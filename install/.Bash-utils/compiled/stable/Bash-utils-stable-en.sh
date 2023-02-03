@@ -103,8 +103,8 @@ __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Exiting script";
 ## FUNCTION : "BU.ModuleInit.AskPrintLog()"
 
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="No logs to display";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array) ? (yes / no)";
-__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="To display the content of the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » array, please type « yes » ou « Y » (no case sensibility)";
+__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » array) ? (yes / no)";
+__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="To display the content of the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » array, please type « yes » ou « Y » (no case sensibility)";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Enter your answer : ";
 __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="The initializer script's log file's content will not be displayed on your screen";
 
@@ -273,7 +273,7 @@ __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_
 
 ## FUNCTION : "BU.ModuleInit.Msg()"
 
-__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » GLOBAL VARIABLE'S VALUE '%s' IS NOT SUPPORTED\n";
+__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » GLOBAL VARIABLE'S VALUE '%s' IS NOT SUPPORTED\n";
 __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Please change its value by '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value.";
 
 # --------
@@ -297,8 +297,10 @@ __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="INITIALIZATION LOGS";
 
 # Display initialization log informations.
 __BU_MODULE_INIT_MSG__PRINTLOG__HERE="Here are the initialization logs";
-__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Logging mode : full (parameter « --mode-log-full » passed during the call of the module 0 « module »)";
-__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Logging mode : partial (parameter « --mode-log-partial » passed during the call of the module 0 « module »)";
+__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Logging mode : full";
+__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE__PARAM="Logging mode : full (parameter « --mode-log-full » passed during the call of the module 0 « module »)";
+__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Logging mode : partial";
+__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE__PARAM="Logging mode : partial (parameter « --mode-log-partial » passed during the call of the module 0 « module »)";
 
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND";
 __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED="If nothing is displayed on the screen after a few seconds, please stop the script's execution by pressing CTRL + C";
@@ -389,13 +391,15 @@ __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG
 ## FUNCTION : "BU.ModuleInit.Usage()"
 
 # List of different messages, used to better measure the space between the text and the colon.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : don't display the initialization messages on the screen, but log them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : don't display the initialization messages on the screen OR log them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « __BU_MODULE_INIT_MSG_ARRAY » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                  : the four following parameters are incompatible with each other, they will overwrite each other :";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : do not display the initialization messages on the screen, but log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : do not display the initialization messages on the screen OR log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
 
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array EVERY informations about the initialization process";
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « __BU_MODULE_INIT_MSG_ARRAY » array the essential informations only";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array EVERY informations about the initialization process";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array the essential informations only";
 
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            OR --stat-debug=true";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   OR--stat-debug-bashx=file   OR --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
@@ -404,14 +408,14 @@ __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bash
 __BU_MODULE_INIT_MSG__USAGE__SUPVALS="The supported values are :";
 
 # Display of the supported values for the log redirection parameter.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="WARNING : the three following parameters are incompatible with each other, they will overwrite each other :";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_NO_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4}";
 
 # Display of the supported values for the logging parameter.
-__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
+__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1}";
 __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2}";
 
@@ -421,10 +425,12 @@ __BU_MODULE_INIT_MSG__USAGE__DEBUG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_
 __BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX}";
 
 # Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
-unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
+unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0 \
+        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4 \
+        __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2 \
         __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG \
@@ -435,13 +441,13 @@ unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
 ## FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
 # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable when calling the « BashUtils_InitModules » function"
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable when calling the « BashUtils_InitModules » function"
 
 # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules" function.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="the « module » value's parameters '--log-display' 'log-no-display', '--log-shut' and '--log-shut-display' are incompatible with each other";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Please choose only one of these parameter values";
 
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="The new value will be assignated to the « __BU_MODULE_INIT_MSG_ARRAY_PERMISSION » global variable";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="The new value will be assignated to the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable";
 
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL="Current value stored in the permission variable : %s";
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL="New value : %s";
@@ -473,7 +479,7 @@ __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID="${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}. As the value « void » has been passed, these features are disabled";
 
 # If the value of the argument "--stat-debug" is not equal to "true".
-__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : The « __BU_MODULE_INIT_STAT_DEBUG » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
+__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE="NOTE : The « \${__BU_MODULE_INIT_STAT_DEBUG} » status global variable's value must be set to « true » in order to use this advanced debugging functionnality";
 
 # If the "--stat-*" argument is not a supported value.
 __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : « %s » IS NOT A SUPPORTED STATUS ARGUMENT BY THE « module » PARAMETER";
@@ -1180,7 +1186,7 @@ printf "
     fi
 }
 
-# TODO in both "BU.ModuleInit.IsFrameworkUnlocalizedWrapped()" and "BU.ModuleInit.IsFrameworkLocalizedWrapped()" functions :
+# TODO in both "BU.ModuleInit.IsFrameworkUnlocalizedCompiled()" and "BU.ModuleInit.IsFrameworkLocalizedCompiled()" functions :
 #   - Faire en sorte que le code détecte le nom du fichier "Bash-utils.sh" ou "Bash-utils-[a-z][az-]" sourcé, directement depuis le fichier en question quand il est sourcé.
 
 # Stopping the execution of the framework in case an error occurs, after printing an error message.
@@ -1189,14 +1195,14 @@ function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; 
 # Checking if the framework is being installed thanks to the installation script (TODO).
 function BU.ModuleInit.IsFrameworkBeingInstalled()      { if [ "${__BU_MODULE_PRE_INIT__IS_FRAMEWORK_INSTALLED,,}" == 'true' ] || [ "${0,,}" == "./install-framework.sh" ] || [ "${0,,}" == "install-framework.sh" ]; then return 0; else return 1; fi }
 
-# Checking if the whole framework's main code (config, initializer and main module's code) is wrapped in a single unlocalized file (generated by the "res/dev-tools/dev-bin/lib-unite.sh" (or "bin/lib-unite.sh") script).
-function BU.ModuleInit.IsFrameworkUnlocalizedWrapped()  { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[2]}")"; if [ "${v_currFile}" == "Bash-utils.sh" ] && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 19078 ]; then echo "FILE = ${v_currFile}"; return 0; else return 1; fi }
+# Checking if the whole framework's main code (config, initializer and main module's code) is compiled in a single unlocalized file (generated by the "res/dev-tools/dev-bin/lib-unite.sh" (or "bin/lib-unite.sh") script).
+function BU.ModuleInit.IsFrameworkUnlocalizedCompiled()  { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[2]}")"; if [ "${v_currFile}" == "Bash-utils.sh" ] && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 19078 ]; then echo "FILE = ${v_currFile}"; return 0; else return 1; fi }
 
-# Checking if the whole framework's main code (config, initializer and main module's code) is wrapped in a single localized file (generated by a script to develop, but inspired by the "res/dev-tools/dev-bin/lib-unite.sh" (or "bin/lib-unite.sh") script).
-function BU.ModuleInit.IsFrameworkLocalizedWrapped()    { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile}" == Bash-utils-[a-z][a-z].sh ]] && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 15000 ]; then return 0; else return 1; fi }
+# Checking if the whole framework's main code (config, initializer and main module's code) is compiled in a single localized file (generated by a script to develop, but inspired by the "res/dev-tools/dev-bin/lib-unite.sh" (or "bin/lib-unite.sh") script).
+function BU.ModuleInit.IsFrameworkLocalizedCompiled()    { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile}" == Bash-utils-[a-z][a-z].sh ]] && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 15000 ]; then return 0; else return 1; fi }
 
-# Checking if the whole framework's main code (config, initializer and main module's code) is wrapped in a single (un)localized file.
-function BU.ModuleInit.IsFrameworkWrapped()             { if BU.ModuleInit.IsFrameworkLocalizedWrapped || BU.ModuleInit.IsFrameworkUnlocalizedWrapped; then return 0; else return 1; fi }
+# Checking if the whole framework's main code (config, initializer and main module's code) is compiled in a single (un)localized file.
+function BU.ModuleInit.IsFrameworkCompiled()             { if BU.ModuleInit.IsFrameworkLocalizedCompiled || BU.ModuleInit.IsFrameworkUnlocalizedCompiled; then return 0; else return 1; fi }
 
 # Checking if the function and / or sourced code currently executed is a part of a script file or running in an interactive shell.
 function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; local v_5="${0: -5}"; if [ "${0:0:2}" == './' ] || [[ "${v_3,,}" == .sh ]] || [[ "${v_5,,}" == .bash ]]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
@@ -1361,7 +1367,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 # the world (according to this website : https://lingua.edu/the-20-most-spoken-languages-in-the-world-in-2022/)
 # will be embedded, in order to avoid bloating the initializer script with thousands of lines of messages.
 
-# Printing the message that warns the user that the rest of the framework will use english as default language (this function is not called if the framework is wrapped in a single file).
+# Printing the message that warns the user that the rest of the framework will use english as default language (this function is not called if the framework is compiled in a single file).
 function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 {
     #**** Variables ****
@@ -1389,7 +1395,7 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage || return 1;
 }
 
-# Set english as default language if an unsupported language is stored in the "${__BU_MODULE_INIT__USER_LANG}" global variable (this function is not called if the framework is wrapped in a single file).
+# Set english as default language if an unsupported language is stored in the "${__BU_MODULE_INIT__USER_LANG}" global variable (this function is not called if the framework is compiled in a single file).
 # shellcheck disable=SC1090,SC1091
 function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
 {
@@ -1413,7 +1419,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
     local p_lang_backup=${1:-'en'}; # ARG TYPE : ISO 639-1 code    - REQUIRED | DEFAULT VAL : en    - DESC : language in which the  language's backup from the "BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()" function.
 
     #**** Code ****
-    BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/en.locale" || {
+    BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/en.locale" || {
         echo >&2;
 
         # Deutch | German
@@ -1596,7 +1602,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
     };
 }
 
-# Rewriting the library's languages messages (this function is not called if the framework is wrapped in a single file).
+# Rewriting the library's languages messages (this function is not called if the framework is compiled in a single file).
 # shellcheck disable=SC1091,SC1090
 function BU.ModuleInit.GetModuleInitLanguage()
 {
@@ -1633,30 +1639,30 @@ function BU.ModuleInit.GetModuleInitLanguage()
     fi
 
 	if [ "${p_lang_ISO_639_1^^}" == 'NULL' ]; then
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]} » aufgerufen wird" >&2 && v_isPrinted='true';
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && v_isPrinted='true';
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]}() » aufgerufen wird" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Nenhuma língua especificada como argumento ao chamar a função « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : При вызове функции « ${FUNCNAME[0]} » в качестве аргумента не указан язык" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Nenhuma língua especificada como argumento ao chamar a função « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : При вызове функции « ${FUNCNAME[0]}() » в качестве аргумента не указан язык" >&2 && v_isPrinted='true';
 
-        [ "${v_isPrinted}" != 'true' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
+        [ "${v_isPrinted}" != 'true' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2;
 
         echo >&2;
 
 		BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
     elif [ "${p_lang_ISO_639_1^^}" != 'NULL' ] && [ ! -f "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/${p_lang_ISO_639_1}.locale" ]; then
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]} » als Argument angegeben wurde, konnte im Ordner « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » nicht gefunden werden" >&2 && v_isPrinted='true';
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2 && v_isPrinted='true';
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]} » no se encontró en el directorio « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]}() » als Argument angegeben wurde, konnte im Ordner « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » nicht gefunden werden" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]}() » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]}() » no se encontró en el directorio « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
 
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} » n'a pas été trouvé dans le dossier « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : O ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]} » não foi encontrado na pasta « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Файл перевода для языка, указанного в качестве аргумента при вызове функции « ${FUNCNAME[0]} » не найден в каталоге « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »." >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]}() » n'a pas été trouvé dans le dossier « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : O ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]}() » não foi encontrado na pasta « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
+		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Файл перевода для языка, указанного в качестве аргумента при вызове функции « ${FUNCNAME[0]}() » не найден в каталоге « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »." >&2 && v_isPrinted='true';
 
-        [ "${v_isPrinted}" != 'true' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]} » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2;
+        [ "${v_isPrinted}" != 'true' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]}() » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2;
 
         echo >&2;
 
@@ -1666,23 +1672,27 @@ function BU.ModuleInit.GetModuleInitLanguage()
         # Sourcing the English translation files first, since these files are the most supported, so that if new variables are added, no empty strings will be displayed if the next language files are not updated yet.
         BU.ModuleInit.SourceEnglishTranslationFiles "${__BU_MODULE_INIT__USER_LANG,,}";
 
-        # Sourcing the language
-        BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/${p_lang_ISO_639_1}.locale" || {
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]} » nicht gefunden werden." >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+        # Sourcing the current language's translations file if the base of the framework is not compiled.
+        BU.ModuleInit.IsFrameworkCompiled || {
+            source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/${p_lang_ISO_639_1}.locale" || {
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]}() » nicht gefunden werden." >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Não foi possível obter o ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Невозможно включить файл перевода для языка, указанного в качестве аргумента, при вызове функции « ${FUNCNAME[0]} »" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Não foi possível obter o ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Невозможно включить файл перевода для языка, указанного в качестве аргумента, при вызове функции « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
-            # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
-            [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]} » function" >&2;
+                # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
+                [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2;
 
-            echo >&2;
+                echo >&2;
 
-            BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
+                BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
+            }
         }
+
+        # Calling the function which defines every variables containing the translated messages.
     fi
 }
 
@@ -1690,34 +1700,37 @@ function BU.ModuleInit.GetModuleInitLanguage()
 
 ## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-# Asking to the user if (s)he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
+# Asking to the user if s/he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
 function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
-    if [ -z "${__BU_MODULE_INIT_MSG_ARRAY}" ]; then
+    if [ -z "${__BU_MODULE_INIT_MSG_ARRAY[*]}" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
         echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY}";
         echo; return 0;
     fi
 
-	if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" == '--log-display' ]; then
+	if [[ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != --log-shut?(-display) ]]; then
         echo;
 
 		BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY}" '#' 'echo';
+		echo;
 
-		# If the user's defined language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
-		if [ "${__BU_MODULE_INIT__USER_LANG,}" != 'en' ]; then
-            echo; echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH}";
+		# If the user's system language is not English, then a message will be displayed to ask the user in his/her language to write 'yes' or 'Y' if he/she wants to display the initialization logs.
+		if [[ "${LANG,,}" != en_* ]]; then
+            echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH}";
+            echo;
 		fi
 
-		echo; read -rp "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS}" read_ask_print_log;
+		read -rp "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS}" read_ask_print_log;
+		echo;
 
 		if [ "${read_ask_print_log,,}" == 'yes' ] || [ "${read_ask_print_log^^}" == 'Y' ]; then
 			BU.ModuleInit.PrintLog || return 1;
 
 			return 0;
 		else
-			echo; echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY}"; echo; return 0;
+			echo "${__BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY}"; echo; return 0;
 		fi
 	else
 		return 0;
@@ -2214,22 +2227,44 @@ function BU.ModuleInit.PrintLog()
 {
     #**** Variables ****
     declare -i v_int_randomizer;    # VAR TYPE : Int        - DESC : This variable stores a random number between 3 and 6 included.
+    declare -i v_str_max_size;      # VAR TYPE : Int        - DESC : This variable stores the maximum size of the "${v_str_randomizer}" string.
 
     local v_str_randomizer;         # VAR TYPE : String     - DESC : This string stores the randomized string which is written in the log file's name.
+    local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This variable stores the randomized numer of times another generated md5sum string must be added to the "${v_str_randomizer} variable".
+    local v_str_randomizer_tmp;     # VAR TYPE : String     - DESC : This string stores the newly generated md5sum string before it is added to the "${v_str_randomizer}" variable.
     local v_tmp_file;               # VAR TYPE : Filepath   - DESC : Path to the file which stores the content of the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array.
 
     #**** Code ****
-    v_str_randomizer="$(echo "${RANDOM}" | md5sum)";
-    v_str_randomizer="${v_str_randomizer%%+( -)}";
-
-    # Adding some extra randomized numbers, a random number of times between 3 and 6 included.
-    v_int_randomizer="$(shuf -i 3-6 -n 1)";
-
-    for ((i=0; i<v_int_randomizer; i++)); do
-        v_str_randomizer+="${v_str_randomizer%%+( -)}";
-    done
+    v_str_max_size=150;
 
     shopt -s extglob;
+
+    v_str_randomizer="$(echo "${RANDOM}" | md5sum)";
+    v_str_randomizer="${v_str_randomizer%%+(  -)}";
+
+    # Adding some extra randomized numbers, a random number of times between 3 and 6 included.
+    v_int_randomizer="$(shuf -i 1-3 -n 1)" || false;
+
+    for ((i=0; i<v_int_randomizer; i++)); do
+        v_str_randomizer_tmp="$(echo "${RANDOM}" | md5sum)";
+        v_str_randomizer+="${v_str_randomizer_tmp%%+(  -)}";
+    done
+
+    # Checking if the name of the file to create is not longer than 255 characters. If so, its size is reduced.
+    if [ "${#v_str_randomizer}" -gt "${v_str_max_size}" ]; then
+        echo "Filename's randomizer string too long, reducing its size to ${v_str_max_size}" >&2;
+        echo >&2;
+
+        until [ "${#v_str_randomizer}" -eq "${v_str_max_size}" ]; do
+            v_str_randomizer_int="${#v_str_randomizer}";
+
+            echo "Current number of characters : ${v_str_randomizer_int}";
+            echo "String content : ${v_str_randomizer}";
+            echo;
+
+            v_str_randomizer="${v_str_randomizer%%+("${v_str_randomizer:$(( v_str_randomizer_int - 1 ))}")}";
+        done
+    fi
 
     # Removing the extra whitespace with the dash.
     v_tmp_file="$(printf "%s" "${__BU_MODULE_INIT__ROOT}/$(date +"%Y-%m-%d %H:%M:%S")")___${v_str_randomizer}.tmp"; shopt -u extglob;
@@ -2243,11 +2278,21 @@ function BU.ModuleInit.PrintLog()
     fi
 
     if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-full' ]; then
-        echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE}"; echo;
+        if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG,,}" == 'true' ]; then
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE__PARAM}";
+        else
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE}";
+        fi
 
     elif [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE}" == '--mode-log-partial' ]; then
-        echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE}"; echo;
+        if [ "${__BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG,,}" == 'true' ]; then
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE__PARAM}";
+        else
+            echo "${__BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE}";
+        fi
     fi
+
+    echo;
 
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}" '-' 'echo';
     BU.ModuleInit.MsgLineCount "${#__BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS}" '-' 'echo';
@@ -2423,7 +2468,7 @@ function BU.ModuleInit.FindPath()
 
                     # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
                     # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
-                    if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+                    if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkCompiled && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
                         BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__ECHO_1__PATH_NOT_FOUND';
 
                         BU.ModuleInit.FindPathNoTranslationFilesSourced "${FUNCNAME[0]}" "${FUNCNAME[1]}" "${BASH_SOURCE[0]}" "${v_e_lineno}" 'echo';
@@ -2448,7 +2493,7 @@ function BU.ModuleInit.FindPath()
 
                     # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
                     # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
-                    if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkWrapped && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
+                    if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkCompiled && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
                         BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${v_e_lineno}" 'E_BUINIT__FIND_PATH__MSG_1__PATH_NOT_FOUND';
 
                         BU.ModuleInit.FindPathNoTranslationFilesSourced "${FUNCNAME[0]}" "${FUNCNAME[1]}" "${BASH_SOURCE[0]}" "${v_e_lineno}" 'echo';
@@ -2635,26 +2680,29 @@ function BU.ModuleInit.SourcingFailure()
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
 # Usage function
-function BU.ModuleInit.Usage()
+function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__USAGE__SUPVALS}" >&2;
     echo >&2;
 
-	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}";
+	BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-'; echo >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_NO_DISPLAY}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY}" >&2;
 	echo >&2;
 
-	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG}";
+	BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG}" '-'; echo >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL}" >&2;
 	echo "${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL}" >&2;
 	echo >&2
 
-	echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST}" >&2;
+	BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST}" '-' >&2; echo >&2;
     echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG}" >&2;
     echo "${__BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX}" >&2;
+    echo >&2;
+
+    BU.ModuleInit.MsgLineCount "${#__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-' >&2;
 }
 
 # Easy writing status error.
@@ -2931,7 +2979,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 					case "${module_args,,}" in
 
-						# Log value : --log-display (printing the initialization messages on the screen while they are appened to the "${__BU_MODULE_INIT_MSG_ARRAY" array).
+						# Log values :
+						# --log-display (printing the initialization messages on the screen while they are appened to the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array).
+						# --log-no-display (do not display the initialization messages on the screen, but log them in the "${__BU_MODULE_INIT_MSG_ARRAY[@}}" array).
 						'--log-display' | '--log-no-display')
 							# Handling the incompatibility with each other '--log-display', '--log-no-display', '--log-shut' and '--log-shut-display' arguments
 							# by checking if the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable already contains a value.
@@ -2993,7 +3043,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
 
-							BU.ModuleInit.Usage;
+							BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
 							BU.ModuleInit.MsgAbort;
 
@@ -3019,7 +3069,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							__BU_MODULE_INIT_MSG_ARRAY_MODE="${module_args}";
 
 							# Displaying the initialization messages already appened in the "${__BU_MODULE_INIT_MSG_ARRAY" global variable.
-							BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos;;
+							BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos
+
+                            # Declaring a global variable which stores the information that this logging option's value
+                            # was modified / passed as argument while calling the "module" value in the project's main file.
+                            __BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG='true';;
 
 						# Setting the "${__BU_MODULE_INIT_MSG_ARRAY_MODE" global variable to '--mode-log-partial', in order to print the essential initialization messages only (already set by default).
 						'--mode-log-partial')
@@ -3028,7 +3082,11 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             # Unsetting every unsused string variables in order to free up some memory.
 
                             # shellcheck disable=SC2046
-                            unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__")
+                            unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__");
+
+                            # Declaring a global variable which stores the information that this logging option's value
+                            # was modified / passed as argument while calling the "module" value in the project's main file.
+                            __BU_MODULE_INIT_MSG_ARRAY_MODE__IS_ARG='true';
                         ;;
 
 						# An unsupported mode argument is passed.
@@ -3050,7 +3108,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
 
-							BU.ModuleInit.Usage;
+							BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
 							BU.ModuleInit.MsgAbort;
 
@@ -3083,7 +3141,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
 
-                    BU.ModuleInit.Usage;
+                    BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
                     BU.ModuleInit.MsgAbort;
 
@@ -3094,7 +3152,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
             done; if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
-            if ! BU.ModuleInit.IsFrameworkWrapped && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
+            if ! BU.ModuleInit.IsFrameworkCompiled && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
                 # shellcheck disable=SC2059
                 printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__ERROR}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))"; echo >&2; return 1;
             else
@@ -3296,8 +3354,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                 BU.ModuleInit.IsInScript && exit 1; return 1;
             })";
 
-            # If the base code of the framework is not wrapped in a single file.
-            if ! BU.ModuleInit.IsFrameworkWrapped; then
+            # If the base code of the framework is not compiled in a single file.
+            if ! BU.ModuleInit.IsFrameworkCompiled; then
                 # shellcheck disable=SC2034
                 __bu_module_init__initializer_path__lineno="$(( LINENO + 2 ))";
 
@@ -3545,8 +3603,8 @@ BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 
 # Setting the whole project's language by getting and sourcing the "gettext.sh" file.
 
-# If the framework is wrapped, then you should call the "Bash-utils-${language}.sh" file which corresponds to the language that you want to use.
-BU.ModuleInit.IsFrameworkLocalizedWrapped || BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+# If the framework is compiled, then you should call the "Bash-utils-${language}.sh" file which corresponds to the language that you want to use.
+BU.ModuleInit.IsFrameworkLocalizedCompiled || BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 declare __BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED='true';
 
@@ -3762,7 +3820,7 @@ function BashUtils_InitModules()
                 fi
 
                 if [ -n "${v_module_aliases_file_name}" ]; then
-                    BU.ModuleInit.IsFrameworkWrapped || {
+                    BU.ModuleInit.IsFrameworkCompiled || {
                         # If the aliases file is empty.
                         if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
 
@@ -3811,7 +3869,7 @@ function BashUtils_InitModules()
                     v_loop_error="error"; break;
                 fi
 
-                BU.ModuleInit.IsFrameworkWrapped || {
+                BU.ModuleInit.IsFrameworkCompiled || {
                     # If the module's configuration file is empty, then the initialization stops.
                     if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" ]; then
 
@@ -3889,7 +3947,7 @@ function BashUtils_InitModules()
                     v_loop_error="error"; break;
                 fi
 
-                BU.ModuleInit.IsFrameworkWrapped || {
+                BU.ModuleInit.IsFrameworkCompiled || {
                     # If the module's initializer file is empty, then the initialization stops.
                     if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" ]; then
 
@@ -4236,7 +4294,7 @@ function BU.ModuleInit.ParseCSVLang()
 		BU.ModuleInit.Msg "The ${__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH} translations CSV file already exists for this language : ${p_lang_ISO_639_1}";
 		BU.ModuleInit.Msg;
 
-		BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
+		BU.ModuleInit.IsFrameworkUnlocalizedCompiled && {
             source "${v_outputFilePath}" || {
                 local C="${?}";
 
@@ -4386,7 +4444,7 @@ function BU.ModuleInit.ParseCSVLang()
 
 			__BU_MODULE_INIT__BU_BASE_IS_TRANSLATED='true';
 
-			BU.ModuleInit.IsFrameworkUnlocalizedWrapped && {
+			BU.ModuleInit.IsFrameworkUnlocalizedCompiled && {
                 source "${v_outputFilePath}" || {
                     local C="${?}"; BU.ModuleInit.SourcingFailure "${v_outputFilePath}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
@@ -4665,7 +4723,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     # Else, if the value passed as argument is not an alphabetic character.
-    elif [ "${p_option,,}" == '!alphachar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)char ]]; then
         BU.Main.Errors.HandleErrors '1' \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC CHARACTER" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4675,7 +4733,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphabetic string.
-    elif [ "${p_option,,}" == '!alphastr' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)str?(ing) ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4685,7 +4743,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphabetic string OR character.
-    elif [ "${p_option,,}" == '!alphastrchar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)str?(ing)char ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHABETIC STRING OR CHARACTER" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4695,7 +4753,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric character.
-    elif [ "${p_option,,}" == '!alphanumchar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)num?(eric)char ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC CHARACTER" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4705,7 +4763,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric string.
-    elif [ "${p_option,,}" == '!alphanumstr' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)num?(eric)str ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4715,9 +4773,19 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not an alphanumeric string OR character.
-    elif [ "${p_option,,}" == '!alphanumstrchar' ]; then
+    elif [[ "${p_option,,}" == !a?(lpha)num?(eric)str?(ing)char ]]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT AN ALPHANUMERIC STRING OR CHARACTER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+
+    # Else, if the value passed as argument is not a boolean.
+    elif [ "${p_option,,}" == '!bool' ]; then
+        BU.Main.Errors.HandleErrors "1" \
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A BOOLEAN" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -4735,7 +4803,7 @@ function BU.Main.Args.PrintBadOption()
         return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
 	# Else, if the value passed as argument is not a valid directory path (only directories accepted).
-    elif [ "${p_option,,}" == '!d' ]; then
+    elif [[ "${p_option,,}" == !d?(ir?(ectory)) ]]; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID DIRECTORY PATH" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4745,7 +4813,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_NOT_DIR}";
 
 	# Else, if the value passed as argument is not a valid directory or file path (both are accepted).
-    elif [ "${p_option,,}" == '!df' ]; then
+    elif [[ "${p_option,,}" == !d?(ir?(ectory))f?(file) ]] || [[ "${p_option}" != p?(ath) ]]; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID DIRECTORY OR FILE PATH" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4755,7 +4823,7 @@ function BU.Main.Args.PrintBadOption()
 		return "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}";
 
 	# Else, if the value passed as argument is not a valid file path (only files accepted).
-    elif [ "${p_option,,}" == '!f' ]; then
+    elif [[ "${p_option,,}" == !f?(ile) ]]; then
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID FILE PATH" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
@@ -4819,6 +4887,16 @@ function BU.Main.Args.PrintBadOption()
     elif [ "${p_option,,}" == '!intpos' ]; then
         BU.Main.Errors.HandleErrors "1" \
             "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
+            "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+		return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+
+    # Else, if the value passed as argument is not a valid ISO 639-1 code.
+    elif [[ "${p_option,,}" == !?(ISO?([[:space:]]))'639-1' ]]; then
+        BU.Main.Errors.HandleErrors "1" \
+            "THE $(BU.Main.Decho.Decho.Function "${v_funcname}") FUNCTION'S $(BU.Main.Decho.Decho.Var "$(echo -n '$')${p_argname}") PARAMETER'S VALUE IS NOT A VALID ISO 639-1 CODE" \
             "${p_advice}" "${p_value}" "${v_filename}" "${v_funcname}" "${v_lineno}";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -5144,6 +5222,8 @@ function BU.Main.Args.Argc()
     #**** Parameters ****
     local p_argcount=${1:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of arguments passed.
     local p_argawait=${2:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of arguments awaited.
+
+    ## IMPORTANT NOTE ABOUT THE "${p_argawait}" ARGUMENT : It is not possible to automatically get the number of declared parameters inside a function, according to ChatGPT, so you will have to provide manually the number of declared parameters).
 
     local p_filename=${3:-$'\0'};   # ARG TYPE : File       - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
     local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
@@ -6249,12 +6329,74 @@ function BU.Main.Args__Filesystem.ChownRec()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### MAIN MODULE'S "" FILE'S FUNCTIONS
+
+## CATEGORY :
+
+# "BU.Main.Locale.PrintLanguageName.Optimize()" function.
+function BU.Main.Args__Locale.PrintLanguageName.Optimize()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+
+    #**** Parameters ****
+	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+	local p_langNameEngl=${2:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${3:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+
+    local p_filename=${5:-$'\0'};       # ARG TYPE : String             - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${6:-$'\0'};       # ARG TYPE : String             - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${7:-$'\0'};         # ARG TYPE : Int                - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
+
+    #**** Code ****
+    BU.Main.Args.GetArgc-FFL "${#}" '7' "${p_filename}" "${p_funcname}" "${p_lineno}";
+
+    if [ "${p_code^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give an ISO 639-1 code to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption '!639-1' \
+            "Please give a valid ISO 639-1 code to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if [ "${p_langNameEngl^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give the name of the targeted language in English (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if [ "${p_langNameOrig^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give the name of the targeted language in its own language (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+   fi
+
+    if [ "${p_langNameUser^^}" == 'NULL' ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'z' \
+            "Please give the name of the targeted language in the language used on your operating system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### MAIN MODULE'S "Text.lib" FILE'S FUNCTIONS
 
 ## MULTI-CATEGORY FUNCTIONS :
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# Functions :
+# Supported functions :
 #	- BU.Main.Text.CutFirstFieldBeforeDelim()
 #	- BU.Main.Text.CutLastFieldAfterDelim()
 #	- BU.Main.Text.GetFirstFieldBeforeDelim()
@@ -6591,18 +6733,25 @@ function BU.Main.Args__Text.StrToWordArray()
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in an array of words.
+    local p_varname=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the array to create.
 
-    local p_filename=${2:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
-    local p_funcname=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
-    local p_lineno=${4:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
+    local p_filename=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file in which the currently processed function is located.
+    local p_funcname=${4:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the currently processed function.
+    local p_lineno=${5:-$'\0'};     # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where this argument processing function is called.
 
     #**** Code ****
-    BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
+    BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
     if [ -z "${p_string}" ]; then local lineno="${LINENO}";
         BU.Main.Args.PrintBadOption 'Z' \
             "Please give as first argument a string to convert in a word array (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
+
+    if [ -z "${p_varname}" ]; then local lineno="${LINENO}";
+        BU.Main.Args.PrintBadOption 'Z' \
+            "Please give as second argument a string to name the array (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
+            'p_varname' "${p_varname}" "${p_filename}" "${p_funcname}" "${p_lineno}"; local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -6779,211 +6928,6 @@ function BU.Main.BasicMaths.PositiveToNegative()
     echo "$(( x = x > 0 ? x * -1 : x ))";
 
     return 0;
-}
-
-# -----------------------------------------------
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-#!/usr/bin/env bash
-
-# ---------------------
-# SCRIPT'S INFORMATIONS
-
-# Name          : Case.lib
-# Module        : Main
-# Author(s)     : Dimitri OBEID
-# Version       :
-
-# ------------------
-# FILE DESCRIPTION :
-
-#
-
-# ----------------------------
-# SHELLCHECK GLOBAL DISABLER :
-
-# Add a coma after each warning code to disable multiple warnings at one go.
-
-# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
-
-# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
-
-# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
-
-# shellcheck disable=SC2154
-
-# ----------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
-    echo -e "ACHTUNG !" >&2; echo >&2;
-    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
-    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
-
-elif [[ "${LANG}" == es_* ]]; then
-    echo -e "ATENCIÓN !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
-    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
-
-elif [[ "${LANG}" == fr_* ]]; then
-    echo -e "ATTENTION !" >&2; echo >&2;
-    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
-    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
-
-elif [[ "${LANG}" == pt_* ]]; then
-    echo -e "ATENÇÃO !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
-    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
-
-elif [[ "${LANG}" == ru_* ]]; then
-    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
-    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
-    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
-
-else
-    echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
-
-fi; exit 1; fi
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-#################################### DEFINING LIBRARY FUNCTIONS ###################################
-
-#### LIBRARY RESOURCES
-
-## VARIABLES
-
-# __BU_MAIN_CASE_INVALID_ANSWER="Please enter a valid answer ($(BU.Main.Decho.Decho.Highlight 'yes') or ($(BU.Main.Decho.Decho.Highlight 'no')) !";
-#
-# __BU_MAIN_CASE_ASK_CONTINUE_EXEC="Do you want to continue the script's execution ? (yes / no)";
-#
-# __BU_MAIN_CASE_ANSWER_PROMPT="Enter your answer : ";
-#
-# __BU_MAIN_CASE_RESUME_EXEC="Resuming the execution of the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") script.";
-#
-# __BU_MAIN_CASE_CANCEL_EXEC="Aborting the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")'s execution.";
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### READING CASE STATEMENTS BY FUNCTIONS
-#### DEBUG ID : case::reading-case-statements-by-functions
-
-__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS="case::reading-case-statements-by-functions";
-
-## "Directories.lib" FILE
-## DEBUG ID : directories.lib-file
-
-__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="${__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS}::directories.lib-file";
-
-# "BU.Main.Directories.TriggerRootDirWarning" function.
-function BU.Main.Case.Read_DirectoriesTriggerRootDirWarning()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS}" \
-        "${__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE}";
-
-    #**** Variables ****
-    local __read_TriggerRootDirWarning; # VAR TYPE : String     - DESC :
-
-    #**** Code ****
-    BU.ModuleInit.SetInitErrorMsg && declare -i VTriggerRootDirWarning='1';
-
-    BU.Main.Echo.Newstep "${__BU_MAIN_CASE_ASK_CONTINUE_EXEC}";
-
-	read -rp "${__BU_MAIN_CASE_ANSWER_PROMPT}" __read_TriggerRootDirWarning;
-	BU.Main.Echo.Read "${__read_TriggerRootDirWarning}";
-	BU.Main.Echo.Newline;
-
-	# shellcheck disable=SC2154
-	case "${__read_TriggerRootDirWarning,,}" in
-		"yes")
-            BU.Main.Echo.Newstep "${__BU_MAIN_CASE_RESUME_EXEC}";
-
-			[ -n "${VTriggerRootDirWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg;
-
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-
-			return 0;
-			;;
-		"no")
-            BU.Main.Echo.Error "${__BU_MAIN_CASE_CANCEL_EXEC}";
-
-			[ -n "${VTriggerRootDirWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg;
-
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-
-			return "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
-			;;
-		*)
-			BU.Main.Echo.Error "${__BU_MAIN_CASE_INVALID_ANSWER}";
-			BU.Main.Case.Read_DirectoriesTriggerRootDirWarning;
-			;;
-	esac
-}
-
-# -----------------------------------------------
-
-## "Errors.lib" FILE
-## DEBUG ID : errors.lib-file
-
-__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="${__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS}::errors.lib-file";
-
-# "BU.Main.Errors.HandleErrors" function, with the "${__BU_MAIN_STAT_ECHO}" variable set to "false".
-function BU.Main.Case.Read_Errors.HandleErrors()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_CASE_LIB__CAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS}" \
-        "${__BU_MAIN_CASE_LIB__SUBCAT_DEBUG_ID__READING_CASE_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE}";
-
-    #**** Variables ****
-    local __read_HandleErrors; # VAR TYPE : String      - DESC :
-
-    #**** Code ****
-    BU.ModuleInit.SetInitErrorMsg && declare -i VReadHandleErrors='1';
-
-	BU.Main.Echo.Newstep "${__BU_MAIN_CASE_ASK_CONTINUE_EXEC}";
-
-	read -rp "${__BU_MAIN_CASE_ANSWER_PROMPT}" __read_HandleErrors;
-	BU.Main.Echo.Read "${__read_HandleErrors}";
-    BU.Main.Echo.Newline;
-
-	# shellcheck disable=SC2154
-	case "${__read_HandleErrors,,}" in
-		"yes")
-			BU.Main.Echo.Newstep "${__BU_MAIN_CASE_RESUME_EXEC}";
-
-			[ -n "${VReadHandleErrors}" ] && BU.ModuleInit.UnsetInitErrorMsg;
-
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-
-			return 0;
-			;;
-		"no")
-			BU.Main.Echo.Error "${__BU_MAIN_CASE_CANCEL_EXEC}";
-
-			[ -n "${VReadHandleErrors}" ] && BU.ModuleInit.UnsetInitErrorMsg;
-
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-
-			BU.Main.Errors.Exit "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
-			;;
-		*)
-			BU.Main.Echo.Error "${__BU_MAIN_CASE_INVALID_ANSWER}";
-			BU.Main.Case.Read_Errors.HandleErrors;
-			;;
-	esac
 }
 
 # -----------------------------------------------
@@ -8120,27 +8064,11 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
     fi
 
 	if [ "${p_type}" == 'f' ]; then
-		if [ -f "${v_path}" ]; then
-			if [ -s "${v_path}" ]; then
-				true > "${v_path}" || {
-                    if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
-                        BU.Main.Errors.HandleSmallErrors 'E' \
-                            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") project's file --> $(BU.Main.Checkings.CheckFilePathExists "${v_path}" 'true')" 'E';
-                    else
-                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « ${__BU_MAIN_PROJECT_NAME} » project's file --> ${v_path}";
-                        BU.Main.Echo.Newline;
-                    fi
-
-                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
-                }
-			fi
-
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-		else
+		if [ ! -f "${v_path}" ]; then
 			if [ ! -d "${p_parent}" ]; then
-                if [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                if [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then echo TEST1; BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-                elif [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then echo TEST; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                elif [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
                 else
                     mkdir -p "${p_parent}" || {
@@ -8161,9 +8089,9 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 				BU.Main.Checkings.CheckDirPathWasCreated "${p_parent}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			fi
 
-            if [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" ]; then BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            if [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" ]; then echo TEST3; BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-            elif [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            elif [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" ]; then echo TEST4; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
             else
                 touch "${v_path}" || {
@@ -8182,6 +8110,22 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
             fi
 
 			BU.Main.Checkings.CheckFilePathWasCreated "${v_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; return 0;
+		else
+			if [ -s "${v_path}" ]; then
+				true > "${v_path}" || {
+                    if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
+                        BU.Main.Errors.HandleSmallErrors 'E' \
+                            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to overwrite this $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") project's file --> $(BU.Main.Checkings.CheckFilePathExists "${v_path}" 'true')" 'E';
+                    else
+                        BU.Main.Echo.Error "${FUNCNAME[0]}() --> Error : unable to overwrite this « ${__BU_MAIN_PROJECT_NAME} » project's file --> ${v_path}";
+                        BU.Main.Echo.Newline;
+                    fi
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                }
+			fi
+
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 		fi
 
     elif [ "${p_type}" == 'd' ]; then
@@ -8950,7 +8894,7 @@ __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions'
 __BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="${__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS}:shellcheck";
 
 # Writing the error message if a Shellcheck verification failed.
-function BU.Main.DevTools.ShellcheckVerif()
+function BU.Main.DevTools.ShellcheckVerifFailed()
 {
     #**** Parameters ****
     local p_path=${1:-$'\0'};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL  - DESC : Path of the file whose Shellcheck verification failed.
@@ -8974,7 +8918,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     if [ "${__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
         printf "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" "${p_path}"; echo;
 
-        if ! shellcheck "${p_path}"; then BU.Main.DevTools.ShellcheckVerif "${p_path}"; return 1; fi
+        if ! shellcheck "${p_path}"; then BU.Main.DevTools.ShellcheckVerifFailed "${p_path}"; return 1; fi
 
         # shellcheck disable=SC2059
         printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}" "${p_path}"; echo;
@@ -9525,7 +9469,7 @@ function BU.Main.Directories.TriggerRootDirWarning()
 			BU.Main.Echo.Newline;
 
 			# Calling the function that processes the given answer.
-			if BU.Main.Case.Read_DirectoriesTriggerRootDirWarning; then
+			if BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning; then
 				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 			else
 				BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
@@ -9761,7 +9705,7 @@ printf "
 
 " > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" ||
     {
-        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « ${LINENO} » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]} » IN THE « ${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH} FILE »" >&2; echo >&2; exit 1;
+        echo >&2; echo "IN « ${BASH_SOURCE[0]} », LINE « ${LINENO} » --> WARNING --> UNABLE TO WRITE THE « ${FUNCNAME[0]}() » IN THE « ${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH} FILE »" >&2; echo >&2; exit 1;
     }
 }
 
@@ -11013,7 +10957,7 @@ function BU.Main.Errors.HandleErrors()
             else
                 if [ "${__BU_MAIN_STAT_ERROR,,}" == 'warning' ]; then
                     # Calling the function that processes the given answer.
-                    BU.Main.Case.Read_Errors.HandleErrors;
+                    BU.Main.Inputs.Read_Errors.HandleErrors;
                 fi
             fi
 
@@ -14932,6 +14876,269 @@ function BU.Main.Headers.Header.CMD.Yellow.White        { BU.Main.Headers.Base "
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
+# Name          : Input.lib
+# Module        : Main
+# Author(s)     : Dimitri OBEID
+# Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# These functions manage the user's inputs.
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
+    echo -e "ACHTUNG !" >&2; echo >&2;
+    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
+    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
+
+elif [[ "${LANG}" == es_* ]]; then
+    echo -e "ATENCIÓN !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
+    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+elif [[ "${LANG}" == pt_* ]]; then
+    echo -e "ATENÇÃO !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
+    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
+
+elif [[ "${LANG}" == ru_* ]]; then
+    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
+    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
+    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+#### LIBRARY RESOURCES
+
+## VARIABLES
+
+# __BU_MAIN_INPUTS_INVALID_ANSWER="Please enter a valid answer ($(BU.Main.Decho.Decho.Highlight 'yes') or ($(BU.Main.Decho.Decho.Highlight 'no')) !";
+#
+# __BU_MAIN_INPUTS_ASK_CONTINUE_EXEC="Do you want to continue the script's execution ? (yes / no)";
+#
+# __BU_MAIN_INPUTS_ANSWER_PROMPT="Enter your answer : ";
+#
+# __BU_MAIN_INPUTS_RESUME_EXEC="Resuming the execution of the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") script.";
+#
+# __BU_MAIN_INPUTS_CANCEL_EXEC="Aborting the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")'s execution.";
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### READING CASE STATEMENTS BY FUNCTIONS
+#### DEBUG ID : "inputs::reading-case-statements-by-functions"
+
+__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="inputs::reading-case-statements-by-functions";
+
+## "Directories.lib" FILE
+## DEBUG ID : "directories.lib-file"
+
+__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::directories.lib-file";
+
+# "BU.Main.Directories.TriggerRootDirWarning" function.
+function BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}" \
+        "${__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE}";
+
+    #**** Variables ****
+    local __read_TriggerRootDirWarning; # VAR TYPE : String     - DESC :
+
+    #**** Code ****
+    BU.ModuleInit.SetInitErrorMsg && declare -i VTriggerRootDirWarning='1';
+
+    BU.Main.Echo.Newstep "${__BU_MAIN_INPUTS_ASK_CONTINUE_EXEC}";
+
+	read -rp "${__BU_MAIN_INPUTS_ANSWER_PROMPT}" __read_TriggerRootDirWarning;
+	BU.Main.Echo.Read "${__read_TriggerRootDirWarning}";
+	BU.Main.Echo.Newline;
+
+	# shellcheck disable=SC2154
+	case "${__read_TriggerRootDirWarning,,}" in
+		"yes")
+            BU.Main.Echo.Newstep "${__BU_MAIN_INPUTS_RESUME_EXEC}";
+
+			[ -n "${VTriggerRootDirWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+			return 0;
+			;;
+		"no")
+            BU.Main.Echo.Error "${__BU_MAIN_INPUTS_CANCEL_EXEC}";
+
+			[ -n "${VTriggerRootDirWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+			return "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
+			;;
+		*)
+			BU.Main.Echo.Error "${__BU_MAIN_INPUTS_INVALID_ANSWER}";
+			BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning;
+			;;
+	esac
+}
+
+# -----------------------------------------------
+
+## "Errors.lib" FILE
+## DEBUG ID : errors.lib-file
+
+__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::errors.lib-file";
+
+# "BU.Main.Errors.HandleErrors" function, with the "${__BU_MAIN_STAT_ECHO}" variable set to "false".
+function BU.Main.Inputs.Read_Errors.HandleErrors()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}" \
+        "${__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE}";
+
+    #**** Variables ****
+    local __read_HandleErrors; # VAR TYPE : String      - DESC :
+
+    #**** Code ****
+    BU.ModuleInit.SetInitErrorMsg && declare -i VReadHandleErrors='1';
+
+	BU.Main.Echo.Newstep "${__BU_MAIN_INPUTS_ASK_CONTINUE_EXEC}";
+
+	read -rp "${__BU_MAIN_INPUTS_ANSWER_PROMPT}" __read_HandleErrors;
+	BU.Main.Echo.Read "${__read_HandleErrors}";
+    BU.Main.Echo.Newline;
+
+	# shellcheck disable=SC2154
+	case "${__read_HandleErrors,,}" in
+		"yes")
+			BU.Main.Echo.Newstep "${__BU_MAIN_INPUTS_RESUME_EXEC}";
+
+			[ -n "${VReadHandleErrors}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+			return 0;
+			;;
+		"no")
+			BU.Main.Echo.Error "${__BU_MAIN_INPUTS_CANCEL_EXEC}";
+
+			[ -n "${VReadHandleErrors}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+			BU.Main.Errors.Exit "${__BU_MAIN_EXIT_PERMISSION_DENIED}";
+			;;
+		*)
+			BU.Main.Echo.Error "${__BU_MAIN_INPUTS_INVALID_ANSWER}";
+			BU.Main.Inputs.Read_Errors.HandleErrors;
+			;;
+	esac
+}
+
+# -----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### READING USER'S INPUTS OUTSIDE "CASE" STATEMENTS
+#### DEBUG ID : "inputs::reading-user's-inputs-outside-case-statements"
+
+__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS="inputs::reading-user's-inputs-outside-case-statements";
+
+## SANITIZING USER'S INPUTS BEFORE EXECUTION
+## DEBUG ID : "sanitizing-user-inputs-before-execution"
+
+__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}::sanitizing-user-inputs-before-execution";
+
+function BU.Main.Inputs.Sanitize()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}" \
+        "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
+
+    #**** Variables ****
+    local v_dangerousChars=';|&|\||`|>|<|$|(|)|{|}';
+    local v_dangerousCmds='rm|mv|cp|mkdir|rmdir|ssh|ftp|wget|curl|dd|shred|eval|sh|bash|dash|ksh|zsh|mkfs|unzip|uz|gunzip|7z|unrar';
+    local v_specialChars='[^a-zA-Z0-9_\./-]';
+
+    #**** Code ****
+    # Checking if the value does not contain dangerous commands.
+    if ! echo "${p_string}" | grep -E -q "${v_dangerousChars}"; then
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
+            "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS DANGEROUS COMMANDS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "Do not use any of these characters as input to be evaluated : ${v_dangerousChars}" "" "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
+    fi
+
+    # Checking if the value does not contain potentially dangerous keywords.
+    if echo "${p_string}" | grep -E -q "${v_dangerousCmds}"; then
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
+            "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS POTENTIALLY DANGEROUS KEYWORDS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "Do not use any of these keywords as input to be evaluated : ${v_dangerousCmds}" "" "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
+    fi
+
+    # Checking if the value does not contain special characters.
+    if echo "${p_string}" | grep -E -q "${v_specialChars}"; then
+        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" \
+            "THE $(BU.Main.Decho.Decho.Highlight "${p_string}") INPUT CONTAINS SPECIAL CHARACTERS AND THUS CANNOT BE EVALUATED !!!!!" \
+            "Do not use anything else than these characters as input to be evaluated :";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_INVALID_ARGUMENT}";
+    fi
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+#!/usr/bin/env bash
+
+# ---------------------
+# SCRIPT'S INFORMATIONS
+
 # Name          : Locale.lib
 # Module        : Main
 # Author(s)     : Dimitri OBEID
@@ -15006,281 +15213,527 @@ fi; exit 1; fi
 # Checking if the language's code matches to a valid ISO 639-1 code.
 function BU.Main.Locale.CheckISO_639_1_ValidCode()
 {
-    [[ ${__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0; return 1;
+    [[ ${__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0;
+
+    # Since the second version of the library compiler (which does not includes any compiled files) will still be supported along the version which
+    # will ship a compiled file (in case a problem occurs with the compiled file or the remote one), the array of ISO 639-1 codes is also supported.
+    [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${1,,} ]] && return 0;
+
+    return 1;
 }
 
-# Printing the language name in English and in its own language.
-function BU.Main.Locale.PrintLanguageName()
+# Handling the parameters errors for the "BU.Main.Locale.PrintLanguageName.Optimize()" function, only if the main script is the V2 version of the library compiler, which does not heavily depends on the framework's resources.
+function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler()
+{
+    #**** Parameters ****
+	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+
+	local p_langNameEngl=${2:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${3:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+
+    #**** Code ****
+	if [ "${p_code^^}" == 'NULL' ]; then echo "MISSING ISO 639-1 CODE"; return 1; fi
+
+	# Checking if a valid ISO 639-1 code was passed as first argument.
+	if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then echo "BAD ISO 639-1 CODE"; return 1; fi
+
+	# Checking if the name of the target language in English was passed as 4th argument.
+	if [ "${p_langNameEngl^^}" == 'NULL' ]; then echo "MISSING TARGET LANGUAGE'S NAME : ENGLISH"; return 1; fi
+
+	# Checking if the name of the target language in the user's system language was passed as 5th argument.
+	if [ "${p_langNameOrig^^}" == 'NULL' ]; then echo "MISSING TARGET LANGUAGE'S NAME : USER'S SYSTEM LANGUAGE"; return 1; fi
+
+    return 0;
+}
+
+# Optimizing the "BU.Main.Locale.PrintLanguageName()" function's code, in order to avoid to modify manually the code and the rendered layout for each of the 200+ supported languages.
+function BU.Main.Locale.PrintLanguageName.Optimize()
 {
 	#**** Parameters ****
-	local p_code=${1:-NULL};        # String    - Default : NULL    - Language in which the file must be translated.
-    local p_print_code=${2:-yes}    # String    - Default : yes     - Authorization to print the ISO 639-1 code before the language name.
+	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+	local p_dispOrder=${2:-NULL};		# ARG TYPE : String			    - OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
+    local p_print_code=${3:-yes};   	# ARG TYPE : Bool			    - REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
+
+	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
+	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
+	local p_langNameUser=${6:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in the user's system language.
+
+    local p_disable_englishNamed=${7:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
+    local p_disable_originalName=${8:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
+    local p_disable_fromUserLang=${9:-false};	# ARG TYPE : Bool	    - OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
+
+    #**** Variables ****
+    local output;		# VAR TYPE : String		# DESC : Storing the final form of the string to display.
+	local valid;		# VAR TYPE : Bool		# DESC : Storing the information to inform the post text display condition that the value passed into the "${p_dispOrder}" 'Parameter was valid;
+
+    local cod;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's ISO 639-1 code according to the value passed into the "${p_print_code}" parameter.
+    local eng;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's English name according to the value passed into the "${p_disable_englishNamed}" parameter.
+    local ori;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's name in its own language according to the value passed into the "${p_disable_originalName}" parameter.
+    local usr;			# VAR TYPE : CMD		# DESC : Displaying the targeted language's name in the user's system language according to the value passed into the "${p_disable_fromUserLang}" parameter.
+    local tmp;          # VAR TYPE : CMD        # DESC : Storing a complex command substitution called in the previous "${usr}" variable.
+
+	#**** Code ****
+    if [[ "${0,,}" != ?(./)*lib-compiler.?(ba)sh ]]; then
+        if ! BU.Main.Args__Locale.PrintLanguageName.Optimize "${p_code}" "${p_langNameEngl}"    "${p_langNameOrig}" "${p_langNameUser}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))"; then local C="${?}"; return "${C}"; fi
+    else
+        BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler "${p_code}"  "${p_langNameEngl}" "${p_langNameOrig}" || { local C="${?}"; return "${C}"; };
+    fi
+
+	# Checking if a boolean value was passed in the "${p_disable_fromUserLang}" parameter.
+	if [ "${p_disable_fromUserLang}" != 'false' ] && [ "${p_disable_fromUserLang}" != 'true' ]; then p_disable_fromUserLang='false'; fi
+
+	# Checking if a boolean value was passed in the "${p_disable_englishNamed}" parameter.
+	if [ "${p_disable_englishNamed}" != 'false' ] && [ "${p_disable_englishNamed}" != 'true' ]; then p_disable_englishNamed='false'; fi
+
+	# Checking if a boolean value was passed in the "${p_disable_originalName}" parameter.
+	if [ "${p_disable_originalName}" != 'false' ] && [ "${p_disable_originalName}" != 'true' ]; then p_disable_originalName='false'; fi
+
+
+	# Writing the code to display or not the targeted langage's ISO 639-1 code.
+	cod="$(echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s, " "${p_code,,}" || printf '')")";
+
+	# Writing the code to display or not the targeted langage's name in English.
+	eng="$(echo -n "$([ "${p_disable_englishNamed,,}" == 'false' ] && printf "%s, " "${p_langNameEngl,,}" || printf '')")";
+
+	# Writing the code to display or not the targeted langage's name in its own language.
+	ori="$(echo -n "$([ "${p_disable_originalName,,}" == 'false' ] && printf "%s, " "${p_langNameOrig,,}" || printf '')")";
+
+	# Writing the code to display or not the targeted language in the user's system language.
+    tmp="$([ "${p_langNameUser^^}" != 'NULL' ] && "${p_langNameUser,,}" || printf "NULL")";
+
+	usr="$(echo -n "$([ "${p_disable_fromUserLang,,}" == 'false' ] && printf "%s, " "${tmp}" || printf '')")";
+
+	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" 'Argument.
+	if   	[[ "${p_dispOrder,,}" == c* ]]; then
+		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then output="${cod}${eng}${ori}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,eng,usr,ori' ]; then output="${cod}${eng}${usr}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,ori,eng,usr' ]; then output="${cod}${ori}${eng}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,ori usr,eng' ]; then output="${cod}${ori}${usr}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,usr,eng,ori' ]; then output="${cod}${usr}${eng}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'cod,usr,ori,eng' ]; then output="${cod}${usr}${ori}${eng}"; valid='true';
+		  fi
+
+	elif 	[[ "${p_dispOrder,,}" == e* ]]; then
+		  if [ "${p_dispOrder,,}" == 'eng,cod,ori,usr' ]; then output="${eng}${cod}${ori}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,cod,usr,ori' ]; then output="${eng}${cod}${usr}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,ori,cod,usr' ]; then output="${eng}${ori}${cod}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,ori,usr,cod' ]; then output="${eng}${ori}${usr}${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,usr,cod,ori' ]; then output="${eng}${usr}${cod}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'eng,usr,ori,cod' ]; then output="${eng}${usr}${ori}${cod}"; valid='true';
+		  fi
+
+	elif 	[[ "${p_dispOrder,,}" == o* ]]; then
+		  if [ "${p_dispOrder,,}" == 'ori,cod,eng,usr' ]; then output="${ori}${cod}${eng}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,cod,usr,eng' ]; then output="${ori}${cod}${usr}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,eng,cod,usr' ]; then output="${ori}${eng}${cod}${usr}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,eng,usr,cod' ]; then output="${ori}${eng}${usr}${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,usr,cod,eng' ]; then output="${ori}${usr}${cod}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'ori,usr,eng,cod' ]; then output="${ori}${usr}${eng}${cod}"; valid='true';
+		  fi
+
+	elif 	[[ "${p_dispOrder,,}" == u* ]]; then
+		  if [ "${p_dispOrder,,}" == 'usr,cod,eng,ori' ]; then output="${usr}${cod}${eng}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,cod,ori,eng' ]; then output="${usr}${cod}${ori}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,eng,cod,ori' ]; then output="${usr}${eng}${cod}${ori}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,eng,ori,cod' ]; then output="${usr}${eng}${ori}${cod}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,ori,cod,eng' ]; then output="${usr}${ori}${cod}${eng}"; valid='true';
+		elif [ "${p_dispOrder,,}" == 'usr,ori,eng,cod' ]; then output="${usr}${ori}${eng}${cod}"; valid='true';
+		  fi
+	fi
+
+	# If an invalid value was passed to the "${p_dispOrder}" 'Parameter, a valid value is
+	# automatically generated by the computer, and the current function is called again.
+	if [ "${valid,,}" != 'true' ]; then
+		#**** Variables ****
+		declare -a charsArray;	# VAR TYPE : Array	- DESC : This array stores the four valid values of the "${p_dispOrder}" 'Parameter.
+
+		local rand;				# VAR TYPE : CMD	- DESC :
+
+		#**** Code ****
+		charsArray+=('cod' 'eng' 'ori' 'usr');
+
+		rand="$(( RANDOM % 4 ))" || echo "FAILED";
+
+		p_dispOrder="${charsArray[${rand}]}";
+
+		# Malheureusement, il n'est pas possible de faire en sorte que la boucle for traite les caractères unicode en utilisant la syntaxe de base de shell.
+		# Vous pouvez cependant utiliser une alternative telle que la commande "$(xargs)", qui est capable de traiter les caractères unicode.
+
+		# La commande "$(xargs)" permet de générer des entrées à partir d'une entrée standard, ce qui signifie que vous pouvez l'utiliser pour traiter les caractères unicode.
+		# Dans ce cas, la boucle for est remplacée par une commande grep qui permet de filtrer les éléments de la liste array et de les transmettre à la commande "$(xargs)".
+		# La commande "$(xargs)" utilise alors la substitution de chaînes pour construire la chaîne de résultat finale.
+		printf "%s\n" "${charsArray[@]}" | grep -v "${charsArray[${rand}]}" | xargs -I{} printf "%s,%s" "${p_dispOrder}" "{}";
+
+		echo; echo; echo "Generated string : ${p_dispOrder}"; echo;
+
+		# WARNING : DO NOT EDIT THE "${p_dispOrder}" 'LINE IF YOU DON'T KNOW WHAT YOU ARE DOING, OR ELSE THE SCRIPT WILL ENTER INTO AN INFINITE LOOP !!!!!
+		BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
+			"${p_dispOrder}" \
+			"${p_print_code}" \
+			"${p_langNameEngl}" \
+			"${p_langNameOrig}" \
+			"${p_langNameUser}" \
+			"${p_disable_englishNamed}" \
+			"${p_disable_originalName}" \
+			"${p_disable_fromUserLang}";
+	fi
+
+    # Removing the ", , " sub-string if the displaying of one of the informations is disabled by the user.
+    output="${output// , /,}";
+
+    # Removing the eventual ',,' sub-strings that can be created by the previous operation.
+    output="${output//,,/, }";
+
+	# Removing the extra blank space between two names of the targeted language (if there is more than one blank space between two words, if one of the names of the targeted language was hidden by the user).
+	output="${output//  / }";
+
+	# Removing the extra / last ', ' from the generated string.
+    # shellcheck disable=SC2001
+	output="$(echo "${output}" | sed 's/, $//')";
+
+	# Printing the final form of the string to display
+	echo "${output}";
+
+	return 0;
+}
+
+# Printing the language name in English, in its own language and in the user's system language.
+
+# Temporary : since the compiled file doesn't exists yet AND does not uses the main module's translation files,
+# it is necessary to prevent Shellcheck to flag the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__*}" global variables as "referenced but not assigned".
+
+# shellcheck disable=SC2154
+function BU.Main.Locale.PrintLanguageName()
+({
+	#**** Parameters ****
+	local p_code=${1:-NULL};        # ARG TYPE : ISO 639-1 code		- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
+	local p_dispOrder=${2:-$'\0'};  # ARG TYPE : String				- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the name of the targeted language in its own language, in English or in the user's system language.
+    local p_print_code=${3:-yes};   # ARG TYPE : Bool				- OPTIONAL | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
+
+    local p_disable_englishNamed=${4:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in English.
+    local p_disable_originalName=${5:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in its own language.
+    local p_disable_fromUserLang=${6:-false};	# ARG TYPE : Bool	- OPTIONAL | DEFAULT VAL : false	- DESC : Enabling or disabling the displaying of the language's name in the user's language.
+
+    #**** Functions ****
+    # Reducing the text to write in order to call the "$(BU.Main.Locale.PrintLanguageName.Optimize)" function.
+
+    # Thanks to the "BU.Main.Locale.PrintLanguageName()" function's body being written between parenthesis instead of braces, the scope of the "BUPLNOptimizer()" function is local only.
+    function BUPLNOptimizer()
+    {
+        #**** Parameters ****
+        local p_langNameEngl="${1:-NULL}";
+        local p_langNameOrig="${2:-NULL}";
+
+        #**** Variables ****
+        local v_varNameFull="__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}";
+
+        #**** Code ****
+        # The following commented lines are used as test / debug procedures.
+        # Please leave them commented if you are not debugging the code of the "BU.Main.Locale.PrintLanguageName/.Optimize()" and "BUPLNOptimizer()" functions.
+
+        # Testing the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}}" variable with a value,
+        # since the main module's files were not translated with the "lang.csv" file as the date of Feb. 02 of 2023, when this function was coded.
+#         __BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__FRENCH="FRANÇAISE";
+#
+#         echo; echo;
+#
+#         echo "${FUNCNAME[0]}() FUNCTION'S DATA :"; echo;
+#         echo "LANG CODE     : ${p_code}";
+#         echo "PRINT CODE    : ${p_print_code}";
+#         echo "DISP ORDER    : ${p_dispOrder}";
+#         echo;
+#
+#         echo "LANG ENG      : ${p_langNameEngl}";
+#         echo "LANG ORI      : ${p_langNameOrig}";
+#         echo "LANG USR      : ${!v_varNameFull}";
+#         echo;
+#
+#         echo "DIS ENG       : ${p_disable_englishNamed}";
+#         echo "DIS ORI       : ${p_disable_originalName}";
+#         echo "DIS SYS       : ${p_disable_fromUserLang}";
+#         echo;
+#
+#         echo "Salut depuis la fonction ${FUNCNAME[0]}(), située dans la fonction ${FUNCNAME[1]}";
+#         echo;
+
+        BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
+        "${p_dispOrder}" \
+        "${p_print_code}" \
+        "${p_langNameEngl}" \
+        "${p_langNameOrig}" \
+        "${!v_varNameFull}" \
+        "${p_disable_englishNamed}" \
+        "${p_disable_originalName}" \
+        "${p_disable_fromUserLang}" || { local C="${?}"; echo "FAILED" >&2; return "${C}"; };
+
+        return 0;
+    }
 
 	#**** Code ****
 
 	# Checking if a code begins with a certain letter, in order to optimize the verification process.
-	if [[ "${p_code}" == a* ]]; then
-		  if [ "${p_code,,}" == 'aa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afar | Afaraf";
-		elif [ "${p_code,,}" == 'ab' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Abkhazian | Аҧсуа";
-		elif [ "${p_code,,}" == 'ae' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avestan | Avesta";
-		elif [ "${p_code,,}" == 'af' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Afrikaans | Afrikaans";
-		elif [ "${p_code,,}" == 'ak' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Akan | Akan";
-		elif [ "${p_code,,}" == 'am' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Amharic | አማርኛ";
-		elif [ "${p_code,,}" == 'an' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aragonese | Aragonés";
-		elif [ "${p_code,,}" == 'ar' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Arabic | العربية";
-		elif [ "${p_code,,}" == 'as' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Assamese | অসমীয়া";
-		elif [ "${p_code,,}" == 'av' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Avaric | авар мацӀ ; магӀарул мацӀ";
-		elif [ "${p_code,,}" == 'ay' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Aymara | Aymar aru";
-		elif [ "${p_code,,}" == 'az' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Azerbaijani | Azərbaycan dili";
-		  fi
-	
-	elif [[ "${p_code}" == b* ]]; then
-	  	  if [ "${p_code,,}" == 'ba' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bashkir | башҡорт теле";
-		elif [ "${p_code,,}" == 'be' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Belarusian | Беларуская";
-		elif [ "${p_code,,}" == 'bg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bulgarian | български език";
-		elif [ "${p_code,,}" == 'bh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bihari | भोजपुरी";
-		elif [ "${p_code,,}" == 'bi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bislama | Bislama";
-		elif [ "${p_code,,}" == 'bm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bambara | Bamanankan";
-		elif [ "${p_code,,}" == 'bn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bengali | বাংলা";
-		elif [ "${p_code,,}" == 'bo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tibetan | བོད་ཡིག";
-		elif [ "${p_code,,}" == 'br' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Breton | Brezhoneg";
-		elif [ "${p_code,,}" == 'bs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Bosnian | Bosanski jezik";
+	if 		[[ "${p_code,,}" == a* ]]; then
+		  if [ "${p_code,,}" == 'aa' ]; then BUPLNOptimizer 'Afar'        "Afaraf";
+		elif [ "${p_code,,}" == 'ab' ]; then BUPLNOptimizer 'Abkhazian'   "Аҧсуа";
+		elif [ "${p_code,,}" == 'ae' ]; then BUPLNOptimizer 'Avestan'     "Avesta";
+		elif [ "${p_code,,}" == 'af' ]; then BUPLNOptimizer 'Afrikaans'   "Afrikaans";
+		elif [ "${p_code,,}" == 'ak' ]; then BUPLNOptimizer 'Akan'        "Akan";
+		elif [ "${p_code,,}" == 'am' ]; then BUPLNOptimizer 'Amharic'     "አማርኛ";
+		elif [ "${p_code,,}" == 'an' ]; then BUPLNOptimizer 'Aragonese'   "Aragonés";
+		elif [ "${p_code,,}" == 'ar' ]; then BUPLNOptimizer 'Arabic'      "العربية";
+		elif [ "${p_code,,}" == 'as' ]; then BUPLNOptimizer 'Assamese'    "অসমীয়া";
+		elif [ "${p_code,,}" == 'av' ]; then BUPLNOptimizer 'Avaric'      "авар мацӀ ; магӀарул мацӀ";
+		elif [ "${p_code,,}" == 'ay' ]; then BUPLNOptimizer 'Aymara'      "Aymar aru";
+		elif [ "${p_code,,}" == 'az' ]; then BUPLNOptimizer 'Azerbaijani' "Azərbaycan dili";
 		  fi
 
-	elif [[ "${p_code}" == c* ]]; then
-		  if [ "${p_code,,}" == 'ca' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Catalan | Català";
-		elif [ "${p_code,,}" == 'ce' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chechen | нохчийн мотт";
-		elif [ "${p_code,,}" == 'ch' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chamorro | Chamoru";
-		elif [ "${p_code,,}" == 'co' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Corsican | Corsu ; lingua corsa";
-		elif [ "${p_code,,}" == 'cr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Cree | ᓀᐦᐃᔭᐍᐏᐣ";
-		elif [ "${p_code,,}" == 'cs' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Czech | Česky ; čeština";
-		elif [ "${p_code,,}" == 'cu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Old Church Slavonic | Словѣньскъ";
-		elif [ "${p_code,,}" == 'cv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chuvash | чӑваш чӗлхи";
-		elif [ "${p_code,,}" == 'cy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Welsh | Cymraeg";
+	elif 	[[ "${p_code,,}" == b* ]]; then
+	  	  if [ "${p_code,,}" == 'ba' ]; then BUPLNOptimizer 'Bashkir'     "башҡорт теле";
+		elif [ "${p_code,,}" == 'be' ]; then BUPLNOptimizer 'Belarusian'  "Беларуская";
+		elif [ "${p_code,,}" == 'bg' ]; then BUPLNOptimizer 'Bulgarian'   "български език";
+		elif [ "${p_code,,}" == 'bh' ]; then BUPLNOptimizer 'Bihari'      "भोजपुरी";
+		elif [ "${p_code,,}" == 'bi' ]; then BUPLNOptimizer 'Bislama'     "Bislama";
+		elif [ "${p_code,,}" == 'bm' ]; then BUPLNOptimizer 'Bambara'     "Bamanankan";
+		elif [ "${p_code,,}" == 'bn' ]; then BUPLNOptimizer 'Bengali'     "বাংলা";
+		elif [ "${p_code,,}" == 'bo' ]; then BUPLNOptimizer 'Tibetan'     "བོད་ཡིག";
+		elif [ "${p_code,,}" == 'br' ]; then BUPLNOptimizer 'Breton'      "Brezhoneg";
+		elif [ "${p_code,,}" == 'bs' ]; then BUPLNOptimizer 'Bosnian'     "Bosanski jezik";
 		  fi
 
-	elif [[ "${p_code}" == d* ]]; then
-		  if [ "${p_code,,}" == 'da' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Danish | Dansk";
-		elif [ "${p_code,,}" == 'de' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') German | Deutsch";
-		elif [ "${p_code,,}" == 'dv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Divehi | ދިވެހި";
-		elif [ "${p_code,,}" == 'dz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dzongkha | རྫོང་ཁ";
+	elif 	[[ "${p_code,,}" == c* ]]; then
+		  if [ "${p_code,,}" == 'ca' ]; then BUPLNOptimizer 'Catalan'               "Català";
+		elif [ "${p_code,,}" == 'ce' ]; then BUPLNOptimizer 'Chechen'               "нохчийн мотт";
+		elif [ "${p_code,,}" == 'ch' ]; then BUPLNOptimizer 'Chamorro'              "Chamoru";
+		elif [ "${p_code,,}" == 'co' ]; then BUPLNOptimizer 'Corsican'              "Corsu ; lingua corsa";
+		elif [ "${p_code,,}" == 'cr' ]; then BUPLNOptimizer 'Cree'                  "ᓀᐦᐃᔭᐍᐏᐣ";
+		elif [ "${p_code,,}" == 'cs' ]; then BUPLNOptimizer 'Czech'                 "Česky ; čeština";
+		elif [ "${p_code,,}" == 'cu' ]; then BUPLNOptimizer 'Old Church Slavonic'   "Словѣньскъ";
+		elif [ "${p_code,,}" == 'cv' ]; then BUPLNOptimizer 'Chuvash'               "чӑваш чӗлхи";
+		elif [ "${p_code,,}" == 'cy' ]; then BUPLNOptimizer 'Welsh'                 "Cymraeg";
 		  fi
 
-	elif [[ "${p_code}" == e* ]]; then
-		  if [ "${p_code,,}" == 'ee' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ewe | Ɛʋɛgbɛ";
-		elif [ "${p_code,,}" == 'el' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greek | Ελληνικά";
-		elif [ "${p_code,,}" == 'en' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') English | English";
-		elif [ "${p_code,,}" == 'eo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Esperanto | Esperanto";
-		elif [ "${p_code,,}" == 'es' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Spanish | Español";
-		elif [ "${p_code,,}" == 'et' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Estonian | Eesti keel";
-		elif [ "${p_code,,}" == 'eu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Basque | Euskara";
+	elif 	[[ "${p_code,,}" == d* ]]; then
+		  if [ "${p_code,,}" == 'da' ]; then BUPLNOptimizer 'Danish'            "Dansk";
+		elif [ "${p_code,,}" == 'de' ]; then BUPLNOptimizer 'German'            "Deutsch";
+		elif [ "${p_code,,}" == 'dv' ]; then BUPLNOptimizer 'Divehi'            "ދިވެހި";
+		elif [ "${p_code,,}" == 'dz' ]; then BUPLNOptimizer 'Dzongkha'          "རྫོང་ཁ";
 		  fi
 
-	elif [[ "${p_code}" == f* ]]; then
-		  if [ "${p_code,,}" == 'fa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Persian | فارسی";
-		elif [ "${p_code,,}" == 'ff' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fulah | Fulfulde";
-		elif [ "${p_code,,}" == 'fi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Finnish | Suomen kieli";
-		elif [ "${p_code,,}" == 'fj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Fijian | Vosa Vakaviti";
-		elif [ "${p_code,,}" == 'fo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Faroese | Føroyskt";
-		elif [ "${p_code,,}" == 'fr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') French | Français";
-		elif [ "${p_code,,}" == 'fy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Western Frisian | Frysk";
+	elif 	[[ "${p_code,,}" == e* ]]; then
+		  if [ "${p_code,,}" == 'ee' ]; then BUPLNOptimizer 'Ewe'               "Ɛʋɛgbɛ";
+		elif [ "${p_code,,}" == 'el' ]; then BUPLNOptimizer 'Greek'             "Ελληνικά";
+		elif [ "${p_code,,}" == 'en' ]; then BUPLNOptimizer 'English'           "English";
+		elif [ "${p_code,,}" == 'eo' ]; then BUPLNOptimizer 'Esperanto'         "Esperanto";
+		elif [ "${p_code,,}" == 'es' ]; then BUPLNOptimizer 'Spanish'           "Español";
+		elif [ "${p_code,,}" == 'et' ]; then BUPLNOptimizer 'Estonian'          "Eesti keel";
+		elif [ "${p_code,,}" == 'eu' ]; then BUPLNOptimizer 'Basque'            "Euskara";
 		  fi
 
-	elif [[ "${p_code}" == g* ]]; then
-		  if [ "${p_code,,}" == 'ga' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Irish | Gaeilge";
-		elif [ "${p_code,,}" == 'gd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Scottish Gaelic | Gàidhlig";
-		elif [ "${p_code,,}" == 'gl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Galician | Galego";
-		elif [ "${p_code,,}" == 'gn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Guarani | Avañe'ẽ";
-		elif [ "${p_code,,}" == 'gu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Gujarati | ગુજરાતી";
-		elif [ "${p_code,,}" == 'gv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Manx | Ghaelg";
+	elif 	[[ "${p_code,,}" == f* ]]; then
+		  if [ "${p_code,,}" == 'fa' ]; then BUPLNOptimizer 'Persian'           "فارسی";
+		elif [ "${p_code,,}" == 'ff' ]; then BUPLNOptimizer 'Fulah'             "Fulfulde";
+		elif [ "${p_code,,}" == 'fi' ]; then BUPLNOptimizer 'Finnish'           "Suomen kieli";
+		elif [ "${p_code,,}" == 'fj' ]; then BUPLNOptimizer 'Fijian'            "Vosa Vakaviti";
+		elif [ "${p_code,,}" == 'fo' ]; then BUPLNOptimizer 'Faroese'           "Føroyskt";
+		elif [ "${p_code,,}" == 'fr' ]; then BUPLNOptimizer 'French'            'Français';
+		elif [ "${p_code,,}" == 'fy' ]; then BUPLNOptimizer 'Western Frisian'   "Frysk";
 		  fi
 
-	elif [[ "${p_code}" == h* ]]; then
-		  if [ "${p_code,,}" == 'ha' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hausa | هَوُسَ";
-		elif [ "${p_code,,}" == 'he' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hebrew | עברית";
-		elif [ "${p_code,,}" == 'hi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hindi | हिन्दी ; हिंदी";
-		elif [ "${p_code,,}" == 'ho' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hiri Motu | Hiri Motu";
-		elif [ "${p_code,,}" == 'hr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Croatian | Hrvatski";
-		elif [ "${p_code,,}" == 'ht' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Haitian | Kreyòl ayisyen";
-		elif [ "${p_code,,}" == 'hu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Hungarian | magyar ";
-		elif [ "${p_code,,}" == 'hy' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Armenian | Հայերեն";
-		elif [ "${p_code,,}" == 'hz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Herero | Otjiherero";
+	elif 	[[ "${p_code,,}" == g* ]]; then
+		  if [ "${p_code,,}" == 'ga' ]; then BUPLNOptimizer 'Irish'             "Gaeilge";
+		elif [ "${p_code,,}" == 'gd' ]; then BUPLNOptimizer 'Scottish Gaelic'   "Gàidhlig";
+		elif [ "${p_code,,}" == 'gl' ]; then BUPLNOptimizer 'Galician'          "Galego";
+		elif [ "${p_code,,}" == 'gn' ]; then BUPLNOptimizer 'Guarani'           "Avañe'ẽ";
+		elif [ "${p_code,,}" == 'gu' ]; then BUPLNOptimizer 'Gujarati'          "ગુજરાતી";
+		elif [ "${p_code,,}" == 'gv' ]; then BUPLNOptimizer 'Manx'              "Ghaelg";
 		  fi
 
-	elif [[ "${p_code}" == i* ]]; then
-		  if [ "${p_code,,}" == 'ia' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingua | Interlingua";
-		elif [ "${p_code,,}" == 'id' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Indonesian | Bahasa Indonesia";
-		elif [ "${p_code,,}" == 'ie' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Interlingue | Interlingue";
-		elif [ "${p_code,,}" == 'ig' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Igbo | Igbo";
-		elif [ "${p_code,,}" == 'ii' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sichuan Yi | ꆇꉙ";
-		elif [ "${p_code,,}" == 'ik' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inupiaq | Iñupiaq ; Iñupiatun";
-		elif [ "${p_code,,}" == 'io' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ido | Ido";
-		elif [ "${p_code,,}" == 'is' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Icelandic | Íslenska";
-		elif [ "${p_code,,}" == 'it' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Italian | Italiano";
-		elif [ "${p_code,,}" == 'iu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Inuktitut | ᐃᓄᒃᑎᑐᑦ";
+	elif 	[[ "${p_code,,}" == h* ]]; then
+		  if [ "${p_code,,}" == 'ha' ]; then BUPLNOptimizer 'Hausa'             "هَوُسَ";
+		elif [ "${p_code,,}" == 'he' ]; then BUPLNOptimizer 'Hebrew'            "עברית";
+		elif [ "${p_code,,}" == 'hi' ]; then BUPLNOptimizer 'Hindi'             "हिन्दी ; हिंदी";
+		elif [ "${p_code,,}" == 'ho' ]; then BUPLNOptimizer 'Hiri Motu'         "Hiri Motu";
+		elif [ "${p_code,,}" == 'hr' ]; then BUPLNOptimizer 'Croatian'          "Hrvatski";
+		elif [ "${p_code,,}" == 'ht' ]; then BUPLNOptimizer 'Haitian'           "Kreyòl ayisyen";
+		elif [ "${p_code,,}" == 'hu' ]; then BUPLNOptimizer 'Hungarian'         "magyar";
+		elif [ "${p_code,,}" == 'hy' ]; then BUPLNOptimizer 'Armenian'          "Հայերեն";
+		elif [ "${p_code,,}" == 'hz' ]; then BUPLNOptimizer 'Herero'            "Otjiherero";
 		  fi
 
-	elif [[ "${p_code}" == j* ]]; then
-		  if [ "${p_code,,}" == 'ja' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Japanese | 日本語 (にほんご)";
-		elif [ "${p_code,,}" == 'jv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Javanese | Basa Jawa";
+	elif 	[[ "${p_code,,}" == i* ]]; then
+		  if [ "${p_code,,}" == 'ia' ]; then BUPLNOptimizer 'Interlingua'       "Interlingua";
+		elif [ "${p_code,,}" == 'id' ]; then BUPLNOptimizer 'Indonesian'        "Bahasa Indonesia";
+		elif [ "${p_code,,}" == 'ie' ]; then BUPLNOptimizer 'Interlingue'       "Interlingue";
+		elif [ "${p_code,,}" == 'ig' ]; then BUPLNOptimizer 'Igbo'              "Igbo";
+		elif [ "${p_code,,}" == 'ii' ]; then BUPLNOptimizer 'Sichuan Yi'        "ꆇꉙ";
+		elif [ "${p_code,,}" == 'ik' ]; then BUPLNOptimizer 'Inupiaq'           "Iñupiaq ; Iñupiatun";
+		elif [ "${p_code,,}" == 'io' ]; then BUPLNOptimizer 'Ido'               "Ido";
+		elif [ "${p_code,,}" == 'is' ]; then BUPLNOptimizer 'Icelandic'         "Íslenska";
+		elif [ "${p_code,,}" == 'it' ]; then BUPLNOptimizer 'Italian'           "Italiano";
+		elif [ "${p_code,,}" == 'iu' ]; then BUPLNOptimizer 'Inuktitut'         "ᐃᓄᒃᑎᑐᑦ";
 		  fi
 
-	elif [[ "${p_code}" == k* ]]; then
-		  if [ "${p_code,,}" == 'ka' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Georgian | ქართული";
-		elif [ "${p_code,,}" == 'kg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kongo | KiKongo";
-		elif [ "${p_code,,}" == 'ki' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kikuyu | Gĩkũyũ";
-		elif [ "${p_code,,}" == 'kj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kwanyama | Kuanyama";
-		elif [ "${p_code,,}" == 'kk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kazakh | Қазақ тілі";
-		elif [ "${p_code,,}" == 'kl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Greenlandic | Kalaallisut ; kalaallit oqaasii";
-		elif [ "${p_code,,}" == 'km' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Khmer | ភាសាខ្មែរ";
-		elif [ "${p_code,,}" == 'kn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kannada | ಕನ್ನಡ";
-		elif [ "${p_code,,}" == 'ko' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Korean | 한국어 (韓國語) ; 조선말 (朝鮮語)";
-		elif [ "${p_code,,}" == 'kr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kanuri | Kanuri";
-		elif [ "${p_code,,}" == 'ks' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kashmiri | कश्मीरी ; كشميري";
-		elif [ "${p_code,,}" == 'ku' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kurdish | Kurdî ; كوردی";
-		elif [ "${p_code,,}" == 'kv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Komi | коми кыв";
-		elif [ "${p_code,,}" == 'kw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Cornish | Kernewek";
-		elif [ "${p_code,,}" == 'ky' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirghiz | кыргыз тили";
+	elif 	[[ "${p_code,,}" == j* ]]; then
+		  if [ "${p_code,,}" == 'ja' ]; then BUPLNOptimizer 'Japanese' "日本語 (にほんご)";
+		elif [ "${p_code,,}" == 'jv' ]; then BUPLNOptimizer 'Javanese' "Basa Jawa";
+		  fi
+
+	elif 	[[ "${p_code,,}" == k* ]]; then
+		  if [ "${p_code,,}" == 'ka' ]; then BUPLNOptimizer 'Georgian'      "ქართული";
+		elif [ "${p_code,,}" == 'kg' ]; then BUPLNOptimizer 'Kongo'         "KiKongo";
+		elif [ "${p_code,,}" == 'ki' ]; then BUPLNOptimizer 'Kikuyu'        "Gĩkũyũ";
+		elif [ "${p_code,,}" == 'kj' ]; then BUPLNOptimizer 'Kwanyama'      "Kuanyama";
+		elif [ "${p_code,,}" == 'kk' ]; then BUPLNOptimizer 'Kazakh'        "Қазақ тілі";
+		elif [ "${p_code,,}" == 'kl' ]; then BUPLNOptimizer 'Greenlandic'   "Kalaallisut ; kalaallit oqaasii";
+		elif [ "${p_code,,}" == 'km' ]; then BUPLNOptimizer 'Khmer'         "ភាសាខ្មែរ";
+		elif [ "${p_code,,}" == 'kn' ]; then BUPLNOptimizer 'Kannada'       "ಕನ್ನಡ";
+		elif [ "${p_code,,}" == 'ko' ]; then BUPLNOptimizer 'Korean'        "한국어 (韓國語) ; 조선말 (朝鮮語)";
+		elif [ "${p_code,,}" == 'kr' ]; then BUPLNOptimizer 'Kanuri'        "Kanuri";
+		elif [ "${p_code,,}" == 'ks' ]; then BUPLNOptimizer 'Kashmiri'      "कश्मीरी ; كشميري";
+		elif [ "${p_code,,}" == 'ku' ]; then BUPLNOptimizer 'Kurdish'       "Kurdî ; كوردی";
+		elif [ "${p_code,,}" == 'kv' ]; then BUPLNOptimizer 'Komi'          "коми кыв";
+		elif [ "${p_code,,}" == 'kw' ]; then BUPLNOptimizer 'Cornish'       "Kernewek";
+		elif [ "${p_code,,}" == 'ky' ]; then BUPLNOptimizer 'Kirghiz'       "кыргыз тили";
 		fi
 
-	elif [[ "${p_code}" == l* ]]; then
-		  if [ "${p_code,,}" == 'la' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latin | Latine ; lingua latina";
-		elif [ "${p_code,,}" == 'lb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luxembourgish | Lëtzebuergesch";
-		elif [ "${p_code,,}" == 'lg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ganda | Luganda";
-		elif [ "${p_code,,}" == 'li' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Limburgish | Limburgs";
-		elif [ "${p_code,,}" == 'ln' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lingala | Lingála";
-		elif [ "${p_code,,}" == 'lo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lao | ພາສາລາວ";
-		elif [ "${p_code,,}" == 'lt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Lithuanian | Lietuvių kalba";
-		elif [ "${p_code,,}" == 'lu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Luba | tshiluba";
-		elif [ "${p_code,,}" == 'lv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Latvian | Latviešu valoda";
+	elif 	[[ "${p_code,,}" == l* ]]; then
+		  if [ "${p_code,,}" == 'la' ]; then BUPLNOptimizer 'Latin'         "Latine ; lingua latina";
+		elif [ "${p_code,,}" == 'lb' ]; then BUPLNOptimizer 'Luxembourgish' "Lëtzebuergesch";
+		elif [ "${p_code,,}" == 'lg' ]; then BUPLNOptimizer 'Ganda'         "Luganda";
+		elif [ "${p_code,,}" == 'li' ]; then BUPLNOptimizer 'Limburgish'    "Limburgs";
+		elif [ "${p_code,,}" == 'ln' ]; then BUPLNOptimizer 'Lingala'       "Lingála";
+		elif [ "${p_code,,}" == 'lo' ]; then BUPLNOptimizer 'Lao'           "ພາສາລາວ";
+		elif [ "${p_code,,}" == 'lt' ]; then BUPLNOptimizer 'Lithuanian'    "Lietuvių kalba";
+		elif [ "${p_code,,}" == 'lu' ]; then BUPLNOptimizer 'Luba'          "tshiluba";
+		elif [ "${p_code,,}" == 'lv' ]; then BUPLNOptimizer 'Latvian'       "Latviešu valoda";
 		  fi
 
-	elif [[ "${p_code}" == m* ]]; then
-		  if [ "${p_code,,}" == 'mg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malagasy | Fiteny malagasy";
-		elif [ "${p_code,,}" == 'mh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marshallese | Kajin M̧ajeļ";
-		elif [ "${p_code,,}" == 'mi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Māori | Te reo Māori";
-		elif [ "${p_code,,}" == 'mk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Macedonian | македонски јазик";
-		elif [ "${p_code,,}" == 'ml' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malayalam | മലയാളം";
-		elif [ "${p_code,,}" == 'mn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Mongolian | Монгол";
-		elif [ "${p_code,,}" == 'mo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Moldavian | лимба молдовеняскэ";
-		elif [ "${p_code,,}" == 'mr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Marathi | मराठी";
-		elif [ "${p_code,,}" == 'ms' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Malay | Bahasa Melayu ; بهاس ملايو";
-		elif [ "${p_code,,}" == 'mt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Maltese | Malti";
-		elif [ "${p_code,,}" == 'my' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Burmese | ဗမာစာ";
+	elif 	[[ "${p_code,,}" == m* ]]; then
+		  if [ "${p_code,,}" == 'mg' ]; then BUPLNOptimizer 'Malagasy'      "Fiteny malagasy";
+		elif [ "${p_code,,}" == 'mh' ]; then BUPLNOptimizer 'Marshallese'   "Kajin M̧ajeļ";
+		elif [ "${p_code,,}" == 'mi' ]; then BUPLNOptimizer 'Māori'         "Te reo Māori";
+		elif [ "${p_code,,}" == 'mk' ]; then BUPLNOptimizer 'Macedonian'    "македонски јазик";
+		elif [ "${p_code,,}" == 'ml' ]; then BUPLNOptimizer 'Malayalam'     "മലയാളം";
+		elif [ "${p_code,,}" == 'mn' ]; then BUPLNOptimizer 'Mongolian'     "Монгол";
+		elif [ "${p_code,,}" == 'mo' ]; then BUPLNOptimizer 'Moldavian'     "лимба молдовеняскэ";
+		elif [ "${p_code,,}" == 'mr' ]; then BUPLNOptimizer 'Marathi'       "मराठी";
+		elif [ "${p_code,,}" == 'ms' ]; then BUPLNOptimizer 'Malay'         "Bahasa Melayu ; بهاس ملايو";
+		elif [ "${p_code,,}" == 'mt' ]; then BUPLNOptimizer 'Maltese'       "Malti";
+		elif [ "${p_code,,}" == 'my' ]; then BUPLNOptimizer 'Burmese'       "ဗမာစာ";
 		  fi
 
-	elif [[ "${p_code}" == n* ]]; then
-		  if [ "${p_code,,}" == 'na' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nauru | Ekakairũ Naoero";
-		elif [ "${p_code,,}" == 'nb' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Bokmål | Norsk bokmål";
-		elif [ "${p_code,,}" == 'nd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') North Ndebele | isiNdebele";
-		elif [ "${p_code,,}" == 'ne' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Nepali | नेपाली";
-		elif [ "${p_code,,}" == 'ng' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ndonga | Owambo";
-		elif [ "${p_code,,}" == 'nl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Dutch | Nederlands";
-		elif [ "${p_code,,}" == 'nn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian Nynorsk | Norsk nynorsk";
-		elif [ "${p_code,,}" == 'no' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Norwegian | Norsk";
-		elif [ "${p_code,,}" == 'nr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') South Ndebele | Ndébélé";
-		elif [ "${p_code,,}" == 'nv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Navajo | Diné bizaad ; Dinékʼehǰí";
-		elif [ "${p_code,,}" == 'ny' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chichewa | ChiCheŵa ; chinyanja";
+	elif	[[ "${p_code,,}" == n* ]]; then
+		  if [ "${p_code,,}" == 'na' ]; then BUPLNOptimizer 'Nauru'             "Ekakairũ Naoero";
+		elif [ "${p_code,,}" == 'nb' ]; then BUPLNOptimizer 'Norwegian Bokmål'  "Norsk bokmål";
+		elif [ "${p_code,,}" == 'nd' ]; then BUPLNOptimizer 'North Ndebele'     "isiNdebele";
+		elif [ "${p_code,,}" == 'ne' ]; then BUPLNOptimizer 'Nepali'            "नेपाली";
+		elif [ "${p_code,,}" == 'ng' ]; then BUPLNOptimizer 'Ndonga'            "Owambo";
+		elif [ "${p_code,,}" == 'nl' ]; then BUPLNOptimizer 'Dutch'             "Nederlands";
+		elif [ "${p_code,,}" == 'nn' ]; then BUPLNOptimizer 'Norwegian Nynorsk' "Norsk nynorsk";
+		elif [ "${p_code,,}" == 'no' ]; then BUPLNOptimizer 'Norwegian'         "Norsk";
+		elif [ "${p_code,,}" == 'nr' ]; then BUPLNOptimizer 'South Ndebele'     "Ndébélé";
+		elif [ "${p_code,,}" == 'nv' ]; then BUPLNOptimizer 'Navajo'            "Diné bizaad ; Dinékʼehǰí";
+		elif [ "${p_code,,}" == 'ny' ]; then BUPLNOptimizer 'Chichewa'          "ChiCheŵa ; chinyanja";
 		  fi
 
-	elif [[ "${p_code}" == o* ]]; then
-		  if [ "${p_code,,}" == 'oc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Occitan | Occitan";
-		elif [ "${p_code,,}" == 'oj' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ojibwa | ᐊᓂᔑᓈᐯᒧᐎᓐ";
-		elif [ "${p_code,,}" == 'om' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oromo | Afaan Oromoo";
-		elif [ "${p_code,,}" == 'or' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Oriya | ଓଡ଼ିଆ";
-		elif [ "${p_code,,}" == 'os' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ossetian | Ирон ӕвзаг";
+	elif 	[[ "${p_code,,}" == o* ]]; then
+		  if [ "${p_code,,}" == 'oc' ]; then BUPLNOptimizer 'Occitan'           "Occitan";
+		elif [ "${p_code,,}" == 'oj' ]; then BUPLNOptimizer 'Ojibwa'            "ᐊᓂᔑᓈᐯᒧᐎᓐ";
+		elif [ "${p_code,,}" == 'om' ]; then BUPLNOptimizer 'Oromo'             "Afaan Oromoo";
+		elif [ "${p_code,,}" == 'or' ]; then BUPLNOptimizer 'Oriya'             "ଓଡ଼ିଆ";
+		elif [ "${p_code,,}" == 'os' ]; then BUPLNOptimizer 'Ossetian'          "Ирон ӕвзаг";
 		  fi
 
-	elif [[ "${p_code}" == p* ]] || [[ "${p_code}" == q* ]]; then
-		  if [ "${p_code,,}" == 'pa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Panjabi | ਪੰਜਾਬੀ ; پنجابی";
-		elif [ "${p_code,,}" == 'pi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pāli | पािऴ";
-		elif [ "${p_code,,}" == 'pl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Polish | Polski";
-		elif [ "${p_code,,}" == 'ps' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Pashto | پښتو";
-		elif [ "${p_code,,}" == 'pt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Portuguese | Português";
-		elif [ "${p_code,,}" == 'qu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Quechua | Runa Simi ; Kichwa";
+	elif 	[[ "${p_code,,}" == p* ]] || [[ "${p_code}" == q* ]]; then
+		  if [ "${p_code,,}" == 'pa' ]; then BUPLNOptimizer 'Panjabi'           "ਪੰਜਾਬੀ ; پنجابی";
+		elif [ "${p_code,,}" == 'pi' ]; then BUPLNOptimizer 'Pāli'              "पािऴ";
+		elif [ "${p_code,,}" == 'pl' ]; then BUPLNOptimizer 'Polish'            "Polski";
+		elif [ "${p_code,,}" == 'ps' ]; then BUPLNOptimizer 'Pashto'            "پښتو";
+		elif [ "${p_code,,}" == 'pt' ]; then BUPLNOptimizer 'Portuguese'        "Português";
+		elif [ "${p_code,,}" == 'qu' ]; then BUPLNOptimizer 'Quechua'           "Runa Simi ; Kichwa";
 		  fi
 
-	elif [[ "${p_code}" == r* ]]; then
-		  if [ "${p_code,,}" == 'rc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Reunionese | Kréol Rénioné";
-		elif [ "${p_code,,}" == 'rm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romansh | Rumantsch grischun";
-		elif [ "${p_code,,}" == 'rn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kirundi | kiRundi";
-		elif [ "${p_code,,}" == 'ro' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Romanian | Română";
-		elif [ "${p_code,,}" == 'ru' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Russian | русский язык";
-		elif [ "${p_code,,}" == 'rw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Kinyarwanda | Kinyarwanda";
+	elif 	[[ "${p_code,,}" == r* ]]; then
+		  if [ "${p_code,,}" == 'rc' ]; then BUPLNOptimizer 'Reunionese'        "Kréol Rénioné";
+		elif [ "${p_code,,}" == 'rm' ]; then BUPLNOptimizer 'Romansh'           "Rumantsch grischun";
+		elif [ "${p_code,,}" == 'rn' ]; then BUPLNOptimizer 'Kirundi'           "kiRundi";
+		elif [ "${p_code,,}" == 'ro' ]; then BUPLNOptimizer 'Romanian'          "Română";
+		elif [ "${p_code,,}" == 'ru' ]; then BUPLNOptimizer 'Russian'           "русский язык";
+		elif [ "${p_code,,}" == 'rw' ]; then BUPLNOptimizer 'Kinyarwanda'       "Kinyarwanda";
 		  fi
 
-	elif [[ "${p_code}" == s* ]]; then
-		  if [ "${p_code,,}" == 'sa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sanskrit | संस्कृतम्";
-		elif [ "${p_code,,}" == 'sc' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sardinian | sardu";
-		elif [ "${p_code,,}" == 'sd' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sindhi | सिन्धी ; سنڌي، سندھی";
-		elif [ "${p_code,,}" == 'se' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Northern Sami | Davvisámegiella";
-		elif [ "${p_code,,}" == 'sg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sango | Yângâ tî sängö";
-		elif [ "${p_code,,}" == 'sh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Serbo-Croatian | srpskohrvatski jezik ; српскохрватски језик";
-		elif [ "${p_code,,}" == 'si' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sinhalese| සිංහල";
-		elif [ "${p_code,,}" == 'sk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Slovak | Slovenčina";
-		elif [ "${p_code,,}" == 'sl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Slovenian | Slovenščina";
-		elif [ "${p_code,,}" == 'sm' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Samoan | Gagana fa'a Samoa";
-		elif [ "${p_code,,}" == 'sn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Shona | chiShona";
-		elif [ "${p_code,,}" == 'so' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Somali | Soomaaliga ; af Soomaali";
-		elif [ "${p_code,,}" == 'sq' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Albanian | Shqip ";
-		elif [ "${p_code,,}" == 'sr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Serbian | српски језик";
-		elif [ "${p_code,,}" == 'ss' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swati| SiSwati";
-		elif [ "${p_code,,}" == 'st' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sotho | seSotho";
-		elif [ "${p_code,,}" == 'su' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Sundanese | Basa Sunda";
-		elif [ "${p_code,,}" == 'sv' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swedish | Svenska";
-		elif [ "${p_code,,}" == 'sw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Swahili | Kiswahili";
+	elif 	[[ "${p_code,,}" == s* ]]; then
+		  if [ "${p_code,,}" == 'sa' ]; then BUPLNOptimizer 'Sanskrit'          "संस्कृतम्";
+		elif [ "${p_code,,}" == 'sc' ]; then BUPLNOptimizer 'Sardinian'         "sardu";
+		elif [ "${p_code,,}" == 'sd' ]; then BUPLNOptimizer 'Sindhi'            "सिन्धी ; سنڌي، سندھی";
+		elif [ "${p_code,,}" == 'se' ]; then BUPLNOptimizer 'Northern Sami'     "Davvisámegiella";
+		elif [ "${p_code,,}" == 'sg' ]; then BUPLNOptimizer 'Sango'             "Yângâ tî sängö";
+		elif [ "${p_code,,}" == 'sh' ]; then BUPLNOptimizer 'Serbo-Croatian'    "srpskohrvatski jezik ; српскохрватски језик";
+		elif [ "${p_code,,}" == 'si' ]; then BUPLNOptimizer 'Sinhalese'         "සිංහල";
+		elif [ "${p_code,,}" == 'sk' ]; then BUPLNOptimizer 'Slovak'            "Slovenčina";
+		elif [ "${p_code,,}" == 'sl' ]; then BUPLNOptimizer 'Slovenian'         "Slovenščina";
+		elif [ "${p_code,,}" == 'sm' ]; then BUPLNOptimizer 'Samoan'            "Gagana fa'a Samoa";
+		elif [ "${p_code,,}" == 'sn' ]; then BUPLNOptimizer 'Shona'             "chiShona";
+		elif [ "${p_code,,}" == 'so' ]; then BUPLNOptimizer 'Somali'            "Soomaaliga ; af Soomaali";
+		elif [ "${p_code,,}" == 'sq' ]; then BUPLNOptimizer 'Albanian'          "Shqip ";
+		elif [ "${p_code,,}" == 'sr' ]; then BUPLNOptimizer 'Serbian'           "српски језик";
+		elif [ "${p_code,,}" == 'ss' ]; then BUPLNOptimizer 'Swati'             "SiSwati";
+		elif [ "${p_code,,}" == 'st' ]; then BUPLNOptimizer 'Sotho'             "seSotho";
+		elif [ "${p_code,,}" == 'su' ]; then BUPLNOptimizer 'Sundanese'         "Basa Sunda";
+		elif [ "${p_code,,}" == 'sv' ]; then BUPLNOptimizer 'Swedish'           "Svenska";
+		elif [ "${p_code,,}" == 'sw' ]; then BUPLNOptimizer 'Swahili'           "Kiswahili";
 		  fi
 
-	elif [[ "${p_code}" == t* ]]; then
-		  if [ "${p_code,,}" == 'ta' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tamil | தமிழ்";
-		elif [ "${p_code,,}" == 'te' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Telugu | తెలుగు";
-		elif [ "${p_code,,}" == 'tg' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tajik | тоҷикӣ ; toğikī ; تاجیکی";
-		elif [ "${p_code,,}" == 'th' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Thai | ไทย";
-		elif [ "${p_code,,}" == 'ti' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tigrinya | ትግርኛ";
-		elif [ "${p_code,,}" == 'tk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Turkmen | Türkmen ; Түркмен";
-		elif [ "${p_code,,}" == 'tl' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tagalog | Tagalog";
-		elif [ "${p_code,,}" == 'tn' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tswana | seTswana";
-		elif [ "${p_code,,}" == 'to' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tonga | faka Tonga";
-		elif [ "${p_code,,}" == 'tr' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Turkish | Türkçe";
-		elif [ "${p_code,,}" == 'ts' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tsonga | xiTsonga";
-		elif [ "${p_code,,}" == 'tt' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tatar | татарча ; tatarça ; تاتارچا";
-		elif [ "${p_code,,}" == 'tw' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Twi | Twi";
-		elif [ "${p_code,,}" == 'ty' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Tahitian | Reo Mā\`ohi";
+	elif 	[[ "${p_code,,}" == t* ]]; then
+		  if [ "${p_code,,}" == 'ta' ]; then BUPLNOptimizer 'Tamil'         "தமிழ்";
+		elif [ "${p_code,,}" == 'te' ]; then BUPLNOptimizer 'Telugu'        "తెలుగు";
+		elif [ "${p_code,,}" == 'tg' ]; then BUPLNOptimizer 'Tajik'         "тоҷикӣ ; toğikī ; تاجیکی";
+		elif [ "${p_code,,}" == 'th' ]; then BUPLNOptimizer 'Thai'          "ไทย";
+		elif [ "${p_code,,}" == 'ti' ]; then BUPLNOptimizer 'Tigrinya'      "ትግርኛ";
+		elif [ "${p_code,,}" == 'tk' ]; then BUPLNOptimizer 'Turkmen'       "Türkmen ; Түркмен";
+		elif [ "${p_code,,}" == 'tl' ]; then BUPLNOptimizer 'Tagalog'       "Tagalog";
+		elif [ "${p_code,,}" == 'tn' ]; then BUPLNOptimizer 'Tswana'        "seTswana";
+		elif [ "${p_code,,}" == 'to' ]; then BUPLNOptimizer 'Tonga'         "faka Tonga";
+		elif [ "${p_code,,}" == 'tr' ]; then BUPLNOptimizer 'Turkish'       "Türkçe";
+		elif [ "${p_code,,}" == 'ts' ]; then BUPLNOptimizer 'Tsonga'        "xiTsonga";
+		elif [ "${p_code,,}" == 'tt' ]; then BUPLNOptimizer 'Tatar'         "татарча ; tatarça ; تاتارچا";
+		elif [ "${p_code,,}" == 'tw' ]; then BUPLNOptimizer 'Twi'           "Twi";
+		elif [ "${p_code,,}" == 'ty' ]; then BUPLNOptimizer 'Tahitian'      'Reo Mā`ohi';
 		  fi
 
-	elif [[ "${p_code}" == u* ]]; then
-		  if [ "${p_code,,}" == 'ug' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uighur | Uyƣurqə ; ئۇيغۇرچ";
-		elif [ "${p_code,,}" == 'uk' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Ukrainian | українська мова";
-		elif [ "${p_code,,}" == 'ur' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Urdu | اردو";
-		elif [ "${p_code,,}" == 'uz' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Uzbek | O'zbek ; Ўзбек ; أۇزبېك";
+	elif 	[[ "${p_code,,}" == u* ]]; then
+		  if [ "${p_code,,}" == 'ug' ]; then BUPLNOptimizer 'Uighur'        "Uyƣurqə ; ئۇيغۇرچ";
+		elif [ "${p_code,,}" == 'uk' ]; then BUPLNOptimizer 'Ukrainian'     "українська мова";
+		elif [ "${p_code,,}" == 'ur' ]; then BUPLNOptimizer 'Urdu'          "اردو";
+		elif [ "${p_code,,}" == 'uz' ]; then BUPLNOptimizer 'Uzbek'         "O'zbek ; Ўзбек; أۇزبېك";
 		  fi
 
-	elif [[ "${p_code}" == v* ]]; then
-		  if [ "${p_code,,}" == 've' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Venda | tshiVenḓa";
-		elif [ "${p_code,,}" == 'vi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Vietnamese | Tiếng Việt";
-		elif [ "${p_code,,}" == 'vo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Volapük | Volapük";
+	elif 	[[ "${p_code,,}" == v* ]]; then
+		  if [ "${p_code,,}" == 've' ]; then BUPLNOptimizer 'Venda'         "tshiVenḓa";
+		elif [ "${p_code,,}" == 'vi' ]; then BUPLNOptimizer 'Vietnamese'    "Tiếng Việt";
+		elif [ "${p_code,,}" == 'vo' ]; then BUPLNOptimizer 'Volapük'       "Volapük";
 		  fi
 
-	elif [[ "${p_code}" == w* ]]; then
-		  if [ "${p_code,,}" == 'wa' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Walloon | Walon";
-		elif [ "${p_code,,}" == 'wo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Wolof | Wollof";
+	elif 	[[ "${p_code,,}" == w* ]]; then
+		  if [ "${p_code,,}" == 'wa' ]; then BUPLNOptimizer 'Walloon'       "Walon";
+		elif [ "${p_code,,}" == 'wo' ]; then BUPLNOptimizer 'Wolof'         "Wollof";
 		  fi
 
-	elif [[ "${p_code}" == x* ]] || [[ "${p_code}" == y* ]]; then
-		  if [ "${p_code,,}" == 'xh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Xhosa | isiXhosa";
-		elif [ "${p_code,,}" == 'yi' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yiddish | ייִדיש";
-		elif [ "${p_code,,}" == 'yo' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Yoruba | Yorùbá";
+	elif 	[[ "${p_code,,}" == x* ]] || [[ "${p_code}" == y* ]]; then
+		  if [ "${p_code,,}" == 'xh' ]; then BUPLNOptimizer 'Xhosa'         "isiXhosa";
+		elif [ "${p_code,,}" == 'yi' ]; then BUPLNOptimizer 'Yiddish'       "ייִדיש";
+		elif [ "${p_code,,}" == 'yo' ]; then BUPLNOptimizer 'Yoruba'        "Yorùbá";
 		  fi
 
-	elif [[ "${p_code}" == z* ]]; then
-		  if [ "${p_code,,}" == 'za' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zhuang | Saɯ cueŋƅ ; Saw cuengh";
-		elif [ "${p_code,,}" == 'zh' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Chinese | 中文, 汉语, 漢語";
-		elif [ "${p_code,,}" == 'zu' ]; then echo -n "$([ "${p_print_code,,}" == 'yes' ] && printf "%s :" "${p_code,,}" || printf '') Zulu | isiZulu";
+	elif 	[[ "${p_code,,}" == z* ]]; then
+		  if [ "${p_code,,}" == 'za' ]; then BUPLNOptimizer 'Zhuang'        "Saɯ cueŋƅ ; Saw cuengh";
+		elif [ "${p_code,,}" == 'zh' ]; then BUPLNOptimizer 'Chinese'       "中文, 汉语, 漢語";
+		elif [ "${p_code,,}" == 'zu' ]; then BUPLNOptimizer 'Zulu'          "isiZulu";
 		  fi
 	fi;
 
 	return 0;
-}
+})
 
 # -----------------------------------------------
 
@@ -17576,13 +18029,58 @@ __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processi
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::cutting-text";
 
-# Cut the date displayed before a string.
+# Cutting the date displayed before a string.
 function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Cut the dash written before a command option call (to be improved).
+# Cutting the dash written before a command option call (to be improved).
 function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Cut every part of a string after and with the delimiter, which can be both a single character or a string.
+# Cutting the first character from a string, and getting every following characters.
+function BU.Main.Text.CutFirstCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Code ****
+    echo "${p_string:1}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Cutting the last character from a string, and getting every previous characters.
+function BU.Main.Text.CutLastCharacter()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
+
+    #**** Variables ****
+    declare -i v_length;        # VAR TYPE : Int        - DESC : Storing the length of the character.
+
+    #**** Code ****
+    # Getting the number of characters from this string.
+    v_length="${#p_string}";
+
+    shopt -s extglob;
+
+    # Printing the wanted character.
+    echo "${p_string%%+("${p_string:$(( v_length - 1 ))}")}";
+
+    shopt -u extglob;
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# Cutting every part of a string after and with the delimiter, which can be both a single character or a string.
 function BU.Main.Text.CutSubStringAfterNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
@@ -17862,20 +18360,6 @@ function BU.Main.Text.GetCharacterOccurences()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Getting every characters present in a file.
-function BU.Main.Text.GetCharactersFromFile() {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}"
-
-    #*** Parameters ****
-
-    #**** Code ****
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"
-    return 0
-}
-
 # Get the very first character of a string, and cut everything that follows this character.
 function BU.Main.Text.GetFirstCharacter()
 {
@@ -17908,7 +18392,9 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
     #**** Code ****
 	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    echo "${p_string%%"${p_delim}"*}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    echo "${p_string%%"${p_delim}"*}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Get the very last character of a string, and cut the preceding characters.
@@ -17932,7 +18418,9 @@ function BU.Main.Text.GetLastCharacter()
     v_length="${#p_string}";
 
     # Printing the wanted character.
-    echo "${p_string:$(( v_length - 1 )):1}"; return 0;
+    echo "${p_string:$(( v_length - 1 )):1}";
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
@@ -17963,10 +18451,10 @@ function BU.Main.Text.GetSubStringAfterDelim()
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_delim=${2:-$'\0'};      # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL    - Delimiter
-    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1       - Iterations
-    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL    - Allow to set a counter of skipped delimiters.
-    local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL    - RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
+    local p_delim=${2:-$'\0'};      # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter.
+    local p_iterations=${3:-1};     # ARG TYPE : Int        - OPTIONAL | DEFAULT VAL : 1        - DESC : Number of iterations.
+    local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
+    local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
     if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
@@ -18304,16 +18792,22 @@ function BU.Main.Text.StrToWordArray()
         "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT}";
 
     #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
+    local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in a word array.
+    local p_varname=${2:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the array to create.
+    local p_delim=${3:-$'\0'};      # ARG TYPE : Char       - OPTIONAL | DEFAULT VAL : NULL     - DESC : Customized delimiter, as per ChatGPT, the "$(read)" command does not support custom delimiters, but only a blank space.
 
     #**** Code ****
     if ! BU.Main.Args__Text.StrToWordArray "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    # Since the "${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR}" array is not used in this file, it's better to ignore the returned Shellcheck warning,
-    # in order to avoid displaying a useless warning during the checkings with the Shellcheck debugger.
+    # Before evaluating the user's input, it is essential to check if the input does not contains any characters that can be used to execute a command.
+    if ! BU.Main.Inputs.Sanitize "${p_varname}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    # shellcheck disable=SC2034
-    read -ra __BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR <<< "${p_string}";
+    # If the user named the variable with empty spaces between each words, the blank spaces are removed from the string.
+
+    # Declaring the array according to the name passed by the user.
+    eval "${p_varname}=()";
+
+    eval read -ra "${p_varname}" <<< "${p_string}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -18618,28 +19112,6 @@ alias BU.GetArgc-FFL='BU.Main.Args.GetArgc-FFL';
 alias BU.BytesToHuman='BU.Main.BasicMaths.BytesToHuman';
 alias BU.NegativeToPositive='BU.Main.BasicMaths.NegativeToPositive';
 alias BU.PositiveToNegative='BU.Main.BasicMaths.PositiveToNegative';
-
-# -----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-##################################### DEFINING ALIASES - CASE #####################################
-
-#### CATEGORY : "READING CASE STATEMENTS BY FUNCTIONS"
-
-## SUB-CATEGORY : "'Directories.lib' FILE"
-
-alias BU.Read_DirectoriesTriggerRootDirWarning='BU.Main.Case.Read_DirectoriesTriggerRootDirWarning';
-
-# -----------------------------------------------
-
-## SUB-CATEGORY : "'Errors.lib' FILE"
-
-alias BU.Read_Errors.HandleErrors='BU.Main.Case.Read_Errors.HandleErrors';
 
 # -----------------------------------------------
 
@@ -20817,6 +21289,28 @@ alias BU.HeaderYellowTurquoiseCMD='BU.Main.Headers.Header.CMD.Yellow.Turquoise';
 alias BU.HeaderYellowVioletCMD='BU.Main.Headers.Header.CMD.Yellow.Violet';
 
 alias BU.HeaderYellowWhiteCMD='BU.Main.Headers.Header.CMD.Yellow.White';
+
+# -----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING ALIASES - INPUTS ####################################
+
+#### CATEGORY : "READING CASE STATEMENTS BY FUNCTIONS"
+
+## SUB-CATEGORY : "'Directories.lib' FILE"
+
+alias BU.Read_DirectoriesTriggerRootDirWarning='BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning';
+
+# -----------------------------------------------
+
+## SUB-CATEGORY : "'Errors.lib' FILE"
+
+alias BU.Read_Errors.HandleErrors='BU.Main.Inputs.Read_Errors.HandleErrors';
 
 # -----------------------------------------------
 
@@ -23722,6 +24216,19 @@ elif [ "${__BU_MAIN_FS_NAME,,}" == 'btrfs' ]; then
 
 # -----------------------------------------------
 
+## DRVFS FILE SYSTEM'S INFORMATIONS (WSL FILE SYSTEM)
+
+elif [ "${__BU_MAIN_FS_NAME,,}" == 'drvfs' ]; then
+    # File system max filename length.
+    __BU_MAIN_FS_MAX_FILENAME_LENGTH='255';
+
+    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MAIN_FS_MAX_FILENAME_LENGTH' "${__BU_MAIN_FS_MAX_FILENAME_LENGTH}" 'Int' \
+        "$(BU.Main.ModConfig.Filesystem.PrintFSLengthDescription 'drvfs')" \
+        "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF}" \
+        "${BASH_SOURCE[0]}" "${FUNCAME[0]}" "$(( LINENO - 2 ))";
+
+# -----------------------------------------------
+
 ## EXT2 FILE SYSTEM'S INFORMATIONS
 
 elif [ "${__BU_MAIN_FS_NAME,,}" == 'ext2' ]; then
@@ -24520,7 +25027,7 @@ function BU.Main.ModConfig.Module.MainModuleConfigFolderContent()
 
 ## MAIN MODULE'S INITIALIZER PATH
 
-# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the wrapped file.
+# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the compiled file.
 
 # shellcheck disable=SC2016,SC2059
 function BU.Main.ModConfig.Module.MainModuleInitializerPath() {
@@ -24728,7 +25235,7 @@ fi
 
 ## BASH UTIILS SUB-FOLDERS PATHS
 
-# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the wrapped file.
+# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the compiled file.
 
 BU.Main.ModConfig.Module.BUSubFoldersPaths;
 
@@ -24736,7 +25243,7 @@ BU.Main.ModConfig.Module.BUSubFoldersPaths;
 
 ## BASH UTILS DEV-TOOLS PATHS
 
-# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the wrapped file.
+# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the compiled file.
 
 # The function call has been moved to the "Initializer.sh" script of the main module, in the "STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS" category,
 # because these folders are only used by the development tools provided with the framework, and are therefore useless in another project.
@@ -24747,7 +25254,7 @@ BU.Main.ModConfig.Module.BUSubFoldersPaths;
 
 ## "lib" FOLDER'S CONTENT.
 
-# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the wrapped file.
+# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the compiled file.
 
 BU.Main.ModConfig.Module.BULibFolderContent;
 
@@ -24761,7 +25268,7 @@ BU.Main.ModConfig.Module.BULibFolderContent;
 
 ## MAIN MODULE'S "config" FOLDER'S CONTENT
 
-# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the wrapped file.
+# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the compiled file.
 
 BU.Main.ModConfig.Module.MainModuleConfigFolderContent;
 
@@ -24769,7 +25276,7 @@ BU.Main.ModConfig.Module.MainModuleConfigFolderContent;
 
 ## MAIN MODULE'S INITIALIZER PATH
 
-# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the wrapped file.
+# Declaring the variables inside a function to prevent the displaying of the Shellcheck info messages when Shellchecking the compiled file.
 
 BU.Main.ModConfig.Module.MainModuleInitializerPath;
 
@@ -25897,7 +26404,7 @@ function BU.Main.Initializer.SourceLibrary()
 
         BU.ModuleInit.CheckIsDebugging && BU.ModuleInit.Msg "Debug mode activated";
 
-		BU.ModuleInit.IsFrameworkWrapped || source "${f}" || { BU.ModuleInit.SourcingFailure "${f}" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("${f}"); v_loop_error='error'; break; }
+		BU.ModuleInit.IsFrameworkCompiled || source "${f}" || { BU.ModuleInit.SourcingFailure "${f}" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; __BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY+=("${f}"); v_loop_error='error'; break; }
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY}" "${f}")";
@@ -25932,7 +26439,7 @@ function BU.Main.Initializer.SourceConfig()
 
 	# shellcheck disable=SC1090
 	for f in "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY[@]}"; do
-		BU.ModuleInit.IsFrameworkWrapped || source "${f}" || { BU.ModuleInit.SourcingFailure "${f}" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; __BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY+=("${f}"); v_loop_error='error'; break; };
+		BU.ModuleInit.IsFrameworkCompiled || source "${f}" || { BU.ModuleInit.SourcingFailure "${f}" "$(BU.ModuleInit.GetModuleName "${BASH_SOURCE[0]}")" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; __BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY+=("${f}"); v_loop_error='error'; break; };
 
 		# shellcheck disable=SC2059
 		BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG}" "${f}")";
@@ -25964,7 +26471,7 @@ function BU.Main.Initializer.SourceConfig()
 __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "${__BU_MAIN_MODULE_LIB_MOD_DIR_PATH}" "Text.lib" 'f')" || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
-BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; };
+BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # -----------------------------------------------
 
@@ -25976,7 +26483,7 @@ BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MAIN_INITIALIZER__TEXT_LIB_PA
 # does not call any library functions from the main module, so it is totally safe to include this file.
 
 # shellcheck disable=SC1090
-BU.ModuleInit.IsFrameworkWrapped || source "${__BU_MAIN_MODULE_CONF_FILE_INIT_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_MODULE_CONF_FILE_INIT_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; }
+BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_MODULE_CONF_FILE_INIT_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_MODULE_CONF_FILE_INIT_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; }
 
 # -----------------------------------------------
 
@@ -26283,11 +26790,20 @@ BU.Main.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; 
 # BU.ModuleInit.ParseCSVLang "${__BU_MODULE_INIT__USER_LANG}" "${__BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 # Since the "CheckProjectLogFile()" function manages the text displaying if the log file doesn't exists, it's okay to call this function now.
-BU.Main.Directories.MkTmpDir || { BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${LINENO}" 'E_BUINIT__BU_MAIN_INIT__CANNOT_MK_TMPDIR'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi }; if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+BU.Main.Directories.MkTmpDir || {
+    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${LINENO}" 'E_BUINIT__BU_MAIN_INIT__CANNOT_MK_TMPDIR';
+
+    BU.ModuleInit.MsgAbort;
+
+    BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+};
 
 # -----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
+rm -rfv "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/:?}/"*;
 
 # Creating the text and background color code files if the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatAllowFormatting; then
@@ -26326,14 +26842,14 @@ fi
 
 # Creating the project's log file if the "${__BU_MAIN_STAT_LOG}" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatIsLogging; then
+if [ -d "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}" ]; then clear; echo "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"; else echo FAILED; echo "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"; fi
 
     # If the file which stores every log entry doesn't exists, then it must be created.
     if [ ! -f "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" ]; then
         if ! BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}" "${__BU_MAIN_PROJECT_LOG_FILE_NAME}" "f"; then
             # shellcheck disable=SC2059
-            BU.Main.Errors.HandleErrors '1' "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR}" "$(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PATH}")" "$(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")")" "" "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" "$(basename "${BASH_SOURCE[0]}")" "" "${LINENO}";
+            BU.Main.Errors.HandleErrors '1' "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR}" "$(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PATH}")" "$(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")")" "" "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" "$(basename "${BASH_SOURCE[0]}")" "" "${LINENO}"; return 1;
 
-            return 1;
         else
             # shellcheck disable=SC2059
             BU.Main.Echo.Success "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS}" "$(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_NAME}")" "$(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}")")"; BU.Main.Echo.Newline;
@@ -26343,6 +26859,8 @@ if BU.Main.Status.CheckStatIsLogging; then
         BU.Main.Echo.Success "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS}" "$(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_NAME}")" "$(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}")")"; BU.Main.Echo.Newline;
     fi
 fi
+
+exit 0;
 
 # -----------------------------------------------
 

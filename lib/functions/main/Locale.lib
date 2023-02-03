@@ -115,8 +115,8 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 {
 	#**** Parameters ****
 	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
-    local p_print_code=${2:-yes};   	# ARG TYPE : Bool			    - REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
-	local p_dispOrder=${3:-NULL};		# ARG TYPE : String			    - OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
+	local p_dispOrder=${2:-NULL};		# ARG TYPE : String			    - OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the language's name in its own language, in English or in the user's system language.
+    local p_print_code=${3:-yes};   	# ARG TYPE : Bool			    - REQUIRED | DEFAULT VAL : yes     	- DESC : Authorization to print the ISO 639-1 code before the language name.
 
 	local p_langNameEngl=${4:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in English.
 	local p_langNameOrig=${5:-NULL};	# ARG TYPE : String			    - REQUIRED | DEFAULT VAL : NULL		- DESC : Name of the targeted language in its own language.
@@ -232,8 +232,8 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 		# WARNING : DO NOT EDIT THE "${p_dispOrder}" 'LINE IF YOU DON'T KNOW WHAT YOU ARE DOING, OR ELSE THE SCRIPT WILL ENTER INTO AN INFINITE LOOP !!!!!
 		BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
-			"${p_print_code}" \
 			"${p_dispOrder}" \
+			"${p_print_code}" \
 			"${p_langNameEngl}" \
 			"${p_langNameOrig}" \
 			"${p_langNameUser}" \
@@ -289,8 +289,7 @@ function BU.Main.Locale.PrintLanguageName()
         local p_langNameOrig="${2:-NULL}";
 
         #**** Variables ****
-        local v_varnameBase="__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__";
-        local v_varNameFull="${v_varnameBase}${p_langNameEngl^^}";
+        local v_varNameFull="__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}";
 
         #**** Code ****
         # The following commented lines are used as test / debug procedures.
@@ -322,8 +321,8 @@ function BU.Main.Locale.PrintLanguageName()
 #         echo;
 
         BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
-        "${p_print_code}" \
         "${p_dispOrder}" \
+        "${p_print_code}" \
         "${p_langNameEngl}" \
         "${p_langNameOrig}" \
         "${!v_varNameFull}" \

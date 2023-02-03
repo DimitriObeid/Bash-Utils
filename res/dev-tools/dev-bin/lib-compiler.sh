@@ -268,7 +268,7 @@ if [[ "${LANG}" == fr_* ]]; then
     # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # COMPILATION DU FICHIER EN MODE STABLE UNIQUEMENT : Vérification d'ereurs de programmation dans le fichier compilé [-----] STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="VÉRIFICATION D'ERREURS DE PROGRAMMATION DANS LE FICHIER COMPILÉ ${__HIGHLIGHT}%s${__NEWSTEP}";
-    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="LE FICHIER COMPILÉ ${__HIGHLIGHT}%s${__ERROR} CONTIENT AU MOINS UNE ERROR DE PROGRAMMATION";
+    __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="LE FICHIER COMPILÉ ${__HIGHLIGHT}%s${__ERROR} CONTIENT AU MOINS UNE ERREUR DE PROGRAMMATION";
     __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="LE FICHIER COMPILÉ ${__HIGHLIGHT}%s${__SUCCESS} NE CONTIENT AUCUNE ERREUR DE PROGRAMMATION";
 
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -784,7 +784,7 @@ function CheckLangArgDelim()
 
 # Parsing the array of optional arguments given by the user.
 for arg in "${__BU_ARGS_ARRAY[@]}"; do
-    # If the user decided to create a stable version of the wrapped framework.
+    # If the user decided to create a stable version of the compiled framework.
     if [[ "${arg,,}" == ?(compile?(-))stable ]]; then
         # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
         __vArrayVal_compile_stable='compile-stable';

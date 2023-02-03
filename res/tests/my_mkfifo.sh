@@ -80,7 +80,7 @@ function ReadFromFIFO
                 echo -e "${p_newVar}";
                 break;
             else
-                echo -e "${FUNCNAME[0]} --> Error : the $(BU.Main.Decho.Decho "${v_varLine}") string was not found in the $(BU.Main.Decho.Decho "${p_fifoPath}") FIFO" >&2;
+                echo -e "${FUNCNAME[0]}() --> Error : the $(BU.Main.Decho.Decho "${v_varLine}") string was not found in the $(BU.Main.Decho.Decho "${p_fifoPath}") FIFO" >&2;
                 kill "${$}";
             fi
         fi
