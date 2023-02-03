@@ -6,7 +6,7 @@
 # Name          : lib-compiler.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 2.0
-# Beta version  : 2.1
+# Beta version  : 3.0
 
 # ------------------
 # FILE DESCRIPTION :

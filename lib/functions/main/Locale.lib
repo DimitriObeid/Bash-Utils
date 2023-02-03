@@ -86,7 +86,7 @@ function BU.Main.Locale.CheckISO_639_1_ValidCode()
     return 1;
 }
 
-# Handling the parameters errors for the "BU.Main.Locale.PrintLanguageName.Optimize()" function, only if the main script is the V2 version of the library compiler, which does not heavily depends on the framework's resources.
+# Handling the parameters errors for the "BU.Main.Locale.PrintLanguageName.Optimize()" function, only if the main script is the 3rd version of the library compiler, which does not heavily depends on the framework's resources.
 function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler()
 {
     #**** Parameters ****
