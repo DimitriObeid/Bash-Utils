@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+# --------------------------
+## INFORMASJON OM SKRIPTET :
+
+# Navn : nb.locale
+# Forfatter(e) : Dimitri OBEID
+# Versjon : 1.0
+
+# ----------------
+# FILBESKRIVELSE :
+
+# Meldinger for Norsk bokmål oversettelse av skript for å initialisere moduler.
+
+# ----------------------------
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+######################## OVERSETTELSE AV MELDINGER FOR INITIALISERINGSPROSESSEN TIL MODULER #######################
+
+#### VIKTIGSTE OVERSETTELSE RESSURSER
+
+## HOVEDFUNKSJON
+
+function BU.ModuleInit.SetInitLocale.nb()
+{
+    # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+    ############################## DEFINISJON AV OVERSETTELSE RESSURSER ##############################
+
+    ####
+
+    ##
+
+    return 0;
+}
