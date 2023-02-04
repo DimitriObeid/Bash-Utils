@@ -545,6 +545,7 @@ function CheckLangArgDelim()
 
 # Defining the values of the arguments, in order to use them in the appropriate information messages.
 _____value_of__compile_stable='--compile-stable';
+_____value_of__compilation_authors='--compilation-authors';
 _____value_of__display='display';
 _____value_of__keep_comments='--keep-comments';
 _____value_of__keep_exec_safeguards='--keep-exec-safeguards';
@@ -562,6 +563,10 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
     elif [[ "${arg,,}" == --?(compile?(-))unstable ]]; then
         # As the unstable version is the one compiled by default AND before the creation of a stable one, nothing has to be done.
         true;
+    
+    # Else, if the author(s) of the compilation give their name(s).
+    elif [[ "${arg,,}" == --compilation-author?(s)=* ]]; then
+        __vArrayVal_compilation_authors="${_____value_of__compilation_authors}";
 
     # Else, if the user decides to display the content of each compiled file.
     elif [ "${arg,,}" == --display ]; then
