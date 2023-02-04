@@ -384,11 +384,61 @@ function WriteCommentCode()
 {
     #**** Variables ****
     local v_filename="${__BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH}/${v_curr_locale}.sh";
+    local v_filename_tmp="${v_filename}.tmp";
 
     #**** Code ****
+    # shellcheck disable=SC1090
+    source "${v_filename}" || {
+        printf "${__ERROR}FAILED TO SOURCE THE ${__HIGHLIGHT}%s${__ERROR} FILE${__RESET}" >&2;
+        echo "" >&2;
+
+        exit 1;
+    }
+
+    WriteCommentCode.Heredoc."${v_curr_locale}";
+
+# Writing the pieces of code which prevent the direct execution of their host files.
+cat <<-EOF >> "${v_filename_tmp}"
+if [ "\${0##*/}" == "\${BASH_SOURCE[0]##*/}" ]; then if [[ "\${LANG}" == de_* ]]; then
+    echo -e "ACHTUNG !" >&2; echo >&2;
+    echo -e "Dieses Shell-Skript (\${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
+    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
+
+elif [[ "\${LANG}" == es_* ]]; then
+    echo -e "ATENCIÓN !" >&2; echo >&2;
+    echo -e "Este script de shell (\${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
+    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
+
+elif [[ "\${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (\${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
+elif [[ "\${LANG}" == pt_* ]]; then
+    echo -e "ATENÇÃO !" >&2; echo >&2;
+    echo -e "Este script de shell (\${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
+    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
+
+elif [[ "\${LANG}" == ru_* ]]; then
+    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
+    echo -e "Этот сценарий оболочки (\${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
+    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (\${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
+
+fi; exit 1; fi
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+EOF
+
     # Cela écrasera le contenu actuel du ficher "${v_filename}" avec la concaténation du contenu du
     # fichier "${__compiled_file_path}" et du contenu du fichier "${v_filename}" à partir de la deuxième ligne.
-    echo "$(tail -n +2 "${v_filename}")$(cat "${__compiled_file_path}")" > "${__compiled_file_path}";
+    echo "$(tail -n +2 "${v_filename_tmp}")$(cat "${__compiled_file_path}")" > "${__compiled_file_path}";
+
+    rm "${v_filename_tmp}";
 
     return 0;
 }
