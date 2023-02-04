@@ -826,6 +826,11 @@ function BU.Main.Text.ReverseCharactersOrder()
 
 # -----------------------------------------------
 
+## TEXT PROCESSING WITH THE "sed" COMMAND
+## DEBUG ID : ""
+
+# -----------------------------------------------
+
 ## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
 ## DEBUG ID : "splitting-text"
 

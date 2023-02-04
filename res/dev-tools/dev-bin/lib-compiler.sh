@@ -174,17 +174,17 @@ else __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")"; if 
     fi
 fi
 
+# Path to the locale files.
+__BU_LIB_COMPILER_RESOURCES__MSG_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler/msg";
+
 # -----------------------------------------------
 
 ## MESSAGE TRANSLATIONS
 
-# Path to the locale files.
-_____bu_compiler_path_to_locale_files="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler/msg";
-
 # FRENCH - FRANÇAIS
 if [[ "${LANG}" == fr_* ]]; then
     # shellcheck disable=SC1091
-    if ! source "${_____bu_compiler_path_to_locale_files}/fr.locale"; then
+    if ! source "${__BU_LIB_COMPILER_RESOURCES__MSG_PATH}/fr.locale"; then
         echo "${__WARNING}IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTIONS EN FRANÇAIS !!!!!${__RESET}" >&2; echo >&2;
         echo "${__WARNING}Le compilateur utilisera les ressources de traduction pour la langue anglaise${__RESET}" >&2;
         echo >&2;
@@ -200,7 +200,7 @@ fi
 
 if [ -n "${____unable_to_include_lang}" ] || [ -z "${____lang_included}" ]; then
     # shellcheck disable=SC1091
-    source "${_____bu_compiler_path_to_locale_files}/en.locale" || {
+    source "${__BU_LIB_COMPILER_RESOURCES__MSG_PATH}/en.locale" || {
         echo >&2; echo >&2;
 
         echo "${__ERROR}UNABLE TO INCLUDE THE ENGLISH TRANSLATION FILES !!!!!${__RESET}" >&2; echo >&2;
@@ -228,6 +228,8 @@ if [ -f "${__BU_ROOT_PATH}/install/Bash-utils-init.sh" ]; then __BU_INITIALIZER_
 else __BU_INITIALIZER_SCRIPT_PATH="${__BU_ROOT_PATH}/Bash-utils-init.sh";
 
 fi
+
+__BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler/heredoc";
 
 # Path of the modules initializer file.
 __BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.sh";
@@ -380,93 +382,13 @@ function EraseSafeguardExecLines()
 #   - and the pieces of code which prevent the direct execution of their host files.
 function WriteCommentCode()
 {
-sed -i '1s/^/'"$(cat <<-EOF
-#!/usr/bin/env bash
+    #**** Variables ****
+    local v_filename="${__BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH}/${v_curr_locale}.sh";
 
-# ------------------------
-## SCRIPT'S INFORMATIONS :
-
-# Name                  : ${__compiled_file_name}.sh
-# Code's Author(s)      : Dimitri OBEID
-# Compilation athor(s)  : $([ -n "$__COMPILATION_AUTHOR" ] && printf "%s" "${__COMPILATION_AUTHOR}" || printf 'Feel free to give your name(s) if you have compiled this file by yourself')
-# Version               : 1.0
-
-# ------------------
-# FILE DESCRIPTION :
-
-# This file contains compiled version of the framework initializer script and the main module.
-
-# This script declares every global variables, defines some useful functions you may use in the main module,
-# and initializes all the modules you need for your scripts, from their configuration files to their initializer file.
-
-# ----------------------------
-# SHELLCHECK GLOBAL DISABLER :
-
-# Add a coma after each warning code to disable multiple warnings at one go.
-
-# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
-
-# DO NOT PUT A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE SHELLCHECK WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
-
-# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
-
-# shellcheck disable=SC1090
-
-# ------------------------
-# NOTES ABOUT SHELLCHECK :
-
-# To display the content of a variable in a translated string, the use of the "\$(printf)" command is mandatory in order to interpret each "%s" pattern as the value of a variable.
-
-# This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entire translated string in a variable.
-
-# If you add new messages to translate, you must call the "shellcheck disable=SC2059" directive before the line where you call the
-# "\$(printf)" command to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
-
-# If the message is displayed inside a function, you can write the "shellcheck disable=SC2059" directive on the line above the declaration of the said function.
-
-# You can also write this directive at the beginning of a Bash script, but I would not recommand you to do so, since you may use the "\$(printf)" command in another context, without the same purpose.
-
-# --------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
-if [ "\${0##*/}" == "\${BASH_SOURCE[0]##*/}" ]; then if [[ "\${LANG}" == de_* ]]; then
-    echo -e "ACHTUNG !" >&2; echo >&2;
-    echo -e "Dieses Shell-Skript (\${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
-    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
-
-elif [[ "\${LANG}" == es_* ]]; then
-    echo -e "ATENCIÓN !" >&2; echo >&2;
-    echo -e "Este script de shell (\${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
-    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
-
-elif [[ "\${LANG}" == fr_* ]]; then
-    echo -e "ATTENTION !" >&2; echo >&2;
-    echo -e "Ce script shell (\${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
-    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
-
-elif [[ "\${LANG}" == pt_* ]]; then
-    echo -e "ATENÇÃO !" >&2; echo >&2;
-    echo -e "Este script de shell (\${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
-    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
-
-elif [[ "\${LANG}" == ru_* ]]; then
-    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
-    echo -e "Этот сценарий оболочки (\${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
-    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
-
-else
-    echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (\${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
-    echo -e "Use only this script by including it in your project script." >&2; echo >&2;
-
-fi; exit 1; fi
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-EOF
-)"'\n/' "${__compiled_file_path}" 
+    #**** Code ****
+    # Cela écrasera le contenu actuel du ficher "${v_filename}" avec la concaténation du contenu du
+    # fichier "${__compiled_file_path}" et du contenu du fichier "${v_filename}" à partir de la deuxième ligne.
+    echo "$(tail -n +2 "${v_filename}")$(cat "${__compiled_file_path}")" > "${__compiled_file_path}";
 
     return 0;
 }
@@ -474,16 +396,8 @@ EOF
 # Erasing the comments from the targeted compiled file.
 function EraseComments()
 {
-    #**** Variables ****
-    local __awk_output; # VAR TYPE : CMD    - DESC : This string stores the content of the output of the following "$(awk)" command.
-
-    #**** Code ****
-    __awk_output="$(awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}')";
-
-    echo "CONTENT : ${__awk_output}";
-
     # Erasing every commented lines, except the ones with the "shellcheck" directive.
-    echo "${__awk_output}" > "${__compiled_file_path}";
+    sed -i '/^[[:blank:]]*#.*shellcheck/d; /^[[:blank:]]*#/d' "${__compiled_file_path}";
 
     # Erasing the extra blank lines from the compiled file.
     sed -i '/^$/N;/\n$/D' "${__compiled_file_path}";
@@ -1032,10 +946,12 @@ function CompileInSingleFile()
             if [ -z "${__vArrayVal_keep_exec_safeguards}" ]; then EraseSafeguardExecLines; fi
 
             # Erasing every comments from the newly created compiled file if the "${__vArrayVal_keep_comments}" value was passed for the execution of this compiler.
-            if [ -z "${__vArrayVal_compile_stable}" ]; then EraseComments; fi
+            if [ -z "${__vArrayVal_keep_comments}" ]; then EraseComments; fi
 
             # Calling the "()" function in order to write the description of the compiled file at its very beginning.
-            if [ -z "${__vArrayVal_keep_comments}" ]; then WriteCommentCode; fi
+            # if [ -z "${new value to define}" ]; then WriteCommentCode; fi
+
+            WriteCommentCode;
         fi
 
         # --------------------------------------------------------------
