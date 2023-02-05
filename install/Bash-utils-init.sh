@@ -1278,6 +1278,9 @@ function BU.ModuleInit.PrintLog()
 
     echo "${__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q}" >> "${v_tmp_file}";
     echo >> "${v_tmp_file}";
+
+    for _ in $(eval echo -e "{1..${#__BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q}}"); do echo -n '-' >> "${v_tmp_file}"; done; echo >> "${v_tmp_file}";
+
     echo >> "${v_tmp_file}";
 
     for value in "${__BU_MODULE_INIT_MSG_ARRAY[@]}"; do
