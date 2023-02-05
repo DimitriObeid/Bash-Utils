@@ -817,7 +817,7 @@ function CompileInSingleFile()
         local __locale_file_path_en;
 
         # Compiled file's informations.
-        local __compiled_file_path_parent_dir;
+        local __compiled_file_parent_dir;
         local __compiled_file_path;
 
         local __locale_print_code;
@@ -844,9 +844,9 @@ function CompileInSingleFile()
         __locale_file_path="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${v_curr_locale}.locale";
         __locale_file_path_en="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/en.locale";
 
-        __compiled_file_path_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
+        __compiled_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
         __compiled_file_name="Bash-utils-${v_curr_locale}.sh"
-        __compiled_file_path="${__compiled_file_path_parent_dir}/${__compiled_file_name}";
+        __compiled_file_path="${__compiled_file_parent_dir}/${__compiled_file_name}";
 
         __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')]]";
 
@@ -854,6 +854,19 @@ function CompileInSingleFile()
         __locale_print_code__newstep="${__locale_print_code}${__NEWSTEP}";
         __locale_print_code__success="${__locale_print_code}${__SUCCESS}";
         __locale_print_code__warning="${__locale_print_code}${__WARNING}";
+
+        # Checking if the "unstable" directory exists.
+        if [ ! -d "${__compiled_file_parent_dir}" ]; then
+            mkdir -p "${__compiled_file_parent_dir}" || {
+                echo "${__ERROR}FAILED TO CREATE THE ${__HIGHLIGHT}${__compiled_file_parent_dir}${__ERROR} DIRECTORY${__RESET}" >&2;
+                echo "${__ERROR}Please check the ${__RESET}" >&2;
+                echo >&2;
+
+                PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+
+                exit 1;
+            };
+        fi
 
         # Deleting the existing "Bash-utils.sh" file.
         if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ] && [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then true > "${__BU_MAIN_FULL_FILE_PATH}"; fi
@@ -1024,6 +1037,18 @@ function CompileInSingleFile()
         __BU_ARRAY__COMPILED_FILES_LIST+=("${__compiled_file_path}");
 
         if [ -n "${__vArrayVal_compile_stable}" ]; then
+            
+            # Checking if the "stable" directory exists.
+            if [ ! -d "${__compiled_stable_file_parent_dir}" ]; then
+                mkdir -p "${__compiled_stable_file_parent_dir}" || {
+                    echo "${__ERROR}FAILED TO CREATE THE ${__HIGHLIGHT}${__compiled_stable_file_parent_dir}${__ERROR} DIRECTORY${__RESET}" >&2;
+                    echo "${__ERROR}Please check the ${__RESET}" >&2;
+                    echo >&2;
+
+                    exit 1;
+                };
+            fi
+
             # Assigning values to the "${__compiled_stable_file_path}" variables.
             __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-${v_curr_locale}.sh";
 
