@@ -16,7 +16,7 @@ cat <<-EOF > "${v_filename_tmp}"
 # ------------------
 # FILE DESCRIPTION :
 
-# This file contains compiled version of the framework initializer script and the main module.
+# This file contains the compiled version of the framework initializer script and the main module.
 # This script declares every global variables, defines some useful functions you may use in the main module,
 # and initializes all the modules you need for your scripts, from their configuration files to their initializer file.
 
