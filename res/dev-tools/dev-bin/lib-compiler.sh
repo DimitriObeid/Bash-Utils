@@ -180,7 +180,7 @@ else __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")"; if 
 fi
 
 # Path to the locale files.
-__BU_LIB_COMPILER_RESOURCES__MSG_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler/msg";
+__BU_LIB_COMPILER_RESOURCES__MSG_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/locale";
 
 # -----------------------------------------------
 
