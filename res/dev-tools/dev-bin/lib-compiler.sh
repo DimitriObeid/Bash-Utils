@@ -728,11 +728,6 @@ function CompileInSingleFile()
     #**** Parameters ****
     local p_locale=${1:-NULL};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Language in which the file must be translated.
 
-    #**** Variables ****
-    local v_locale_str;         # VAR TYPE : String     - DESC :
-    local v_locale_tmp;         # VAR TYPE : String     - DESC :
-    local v_locale_delim;       # VAR TYPE : Char       - DESC :
-
     # This variable will be used to verify if the "lang=" value is passed as first argument.
     local v_is_check_to_do;     # VAR TYPE : Bool       - DESC :
 
@@ -745,7 +740,15 @@ function CompileInSingleFile()
     ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
 
     # Converting the "${p_locale}" string into an array of ISO 639-1 codes.
-    if [[ "${p_locale,,}" == lang=* ]]; then
+    if [[ "${p_locale,,}" == ?(-?(-))lang=* ]]; then
+
+        #**** Conditional variables ****
+        local v_locale_str;         # VAR TYPE : String     - DESC : This variable stores the mandatory first argument's value if it contains the "--lang=" sub-string.
+        local v_locale_tmp;         # VAR TYPE : String     - DESC : This variable stores the above variable's string
+        local v_locale_delim;       # VAR TYPE : Char       - DESC :
+
+        #**** Conditional code ****
+
         # Checking for the delimiter.
         if      CheckLangArgDelim "${p_locale}" ','; then v_locale_delim=',';
         elif    CheckLangArgDelim "${p_locale}" ';'; then v_locale_delim=';';
