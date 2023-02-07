@@ -46,10 +46,10 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entirety of every translated strings into global variables, many of which contain the above-mentioned pattern.
 
-# If you add new messages to translate, you must call the "shellcheck disable=SC2059" directive before the line where you call the
+# If you add new messages to translate, you must call the "# shellcheck disable=SC2059" directive before the line where you call the
 # "\$(printf)" command to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
 
-# If the message is displayed inside a function, you can write the "shellcheck disable=SC2059" directive on the line above the declaration of the said function.
+# If the message is displayed inside a function, you can write the "# shellcheck disable=SC2059" directive on the line above the declaration of the said function.
 
 # You can also write this directive at the beginning of a Bash script, but I would not recommand you to do so, since you may use the "\$(printf)" command in another context, without the same purpose.
 

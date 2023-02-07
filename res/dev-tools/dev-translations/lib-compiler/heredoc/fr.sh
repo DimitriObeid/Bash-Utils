@@ -36,7 +36,12 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # Pour afficher le contenu d'une variable dans une chaîne de caractères traduite, l'utilisation de la commande "\$(printf)" est obligatoire dans le but d'interpréter chaque patterne "%s" comme étant la valeur d'une variable.
 
-# Ceci veut dire que l'avertissement au code SC2059 sera de toute façon déclenché, sachant que nous n'avons pas d'autres choix que d'enregsitrer l'entièreté de la chaîne de caractères traduite dans une variable.
+# Ceci veut dire que l'avertissement au code SC2059 sera de toute façon déclenché, sachant que nous n'avons pas d'autres choix que d'enregsitrer l'intégralité de toutes les chaînes de caractères traduites dans des variables globales, dont un grand nombre contient le patterne sus-mentionné.
+
+# Si vous ajoutez de nouveaux messages à traduire, vous devez appeller la directive "# shellcheck disable=SC2059" avant la ligne où vous appellez la
+# commande "\$(printf)" pour afficher le message traduit, sinon Shellcheck affichera de nombreux messages d'avertissement pendant la procédure de déboguage.
+
+# Si le message est affiché à l'intérieur d'une fonction, vous pouvez écrire la directive "# shellcheck disable=SC2059" à la ligne se situant juste au dessus de celle déclarant la fonction en question.
 
 
 # -----------------------------------------------------------------------------------------
