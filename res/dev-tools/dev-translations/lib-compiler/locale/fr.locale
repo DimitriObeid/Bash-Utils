@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# --------------------------------------------------------------
+# Fonction "CompilerUsage()" [-----] "CompilerUsage()" function.
+__BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compiler.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
+__BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers de base et du module principal du framework Bash Utils dans un seul fichier";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire :";
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Si un argument non-supporté est passé dans le tableau d'arguments optionnel [-----] If an unsupported argument is passed into the array of optional arguments.
 __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY="UN ARGUMENT NON-SUPPORTÉ À ÉTÉ PASSÉ DANS LE TABLEAU DES ARGUMENT OPTIONNELS";
@@ -28,6 +34,8 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERREUR : LE PREMIER ARGUMENT DU 
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Veuillez exécuter ce script en passant le(s) code(s) ISO 639-1 souhaité(s) comme fait dans la chaîne de caractères suivante, qui peut être utilisée pour compiler le framework dans ces langues : anglais, français, ukrainien, suédois, turkmène or groenlandais :${__RESET}";
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Ou bien utilisez SEULEMENT un de ces délimiteurs (aucun autre n'est supporté) entre chaque code ISO 639-1 au lieu d'un espace :";
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Ou bien passez l'une de ces valeurs : \"${__HIGHLIGHT}all-supported${__WARNING}\", \"${__HIGHLIGHT}supported${__WARNING}\", \"${__HIGHLIGHT}lang=all-supported${__WARNING}\" OU \"${__HIGHLIGHT}lang=supported${__WARNING}\" uniquement si vous voulez compiler le framework avec chacune de ses langes supportées${__RESET}";
+
+__BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}Vous pouvez également passer l'option ${__HIGHLIGHT}%s${__WARNING} (ou ${__HIGHLIGHT}%s${__WARNING}) pour obtenir une aide rapide${__RESET}";
 
 # -------------------------------------------------------------------------
 # Exécution de la commande Shellcheck [-----] Shellcheck command execution.

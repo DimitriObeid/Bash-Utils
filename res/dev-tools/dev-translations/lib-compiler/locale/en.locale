@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# ---------------------------
+# "CompilerUsage()" function.
+__BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./path/to/lib-compiler.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
+__BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compiles the content of the Bash Utils framework's basic files and its main module into a single file";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument :";
+
 # --------------------------------------------------------------------------
 # If an unsupported argument is passed into the array of optional arguments.
 __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY="AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
@@ -28,6 +34,8 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERROR : THE COMPILER'S FIRST ARG
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Please execute this script by passing the wanted ISO 639-1 code(s) like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}";
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space :";
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIGHLIGHT}all-supported${__WARNING}\", \"${__HIGHLIGHT}supported${__WARNING}\", \"${__HIGHLIGHT}lang=all-supported${__WARNING}\" OR \"${__HIGHLIGHT}lang=supported${__WARNING}\" strings only if you want to compile the framework with each of its supported languages${__RESET}";
+
+__BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}You can also pass the ${__HIGHLIGHT}%s${__WARNING} (or the ${__HIGHLIGHT}%s${__WARNING}) option in order to get a quick help${__RESET}";
 
 # -----------------------------
 # Shellcheck command execution.

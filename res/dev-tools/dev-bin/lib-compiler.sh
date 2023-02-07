@@ -598,16 +598,19 @@ function CheckLangArgDelim()
 # Usage function
 function CompilerUsage()
 {
-    echo "Usage : ./path/to/lib-compiler.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__USAGE}";
     echo;
 
-    echo "Compiles the Bash Utils framework's basic files and its main module into a single file";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC}";
     echo;
 
-    echo "Mandatory argument :";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
     echo "    --lang=[ARRAY]                    array of languages ISO 639-1 codes. Each of them represent the language in which the messages and the";
     echo "                                      top-level file's comments must be translated, as well as the translation files (from the initialization";
     echo "                                      process) to ship.";
+    echo;
+
+    echo "    -h --help                         displays on the screen the help messages and the instructions.";
     echo;
 
     echo "Optional arguments :";
@@ -661,8 +664,10 @@ function CompilerUsage()
 ## PARSING THE ARRAY OF OPTIONAL ARGUMENTS GIVEN BY THE USER
 
 # Defining the values of the arguments, in order to use them in the appropriate information messages.
-_____value_of__compile_stable='--compile-stable';
 _____value_of__compilation_authors='--compilation-authors';
+_____value_of__compilation_version='--compilation-version';
+_____value_of__compile_stable='--compile-stable';
+_____value_of__compile_unstable='--compile-unstable';
 _____value_of__display='--display';
 _____value_of__help='--help'
 _____value_of__keep_comments='--keep-comments';
@@ -673,17 +678,17 @@ _____value_of__no_shellcheck='--no-shellcheck';
 # Looping through the array of optional arguments.
 for arg in "${__BU_ARGS_ARRAY[@]}"; do
     # If the user decided to create a stable version of the compiled framework.
-    if [[ "${arg,,}" == --?(compile?(-))stable ]]; then
+    if [ "${arg}" == '-C' ] || [[ "${arg,,}" == "${_____value_of__compile_stable}" ]]; then
         # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
         __vArrayVal_compile_stable="${_____value_of__compile_stable}";
 
     # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
-    elif [[ "${arg,,}" == --?(compile?(-))unstable ]]; then
+    elif [ "${arg}" == '-c' ] || [[ "${arg,,}" == "${_____value_of__compile_unstable}" ]]; then
         # As the unstable version is the one compiled by default AND before the creation of a stable one, nothing has to be done.
         true;
 
     # Else, if the author(s) of the compilation give their name(s).
-    elif [[ "${arg,,}" == --compilation-author?(s)=* ]]; then
+    elif [[ "${arg,,}" == "${_____value_of__compilation_authors}"=* ]]; then
         __vArrayVal_compilation_authors="${_____value_of__compilation_authors}";
 
     # Else, if the user decides to display the content of each compiled file as they are processed by the compiler.
@@ -696,20 +701,20 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
 
     # Else, if the user decides to remove the comments from the compiled file
     # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
-    elif [[ "${arg,,}" == --keep?(-)comments ]]; then
+    elif [[ "${arg,,}" == "${_____value_of__keep_comments}" ]]; then
         __vArrayVal_keep_comments="${_____value_of__keep_comments}";
 
     # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
-    elif [[ "${arg,,}" == --keep-exec-safeguards ]]; then
+    elif [ "${arg}" == '-e' ] || [[ "${arg,,}" == "${_____value_of__keep_exec_safeguards}" ]]; then
         __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
 
     # Else, if the user decides to keep the raw layout of the compiled file.
-    elif [[ "${arg,,}" == --keep-raw-doc?(ument)-layout ]]; then
+    elif [ "${arg}" == '-r' ] || [[ "${arg,,}" == "${_____value_of__keep_raw_document_layout}" ]]; then
         __vArrayVal_keep_raw_document_layout="${_____value_of__keep_raw_document_layout}";
 
     # Else, if the user decides to prevent the execution of the 'shellcheck' command.
     # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-    elif [[ "${arg,,}" == --no?(-)shellcheck ]]; then
+    elif [ "${arg}" == '-n' ] || [[ "${arg,,}" == "${_____value_of__no_shellcheck}" ]]; then
         __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
 
     # --------------------------------------------------------------------------------
@@ -878,6 +883,9 @@ function CompileInSingleFile()
             echo >&2;
 
             echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3}" >&2;
+            echo >&2; echo >&2;
+
+            printf "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP}\n" '-h' '--help' >&2;
 
             PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
