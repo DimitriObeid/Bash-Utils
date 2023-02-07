@@ -7,12 +7,13 @@
 # Author(s)     : Dimitri OBEID
 # Version       : Beta 1.0
 
+
 # -----------------
 # FILE DESCRIPTION :
 
 # This Bourne Again Shell script was made to help you removing every modules you don't want anymore.
 
-# WARNING : it will not erase the scripts that has these modules as dependency, so expect bugs if you try to execute them.
+# WARNING : it will not erase the scripts which has these modules as dependencies, so expect bugs if you try to execute them.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
