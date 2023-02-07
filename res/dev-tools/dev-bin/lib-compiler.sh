@@ -591,6 +591,42 @@ function CheckLangArgDelim()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### MISC FUNCTIONS
+
+## HELP
+
+# Usage function
+function CompilerUsage()
+{
+    echo "Usage : ./path/to/lib-compiler.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
+    echo;
+
+    echo "Compiles the Bash Utils framework's basic files and its main module into a single file";
+    echo;
+
+    echo "Mandatory argument :";
+    echo "    --lang=[ARRAY]                    array of languages ISO 639-1 codes. Each of them represent the language in which the messages and the top-level file's comment must be translated, as well as the translation files (from the initialization process) to ship";
+
+    echo "Optional arguments :":
+    echo "    -C --compile-stable               ";
+    echo "    -c --compile-unstable             ";
+    echo "    -d --display                      ";
+    echo "    -h --help                         display the help ";
+    echo "    -k --keep-comments                keep each comment into the file. The only ones which are not removed if this option is passed are the Shellcheck directives";
+    echo "    -e --keep-exec-safeguards         keep the extra safeguard pieces of code (from the beginning of each shell file) which prevent the direct execution of the said file. This option does not prevent the addition of an extra safeguard code after the top-level of the compled file";
+    echo "    -r --keep-raw-document-layout     keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work";
+    echo "    -s --no-shellcheck                prevent the execution of the 'shellcheck' command";
+
+    exit 0;
+}
+
+
+# ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
@@ -602,7 +638,8 @@ function CheckLangArgDelim()
 # Defining the values of the arguments, in order to use them in the appropriate information messages.
 _____value_of__compile_stable='--compile-stable';
 _____value_of__compilation_authors='--compilation-authors';
-_____value_of__display='display';
+_____value_of__display='--display';
+_____value_of__help='--help'
 _____value_of__keep_comments='--keep-comments';
 _____value_of__keep_exec_safeguards='--keep-exec-safeguards';
 _____value_of__keep_raw_document_layout='--keep-raw-document-layout';
@@ -624,9 +661,13 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
     elif [[ "${arg,,}" == --compilation-author?(s)=* ]]; then
         __vArrayVal_compilation_authors="${_____value_of__compilation_authors}";
 
-    # Else, if the user decides to display the content of each compiled file.
-    elif [ "${arg,,}" == --display ]; then
+    # Else, if the user decides to display the content of each compiled file as they are processed by the compiler.
+    elif [ "${arg,,}" == "${_____value_of__display}" ]; then
         __vArrayVal_display="${_____value_of__display}";
+
+    # Else, if the user decides to get a quick help about the compiler.
+    elif [ "${arg,,}" == "${_____value_of__help}" ]; then
+        CompilerUsage;
 
     # Else, if the user decides to remove the comments from the compiled file
     # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
@@ -1189,6 +1230,7 @@ function CompileInSingleFile()
 
             elif    [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -gt 1 ]; then
                     PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_GT_1}" "${#__BU_ARRAY__COMPILED_FILES_LIST[@]}")";
+            fi
         fi
     fi
 
