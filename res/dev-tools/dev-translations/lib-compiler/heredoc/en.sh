@@ -11,8 +11,8 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # Name                  : ${__compiled_file_name}
 # Code's Author(s)      : Dimitri OBEID
-# Compilation athor(s)  : $([ -n "$__COMPILATION_AUTHOR" ] && printf "%s" "${__COMPILATION_AUTHOR}" || printf 'Feel free to give your name(s) if you have compiled this file by yourself')
-# Version               : 1.0
+# Compilation author(s) : $([ -n "$__COMPILATION_AUTHOR" ]  && printf "%s" "${__COMPILATION_AUTHOR}"    || printf 'Feel free to give your name(s) if you have compiled this file by yourself')
+# Version               : $([ -n "$__COMPILED_VERSION" ]    && printf "%s" "${__COMPILED_VERSION}"      || printf '1.0')
 
 
 # ------------------
@@ -59,6 +59,6 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-# Preventing the direct execution of this file, as this script is not meant to be directly executed, but sourced.
+# Preventing the direct execution of this file, as it is not meant to be directly executed, but sourced.
 EOF
 }
