@@ -609,12 +609,25 @@ function CompilerUsage()
 
     echo "Optional arguments :":
     echo "    -C --compile-stable               ";
+    echo;
+
     echo "    -c --compile-unstable             ";
-    echo "    -d --display                      ";
-    echo "    -h --help                         display the help ";
-    echo "    -k --keep-comments                keep each comment into the file. The only ones which are not removed if this option is passed are the Shellcheck directives";
-    echo "    -e --keep-exec-safeguards         keep the extra safeguard pieces of code (from the beginning of each shell file) which prevent the direct execution of the said file. This option does not prevent the addition of an extra safeguard code after the top-level of the compled file";
+    echo;
+
+    echo "    -d --display                      displays on the screen the content of the file currently processed by the compiler";
+    echo;
+
+    echo "    -h --help                         displays on the screen the help messages and the instructions";
+    echo;
+
+    echo "    -k --keep-comments                keep each comment into the file. The only ones which are not removed if this option is passed";
+    echo "                                      are the Shellcheck directives";
+    echo;
+
+    echo "    -e --keep-exec-safeguards         keep the extra safeguard pieces of code (from the beginning of each shell file) which prevent the direct execution of the said file. This option does not prevents the addition of an extra safeguard code after the top-level of the compled file";
+
     echo "    -r --keep-raw-document-layout     keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work";
+
     echo "    -s --no-shellcheck                prevent the execution of the 'shellcheck' command";
 
     exit 0;
