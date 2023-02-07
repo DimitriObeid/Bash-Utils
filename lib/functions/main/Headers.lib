@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       : 1.0
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # Displaying text between two horizontal lines, in order to separate two important steps of a script, for example.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

@@ -5,20 +5,25 @@ function WriteCommentCode.Heredoc.en()
 {
 cat <<-EOF > "${v_filename_tmp}"
 #!/usr/bin/env bash
-# ------------------------
 
-## SCRIPT'S INFORMATIONS :
+# -----------------------
+# SCRIPT'S INFORMATIONS :
+
 # Name                  : ${__compiled_file_name}
 # Code's Author(s)      : Dimitri OBEID
 # Compilation athor(s)  : $([ -n "$__COMPILATION_AUTHOR" ] && printf "%s" "${__COMPILATION_AUTHOR}" || printf 'Feel free to give your name(s) if you have compiled this file by yourself')
 # Version               : 1.0
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # This file contains the compiled version of the framework initializer script and the main module.
-# This script declares every global variables, defines some useful functions you may use in the main module,
-# and initializes all the modules you need for your scripts, from their configuration files to their initializer file.
+
+# This script declares every global variables, defines useful functions, and initializes all the extra modules
+
+# you need for your scripts, from their configuration files to their initializer file, which are all included into this file.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -33,6 +38,7 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # shellcheck disable=SC1090
 
+
 # ------------------------
 # NOTES ABOUT SHELLCHECK :
 
@@ -46,6 +52,7 @@ cat <<-EOF > "${v_filename_tmp}"
 # If the message is displayed inside a function, you can write the "shellcheck disable=SC2059" directive on the line above the declaration of the said function.
 
 # You can also write this directive at the beginning of a Bash script, but I would not recommand you to do so, since you may use the "\$(printf)" command in another context, without the same purpose.
+
 
 # --------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.

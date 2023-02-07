@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       : beta
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # Operating systems types and versions management.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

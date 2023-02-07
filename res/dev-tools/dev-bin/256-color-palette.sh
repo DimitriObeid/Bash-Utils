@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# --------------------------------------
-# DEV-TOOLS EXECUTABLE FILE INFORMATIONS
+# ----------------------------------------
+# DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
 # Name          : 256-color-palette.sh
 # Author(s)     : A Stack Overflow user
 # Version       : 1.0
+
 
 # ------------------
 # FILE DESCRIPTION :

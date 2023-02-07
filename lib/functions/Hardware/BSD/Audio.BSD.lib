@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       :
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # This script manages the audio-related hardware functionalities of BSD-related operating systems.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

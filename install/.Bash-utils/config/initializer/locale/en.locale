@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-# ------------------------
-## SCRIPT'S INFORMATIONS :
+# -----------------------
+# SCRIPT'S INFORMATIONS :
 
 # Name          : en.locale
 # Author(s)     : Dimitri OBEID
 # Version       : 1.0
+
 
 # ------------------
 # FILE DESCRIPTION :

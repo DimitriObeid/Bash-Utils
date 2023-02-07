@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       :
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # Functions specially made for text processing (cutting fields / characters, ).
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

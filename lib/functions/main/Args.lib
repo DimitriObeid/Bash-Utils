@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       :
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # These functions act as argument checkers for several functions in the library, whose checking would make the code more difficult to read.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

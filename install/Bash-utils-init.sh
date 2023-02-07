@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-# ------------------------
-## SCRIPT'S INFORMATIONS :
+# -----------------------
+# SCRIPT'S INFORMATIONS :
 
 # Name          : Bash-utils-init.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 3.0
+
 
 # ------------------
 # FILE DESCRIPTION :
@@ -14,6 +15,7 @@
 
 # This script declares every global variables, defines some useful functions you may use in the main module,
 # and initializes all the modules you need for your scripts, from their configuration files to their initializer file.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -41,6 +43,7 @@
 # If the message is displayed inside a function, you can write the "shellcheck disable=SC2059" directive on the line above the declaration of the said function.
 
 # You can also write this directive at the beginning of a Bash script, but I would not recommand you to do so, since you may use the "$(printf)" command in another context, without the same purpose.
+
 
 # --------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.

@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-# --------------------------------------
-# DEV-TOOLS EXECUTABLE FILE INFORMATIONS
+# ----------------------------------------
+# DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
 # Name          : latex-unite.sh
 # Author(s)     : Dimitri OBEID
 # Version       : Beta 1.0
+
 
 # ------------------
 # FILE DESCRIPTION :

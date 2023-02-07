@@ -1,17 +1,19 @@
 #!/usr/bin/env bash
 
-# ------------------------
-## SCRIPT'S INFORMATIONS :
+# -----------------------
+# SCRIPT'S INFORMATIONS :
 
 # Name          : Linux.Virtualization.lib
 # Module        : Software
 # Author(s)     : Dimitri OBEID
 # Version       : beta
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # Installation of virtualization softwares (like VirtualBox or VMware), on Linux-based operating systems.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -35,6 +37,7 @@
 
 # If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
 # command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
+
 
 # --------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in your main script file.

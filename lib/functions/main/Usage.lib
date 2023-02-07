@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       : 1.0
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # Printing the way to use each main module's functions.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

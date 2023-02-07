@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-# --------------------------------------
-# DEV-TOOLS EXECUTABLE FILE INFORMATIONS
+# ----------------------------------------
+# DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
 # Name          : lib-compiler.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 2.0
 # Beta version  : 3.0
+
 
 # ------------------
 # FILE DESCRIPTION :

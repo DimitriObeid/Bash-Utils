@@ -8,10 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       :
 
+
 # ------------------
 # FILE DESCRIPTION :
 
 # (Colored) text display functions.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
