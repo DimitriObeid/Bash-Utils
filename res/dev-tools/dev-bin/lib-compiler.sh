@@ -235,7 +235,7 @@ else __BU_INITIALIZER_SCRIPT_PATH="${__BU_ROOT_PATH}/Bash-utils-init.sh";
 
 fi
 
-__BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-res/lib-compiler/heredoc";
+__BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/heredoc";
 
 # Path of the modules initializer file.
 __BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.sh";
@@ -1181,8 +1181,14 @@ function CompileInSingleFile()
 
                 PrintFilesWhichWereNotChmoded "${__compiled_stable_file_parent_dir}";
             fi
-        else
-            PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS}" "${#__BU_ARRAY__COMPILED_FILES_LIST[@]}")";
+        fi
+
+        if [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -ge 1 ]; then
+            if      [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -eq 1 ]; then
+                    PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_EQ_1}" "${#__BU_ARRAY__COMPILED_FILES_LIST[@]}")";
+
+            elif    [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -gt 1 ]; then
+                    PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_GT_1}" "${#__BU_ARRAY__COMPILED_FILES_LIST[@]}")";
         fi
     fi
 
