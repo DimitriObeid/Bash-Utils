@@ -36,7 +36,7 @@
 
 # To display the content of a variable in a translated string, the use of the "$(printf)" command is mandatory in order to interpret each "%s" pattern as the value of a variable.
 
-# This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entire translated string in a variable.
+# This means that the Shellcheck warning code SC2059 will be triggered anyway, since we have no choice but to store the entirety of every translated strings into global variables, many of which contain the above-mentioned pattern.
 
 # If you add new messages to translate, you must call the "shellcheck disable=SC2059" directive before the line where you call the
 # "$(printf)" command to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.

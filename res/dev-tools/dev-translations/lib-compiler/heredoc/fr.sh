@@ -6,8 +6,8 @@ function WriteCommentCode.Heredoc.fr()
 cat <<-EOF > "${v_filename_tmp}"
 #!/usr/bin/env bash
 
-# -----------------------------
-## INFORMATIONS SUR LE SCRIPT :
+# ----------------------------
+# INFORMATIONS SUR LE SCRIPT :
 
 # Nom                           : ${__compiled_file_name}
 # Auteur(s) du code             : Dimitri OBEID
@@ -34,7 +34,9 @@ cat <<-EOF > "${v_filename_tmp}"
 # ------------------------------
 # NOTES À PROPOS DE SHELLCHECK :
 
-#
+# Pour afficher le contenu d'une variable dans une chaîne de caractères traduite, l'utilisation de la commande "\$(printf)" est obligatoire dans le but d'interpréter chaque patterne "%s" comme étant la valeur d'une variable.
+
+# Ceci veut dire que l'avertissement au code SC2059 sera de toute façon déclenché, sachant que nous n'avons pas d'autres choix que d'enregsitrer l'entièreté de la chaîne de caractères traduite dans une variable.
 
 
 # -----------------------------------------------------------------------------------------
