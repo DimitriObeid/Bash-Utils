@@ -14,7 +14,7 @@
 # This script unites every Bash source files of the framework in a single file, in order to get the total size of the whole project in bytes,
 # number of characters, of words, of columns and lines.
 
-# This script is different from the "lib-compiler.sh" script, because it compiles every translation files, instead of the needed ones in a localized file,
+# This script is different from the "lib-compilerV3/-bu.sh" script, because it compiles every translation files, instead of the needed ones in a localized file,
 # plus this script is older than the compiler. Actually, the new compiler was builded with many bits from this script.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

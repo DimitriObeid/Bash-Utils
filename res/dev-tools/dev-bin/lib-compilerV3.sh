@@ -3,7 +3,7 @@
 # ----------------------------------------
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
-# Name          : lib-compiler.sh
+# Name          : lib-compilerV3.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 2.0
 # Beta version  : 3.0
@@ -598,6 +598,10 @@ function CheckLangArgDelim()
 # Usage function
 function CompilerUsage()
 {
+    #**** Parameters ****
+    local p_exit=${1:-true};
+
+    #**** Code ****
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__USAGE}";
     echo;
 
@@ -605,37 +609,29 @@ function CompilerUsage()
     echo;
 
     echo -n "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
-    echo "";
-    echo "";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG}";
 
-    echo "
-    -h --help                       displays on the screen the help messages and the instructions.";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP}";
     echo;
 
     echo -n "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}"
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS}";
+
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION}";
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__DISPLAY}";
 
-    echo "";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__HELP}";
 
-    echo "
-    -k --keep-comments              keep each comment into the file. The only ones which are not removed if this option is passed are
-                                    the Shellcheck directives and the top-level file's comments.";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS}";
 
-    echo "
-    -e --keep-exec-safeguards       keep the extra safeguard pieces of code (from the beginning of each shell file) which prevent the
-                                    direct execution of the said file. This option does not prevents the addition of an extra safeguard
-                                    code after the top-level of the compled file.";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS}";
 
-    echo "
-    -r --keep-raw-document-layout   keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work.";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT}";
 
-    echo "
-    -s --no-shellcheck              prevents the execution of the 'shellcheck' command on each file.";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK}";
 
-    exit 0;
+    if [ "${p_exit,,}" == 'true' ]; then exit 0; else return 0; fi
 }
 
 
@@ -731,7 +727,9 @@ if [[ (-n "${__vArrayVal_compile_stable}") && (-n "${__vArrayVal_no_shellcheck}"
     # shellcheck disable=SC2059
     PrintWarningLine "$(printf "${__BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER}\n\n" "${__vArrayVal_compile_stable}" "${__vArrayVal_no_shellcheck}")" 'FULL' >&2;
     echo "${__BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE}" >&2;
-    echo >&2;
+    echo >&2; echo >&2;
+
+    CompilerUsage 'false';
 
     PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 

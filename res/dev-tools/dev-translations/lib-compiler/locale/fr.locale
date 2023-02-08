@@ -3,35 +3,68 @@
 # --------------------------------------------------------------
 # Fonction "CompilerUsage()" [-----] "CompilerUsage()" function.
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compiler.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
+__BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compilerV3.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
 __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers de base et du module principal du framework Bash Utils dans un seul fichier";
 
 # ----------------------------------------------------------------------------------------------------------
 # Fonction "CompilerUsage()" : argument obligatoire [-----] "CompilerUsage()" function : mandatory argument.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire :";
-__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
+    --lang=[ARRAY]                      tableau de codes de langues au format ISO 639-1. Chacun d'entre eux représente la langue dans laquelle
+                                        les messages et les commentaires au niveau supérieur du fichier compilé doivent être traduits, ainsi que
+                                        les fichiers de traduction (venant du processus d'initialisation) à embarquer. Si l'option '--lang=supported'
+                                        est passée, tous les fichiers de traduction du processus d'initialisation seront embarqués dans le fichier
+                                        compilé, avec leur fonction   with the function which defines each of the variables storing the translated strings.";
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
+    -h --help                           remplacement de l'option '--lang='. Affiche à l'écran les messages d'aide et les instructions d'utilisation
+                                        du compilateur.";
 
-# -------------------------------------------------------------------------------------------------------
-# Fonction "CompilerUsage()" : argument optionel [-----] "CompilerUsage()" function : optional arguments.
+# ---------------------------------------------------------------------------------------------------------
+# Fonction "CompilerUsage()" : arguments optionels [-----] "CompilerUsage()" function : optional arguments.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Arguments optionnels :";
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS="
-    -A --compilation-authors        sets the name of the author(s) of the compilation of the file into its top-level comments, except if
-                                    the '-r' / '--keep-raw-document-layout' option is passed.";
+    -A --compilation-authors            définit le nom de l' / des auteurs(s) de la compilation du fichier dans ses commentaires du niveau supérieur,
+                                        sauf si l'option '-r' / '--keep-raw-document-layout' est passée.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
-    -V --compilation-version        sets the version of the compiled file, except if the '-r' / '--keep-raw-document-layout' option is passed.
-                                    If the value is absent, the '1.0' version number is written into the 'version :' section.";
+    -V --compilation-version=[VERSION]  définit la version du fichier compilé, sauf si l'option '-r' / '--keep-raw-document-layout' est passée.
+                                        Si cette valeur est absente, le numéro de version '1.0' est écrit dans la section 'version :'.";
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
+    -C --compile-stable                 convertit le fichier compilé dans une version stable. Cette option force l'exécution de la commande 'shellcheck'
+                                        pour chaque fichier à compiler traité par le compilateur, et en fait de même avec le fichier de sortie une fois
+                                        ce dernier compilé. Elle est incompatible avec l'option '-s' / '--no-shellcheck', et un message d'erreur sera
+                                        retourné si les deux options sont utilisées ensemble.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_UNSTABLE="
+    -c --compile-unstable               cette option ne fait rien, sachant que la compilation d'une version instable est le comportment par défaut du
+                                        compilateur du framework Bash Utils.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__DISPLAY="
+    -d --display                        affiche à l'écran le contenu du fichier actuellement traité par le compilateur.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__HELP="
+    -h --help                           affiche à l'écran les messages d'aide et les instructions d'utilisation du compilateur.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS="
+    -k --keep-comments                  garde chaque commentaire du fichier source dans le fichier compilé. Les seuls qui ne sont par retirés si cette
+                                        option n'est pas passée sont les directives Shellcheck et les commentaires du niveau supérieur du fichier compilé.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
+    -e --keep-exec-safeguards           garde les   the extra safeguard pieces of code (from the beginning of each shell file) which prevent the
+                                        direct execution of the said file. This option does not prevents the addition of an extra safeguard
+                                        code after the top-level of the compled file.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
+    -r --keep-raw-document-layout       keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
+    -s --no-shellcheck                  prevents the execution of the 'shellcheck' command on each file. This option is incompatible with the
+                                        '-C' / '--compile-stable' option, an error message will be returned if both options are used together.";
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
