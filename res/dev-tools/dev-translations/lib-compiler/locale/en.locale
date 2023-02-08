@@ -4,32 +4,86 @@
 # "CompilerUsage()" function.
 __BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./path/to/lib-compiler.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
 __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compiles the content of the Bash Utils framework's basic files and its main module into a single file";
+
+# ------------------------------------------------
+# "CompilerUsage()" function : mandatory argument.
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument :";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
+    --lang=[ARRAY]                  array of languages ISO 639-1 codes. Each of them represent the language in which the messages and the
+                                    top-level comments of the compiled file must be translated, as well as the translation files (from the
+                                    initialization process) to ship.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
+    -h --help                       displays on the screen the help messages and the instructions.";
+
+# ------------------------------------------------
+# "CompilerUsage()" function : optional arguments.
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Optional arguments :";
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS="
+${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}
+    -A --compilation-authors        sets the name of the author(s) of the compilation of the file into its top-level comments, except if
+                                    the '-r' / '--keep-raw-document-layout' option is passed.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
+    -V --compilation-version        sets the version of the compiled file, except if the '-r' / '--keep-raw-document-layout' option is passed.
+                                    If the value is absent, the '1.0' version number is written into the 'version :' section.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
+    -C --compile-stable             sets the compiled file into a stable version. It will force the execution of the 'shellcheck' command
+                                    on each file to compile processed by the compiler, and will do the same on the output file. This option
+                                    is incompatible with the '-s' / '--no-shellcheck' option, an error will be returned if both options
+                                    are used together.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_UNSTABLE="
+    -c --compile-unstable           this option does actually nothing, as the compilation of an unstable version is the default behavior
+                                    of the Bash Utils compiler.";
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__DISPLAY="
+    -d --display                    displays on the screen the content of the file currently processed by the compiler.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__HELP="${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP}";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__
 
 # --------------------------------------------------------------------------
 # If an unsupported argument is passed into the array of optional arguments.
+
+
 __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY="AN UNSUPPORTED ARGUMENT WAS PASSED INTO THE ARRAY OF OPTIONAL ARGUMENT";
 __BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE="${__ERROR}The ${__HIGHLIGHT}%s${__ERROR} value is not supported. Please remove it from the array of arguments following the mandatory first argument (lang=*)${__RESET}";
 
 __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="STOPPING THE EXECUTION OF THE COMPILER, NO FILES FROM THE ${__HIGHLIGHT}BASH UTILS${__ERROR} FRAMEWORK WERE COMPILED !!!";
 
+
 # -----------------------------------------------------------------------------------
 # Verifying if the "no-shell-check" and "compile-stable" values were passed together.
+
 __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} AND ${__HIGHLIGHT}%s${__WARNING} VALUES MUST NOT BE USED TOGETHER${__RESET}",
 __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to compile a stable file, the ${__HIGHLIGHT}shellcheck${__WARNING} command MUST be executed in order to check for any programming error in every files to be included${__RESET}";
 
+
 # -------------------------------------------------------------------------------------------------------------------
 # Verifying if the "keep-raw-document-layout", "keep-exec-safeguard" and "keep-comments" values were passed together.
+
 __BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER="${__WARNING}WARNING : THE ${__HIGHLIGHT}%s${__WARNING} WAS PASSED WITH ONE OF THESE VALUES : ${__HIGHLIGHT}%s${__WARNING} OR ${__HIGHLIGHT}%s${__RESET}";
 __BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}In order to optimize the code of the compiled file, the ${__HIGHLIGHT}%s${__WARNING} value must not be used with the ${__HIGHLIGHT}%s${__WARNING} and ${__HIGHLIGHT}%s${__WARNING} values${__RESET}";
 
+
 # --------------------------------
 # Shellcheck command verification.
+
 __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS SCRIPT WITHOUT THE SHELLCHECK COMMAND, UNLESS YOU KNOW EXACTLY WHAT YOU ARE DOING!";
 __BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}THE ${__HIGHLIGHT}SHELLCHECK${__ERROR} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
 
+
 # -------------------------------------------
 # If a bad value is passed as first argument.
+
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG="ERROR : THE COMPILER'S FIRST ARGUMENT IS NOT CORRECTLY FORMATTED !!!";
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1="${__WARNING}Please execute this script by passing the wanted ISO 639-1 code(s) like it is done in the following string, which can be used to compile the framework in these languages : English, French, Ukrainian, Swedish, Turkmen or Greenlandic :${__RESET}";
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2="${__WARNING}Or use ONLY one of these delimiters (no others are supported) between each ISO 639-1 codes instead of a space :";
@@ -37,32 +91,43 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3="${__WARNING}Or pass the \"${__HIG
 
 __BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}You can also pass the ${__HIGHLIGHT}%s${__WARNING} (or the ${__HIGHLIGHT}%s${__WARNING}) option in order to get a quick help${__RESET}";
 
+
 # -----------------------------
 # Shellcheck command execution.
+
 __BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
 __BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
 
-# -----------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------
 # Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code.
+
 __BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}An unsupported language ISO 639-1 code was passed as ${__HIGHLIGHT}CompileInSingleFile()${__ERROR} function's first argument ${__RESET}";
+
 
 # ------------------------------------
 # Framework compilation start message.
+
 __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE${__RESET}";
+
 
 # ---------------------------------------------------------------------------------
 # ("WriteBU" function) Writing the target file's content into the file to generate.
+
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !";
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Please check its path, its rights and if it exists.";
 
+
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES CONTENT OF THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="This is a safeguard measure in case the locale files are updated after an update of the initialization script, since English is the primary supported language, so that a message is not returned as an empty string";
 
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE, FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES FOR THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE, FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
+
 
 # ------------------------------------------------------------------------------------------
 # Writing now the initializer script's translations files content into the file to generate.
@@ -70,44 +135,58 @@ __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZ
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # --------------------------------------------------------------------------
 # Writing the main module's library files content into the file to generate.
+
 __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT="COPYING THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S LIBRARY FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # --------------------------------------------------------------------------------
 # Writing the main module's configuration files content into the file to generate.
+
 __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT="COPYING THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S CONFIGURATION FILES CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # ---------------------------------------------------------------------------------
 # Writing the main module's initializer script's content into the file to generate.
+
 __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT="COPYING THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE MAIN MODULE'S INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # ---------------------------------------------------------------------------------------
 # Writing the initializer script's configuration files content into the file to generate.
+
 __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONFIGURATION files CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # -------------------------------------------------------------------
 # Writing the initializer script's content into the file to generate.
+
 __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT="COPYING THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # -----------------------------------------------------------------------------
 # Copying the content of the generated file into the localized language's file.
+
 __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE="COPYING THE CONTENT OF THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR="FAILED TO COPY THE CONTENT OF THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCESSFULLY COPIED THE CONTENT OF THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
+
 # --------------------------------------------------------------
 # Printing the statistics of the newly generated localized file.
+
 __BU_COMPILE__LOCALIZED_FILE__STATS="${__HIGHLIGHT}%s${__RESET} file statistics :";
 __BU_COMPILE__LOCALIZED_FILE__BYTES="Size in bytes           : %s";
 __BU_COMPILE__LOCALIZED_FILE__CHARS="Number of characters    : %s characters";
@@ -118,14 +197,18 @@ __BU_COMPILE__LOCALIZED_FILE__WORDS="Number of words         : %s words";
 __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED="FAILED TO COMPILE A VERSION OF THE FRAMEWORK CONTAINING THE MAIN RESOURCES ENCAPSULATED IN A SINGLE FILE IN THIS LANGUAGE : ${__HIGHLIGHT}%s${__ERROR} !!!${__RESET}";
 __BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS="THE BASH UTILS FRAMEWORK HAS BEEN SUCCESSFULLY COMPILED TO THIS LANGUAGE : ${__HIGHLIGHT}%s${__RESET}";
 
+
 # ---------------------------------------------------------------------------------------
 # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
+
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS="CHECKING FOR PROGRAMMING ERRORS IN THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR="THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE CONTAINS ONE OR MORE PROGRAMMING ERRORS";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} FILE DOES NOT CONTAINS ANY PROGRAMMING ERROR";
 
+
 # -------------------------------------------------------------------------------------
 # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
+
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPYING THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE TO THE ${__HIGHLIGHT}%s${__NEWSTEP} DIRECTORY";
 
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="FAILED TO COPY THE COMPILED ${__HIGHLIGHT}%s${__ERROR} FILE TO THE ${__HIGHLIGHT}%s${__ERROR} DIRECTORY";
@@ -136,8 +219,10 @@ __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_
 
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
 
+
 # ------------------------------------------------------------------------------------------------------
 # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "cmhod" command.
+
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} STABLE FILE IN READ-ONLY MODE FOR SAFETY REASONS";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE CANNOT BE SET IN READ ONLY MODE";
 
@@ -158,8 +243,10 @@ __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_GT_1="SUCCE
 
 __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} STABLE FILE WAS SUCCESSFULLY COMPILED AND IS READY TO BE USED";
 
+
 # --------------------------------------------------
 # If the framework was compiled in a stable version.
+
 __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Here is the existing compiled file whose rights have not been modified :${__RESET}";
 __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Please execute the '${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s${__WARNING}' command in order to set this file in read-only mode";
 

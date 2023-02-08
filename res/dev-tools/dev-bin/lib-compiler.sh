@@ -604,46 +604,36 @@ function CompilerUsage()
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC}";
     echo;
 
-    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
-    echo "    --lang=[ARRAY]                    array of languages ISO 639-1 codes. Each of them represent the language in which the messages and the";
-    echo "                                      top-level file's comments must be translated, as well as the translation files (from the initialization";
-    echo "                                      process) to ship.";
+    echo -n "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
+    echo "";
+    echo "";
+
+    echo "
+    -h --help                       displays on the screen the help messages and the instructions.";
     echo;
 
-    echo "    -h --help                         displays on the screen the help messages and the instructions.";
-    echo;
+    echo -n "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}"
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS}";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION}";
 
-    echo "Optional arguments :";
-    echo "    -C --compile-stable               sets the compiled file into a stable version. It will force the execution of the 'shellcheck' command";
-    echo "                                      on each file to compile processed by the compiler, and will do the same on the output file. This option";
-    echo "                                      is incompatible with the '-s' / '--no-shellcheck' option, an error will be returned if both options";
-    echo "                                      are used together.";
-    echo;
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__DISPLAY}";
 
-    echo "    -c --compile-unstable             this option does actually nothing, as the compilation of an unstable version is the default behavior";
-    echo "                                      of the Bash Utils compiler.";
-    echo;
+    echo "";
 
-    echo "    -d --display                      displays on the screen the content of the file currently processed by the compiler.";
-    echo;
+    echo "
+    -k --keep-comments              keep each comment into the file. The only ones which are not removed if this option is passed are
+                                    the Shellcheck directives and the top-level file's comments.";
 
-    echo "    -h --help                         displays on the screen the help messages and the instructions.";
-    echo;
+    echo "
+    -e --keep-exec-safeguards       keep the extra safeguard pieces of code (from the beginning of each shell file) which prevent the
+                                    direct execution of the said file. This option does not prevents the addition of an extra safeguard
+                                    code after the top-level of the compled file.";
 
-    echo "    -k --keep-comments                keep each comment into the file. The only ones which are not removed if this option is passed are";
-    echo "                                      the Shellcheck directives and the top-level file's comments.";
-    echo;
+    echo "
+    -r --keep-raw-document-layout   keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work.";
 
-    echo "    -e --keep-exec-safeguards         keep the extra safeguard pieces of code (from the beginning of each shell file) which prevent the";
-    echo "                                      direct execution of the said file. This option does not prevents the addition of an extra safeguard";
-    echo "                                      code after the top-level of the compled file.";
-    echo;
-
-    echo "    -r --keep-raw-document-layout     keeps the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work.";
-    echo;
-
-    echo "    -s --no-shellcheck                prevents the execution of the 'shellcheck' command on each file.";
-    echo;
+    echo "
+    -s --no-shellcheck              prevents the execution of the 'shellcheck' command on each file.";
 
     exit 0;
 }
