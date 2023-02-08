@@ -6,13 +6,16 @@
 __BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compiler.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
 __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers de base et du module principal du framework Bash Utils dans un seul fichier";
 
+# ----------------------------------------------------------------------------------------------------------
+# Fonction "CompilerUsage()" : argument obligatoire [-----] "CompilerUsage()" function : mandatory argument.
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire :";
-__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
-";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="";
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
-";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="";
 
+# -------------------------------------------------------------------------------------------------------
+# Fonction "CompilerUsage()" : argument optionel [-----] "CompilerUsage()" function : optional arguments.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Arguments optionnels :";
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS="
@@ -224,6 +227,7 @@ __BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED="LE FICHIER STABLE ${__HI
 
 # ----------------------------------------------------------------------------------------------------------------
 # Si le framework a été compilé dans une version stable [-----] If the framework was compiled in a stable version.
+
 __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED="${__WARNING}Voici le fichier compilé existant dont les droits n'ont pas été modifiés :${__RESET}";
 __BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE="${__WARNING}Veuillez exécuter la commande '${__CMDS}chmod ${__SUCCESS}-xw ${__HIGHLIGHT}%s${__WARNING}' pour rendre ce fichier accessible en lecture seule${__RESET}";
 
