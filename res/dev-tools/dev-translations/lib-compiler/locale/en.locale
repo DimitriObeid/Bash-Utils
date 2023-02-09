@@ -9,13 +9,25 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compiles the content of the Bas
 # ------------------------------------------------
 # "CompilerUsage()" function : mandatory argument.
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument :";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument (use ONLY one of them) :";
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
-    --lang=[ARRAY]                      array of languages ISO 639-1 codes. Each of them represent the language in which the messages and the
+    --lang=[ARRAY]                      array of languages ISO 639-1 codes. This option creates a compiled file for each language.
+
+                                        Each value represent the language in which the messages and the top-level comments of the compiled file
+                                        must be translated, with the individual translation file associated to the target language";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
+    --lang-include=[ARRAY]              array of languages ISO 639-1 codes. This option creates a compiled file embedding the linguistic content
+                                        of each translation files used during the initialization process of the Bash utils framework.
+
+                                        Each value represent the language in which the messages and the
                                         top-level comments of the compiled file must be translated, as well as the translation files (from the
-                                        initialization process) to ship. If the '--lang=supported' is passed, every translation files for the
-                                        initialization process will be embedded in the compiled file, with their function which defines each
-                                        of the variables storing the translated strings.";
+                                        initialization process) to ship. If the 'supported' value is passed after the '=' sign, the content of
+                                        every supported translation files for the initialization process will be embedded into the compiled file,
+                                        with their function which defines each of the variables storing the translated strings. Else, if the 'all'
+                                        value is passed, the content of EVERY translation files will be written into the compiled file, including
+                                        the unsupported files, and the ones whose translation is uncomplete or obsolete.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
     -h --help                           replacement of the '--lang=' option. Displays on the screen the help messages and the compiler's usage

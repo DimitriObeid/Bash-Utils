@@ -9,13 +9,44 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers
 # ----------------------------------------------------------------------------------------------------------
 # Fonction "CompilerUsage()" : argument obligatoire [-----] "CompilerUsage()" function : mandatory argument.
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire :";
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire (n'utilisez QU'UN SEUL d'entre eux) :";
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
-    --lang=[ARRAY]                      tableau de codes de langues au format ISO 639-1. Chacun d'entre eux représente la langue dans laquelle
-                                        les messages et les commentaires au niveau supérieur du fichier compilé doivent être traduits, ainsi que
-                                        les fichiers de traduction (venant du processus d'initialisation) à embarquer. Si l'option '--lang=supported'
-                                        est passée, tous les fichiers de traduction du processus d'initialisation seront embarqués dans le fichier
-                                        compilé, avec leur fonction   with the function which defines each of the variables storing the translated strings.";
+    --lang=[ARRAY]                      tableau de codes de langues au format ISO 639-1. Cette option crée un fichier compilé par langue.
+
+                                        Chaque valeur représente la langue dans laquelle les messages et les commentaires au niveau supérieur de chaque
+                                        fichier compilé doivent être traduits, ainsi que celle du fichier de traduction individuel contenant les messages
+                                        traduits utilisés pendant le processus d'initialisation du framework Bash Utils, et dont le contenu est embarqué
+                                        dans le fichier final lors de la compilation.
+
+                                        Ce fichier de traductions se trouve dans le dossier '.Bash-utils/config/initializer/locale', et porte ce nom :
+                                        '\$code_iso_639-1.locale'.
+
+                                        Si la valeur 'supported' est passée après le signe '=', alors un fichier compilé est créé pour chaque langue
+                                        supportée par le compilateur et passée avec l'option '--lang='.
+
+                                        Sinon, si la valeur 'all' est passée, alors un fichier compilé est créé pour toutes les langues, incluant les
+                                        langues non-supportés par le compilateur et / ou dont le fichier de traduction associé est incomplet et / ou
+                                        obsolète.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
+    --lang-include=[ARRAY]              tableau de codes de langues au format ISO 639-1. Cette option crée un fichier compilé embarquant le contenu
+                                        linguistique de chaque fichier de traduction utilisé pendant le processus d'initialisation.
+
+                                        Chaque valeur représente le code ISO 639-1 de la langue utilisée par chaque fichier de traduction individuel
+                                        contenant les messages traduits utilisés pendant le processus d'initialisation du framework Bash Utils, et dont
+                                        le contenu est embarqué dans le fichier final lors de la compilation.
+
+                                        Chacun de ces fichiers de traductions se trouve dans le dossier mentionné à la fin de la description de l'option
+                                        obligatoire '--lang=' décrite ci-dessus, et porte le même nom de fichier.
+
+                                        Si la valeur 'supported' est passée après le signe '=', alors le contenu de tous les fichiers de traduction de
+                                        chaque langue supportée par le compilateur sera écrit dans le fichier compilé, avec leur fonction qui définit
+                                        chacune des variables contenant les chaînes de caractères traduites.
+
+                                        Sinon, si la valeur 'all' est passée, alors le contenu de TOUS les fichiers de traduction sera écrit dans le
+                                        fichier compilé, y compris les fichiers des langues non-supportés par le compilateur et / ou dont la traduction
+                                        est incomplète ou obsolète.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
     -h --help                           remplacement de l'option '--lang='. Affiche à l'écran les messages d'aide et les instructions d'utilisation

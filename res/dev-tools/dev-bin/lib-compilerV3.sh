@@ -608,12 +608,16 @@ function CompilerUsage()
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC}";
     echo;
 
+    # Mandatory argument.
     echo -n "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG}";
+
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE}";
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP}";
     echo;
 
+    # Optional options.
     echo -n "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}"
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS}";
 
