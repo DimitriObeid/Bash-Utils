@@ -284,7 +284,7 @@ function PrintLine()
     fi
 
     #**** Variables ****
-    local v_line_char  # VAR TYPE : Char    - Desc : Character which is printed at each row's column to draw the line.
+    local v_line_char; # VAR TYPE : Char    - Desc : Character which is printed at each row's column to draw the line.
 
     #**** Code ****
     if [ "${p_pos^^}" == 'UPPER' ] || [ "${p_pos^^}" == 'LOWER' ]; then v_line_char='-'; else v_line_char='#'; fi

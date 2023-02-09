@@ -14,20 +14,39 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument (use ONLY o
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
     --lang=[ARRAY]                      array of languages ISO 639-1 codes. This option creates a compiled file for each language.
 
-                                        Each value represent the language in which the messages and the top-level comments of the compiled file
-                                        must be translated, with the individual translation file associated to the target language";
+                                        Each value represents the ISO 639-1 code of the language in which the messages and the top-level comments of
+                                        each compiled file must be translated, as well as the one of the individual translation file which contains
+                                        the translated messages used during the initialization processus of the Bash Utils framework, and whose
+                                        content must be embedded in each final file during the compilation process.
+                                        
+                                        This translation file can be found in the '.Bash-utils/config/initializer/locale' folder, and is named :
+                                        '\$iso_639-1_code.locale'
+                                        
+                                        If the 'supported' value is passed after the '=' sign, then a compiled file is created for each language
+                                        supported by the compiler, still in the same way as for each ISO 639-1 code passed to the compiler after
+                                        the '--lang=' option
+                                        
+                                        Else, if the 'all' value is passed after the '=' sign, then a compiled file is created for every language,
+                                        including the ones not supported by the compiler and / or whose associated translation file is incomplete
+                                        and / or obsolete.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
     --lang-include=[ARRAY]              array of languages ISO 639-1 codes. This option creates a compiled file embedding the linguistic content
-                                        of each translation files used during the initialization process of the Bash utils framework.
+                                        of each translation file used during the initialization process of the Bash utils framework.
 
-                                        Each value represent the language in which the messages and the
-                                        top-level comments of the compiled file must be translated, as well as the translation files (from the
-                                        initialization process) to ship. If the 'supported' value is passed after the '=' sign, the content of
-                                        every supported translation files for the initialization process will be embedded into the compiled file,
-                                        with their function which defines each of the variables storing the translated strings. Else, if the 'all'
-                                        value is passed, the content of EVERY translation files will be written into the compiled file, including
-                                        the unsupported files, and the ones whose translation is uncomplete or obsolete.";
+                                        Each value represents the ISO 639-1 code of the language of each individual translation file mentioned in
+                                        the paragraph above, and whose content must be embedded in the final file during the compilation process.
+
+                                        Each of these translation files is located in the folder mentioned into the description of the '--lang='
+                                        option described above, and has the same file name.
+
+                                        If the 'supported' value is passed after the '=' sign, then the content of the translation file of each
+                                        language supported by the compiler will be written into the compiled file, with their function that defines
+                                        each of the variables containing the translated strings.
+                                        
+                                        Else, if the 'all' value is passed after the '=' sign, then the content of EVERY translation files will be
+                                        written into the compiled file, including the files of the languages not supported by the compiler and / or
+                                        whose translation is incomplete and / or obsolete.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
     -h --help                           replacement of the '--lang=' option. Displays on the screen the help messages and the compiler's usage
