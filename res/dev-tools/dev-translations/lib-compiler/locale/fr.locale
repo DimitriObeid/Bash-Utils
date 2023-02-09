@@ -55,16 +55,18 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS="
                                         option n'est pas passée sont les directives Shellcheck et les commentaires du niveau supérieur du fichier compilé.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
-    -e --keep-exec-safeguards           garde les   the extra safeguard pieces of code (from the beginning of each shell file) which prevent the
-                                        direct execution of the said file. This option does not prevents the addition of an extra safeguard
-                                        code after the top-level of the compled file.";
+    -e --keep-exec-safeguards           garde les morceaux de code (écrits au début de chaque fichier source) prévenant l'exécution directe dudit fichier.
+                                        Cette option n'empêche pas l'ajout d'un tel code de sécurité supplémentaire après les commentaires au niveau
+                                        supérieur du fichier compilé.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
-    -r --keep-raw-document-layout       keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work.";
+    -r --keep-raw-document-layout       garde le formatage brut du fichier compilé, sans lui apporter d'optimisations. Dans ce cas, les options '--keep-*'
+                                        citées précédemment ne fonctionneront pas.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
-    -s --no-shellcheck                  prevents the execution of the 'shellcheck' command on each file. This option is incompatible with the
-                                        '-C' / '--compile-stable' option, an error message will be returned if both options are used together.";
+    -s --no-shellcheck                  empêche l'exécution de la commande 'shellcheck' sur chaque fichier traité par le compilateur. Cette option est
+                                        incompatible avec l'option '-C' / '--compile-stable', une message d'erreur sera retourné si les deux options sont
+                                        utilisées ensemble.";
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------

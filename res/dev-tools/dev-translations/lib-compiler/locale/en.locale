@@ -55,16 +55,18 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS="
                                         this option is not passed are the Shellcheck directives and the comments from the top-level compiled file.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
-    -e --keep-exec-safeguards           keep the extra safeguard pieces of code (from the beginning of each source file) which prevent the
+    -e --keep-exec-safeguards           keep the extra safeguard pieces of code (written at the beginning of each source file) which prevent the
                                         direct execution of the said file. This option does not prevents the addition of an extra safeguard
-                                        code after the top-level of the compled file.";
+                                        code after the top-level of the compiled file.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
-    -r --keep-raw-document-layout       keep the raw compiled file's layout. In this case, the aforementionned '--keep-*' options will not work.";
+    -r --keep-raw-document-layout       keep the raw compiled file's layout, without optimizing it. In this case, the aforementionned '--keep-*'
+                                        options will not work.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
-    -s --no-shellcheck                  prevents the execution of the 'shellcheck' command on each file. This option is incompatible with the
-                                        '-C' / '--compile-stable' option, an error message will be returned if both options are used together.";
+    -s --no-shellcheck                  prevents the execution of the 'shellcheck' command on each file processed by the compiler. This option is
+                                        incompatible with the '-C' / '--compile-stable' option, an error message will be returned if both options
+                                        are used together.";
 
 
 # --------------------------------------------------------------------------
