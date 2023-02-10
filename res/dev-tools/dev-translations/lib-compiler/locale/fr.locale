@@ -145,7 +145,7 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}Vous pouvez également pa
 
 __BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
 __BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
-__BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation";
+__BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation${__RESET}";
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

@@ -469,9 +469,9 @@ function WriteBU()
 	#**** Variables ****
 	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write in the "${__BU_MAIN_FULL_FILE_PATH}" file.
 
-	v_content="$(cat "${p_filepath}")";
-
     #**** Code ****
+    v_content="$(cat "${p_filepath}")";
+
     if      [ "${p_display,,}" == "${_____value_of__display}" ]; then   echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
     else                                                                echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { PrintErrorLine "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
     fi
@@ -1011,27 +1011,25 @@ function CompileInSingleFile()
 
         # If the compiled file must ship multiple languages.
         elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+            #**** Condition variables ****
+            local translationList;      # VAR TYPE : CMD        - DESC : This variable stores the "for" loop which loops into the "" array in order to print the ISO 639-1 codes of the translation files languages to include into the compiled file.
+
+            #**** Condition code ****
+            translationList="$(for langArr in "${__language_array[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${langArr}" "${__NEWSTEP}"; if [ "${langArr}" != "${__language_array[-1]}" ]; then printf ' | '; fi; done)";
+
+            # PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
+            PrintNewstepLine "$(printf "EMBEDDING THE TRANSLATION FILE FROM EACH OF THESE LANGUAGES INTO THE COMPILED FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationList}")" 'UPPER';
+
             for translationLanguage in "${__language_array[@]}"; do
 
                 #**** Loop variables ****
                 local translationFilePath;  # VAR TYPE : Filepath   - DESC : Path to the translation file (for the initialization process of the Bash Utils framework) of the language currently processed.
 
-                local translationList;      # VAR TYPE : CMD        - DESC : This variable stores the "for" loop which loops into the "" array in order to print the ISO 639-1 codes of the translation files languages to include into the compiled file.
-
                 #**** Loop code ****
-                translationFilePath="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${translationLanguage}";
-
-                translationList="$(for langArr in "${__language_array[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${langArr}" "${__NEWSTEP}"; if [ "${langArr}" != "${__language_array[-1]}" ]; then printf ' | '; fi; done)";
-
-                # PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
-                PrintNewstepLine "$(printf "EMBEDDING THE TRANSLATION FILE FROM EACH OF THESE LANGUAGES INTO THE COMPILED FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationList}")" 'UPPER';
+                translationFilePath="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${translationLanguage}.locale";
 
                 if  [ ! -f "${translationFilePath}" ]; then
                     PrintErrorLine "$(printf "${__locale_print_code__error} UNABLE TO FIND THE PATH TO THIS FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationFilePath}")" 'FULL';
-
-                    printf "${__ERROR}Please${__RESET}\n\n";
-
-                    echo "${0}"
 
                     ____loop_error='error'; break 2;
                 else
@@ -1041,9 +1039,9 @@ function CompileInSingleFile()
                 fi
 
                 [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break 2; };
-
-                PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
             done
+
+            PrintSuccessLine "$(printf "SUCCESSFULLLY EMBEDDED THE" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
         fi
 
         # ---------------------------------------------------------------------------------------

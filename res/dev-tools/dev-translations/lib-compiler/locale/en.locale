@@ -18,14 +18,14 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
                                         each compiled file must be translated, as well as the one of the individual translation file which contains
                                         the translated messages used during the initialization processus of the Bash Utils framework, and whose
                                         content must be embedded in each final file during the compilation process.
-                                        
+
                                         This translation file can be found in the '.Bash-utils/config/initializer/locale' folder, and is named :
                                         '\$iso_639-1_code.locale'
-                                        
+
                                         If the 'supported' value is passed after the '=' sign, then a compiled file is created for each language
                                         supported by the compiler, still in the same way as for each ISO 639-1 code passed to the compiler after
                                         the '--lang=' option
-                                        
+
                                         Else, if the 'all' value is passed after the '=' sign, then a compiled file is created for every language,
                                         including the ones not supported by the compiler and / or whose associated translation file is incomplete
                                         and / or obsolete.";
@@ -43,7 +43,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
                                         If the 'supported' value is passed after the '=' sign, then the content of the translation file of each
                                         language supported by the compiler will be written into the compiled file, with their function that defines
                                         each of the variables containing the translated strings.
-                                        
+
                                         Else, if the 'all' value is passed after the '=' sign, then the content of EVERY translation files will be
                                         written into the compiled file, including the files of the languages not supported by the compiler and / or
                                         whose translation is incomplete and / or obsolete.";
@@ -145,8 +145,12 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}You can also pass the ${_
 # Shellcheck command execution.
 
 __BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
+
 __BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
+__BU_COMPILE__SHELLCHECK__FAIL_STR="... ${__RESET}Failed ❌";
+
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS_STR="... ${__RESET}Success ${__SUCCESS}✓${__RESET}";
 
 
 # -------------------------------------------------------------------------------
