@@ -1041,7 +1041,7 @@ function CompileInSingleFile()
                 [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break 2; };
             done
 
-            PrintSuccessLine "$(printf "SUCCESSFULLLY EMBEDDED THE" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
+            PrintSuccessLine "$(printf "${__HIGHLIGHT}%s${__SUCCESS} SUCCESSFULLLY EMBEDDED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE'S CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
         fi
 
         # ---------------------------------------------------------------------------------------
