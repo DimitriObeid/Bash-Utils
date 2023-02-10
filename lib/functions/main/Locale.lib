@@ -138,7 +138,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local tmp;          # VAR TYPE : CMD        # DESC : Storing a complex command substitution called in the previous "${usr}" variable.
 
 	#**** Code ****
-    if [[ "${0,,}" != ?(./)*lib-compilerV3.?(ba)sh ]]; then
+    if [[ ${0##*/} != lib-compilerV3.?(ba)sh ]]; then
         if ! BU.Main.Args__Locale.PrintLanguageName.Optimize "${p_code}" "${p_langNameEngl}"    "${p_langNameOrig}" "${p_langNameUser}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))"; then local C="${?}"; return "${C}"; fi
     else
         BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler "${p_code}"  "${p_langNameEngl}" "${p_langNameOrig}" || { local C="${?}"; return "${C}"; };

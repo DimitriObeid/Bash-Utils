@@ -998,14 +998,14 @@ function CompileInSingleFile()
         if [ -n "${__vMandatoryArgLang}" ]; then
             PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
-            if  [ ! -f "${__locale_file_path}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+            if  [ ! -f "${__locale_file_path}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
             else
                 BU.Main.DevTools.ShellcheckVerif "${__locale_file_path}" || local __err="error";
 
                 WriteBU "${__locale_file_path}" "${__vArrayVal_display}" || local ____err="error";
             fi
 
-            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
 
             PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1014,19 +1014,33 @@ function CompileInSingleFile()
             for translationLanguage in "${__language_array[@]}"; do
 
                 #**** Loop variables ****
-                local translationFilePath="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${translationLanguage}";
+                local translationFilePath;  # VAR TYPE : Filepath   - DESC : Path to the translation file (for the initialization process of the Bash Utils framework) of the language currently processed.
+
+                local translationList;      # VAR TYPE : CMD        - DESC : This variable stores the "for" loop which loops into the "" array in order to print the ISO 639-1 codes of the translation files languages to include into the compiled file.
 
                 #**** Loop code ****
-                PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
+                translationFilePath="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${translationLanguage}";
 
-                if  [ ! -f "${translationFilePath}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+                translationList="$(for langArr in "${__language_array[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${langArr}" "${__NEWSTEP}"; if [ "${langArr}" != "${__language_array[-1]}" ]; then printf ' | '; fi; done)";
+
+                # PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
+                PrintNewstepLine "$(printf "EMBEDDING THE TRANSLATION FILE FROM EACH OF THESE LANGUAGES INTO THE COMPILED FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationList}")" 'UPPER';
+
+                if  [ ! -f "${translationFilePath}" ]; then
+                    PrintErrorLine "$(printf "${__locale_print_code__error} UNABLE TO FIND THE PATH TO THIS FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationFilePath}")" 'FULL';
+
+                    printf "${__ERROR}Please${__RESET}\n\n";
+
+                    echo "${0}"
+
+                    ____loop_error='error'; break 2;
                 else
                     BU.Main.DevTools.ShellcheckVerif "${translationFilePath}" || local __err="error";
 
                     WriteBU "${translationFilePath}" "${__vArrayVal_display}" || local ____err="error";
                 fi
 
-                [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+                [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break 2; };
 
                 PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
             done
