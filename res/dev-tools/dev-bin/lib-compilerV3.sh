@@ -812,7 +812,7 @@ function CompileInSingleFile()
         CompilerUsage;
 
     # Converting the "${p_locale}" string into an array of ISO 639-1 codes.
-    elif [[ "${p_locale,,}" == ?(-?(-))lang=* ]]; then
+    elif [[ "${p_locale,,}" == ?(-?(-))lang?(-include)=* ]]; then
 
         #**** Conditional variables ****
         local v_locale_str;         # VAR TYPE : String     - DESC : This variable stores the mandatory first argument's value if it contains the "--lang=" sub-string.
@@ -852,6 +852,15 @@ function CompileInSingleFile()
 
             # Assigning a value, so that no extra checkings are done to the first argument's value afterwards.
             v_is_check_to_do='true';
+        fi
+
+        # Checking if the "--lang=" value was passed, so that a file will be compiled for each language.
+        if [[ "${p_locale,,}" == ?(-?(-))lang=* ]]; then
+            __vMandatoryArgLang='--lang=';
+
+        # Checking if the "--lang-include=" value was passed, so that each language will be embedded in the compiled file.
+        elif [[ "${p_locale,,}" == ?(-?(-))lang-include=* ]]; then
+            __vMandatoryArgLangInclude='--lang-include';
         fi
     else
         # Assigning a value, so that no extra checkings are done to the first argument's value afterwards.
@@ -985,18 +994,43 @@ function CompileInSingleFile()
         # ------------------------------------------------------------------------------------------
         # Writing now the initializer script's translations files content into the file to generate.
 
-        PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
+        # If a file must be compiled for each language.
+        if [ -n "${__vMandatoryArgLang}" ]; then
+            PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
-        if  [ ! -f "${__locale_file_path}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
-        else
-            BU.Main.DevTools.ShellcheckVerif "${__locale_file_path}" || local __err="error";
+            if  [ ! -f "${__locale_file_path}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+            else
+                BU.Main.DevTools.ShellcheckVerif "${__locale_file_path}" || local __err="error";
 
-            WriteBU "${__locale_file_path}" "${__vArrayVal_display}" || local ____err="error";
+                WriteBU "${__locale_file_path}" "${__vArrayVal_display}" || local ____err="error";
+            fi
+
+            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+
+            PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
+
+        # If the compiled file must ship multiple languages.
+        elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+            for translationLanguage in "${__language_array[@]}"; do
+
+                #**** Loop variables ****
+                local translationFilePath="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${translationLanguage}";
+
+                #**** Loop code ****
+                PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
+
+                if  [ ! -f "${translationFilePath}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+                else
+                    BU.Main.DevTools.ShellcheckVerif "${translationFilePath}" || local __err="error";
+
+                    WriteBU "${translationFilePath}" "${__vArrayVal_display}" || local ____err="error";
+                fi
+
+                [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+
+                PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
+            done
         fi
-
-        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}__ERROR" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
-
-        PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
         # ---------------------------------------------------------------------------------------
         # Writing the initializer script's configuration files content into the file to generate.
