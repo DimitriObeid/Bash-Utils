@@ -936,11 +936,20 @@ function CompileInSingleFile()
         __locale_file_path="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${v_curr_locale}.locale";
         __locale_file_path_en="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/en.locale";
 
+
         __compiled_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
-        __compiled_file_name="Bash-utils-${v_curr_locale}.sh"
+
+        if [ -n "${__vMandatoryArgLang}" ]; then __compiled_file_name="Bash-utils-${v_curr_locale}.sh"; elif [ -n "${__vMandatoryArgLangInclude}" ]; then __compiled_file_name="Bash-utils-full.sh"; fi
+
         __compiled_file_path="${__compiled_file_parent_dir}/${__compiled_file_name}";
 
-        __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')]]";
+
+        if [ "${__vMandatoryArgLang}" ]; then
+            __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')] ]";
+
+        elif [ "${__vMandatoryArgLangInclude}" ]; then
+            __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG ]";
+        fi
 
         __locale_print_code__error="${__locale_print_code}${__ERROR}";
         __locale_print_code__newstep="${__locale_print_code}${__NEWSTEP}";
@@ -1018,7 +1027,7 @@ function CompileInSingleFile()
             translationList="$(for langArr in "${__language_array[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${langArr}" "${__NEWSTEP}"; if [ "${langArr}" != "${__language_array[-1]}" ]; then printf ' | '; fi; done)";
 
             # PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
-            PrintNewstepLine "$(printf "EMBEDDING THE TRANSLATION FILE FROM EACH OF THESE LANGUAGES INTO THE COMPILED FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationList}")" 'UPPER';
+            PrintNewstepLine "$(printf "EMBEDDING THE TRANSLATION FILE FROM EACH OF THESE LANGUAGES INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} COMPILED FILE : ${__HIGHLIGHT}%s${__RESET}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'UPPER';
 
             for translationLanguage in "${__language_array[@]}"; do
 
@@ -1041,7 +1050,7 @@ function CompileInSingleFile()
                 [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break 2; };
             done
 
-            PrintSuccessLine "$(printf "${__HIGHLIGHT}%s${__SUCCESS} SUCCESSFULLLY EMBEDDED THE ${__HIGHLIGHT}%s${__SUCCESS} FILE'S CONTENT INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
+            PrintSuccessLine "$(printf "SUCCESSFULLLY EMBEDDED THE TRANSLATION FILES FROM EACH OF THESE LANGUAGES INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE : ${__HIGHLIGHT}%s${__RESET}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'LOWER';
         fi
 
         # ---------------------------------------------------------------------------------------
@@ -1130,10 +1139,18 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'LOWER';
 
-        if [ -n "${__vArrayVal_compile_stable}" ]; then
-            PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
-        else
-            PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+        if [ -n "${__vMandatoryArgLang}" ]; then
+            if [ -n "${__vArrayVal_compile_stable}" ]; then
+                PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+            else
+                PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+            fi
+        elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+            if [ -n "${__vArrayVal_compile_stable}" ]; then
+                PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__MULTI_LANGUAGES_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+            else
+                PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__MULTI_LANGUAGES_COMPILATION_SUCCESS}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+            fi
         fi
 
         # --------------------------------------------------------------------------------------------------------------------------------
@@ -1161,6 +1178,9 @@ function CompileInSingleFile()
         printf "${__BU_COMPILE__LOCALIZED_FILE__LINES}\n" "$(wc -l < "${__compiled_file_path}")";
         printf "${__BU_COMPILE__LOCALIZED_FILE__WIDTH}\n" "$(wc -L < "${__compiled_file_path}")";
         printf "${__BU_COMPILE__LOCALIZED_FILE__WORDS}\n" "$(wc -w < "${__compiled_file_path}")";
+
+        # Exiting the script's loop after the compilation of the mulit-language file.
+        if [ -n "${__vMandatoryArgLangInclude}" ]; then break; fi
 
         # Adding the newly compiled file in the compiled files list.
         __BU_ARRAY__COMPILED_FILES_LIST+=("${__compiled_file_path}");
@@ -1260,7 +1280,17 @@ function CompileInSingleFile()
             # Adding the newly compiled stable file in the compiled stable files list.
             __BU_ARRAY__COMPILED_STABLE_FILES_LIST+=("${__compiled_stable_file_path}");
         fi
-    done; if [ -n "${____loop_error}" ] && [ "${____loop_error}" = 'error' ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1; fi
+    done;
+
+    # If an error occured in the above loop, the execution of the compiler terminates.
+    if [ -n "${____loop_error}" ] && [ "${____loop_error}" = 'error' ]; then
+        if [ -n "${__vMandatoryArgLang}" ]; then
+            PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1;
+
+        elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+            PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__MULTI_LANGUAGES_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1;
+        fi
+    fi
 
     # If the framework was compiled in a stable version.
     if [ -n "${__vArrayVal_compile_stable}" ]; then
