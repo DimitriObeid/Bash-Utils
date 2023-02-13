@@ -1317,10 +1317,15 @@ function CompileInSingleFile()
 
             __compiled_file_path="${__compiled_file_parent_dir}/${__compiled_file_name}";
 
-            ProcessSourceFiles || ____loop_error='error'; break;
+            ProcessSourceFiles || { ____loop_error='error'; break; };
         done
 
-        if [ -n "${____loop_error}" ]; then return 1; fi
+        # If an error occured in the above loop, the execution of the compiler terminates.
+        if [ -n "${____loop_error}" ]; then
+            PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1;
+
+            return 1;
+        fi
 
     # Else, if the '--lang-include=' value was passed as the mandatory option.
     elif [ -n "${__vMandatoryArgLangInclude}" ]; then
@@ -1366,19 +1371,15 @@ function CompileInSingleFile()
 
         __compiled_file_path="${__compiled_file_parent_dir}/${__compiled_file_name}";
 
-        ProcessSourceFiles;
+        ProcessSourceFiles || {
+            # If an error occured in the above function, the execution of the compiler terminates.
+            PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__MULTI_LANGUAGES_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL';
+
+            return 1;
+        };
     fi
 
 
-    # If an error occured in the above loop, the execution of the compiler terminates.
-    if [ -n "${____loop_error}" ] && [ "${____loop_error}" = 'error' ]; then
-        if [ -n "${__vMandatoryArgLang}" ]; then
-            PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__CUSTOM_LANGUAGE_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1;
-
-        elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-            PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__MULTI_LANGUAGES_COMPILATION_FAILED}" "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" 'FULL'; return 1;
-        fi
-    fi
 
     # If the framework was compiled in a stable version.
     if [ -n "${__vArrayVal_compile_stable}" ]; then
