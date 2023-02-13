@@ -409,28 +409,36 @@ if [ "\${0##*/}" == "\${BASH_SOURCE[0]##*/}" ]; then if [[ "\${LANG}" == de_* ]]
     echo -e "ACHTUNG !" >&2; echo >&2;
     echo -e "Dieses Shell-Skript (\${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
     echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
+
 elif [[ "\${LANG}" == es_* ]]; then
     echo -e "ATENCIÓN !" >&2; echo >&2;
     echo -e "Este script de shell (\${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
     echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
+
 elif [[ "\${LANG}" == fr_* ]]; then
     echo -e "ATTENTION !" >&2; echo >&2;
     echo -e "Ce script shell (\${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
+
 elif [[ "\${LANG}" == pt_* ]]; then
     echo -e "ATENÇÃO !" >&2; echo >&2;
     echo -e "Este script de shell (\${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
     echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
+
 elif [[ "\${LANG}" == ru_* ]]; then
     echo -e "ВНИМАНИЕ !" >&2; echo >&2;
     echo -e "Этот сценарий оболочки (\${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
     echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
+
 else
     echo -e "WARNING !" >&2; echo >&2;
     echo -e "This shell script (\${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
     echo -e "Use only this script by including it in your project script." >&2; echo >&2;
 fi; exit 1; fi
+
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+
 EOF
 
     # Cela écrasera le contenu actuel du ficher "${v_filename}" avec la concaténation du contenu du
@@ -924,7 +932,12 @@ function CompileInSingleFile()
 
         __compiled_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
 
-        if [ -n "${__vMandatoryArgLang}" ]; then __compiled_file_name="Bash-utils-${v_curr_locale}.sh"; elif [ -n "${__vMandatoryArgLangInclude}" ]; then __compiled_file_name="Bash-utils-full.sh"; fi
+        if [ -n "${__vMandatoryArgLang}" ]; then
+            __compiled_file_name="Bash-utils-${v_curr_locale}.sh";
+
+        elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+            __compiled_file_name="Bash-utils-full.sh";
+        fi
 
         __compiled_file_path="${__compiled_file_parent_dir}/${__compiled_file_name}";
 
@@ -968,7 +981,12 @@ function CompileInSingleFile()
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
 
-        if [ "${v_curr_locale,,}" != "en" ]; then
+        # Checking if the 'en' value is present in the array of languages if the '--lang-include=' option was passed.
+        if [ -n "${__vMandatoryArgLangInclude}" ]; then
+            [[ ${__language_array[*]} =~ en ]] || local ____no_english_included='true';
+        fi
+
+        if [[ (-n "${__vMandatoryArgLang}") && ("${v_curr_locale,,}" != "en") ]] || [[ (-n "${__vMandatoryArgLangInclude}") && (-n "${____no_english_included}") ]]; then
             PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
             echo "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN}"; echo;
@@ -1164,11 +1182,11 @@ function CompileInSingleFile()
         printf "${__BU_COMPILE__LOCALIZED_FILE__WIDTH}\n" "$(wc -L < "${__compiled_file_path}")";
         printf "${__BU_COMPILE__LOCALIZED_FILE__WORDS}\n" "$(wc -w < "${__compiled_file_path}")";
 
-        # Exiting the script's loop after the compilation of the mulit-language file.
-        if [ -n "${__vMandatoryArgLangInclude}" ]; then break; fi
+        # Exiting the script's loop after the compilation of the multi-language file.
+        if [ -n "${__vMandatoryArgLangInclude}" ] && [ -z "${__vArrayVal_compile_stable}" ]; then break; fi
 
         # Adding the newly compiled file in the compiled files list.
-        __BU_ARRAY__COMPILED_FILES_LIST+=("${__compiled_file_path}");
+        [ -n "${__vMandatoryArgLang}" ] && __BU_ARRAY__COMPILED_FILES_LIST+=("${__compiled_file_path}");
 
         if [ -n "${__vArrayVal_compile_stable}" ]; then
 
@@ -1184,7 +1202,12 @@ function CompileInSingleFile()
             fi
 
             # Assigning values to the "${__compiled_stable_file_path}" variables.
-            __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-${v_curr_locale}.sh";
+            if [ -n "${__vMandatoryArgLang}" ]; then
+                __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-${v_curr_locale}.sh";
+
+            elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+                __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-full.sh";
+            fi
 
             # --------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
@@ -1205,7 +1228,6 @@ function CompileInSingleFile()
 
             if ! cp --verbose "${__compiled_file_path}" "${__compiled_stable_file_path}" ; then
                 PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR}" "${__compiled_file_path}" "${__compiled_stable_file_parent_dir}")" 'FULL';
-                echo >&2;
 
                 echo "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1}" >&2;
                 echo >&2;
@@ -1253,7 +1275,7 @@ function CompileInSingleFile()
                 esac
 
                 # Adding the failed file into the array of failed files.
-                __BU_ARRAY__READ_ONLY_FAILED_FILES+=("${__compiled_stable_file_path}");
+                [ -n "${__vMandatoryArgLang}" ] && __BU_ARRAY__READ_ONLY_FAILED_FILES+=("${__compiled_stable_file_path}");
 
                 PrintWarningLine "$(printf "${__BU_COMPILE__COMPILED_STABLE_FILE_WAS_NOT_SET_IN_READ_ONLY_MODE}" "${__compiled_stable_file_path}")" 'LOWER';
             else
@@ -1263,8 +1285,11 @@ function CompileInSingleFile()
             PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU_COMPILE__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED}" "${__compiled_stable_file_path}")" 'FULL';
 
             # Adding the newly compiled stable file in the compiled stable files list.
-            __BU_ARRAY__COMPILED_STABLE_FILES_LIST+=("${__compiled_stable_file_path}");
+            [ -n "${__vMandatoryArgLang}" ] && __BU_ARRAY__COMPILED_STABLE_FILES_LIST+=("${__compiled_stable_file_path}");
         fi
+
+        # If the '--lang-include=' value was passed as mandatory argument, the execution of this script ends successfully.
+        if [ -n "${__vMandatoryArgLangInclude}" ]; then break; fi
     done;
 
     # If an error occured in the above loop, the execution of the compiler terminates.
