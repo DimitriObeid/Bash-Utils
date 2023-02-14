@@ -80,6 +80,10 @@ __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::va
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::array-checkings";
 
 # Checking if the variable is an array.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -93,6 +97,10 @@ function BU.Main.Checkings.IsArray()
 }
 
 # Checking if an array in empty.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsArrayEmpty()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -110,6 +118,10 @@ function BU.Main.Checkings.IsArrayEmpty()
 }
 
 # Checking if an array is not empty.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsArrayNotEmpty()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -134,6 +146,15 @@ function BU.Main.Checkings.IsArrayNotEmpty()
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::command-substitutions";
 
 # Checking if the value is a command substitution.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.IsAlphaNumChar()    -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsAlphaNumString()  -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsFloat()           -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsInt()             -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Checkings.IsCMD()
 {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS}";
@@ -149,6 +170,12 @@ function BU.Main.Checkings.IsCMD()
 }
 
 # Checking if the value is not a command substitution.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.IsCMD() -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsNotCMD()
 {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS}";
@@ -169,7 +196,11 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMA
 
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
-function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || return 1; return 0; }
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;}; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats :
 #   - YYYY-MM-DD
@@ -178,7 +209,11 @@ function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "
 #   - DD/MM/YYYY
 #   - YYYYMMDD
 #   - DDMMYYYY
-function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ $(date "+%d-%m-%Y" -d "${1}" > /dev/null) ]] || return 1; return 0; }
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ $(date "+%d-%m-%Y" -d "${1}" > /dev/null) ]] || { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;}; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # Checking if a given date is formatted in timestamp format, with separators, and in these formats.
 #   - YYYY-MM-DD hh:mm:ss
@@ -187,6 +222,14 @@ function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "
 #   - DD/MM/YYYY hh:mm:ss
 #   - YYYYMMDD hh:mm:ss
 #   - DDMMYYYY hh:mm:ss
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.IsDateYMD() -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()        -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()        -> Main -> Echo.lib
 function BU.Main.Checkings.IsDateYMD_HMS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
