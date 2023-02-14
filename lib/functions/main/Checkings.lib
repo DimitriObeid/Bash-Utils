@@ -276,6 +276,10 @@ function BU.Main.Checkings.IsDateYMD_HMS()
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::number-values";
 
 # Checking if a number is even.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsEven()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -289,6 +293,10 @@ function BU.Main.Checkings.IsEven()
 }
 
 # Checking if a number is uneven.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.isOdd()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -304,6 +312,10 @@ function BU.Main.Checkings.isOdd()
 alias BU.Main.Checkings.IsUneven='BU.Main.Checkings.isOdd';
 
 # Checking floating value.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -317,6 +329,10 @@ function BU.Main.Checkings.IsFloat()
 }
 
 # Checking negative only floating value.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsNegativeFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -330,6 +346,10 @@ function BU.Main.Checkings.IsNegativeFloat()
 }
 
 # Checking positive only floating value.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsPositiveFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -343,6 +363,10 @@ function BU.Main.Checkings.IsPositiveFloat()
 }
 
 # Checking integer value.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -356,6 +380,10 @@ function BU.Main.Checkings.IsInt()
 }
 
 # Checking negative only integer value.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsNegativeInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -369,6 +397,10 @@ function BU.Main.Checkings.IsNegativeInt()
 }
 
 # Checking positive only integer value.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsPositiveInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -389,6 +421,10 @@ function BU.Main.Checkings.IsPositiveInt()
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::characters-and-string-values";
 
 # Checking if the value is an alphabetic character (not any number allowed).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -401,7 +437,11 @@ function BU.Main.Checkings.IsAlphaChar()
 	fi
 }
 
-# Checking if the value is an alphabetic string (not any number allowed)
+# Checking if the value is an alphabetic string (not any number allowed).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -415,6 +455,10 @@ function BU.Main.Checkings.IsAlphaString()
 }
 
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -433,6 +477,10 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 }
 
 # Checking if the value is a character.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaNumChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -446,6 +494,10 @@ function BU.Main.Checkings.IsAlphaNumChar()
 }
 
 # Checking if the value is an alphanumeric string.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaNumString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -459,6 +511,10 @@ function BU.Main.Checkings.IsAlphaNumString()
 }
 
 # Checking if the value is an alphabetic string only (not less than two characters).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaNumStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -502,8 +558,9 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDEN
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
-# Required functions and files :
-#   - BU.Main.Errors.HandleErrors      --> From this file.
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.CheckRootEUID()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -524,6 +581,20 @@ alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}::basic-hardware-checkings";
 
 # Check if hard drive is full.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
+
+#   - BU.Main.Filesystem.IsPartitionFull()  -> Main -> Filesystem.lib
+
+#   - BU.Main.Status.ChangeSTAT_ERROR()     -> Main -> Status.lib
+
+#   - BU.ModuleInit.IsInScript()            -> Modules initializer script
+#   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
 function BU.Main.Checkings.CheckDiskUsedSpace()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -547,7 +618,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
     if [ "${__BU_MAIN_STAT_ECHO,,}" == 'false' ]; then
         local v_echoBackup="${__BU_MAIN_STAT_ECHO}";
 
-        # There is no need to call the associated function "BU.Main.Status.ChangeSTAT_ECHO", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the disk is full.
+        # There is no need to call the associated function "BU.Main.Status.ChangeSTAT_ECHO()", since no text have to be redirected to the log file afterwards, because the script has to definitely exit if the targeted partition of the hard disk is full.
         __BU_MAIN_STAT_ECHO="true";
     fi
 
@@ -678,6 +749,12 @@ __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkin
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}::directories-paths-checkings";
 
 # Checking for an existent directory path (for the "BU.Main.Errors.HandleErrors()" function mainly).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Path()    -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Checkings.CheckDirPathExists()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -703,6 +780,10 @@ function BU.Main.Checkings.CheckDirPathExists()
 }
 
 # Checking if a directory was successfully created.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Checkings.CheckDirPathWasCreated()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -729,6 +810,12 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
 __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}::files-paths-checkings";
 
 # Checking for an existent file path (for the "BU.Main.Errors.HandleErrors()" function mainly).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Path()    -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Checkings.CheckFilePathExists()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -756,6 +843,10 @@ function BU.Main.Checkings.CheckFilePathExists()
 }
 
 # Checking if a file was successfully created.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Checkings.CheckFilePathWasCreated()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -776,7 +867,11 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 
 # Checking for "${__BU_MAIN_PROJECT_LOG_FILE_PATH}".
 
-# Required functions and files :
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()   -> Modules initializer script
 function BU.Main.Checkings.CheckProjectLogPath()
 {
     # If the framework is still initializing when an error occurs.
