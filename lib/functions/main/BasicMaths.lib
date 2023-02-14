@@ -20,7 +20,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -84,7 +84,7 @@ __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="${_
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 function BU.Main.BasicMaths.BytesToHuman()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}" \
         "${__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS}";

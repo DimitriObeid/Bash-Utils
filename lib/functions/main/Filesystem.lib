@@ -21,7 +21,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -82,7 +82,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="${
 # Checking if the current partition is full.
 function BU.Main.Filesystem.IsPartitionFull()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}";
@@ -163,7 +163,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GE
 # Getting the file system path.
 function BU.Main.Filesystem.GetFSDevice()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -194,7 +194,7 @@ function BU.Main.Filesystem.GetFSDevice()
 # Getting the total size in bytes allocated to a given file system.
 function BU.Main.Filesystem.GetFSTotalSize()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -225,7 +225,7 @@ function BU.Main.Filesystem.GetFSTotalSize()
 # Getting the mounted partition of a given file system.
 function BU.Main.Filesystem.GetFSMountPoint()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -256,7 +256,7 @@ function BU.Main.Filesystem.GetFSMountPoint()
 # Getting the used size in bytes of a given file system.
 function BU.Main.Filesystem.GetFSUsedSizeBytes()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -303,7 +303,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 # Getting the percentage of the used space of a given file system.
 function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -351,7 +351,7 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 # Getting the available size in bytes of a given file system.
 function BU.Main.Filesystem.GetFSAvailableSize()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -382,7 +382,7 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 # Getting the type of the file system of a directory or a file.
 function BU.Main.Filesystem.GetFSType()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS}";
@@ -440,7 +440,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 #   - BU.Main.Errors.HandleErrors()     -> Headers.lib
 function BU.Main.Filesystem.Chown()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE}";
@@ -545,7 +545,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 #	- BU.Main.Errors.HandleErrors()		    -> Headers.lib
 function BU.Main.Filesystem.ChownRec()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}" \
         "${__BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE}";

@@ -24,7 +24,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -90,7 +90,7 @@ fi; exit 1; fi
 
 ## USEFUL FUNCTIONS
 
-# Use this function to have a better view about a bug location during a "bash -x" debug.
+# Use this function to have a better view about a bug location during a "$(bash -x)" debug.
 function DbgMsg()
 {
     #**** Parameters ****
@@ -1571,9 +1571,9 @@ function BU.ModuleInit.ListInstalledModules()
 
     if [ -d "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" ] && [ -d "${__BU_MODULE_INIT__MODULES_DIR}" ]; then
 
-																				# In case the "ls" command points towards a bad path because of a bad variable's value.
+																		                # In case the "$(ls)" command points towards a bad path because of a bad variable's value.
         ls -1 "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}"    > "${v_module_conf_f}"  || { echo >&2; printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" >&2; echo >&2; BU.ModuleInit.AskPrintLog >&2 || return 1; return 1; };
-        ls -1 "${__BU_MODULE_INIT__MODULES_DIR}"            > "${v_module_init_f}"  || { echo >&2; printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" >&2; echo >&2; BU.ModuleInit.AskPrintLog >&2 || return 1; return 1; };
+        ls -1 "${__BU_MODULE_INIT__MODULES_DIR}"                > "${v_module_init_f}"  || { echo >&2; printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" >&2; echo >&2; BU.ModuleInit.AskPrintLog >&2 || return 1; return 1; };
 
         if diff "${v_module_conf_f}" "${v_module_init_f}" > "${v_module_diff_f}"; then
             echo; echo "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST} :"; echo; sleep ".5";
@@ -3203,7 +3203,7 @@ function BU.ModuleInit.HandleErrors()
         fi
     fi
 
-    return 0;
+    return 1;
 }
 
 # -----------------------------------------------

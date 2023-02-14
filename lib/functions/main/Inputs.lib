@@ -22,7 +22,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -103,7 +103,7 @@ __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__D
 # "BU.Main.Directories.TriggerRootDirWarning" function.
 function BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}" \
         "${__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE}";
@@ -157,7 +157,7 @@ __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__E
 # "BU.Main.Errors.HandleErrors" function, with the "${__BU_MAIN_STAT_ECHO}" variable set to "false".
 function BU.Main.Inputs.Read_Errors.HandleErrors()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}" \
         "${__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE}";
@@ -218,7 +218,7 @@ __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS_
 
 function BU.Main.Inputs.Sanitize()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}" \
         "${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION}";

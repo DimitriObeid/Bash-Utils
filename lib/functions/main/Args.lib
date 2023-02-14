@@ -22,7 +22,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -90,10 +90,26 @@ __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FU
 # shellcheck disable=SC2034
 __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::quick-message-printing";
 
-# Print a message without the need to write the whole "BU.Main.Errors.HandleErrors()" function's second argument, and according to the test option which failed :
+# Print a message without the need to write the whole "BU.Main.Errors.HandleErrors()" function's second argument, and according to the test option which failed.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.Argc()               -> Main -> Args.lib
+#   - BU.Main.Args.GetFileName()        -> Main -> Args.lib
+#   - BU.Main.Args.GetFunctionName()    -> Main -> Args.lib
+#   - BU.Main.Args.GetLineNumber()      -> Main -> Args.lib
+
+#   - BU.Main.Decho.Decho.Function()    -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Var()         -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
+
+#   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
 function BU.Main.Args.PrintBadOption()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING}";
@@ -366,9 +382,23 @@ function BU.Main.Args.PrintBadOption()
 __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::argument-presence-checking";
 
 # Checking the values stored in the argument array of a function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Function              -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                    -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()                    -> Main -> Echo.lib
+
+#   - BU.Main.Status.ChangeSTAT_ECHO()          -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.CheckIsDebugging()          -> Modules initializer script
 function BU.Main.Args.GetFuncArgsArrayValues()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -378,7 +408,7 @@ function BU.Main.Args.GetFuncArgsArrayValues()
     local p_decorate=${2:-NULL};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Special text processing for the "Decho()" function's "BU.Main.Args__Decho.Decho()" sub-fonction.
     shift 2;
 
-    local pa_argsArray=("${@}");      # ARG TYPE : Array      - | DEFAULT VAL : NULL    - Array of values to check and display.
+    local pa_argsArray=("${@}");    # ARG TYPE : Array      - OPTIONAL | DEFAULT VAL : NULL     - DESC : Array of values to check and display.
 
     #**** Variables ****
     local v_index=0;                # VAR TYPE : Int        - DESC : Initial value of the "for" loop's iterations counter.
@@ -420,9 +450,15 @@ function BU.Main.Args.GetFuncArgsArrayValues()
 }
 
 # Checking a file's name passed as argument.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Path()    -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Args.GetFileName()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -443,9 +479,15 @@ function BU.Main.Args.GetFileName()
 }
 
 # Checking a function's name passed argument.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Function()    -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Args.GetFunctionName()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -466,9 +508,15 @@ function BU.Main.Args.GetFunctionName()
 }
 
 # Checking a file's name passed as argument.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Highlight()   -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Args.GetLineNumber()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -489,9 +537,18 @@ function BU.Main.Args.GetLineNumber()
 }
 
 # Getting the three informations simultaneously.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.PrintFFL()               -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 function BU.Main.Args.GetFFL()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -586,9 +643,17 @@ function BU.Main.Args.GetFFL()
 # Printing the file, function and line.
 
 # This function is called in the "BU.Main.Args.Argc()" and "BU.Main.Echo.__EchoOutput()" functions, for example.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetFileName()        -> Main -> Args.lib
+#   - BU.Main.Args.GetFunctionName()    -> Main -> Args.lib
+#   - BU.Main.Args.GetLineNumber()      -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Args.PrintFFL()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -612,9 +677,17 @@ function BU.Main.Args.PrintFFL()
 # Printing the file, function and line.
 
 # Please call this function after the advice given as second argument for the "BU.Main.Args.PrintBadOption()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetFileName()        -> Main -> Args.lib
+#   - BU.Main.Args.GetFunctionName()    -> Main -> Args.lib
+#   - BU.Main.Args.GetLineNumber()      -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Args.PrintFFLErrorOccured()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -656,9 +729,21 @@ function BU.Main.Args.PrintFFLErrorOccured()
 # Checking if any mandatory arguments are provided for any function.
 
 # This function is called in the "BU.Main.Args.PrintBadOption()" function, DO NOT call the "BU.Main.Args.PrintBadOption()" function here.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsPositiveInt()     -> Main -> Checkings.lib
+
+#   - BU.Main.Decho.Decho.Function()        -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Highlight()       -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Var()             -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args.Argc()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -759,10 +844,10 @@ function BU.Main.Args.Argc()
 }
 
 # Checking if any mandatory arguments are provided for any function AND the file, function and line number
-# informations simultaneously, by calling both the "BU.Main.Args.Argc" and "BU.Main.Args.GetFFL()" functions.
+# informations simultaneously, by calling both the "BU.Main.Args.Argc(" and "BU.Main.Args.GetFFL()" functions.
 function BU.Main.Args.GetArgc-FFL()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
@@ -793,9 +878,17 @@ function BU.Main.Args.GetArgc-FFL()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Checkings.CheckProjectRelatedFile()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
@@ -848,10 +941,18 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 ## CATEGORY : "GET COMMAND OUTPUTS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
-# "BU.Main.CMDSGetCommandPath()" function.
+# "BU.Main.CMDS.GetCommandPath()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__CMDS.GetCommandPath()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -885,9 +986,17 @@ function BU.Main.Args__CMDS.GetCommandPath()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Decho.Decho()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()    -> Main -> Args.lib
+
+#   - BU.Main.Args.IsPositiveInt()  -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Args__Decho.Decho()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
 	#**** Parameters ****
@@ -932,9 +1041,17 @@ function BU.Main.Args__Decho.Decho()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.ProcessingDir()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.ProcessingDir()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -976,9 +1093,17 @@ function BU.Main.Args__Directories.ProcessingDir()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Directories.OverwriteDir()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.OverwriteDir()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1009,9 +1134,17 @@ function BU.Main.Args__Directories.OverwriteDir()
 }
 
 # "BU.Main.Directories.Make()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.Make()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1050,9 +1183,17 @@ function BU.Main.Args__Directories.Make()
 }
 
 # "BU.Main.Directories.MakePath()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.MakePath()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1088,9 +1229,17 @@ function BU.Main.Args__Directories.MakePath()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Directories.GetDirectoryName()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.GetDirectoryName()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1113,9 +1262,17 @@ function BU.Main.Args__Directories.GetDirectoryName()
 }
 
 # "BU.Main.Directories.GetDirectoryPath()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.GetDirectoryPath()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1138,9 +1295,17 @@ function BU.Main.Args__Directories.GetDirectoryPath()
 }
 
 # "BU.Main.Directories.GetParentDirectoryName()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.GetParentDirectoryName()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1165,9 +1330,17 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
 }
 
 # "BU.Main.Directories.GetParentDirectoryPath()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Directories.GetParentDirectoryPath()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1222,9 +1395,17 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Files.ProcessingFile()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.ProcessingFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1247,9 +1428,17 @@ function BU.Main.Args__Files.ProcessingFile()
 }
 
 # "BU.Main.Files.OverwriteFile()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.OverwriteFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #***** Parameters ****
@@ -1288,9 +1477,19 @@ function BU.Main.Args__Files.OverwriteFile()
 }
 
 # "BU.Main.Files.Make()" function's arguments.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 function BU.Main.Args__Files.Make()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1337,9 +1536,17 @@ function BU.Main.Args__Files.Make()
 }
 
 # "BU.Main.Files.MakePath()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.MakePath()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1368,9 +1575,17 @@ function BU.Main.Args__Files.MakePath()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.FilesSetLastAccess()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.SetLastAccess()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1411,9 +1626,17 @@ function BU.Main.Args__Files.SetLastAccess()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Files.CompressCMD()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.CompressCMD()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1451,9 +1674,17 @@ function BU.Main.Args__Files.CompressCMD()
 }
 
 # "BU.Main.Files.CompressFormat()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.CompressFormat()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1484,9 +1715,17 @@ function BU.Main.Args__Files.CompressFormat()
 }
 
 # "BU.Main.Files.SearchInArchive()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.SearchInArchive()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1517,9 +1756,17 @@ function BU.Main.Args__Files.SearchInArchive()
 }
 
 # "BU.Main.Files.UncompressCMD()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.UncompressCMD()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1557,9 +1804,17 @@ function BU.Main.Args__Files.UncompressCMD()
 }
 
 # "BU.Main.Files.UncompressFormat()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Files.UncompressFormat()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1601,9 +1856,17 @@ function BU.Main.Args__Files.UncompressFormat()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.IsPartitionFull()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Filesystem.IsPartitionFull()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1637,9 +1900,17 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.GetFS<...>()" functions.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Filesystem.GetFSInfos()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1673,9 +1944,17 @@ function BU.Main.Args__Filesystem.GetFSInfos()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.Chown()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Filesystem.Chown()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1723,9 +2002,17 @@ function BU.Main.Args__Filesystem.Chown()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Filesystem.ChownRec()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Filesystem.ChownRec()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1778,9 +2065,17 @@ function BU.Main.Args__Filesystem.ChownRec()
 ## CATEGORY :
 
 # "BU.Main.Locale.PrintLanguageName.Optimize()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1846,9 +2141,17 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 #	- BU.Main.Text.GetFirstFieldBeforeDelim()
 #	- BU.Main.Text.GetLastFieldAfterDelim()
 #   - BU.Main.Text.ReverseStringWordsOrder()
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1883,9 +2186,17 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Text.CutSubStringAfterNthDelim()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.CutSubStringAfterNthDelim()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1922,9 +2233,19 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
 }
 
 # "BU.Main.Text.CutSubStringBeforeNthDelim()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsPositiveInt()     -> main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1963,7 +2284,7 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
 # "BU.Main.Text.DeleteLettersInString()" function
 function BU.Main.Args__Text.DeleteLettersInString()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -1994,7 +2315,7 @@ function BU.Main.Args__Text.DeleteLettersInString()
 # "BU.Main.Text.GetCharacterOccurences()" function.
 function BU.Main.Args__Text.GetCharacterOccurences()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -2032,7 +2353,7 @@ function BU.Main.Args__Text.GetCharacterOccurences()
 # "BU.Main.Text.GetFirstCharacter()" and "BU.Main.Text.GetLastCharacter()" functions.
 function BU.Main.Args__Text.GetFirstLastCharacter()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -2057,7 +2378,7 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
 # "BU.Main.Args__Text.GetSubStringAfterDelim()" function.
 function BU.Main.Args__Text.GetSubStringAfterDelim()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -2096,7 +2417,7 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
 # "BU.Main.Text.GetSubStringBeforeDelim()" function.
 function BU.Main.Args__Text.GetSubStringBeforeDelim()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -2135,7 +2456,7 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
 # "BU.Main.Text.GetSubStringOccurences()" function.
 function BU.Main.Args__Text.GetSubStringOccurences()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****
@@ -2172,7 +2493,7 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 # "BU.Main.Text.StrToWordArray()" function.
 function BU.Main.Args__Text.StrToWordArray()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
 
     #**** Parameters ****

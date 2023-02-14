@@ -21,7 +21,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -82,7 +82,7 @@ __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALU
 # Easy writing text function.
 function BU.Main.Status.ConfEcho()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES}";
@@ -163,7 +163,7 @@ __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="${
 # Check the "${__BU_MAIN_STAT_DECHO}" status variable's value.
 function BU.Main.Status.CheckSTAT_DECHO()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -189,7 +189,7 @@ function BU.Main.Status.CheckSTAT_DECHO()
 # Check the "${__BU_MAIN_STAT_ECHO}" status variable's value.
 function BU.Main.Status.CheckSTAT_ECHO()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -215,7 +215,7 @@ function BU.Main.Status.CheckSTAT_ECHO()
 # Checking the "${__BU_MAIN_STAT_ERROR}" status variable's value.
 function BU.Main.Status.CheckSTAT_ERROR()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -241,7 +241,7 @@ function BU.Main.Status.CheckSTAT_ERROR()
 # Checking the "${__BU_MAIN_STAT_INITIALIZING}" status variable's value.
 function BU.Main.Status.CheckSTAT_INITIALIZING()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -267,7 +267,7 @@ function BU.Main.Status.CheckSTAT_INITIALIZING()
 # Checking the "${__BU_MAIN_STAT_LOG}" status variable's value.
 function BU.Main.Status.CheckSTAT_LOG()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -296,7 +296,7 @@ function BU.Main.Status.CheckSTAT_LOG()
 # Checking the "${__BU_MAIN_STAT_LOG_REDIRECT}" status variable's value.
 function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -322,7 +322,7 @@ function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
 # Checking the "${__BU_MAIN_STAT_OPERATE_ROOT}" status variable's value.
 function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -348,7 +348,7 @@ function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
 # Checking the "${__BU_MAIN_STAT_TIME_HEADER}" status variable's value.
 function BU.Main.Status.CheckSTAT_TIME_HEADER()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -375,7 +375,7 @@ function BU.Main.Status.CheckSTAT_TIME_HEADER()
 # Checking the "${__BU_MAIN_STAT_TIME_NEWLINE}" status variable's value.
 function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -402,7 +402,7 @@ function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
 # Checking the "${__BU_MAIN_STAT_TIME_TXT}" status variable's value.
 function BU.Main.Status.CheckSTAT_TIME_TXT()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -429,7 +429,7 @@ function BU.Main.Status.CheckSTAT_TIME_TXT()
 # Checking the "${__BU_MAIN_STAT_TXT_FMT}" status variable's value.
 function BU.Main.Status.CheckSTAT_TXT_FMT()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -473,7 +473,7 @@ function BU.Main.Status.CheckSTAT_USER_OS()
 # Checking all the project's status variables values if multiple values had been modified.
 function BU.Main.Status.CheckProjectStatusVars()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
@@ -521,7 +521,7 @@ function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "main" "$(basena
 ## VERY IMPORTANT : DO NOT CALL ANY "BU.Main.Decho.Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
 function BU.Main.Status.ChangeSTAT_ECHO()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
@@ -598,7 +598,7 @@ function BU.Main.Status.ChangeSTAT_ECHO()
 # Changing the "${__BU_MAIN_STAT_ERROR}" status variable's value.
 function BU.Main.Status.ChangeSTAT_ERROR()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
 
     __BU_MAIN_STAT_ERROR="${1:-$'\0'}";

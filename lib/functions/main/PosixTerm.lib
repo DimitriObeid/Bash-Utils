@@ -22,7 +22,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -83,7 +83,7 @@ __BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLA
 # Display a countdown while a task is ongoing.
 function BU.Main.PosixTerm.DisplayCountdown()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}" \
         "${__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG}";
@@ -94,7 +94,7 @@ function BU.Main.PosixTerm.DisplayCountdown()
 # Display a progress bar while a task is ongoing.
 function BU.Main.PosixTerm.DisplayProgressBar()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}" \
         "${__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG}";
@@ -105,7 +105,7 @@ function BU.Main.PosixTerm.DisplayProgressBar()
 # Display a spinner while a task is ongoing.
 function BU.Main.PosixTerm.DisplaySpinner()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}" \
         "${__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG}";

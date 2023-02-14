@@ -21,7 +21,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -82,7 +82,7 @@ __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WR
 # Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 function BU.Main.Decho.__Decho()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
         "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS}";
@@ -100,12 +100,12 @@ function BU.Main.Decho.__Decho()
 
 # Text's inside decoration/formatting procssing (complete version).
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.CheckDecho
 #   -
 function BU.Main.Decho.Decho()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
         "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS}";

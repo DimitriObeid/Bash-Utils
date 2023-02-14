@@ -21,7 +21,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -168,7 +168,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 	usr="$(echo -n "$([ "${p_disable_fromUserLang,,}" == 'false' ] && printf "%s, " "${tmp}" || printf '')")";
 
-	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" 'Argument.
+	# Adaptation of the layout of the language's name according to the value of the "${p_dispOrder}" parameter.
 	if   	[[ "${p_dispOrder,,}" == c* ]]; then
 		  if [ "${p_dispOrder,,}" == 'cod,eng,ori,usr' ]; then output="${cod}${eng}${ori}${usr}"; valid='true';
 		elif [ "${p_dispOrder,,}" == 'cod,eng,usr,ori' ]; then output="${cod}${eng}${usr}${ori}"; valid='true';

@@ -22,7 +22,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -305,7 +305,7 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="${__
 # Checking the current operating system, by using the functions declared above.
 function BU.Main.OS.GetCurrentOS()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
 
     #**** Code ****
@@ -351,7 +351,7 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="${__BU_MAIN_OS_
 # Checking the name of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistro()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS}";
 
     #**** Parameters ****
@@ -381,7 +381,7 @@ function BU.Main.OS.CheckLinuxDistro()
 # Checking the version of the currently used Linux distribution.
 function BU.Main.OS.CheckLinuxDistroVersion()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS}";
 
     #**** Parameters ****
@@ -744,7 +744,7 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LI
 # Checking the version of the currently used OS X operating system.
 function BU.Main.OS.CheckOSXVersion()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS}";
 
 	#**** Parameters ****

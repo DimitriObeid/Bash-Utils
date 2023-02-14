@@ -19,7 +19,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -78,9 +78,18 @@ __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS="files::files-proc
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::files-processing-functions";
 
 # This function only repeats some parts of the following function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+#   - BU.Main.Echo.Error()          -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()            -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()        -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()        -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()        -> Main -> Echo.lib
 function BU.Main.Files.__ProcessingFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS}";
@@ -113,12 +122,25 @@ function BU.Main.Files.__ProcessingFile()
 
 # Separate processing steps displays from the rest of the main script between two horizontal lines.
 
-# Featured functions and files from the "functions" folder :
-#   - BU.Main.Headers.DrawLine      -> Headers.lib
-#   - BU.Main.Errors.HandleErrors  -> Headers.lib
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.ProcessingFile()  -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                    -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()                -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()         -> Main -> Headers.lib
+
+#   - BU.Main.Files.__ProcessingFiles()     -> Main -> Files.lib
+#   - BU.Main.Files.Make()                  -> Main -> Files.lib
+#   - BU.Main.Files.OverwriteFile()         -> Main -> Files.lib
+
+#   - BU.Main.Headers.DrawLine()            -> Main -> Headers.lib
 function BU.Main.Files.ProcessingFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS}";
@@ -149,7 +171,7 @@ function BU.Main.Files.ProcessingFile()
                 BU.Main.Files.__ProcessingFile 'E' "${p_name}" "${p_char}";
             fi
             ;;
-        'OverwriteFile')
+        'BU.Main.Files.OverwriteFile')
             if BU.Main.Files.OverwriteFile "${pa_arr[@]}"; then
                 BU.Main.Files.__ProcessingFile 'S' "${p_name}" "${p_char}";
             else
@@ -157,6 +179,8 @@ function BU.Main.Files.ProcessingFile()
             fi
             ;;
     esac
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -168,14 +192,22 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_
 
 # Overwriting a file
 
-# Featured functions and files from the "functions" folder :
-#	- BU.Main.Echo.Error()			-> Main -> Echo.lib
-#	- BU.Main.Echo.Newstep()		-> Main -> Echo.lib
-#	- BU.Main.Echo.Success()		-> Main -> Echo.lib
-#	- BU.Main.Echo.Newline()		-> Main -> Echo.lib
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.OverwriteFile()           -> Main -> Args.lib
+
+#   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#	- BU.Main.Echo.Error()			                -> Main -> Echo.lib
+#	- BU.Main.Echo.Newstep()		                -> Main -> Echo.lib
+#	- BU.Main.Echo.Newline()		                -> Main -> Echo.lib
+#	- BU.Main.Echo.Success()		                -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 function BU.Main.Files.OverwriteFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
@@ -210,21 +242,31 @@ function BU.Main.Files.OverwriteFile()
 
 # File creation function, with the parent folder's path and the file's name as separated arguments.
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.Make()                    -> Main -> Args.lib
+
+#   - BU.Main.Checkings.CheckDiskUsedSpace()        -> Main -> Checkings.lib
 #   - BU.Main.Checkings.CheckFilePathWasCreated()   -> Main -> Checkings.lib
-#   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib
-#   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
-#   - BU.Main.Files.OverwriteFile()                 -> Main -> Files.lib (this file)
-#   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
 #   - BU.Main.Decho.Decho.Path()                    -> Main -> Decho.lib
+
+#   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 #   - BU.Main.Echo.Error()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.Newstep()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                        -> Main -> Echo.lib
 #   - BU.Main.Echo.Success()                        -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
+
+#   - BU.Main.Files.OverwriteFile()                 -> Main -> Files.lib (this file)
+
+#   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 function BU.Main.Files.Make()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
@@ -251,13 +293,13 @@ function BU.Main.Files.Make()
     # Checking second if the script is operating at the root directory.
     BU.Main.Directories.TriggerRootDirWarning "${v_path}" || return 1;
 
-	# If the file to create doesn't exists, ths script creates it with the help of the "touch" command.
+	# If the file to create doesn't exists, ths script creates it with the help of the "$(touch)" command.
 	if [ ! -f "${v_path}" ]; then
         BU.Main.Echo.Newstep "Creating the $(BU.Main.Decho.Decho.Path "${p_name}") file in the parent folder $(BU.Main.Decho.Decho.Path "${p_parent}/").";
 
 		touch "${v_path}"; BU.Main.Checkings.CheckFilePathWasCreated "${v_path}";
 
-		# Testing if the file has been created by checking the return code of the "BU.Main.Checkings.CheckFilePathWasCreated" function via the "BU.Main.Errors.HandleErrors" function.
+		# Testing if the file has been created by checking the return code of the "BU.Main.Checkings.CheckFilePathWasCreated()" function via the "BU.Main.Errors.HandleErrors()" function.
         # An error may come from the fact that the user did not run the script in superuser mode, a script that tried to create a file in a folder
 		# where the user is not allowed to create a file without superuser privileges.
 
@@ -287,9 +329,19 @@ function BU.Main.Files.Make()
 }
 
 # File creation function, with the parent folder's path and the file's name as unique argument.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.MakePath()            -> Main -> Args.lib
+
+#   - BU.Main.Checkings.CheckDiskUsedSpace()    -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Files.Make()                      -> Main -> Files.lib
 function BU.Main.Files.MakePath()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
@@ -310,16 +362,20 @@ function BU.Main.Files.MakePath()
 
     if ! BU.Main.Args__Files.MakePath "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    BU.Main.Files.Make "${v_parent}" "${v_target}" || return 1;
+    BU.Main.Files.Make "${v_parent}" "${v_target}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
-    return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive.
 # This method is safer for SSD drives, faster for HDD drives, and no permissions are needed.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.MakeFileInMemory()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
@@ -334,9 +390,36 @@ function BU.Main.Files.MakeFileInMemory()
 }
 
 # Creating the project's log file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.CheckDiskUsedSpace()        -> Main -> Checkings.lib
+#   - BU.Main.Checkings.CheckProjectRelatedFile()   -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Error()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                            -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()                        -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                        -> Main -> Echo.lib
+
+#   - BU.Main.Headers.Header.Blue()                 -> Main -> Headers.lib
+
+#   - BU.Main.OS.IsAndroidTermux()                  -> Main -> OS.lib
+#   - BU.Main.OS.IsFreeBSD()                        -> Main -> OS.lib
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsNetBSD()                         -> Main -> OS.lib
+#   - BU.Main.OS.IsOpenBSD()                        -> Main -> OS.lib
+#   - BU.Main.OS.IsOSX()                            -> Main -> OS.lib
+
+#   - BU.Main.Status.ChangeSTAT_DECHO()             -> Main -> Status.lib
+#   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
+#   - BU.Main.Status.CheckProjectLogStatus()        -> Main -> Status.lib
 function BU.Main.Files.CreateProjectLogFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
@@ -394,6 +477,16 @@ function BU.Main.Files.CreateProjectLogFile()
         BU.Main.Echo.Newstep "Operating system general informations :";
     }
 
+    # Getting operating system's informations (Haiku OS) :
+    BU.Main.OS.IsHaiku && {
+        # Getting operating system pretty name.
+        BU.Main.Echo.Newstep "Operating system pretty name : Haiku OS";
+        BU.Main.Echo.Newline;
+
+        # Gathering OS informations.
+        BU.Main.Echo.Newstep "Operating system general informations :";
+    }
+
     # Getting operating system's informations (Linux platforms or Android without the Termux terminal emulator) :
     BU.Main.OS.IsLinux && {
         if [ -f "/etc/os-release" ]; then
@@ -416,18 +509,8 @@ function BU.Main.Files.CreateProjectLogFile()
         BU.Main.Echo.Newline;
     }
 
-    # Getting operating system's informations (Haiku OS) :
-    BU.Main.OS.IsHaiku && {
-        # Getting operating system pretty name.
-        BU.Main.Echo.Newstep "Operating system pretty name : Haiku OS";
-        BU.Main.Echo.Newline;
-
-        # Gathering OS informations.
-        BU.Main.Echo.Newstep "Operating system general informations :";
-    }
-
-    # Getting operating system's informations (OpenBSD) :
-    BU.Main.OS.IsOpenBSD && {
+    # Getting operating system's informations (NetBSD) :
+    BU.Main.OS.IsNetBSD && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : ";
 
@@ -435,8 +518,8 @@ function BU.Main.Files.CreateProjectLogFile()
         BU.Main.Echo.Newstep "Operating system general informations :";
     }
 
-    # Getting operating system's informations (NetBSD) :
-    BU.Main.OS.IsNetBSD && {
+    # Getting operating system's informations (OpenBSD) :
+    BU.Main.OS.IsOpenBSD && {
         # Getting operating system pretty name.
         BU.Main.Echo.Newstep "Operating system pretty name : ";
 
@@ -464,7 +547,7 @@ function BU.Main.Files.CreateProjectLogFile()
 
     BU.Main.Echo.Success "Successfully got the user's system's informations.";
 
-    # Purging the "${__BU_MODULE_INIT_MSG_ARRAY}" variable from the logged messages, after writing its content in the project's log file, in order to free memory.
+    # Purging the "${__BU_MODULE_INIT_MSG_ARRAY}" variable from the logged messages, after writing its content in the project's log file, in order to free up the computer's memory.
     __BU_MODULE_INIT_MSG_ARRAY=('');
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
@@ -478,9 +561,16 @@ function BU.Main.Files.CreateProjectLogFile()
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::file-deletion-functions";
 
 # File deletion function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.DeleteFile()  -> Main -> Args.lib
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 function BU.Main.Files.DeleteFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS}";
@@ -494,9 +584,9 @@ function BU.Main.Files.DeleteFile()
 
     rm "$(if [ "${p_security,,}" == 'yes' ]; then echo '-i'; fi)" "${p_path}";
 
-    BU.Main.Errors.HandleErrors "${?}" "" "" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+    BU.Main.Errors.HandleErrors "${?}" "" "" "${p_path}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
-    return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
 # -----------------------------------------------
@@ -507,9 +597,13 @@ function BU.Main.Files.DeleteFile()
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::checking-file-informations";
 
 # Checking if a file is in read-only mode.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsReadOnly()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -526,9 +620,13 @@ function BU.Main.Files.IsReadOnly()
 }
 
 # Checking if a file is readable AND writable.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsRW()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -545,9 +643,13 @@ function BU.Main.Files.IsRW()
 }
 
 # Checking if a file is readable, writable and executable.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsRWX()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -564,9 +666,13 @@ function BU.Main.Files.IsRWX()
 }
 
 # Checking if a file is in readable AND executable.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsRX()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -583,9 +689,13 @@ function BU.Main.Files.IsRX()
 }
 
 # Checking if a file is writable only.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsWriteOnly()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -602,9 +712,13 @@ function BU.Main.Files.IsWriteOnly()
 }
 
 # Checking if a file is writable AND executable.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsWX()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -621,9 +735,13 @@ function BU.Main.Files.IsWX()
 }
 
 # Checking if a file is in executable only.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Files.IsExecutableOnly()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
@@ -647,9 +765,19 @@ function BU.Main.Files.IsExecutableOnly()
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::getting-file-informations";
 
 # Getting the size of a file in bytes.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.BasicMaths.BytesToHuman() -> Main -> BasicMaths.lib
+
+#   - BU.Main.Checkings.IsInt()         -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
 function BU.Main.Files.GetByteSize()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -685,10 +813,16 @@ function BU.Main.Files.GetByteSize()
 
 # Getting the file's creation date.
 
-# Please note, some file systems don't store the file's creation date. In this case, the "stat" command will return '0'.
+# PLEASE NOTE : Some file systems don't store the file's creation date. In this case, the "stat" command will return '0'.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetCreationDate()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -711,9 +845,15 @@ function BU.Main.Files.GetCreationDate()
 }
 
 # Getting the total number of characters in a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetCharactersNumber()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -728,9 +868,16 @@ function BU.Main.Files.GetCharactersNumber()
 }
 
 # Getting the target file's extension.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                -> Main -> Echo.lib
+
+#   - BU.Main.Text.CutLastFieldAfterDelim() -> Main -> Text.lib
 function BU.Main.Files.GetExtension()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -745,9 +892,15 @@ function BU.Main.Files.GetExtension()
 }
 
 # Getting the last file's access date.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetLastAccess()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -762,9 +915,15 @@ function BU.Main.Files.GetLastAccess()
 }
 
 # Getting the last file's modification date.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetLastModification()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -779,9 +938,14 @@ function BU.Main.Files.GetLastModification()
 }
 
 # Getting the target file's mime type.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetMIMEType()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -796,9 +960,15 @@ function BU.Main.Files.GetMIMEType()
 }
 
 # Getting the total number of lines in a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetLinesNumber()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -813,9 +983,15 @@ function BU.Main.Files.GetLinesNumber()
 }
 
 # Getting the max line length in a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetMaxLineLength()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -830,9 +1006,15 @@ function BU.Main.Files.GetMaxLineLength()
 }
 
 # Getting the owner of a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetOwnerName()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -847,9 +1029,15 @@ function BU.Main.Files.GetOwnerName()
 }
 
 # Getting the group of the owner of a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetOwnerGroup()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -864,9 +1052,15 @@ function BU.Main.Files.GetOwnerGroup()
 }
 
 # Getting the total number of characters in a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Files.GetWordsNumber()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
@@ -888,9 +1082,15 @@ function BU.Main.Files.GetWordsNumber()
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::setting-file-informations";
 
 # Setting a fake last access date to a file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__FilesSetFileLastAccess()    -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 function BU.Main.File.SetFileLastAccess()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS}";
@@ -913,9 +1113,18 @@ function BU.Main.File.SetFileLastAccess()
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::file-sourcing";
 
 # Sourcing dependencies files.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()        -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()        -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()        -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
 function BU.Main.Files.SourceFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING}";
@@ -946,7 +1155,7 @@ function BU.Main.Files.SourceFile()
 
         BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
 
-		return "${C}";
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
 }
 
@@ -958,9 +1167,13 @@ function BU.Main.Files.SourceFile()
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::text-file-parsing";
 
 # Getting a specific line from a text file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.GetLineFromTextFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING}";
@@ -1006,9 +1219,18 @@ __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="files::archive
 __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}::(un)compression-functions";
 
 # Adding files or folders into an archive.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__FilesCompress()     -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()     -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsArrayEmpty()  -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Files.AddToArchive()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
@@ -1048,10 +1270,14 @@ function BU.Main.Files.AddToArchive()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Compressing archives according to the compression command
+# Compressing archives according to the compression command.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.CompressCMD()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
@@ -1073,11 +1299,17 @@ function BU.Main.Files.CompressCMD()
 
 # Compressing archives according to the used compression method.
 
-# Featured functions and files from the "functions" folder :
-#   -
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args__Files.CompressFormat()  -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsArrayEmpty()  -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Files.CompressFormat()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
@@ -1085,6 +1317,7 @@ function BU.Main.Files.CompressFormat()
     #**** Parameters ****
     local p_cmd=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
     local p_arch=${3:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Archive's name.
+
     shift 2;
 
     local p_paths=("${@}");     # ARG TYPE : Array      - REQUIRED | DEFAULT VAL : NULL     - DESC : Paths to the files / folders to archivate.
@@ -1155,9 +1388,17 @@ function BU.Main.Files.CompressFormat()
 }
 
 # Deleting a file or a folder stored in an archive.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.PrintBadOption()     -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsArrayEmpty()  -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Files.DeleteInArchive()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
@@ -1183,10 +1424,11 @@ function BU.Main.Files.DeleteInArchive()
 # Searching for a file or a folder inside an archive.
 function BU.Main.Files.SearchInArchive()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
+#   - BU.Main.Checkings.IsArrayEmpty()  -> Main -> Checkings.lib
 
     #**** Parameters ****
     local p_arch=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - Path to the target archive.
@@ -1199,13 +1441,22 @@ function BU.Main.Files.SearchInArchive()
 
 # Uncompressing archives according to the used compression method AND the (un)compression command's name.
 
-# Featured functions and files from the "functions" folder :
-#   - BU.Main.Errors.HandleErrors()     -> Errors.lib
-#   - BU.Main.Echo.Success()            -> Echo.lib
-#   - BU.Main.Echo.Newline()            -> Echo.lib
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.UncompressCMD()   -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandPath()         -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()                -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
+
+#   - BU.Main.Files.DeleteFile()            -> Main -> Files.lib
 function BU.Main.Files.UncompressCMD()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
@@ -1222,32 +1473,32 @@ function BU.Main.Files.UncompressCMD()
     # EVEN IF THIS PARAMETER IS OPTIONAL, ANY OTHER FOLLOWING PARAMETERS ARE MANDATORY, SO USE AN EMPTY STRING BETWEEN QUOTES WHEN YOU CALL THE CURRENT FUNCTION !!!!!
     if ! BU.Main.Args__Files.UncompressCMD "${p_cmd}" "${p_arch}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
-    # If the user wishes to use the "7z" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
-    if      [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == '7z' ) && "$(BU.Main.CMDSGetCommandPath '7z')" ]]; then
+    # If the user wishes to use the "$(7z)" command in order to uncompress one of these supported formats : 7z, LZMA2, XZ, ZIP, Zip64, CAB, RAR (if the non-free p7zip-rar package is installed), ARJ, GZIP, BZIP2, TAR, CPIO, RPM, ISO.
+    if      [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == '7z' ) && "$(BU.Main.CMDS.GetCommandPath '7z')" ]]; then
             7z x "" "" "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the user wishes to decode a BinHexed file (Apple's BinHex format)
-    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'hexbin' ) && "$(BU.Main.Files.GetExtension ".hqx")" && "$(BU.Main.CMDSGetCommandPath 'hexbin')" ]]; then
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'hexbin' ) && "$(BU.Main.Files.GetExtension ".hqx")" && "$(BU.Main.CMDS.GetCommandPath 'hexbin')" ]]; then
             hexbin "${p_opts}" "${p_arch}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-    # Else, if the user wishes to use the "p7zip" command in order to uncompress ... .
-    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'p7zip' ) && "$(BU.Main.CMDSGetCommandPath 'p7zip')" ]]; then
+    # Else, if the user wishes to use the "$(p7zip)" command in order to uncompress ... .
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'p7zip' ) && "$(BU.Main.CMDS.GetCommandPath 'p7zip')" ]]; then
             p7zip "" "" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
     # Else, if the data to extract is stored in a Microsoft cabinet archive (.cab).
-    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'cabextract' ) && "$(BU.Main.CMDSGetCommandPath 'cabextract')" ]]; then
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'cabextract' ) && "$(BU.Main.CMDS.GetCommandPath 'cabextract')" ]]; then
             cabextract "${p_opts}" "${p_arch}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-    # Else, if the user wishes to use the "gzip" command in order to uncompress
-    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'zip' ) && "$(BU.Main.CMDSGetCommandPath 'zip')" ]]; then
+    # Else, if the user wishes to use the "$(gzip)" command in order to uncompress
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'zip' ) && "$(BU.Main.CMDS.GetCommandPath 'zip')" ]]; then
             gzip "${p_opts}" "${p_arch}" "${p_dest}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-    # Else, if the user wishes to use the "gunzip" command in order to uncompress
-    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'gunzip' ) && "$(BU.Main.CMDSGetCommandPath 'gunzip')" ]]; then
+    # Else, if the user wishes to use the "$(gunzip)" command in order to uncompress
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'gunzip' ) && "$(BU.Main.CMDS.GetCommandPath 'gunzip')" ]]; then
             gunzip "${p_opts}" "${p_arch}" "${p_dest}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 
-    # Else, if the user wishes to use the "unzip" command in order to uncompress
-    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'unzip' ) && "$(BU.Main.CMDSGetCommandPath 'unzip')" ]]; then
+    # Else, if the user wishes to use the "$(unzip)" command in order to uncompress
+    elif    [[ ( -n "${p_cmd}" ) && ( "${p_cmd,,}" == 'unzip' ) && "$(BU.Main.CMDS.GetCommandPath 'unzip')" ]]; then
             unzip "${p_opts}" "${p_arch}" "${p_dest}" || { return 1; }; if [ "${p_del,,}" == 'true' ]; then BU.Main.Files.DeleteFile "${p_arch}"; fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
 
@@ -1255,9 +1506,21 @@ function BU.Main.Files.UncompressCMD()
 }
 
 # Uncompressing archives according to the used compression method.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.UncompressFormat()    -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandPath()             -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                    -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleSmallErrors()        -> Main -> Errors.lib
 function BU.Main.Files.UncompressFormat()
-{
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+({
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
@@ -1279,7 +1542,7 @@ function BU.Main.Files.UncompressFormat()
         local p_cmd=${3:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command used to uncompress the targeted archive.
 
         #**** Code ****
-        BU.Main.Errors.HandleSmallErrors 'W' "Impossible to decompress the $(BU.Main.Decho.Decho.Highlight "${p_fmt}") archive named $(BU.Main.Decho.Decho.Path "${p_arc}") with the $(BU.Main.Decho.Decho.CMD "${p_cmd}") command" 'R';
+        BU.Main.Errors.HandleSmallErrors 'W' "Unable to uncompress the $(BU.Main.Decho.Decho.Highlight "${p_fmt}") archive named $(BU.Main.Decho.Decho.Path "${p_arc}") with the $(BU.Main.Decho.Decho.CMD "${p_cmd}") command" 'R';
         BU.Main.Echo.Warning "Please check the permissions of the archive, or use another uncompression command which supports the targeted archive's format";
         BU.Main.Echo.Newline;
 
@@ -1289,11 +1552,11 @@ function BU.Main.Files.UncompressFormat()
     # If the archive to be decompressed is a 7-Zip archive format.
     if [[ "${p_form}" == ?(.)7?(-)[Zz]?([Ii][Pp]) ]]; then
         # If the '7z' command is found in the "${PATH}" environment variable.
-        if      BU.Main.CMDSGetCommandPath 7z; then
+        if      BU.Main.CMDS.GetCommandPath 7z; then
                 7z x "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "${p_arch}" '7z'; return 1; };
 
         # Else, if the '7z' command is found in the "${PATH}" environment variable.
-        elif    BU.Main.CMDSGetCommandPath p7zip; then
+        elif    BU.Main.CMDS.GetCommandPath p7zip; then
                 p7zip || { BU.Main.Files.UncompressFormat.ErrorMsg '7-Zip' "${p_arch}" 'p7zip'; return 1; };
 
         else
@@ -1302,7 +1565,7 @@ function BU.Main.Files.UncompressFormat()
 
     # Else, if the archive to be decompressed is an Apple's BinHex file.
     elif [[ "${p_form}" == ?([Aa][Pp][Pp][Ll][Ee]?(\')?([Ss])[[:space:]])[Bb][Ii][Nn][Hh][Ee][Xx] ]]; then
-        if      BU.Main.CMDSGetCommandPath hexbin; then
+        if      BU.Main.CMDS.GetCommandPath hexbin; then
                 hexbin "${p_arch}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'BinHex' "${p_arch}" 'hexbin'; return 1; };
 
         else
@@ -1311,10 +1574,10 @@ function BU.Main.Files.UncompressFormat()
 
     # Else, if the archive to be decompressed is a Microsoft cabinet archive (.cab).
     elif [[ "${p_form}" == ?([Mm][Ii][Cc][Rr][Oo][Ss][Oo][Ff][Tt]?(\')?([Ss])?([[:space:]]))?(.)[Cc][Aa][Bb]?([Ii][Nn][Ee][Tt]) ]]; then
-        if      BU.Main.CMDSGetCommandPath cabextract; then
+        if      BU.Main.CMDS.GetCommandPath cabextract; then
                 cabextract || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "$'p_arch'" 'cabextract'; return 1; };
 
-        elif    BU.Main.CMDSGetCommandPath 7z; then
+        elif    BU.Main.CMDS.GetCommandPath 7z; then
                 7z x "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Microsoft Cab' "${p_arch}" '7z'; return 1; };
 
         else
@@ -1323,10 +1586,10 @@ function BU.Main.Files.UncompressFormat()
 
     # Else, if the archive to be decompressed is a Gzip archive format.
     elif [[ "${p_form}" == ?(.)[Gg][Zz]?([Ii][Pp]) ]]; then
-        if      BU.Main.CMDSGetCommandPath gunzip; then
+        if      BU.Main.CMDS.GetCommandPath gunzip; then
                 gunzip -v "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "${p_arch}" 'gunzip'; return 1; };
 
-        elif    BU.Main.CMDSGetCommandPath gzip; then
+        elif    BU.Main.CMDS.GetCommandPath gzip; then
                 gzip -dv "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Gzip' "${p_arch}" 'gzip'; return 1; };
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Gzip archives uncompression found on your system' 'R';
@@ -1338,7 +1601,7 @@ function BU.Main.Files.UncompressFormat()
 
     # Else, if the archive to be decompressed is a Zip archive format.
     elif [[ "${p_form}" == ?(.)[Zz][Ii][Pp] ]]; then
-        if      BU.Main.CMDSGetCommandPath unzip; then
+        if      BU.Main.CMDS.GetCommandPath unzip; then
                 unzip "${p_arch}" "${p_dest}" || { BU.Main.Files.UncompressFormat.ErrorMsg 'Zip' "${p_arch}" 'unzip'; return 1; };
         else
                 BU.Main.Errors.HandleSmallErrors 'W' 'No valid command for Zip archives uncompression found on your system' 'R';
@@ -1346,7 +1609,7 @@ function BU.Main.Files.UncompressFormat()
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-}
+})
 
 # -----------------------------------------------
 

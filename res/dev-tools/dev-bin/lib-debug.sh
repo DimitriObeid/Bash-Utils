@@ -4,7 +4,7 @@ debug_tmp_f="tmp/debug.tmp";
 debug_log="tmp/final_debug_file.dbg";
 
 if [ -f "${debug_tmp_f}" ]; then
-	true > "${debug_f}";
+	true > "${debug_tmp_f}";
 else
 	if [ ! -d "tmp" ]; then
 		mkdir -p "tmp";

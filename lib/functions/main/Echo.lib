@@ -22,7 +22,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -118,9 +118,9 @@ function BU.Main.Echo.DebugEnd()
     }
 }
 
-# Printing the name of the processed function if the main script is launched with the "bash -x" command.
+# Printing the name of the processed function if the main script is launched with the "$(bash -x)" command.
 
-## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "bash -x".
+## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "$(bash -x)".
 function BU.Main.Echo.Debug()
 {
     # The six following conditional lines are used as test / debug procedures. Please leave them commented if you are not debugging the behavior of the modules debugger.
@@ -224,10 +224,10 @@ printf "
 }
 
 # "BU.Echo<...>()" functions debug output for a better view during a debug process.
-# It's better to also execute the project's script with the "bash - x ${project_name}" command, instead of the "./${project_name}" way.
+# It's better to also execute the project's script with the "$(bash - x "${project_name}")" command, instead of the "./${project_name}" way.
 function BU.Main.Echo.__EchoOutput()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING}";
@@ -312,7 +312,7 @@ function BU.Main.Echo.__EchoOutput()
 # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
 function BU.Main.Echo.__EchoCPLS()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING}";
@@ -412,11 +412,11 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSA
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus()                    --> Checkings.lib
 function BU.Main.Echo.Error()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
@@ -459,11 +459,11 @@ function BU.Main.Echo.Error()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus()    --> Checkings.lib
 function BU.Main.Echo.Msg()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
@@ -500,11 +500,11 @@ function BU.Main.Echo.Msg()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Newstep()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
@@ -541,11 +541,11 @@ function BU.Main.Echo.Newstep()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #	- BU.Main.Status.CheckProjectLogStatus		--> Checkings.lib
 function BU.Main.Echo.Read()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
@@ -564,11 +564,11 @@ function BU.Main.Echo.Read()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Success()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
@@ -605,11 +605,11 @@ function BU.Main.Echo.Success()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 function BU.Main.Echo.Warning()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
@@ -1041,12 +1041,12 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_P
 
 # Redirecting the output of the "echo" command
 
-# Featured functions and files from the "functions" folder :
+# Featured functions and files by module(s) and from the "functions" folder :
 #   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
 #	- BU.Main.Errors.HandleErrors				--> Checkings.lib
 function BU.Main.Echo.Newline()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS}" \
         "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL}";

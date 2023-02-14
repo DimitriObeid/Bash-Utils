@@ -21,7 +21,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -82,7 +82,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHEC
 # Checking if the variable is an array.
 function BU.Main.Checkings.IsArray()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS}";
 
     if [[ -n ${1} ]]; then
@@ -95,7 +95,7 @@ function BU.Main.Checkings.IsArray()
 # Checking if an array in empty.
 function BU.Main.Checkings.IsArrayEmpty()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS}";
 
     #**** Parameters ****
@@ -112,7 +112,7 @@ function BU.Main.Checkings.IsArrayEmpty()
 # Checking if an array is not empty.
 function BU.Main.Checkings.IsArrayNotEmpty()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS}";
 
     #**** Parameters ****
@@ -189,7 +189,7 @@ function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "
 #   - DDMMYYYY hh:mm:ss
 function BU.Main.Checkings.IsDateYMD_HMS()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}";
 
     #**** Variables ****
@@ -235,7 +235,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VAL
 # Checking if a number is even.
 function BU.Main.Checkings.IsEven()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [ "$(( ${1:-$'\0'} % 2 ))" -eq 0 ]; then
@@ -248,7 +248,7 @@ function BU.Main.Checkings.IsEven()
 # Checking if a number is uneven.
 function BU.Main.Checkings.isOdd()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [ "$(( ${1:-$'\0'} % 2 ))" -ne 0 ]; then
@@ -263,7 +263,7 @@ alias BU.Main.Checkings.IsUneven='BU.Main.Checkings.isOdd';
 # Checking floating value.
 function BU.Main.Checkings.IsFloat()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [[ "${1}" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
@@ -276,7 +276,7 @@ function BU.Main.Checkings.IsFloat()
 # Checking negative only floating value.
 function BU.Main.Checkings.IsNegativeFloat()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if BU.Main.Checkings.IsFloat "${1}" && (( 1 < 0 )); then
@@ -289,7 +289,7 @@ function BU.Main.Checkings.IsNegativeFloat()
 # Checking positive only floating value.
 function BU.Main.Checkings.IsPositiveFloat()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if BU.Main.Checkings.IsFloat "${1}" && (( 1 >= 0 )); then
@@ -302,7 +302,7 @@ function BU.Main.Checkings.IsPositiveFloat()
 # Checking integer value.
 function BU.Main.Checkings.IsInt()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [[ "${1}" =~ ^[\-0-9]+$ ]]; then
@@ -315,7 +315,7 @@ function BU.Main.Checkings.IsInt()
 # Checking negative only integer value.
 function BU.Main.Checkings.IsNegativeInt()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
 	if BU.Main.Checkings.IsInt "${1}" && (( 1 < 0 )); then
@@ -328,7 +328,7 @@ function BU.Main.Checkings.IsNegativeInt()
 # Checking positive only integer value.
 function BU.Main.Checkings.IsPositiveInt()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
 	if BU.Main.Checkings.IsInt "${1}" && (( 1 >= 0 )); then
@@ -348,7 +348,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS
 # Checking if the value is an alphabetic character (not any number allowed).
 function BU.Main.Checkings.IsAlphaChar()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
 	if [[ "${1}" == [a-zA-Z] ]]; then
@@ -361,7 +361,7 @@ function BU.Main.Checkings.IsAlphaChar()
 # Checking if the value is an alphabetic string (not any number allowed)
 function BU.Main.Checkings.IsAlphaString()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
     if [[ "${1}" == [^a-zA-Z\ ] ]]; then
@@ -374,7 +374,7 @@ function BU.Main.Checkings.IsAlphaString()
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
 function BU.Main.Checkings.IsAlphaStringOnly()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
 	if [ "${#1}" -lt 2 ]; then
@@ -392,7 +392,7 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 # Checking if the value is a character.
 function BU.Main.Checkings.IsAlphaNumChar()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
 	if [[ "${1}" == [a-zA-Z0-9] ]]; then
@@ -405,7 +405,7 @@ function BU.Main.Checkings.IsAlphaNumChar()
 # Checking if the value is an alphanumeric string.
 function BU.Main.Checkings.IsAlphaNumString()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
     if [[ "${1}" =~ [^a-zA-Z0-9\ ] ]]; then
@@ -418,7 +418,7 @@ function BU.Main.Checkings.IsAlphaNumString()
 # Checking if the value is an alphabetic string only (not less than two characters).
 function BU.Main.Checkings.IsAlphaNumStringOnly()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
 	if [ "${#1}" -lt 2 ]; then
@@ -463,7 +463,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDEN
 #   - BU.Main.Errors.HandleErrors      --> From this file.
 function BU.Main.Checkings.CheckRootEUID()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS}";
@@ -483,7 +483,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CH
 # Check if hard drive is full.
 function BU.Main.Checkings.CheckDiskUsedSpace()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS}";
@@ -637,7 +637,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHE
 # Checking for an existent directory path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 function BU.Main.Checkings.CheckDirPathExists()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS}";
@@ -662,7 +662,7 @@ function BU.Main.Checkings.CheckDirPathExists()
 # Checking if a directory was successfully created.
 function BU.Main.Checkings.CheckDirPathWasCreated()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS}";
@@ -688,7 +688,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS
 # Checking for an existent file path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 function BU.Main.Checkings.CheckFilePathExists()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
@@ -715,7 +715,7 @@ function BU.Main.Checkings.CheckFilePathExists()
 # Checking if a file was successfully created.
 function BU.Main.Checkings.CheckFilePathWasCreated()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
@@ -739,7 +739,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
     # If the framework is still initializing when an error occurs.
     BU.ModuleInit.SetInitErrorMsg && declare -i VCheckProjectLogPath='1';
 
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
@@ -776,7 +776,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 # Accepted arguments : 'nodate', '<an empty string>'
 function BU.Main.Status.CheckProjectLogStatus()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
@@ -1106,7 +1106,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 # Check project related file presence, or create this file.
 function BU.Main.Checkings.CheckProjectRelatedFile()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
@@ -1237,7 +1237,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="
 function BU.Main.Checkings.CheckDecho()
 {
     #**** Code ****
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS}";

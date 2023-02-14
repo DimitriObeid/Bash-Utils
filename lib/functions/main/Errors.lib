@@ -22,7 +22,7 @@
 
 # Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "SHELLCHECK" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -88,7 +88,7 @@ __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS
 # OR THE SCRIPT WILL LOOP FOREVER IN CASE OF AN ERROR DURING THIS FUNCTION CALL !!!
 function BU.Main.Errors.HandleSmallErrors()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}" \
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING}";
@@ -173,7 +173,7 @@ __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 function BU.Main.Errors.Exit()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}" \
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING}";
@@ -233,7 +233,7 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 #   -
 function BU.Main.Errors.HandleErrors()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the command "bash -x".
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}" \
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING}";
