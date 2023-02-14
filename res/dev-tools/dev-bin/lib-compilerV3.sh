@@ -383,7 +383,7 @@ function EraseSafeguardExecLines()
     return 0;
 }
 
-# Writing to the compiled file with a here document :
+# Writing into the compiled file with a here document :
 #   - the comments containing the informations about the compiled file,
 #   - and the pieces of code which prevent the direct execution of their host files.
 function WriteCommentCode()
@@ -464,7 +464,7 @@ function EraseComments()
 function WriteBU()
 {
     #**** Parameters ****
-    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written to the "${__BU_MAIN_FULL_FILE_PATH}" file.
+    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written into the "${__BU_MAIN_FULL_FILE_PATH}" file.
     local p_display=${2:-no};   	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
 
 	#**** Variables ****
@@ -635,6 +635,32 @@ function CompilerUsage()
     if [ "${p_exit,,}" == 'true' ]; then exit 0; else return 0; fi
 }
 
+# ----------------------------------------------
+
+## MESSAGES
+
+# Quit error messages.
+
+# shellcheck disable=SC2059
+function QuitErrorMessage.NumberOfFilesCompiled()
+{
+    # If the '--lang=' value was passed as mandatory argument.
+    if [ -n "${__vMandatoryArgLang}" ]; then
+        if [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -eq 0 ]; then
+            echo "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NO_FILES_WERE_COMPILED}";
+        else
+            printf "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NUMBER_OF_COMPILED_FILES}\n\n" "${#__BU_ARRAY__COMPILED_FILES_LIST}";
+
+            echo "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_LIST_OF_COMPILED_FILES}";
+
+            for file in "${__BU_ARRAY__COMPILED_FILES_LIST[@]}"; do
+                echo "    - ${__HIGHLIGHT}${file}${__RESET}";
+            done
+
+            echo;
+        fi
+    fi
+}
 
 # ----------------------------------------------
 
@@ -840,7 +866,7 @@ function CompileInSingleFile()
             # String to word array.
             read -ra __language_array <<< "${v_locale_str}";
         else
-            # Reassigning the new value in the "${v_locale_str}" variable to the "${p_locale}" original variable, so that the condition can be written only once.
+            # Reassigning the new value in the "${v_locale_str}" variable into the "${p_locale}" original variable, so that the condition can be written only once.
             p_locale="${v_locale_str}";
 
             # Assigning a value, so that no extra checkings are done to the first argument's value afterwards.
@@ -991,14 +1017,14 @@ function CompileInSingleFile()
 
             echo "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN}"; echo;
 
-            if [ ! -f "${__locale_file_path_en}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+            if [ ! -f "${__locale_file_path_en}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break;
             else
                 BU.Main.DevTools.ShellcheckVerif "${__locale_file_path_en}" "${__vArrayVal_compile_stable}" || local __err="error";
 
                 WriteBU "${__locale_file_path_en}" "${__vArrayVal_display}" || local ____err="error";
             fi
 
-            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
             PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
         fi
@@ -1010,14 +1036,14 @@ function CompileInSingleFile()
         if [ -n "${__vMandatoryArgLang}" ]; then
             PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
-            if  [ ! -f "${__locale_file_path}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+            if  [ ! -f "${__locale_file_path}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break;
             else
                 BU.Main.DevTools.ShellcheckVerif "${__locale_file_path}" || local __err="error";
 
                 WriteBU "${__locale_file_path}" "${__vArrayVal_display}" || local ____err="error";
             fi
 
-            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+            [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
             PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1043,6 +1069,8 @@ function CompileInSingleFile()
                 if  [ ! -f "${translationFilePath}" ]; then
                     PrintErrorLine "$(printf "${__locale_print_code__error} UNABLE TO FIND THE PATH TO THIS FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationFilePath}")" 'FULL';
 
+                    QuitErrorMessage.NumberOfFilesCompiled;
+
                     ____loop_error='error'; break 2;
                 else
                     BU.Main.DevTools.ShellcheckVerif "${translationFilePath}" || local __err="error";
@@ -1050,7 +1078,7 @@ function CompileInSingleFile()
                     WriteBU "${translationFilePath}" "${__vArrayVal_display}" || local ____err="error";
                 fi
 
-                [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break 2; };
+                [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break 2; };
             done
 
             PrintSuccessLine "$(printf "SUCCESSFULLLY EMBEDDED THE TRANSLATION FILES FROM EACH OF THESE LANGUAGES INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE : ${__HIGHLIGHT}%s${__RESET}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'LOWER';
@@ -1066,7 +1094,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
-        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1074,7 +1102,7 @@ function CompileInSingleFile()
         # Writing the initializer script's content into the file to generate.
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
-        if [ ! -f "${__BU_INITIALIZER_SCRIPT_PATH}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break;
+        if [ ! -f "${__BU_INITIALIZER_SCRIPT_PATH}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break;
 
         else
             BU.Main.DevTools.ShellcheckVerif "${__BU_INITIALIZER_SCRIPT_PATH}" || local __err="error";
@@ -1082,7 +1110,7 @@ function CompileInSingleFile()
             WriteBU "${__BU_INITIALIZER_SCRIPT_PATH}" "${__vArrayVal_display}";
         fi
 
-        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1096,7 +1124,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
-        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1110,7 +1138,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
-        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1124,7 +1152,7 @@ function CompileInSingleFile()
             WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
         done
 
-        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; ____loop_error='error'; break; };
+        [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
@@ -1138,7 +1166,7 @@ function CompileInSingleFile()
         # Copying the content of the generated file into the localized language's file.
         PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'UPPER';
 
-        cp "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}" || { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'FULL'; ____loop_error='error'; break; };
+        cp "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}" || { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'LOWER';
 
@@ -1235,6 +1263,8 @@ function CompileInSingleFile()
                 echo "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2}" >&2;
                 echo >&2;
 
+                QuitErrorMessage.NumberOfFilesCompiled;
+
                 ____loop_error='error'; break;
             else
                 PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS}" "${__compiled_file_path}" "${__compiled_stable_file_parent_dir}")" 'LOWER';
@@ -1268,6 +1298,8 @@ function CompileInSingleFile()
                                 PrintFilesWhichWereNotChmoded "${__compiled_stable_file_parent_dir}";
                             fi
                         fi
+
+                        QuitErrorMessage.NumberOfFilesCompiled;
 
                         ____loop_error='error';
 

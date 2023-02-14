@@ -101,6 +101,16 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
                                         utilisées ensemble.";
 
 
+# ----------------------------------------------------------------------------------------------------------------
+# Fonction "QuitErrorMessage.NumberOfFilesCompiled()" [-----] "QuitErrorMessage.NumberOfFilesCompiled()" function.
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NO_FILES_WERE_COMPILED="${__ERROR}Aucun fichier n'a été compilé${__RESET}";
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NUMBER_OF_COMPILED_FILES="${__ERROR}Nombre de fichiers compilés : ${__HIGHLIGHT}%s${__RESET}";
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_LIST_OF_COMPILED_FILES="${__ERROR}Liste des fichiers compilés :${__RESET}";
+
+
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Si un argument non-supporté est passé dans le tableau d'arguments optionnel [-----] If an unsupported argument is passed into the array of optional arguments.
 
@@ -143,9 +153,13 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}Vous pouvez également pa
 # -------------------------------------------------------------------------
 # Exécution de la commande Shellcheck [-----] Shellcheck command execution.
 
-__BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}";
+__BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Vérification d'erreurs de programmation dans le fichier ${__HIGHLIGHT}%s${__NEWSTEP}${__RESET}... ";
+
 __BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}Une ou plusieurs erreurs de programmation ont été détectées dans le fichier ${__HIGHLIGHT}%s${__ERROR} !${__RESET}";
+__BU_COMPILE__SHELLCHECK__FAIL_STR="${__RESET}Échec ❌";
+
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS_STR="${__RESET}Succès ${__SUCCESS}✓${__RESET}";
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

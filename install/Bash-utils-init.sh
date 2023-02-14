@@ -1198,8 +1198,8 @@ function BU.ModuleInit.PrintLog()
     declare -i v_str_max_size;      # VAR TYPE : Int        - DESC : This variable stores the maximum size of the "${v_str_randomizer}" string.
 
     local v_str_randomizer;         # VAR TYPE : String     - DESC : This string stores the randomized string which is written in the log file's name.
-    local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This variable stores the randomized numer of times another generated md5sum string must be added to the "${v_str_randomizer} variable".
-    local v_str_randomizer_tmp;     # VAR TYPE : String     - DESC : This string stores the newly generated md5sum string before it is added to the "${v_str_randomizer}" variable.
+    local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This variable stores the randomized numer of times another generated md5sum string must be added into the "${v_str_randomizer} variable".
+    local v_str_randomizer_tmp;     # VAR TYPE : String     - DESC : This string stores the newly generated md5sum string before it is added into the "${v_str_randomizer}" variable.
     local v_tmp_file;               # VAR TYPE : Filepath   - DESC : Path to the file which stores the content of the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array.
 
     #**** Code ****
@@ -2983,7 +2983,7 @@ function BashUtils_InitModules()
 
 	# Unsetting every initialization message variables in order to free up some memory.
 
-	# Don't double quote the command substitution.
+	# DO NOT DOUBLE QUOTE THE COMMAND SUBSTITUTION !!!!!
 
 	# shellcheck disable=SC2046
 	unset $(compgen -v "__BU_MODULE_INIT_MSG__");

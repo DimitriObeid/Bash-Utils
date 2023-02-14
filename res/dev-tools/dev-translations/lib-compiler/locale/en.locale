@@ -100,6 +100,16 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
                                         are used together.";
 
 
+# ----------------------------------------------------
+# "QuitErrorMessage.NumberOfFilesCompiled()" function.
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NO_FILES_WERE_COMPILED="${__ERROR}No files were compiled${__RESET}";
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NUMBER_OF_COMPILED_FILES="${__ERROR}Number of compiled files : ${__HIGHLIGHT}%s${__RESET}";
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_LIST_OF_COMPILED_FILES="${__ERROR}List of the compiled files :${__RESET}";
+
+
 # --------------------------------------------------------------------------
 # If an unsupported argument is passed into the array of optional arguments.
 
@@ -144,13 +154,13 @@ __BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP="${__WARNING}You can also pass the ${_
 # -----------------------------
 # Shellcheck command execution.
 
-__BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}";
+__BU_COMPILE__SHELLCHECK__VERIFICATION="${__NEWSTEP}Verifying the programming errors in the ${__HIGHLIGHT}%s${__NEWSTEP} file${__RESET}... ";
 
 __BU_COMPILE__SHELLCHECK__FAIL="${__ERROR}One or more programming errors were detected in the ${__HIGHLIGHT}%s${__ERROR} file!${__RESET}";
-__BU_COMPILE__SHELLCHECK__FAIL_STR="... ${__RESET}Failed ❌";
+__BU_COMPILE__SHELLCHECK__FAIL_STR="${__RESET}Failed ❌";
 
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
-__BU_COMPILE__SHELLCHECK__SUCCESS_STR="... ${__RESET}Success ${__SUCCESS}✓${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS_STR="${__RESET}Success ${__SUCCESS}✓${__RESET}";
 
 
 # -------------------------------------------------------------------------------
