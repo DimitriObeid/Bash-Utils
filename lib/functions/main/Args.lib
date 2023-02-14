@@ -2239,7 +2239,7 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
 #   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
 
-#   - BU.Main.Checkings.IsPositiveInt()     -> main -> Checkings.lib
+#   - BU.Main.Checkings.IsPositiveInt()     -> Main -> Checkings.lib
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
@@ -2281,7 +2281,15 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# "BU.Main.Text.DeleteLettersInString()" function
+# "BU.Main.Text.DeleteLettersInString()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -2313,6 +2321,14 @@ function BU.Main.Args__Text.DeleteLettersInString()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
 
 # "BU.Main.Text.GetCharacterOccurences()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.GetCharacterOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -2351,6 +2367,14 @@ function BU.Main.Args__Text.GetCharacterOccurences()
 }
 
 # "BU.Main.Text.GetFirstCharacter()" and "BU.Main.Text.GetLastCharacter()" functions.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.GetFirstLastCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -2376,6 +2400,16 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
 }
 
 # "BU.Main.Args__Text.GetSubStringAfterDelim()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsPositiveInt()     -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -2415,6 +2449,16 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
 }
 
 # "BU.Main.Text.GetSubStringBeforeDelim()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsPositiveInt()     -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -2454,6 +2498,14 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
 }
 
 # "BU.Main.Text.GetSubStringOccurences()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -2491,6 +2543,14 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
 # "BU.Main.Text.StrToWordArray()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib
+#   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
+#   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 function BU.Main.Args__Text.StrToWordArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
