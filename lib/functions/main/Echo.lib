@@ -131,7 +131,7 @@ function BU.Main.Echo.Debug()
     # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}" ];      then echo "FUNC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_FUNCTIONS_ARRAY[*]}";    else echo 'FUNC ARRAY FALSE'; fi
     # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}" ];        then echo "MODL ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_MODULES_ARRAY[*]}";      else echo 'MODL ARRAY FALSE'; fi
     # if [ -n "${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}" ];   then echo "SUBC ARRAY VALUES : ${__BU_MODULE_INIT_STAT_DEBUG_BASHX_SUB_CATEGORY_ARRAY[*]}"; else echo 'SUBC ARRAY FALSE'; fi
-if
+
     BU.ModuleInit.CheckIsDebugging && {
         #**** Parameters ****
         local p_modname=${1:-$'\0'};    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Module where the function currently processed is defined.

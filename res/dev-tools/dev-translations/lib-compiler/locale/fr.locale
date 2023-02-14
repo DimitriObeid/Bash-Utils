@@ -104,11 +104,13 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
 # ----------------------------------------------------------------------------------------------------------------
 # Fonction "QuitErrorMessage.NumberOfFilesCompiled()" [-----] "QuitErrorMessage.NumberOfFilesCompiled()" function.
 
-__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NO_FILES_WERE_COMPILED="${__ERROR}Aucun fichier n'a été compilé${__RESET}";
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED="${__ERROR}Aucun fichier n'a été compilé${__RESET}";
 
-__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NUMBER_OF_COMPILED_FILES="${__ERROR}Nombre de fichiers compilés : ${__HIGHLIGHT}%s${__RESET}";
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NUMBER_OF_COMPILED_FILES="${__ERROR}Nombre de fichiers compilés : ${__HIGHLIGHT}%s${__RESET}";
 
-__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_LIST_OF_COMPILED_FILES="${__ERROR}Liste des fichiers compilés :${__RESET}";
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LIST_OF_COMPILED_FILES="${__ERROR}Liste des fichiers compilés :${__RESET}";
+
+__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LANG_INCLUDE_HANDLING="${__ERROR}La compilation du fichier ${__HIGHLIGHT}%s${__ERROR} a échoué${__RESET}";
 
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -122,6 +124,7 @@ __BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG="ARRÊT DE L'EXÉCUTION DU 
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Vérification de la présence des valeurs "no-shell-check" et "compile-stable" passées ensemble [-----] Verifying if the "no-shell-check" and "compile-stable" values were passed together.
+
 __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER="${__WARNING}ATTENTION : LES VALEURS ${__HIGHLIGHT}%s${__WARNING} ET ${__HIGHLIGHT}%s${__WARNING} NE DOIVENT PAS ÊTRE UTILISÉES ENSEMBLES${__RESET}",
 __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE="${__WARNING}Pour compiler un fichier stable, la commande ${__HIGHLIGHT}shellcheck${__WARNING} DOIT être exécutée pour pouvoir vérifier toute erreur de programmation dans chaque fichier à inclure${__RESET}";
 

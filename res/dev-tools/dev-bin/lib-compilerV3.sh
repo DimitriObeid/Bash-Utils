@@ -647,18 +647,22 @@ function QuitErrorMessage.NumberOfFilesCompiled()
     # If the '--lang=' value was passed as mandatory argument.
     if [ -n "${__vMandatoryArgLang}" ]; then
         if [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -eq 0 ]; then
-            echo "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NO_FILES_WERE_COMPILED}";
+            echo "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED}" >&2;
         else
-            printf "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_NUMBER_OF_COMPILED_FILES}\n\n" "${#__BU_ARRAY__COMPILED_FILES_LIST}";
+            printf "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NUMBER_OF_COMPILED_FILES}\n\n" "${#__BU_ARRAY__COMPILED_FILES_LIST}" >&2;
 
-            echo "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED_LIST_OF_COMPILED_FILES}";
+            echo "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LIST_OF_COMPILED_FILES}" >&2;
 
             for file in "${__BU_ARRAY__COMPILED_FILES_LIST[@]}"; do
-                echo "    - ${__HIGHLIGHT}${file}${__RESET}";
+                echo "    - ${__HIGHLIGHT}${file}${__RESET}" >&2;
             done
 
             echo;
         fi
+
+    # Else, if the '--lang-include=' value was passed as mandatory argument.
+    elif [ -n "${__vMandatoryArgLangInclude}" ]; then
+        printf "${__BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LANG_INCLUDE_HANDLING}\n" "${__BU_MAIN_FULL_FILE_PATH}" >&2;
     fi
 }
 
