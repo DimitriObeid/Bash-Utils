@@ -80,6 +80,7 @@ __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions'
 
 __BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="${__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS}:shellcheck";
 
+# ······························································
 # Writing the error message if a Shellcheck verification failed.
 function BU.Main.DevTools.ShellcheckVerifFailed()
 {
@@ -93,6 +94,7 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
     printf "${__BU_COMPILE__SHELLCHECK__FAIL}" "${p_path}"; echo >&2; return 0;
 }
 
+# ·························································································
 # Verifying for any programming errors in a Bash script file with the "shellcheck" command.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -134,7 +136,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

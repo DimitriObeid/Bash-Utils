@@ -79,11 +79,13 @@ __BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho
 
 __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.basis";
 
+# ···························································································································································
 # Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Decho.__Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -102,6 +104,7 @@ function BU.Main.Decho.__Decho()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ···································································
 # Text's inside decoration / formatting procssing (complete version).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -119,6 +122,7 @@ function BU.Main.Decho.__Decho()
 #   - BU.Main.TextFormat.Atoi()             -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetBGColor()       -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetTextColor()     -> Main -> TextFormat.lib
+
 function BU.Main.Decho.Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -219,7 +223,7 @@ function BU.Main.Decho.Decho()
     echo "TEXT COLOR : ${p_newTextColor}";
     echo "BG COLOR : ${p_newBGColor}";
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## APPLYING THE FORMATTINGS ON THE TEXT
 
@@ -263,7 +267,7 @@ function BU.Main.Decho.Decho()
 
         echo -e "${p_string}${p_newTextColor}${__BU_MAIN_COLOR_CODE_RESET}";
 
-        # -----------------------------------------------
+        ## ----------------------------------------------
 
         ## APPLYING THE FORMATTINGS ON THE TEXT
 
@@ -303,10 +307,11 @@ function BU.Main.Decho.Decho()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST
 
+# ···································································································································································
 # Tip : to avoid defining a function for each color and formatting (which would take a monstruous amount of time, especially if new colors or formattings are added),
 # it's easier to call the wanted text formatting function, then the wanted coloring text function, or vice-versa.
 
@@ -314,6 +319,7 @@ function BU.Main.Decho.Decho()
 # echo -e "Lorem ipsum $(BU.Main.Decho.Decho.FMT_BlinkBoldDISU "$(BU.Main.Decho.Orange "dolor")") sit amet...";
 # echo -e "Lorem ipsum $(BU.Main.Decho.Orange "$(BU.Main.Decho.Decho.FMT_BlinkBoldDISU "dolor")") sit amet...";
 
+# ························································
 # Easy "BU.Main.Decho.Decho()" function calls with colors.
 function BU.Main.Decho.Decho.Aqua                   { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho             "${v_str}" "${__BU_MAIN_COLOR_CODE_AQUA}"       "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 function BU.Main.Decho.Decho.Black                  { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho             "${v_str}" "${__BU_MAIN_COLOR_CODE_BLACK}"      "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
@@ -346,6 +352,7 @@ function BU.Main.Decho.Decho.Violet                 { local v_str=${1:-$'\0'}; l
 function BU.Main.Decho.Decho.White                  { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho             "${v_str}" "${__BU_MAIN_COLOR_CODE_WHITE}"      "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 function BU.Main.Decho.Decho.Yellow                 { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho             "${v_str}" "${__BU_MAIN_COLOR_CODE_YELLOW}"     "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 
+# ··············································································
 # Easy "BU.Main.Decho.Decho()" function calls with specific text display colors.
 function BU.Main.Decho.Decho.Highlight              { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho             "${v_str}" "${__BU_MAIN_COLOR_CODE_HIGHLIGHT}"  "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 function BU.Main.Decho.Decho.CMD                    { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho.FMT_Bold    "${v_str}" "${__BU_MAIN_COLOR_CODE_CMD}"        "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
@@ -359,9 +366,11 @@ function BU.Main.Decho.Decho.Success                { local v_str=${1:-$'\0'}; l
 function BU.Main.Decho.Decho.Var                    { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho.FMT_Bold    "${v_str}" "${__BU_MAIN_COLOR_CODE_VAR}"        "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 function BU.Main.Decho.Decho.Warning                { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho.FMT_BoldIU  "${v_str}" "${__BU_MAIN_COLOR_CODE_WARNING}"    "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 
+# ··········································································
 # Easy "BU.Main.Decho.Decho()" function calls with background color display.
 function BU.Main.Decho.BGColor                      { local v_str=${1:-$'\0'}; local v_bg=${2:-$'\0'}; shift 2; local pa_arr=("${@}"); BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_fmtArgs[@]}"; BU.Main.Decho.Decho             "${v_str}"                                      "${v_bg}" "${pa_arr[@]}" || return 1; return 0; }
 
+# ··························································
 # Easy "BU.Main.Decho.__Decho()" function calls with colors.
 function BU.Main.Decho.__Decho.Aqua                 { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_AQUA}"        "${2}"; }
 function BU.Main.Decho.__Decho.Black                { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_BLACK}"       "${2}"; }
@@ -394,6 +403,7 @@ function BU.Main.Decho.__Decho.Violet               { BU.Main.Decho.__Decho "${1
 function BU.Main.Decho.__Decho.White                { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_WHITE}"       "${2}"; }
 function BU.Main.Decho.__Decho.Yellow               { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_YELLOW}"      "${2}"; }
 
+# ················································································
 # Easy "BU.Main.Decho.__Decho()" function calls with specific text display colors.
 function BU.Main.Decho.__Decho.Highlight            { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_HIGLIGHT}"    "${2}"; }
 function BU.Main.Decho.__Decho.CMD                  { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_CMD}"         "${2}"; }
@@ -407,15 +417,17 @@ function BU.Main.Decho.__Decho.Success              { BU.Main.Decho.__Decho "${1
 function BU.Main.Decho.__Decho.Var                  { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_VAR}"         "${2}"; }
 function BU.Main.Decho.__Decho.Warning              { BU.Main.Decho.__Decho "${1}" "${__BU_MAIN_COLOR_WARNING}"     "${2}"; }
 
+# ··············································································································································
 # Tip : you can also pass a second argument when you call the following functions, which is the same than the "Decho" function's second argument
-# (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE "BU.Main.TextFormat.SetTextColor" FUNCTIONS" sub-section).
+# (one of the color global variables defined in the main module's Colors.conf file, in the "ENCODING WITH THE "$(tput)" COMMAND AND PRINTED AND 
+# REDIRECTED WITH THE "BU.Main.TextFormat.SetTextColor()" FUNCTIONS" sub-section).
 
 # Positionnal parameters :
 #   ${1}    --> String to display.
 #   ${2}    --> Text color to display.
 #	${3}	--> Background color display.
 
-# Blink formatting.
+# Blink formatting
 function BU.Main.Decho.Decho.FMT_Blink              { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Blink'                         	|| return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_BlinkBold          { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Blink' 'Bold'                  	|| return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_BlinkBoldD         { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Blink' 'Bold' 'D'              	|| return 1; return 0; }
@@ -449,7 +461,8 @@ function BU.Main.Decho.Decho.FMT_BlinkS             { BU.Main.Decho.Decho "${1}"
 function BU.Main.Decho.Decho.FMT_BlinkSU            { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Blink' 'S' 'U'                 	|| return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_BlinkU             { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Blink' 'U'                      || return 1; return 0; }
 
-# Bold formatting.
+# ···············
+# Bold formatting
 function BU.Main.Decho.Decho.FMT_Bold           { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Bold'                  	|| return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_BoldD          { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Bold' 'D'              	|| return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_BoldDI         { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Bold' 'D' 'I'          	|| return 1; return 0; }
@@ -467,6 +480,7 @@ function BU.Main.Decho.Decho.FMT_BoldS          { BU.Main.Decho.Decho "${1}" "${
 function BU.Main.Decho.Decho.FMT_BoldSU         { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Bold' 'S' 'U'          	|| return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_BoldU          { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'Bold' 'U'               || return 1; return 0; }
 
+# ··············
 # Dim formatting
 function BU.Main.Decho.Decho.FMT_D          { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'D'              || return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_DI         { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'D' 'I'          || return 1; return 0; }
@@ -477,20 +491,23 @@ function BU.Main.Decho.Decho.FMT_DS         { BU.Main.Decho.Decho "${1}" "${2}" 
 function BU.Main.Decho.Decho.FMT_DSU        { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'D' 'S' 'U'      || return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_DU         { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'D' 'U'          || return 1; return 0; }
 
-# Italic formatting.
+# ·················
+# Italic formatting
 function BU.Main.Decho.Decho.FMT_I      { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'I'          || return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_IS     { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'I' 'S'      || return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_ISU    { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'I' 'S' 'U'  || return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_IU     { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'I' 'U'      || return 1; return 0; }
 
-# Strikethrough formatting.
+# ························
+# Strikethrough formatting
 function BU.Main.Decho.Decho.FMT_S      { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'S'      || return 1; return 0; }
 function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'S' 'U'  || return 1; return 0; }
 
-# Underline formatting.
+# ····················
+# Underline formatting
 function BU.Main.Decho.Decho.FMT_U      { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'U'  || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

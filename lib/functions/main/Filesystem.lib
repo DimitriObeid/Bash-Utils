@@ -79,6 +79,7 @@ __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="files
 
 __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}::checking-filesystem-informations";
 
+# ··········································
 # Checking if the current partition is full.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -92,6 +93,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="${
 #   - BU.Main.OS.IsNetBSD()         -> Main -> OS.lib
 #   - BU.Main.OS.IsOpenBSD()        -> Main -> OS.lib
 #   - BU.Main.OS.IsOSX()            -> Main -> OS.lib
+
 function BU.Main.Filesystem.IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -165,13 +167,14 @@ function BU.Main.Filesystem.IsPartitionFull()
 	}
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : getting-filesystem-informations
 
 __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}::getting-filesystem-informations";
 
+# ·····························
 # Getting the file system path.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -184,6 +187,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GE
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -214,6 +218,7 @@ function BU.Main.Filesystem.GetFSDevice()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
+# ·································································
 # Getting the total size in bytes allocated to a given file system.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -226,6 +231,7 @@ function BU.Main.Filesystem.GetFSDevice()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -256,6 +262,7 @@ function BU.Main.Filesystem.GetFSTotalSize()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
+# ·····················································
 # Getting the mounted partition of a given file system.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -268,6 +275,7 @@ function BU.Main.Filesystem.GetFSTotalSize()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -298,6 +306,7 @@ function BU.Main.Filesystem.GetFSMountPoint()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
+# ······················································
 # Getting the used size in bytes of a given file system.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -311,6 +320,7 @@ function BU.Main.Filesystem.GetFSMountPoint()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -357,6 +367,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
+# ································································
 # Getting the percentage of the used space of a given file system.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -370,6 +381,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -417,6 +429,7 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
+# ···························································
 # Getting the available size in bytes of a given file system.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -429,6 +442,7 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -459,6 +473,7 @@ function BU.Main.Filesystem.GetFSAvailableSize()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
+# ·····························································
 # Getting the type of the file system of a directory or a file.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -471,6 +486,7 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 function BU.Main.Filesystem.GetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -504,7 +520,7 @@ function BU.Main.Filesystem.GetFSType()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -520,6 +536,7 @@ __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="fil
 
 __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__NON_RECURSIVE="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}::non-recursive";
 
+# ································································
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -534,6 +551,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 #   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 
 #   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
+
 function BU.Main.Filesystem.Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -623,14 +641,15 @@ function BU.Main.Filesystem.Chown()
     fi
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : recursive
 
 __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__RECURSIVE="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING}::recursive";
 
-# Calling the "chown" command to change recursively directory ownership
+# ······································································
+# Calling the "chown" command to change recursively directory ownership.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Filesystem.ChownRec()   -> Main -> Args.lib
@@ -645,6 +664,7 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 #	- BU.Main.Echo.Success()		        -> Main -> Echo.lib
 
 #	- BU.Main.Errors.HandleErrors()		    -> Main -> Headers.lib
+
 function BU.Main.Filesystem.ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -690,7 +710,7 @@ function BU.Main.Filesystem.ChownRec()
     fi
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

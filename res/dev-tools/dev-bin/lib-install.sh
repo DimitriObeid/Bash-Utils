@@ -23,7 +23,7 @@
 
 # Feel free to source any dependencies here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -41,7 +41,7 @@
 
 # Feel free to define positional arguments here.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -53,7 +53,7 @@
 
 # Feel free to define an array of arguments here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -69,7 +69,7 @@
 
 # Feel free to define arrays here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -85,7 +85,7 @@ __LIB_INSTALL_STABLE_FILES_PROJECT_DIR='install/.Bash-utils/compiled/stable';
 # Path to the directory containing the compiled stable files in the user's home directory.
 __LIB_INSTALL_STABLE_FILES_HOME_DIR="${HOME}/.Bash-utils/compiled/stable";
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -113,9 +113,9 @@ __LIB_INSTALL_STABLE_FILES_HOME_DIR="${HOME}/.Bash-utils/compiled/stable";
 
 cp -r install/.Bash-utils/ ~
 
-## ----------------------------------------------------------------------------------------------------------------------------------------
+### ---------------------------------------------------------------------------------------------------------------------------------------
 ## COMMENTING THE FOLLOWING LINES UNTIL THIS SCRIPT WILL SUPPORT THE OPTIONS TO PROCESS THE READ-ONLY FILES ACCORDING TO THE USER'S DESIRES
-## ----------------------------------------------------------------------------------------------------------------------------------------
+### ---------------------------------------------------------------------------------------------------------------------------------------
 
 # cp "install/Bash-utils-init.sh" ~   || { echo "Unable to copy the initializer script in the ${HOME} directory"; exit 1; };
 # echo "Successfully copied the initializer script in the ${HOME} directory";

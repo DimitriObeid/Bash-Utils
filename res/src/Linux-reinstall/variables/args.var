@@ -9,7 +9,7 @@
 ## ARGUMENT VALUES ARRAY
 ARGV=("${@}");
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## ARGUMENT VALUES
 
@@ -20,7 +20,7 @@ ARG_USERNAME_INDEX='1';     # Username argument's index.
 ARG_INSTALL=${2:-$'\0'};    # Second argument : Le type de paquets à installer (version SIO (travail) ou personnelle (travail + logiciels pour un usage presonnel)).
 ARG_INSTALL_INDEX='2';      # Installation kind argument's index.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -31,7 +31,7 @@ ARG_DEBUG_INDEX='3';        # Debug argument's index.
 
 ARG_DEBUG_VAL="debug";      # Valeur de l'agument de déboguage.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 

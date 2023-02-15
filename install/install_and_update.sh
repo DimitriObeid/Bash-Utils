@@ -6,7 +6,7 @@
 ##      : Ask to the user if he wants to keep the default paths.
 ##      : Change each user's newly installed files and folders rights, so that the users can interact easily with these.
 
-# ------------------------------------------------
+## -----------------------------------------------
 
 
 
@@ -25,7 +25,7 @@ __D_MODULE_MANAGER_DIR_NAME=".Bash-utils";
 # Path of the module manager directory in the installation directory.
 __D_MODULE_MANAGER_OLD_PATH="${__D_INSTALL_DIR_PATH}/${__D_MODULE_MANAGER_DIR_NAME}";
 
-# ------------------------------------------------
+## -----------------------------------------------
 
 ## DIRECTORIES VARIABLES DECLARATIONS
 
@@ -65,7 +65,7 @@ fi
 # Path of the users home directories paths list file.
 __F_USERS_LIST_FILE_PATH="${__D_INSTALL_DIR_PATH}/${__F_USERS_LIST_FILE_NAME}";
 
-# ------------------------------------------------
+## -----------------------------------------------
 
 ## FUNCTIONS
 
@@ -269,7 +269,7 @@ function PrintLog()
 # Printing back the "/root" path in the normal users list file.
 function PrintRoot() { if [ "${__UNROOT}" == 'true' ] && [ "${OSTYPE}" != 'linux-android' ]; then printf '/root' >> "${__F_USERS_LIST_FILE_PATH}"; fi; return 0; }
 
-# ------------------------------------------------
+## -----------------------------------------------
 
 
 
@@ -359,7 +359,7 @@ fi
 # Feel free to add any user's home directory path into the users list.
 mapfile -t __TARGET_HOME_DIRECTORIES < "${__F_USERS_LIST_FILE_PATH}" || { PrintLog "UNABLE TO GET THE USERS LIST FILE"; PrintLog "Please navigate to this directory, and execute this script right there --> $(pwd -P "$(basename "${BASH_SOURCE[0]}")")" 'log'; PrintRoot; exit 1; }
 
-# ------------------------------------------------
+## -----------------------------------------------
 
 ## CODE
 PrintLog "Copying the Bash Utils root directory path into the ${__F_LIBRARY_PATH_FILE_NAME} file";
@@ -372,14 +372,14 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 	if [ ! -d "${user}" ]; then
         PrintLog "ERROR --> « ${user} » IS NOT AN EXISTING USER !"; PrintRoot; exit 1;
 	else
-        # ------------------------------------------------
+        ## -----------------------------------------------
 
         ## NEW DIRECTORIES VARIABLES DECLARATIONS
 
         # Path of the module manager directory in the user's directory.
         __D_MODULE_MANAGER_NEW_PATH="${user}/${__D_MODULE_MANAGER_DIR_NAME}";
 
-        # ------------------------------------------------
+        ## -----------------------------------------------
 
         ## NEW FILES VARIABLES DECLARATIONS
 
@@ -388,7 +388,7 @@ for user in "${__TARGET_HOME_DIRECTORIES[@]}"; do
 
         __F_MODULE_INITIALIZER_NEW_PATH="${user}/${__F_MODULE_INITIALIZER_FILE_NAME}";
 
-        # ------------------------------------------------
+        ## -----------------------------------------------
 
         ## CODE
 

@@ -311,7 +311,7 @@ function BU.Main.Text.ReplaceLettersInString()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FORMATTING TEXT
 ## DEBUG ID : "formatting-text"
@@ -382,7 +382,7 @@ function BU.Main.Text.ToUppercase()
 	echo "${p_string}" | tr '[:lower:]' '[:upper:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## GETTING TEXT
 ## DEBUG ID : "getting-text"
@@ -678,7 +678,7 @@ function BU.Main.Text.GetStringWordsNumber()
     echo -ne "${p_string}" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## LISTING TEXT
 ## DEBUG ID : "listing-text"
@@ -731,7 +731,7 @@ function BU.Main.Text.ListWordsFromFile()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PRINTING TEXT
 ## DEBUG ID : "printing-text"
@@ -759,7 +759,7 @@ function BU.Main.Text.PrintCharXTimes()
 	return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## REVERSING TEXT
 ## DEBUG ID : "reversing-text"
@@ -826,12 +826,12 @@ function BU.Main.Text.ReverseCharactersOrder()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## TEXT PROCESSING WITH THE "$(sed)" COMMAND
 ## DEBUG ID : ""
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## SPLITTING TEXT AND SPLITTED TEXT PROCESSING
 ## DEBUG ID : "splitting-text"
@@ -942,7 +942,7 @@ function BU.Main.Text.WordArrayToStr()
 #     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 # }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

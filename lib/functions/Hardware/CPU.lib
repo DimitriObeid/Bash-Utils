@@ -83,7 +83,7 @@ function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommand
 # Getting the CPU vendor
 function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## CHECK CPU INFORMATIONS
 

@@ -80,6 +80,7 @@ __BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-de
 
 __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION}::headers-basis-creation-functions";
 
+# ······················································································································
 # Function to create and display rows (decorated or not) according to the number of columns in the terminal's text area.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -90,6 +91,7 @@ __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREA
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleSmallErrors()    -> Main -> Errors.lib
+
 function BU.Main.Headers.DrawLine()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -185,6 +187,7 @@ function BU.Main.Headers.DrawLine()
     return 0;
 }
 
+# ··················································
 # Printing a simple header, without any decorations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -215,6 +218,7 @@ function BU.Main.Headers.Light()
     return 0;
 }
 
+# ··················································
 # Printing a simple header, without any decorations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -246,6 +250,7 @@ function BU.Main.Headers.LightDeco()
     return 0;
 }
 
+# ···········································································································
 # Basic header creation function (Background colors, lines characters and colors, and string text and color).
 
 # Since this function can be called in the "BU.Main.Echo.__EchoOutput()" function,
@@ -265,6 +270,7 @@ function BU.Main.Headers.LightDeco()
 #   - BU.Main.Echo.Newline()                -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleSmallErrors()    -> Main -> Errors.lib
+
 function BU.Main.Headers.Base () {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -371,7 +377,7 @@ function BU.Main.Headers.Base.CMD()
     BU.Main.Headers.Base "${@}";
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -380,6 +386,7 @@ function BU.Main.Headers.Base.CMD()
 ## UNICOLOR HEADERS
 ## DEBUG ID : unicolor-headers
 
+# ·····················································································································
 # Positional parameters, and their correspondences with the parameters of the "BU.Main.Headers.HeaderBase()" function :
 
 # Except for the "${1}" positional parameter, the three other are totally optional.
@@ -419,10 +426,12 @@ function BU.Main.Headers.Header.CMD.Warning         { BU.Main.Headers.Base.CMD  
 # Copy-paste this function to avoid losing time while creating unicolor headers :
 # function BU.Header<col> { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_<COLOR>}" -"${__BU_MAIN_COLOR_<COLOR>}" "${1}" "${2}" "${3}" "${4}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ······························
 # OLD COLORS (BEFORE 2022 01 07)
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Black               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLACK}"              "${__BU_MAIN_COLOR_CODE_BLACK}"         "${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 function BU.Main.Headers.Header.Blue                { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLUE}"           	"${__BU_MAIN_COLOR_CODE_BLUE}"          "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -440,6 +449,7 @@ function BU.Main.Headers.Header.Turquoise           { BU.Main.Headers.Base "${__
 function BU.Main.Headers.Header.White               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_WHITE}"          	"${__BU_MAIN_COLOR_CODE_WHITE}"         "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Yellow              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"     		"${__BU_MAIN_COLOR_CODE_YELLOW}"        "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Black			{ BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLACK}"          		"${__BU_MAIN_COLOR_TXT_BLACK}"       	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Blue            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLUE}"           		"${__BU_MAIN_COLOR_TXT_BLUE}"        	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -457,10 +467,12 @@ function BU.Main.Headers.Header.CMD.Turquoise       { BU.Main.Headers.Base "${__
 function BU.Main.Headers.Header.CMD.White           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WHITE}"          		"${__BU_MAIN_COLOR_TXT_WHITE}"       	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"         		"${__BU_MAIN_COLOR_TXT_YELLOW}"      	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·····························
 # NEW COLORS (SINCE 2022 01 07)
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Aqua                { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_AQUA}"           	"${__BU_MAIN_COLOR_CODE_AQUA}"     	    "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Fuchsia             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_FUCHSIA}"        	"${__BU_MAIN_COLOR_CODE_FUCHSIA}"       "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -477,6 +489,7 @@ function BU.Main.Headers.Header.Tan                 { BU.Main.Headers.Base "${__
 function BU.Main.Headers.Header.Teal                { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TEAL}"           	"${__BU_MAIN_COLOR_CODE_TEAL}"          "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Violet              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_VIOLET}"     		"${__BU_MAIN_COLOR_CODE_VIOLET}"        "${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Aqua            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_AQUA}"          		"${__BU_MAIN_COLOR_TXT_AQUA}"        	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Fuchsia         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_FUCHSIA}"       		"${__BU_MAIN_COLOR_TXT_FUCHSIA}"     	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -493,7 +506,7 @@ function BU.Main.Headers.Header.CMD.Tan             { BU.Main.Headers.Base "${__
 function BU.Main.Headers.Header.CMD.Teal            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TEAL}"          		"${__BU_MAIN_COLOR_TXT_TEAL}"        	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Violet          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_VIOLET}"        		"${__BU_MAIN_COLOR_TXT_VIOLET}"      	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -502,11 +515,14 @@ function BU.Main.Headers.Header.CMD.Violet          { BU.Main.Headers.Base "${__
 ## BICOLOR HEADERS
 ## DEBUG ID : bicolor-headers
 
+# ··············································································
 # Copy-paste this function to avoid losing time while creating bicolor headers :
 # function BU.Header<col1><col2>      { BU.Main.Headers.HeaderBase "${__BU_MAIN_COLOR_<COLOR1>}" "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_<COLOR2>}" "${1}" "${2}" "${3}" "${4}" || return 1; return 0; }
 
+# ··········································
 ## AQUA BLUE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Aqua.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_AQUA}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Aqua.Blue               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_AQUA}" "${__BU_MAIN_COLOR_CODE_BLUE}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -538,6 +554,7 @@ function BU.Main.Headers.Header.Aqua.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Aqua.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_AQUA}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Aqua.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_AQUA}" "${__BU_MAIN_COLOR_TXT_BLACK}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Aqua.Blue           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_AQUA}" "${__BU_MAIN_COLOR_TXT_BLUE}"              		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -569,10 +586,12 @@ function BU.Main.Headers.Header.CMD.Aqua.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Aqua.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_AQUA}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ······································
 ## BLACK LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Black.Aqua              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLACK}" "${__BU_MAIN_COLOR_CODE_AQUA}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Black.Blue              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLACK}" "${__BU_MAIN_COLOR_CODE_BLUE}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -604,6 +623,7 @@ function BU.Main.Headers.Header.Black.White             { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Black.Yellow            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLACK}" "${__BU_MAIN_COLOR_CODE_YELLOW}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Black.Aqua          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLACK}" "${__BU_MAIN_COLOR_TXT_AQUA}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Black.Blue          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLACK}" "${__BU_MAIN_COLOR_TXT_BLUE}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -635,10 +655,12 @@ function BU.Main.Headers.Header.CMD.Black.White         { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Black.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLACK}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·····································
 ## BLUE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Blue.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLUE}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Blue.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLUE}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -670,6 +692,7 @@ function BU.Main.Headers.Header.Blue.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Blue.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_BLUE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Blue.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLUE}" "${__BU_MAIN_COLOR_TXT_AQUA}"              		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Blue.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLUE}" "${__BU_MAIN_COLOR_TXT_BLACK}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -701,10 +724,12 @@ function BU.Main.Headers.Header.CMD.Blue.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Blue.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLUE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ······································
 ## CYAN LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Cyan.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_CYAN}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Cyan.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_CYAN}" "${__BU_MAIN_COLOR_CODE_BLACK}"            		"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -736,6 +761,7 @@ function BU.Main.Headers.Header.Cyan.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Cyan.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_CYAN}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitution
 function BU.Main.Headers.Header.CMD.Cyan.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_CYAN}" "${__BU_MAIN_COLOR_TXT_AQUA}"              		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Cyan.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_CYAN}" "${__BU_MAIN_COLOR_TXT_BLACK}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -767,10 +793,12 @@ function BU.Main.Headers.Header.CMD.Cyan.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Cyan.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_CYAN}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ········································
 ## FUCHSIA LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Fuchsia.Aqua            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_FUCHSIA}" "${__BU_MAIN_COLOR_CODE_AQUA}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Fuchsia.Black           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_FUCHSIA}" "${__BU_MAIN_COLOR_CODE_BLACK}"          	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -802,6 +830,7 @@ function BU.Main.Headers.Header.Fuchsia.White           { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Fuchsia.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_FUCHSIA}" "${__BU_MAIN_COLOR_CODE_YELLOW}"         	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Fuchsia.Aqua        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_FUCHSIA}" "${__BU_MAIN_COLOR_TXT_AQUA}"          		    "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Fuchsia.Black       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_FUCHSIA}" "${__BU_MAIN_COLOR_TXT_BLACK}"          		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -833,10 +862,12 @@ function BU.Main.Headers.Header.CMD.Fuchsia.White       { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Fuchsia.Yellow      { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_FUCHSIA}" "${__BU_MAIN_COLOR_TXT_YELLOW}"         		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·····································
 ## GRAY LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Gray.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_GRAY}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Gray.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_GRAY}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -868,6 +899,7 @@ function BU.Main.Headers.Header.Gray.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Gray.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_GRAY}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.CMD.Header.Gray.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GRAY}" "${__BU_MAIN_COLOR_TXT_AQUA}"              		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.CMD.Header.Gray.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GRAY}" "${__BU_MAIN_COLOR_TXT_BLACK}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -899,10 +931,12 @@ function BU.Main.Headers.CMD.Header.Gray.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.CMD.Header.Gray.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GRAY}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ············································
 ## LIGHT GREEN LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Green.Aqua              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_GREEN}" "${__BU_MAIN_COLOR_CODE_AQUA}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Green.Black             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_GREEN}" "${__BU_MAIN_COLOR_CODE_BLACK}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -934,6 +968,7 @@ function BU.Main.Headers.Header.Green.White             { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Green.Yellow            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_GREEN}" "${__BU_MAIN_COLOR_CODE_YELLOW}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.CMD.Header.Green.Aqua          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GREEN}" "${__BU_MAIN_COLOR_TXT_AQUA}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.CMD.Header.Green.Black         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GREEN}" "${__BU_MAIN_COLOR_TXT_BLACK}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -965,10 +1000,12 @@ function BU.Main.Headers.CMD.Header.Green.White         { BU.Main.Headers.Base "
 
 function BU.Main.Headers.CMD.Header.Green.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GREEN}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ···········································
 ## LIME GREEN LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Lime.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_LIME}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 function BU.Main.Headers.Header.Lime.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_LIME}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
@@ -1000,6 +1037,7 @@ function BU.Main.Headers.Header.Lime.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Lime.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_LIME}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.CMD.Header.Lime.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_LIME}" "${__BU_MAIN_COLOR_TXT_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.CMD.Header.Lime.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_LIME}" "${__BU_MAIN_COLOR_TXT_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1031,10 +1069,12 @@ function BU.Main.Headers.CMD.Header.Lime.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.CMD.Header.Lime.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_LIME}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·······································
 ## MAROON LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Maroon.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_MAROON}" "${__BU_MAIN_COLOR_CODE_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 function BU.Main.Headers.Header.Maroon.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_MAROON}" "${__BU_MAIN_COLOR_CODE_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
@@ -1066,6 +1106,7 @@ function BU.Main.Headers.Header.Maroon.White            { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Maroon.Yellow           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_MAROON}" "${__BU_MAIN_COLOR_CODE_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Maroon.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_MAROON}" "${__BU_MAIN_COLOR_TXT_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Maroon.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_MAROON}" "${__BU_MAIN_COLOR_TXT_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1097,10 +1138,12 @@ function BU.Main.Headers.Header.CMD.Maroon.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Maroon.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_MAROON}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ··········································
 ## NAVY BLUE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Navy.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_NAVY}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 function BU.Main.Headers.Header.Navy.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_NAVY}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
@@ -1132,6 +1175,7 @@ function BU.Main.Headers.Header.Navy.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Navy.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_NAVY}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Navy.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_NAVY}" "${__BU_MAIN_COLOR_TXT_AQUA}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Navy.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_NAVY}" "${__BU_MAIN_COLOR_TXT_BLACK}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1163,10 +1207,12 @@ function BU.Main.Headers.Header.CMD.Navy.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Navy.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_NAVY}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ············································
 ## OLIVE GREEN LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Olive.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_OLIVE}" "${__BU_MAIN_COLOR_CODE_AQUA}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Olive.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_OLIVE}" "${__BU_MAIN_COLOR_CODE_BLACK}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1198,6 +1244,7 @@ function BU.Main.Headers.Header.Olive.White            { BU.Main.Headers.Base "$
 
 function BU.Main.Headers.Header.Olive.Yellow           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_OLIVE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Olive.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_OLIVE}" "${__BU_MAIN_COLOR_TXT_AQUA}"             		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Olive.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_OLIVE}" "${__BU_MAIN_COLOR_TXT_BLACK}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1229,10 +1276,12 @@ function BU.Main.Headers.Header.CMD.Olive.White        { BU.Main.Headers.Base "$
 
 function BU.Main.Headers.Header.CMD.Olive.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_OLIVE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·······································
 ## ORANGE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Orange.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_ORANGE}" "${__BU_MAIN_COLOR_CODE_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Orange.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_ORANGE}" "${__BU_MAIN_COLOR_CODE_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1264,6 +1313,7 @@ function BU.Main.Headers.Header.Orange.White            { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Orange.Yellow           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_ORANGE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Orange.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ORANGE}" "${__BU_MAIN_COLOR_TXT_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Orange.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ORANGE}" "${__BU_MAIN_COLOR_TXT_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1295,10 +1345,12 @@ function BU.Main.Headers.Header.CMD.Orange.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Orange.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ORANGE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·····································
 ## PINK LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Pink.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_PINK}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Pink.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_PINK}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1330,6 +1382,7 @@ function BU.Main.Headers.Header.Pink.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Pink.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_PINK}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Pink.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PINK}" "${__BU_MAIN_COLOR_TXT_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Pink.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PINK}" "${__BU_MAIN_COLOR_TXT_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1361,10 +1414,12 @@ function BU.Main.Headers.Header.CMD.Pink.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Pink.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PINK}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·······································
 ## PURPLE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Purple.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_PURPLE}" "${__BU_MAIN_COLOR_CODE_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Purple.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_PURPLE}" "${__BU_MAIN_COLOR_CODE_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1396,6 +1451,7 @@ function BU.Main.Headers.Header.Purple.White            { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Purple.Yellow           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_PURPLE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Purple.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PURPLE}" "${__BU_MAIN_COLOR_TXT_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Purple.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PURPLE}" "${__BU_MAIN_COLOR_TXT_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1427,10 +1483,12 @@ function BU.Main.Headers.Header.CMD.Purple.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Purple.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PURPLE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ····································
 ## RED LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Red.Aqua                { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_RED}" "${__BU_MAIN_COLOR_CODE_AQUA}"               	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Red.Black               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_RED}" "${__BU_MAIN_COLOR_CODE_BLACK}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1462,6 +1520,7 @@ function BU.Main.Headers.Header.Red.White               { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Red.Yellow              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_RED}" "${__BU_MAIN_COLOR_CODE_YELLOW}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Red.Aqua            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_RED}" "${__BU_MAIN_COLOR_TXT_AQUA}"               	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Red.Black           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_RED}" "${__BU_MAIN_COLOR_TXT_BLACK}"              	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1493,10 +1552,12 @@ function BU.Main.Headers.Header.CMD.Red.White           { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Red.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_RED}" "${__BU_MAIN_COLOR_TXT_YELLOW}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·······································
 ## SALMON LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Salmon.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SALMON}" "${__BU_MAIN_COLOR_CODE_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 function BU.Main.Headers.Header.Salmon.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SALMON}" "${__BU_MAIN_COLOR_CODE_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
@@ -1528,6 +1589,7 @@ function BU.Main.Headers.Header.Salmon.White            { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Salmon.Yellow           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SALMON}" "${__BU_MAIN_COLOR_CODE_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'false'		|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Salmon.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SALMON}" "${__BU_MAIN_COLOR_TXT_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Salmon.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SALMON}" "${__BU_MAIN_COLOR_TXT_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1559,10 +1621,12 @@ function BU.Main.Headers.Header.CMD.Salmon.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Salmon.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SALMON}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·······································
 ## SILVER LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Silver.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SILVER}" "${__BU_MAIN_COLOR_CODE_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Silver.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SILVER}" "${__BU_MAIN_COLOR_CODE_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1594,6 +1658,7 @@ function BU.Main.Headers.Header.Silver.White            { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Silver.Yellow           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SILVER}" "${__BU_MAIN_COLOR_CODE_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Silver.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SILVER}" "${__BU_MAIN_COLOR_TXT_AQUA}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Silver.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SILVER}" "${__BU_MAIN_COLOR_TXT_BLACK}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1625,10 +1690,12 @@ function BU.Main.Headers.Header.CMD.Silver.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Silver.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SILVER}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ····································
 ## TAN LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Tan.Aqua                { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TAN}" "${__BU_MAIN_COLOR_CODE_AQUA}"               	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Tan.Blue                { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TAN}" "${__BU_MAIN_COLOR_CODE_BLACK}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1660,6 +1727,7 @@ function BU.Main.Headers.Header.Tan.White               { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Tan.Yellow              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TAN}" "${__BU_MAIN_COLOR_CODE_YELLOW}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Tan.Aqua            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TAN}" "${__BU_MAIN_COLOR_TXT_AQUA}"               	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Tan.Blue            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TAN}" "${__BU_MAIN_COLOR_TXT_BLACK}"              	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1691,10 +1759,12 @@ function BU.Main.Headers.Header.CMD.Tan.White           { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Tan.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TAN}" "${__BU_MAIN_COLOR_TXT_YELLOW}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·····································
 ## TEAL LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Teal.Aqua               { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TEAL}" "${__BU_MAIN_COLOR_CODE_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 function BU.Main.Headers.Header.Teal.Black              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TEAL}" "${__BU_MAIN_COLOR_CODE_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
@@ -1726,6 +1796,7 @@ function BU.Main.Headers.Header.Teal.White              { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Teal.Yellow             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TEAL}" "${__BU_MAIN_COLOR_CODE_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'false' 	|| return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Teal.Aqua           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TEAL}" "${__BU_MAIN_COLOR_TXT_AQUA}"              	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Teal.Black          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TEAL}" "${__BU_MAIN_COLOR_TXT_BLACK}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1757,10 +1828,12 @@ function BU.Main.Headers.Header.CMD.Teal.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Teal.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TEAL}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ··········································
 ## TURQUOISE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Turquoise.Aqua          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TURQUOISE}" "${__BU_MAIN_COLOR_CODE_AQUA}"           "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
 function BU.Main.Headers.Header.Turquoise.Black         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TURQUOISE}" "${__BU_MAIN_COLOR_CODE_BLACK}"          "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
@@ -1792,6 +1865,7 @@ function BU.Main.Headers.Header.Turquoise.White         { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Turquoise.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_TURQUOISE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"         "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Turquoise.Aqua      { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TURQUOISE}" "${__BU_MAIN_COLOR_TXT_AQUA}"             "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Turquoise.Black     { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TURQUOISE}" "${__BU_MAIN_COLOR_TXT_BLACK}"            "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1823,10 +1897,12 @@ function BU.Main.Headers.Header.CMD.Turquoise.White     { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Turquoise.Yellow    { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TURQUOISE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ······································
 ## WHITE LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.White.Aqua              { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_WHITE}" "${__BU_MAIN_COLOR_CODE_AQUA}"               "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
 function BU.Main.Headers.Header.White.Black             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_WHITE}" "${__BU_MAIN_COLOR_CODE_BLACK}"              "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
@@ -1858,6 +1934,7 @@ function BU.Main.Headers.Header.White.Turquoise         { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.White.Yellow            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_WHITE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"             "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.White.Aqua          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WHITE}" "${__BU_MAIN_COLOR_TXT_AQUA}"                 "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.White.Black         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WHITE}" "${__BU_MAIN_COLOR_TXT_BLACK}"                "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1890,10 +1967,12 @@ function BU.Main.Headers.Header.CMD.White.Turquoise     { BU.Main.Headers.Base "
 function BU.Main.Headers.Header.CMD.White.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WHITE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
 
-# -----------------------------------------------
+## ----------------------------------------------
 
+# ·······································
 ## YELLOW LINES, DIFFERENTLY COLORED TEXT
 
+# ·······
 # Strings
 function BU.Main.Headers.Header.Yellow.Aqua             { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_YELLOW}" "${__BU_MAIN_COLOR_CODE_AQUA}"              "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
 function BU.Main.Headers.Header.Yellow.Black            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_YELLOW}" "${__BU_MAIN_COLOR_CODE_BLACK}"             "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
@@ -1925,6 +2004,7 @@ function BU.Main.Headers.Header.Yellow.Violet           { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.Yellow.White            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_YELLOW}" "${__BU_MAIN_COLOR_CODE_WHITE}"             "${1}" "${2}" "${3}" "${4}" 'false'     || return 1; return 0; }
 
+# ·····················
 # Command substitutions
 function BU.Main.Headers.Header.CMD.Yellow.Aqua         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_AQUA}"                "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Yellow.Black        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_BLACK}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
@@ -1956,7 +2036,7 @@ function BU.Main.Headers.Header.CMD.Yellow.Violet       { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Yellow.White        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_WHITE}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

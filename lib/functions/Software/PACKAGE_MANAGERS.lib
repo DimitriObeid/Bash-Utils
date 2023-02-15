@@ -96,7 +96,7 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
     BU.Main.Echo.Error ""; BU.Main.Echo.Newline;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PACKAGE MANAGERS INSTALLATION
 
@@ -111,7 +111,7 @@ function BU.Software.PackageManagers.InstallNPM()
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PACKAGE MANAGERS UPDATE
 
@@ -126,6 +126,6 @@ function BU.Software.PackageManagers.UpdateNPM()
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PACKAGE AVAILABLE CHECKING (ON THE MANAGER'S DATABASE)

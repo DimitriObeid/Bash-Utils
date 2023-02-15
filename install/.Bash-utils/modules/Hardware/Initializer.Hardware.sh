@@ -173,13 +173,13 @@ function BU.Hardware.Initializer.Usage()
 # Sourcing each library file stored into the "function/Hardware" directory, from the "${__BU_HARDWARE_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array.
 BU.Hardware.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each file listed into the "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array.
 BU.Hardware.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## END OF THE INITIALIZATION PROCESS OF THE "HARDWARE" MODULE.

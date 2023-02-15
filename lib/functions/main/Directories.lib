@@ -79,6 +79,7 @@ __BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::dir
 
 __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::processing-functions";
 
+# ················································································
 # Separate processing steps displays from the rest of the main script with a line.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -97,6 +98,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FU
 #   - BU.Main.Errors.HandleErrors()             -> Main -> Errors.lib
 
 #   - BU.Main.Headers.DrawLine()                -> Main -> Headers.lib
+
 function BU.Main.Directories.ProcessingDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -138,13 +140,14 @@ function BU.Main.Directories.ProcessingDir()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FOLDER CREATION FUNCTIONS
 ## DEBUG ID : folder-creation-functions
 
 __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::folder-creation-functions";
 
+# ···········································
 # Overwriting an existing directory's content
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -159,6 +162,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATI
 #	- BU.Main.Echo.Success()		                -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
+
 function BU.Main.Directories.OverwriteDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -209,6 +213,7 @@ function BU.Main.Directories.OverwriteDir()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ·········································································································
 # folder creation function, with the parent folder's path and the new folder's name as separated arguments.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -230,6 +235,7 @@ function BU.Main.Directories.OverwriteDir()
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
 #   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
+
 function BU.Main.Directories.Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -290,6 +296,7 @@ function BU.Main.Directories.Make()
     fi
 }
 
+# ····································································································
 # Folder creation function, with the parent folder's path and the directory's name as unique argument.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -299,6 +306,7 @@ function BU.Main.Directories.Make()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
 function BU.Main.Directories.MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -326,7 +334,8 @@ function BU.Main.Directories.MakePath()
     return 0;
 }
 
-# The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MAIN_STAT_LOG variable's value is "true",
+# ·····························································································································
+# The function "CheckSTAT_LOG()" creates the log file and its path when the "${__BU_MAIN_STAT_LOG}" variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -336,6 +345,7 @@ function BU.Main.Directories.MakePath()
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()      -> Main -> Status.lib
+
 function BU.Main.Directories.MkTmpDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -363,13 +373,14 @@ function BU.Main.Directories.MkTmpDir()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PATH PROCESSING
 ## DEBUG ID : path-processing
 
 __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::path-processing";
 
+# ························································
 # Getting the name of a target directory without its path.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -379,6 +390,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSI
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
+
 function BU.Main.Directories.GetDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -414,6 +426,7 @@ function BU.Main.Directories.GetDirectoryName()
     fi
 }
 
+# ·····························································································
 # Checking if the directory's sub-folders paths passed as argument exists, then print its path.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -423,6 +436,7 @@ function BU.Main.Directories.GetDirectoryName()
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
+
 function BU.Main.Directories.GetDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -448,6 +462,7 @@ function BU.Main.Directories.GetDirectoryPath()
     fi
 }
 
+# ····································································································
 # Getting parent folder's name only (without its full path from the root directory), then printing it.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -457,6 +472,7 @@ function BU.Main.Directories.GetDirectoryPath()
 #   - BU.Main.Echo.DebugEnd()                               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                         -> Main -> Errors.lib
+
 function BU.Main.Directories.GetParentDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -496,6 +512,7 @@ function BU.Main.Directories.GetParentDirectoryName()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ······································································
 # Getting parent folder's path from the root directory, then printing it
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -507,6 +524,7 @@ function BU.Main.Directories.GetParentDirectoryName()
 #   - BU.Main.Errors.HandleErrors()                         -> Main -> Errors.lib
 
 #   - BU.Main.Text.ReverseStringWordsOrder()                -> Main -> Text.lib
+
 function BU.Main.Directories.GetParentDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -579,7 +597,9 @@ function BU.Main.Directories.GetParentDirectoryPath()
     return 0;
 }
 
-# Check if the script is about to work at the root directory ('/').
+# ·····························································································
+# Checking if the script is about to work at the root directory ('/') or into one of its direct 
+# child directories ("/bin", "/etc", "/usr", "/var" for example).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
@@ -592,6 +612,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
 #   - BU.Main.Headers.Header.Warning()  -> Main -> Headers.lib
 
 #   - BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()    -> Main -> Inputs.lib
+
 function BU.Main.Directories.TriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -640,7 +661,7 @@ function BU.Main.Directories.TriggerRootDirWarning()
 	return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

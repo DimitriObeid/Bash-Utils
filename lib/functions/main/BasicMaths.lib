@@ -78,7 +78,9 @@ __BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
 
 __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}::numeric-conversions";
 
-# Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
+# ··············································································································
+# Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
+# decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
 # Initial source of this AWK script (since it's not mine, plus I added more informations as comments and the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
@@ -87,6 +89,7 @@ __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="${_
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 #   - BU.Main.Echo.Msg()                -> Main -> Echo.lib
+
 function BU.Main.BasicMaths.BytesToHuman()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -147,6 +150,7 @@ function BU.Main.BasicMaths.BytesToHuman()
     return 0;
 }
 
+# ·································································
 # Negative number (float or int) to positive number (float or int).
 function BU.Main.BasicMaths.NegativeToPositive()
 {
@@ -159,6 +163,7 @@ function BU.Main.BasicMaths.NegativeToPositive()
     return 0;
 }
 
+# ·································································
 # Positive number (float or int) to negative number (float or int).
 function BU.Main.BasicMaths.PositiveToNegative()
 {
@@ -171,7 +176,7 @@ function BU.Main.BasicMaths.PositiveToNegative()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

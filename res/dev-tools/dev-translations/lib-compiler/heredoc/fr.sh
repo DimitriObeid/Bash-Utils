@@ -44,7 +44,7 @@ cat <<-EOF > "${v_filename_tmp}"
 # Si le message est affiché à l'intérieur d'une fonction, vous pouvez écrire la directive "# shellcheck disable=SC2059" à la ligne se situant juste au dessus de celle déclarant la fonction en question.
 
 
-# -----------------------------------------------------------------------------------------
+## ----------------------------------------------------------------------------------------
 # N'EXÉCUTEZ PAS DIRECTEMENT CE SCRIPT, à la place, incluez-le dans votre script principal.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

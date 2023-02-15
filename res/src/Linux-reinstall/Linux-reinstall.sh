@@ -30,7 +30,7 @@ if ! source "${__BU_MAIN_LIB_FILE_INITIALIZER}"; then
     echo >&2; echo -e "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : unable to source the initialization file." >&2; echo >&2; exit 1;
 fi
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## DEFINING RESOURCE FILES AND FOLDERS
 
@@ -54,7 +54,7 @@ BU.Main.Echo.Newstep "All the needed directories are found !"
 # Ending the initialization process.
 Header.Green "END OF THE $(BU.Main.Decho.Green "${__BU_MAIN_PROJECT_NAME^^}")'S INITIALIZATION";
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -68,7 +68,7 @@ Header.Green "END OF THE $(BU.Main.Decho.Green "${__BU_MAIN_PROJECT_NAME^^}")'S 
 # shellcheck disable=SC2034
 __ARGV=("${@}");
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## MANDATORY ARGUMENTS
 
@@ -76,7 +76,7 @@ __ARGV=("${@}");
 __ARG_INSTALL=${1:-$'\0'};  # First argument : the type of packages to install (SIO version (for work) or personal (work + software for personal usage)).
 __ARG_INSTALL_INDEX='1';    # Packages installation argument's index.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -236,7 +236,7 @@ function LaunchScript
         "Le script ne sera pas exécuté.$(BU.Main.Echo.Newline)Abandon.$(exit 0)";
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## DÉFINITION DES FONCTIONS DE CONNEXION À INTERNET ET DE MISES À JOUR
 # Vérification de la connexion à Internet.

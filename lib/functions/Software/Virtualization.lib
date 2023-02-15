@@ -118,7 +118,7 @@ function BU.Software.Virtualization.InstallVirtualbox.Linux()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## OSX VIRTUALIZATION SOFTWARES
 
@@ -150,7 +150,7 @@ function BU.Software.Virtualization.InstallVirtualbox.OSX()
 }
 
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## WINDOWS VIRTUALIZATION SOFTWARES
 
@@ -182,7 +182,7 @@ function BU.Software.Virtualization.InstallVMwareWorkstation.Windows()
 }
 
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## MULTI-PLATFORM INSTALLATION
 

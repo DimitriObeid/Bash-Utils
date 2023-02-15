@@ -27,7 +27,7 @@
 
 # Feel free to source any dependencies here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -64,7 +64,7 @@ __BU_ARG_DEL_EMPTY_LINES="${2:-$'\0'}";
 # DESC : Delete comments that are not on the same line as a piece of code.
 __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -76,7 +76,7 @@ __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 # Feel free to define an array of arguments here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -92,7 +92,7 @@ __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 # Feel free to define arrays here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -126,7 +126,7 @@ __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/init
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -150,7 +150,7 @@ function PrintLine()
     done; printf "\n";
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -201,7 +201,7 @@ function BytesToHuman()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 

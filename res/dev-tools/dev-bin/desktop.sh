@@ -27,7 +27,7 @@ if ! source "/usr/local/lib/Bash-utils/lib/Initializer.sh"; then
     echo; echo -e "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : unable to source the initialization file."; echo; exit 1;
 fi
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -50,7 +50,7 @@ fi
 # DESC : Path of the file to create, including its name.
 __P_DESKTOP_PATH=${1:-$'\0'};
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -62,7 +62,7 @@ __P_DESKTOP_PATH=${1:-$'\0'};
 
 # Feel free to define an array of arguments here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -78,7 +78,7 @@ __P_DESKTOP_PATH=${1:-$'\0'};
 
 # Feel free to define arrays here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -90,7 +90,7 @@ __P_DESKTOP_PATH=${1:-$'\0'};
 
 # Feel free to define variables here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 

@@ -209,7 +209,7 @@ function BU.Software.OSX.PackageManagers.NPM.Autoremove()
 	return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 

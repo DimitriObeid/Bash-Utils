@@ -145,7 +145,7 @@ function BU.Main.Initializer.SourceConfig()
 	return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -165,7 +165,7 @@ __BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "${__BU_MAIN_MODU
 # shellcheck disable=SC1090
 BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
@@ -177,7 +177,7 @@ BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_INITIALIZER__TEXT_LIB_P
 # shellcheck disable=SC1090
 BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_MODULE_CONF_FILE_INIT_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_MODULE_CONF_FILE_INIT_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -450,7 +450,7 @@ for value in "${__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY[@]}"; do
     fi
 done
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -461,14 +461,14 @@ done
 # Sourcing each library file stored into the function/main directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array.
 BU.Main.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each file listed into the "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array.
 BU.Main.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -492,7 +492,7 @@ BU.Main.Directories.MkTmpDir || {
     if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
 rm -rfv "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/:?}/"*;
@@ -554,7 +554,7 @@ fi
 
 exit 0;
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## END OF THE INITIALIZATION PROCESS OF THE "MAIN" MODULE.
 

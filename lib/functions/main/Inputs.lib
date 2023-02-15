@@ -84,7 +84,7 @@ fi; exit 1; fi
 #
 # __BU_MAIN_INPUTS_CANCEL_EXEC="Aborting the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")'s execution.";
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -100,7 +100,8 @@ __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="inpu
 
 __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::directories.lib-file";
 
-# "BU.Main.Directories.TriggerRootDirWarning" function.
+# ·······················································
+# "BU.Main.Directories.TriggerRootDirWarning()" function.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
@@ -114,6 +115,7 @@ __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__D
 
 #   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
+
 function BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -160,13 +162,14 @@ function BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()
 	esac
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## "Errors.lib" FILE
 ## DEBUG ID : errors.lib-file
 
 __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::errors.lib-file";
 
+# ··································································································
 # "BU.Main.Errors.HandleErrors" function, with the "${__BU_MAIN_STAT_ECHO}" variable set to "false".
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -181,6 +184,7 @@ __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__E
 
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
+
 function BU.Main.Inputs.Read_Errors.HandleErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -227,7 +231,7 @@ function BU.Main.Inputs.Read_Errors.HandleErrors()
 	esac
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -242,6 +246,7 @@ __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS=
 
 __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}::sanitizing-user-inputs-before-execution";
 
+# ·····································································
 # Sanitizing a string before its evaluation with the "$(eval)" command.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -249,6 +254,7 @@ __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS_
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
+
 function BU.Main.Inputs.Sanitize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

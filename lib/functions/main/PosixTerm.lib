@@ -81,6 +81,11 @@ __BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS="posixterm
 __BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG="${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}::displaying-text-and-more-while-a-task-is-ongoing";
 
 # Display a countdown while a task is ongoing.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.PosixTerm.DisplayCountdown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -92,6 +97,11 @@ function BU.Main.PosixTerm.DisplayCountdown()
 }
 
 # Display a progress bar while a task is ongoing.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.PosixTerm.DisplayProgressBar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -103,6 +113,12 @@ function BU.Main.PosixTerm.DisplayProgressBar()
 }
 
 # Display a spinner while a task is ongoing.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg          -> Main -> Echo.lib
+
 function BU.Main.PosixTerm.DisplaySpinner()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -131,7 +147,7 @@ function BU.Main.PosixTerm.DisplaySpinner()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

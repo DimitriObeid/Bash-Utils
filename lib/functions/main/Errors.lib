@@ -82,6 +82,7 @@ __BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="errors::errors-ha
 
 __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}::classic-errors-handling";
 
+# ······················································································
 # Saving time when displaying a newline, an error message and an exit or a return value.
 
 # WARNING ! DO NOT CALL HERE ANY FUNCTION THAT CALL THIS FUNCTION DIRECTLY OR INDIRECTLY,
@@ -98,6 +99,7 @@ __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS
 
 #   - BU.ModuleInit.SetInitErrorMsg()   -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg() -> Modules initializer script
+
 function BU.Main.Errors.HandleSmallErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -175,13 +177,14 @@ function BU.Main.Errors.HandleSmallErrors()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## EXIT AND RETURN CODES HANDLING
 ## DEBUG ID : exit-and-return-codes-handling
 
 __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING="${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}::exit-and-return-codes-handling";
 
+# ····································································································
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -194,6 +197,7 @@ __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS
 #   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
 
 #   - BU.ModuleInit.IsInScript()        -> Modules initializer script
+
 function BU.Main.Errors.Exit()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -235,22 +239,29 @@ function BU.Main.Errors.Exit()
     fi
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## SCRIPT'S ERRORS HANDLING
 ## DEBUG ID : script-errors-handling
 
 __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING="${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}::script-errors-handling";
 
+# ···············································································································································································································
 # "BU.Main.Errors.HandleErrors()" function --> Handling file name presence      | Featured function(s) and file(s) by module(s) and from the "functions" folder : BU.Main.Decho.Decho.Path() -> Main -> Decho.lib
+
 function BU.Main.Errors.HandleErrors_File()        { if [ -z "${1}" ]; then BU.Main.Decho.Decho.Path "<no specified file>"; else BU.Main.Decho.Decho.Path "${1}"; fi; }
 
+# ···················································································································································································································
 # "BU.Main.Errors.HandleErrors()" function --> Handling function name presence  | Featured function(s) and file(s) by module(s) and from the "functions" folder : BU.Main.Decho.Decho.Function() -> Main -> Decho.lib
+
 function BU.Main.Errors.HandleErrors_Function()    { if [ -z "${1}" ]; then BU.Main.Decho.Decho.Function "<no specified function>"; else BU.Main.Decho.Decho.Function "${1}"; fi; }
 
+# ····················································································································································································································
 # "BU.Main.Errors.HandleErrors()" function --> Handling line number presence    | Featured function(s) and file(s) by module(s) and from the "functions" folder : BU.Main.Decho.Decho.Highlight() -> Main -> Decho.lib
+
 function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.Main.Decho.Decho.Highlight "<no specified line>"; else BU.Main.Decho.Decho.Highlight "${1}"; fi; }
 
+# ·························
 # Handling command outputs.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -270,6 +281,7 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 #   - BU.ModuleInit.HandleErrors()              -> Modules initializer script
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
+
 function BU.Main.Errors.HandleErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -466,7 +478,7 @@ function BU.Main.Errors.HandleErrors()
     fi
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

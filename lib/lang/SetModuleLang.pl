@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## EXIT CODES :
 
@@ -15,14 +15,14 @@ $__BU_SML__NO_FILE_SPECIFIED = 2;
 # 10022 : An invalid argument was supplied.
 $__BU_SML__INVALID_ARG = 10022;
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## VARIABLES
 
 my ($file_extension) = $file =~ /(\.[^.]+)$/;
 my $output_file = ""
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 # ARGUMENTS :
 #	- $arg_file_path	--> MANDATORY	: Path of the translations CSV file to process.
@@ -32,7 +32,7 @@ my $output_file = ""
 
 my ($arg_file_path; $arg_target_col $arg_output_file $arg_print) = @ARGV;
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 # If no file is passed to the "$arg_file_path" parameter.
 if (-z $arg_file_path) {

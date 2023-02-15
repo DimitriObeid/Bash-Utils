@@ -35,7 +35,7 @@ if ! BashUtils_InitModules \
 	    echo >&2; echo "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
 fi
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -57,7 +57,7 @@ fi
 # DESC : Targeted language
 __ARG_LANG=${1:-$'\0'};
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## DOCUMENT TYPE
 
@@ -67,7 +67,7 @@ __ARG_LANG=${1:-$'\0'};
 # DESC : Type of document (master documentation, configurations, module initializer resources or library functions).
 __ARG_TYPE=${2:-$'\0'};
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FILE NAME
 
@@ -77,7 +77,7 @@ __ARG_TYPE=${2:-$'\0'};
 # DESC : Name of the file to create.
 __ARG_FILENAME=${3:-$'\0'};
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## AUTHOR'S NAME
 
@@ -87,7 +87,7 @@ __ARG_FILENAME=${3:-$'\0'};
 # DESC : Author's name
 __ARG_AUTHOR=${4:-$'\0'};
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -99,7 +99,7 @@ __ARG_AUTHOR=${4:-$'\0'};
 
 # Feel free to define an array of arguments here if needed.
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -116,7 +116,7 @@ __ARG_AUTHOR=${4:-$'\0'};
 # Supported languages array.
 __LATEX_CREATE_DOC__SUPPORTED_LANGUAGES=('en (English)' 'fr (French | Français)');
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -129,7 +129,7 @@ __LATEX_CREATE_DOC__SUPPORTED_LANGUAGES=('en (English)' 'fr (French | Français)
 # Script's resources directory.
 __LATEX_CREATE_DOC__RES_DIR="${__BU_MAIN_MODULE_DEVTOOLS_SRC}/${__BU_MAIN_PROJECT_NAME}";
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 

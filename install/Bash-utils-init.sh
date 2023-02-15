@@ -144,7 +144,7 @@ function BU.ModuleInit.SetInitErrorMsg()                { if BU.Main.Status.Chec
 # Unsetting the former function's result.
 function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.CheckStatIsInitializing && [ -n "${v_msg_arr_permission_global_backup}" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_permission_global_backup}"; unset v_msg_arr_permission_global_backup; fi }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
@@ -184,7 +184,7 @@ function BU.ModuleInit.DefineTraps()
     trap "BU.ModuleInit.SIGINT; BU.ModuleInit.Exit 2" SIGINT;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE TRANSLATIONS OF MESSAGES BEFORE THE INCLUSION OF THE TRANSLATION FILES.
 
@@ -287,7 +287,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
     };
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
 
@@ -664,7 +664,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
     fi
 }
 #"
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
@@ -1335,7 +1335,7 @@ function BU.ModuleInit.PrintLogError()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
@@ -1646,7 +1646,7 @@ function BU.ModuleInit.SourcingFailure()
     if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
@@ -1786,7 +1786,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     #**** Code ****
     v_module_name="$(echo "${p_module}" | cut -d' ' -f1)";
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## PROCESSING THE 'module' VALUE'S ARGUMENTS VALUES
 
@@ -1819,7 +1819,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 			# Unsetting the "module" value from the newly created array, in order to avoid an "unsupported argument" error.
 			unset "module_array[0]";
 
-            # -----------------------------------------------
+            ## ----------------------------------------------
 
             ## MODULE : DEFINING RESOURCES FOR THE « module » ARGUMENTS PROCESSING
 
@@ -1862,7 +1862,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
             # Processing the list of arguments for the "module" module.
             for module_args in "${module_array[@]}"; do
 
-                # -----------------------------------------------
+                ## ----------------------------------------------
 
                 ## "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
 
@@ -1939,7 +1939,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         ;;
                     esac
 
-                # -----------------------------------------------
+                ## ----------------------------------------------
 
                 ## MODULE : LOG MESSAGES PROCESSING
 
@@ -2024,7 +2024,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         ;;
 					esac
 
-                # -----------------------------------------------
+                ## ----------------------------------------------
 
                 ## MODULE : MODES PROCESSING
 
@@ -2089,7 +2089,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         ;;
 					esac
 
-                # -----------------------------------------------
+                ## ----------------------------------------------
 
                 ## MODULE : HANDLING UNSUPPORTED ARGUMENTS
 
@@ -2137,7 +2137,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         fi
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE AND THE 'main' MODULE PASSING
 
@@ -2151,7 +2151,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## 'module' VALUE NOT PASSED, BUT 'main' MODULE PASSED AS FIRST ARGUMENT
 
@@ -2167,7 +2167,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## MISSING 'main' MODULE AFTER THE 'module' VALUE
 
@@ -2190,7 +2190,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         return 1;
 
-	# -----------------------------------------------
+	## ----------------------------------------------
 
     ## 'Main' MODULE PASSED AS FIRST ARGUMENT, BUT BEFORE THE 'module' VALUE
 
@@ -2210,7 +2210,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
 
@@ -2219,7 +2219,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         return 0;
 
-    # -----------------------------------------------
+    ## ----------------------------------------------
 
     ## NO 'module' AND 'main' PASSED AS FIRST, THEN AS SECOND ARGUMENTS
 
@@ -2241,7 +2241,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -2265,20 +2265,20 @@ if ! ps -a | grep -E "${$}" | grep "bash" > /dev/null; then
     BU.ModuleInit.IsInScript && exit 1; return 1;
 fi
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## CHECKING THE CURRENT VERSION OF THE LANGUAGE
 
 # Checking the version of the Bash language currently used on the user's system.
 BU.ModuleInit.CheckBashMinimalVersion || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## CALLING THE TRAPS RESOURCES
 
 BU.ModuleInit.DefineTraps;
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## DEFINING GLOBAL VARIABLES
 
@@ -2446,9 +2446,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # ------------------------------------------------------------------------------------
+    ## -----------------------------------------------------------------------------------
     # Translation files for the initializer script + the main module config and init files
-    # ------------------------------------------------------------------------------------
+    ## -----------------------------------------------------------------------------------
 
     __bu_module_init__config_init_lang_dir_path__lineno="$(( LINENO + 2 ))";
 
@@ -2542,9 +2542,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
     __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
 
-    # --------------------------------------------------------------------------------------
+    ## -------------------------------------------------------------------------------------
     # Array of allowed values for the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" global variable
-    # --------------------------------------------------------------------------------------
+    ## -------------------------------------------------------------------------------------
 
     __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO + 2 ))";
 
@@ -2563,7 +2563,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 # Calling the function previously defined, or else the global variables will not be declared.
 BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## CALLING THE NEEDED FUNCTIONS (DEFINED IN THIS FILE) THAT MUST BE CALLED BEFORE INITIALIZING THE FIRST GLOBAL VARIABLES
 
@@ -2583,7 +2583,7 @@ BU.ModuleInit.IsFrameworkLocalizedCompiled || {
 
 declare __BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED='true';
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## DEFINING NEW GLOBAL VARIABLES TO STORE THE INITIALIZATION LOGS AND DISPLAY THEM OR NO
 
@@ -2607,7 +2607,7 @@ declare __BU_MODULE_INIT_MSG_ARRAY_MODE='--mode-log-partial';
 # without being redirected to the screen too (these instructions are processed in the "BU.ModuleInit.Msg" function).
 declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
@@ -2615,7 +2615,7 @@ declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
 __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg "${__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES}")");
 __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -2683,14 +2683,14 @@ function BashUtils_InitModules()
 	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
 	for module in "${p_modules_list[@]}"; do
 
-		# -----------------------------------------------
+		## ----------------------------------------------
 
 		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
 
 		# Calling the function which processes the « module » argument and its parameters, along with the « main » module.
         BU.ModuleInit.ProcessFirstModuleParameters "${module}" "${v_index}" || { v_loop_error='error'; break; }
 
-		# -----------------------------------------------
+		## ----------------------------------------------
 
 		## DEFINING LOCAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
@@ -2699,7 +2699,7 @@ function BashUtils_InitModules()
 
         v_module_name="$(echo "${module}" | cut -d' ' -f1)";
 
-		# -----------------------------------------------
+		## ----------------------------------------------
 
 		## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
 
@@ -2749,7 +2749,7 @@ function BashUtils_InitModules()
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
         if [[ "${module}" != 'module --'* ]]; then
 
-            # -----------------------------------------------
+            ## ----------------------------------------------
 
             # MODULES' CONFIGURATION FILES SOURCING
 
@@ -2775,7 +2775,7 @@ function BashUtils_InitModules()
             else
                 BU.ModuleInit.Msg;
 
-                # ---------------------------------------------------------------------------------------------------------------
+                ## --------------------------------------------------------------------------------------------------------------
                 # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
 
                 # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
@@ -2811,7 +2811,7 @@ function BashUtils_InitModules()
 
                 unset v_module_aliases_file_name;
 
-                # ----------------------------------------------------
+                ## ---------------------------------------------------
                 # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
 
                 # shellcheck disable=SC2059
@@ -2870,7 +2870,7 @@ function BashUtils_InitModules()
                 unset v_module_config_file_name;
             fi
 
-            # -----------------------------------------------
+            ## ----------------------------------------------
 
             # MODULES' INITIALIZATION FILES SOURCING
 
@@ -2895,7 +2895,7 @@ function BashUtils_InitModules()
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE}" "${v_module_name}")" '-' 'msg';
 
-                # -----------------------------------------------------
+                ## ----------------------------------------------------
                 # MANDATORY : SOURCING THE MODULE'S INITIALIZATION FILE
 
                 # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
@@ -3161,7 +3161,7 @@ function BU.ModuleInit.UnsourceModules()
     return 0;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -3206,7 +3206,7 @@ function BU.ModuleInit.HandleErrors()
     return 1;
 }
 
-# -----------------------------------------------
+## ----------------------------------------------
 
 ## PARSING THE TRANSLATION FILE OF THE CURRENTLY PROCESSED MODULE
 
