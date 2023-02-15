@@ -81,7 +81,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHEC
 
 # Checking if the variable is an array.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsArray()
@@ -98,7 +98,7 @@ function BU.Main.Checkings.IsArray()
 
 # Checking if an array in empty.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsArrayEmpty()
@@ -119,7 +119,7 @@ function BU.Main.Checkings.IsArrayEmpty()
 
 # Checking if an array is not empty.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsArrayNotEmpty()
@@ -147,7 +147,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SU
 
 # Checking if the value is a command substitution.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsAlphaNumChar()    -> Main -> Checkings.lib (this file)
 #   - BU.Main.Checkings.IsAlphaNumString()  -> Main -> Checkings.lib (this file)
 #   - BU.Main.Checkings.IsFloat()           -> Main -> Checkings.lib (this file)
@@ -171,7 +171,7 @@ function BU.Main.Checkings.IsCMD()
 
 # Checking if the value is not a command substitution.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsCMD() -> Main -> Checkings.lib (this file)
 
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -197,7 +197,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMA
 # Checking if a given hour is formatted in timestamp format, with separators, and in these formats :
 #   - hh:mm:ss
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;}; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -210,7 +210,7 @@ function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "
 #   - YYYYMMDD
 #   - DDMMYYYY
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ $(date "+%d-%m-%Y" -d "${1}" > /dev/null) ]] || { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;}; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -223,7 +223,7 @@ function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "
 #   - YYYYMMDD hh:mm:ss
 #   - DDMMYYYY hh:mm:ss
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsDateYMD() -> Main -> Checkings.lib (this file)
 
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
@@ -277,7 +277,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VAL
 
 # Checking if a number is even.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsEven()
@@ -294,7 +294,7 @@ function BU.Main.Checkings.IsEven()
 
 # Checking if a number is uneven.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.isOdd()
@@ -313,7 +313,7 @@ alias BU.Main.Checkings.IsUneven='BU.Main.Checkings.isOdd';
 
 # Checking floating value.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsFloat()
@@ -330,7 +330,7 @@ function BU.Main.Checkings.IsFloat()
 
 # Checking negative only floating value.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsNegativeFloat()
@@ -347,7 +347,7 @@ function BU.Main.Checkings.IsNegativeFloat()
 
 # Checking positive only floating value.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsPositiveFloat()
@@ -364,7 +364,7 @@ function BU.Main.Checkings.IsPositiveFloat()
 
 # Checking integer value.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsInt()
@@ -381,7 +381,7 @@ function BU.Main.Checkings.IsInt()
 
 # Checking negative only integer value.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsNegativeInt()
@@ -398,7 +398,7 @@ function BU.Main.Checkings.IsNegativeInt()
 
 # Checking positive only integer value.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsPositiveInt()
@@ -422,7 +422,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS
 
 # Checking if the value is an alphabetic character (not any number allowed).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaChar()
@@ -439,7 +439,7 @@ function BU.Main.Checkings.IsAlphaChar()
 
 # Checking if the value is an alphabetic string (not any number allowed).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaString()
@@ -456,7 +456,7 @@ function BU.Main.Checkings.IsAlphaString()
 
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaStringOnly()
@@ -478,7 +478,7 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 
 # Checking if the value is a character.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaNumChar()
@@ -495,7 +495,7 @@ function BU.Main.Checkings.IsAlphaNumChar()
 
 # Checking if the value is an alphanumeric string.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaNumString()
@@ -512,7 +512,7 @@ function BU.Main.Checkings.IsAlphaNumString()
 
 # Checking if the value is an alphabetic string only (not less than two characters).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.IsAlphaNumStringOnly()
@@ -558,7 +558,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDEN
 
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Checkings.CheckRootEUID()
@@ -582,7 +582,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CH
 
 # Check if hard drive is full.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
@@ -750,7 +750,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHE
 
 # Checking for an existent directory path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Path()    -> Main -> Decho.lib
 
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
@@ -781,7 +781,7 @@ function BU.Main.Checkings.CheckDirPathExists()
 
 # Checking if a directory was successfully created.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Checkings.CheckDirPathWasCreated()
@@ -811,7 +811,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS
 
 # Checking for an existent file path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Path()    -> Main -> Decho.lib
 
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
@@ -844,7 +844,7 @@ function BU.Main.Checkings.CheckFilePathExists()
 
 # Checking if a file was successfully created.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 function BU.Main.Checkings.CheckFilePathWasCreated()
@@ -867,7 +867,7 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 
 # Checking for the presence of the project's log path, whose path is stored in the "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" global variable.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Function()        -> Main -> Decho.lib
 #   - BU.Main.Decho.Decho.Highlight()       -> Main -> Decho.lib
 #   - BU.Main.Decho.Decho.Path()            -> Main -> Decho.lib
@@ -924,7 +924,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 
 # Accepted arguments : 'nodate', '<an empty string>'
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.CheckDiskUsedSpace()    -> Main -> Checkings.lib (this file)
 #   - BU.Main.Checkings.CheckProjectLogPath()   -> Main -> Checkings.lib (this file)
 
@@ -1283,7 +1283,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 
 # Check project related file presence, or create this file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Checkings.CheckProjectRelatedFile() -> Main -> Args.lib
 
 #   - BU.Main.Checkings.CheckDirPathExists()            -> Main -> Checkings.lib (this file)
@@ -1432,7 +1432,7 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="
 
 # WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER !!!
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.CheckProjectRelatedFile()   -> Main -> Checkings.lib (this file)
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib

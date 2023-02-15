@@ -79,7 +79,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUN
 
 # This function only repeats some parts of the following function.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 #   - BU.Main.Echo.Error()          -> Main -> Echo.lib
@@ -122,7 +122,7 @@ function BU.Main.Files.__ProcessingFile()
 
 # Separate processing steps displays from the rest of the main script between two horizontal lines.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.ProcessingFile()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
@@ -192,7 +192,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_
 
 # Overwriting a file
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.OverwriteFile()           -> Main -> Args.lib
 
 #   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib
@@ -242,7 +242,7 @@ function BU.Main.Files.OverwriteFile()
 
 # File creation function, with the parent folder's path and the file's name as separated arguments.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.Make()                    -> Main -> Args.lib
 
 #   - BU.Main.Checkings.CheckDiskUsedSpace()        -> Main -> Checkings.lib
@@ -330,7 +330,7 @@ function BU.Main.Files.Make()
 
 # File creation function, with the parent folder's path and the file's name as unique argument.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.MakePath()            -> Main -> Args.lib
 
 #   - BU.Main.Checkings.CheckDiskUsedSpace()    -> Main -> Checkings.lib
@@ -370,7 +370,7 @@ function BU.Main.Files.MakePath()
 # Create a file directly in the computer's memory to redirect the informations that are often updated instead of using the hard drive.
 # This method is safer for SSD drives, faster for HDD drives, and no permissions are needed.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.MakeFileInMemory()
@@ -391,7 +391,7 @@ function BU.Main.Files.MakeFileInMemory()
 
 # Creating the project's log file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.CheckDiskUsedSpace()        -> Main -> Checkings.lib
 #   - BU.Main.Checkings.CheckProjectRelatedFile()   -> Main -> Checkings.lib
 
@@ -562,7 +562,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_
 
 # File deletion function.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.DeleteFile()  -> Main -> Args.lib
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
@@ -598,7 +598,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_
 
 # Checking if a file is in read-only mode.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsReadOnly()
@@ -621,7 +621,7 @@ function BU.Main.Files.IsReadOnly()
 
 # Checking if a file is readable AND writable.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsRW()
@@ -644,7 +644,7 @@ function BU.Main.Files.IsRW()
 
 # Checking if a file is readable, writable and executable.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsRWX()
@@ -667,7 +667,7 @@ function BU.Main.Files.IsRWX()
 
 # Checking if a file is in readable AND executable.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsRX()
@@ -690,7 +690,7 @@ function BU.Main.Files.IsRX()
 
 # Checking if a file is writable only.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsWriteOnly()
@@ -713,7 +713,7 @@ function BU.Main.Files.IsWriteOnly()
 
 # Checking if a file is writable AND executable.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.IsWX()
@@ -736,7 +736,7 @@ function BU.Main.Files.IsWX()
 
 # Checking if a file is in executable only.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 function BU.Main.Files.IsExecutableOnly()
@@ -766,7 +766,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_I
 
 # Getting the size of a file in bytes.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.BasicMaths.BytesToHuman() -> Main -> BasicMaths.lib
 
 #   - BU.Main.Checkings.IsInt()         -> Main -> Checkings.lib
@@ -815,7 +815,7 @@ function BU.Main.Files.GetByteSize()
 
 # PLEASE NOTE : Some file systems don't store the file's creation date. In this case, the "stat" command will return '0'.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -846,7 +846,7 @@ function BU.Main.Files.GetCreationDate()
 
 # Getting the total number of characters in a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -869,7 +869,7 @@ function BU.Main.Files.GetCharactersNumber()
 
 # Getting the target file's extension.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                -> Main -> Echo.lib
@@ -893,7 +893,7 @@ function BU.Main.Files.GetExtension()
 
 # Getting the last file's access date.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -916,7 +916,7 @@ function BU.Main.Files.GetLastAccess()
 
 # Getting the last file's modification date.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -939,7 +939,7 @@ function BU.Main.Files.GetLastModification()
 
 # Getting the target file's mime type.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
@@ -961,7 +961,7 @@ function BU.Main.Files.GetMIMEType()
 
 # Getting the total number of lines in a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -984,7 +984,7 @@ function BU.Main.Files.GetLinesNumber()
 
 # Getting the max line length in a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -1007,7 +1007,7 @@ function BU.Main.Files.GetMaxLineLength()
 
 # Getting the owner of a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -1030,7 +1030,7 @@ function BU.Main.Files.GetOwnerName()
 
 # Getting the group of the owner of a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -1053,7 +1053,7 @@ function BU.Main.Files.GetOwnerGroup()
 
 # Getting the total number of characters in a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
@@ -1083,7 +1083,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_I
 
 # Setting a fake last access date to a file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__FilesSetFileLastAccess()    -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
@@ -1114,7 +1114,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING=
 
 # Sourcing dependencies files.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()        -> Main -> Echo.lib
@@ -1168,7 +1168,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARS
 
 # Getting a specific line from a text file.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.GetLineFromTextFile()
@@ -1220,7 +1220,7 @@ __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESS
 
 # Adding files or folders into an archive.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__FilesCompress()     -> Main -> Args.lib
 #   - BU.Main.Args.PrintBadOption()     -> Main -> Args.lib
 
@@ -1272,7 +1272,7 @@ function BU.Main.Files.AddToArchive()
 
 # Compressing archives according to the compression command.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Files.CompressCMD()
@@ -1299,7 +1299,7 @@ function BU.Main.Files.CompressCMD()
 
 # Compressing archives according to the used compression method.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib
 #   - BU.Main.Args__Files.CompressFormat()  -> Main -> Args.lib
 
@@ -1389,7 +1389,7 @@ function BU.Main.Files.CompressFormat()
 
 # Deleting a file or a folder stored in an archive.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.PrintBadOption()     -> Main -> Args.lib
 
 #   - BU.Main.Checkings.IsArrayEmpty()  -> Main -> Checkings.lib
@@ -1441,7 +1441,7 @@ function BU.Main.Files.SearchInArchive()
 
 # Uncompressing archives according to the used compression method AND the (un)compression command's name.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.UncompressCMD()   -> Main -> Args.lib
 
 #   - BU.Main.CMDS.GetCommandPath()         -> Main -> CMDS.lib
@@ -1507,7 +1507,7 @@ function BU.Main.Files.UncompressCMD()
 
 # Uncompressing archives according to the used compression method.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Files.UncompressFormat()    -> Main -> Args.lib
 
 #   - BU.Main.CMDS.GetCommandPath()             -> Main -> CMDS.lib

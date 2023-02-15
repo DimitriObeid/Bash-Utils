@@ -82,7 +82,7 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="${__
 
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.__EchoVoid()         -> Main -> Echo.lib (this file)
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
@@ -106,7 +106,7 @@ function BU.Main.Echo.__Debug()
 
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.__EchoVoid()         -> Main -> Echo.lib (this file)
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
@@ -132,7 +132,7 @@ function BU.Main.Echo.DebugEnd()
 
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "$(bash -x)".
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.__Debug()            -> Main -> Echo.lib (this file)
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
@@ -221,7 +221,7 @@ function BU.Main.Echo.Debug()
 
 # Print void lines before and after calling a header.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 function BU.Main.Echo.__EchoVoid()
 {
@@ -244,7 +244,7 @@ printf "
 # "BU.Echo<...>()" functions debug output for a better view during a debug process.
 # It's better to also execute the project's script with the "$(bash - x "${project_name}")" command, instead of the "./${project_name}" way.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.PrintFFL()                       -> Main -> Args.lib
 
 #   - BU.Main.Checkings.IsAlphaChar()               -> Main -> Checkings.lib
@@ -349,7 +349,7 @@ function BU.Main.Echo.__EchoOutput()
 
 # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib (this file)
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib (this file)
 
@@ -458,7 +458,7 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSA
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
 
 #   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
@@ -516,7 +516,7 @@ function BU.Main.Echo.Error()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
 
 #   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
@@ -568,7 +568,7 @@ function BU.Main.Echo.Msg()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
 
 #   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
@@ -620,7 +620,7 @@ function BU.Main.Echo.Newstep()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Var() -> Main -> Decho.lib
 
 #   - BU.Main.Echo.__EchoCPLS() -> Main -> Echo.lib (this file)
@@ -647,7 +647,7 @@ function BU.Main.Echo.Read()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
 
 #   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
@@ -699,7 +699,7 @@ function BU.Main.Echo.Success()
 # Usage :
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
 
 #   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
@@ -762,7 +762,7 @@ function BU.Main.Echo.Warning()
 
 # Aqua blue colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Aqua()
 {
@@ -781,7 +781,7 @@ function BU.Main.Echo.Aqua()
 
 # Black colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Black()
 {
@@ -800,7 +800,7 @@ function BU.Main.Echo.Black()
 
 # Blue colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Blue()
 {
@@ -819,7 +819,7 @@ function BU.Main.Echo.Blue()
 
 # Cyan colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Cyan()
 {
@@ -838,7 +838,7 @@ function BU.Main.Echo.Cyan()
 
 # Fuchsia colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Fuchsia()
 {
@@ -857,7 +857,7 @@ function BU.Main.Echo.Fuchsia()
 
 # Gray colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Gray()
 {
@@ -876,7 +876,7 @@ function BU.Main.Echo.Gray()
 
 # Green colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Green()
 {
@@ -895,7 +895,7 @@ function BU.Main.Echo.Green()
 
 # Lime green colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Lime()
 {
@@ -914,7 +914,7 @@ function BU.Main.Echo.Lime()
 
 # Maroon colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Maroon()
 {
@@ -933,7 +933,7 @@ function BU.Main.Echo.Maroon()
 
 # Navy blue colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Navy()
 {
@@ -952,7 +952,7 @@ function BU.Main.Echo.Navy()
 
 # Olive green colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Olive()
 {
@@ -971,7 +971,7 @@ function BU.Main.Echo.Olive()
 
 # Orange colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Orange()
 {
@@ -990,7 +990,7 @@ function BU.Main.Echo.Orange()
 
 # Pink colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Pink()
 {
@@ -1009,7 +1009,7 @@ function BU.Main.Echo.Pink()
 
 # Purple colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Purple()
 {
@@ -1028,7 +1028,7 @@ function BU.Main.Echo.Purple()
 
 # Red colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Red()
 {
@@ -1047,7 +1047,7 @@ function BU.Main.Echo.Red()
 
 # Salmon colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Salmon()
 {
@@ -1066,7 +1066,7 @@ function BU.Main.Echo.Salmon()
 
 # Silver colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Silver()
 {
@@ -1085,7 +1085,7 @@ function BU.Main.Echo.Silver()
 
 # Tan colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Tan()
 {
@@ -1104,7 +1104,7 @@ function BU.Main.Echo.Tan()
 
 # Teal colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Teal()
 {
@@ -1123,7 +1123,7 @@ function BU.Main.Echo.Teal()
 
 # Turquoise colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Turquoise()
 {
@@ -1142,7 +1142,7 @@ function BU.Main.Echo.Turquoise()
 
 # Violet colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Violet()
 {
@@ -1161,7 +1161,7 @@ function BU.Main.Echo.Violet()
 
 # White colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.White()
 {
@@ -1180,7 +1180,7 @@ function BU.Main.Echo.White()
 
 # Yellow colored message.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Yellow()
 {
@@ -1215,7 +1215,7 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_P
 
 # Redirecting the output of the "echo" command
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsPositiveInt() -> Main -> Checkings.lib
 
 #   - BU.Main.Echo.__EchoCPLS()         -> Main -> Echo.lib

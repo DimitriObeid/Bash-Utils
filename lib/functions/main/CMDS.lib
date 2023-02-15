@@ -82,7 +82,7 @@ __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="$
 
 # Get command's executable file's path.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__CMDS.GetCommandPath()   -> Main -> Args.lib
 
 #   - BU.Main.Decho.Decho.Highlight()       -> Main -> Decho.lib
@@ -111,7 +111,7 @@ function BU.Main.CMDS.GetCommandPath()
 
 # Get the command's return output.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.CMDS.GetCommandReturnOutputValue()

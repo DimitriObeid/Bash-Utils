@@ -81,7 +81,7 @@ __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WR
 
 # Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Decho.__Decho()
@@ -104,7 +104,7 @@ function BU.Main.Decho.__Decho()
 
 # Text's inside decoration / formatting procssing (complete version).
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Decho.Decho()           -> Main -> Args.lib
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
 

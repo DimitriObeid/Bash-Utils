@@ -81,7 +81,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FU
 
 # Separate processing steps displays from the rest of the main script with a line.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.ProcessingDir() -> Main -> Args.lib
 
 #   - BU.Main.Decho.Decho.Path()                -> Main -> Decho.lib
@@ -147,7 +147,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATI
 
 # Overwriting an existing directory's content
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.OverwriteDir()      -> Main -> Args.lib
 
 #   - BU.Main.Directories.TriggerRootDirWarning()   -> Main -> Directories.lib (this file)
@@ -211,7 +211,7 @@ function BU.Main.Directories.OverwriteDir()
 
 # folder creation function, with the parent folder's path and the new folder's name as separated arguments.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.Make()              -> Main -> Args.lib
 
 #   - BU.Main.Checkings.CheckFilePathWasCreated()   -> Main -> Checkings.lib
@@ -292,7 +292,7 @@ function BU.Main.Directories.Make()
 
 # Folder creation function, with the parent folder's path and the directory's name as unique argument.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.MakePath()  -> Main -> Args.lib
 
 #   - BU.Main.Directories.Make()            -> Main -> Directories.lib (this file)
@@ -329,7 +329,7 @@ function BU.Main.Directories.MakePath()
 # The function "CheckSTAT_LOG()" creates the log file and its path when the __BU_MAIN_STAT_LOG variable's value is "true",
 # but in case the value is "false", it's necessary to check if the project's temporary folder exists anyway.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
@@ -372,7 +372,7 @@ __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSI
 
 # Getting the name of a target directory without its path.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.GetDirectoryName()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
@@ -416,7 +416,7 @@ function BU.Main.Directories.GetDirectoryName()
 
 # Checking if the directory's sub-folders paths passed as argument exists, then print its path.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.GetDirectoryPath()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
@@ -450,7 +450,7 @@ function BU.Main.Directories.GetDirectoryPath()
 
 # Getting parent folder's name only (without its full path from the root directory), then printing it.
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.GetParentDirectoryName()    -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                                  -> Main -> Echo.lib
@@ -498,7 +498,7 @@ function BU.Main.Directories.GetParentDirectoryName()
 
 # Getting parent folder's path from the root directory, then printing it
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Directories.GetParentDirectoryPath()    -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                                  -> Main -> Echo.lib
@@ -581,7 +581,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
 
 # Check if the script is about to work at the root directory ('/').
 
-# Featured functions and files by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 #   - BU.Main.Echo.Error()              -> Main -> Echo.lib
