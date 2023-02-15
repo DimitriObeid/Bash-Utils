@@ -259,6 +259,7 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 #   - BU.Main.Echo.Error()                      -> Main -> Echo.lib
 
 #   - BU.Main.Headers.DrawLine()                -> Main -> Headers.lib
+#   - BU.Main.Headers.Header.Red()              -> Main -> Headers.lib
 
 #   - BU.Main.Status.CheckSTAT_ERROR()          -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsInitializing()  -> Main -> Status.lib
