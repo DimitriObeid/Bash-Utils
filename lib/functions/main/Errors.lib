@@ -254,6 +254,8 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 # Handling command outputs.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.IsInt()                 -> Main -> Checkings.lib
+
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 #   - BU.Main.Echo.Error()                      -> Main -> Echo.lib
@@ -262,6 +264,7 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 #   - BU.Main.Headers.Header.Red()              -> Main -> Headers.lib
 
 #   - BU.Main.Status.CheckSTAT_ERROR()          -> Main -> Status.lib
+#   - BU.Main.Status.CheckSTAT_LOG_REDIRECT()   -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsInitializing()  -> Main -> Status.lib
 
 #   - BU.ModuleInit.HandleErrors()              -> Modules initializer script
