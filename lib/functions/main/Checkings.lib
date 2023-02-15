@@ -148,10 +148,10 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SU
 # Checking if the value is a command substitution.
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Checkings.IsAlphaNumChar()    -> Main -> Checkings.lib
-#   - BU.Main.Checkings.IsAlphaNumString()  -> Main -> Checkings.lib
-#   - BU.Main.Checkings.IsFloat()           -> Main -> Checkings.lib
-#   - BU.Main.Checkings.IsInt()             -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsAlphaNumChar()    -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.IsAlphaNumString()  -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.IsFloat()           -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.IsInt()             -> Main -> Checkings.lib (this file)
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
@@ -172,7 +172,7 @@ function BU.Main.Checkings.IsCMD()
 # Checking if the value is not a command substitution.
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Checkings.IsCMD() -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsCMD() -> Main -> Checkings.lib (this file)
 
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
@@ -224,7 +224,7 @@ function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "
 #   - DDMMYYYY hh:mm:ss
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Checkings.IsDateYMD() -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsDateYMD() -> Main -> Checkings.lib (this file)
 
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
@@ -868,14 +868,21 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 # Checking for the presence of the project's log path, whose path is stored in the "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" global variable.
 
 # Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Function()        -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Highlight()       -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Path()            -> Main -> Decho.lib
+
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 #   - BU.Main.Echo.Newstep()                -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                -> Main -> Echo.lib
 
+#   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
+
 #   - BU.Main.Files.CreateProjectLogFile()  -> Main -> Files.lib
 
-#   - BU.ModuleInit.SetInitErrorMsg()   -> Modules initializer script
+#   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
 function BU.Main.Checkings.CheckProjectLogPath()
 {
     # If the framework is still initializing when an error occurs.
@@ -916,6 +923,35 @@ function BU.Main.Checkings.CheckProjectLogPath()
 # Checking for project's log file's status, then write the wanted text with 'echo' command's parameters.
 
 # Accepted arguments : 'nodate', '<an empty string>'
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.CheckDiskUsedSpace()    -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.CheckProjectLogPath()   -> Main -> Checkings.lib (this file)
+
+#   - BU.Main.Decho.Decho.Function()            -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Highlight()           -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Path()                -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Var()                 -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+#   - BU.Main.Echo.Error()                      -> Main -> Echo.lib (NOTE : The "${__BU_MAIN_STAT_ECHO}" status global variable's value is set on 'true' at this point, so this function can safely be used)
+#   - BU.Main.Echo.Newline()                    -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                    -> Main -> Echo.lib (NOTE : The "${__BU_MAIN_STAT_ECHO}" status global variable's value is set on 'true' at this point, so this function can safely be used)
+
+#   - BU.Main.Status.ChangeSTAT_DECHO()         -> Main -> Status.lib
+#   - BU.Main.Status.ChangeSTAT_ECHO()          -> Main -> Status.lib
+#   - BU.Main.Status.ChangeSTAT_TIME_HEADER()   -> Main -> Status.lib
+#   - BU.Main.Status.ChangeSTAT_TIME_NEWLINE()  -> Main -> Status.lib
+#   - BU.Main.Status.ChangeSTAT_TIME_TXT()      -> Main -> Status.lib
+#   - BU.Main.Status.CheckSTAT_LOG()            -> Main -> Status.lib
+#   - BU.Main.Status.CheckSTAT_LOG_REDIRECT()   -> Main -> Status.lib
+#   - BU.Main.Status.CheckSTAT_TIME_TXT()       -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsInitializing()  -> Main -> Status.lib
+
+#   - BU.ModuleInit.Msg()                       -> Modules initializer script
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 function BU.Main.Status.CheckProjectLogStatus()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1246,6 +1282,25 @@ function BU.Main.Status.CheckProjectLogStatus()
 }
 
 # Check project related file presence, or create this file.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Checkings.CheckProjectRelatedFile() -> Main -> Args.lib
+
+#   - BU.Main.Checkings.CheckDirPathExists()            -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.CheckDirPathWasCreated()        -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.CheckDiskUsedSpace()            -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.CheckFilePathExists()           -> Main -> Checkings.lib (this file)
+#   - BU.Main.Checkings.CheckFilePathWasCreated()       -> Main -> Checkings.lib (this file)
+
+#   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
+#   - BU.Main.Echo.Error()                              -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()                            -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleSmallErrors()                -> Main -> Errors.lib
+
+#   - BU.Main.TextFormat.SetBGColor()                   -> Main -> TextFormat.lib
+#   - BU.Main.TextFormat.SetTextColor()                 -> Main -> TextFormat.lib
 function BU.Main.Checkings.CheckProjectRelatedFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1376,6 +1431,15 @@ __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="
 # Checking if the project's color code file exists or not.
 
 # WARNING ! DO NOT CALL ANY "Decho<...>()" FUNCTION HERE, OR THE SCRIPT WILL LOOP FOREVER !!!
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.CheckProjectRelatedFile()   -> Main -> Checkings.lib (this file)
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                            -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleSmallErrors()            -> Main -> Errors.lib
 function BU.Main.Checkings.CheckDecho()
 {
     #**** Code ****

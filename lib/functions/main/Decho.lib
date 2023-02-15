@@ -79,7 +79,11 @@ __BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho
 
 __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.basis";
 
-# Text's inside decoration/formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
+# Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Decho.__Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -98,11 +102,23 @@ function BU.Main.Decho.__Decho()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Text's inside decoration/formatting procssing (complete version).
+# Text's inside decoration / formatting procssing (complete version).
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Checkings.CheckDecho
-#   -
+#   - BU.Main.Args__Decho.Decho()           -> Main -> Args.lib
+#   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
+
+#   - BU.Main.Checkings.CheckDecho()        -> Main -> Checkings.lib
+#   - BU.Main.Checkings.IsAlphaString()     -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+#   - BU.Main.Status.ChangeSTAT_TXT_FMT()   -> Main -> Status.lib
+
+#   - BU.Main.TextFormat.Atoi()             -> Main -> TextFormat.lib
+#   - BU.Main.TextFormat.SetBGColor()       -> Main -> TextFormat.lib
+#   - BU.Main.TextFormat.SetTextColor()     -> Main -> TextFormat.lib
 function BU.Main.Decho.Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

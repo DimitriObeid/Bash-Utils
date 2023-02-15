@@ -94,6 +94,9 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 }
 
 # Verifying for any programming errors in a Bash script file with the "shellcheck" command.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.DevTools.ShellcheckVerifFailed()  -> Main -> DevTools.lib (this file)
 function BU.Main.DevTools.ShellcheckVerif()
 {
     #**** Parameters ****

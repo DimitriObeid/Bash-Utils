@@ -81,6 +81,11 @@ __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-for
 __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS}::debugging";
 
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.__EchoVoid()         -> Main -> Echo.lib (this file)
+
+#   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
 function BU.Main.Echo.__Debug()
 {
     BU.ModuleInit.CheckIsDebugging && {
@@ -100,6 +105,11 @@ function BU.Main.Echo.__Debug()
 }
 
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.__EchoVoid()         -> Main -> Echo.lib (this file)
+
+#   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
 function BU.Main.Echo.DebugEnd()
 {
  #   set +x;
@@ -121,6 +131,11 @@ function BU.Main.Echo.DebugEnd()
 # Printing the name of the processed function if the main script is launched with the "$(bash -x)" command.
 
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "$(bash -x)".
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.__Debug()            -> Main -> Echo.lib (this file)
+
+#   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
 function BU.Main.Echo.Debug()
 {
     # The six following conditional lines are used as test / debug procedures. Please leave them commented if you are not debugging the behavior of the modules debugger.
@@ -205,6 +220,9 @@ function BU.Main.Echo.Debug()
 }
 
 # Print void lines before and after calling a header.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
 function BU.Main.Echo.__EchoVoid()
 {
 printf "
@@ -225,6 +243,26 @@ printf "
 
 # "BU.Echo<...>()" functions debug output for a better view during a debug process.
 # It's better to also execute the project's script with the "$(bash - x "${project_name}")" command, instead of the "./${project_name}" way.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args.PrintFFL()                       -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsAlphaChar()               -> Main -> Checkings.lib
+#   - BU.Main.Checkings.CheckProjectRelatedFile()   -> Main -> Checkings.lib
+
+#   - BU.Main.Decho.Decho()                         -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Function()                -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Path()                    -> Main -> Decho.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                     -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoVoid()                     -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
+
+#   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing()     -> Main -> Status.lib
 function BU.Main.Echo.__EchoOutput()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -310,6 +348,14 @@ function BU.Main.Echo.__EchoOutput()
 }
 
 # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckStatIsInitializing()      -> Main -> Status.conf
+
+#   - BU.ModuleInit.Msg()                           -> Modules initializer script
 function BU.Main.Echo.__EchoCPLS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -413,7 +459,18 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSA
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Status.CheckProjectLogStatus()                    --> Checkings.lib
+#   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 function BU.Main.Echo.Error()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -460,7 +517,18 @@ function BU.Main.Echo.Error()
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Status.CheckProjectLogStatus()    --> Checkings.lib
+#   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 function BU.Main.Echo.Msg()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -501,7 +569,18 @@ function BU.Main.Echo.Msg()
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 function BU.Main.Echo.Newstep()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -542,7 +621,11 @@ function BU.Main.Echo.Newstep()
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#	- BU.Main.Status.CheckProjectLogStatus		--> Checkings.lib
+#   - BU.Main.Decho.Decho.Var() -> Main -> Decho.lib
+
+#   - BU.Main.Echo.__EchoCPLS() -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Read()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -565,7 +648,18 @@ function BU.Main.Echo.Read()
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 function BU.Main.Echo.Success()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -606,7 +700,18 @@ function BU.Main.Echo.Success()
 #	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
+#   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 function BU.Main.Echo.Warning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -656,6 +761,9 @@ function BU.Main.Echo.Warning()
 # Note : These function call the "BU.Main.Echo.Msg()" function in order to avoid rewriting tons of lines that would do the same thing.
 
 # Aqua blue colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Aqua()
 {
     #**** Parameters ****
@@ -672,6 +780,9 @@ function BU.Main.Echo.Aqua()
 }
 
 # Black colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Black()
 {
     #**** Parameters ****
@@ -688,6 +799,9 @@ function BU.Main.Echo.Black()
 }
 
 # Blue colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Blue()
 {
     #**** Parameters ****
@@ -704,6 +818,9 @@ function BU.Main.Echo.Blue()
 }
 
 # Cyan colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Cyan()
 {
     #**** Parameters ****
@@ -720,6 +837,9 @@ function BU.Main.Echo.Cyan()
 }
 
 # Fuchsia colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Fuchsia()
 {
     #**** Parameters ****
@@ -736,6 +856,9 @@ function BU.Main.Echo.Fuchsia()
 }
 
 # Gray colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Gray()
 {
     #**** Parameters ****
@@ -752,6 +875,9 @@ function BU.Main.Echo.Gray()
 }
 
 # Green colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Green()
 {
     #**** Parameters ****
@@ -768,6 +894,9 @@ function BU.Main.Echo.Green()
 }
 
 # Lime green colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Lime()
 {
     #**** Parameters ****
@@ -784,6 +913,9 @@ function BU.Main.Echo.Lime()
 }
 
 # Maroon colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Maroon()
 {
     #**** Parameters ****
@@ -800,6 +932,9 @@ function BU.Main.Echo.Maroon()
 }
 
 # Navy blue colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Navy()
 {
     #**** Parameters ****
@@ -816,6 +951,9 @@ function BU.Main.Echo.Navy()
 }
 
 # Olive green colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Olive()
 {
     #**** Parameters ****
@@ -832,6 +970,9 @@ function BU.Main.Echo.Olive()
 }
 
 # Orange colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Orange()
 {
     #**** Parameters ****
@@ -848,6 +989,9 @@ function BU.Main.Echo.Orange()
 }
 
 # Pink colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Pink()
 {
     #**** Parameters ****
@@ -864,6 +1008,9 @@ function BU.Main.Echo.Pink()
 }
 
 # Purple colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Purple()
 {
     #**** Parameters ****
@@ -880,6 +1027,9 @@ function BU.Main.Echo.Purple()
 }
 
 # Red colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Red()
 {
     #**** Parameters ****
@@ -896,6 +1046,9 @@ function BU.Main.Echo.Red()
 }
 
 # Salmon colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Salmon()
 {
     #**** Parameters ****
@@ -912,6 +1065,9 @@ function BU.Main.Echo.Salmon()
 }
 
 # Silver colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Silver()
 {
     #**** Parameters ****
@@ -928,6 +1084,9 @@ function BU.Main.Echo.Silver()
 }
 
 # Tan colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Tan()
 {
     #**** Parameters ****
@@ -944,6 +1103,9 @@ function BU.Main.Echo.Tan()
 }
 
 # Teal colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Teal()
 {
     #**** Parameters ****
@@ -960,6 +1122,9 @@ function BU.Main.Echo.Teal()
 }
 
 # Turquoise colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Turquoise()
 {
     #**** Parameters ****
@@ -976,6 +1141,9 @@ function BU.Main.Echo.Turquoise()
 }
 
 # Violet colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Violet()
 {
     #**** Parameters ****
@@ -992,6 +1160,9 @@ function BU.Main.Echo.Violet()
 }
 
 # White colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.White()
 {
     #**** Parameters ****
@@ -1008,6 +1179,9 @@ function BU.Main.Echo.White()
 }
 
 # Yellow colored message.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 function BU.Main.Echo.Yellow()
 {
     #**** Parameters ****
@@ -1042,8 +1216,14 @@ __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_P
 # Redirecting the output of the "echo" command
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Status.CheckProjectLogStatus     --> Checkings.lib
-#	- BU.Main.Errors.HandleErrors				--> Checkings.lib
+#   - BU.Main.Checkings.IsPositiveInt() -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.__EchoCPLS()         -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                -> Main -> Echo.lib
+
+#	- BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 function BU.Main.Echo.Newline()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

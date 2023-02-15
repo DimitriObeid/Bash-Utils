@@ -81,6 +81,16 @@ __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands
 __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
 
 # Get command's executable file's path.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Args__CMDS.GetCommandPath()   -> Main -> Args.lib
+
+#   - BU.Main.Decho.Decho.Highlight()       -> Main -> Decho.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# BU.Main.Errors.HandleSmallErrors()        -> Main -> Errors.lib
 function BU.Main.CMDS.GetCommandPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -89,7 +99,7 @@ function BU.Main.CMDS.GetCommandPath()
         "${__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS}";
 
     #**** Parameters ****
-    local p_cmd=${1:-$'\0'}; #ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with it's options.
+    local p_cmd=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the command to process, with its options.
 
     #**** Code ****
     if ! BU.Main.Args__CMDS.GetCommandPath "${p_cmd}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
@@ -100,6 +110,10 @@ function BU.Main.CMDS.GetCommandPath()
 }
 
 # Get the command's return output.
+
+# Featured functions and files by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.CMDS.GetCommandReturnOutputValue()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
