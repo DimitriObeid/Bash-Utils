@@ -79,6 +79,7 @@ __BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="status::variable
 
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKING_VALUES="${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}::checking-values";
 
+# ···························
 # Easy writing text function.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -121,10 +122,10 @@ function BU.Main.Status.ConfEcho()
     # Sourcing the "Status.conf" file to reset every status global variables values
     BU.Main.Files.SourceFile "${__BU_MAIN_MODULE_CONF_FILE_STATUS_PATH}";
 
-    # Setting the "${__BU_MAIN_STAT_DECHO}" status global variable to "allow" in order to display correctly the formatted text.
+    # Setting the "${__BU_MAIN_STAT_DECHO}" global status variable to "allow" in order to display correctly the formatted text.
     __BU_MAIN_STAT_DECHO='allow';
 
-    # Since the "${__BU_MAIN_STAT_ECHO}" status global variable is reset to "true", it's totally safe to call an "Echo<...>()" function here.
+    # Since the "${__BU_MAIN_STAT_ECHO}" global status variable is reset to "true", it's totally safe to call an "Echo<...>()" function here.
     if [ -f "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" ]; then
         {
 			BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ERROR}";
@@ -175,7 +176,8 @@ function BU.Main.Status.ConfEcho()
 
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS="${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}::checkings";
 
-# Check the "${__BU_MAIN_STAT_DECHO}" status variable's value.
+# ···································································
+# Check the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -207,7 +209,8 @@ function BU.Main.Status.CheckSTAT_DECHO()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Check the "${__BU_MAIN_STAT_ECHO}" status variable's value.
+# ··································································
+# Check the "${__BU_MAIN_STAT_ECHO}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -239,7 +242,8 @@ function BU.Main.Status.CheckSTAT_ECHO()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_ERROR}" status variable's value.
+# ······································································
+# Checking the "${__BU_MAIN_STAT_ERROR}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -271,7 +275,8 @@ function BU.Main.Status.CheckSTAT_ERROR()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_INITIALIZING}" status variable's value.
+# ·············································································
+# Checking the "${__BU_MAIN_STAT_INITIALIZING}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -303,7 +308,8 @@ function BU.Main.Status.CheckSTAT_INITIALIZING()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_LOG}" status variable's value.
+# ····································································
+# Checking the "${__BU_MAIN_STAT_LOG}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
@@ -340,7 +346,8 @@ function BU.Main.Status.CheckSTAT_LOG()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_LOG_REDIRECT}" status variable's value.
+# ·············································································
+# Checking the "${__BU_MAIN_STAT_LOG_REDIRECT}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -372,7 +379,8 @@ function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_OPERATE_ROOT}" status variable's value.
+# ·············································································
+# Checking the "${__BU_MAIN_STAT_OPERATE_ROOT}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -404,7 +412,8 @@ function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_TIME_HEADER}" status variable's value.
+# ············································································
+# Checking the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsFloat()   -> Main -> Checkings.lib
@@ -439,7 +448,8 @@ function BU.Main.Status.CheckSTAT_TIME_HEADER()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_TIME_NEWLINE}" status variable's value.
+# ·············································································
+# Checking the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsFloat()   -> Main -> Checkings.lib
@@ -474,7 +484,8 @@ function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_TIME_TXT}" status variable's value.
+# ·········································································
+# Checking the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsFloat()   -> Main -> Checkings.lib
@@ -509,7 +520,8 @@ function BU.Main.Status.CheckSTAT_TIME_TXT()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_TXT_FMT}" status variable's value.
+# ········································································
+# Checking the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -541,7 +553,8 @@ function BU.Main.Status.CheckSTAT_TXT_FMT()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Checking the "${__BU_MAIN_STAT_USER_OS}" status variable's value.
+# ········································································
+# Checking the "${__BU_MAIN_STAT_USER_OS}" global status variable's value.
 # This function is empty now, as the OS handling is still in work.
 function BU.Main.Status.CheckSTAT_USER_OS()
 {
@@ -559,6 +572,7 @@ function BU.Main.Status.CheckSTAT_USER_OS()
     return 0;
 }
 
+# ························································································
 # Checking all the project's status variables values if multiple values had been modified.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -604,15 +618,17 @@ function BU.Main.Status.CheckProjectStatusVars()
 
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY="${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}::changing-values-more-easily";
 
+# ························
 # Positionnal parameters :
 #   ${1}    --> Any     : new value.
 #   ${2}    --> String  : file where the change was made.
 #   ${3}    --> Int     : line where the change was made.
 
-# Changing the "$'__BU_MAIN_STAT_DECHO'" status variable's value.
+# Changing the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
 function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}"; __BU_MAIN_STAT_DECHO="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_DECHO "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "$'__BU_MAIN_STAT_ECHO'" status variable's value, and provide a log redirection support.
+# ············································································································
+# Changing the "${__BU_MAIN_STAT_ECHO}" global status variable's value, and provide a log redirection support.
 
 ## VERY IMPORTANT : DO NOT CALL ANY "BU.Main.Decho.Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
 
@@ -706,8 +722,8 @@ function BU.Main.Status.ChangeSTAT_ECHO()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# Changing the "${__BU_MAIN_STAT_ERROR}" status variable's value.
+# ······································································
+# Changing the "${__BU_MAIN_STAT_ERROR}" global status variable's value.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
@@ -730,15 +746,16 @@ function BU.Main.Status.ChangeSTAT_ERROR()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Changing the "${__BU_MAIN_STAT_INITIALIZING}" status variable's value.
+# ·············································································
+# Changing the "${__BU_MAIN_STAT_INITIALIZING}" global status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                    -> Main -> Echo.lib
 
+#   - BU.Main.Status.CheckSTAT_INITIALIZING()   -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
 
@@ -749,25 +766,74 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
 	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-# Changing the "${__BU_MAIN_STAT_LOG}" status variable's value.
+# ··································································
+# Changing the "${__BU_MAIN_STAT_LOG}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_LOG()    -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_LOG="${1:-$'\0'}";          BU.Main.Status.CheckSTAT_LOG            "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "${__BU_MAIN_STAT_LOG_REDIRECT}" status variable's value.
+# ·············································································
+# Changing the "${__BU_MAIN_STAT_LOG_REDIRECT}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_LOG_REDIRECT()   -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_LOG_REDIRECT="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_LOG_REDIRECT   "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "${__BU_MAIN_STAT_OPERATE_ROOT}" status variable's value.
+# ·············································································
+# Changing the "${__BU_MAIN_STAT_OPERATE_ROOT}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_OPERATE_ROOT()   -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_OPERATE_ROOT="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_OPERATE_ROOT   "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "${__BU_MAIN_STAT_TIME_HEADER}" status variable's value.
+# ············································································
+# Changing the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_TIME_HEADER()    -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_TIME_HEADER()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TIME_HEADER="${1:-$'\0'}";  BU.Main.Status.CheckSTAT_TIME_HEADER    "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "${__BU_MAIN_STAT_TIME_NEWLINE}" status variable's value.
+# ············································································
+# Changing the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_TIME_NEWLINE()   -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TIME_NEWLINE="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_TIME_NEWLINE   "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "${__BU_MAIN_STAT_TIME_TXT}" status variable's value.
+# ·········································································
+# Changing the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_TIME_TXT()       -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TIME_TXT="${1:-$'\0'}";     BU.Main.Status.CheckSTAT_TIME_TXT       "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-# Changing the "${__BU_MAIN_STAT_TXT_FMT}" status variable's value.
+# ········································································
+# Changing the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_TXT_FMT()        -> Main -> Status.lib (this file)
 function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TXT_FMT="${1:-$'\0'}";      BU.Main.Status.CheckSTAT_TXT_FMT        "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 ## ----------------------------------------------
@@ -777,19 +843,44 @@ function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main"
 
 __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS="${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}::easier-boolean-values-checkings";
 
+# ·············································································································································
 # Checking if the "BU.Echo<...>()" functions can call the "BU.Main.Status.CheckProjectLogStatus()" function without provoking an infinite loop.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 function BU.Main.Status.CheckStatIsBackupEchoing() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_ECHO,,}"           == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
+# ····························································································
 # Checking if the library is into its initialization process (${__BU_MAIN_STAT_INITIALIZING}).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 function BU.Main.Status.CheckStatIsInitializing()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_INITIALIZING,,}"   == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
+# ···············································
 # Checking if the log redirection mode is active.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 function BU.Main.Status.CheckStatIsLogging()       { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_LOG,,}"            == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
+# ···································································
 # Checking if the initialization logs can be printed on the terminal.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
+# ···········································
 # Checking if the text formatting is allowed.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
 ## ----------------------------------------------

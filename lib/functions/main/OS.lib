@@ -983,51 +983,67 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
     if [ "${p_versionNumber}" -eq "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then return 0; else return 1; fi
 }
 
+# ·························································
 # Checking if the current Windows' architecture is 32 bits.
 function BU.Main.OS.IsWindows32bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 32; then return 0; else return 1; fi else return 1; fi; }
 
+# ·························································
 # Checking if the current Windows' architecture is 64 bits.
 function BU.Main.OS.IsWindows64bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 64; then return 0; else return 1; fi else return 1; fi; }
 
+# ······························································
 # Checking if the current Windows licence is the Family licence.
 function BU.Main.OS.IsWindowsFamily()					{ if BU.Main.OS.IsWindows10Family   || BU.Main.OS.IsWindows11Family;                        then    return 0; else  return 1; fi; }
 
+# ·····································································
 # Checking if the current Windows licence is the Professionnal licence.
 function BU.Main.OS.IsWindowsPro()						{ if BU.Main.OS.IsWindows10Pro      || BU.Main.OS.IsWindows11Pro;                           then    return 0; else  return 1; fi; }
 
+# ··································································
 # Checking if the current Windows licence is the Enterprise licence.
 function BU.Main.OS.IsWindowsLTSC() 					{ if BU.Main.OS.IsWindows10LTSC     || BU.Main.OS.IsWindows11LTSC;                          then    return 0; else  return 1; fi; }
 
+# ······································································
 # Checking if the currently used version of Windows is the 10th version.
 function BU.Main.OS.IsWindows10()                    	{ if BU.Main.Checkings.CheckOSWindowsVersion '10';          								then    return 0; else  return 1; fi; }
 
+# ···················································································
 # Checking if the currently used version of Windows is the Windows 10 Family version.
 function BU.Main.OS.IsWindows10Family()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsFamily;	then 	return 0; else 	return 1; fi; }
 
+# ··························································································
 # Checking if the currently used version of Windows is the Windows 10 Professionnal version.
 function BU.Main.OS.IsWindows10Pro()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsPro;		then 	return 0; else 	return 1; fi; }
 
+# ·················································································
 # Checking if the currently used version of Windows is the Windows 10 LTSC version.
 function BU.Main.OS.IsWindows10LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsLTSC;	then 	return 0; else 	return 1; fi; }
 
-# Checking if the currently used version of Windows is the 11th.
+# ······································································
+# Checking if the currently used version of Windows is the 11th version.
 function BU.Main.OS.IsWindows11()                     	{ if BU.Main.Checkings.CheckOSWindowsVersion '11';          								then    return 0; else 	return 1; fi; }
 
+# ···················································································
 # Checking if the currently used version of Windows is the Windows 11 Family version.
 function BU.Main.OS.IsWindows11Family()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsFamily;	then 	return 0; else 	return 1; fi; }
 
+# ··························································································
 # Checking if the currently used version of Windows is the Windows 11 Professionnal version.
 function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsPro;		then 	return 0; else 	return 1; fi; }
 
+# ·················································································
 # Checking if the currently used version of Windows is the Windows 11 LTSC version.
 function BU.Main.OS.IsWindows11LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsLTSC;	then 	return 0; else 	return 1; fi; }
 
+# ··············································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
 function BU.Main.OS.IsLinuxWSL()                        { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    						then    return 0; else  return 1; fi; }
 
+# ·······················································································································································································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "Microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
 function BU.Main.OS.IsLinuxWSL1()                     	{ uname -r | grep Microsoft                                 &&      								return 0;       return 1; }
 
+# ·······················································································································································································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
 function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microsoft                                 &&      								return 0;       return 1; }
 

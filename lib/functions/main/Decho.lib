@@ -227,7 +227,7 @@ function BU.Main.Decho.Decho()
 
     ## APPLYING THE FORMATTINGS ON THE TEXT
 
-    # If the "${__BU_MAIN_STAT_DECHO}" status global variable is set to "restrict", then only basic formatting is applied.
+    # If the "${__BU_MAIN_STAT_DECHO}" global status variable is set to "restrict", then only basic formatting is applied.
 	if [ "${__BU_MAIN_STAT_DECHO,,}" == 'restrict' ]; then
         printf "%s" "${p_newTextColor}";
         printf "%s" "${p_newBGColor}";

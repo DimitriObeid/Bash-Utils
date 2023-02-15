@@ -462,7 +462,7 @@ __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
 
 __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}::displaying-a-context-message";
 
-# --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "${__BU_MAIN_STAT_TIME_TXT}" STATUS VARIABLE.
+# --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "${__BU_MAIN_STAT_TIME_TXT}" GLOBAL STATUS VARIABLE.
 
 # ·····················
 # Error message display
@@ -778,7 +778,7 @@ function BU.Main.Echo.Warning()
 
 ## DISPLAYING A COLORED MESSAGE
 
-# --> DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "${__BU_MAIN_STAT_TIME_TXT}" STATUS VARIABLE.
+# --> DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE "${__BU_MAIN_STAT_TIME_TXT}" GLOBAL STATUS VARIABLE.
 
 # ····································································································································
 # Note : These function call the "BU.Main.Echo.Msg()" function in order to avoid rewriting tons of lines that would do the same thing.

@@ -254,7 +254,7 @@ function BU.Main.Headers.LightDeco()
 # Basic header creation function (Background colors, lines characters and colors, and string text and color).
 
 # Since this function can be called in the "BU.Main.Echo.__EchoOutput()" function,
-# even if the "${__BU_MAIN_STAT_ECHO}" status variable's value is set to "true",
+# even if the "${__BU_MAIN_STAT_ECHO}" global status variable's value is set to "true",
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

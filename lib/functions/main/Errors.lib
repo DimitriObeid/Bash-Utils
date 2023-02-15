@@ -142,7 +142,7 @@ function BU.Main.Errors.HandleSmallErrors()
     BU.Main.Echo.Newline >&2
 
     # As the "BU.Main.Echo.Warning()" function will be called in case of a missing return or exit code (normally passed as second argument),
-    # it's better to reset the value of the "${__BU_MAIN_STAT_ECHO}" status variable condition per condition.
+    # it's better to reset the value of the "${__BU_MAIN_STAT_ECHO}" global status variable condition per condition.
     if [ "${p_return^^}" == 'R' ]; then
         if [ "${v_BU_STAT_ECHO_old}" == "true" ]; then BU.Main.Status.ChangeSTAT_ECHO 'false' 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || { local C="${?}"; [ -n "${VHandleSmallErrors}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
 

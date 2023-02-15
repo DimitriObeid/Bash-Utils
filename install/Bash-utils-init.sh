@@ -1723,7 +1723,7 @@ function BU.ModuleInit.DisplayStatError()
     return 1;
 }
 
-# Checking the "${__BU_MODULE_INIT_STAT_DEBUG}" status variable's value.
+# Checking the "${__BU_MODULE_INIT_STAT_DEBUG}" global status variable's value.
 function BU.ModuleInit.CheckSTAT_DEBUG()
 {
     #**** Parameters ****
@@ -1741,7 +1741,7 @@ function BU.ModuleInit.CheckSTAT_DEBUG()
     return 0;
 }
 
-# Checking the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" status variable's value.
+# Checking the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" global status variable's value.
 function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
 {
     #**** Parameters ****
@@ -1761,10 +1761,10 @@ function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
     return 0;
 }
 
-# Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" status variable's value.
+# Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" global status variable's value.
 function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="${1}";         BU.ModuleInit.CheckSTAT_DEBUG         "${2}" "${3}" || return "${?}"; return 0; }
 
-# Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" status variable's value.
+# Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" global status variable's value.
 function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "${?}"; return 0; }
 
 # Checking if the debug mode is active.
