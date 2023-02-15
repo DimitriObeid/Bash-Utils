@@ -22,6 +22,11 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
                                         This translation file can be found in the '.Bash-utils/config/initializer/locale' folder, and is named :
                                         '\$iso_639-1_code.locale'
 
+                                        If, among the ISO 639-1 codes passed, the 'en' (English) code is absent, then the English translation file
+                                        is shipped into the compiled file for security reasons : if the translation file of the currently wanted is
+                                        incomplete, and / or if the final user tries to use another language while using this compiled file, so that
+                                        the program's messages can still be displayed into plain text instead of empty strings.
+
                                         If the 'supported' value is passed after the '=' sign, then a compiled file is created for each language
                                         supported by the compiler, still in the same way as for each ISO 639-1 code passed to the compiler after
                                         the '--lang=' option
@@ -39,6 +44,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
 
                                         Each of these translation files is located in the folder mentioned into the description of the '--lang='
                                         option described above, and has the same file name.
+
+                                        If, among the ISO 639-1 codes passed, the 'en' (English) code is absent, then the same procedure mentioned
+                                        into the description of the '--lang=' option described above is applied for the same mentioned reasons.
 
                                         If the 'supported' value is passed after the '=' sign, then the content of the translation file of each
                                         language supported by the compiler will be written into the compiled file, with their function that defines
@@ -67,9 +75,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
     -C --compile-stable                 sets the compiled file into a stable version. It will force the execution of the 'shellcheck' command
-                                        on each file to compile processed by the compiler, and will do the same on the output file once the
-                                        compilation is done. This option is incompatible with the '-s' / '--no-shellcheck' option, an error
-                                        message will be returned if both options are used together.";
+                                        on each file to compile processed by the compiler, and will do the same to the output file once the
+                                        compilation process is done, before setting it in read-only mode. This option is incompatible with the
+                                        '-s' / '--no-shellcheck' option, an error message will be returned if both options are used together.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_UNSTABLE="
     -c --compile-unstable               this option does actually nothing, as the compilation of an unstable version is the default behavior
@@ -82,8 +90,8 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__HELP="
     -h --help                           displays on the screen the help messages and the compiler's usage instructions.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS="
-    -k --keep-comments                  keep each comment from the source file into the compiled file. The only ones which are not removed if
-                                        this option is not passed are the Shellcheck directives and the comments from the top-level compiled file.";
+    -k --keep-comments                  keep each comment from the source file into the compiled file. The only ones which are not removed if this
+                                        option is not passed are the Shellcheck directives and the comments from the top-level compiled file.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
     -e --keep-exec-safeguards           keep the extra safeguard pieces of code (written at the beginning of each source file) which prevent the
@@ -93,6 +101,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
     -r --keep-raw-document-layout       keep the raw compiled file's layout, without optimizing it. In this case, the aforementionned '--keep-*'
                                         options will not work.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE="
+    -a --no-alias-include               does not includes the main module's aliases file into the compiled file.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
     -s --no-shellcheck                  prevents the execution of the 'shellcheck' command on each file processed by the compiler. This option is

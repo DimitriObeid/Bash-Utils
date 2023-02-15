@@ -16,11 +16,17 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
 
                                         Chaque valeur représente le code ISO 639-1 de la langue dans laquelle les messages et les commentaires au niveau
                                         supérieur de chaque fichier compilé doivent être traduits, ainsi que celle du fichier de traduction individuel
-                                        contenant les messages traduits utilisés pendant le processus d'initialisation du framework Bash Utils, et dont le
-                                        contenu doit être embarqué dans chaque fichier final lors de la compilation.
+                                        contenant les messages traduits utilisés pendant le processus d'initialisation du framework Bash Utils, et dont
+                                        le contenu doit être embarqué dans chaque fichier final lors de la compilation.
 
                                         Ce fichier de traduction se trouve dans le dossier '.Bash-utils/config/initializer/locale', et porte ce nom :
                                         '\$code_iso_639-1.locale'.
+
+                                        Si, parmi les codes ISO 639-1 passés, le code 'en' (anglais) est absent, alors le fichier de traduction en
+                                        anglais est embarqué dans le fichier compilé pour des raisons de sécurité : si le fichier de traduction de
+                                        la langue actuelle voulue est incomplet, et / ou si l'utilisateur final essaie d'utiliser une autre langue
+                                        en utilisant ce fichier compilé, de sorte que les messages du programme puissent être affichés sous forme
+                                        de texte au lieu de chaînes de caractères vides.
 
                                         Si la valeur 'supported' est passée après le signe '=', alors un fichier compilé est créé pour chaque langue
                                         supportée par le compilateur, toujours de la même manière que pour chaque code ISO 639-1 passée au compilateur
@@ -40,6 +46,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
 
                                         Chacun de ces fichiers de traduction se trouve dans le dossier mentionné dans la description de l'option obligatoire
                                         '--lang=' décrite ci-dessus, et porte le même nom de fichier.
+
+                                        Si, parmi les codes ISO 639-1 passés, le code 'en' (anglais) est absent, alors la même procédure mentionnée dans la
+                                        description de l'option obligatoire '--lang=' décrite ci-dessus est appliquée pour les mêmes raisons sus-mentionnées.
 
                                         Si la valeur 'supported' est passée après le signe '=', alors le contenu du fichier de traduction de chaque langue
                                         supportée par le compilateur sera écrit dans le fichier compilé, avec leur fonction qui définit chacune des variables
@@ -69,8 +78,8 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
     -C --compile-stable                 convertit le fichier compilé dans une version stable. Cette option force l'exécution de la commande 'shellcheck'
                                         pour chaque fichier à compiler traité par le compilateur, et en fait de même avec le fichier de sortie une fois
-                                        ce dernier compilé. Elle est incompatible avec l'option '-s' / '--no-shellcheck', et un message d'erreur sera
-                                        retourné si les deux options sont utilisées ensemble.";
+                                        ce dernier compilé, avant de le rendre accessible uniquement en mode lecture seule. Elle est incompatible avec
+                                        l'option '-s' / '--no-shellcheck', un message d'erreur sera retourné si les deux options sont utilisées ensemble.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_UNSTABLE="
     -c --compile-unstable               cette option ne fait rien, sachant que la compilation d'une version instable est le comportment par défaut du
@@ -94,6 +103,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
     -r --keep-raw-document-layout       garde le formatage brut du fichier compilé, sans lui apporter d'optimisations. Dans ce cas, les options '--keep-*'
                                         citées précédemment ne fonctionneront pas.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE="
+    -a --no-alias-include               n'inclut pas le fichier des alias du module principal dans le fichier compilé.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
     -s --no-shellcheck                  empêche l'exécution de la commande 'shellcheck' sur chaque fichier traité par le compilateur. Cette option est

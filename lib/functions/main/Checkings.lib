@@ -865,11 +865,15 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 	fi
 }
 
-# Checking for "${__BU_MAIN_PROJECT_LOG_FILE_PATH}".
+# Checking for the presence of the project's log path, whose path is stored in the "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" global variable.
 
 # Featured functions and files by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()                -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                -> Main -> Echo.lib
+
+#   - BU.Main.Files.CreateProjectLogFile()  -> Main -> Files.lib
 
 #   - BU.ModuleInit.SetInitErrorMsg()   -> Modules initializer script
 function BU.Main.Checkings.CheckProjectLogPath()

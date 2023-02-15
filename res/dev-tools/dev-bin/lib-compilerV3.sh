@@ -630,6 +630,8 @@ function CompilerUsage()
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT}";
 
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE}";
+
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK}";
 
     if [ "${p_exit,,}" == 'true' ]; then exit 0; else return 0; fi
@@ -690,17 +692,18 @@ _____value_of__help='--help'
 _____value_of__keep_comments='--keep-comments';
 _____value_of__keep_exec_safeguards='--keep-exec-safeguards';
 _____value_of__keep_raw_document_layout='--keep-raw-document-layout';
+_____value_of__no_alias_include='--no-alias-include';
 _____value_of__no_shellcheck='--no-shellcheck';
 
 # Looping through the array of optional arguments.
 for arg in "${__BU_ARGS_ARRAY[@]}"; do
     # If the user decided to create a stable version of the compiled framework.
-    if [ "${arg}" == '-C' ] || [[ "${arg,,}" == "${_____value_of__compile_stable}" ]]; then
+    if [ "${arg}" == '-C' ] || [ "${arg,,}" == "${_____value_of__compile_stable}" ]; then
         # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
         __vArrayVal_compile_stable="${_____value_of__compile_stable}";
 
     # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
-    elif [ "${arg}" == '-c' ] || [[ "${arg,,}" == "${_____value_of__compile_unstable}" ]]; then
+    elif [ "${arg}" == '-c' ] || [ "${arg,,}" == "${_____value_of__compile_unstable}" ]; then
         # As the unstable version is the one compiled by default AND before the creation of a stable one, nothing has to be done.
         true;
 
@@ -718,20 +721,24 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
 
     # Else, if the user decides to remove the comments from the compiled file
     # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
-    elif [[ "${arg,,}" == "${_____value_of__keep_comments}" ]]; then
+    elif [ "${arg,,}" == "${_____value_of__keep_comments}" ]; then
         __vArrayVal_keep_comments="${_____value_of__keep_comments}";
 
     # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
-    elif [ "${arg}" == '-e' ] || [[ "${arg,,}" == "${_____value_of__keep_exec_safeguards}" ]]; then
+    elif [ "${arg}" == '-e' ] || [ "${arg,,}" == "${_____value_of__keep_exec_safeguards}" ]; then
         __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
 
     # Else, if the user decides to keep the raw layout of the compiled file.
-    elif [ "${arg}" == '-r' ] || [[ "${arg,,}" == "${_____value_of__keep_raw_document_layout}" ]]; then
+    elif [ "${arg}" == '-r' ] || [ "${arg,,}" == "${_____value_of__keep_raw_document_layout}" ]; then
         __vArrayVal_keep_raw_document_layout="${_____value_of__keep_raw_document_layout}";
+
+    # Else, if the user decides not to include the aliases file into the compiled file.
+    elif [ "${arg}" == '' ] || [ "${arg,,}" == "${_____value_of__no_alias_include}" ]; then
+        __vArrayVal_no_alias_include="${_____value_of__no_alias_include}";
 
     # Else, if the user decides to prevent the execution of the 'shellcheck' command.
     # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-    elif [ "${arg}" == '-n' ] || [[ "${arg,,}" == "${_____value_of__no_shellcheck}" ]]; then
+    elif [ "${arg}" == '-n' ] || [ "${arg,,}" == "${_____value_of__no_shellcheck}" ]; then
         __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
 
     # --------------------------------------------------------------------------------
