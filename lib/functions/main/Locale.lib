@@ -69,13 +69,20 @@ fi; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
-#### DEBUG ID :
+#### LOCALE DISPLAY FUNCTIONS
+#### DEBUG ID : "locale::locale-display-functions"
 
-##
-## DEBUG ID :
+__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS="locale::locale-display-functions";
+
+## OPTIMIZATION FUNCTIONS
+## DEBUG ID : "optimization-functions"
+
+__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__OPTIMIZATION_FUNCTIONS="${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}::optimization-functions";
 
 # Checking if the language's code matches to a valid ISO 639-1 code.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
 function BU.Main.Locale.CheckISO_639_1_ValidCode()
 {
     [[ ${__BU_MAIN_LOCALE_ISO_639_1_LOCALES_ARRAY[*]} =~ ${1,,} ]] && return 0;
@@ -88,6 +95,9 @@ function BU.Main.Locale.CheckISO_639_1_ValidCode()
 }
 
 # Handling the parameters errors for the "BU.Main.Locale.PrintLanguageName.Optimize()" function, only if the main script is the 3rd version of the library compiler, which does not heavily depends on the framework's resources.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Locale.CheckISO_639_1_ValidCode()     -> Main -> Locale.lib (this file)
 function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler()
 {
     #**** Parameters ****
@@ -112,6 +122,12 @@ function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompi
 }
 
 # Optimizing the "BU.Main.Locale.PrintLanguageName()" function's code, in order to avoid to modify manually the code and the rendered layout for each of the 200+ supported languages.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Locale.PrintLanguageName.Optimize()                             -> Main -> Args.lib
+
+#   - BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler()  -> Main -> Locale.lib (this file)
+#   - BU.Main.Locale.PrintLanguageName.Optimize()                                   -> Main -> Locale.lib (this function, this file)
 function BU.Main.Locale.PrintLanguageName.Optimize()
 {
 	#**** Parameters ****
@@ -262,10 +278,20 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	return 0;
 }
 
+# -----------------------------------------------
+
+## PRINTING LOCALE
+## DEBUG ID : "printing-locale"
+
+__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRINTING_LOCALE="${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}::printing-locale";
+
 # Printing the language name in English, in its own language and in the user's system language.
 
 # Temporary : since the compiled file doesn't exists yet AND does not uses the main module's translation files,
 # it is necessary to prevent Shellcheck to flag the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__*}" global variables as "referenced but not assigned".
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BUPLNOptimizer()  -> Main -> Locale.lib (defined into this function, this file)
 
 # shellcheck disable=SC2154
 function BU.Main.Locale.PrintLanguageName()
@@ -283,6 +309,9 @@ function BU.Main.Locale.PrintLanguageName()
     # Reducing the text to write in order to call the "$(BU.Main.Locale.PrintLanguageName.Optimize)" function.
 
     # Thanks to the "BU.Main.Locale.PrintLanguageName()" function's body being written between parenthesis instead of braces, the scope of the "BUPLNOptimizer()" function is local only.
+
+    # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+    #   - BU.Main.Locale.PrintLanguageName.Optimize()   -> Main -> Locale (this file)
     function BUPLNOptimizer()
     {
         #**** Parameters ****

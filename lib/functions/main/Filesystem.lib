@@ -82,10 +82,16 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="${
 # Checking if the current partition is full.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-#   - BU.Main.OS.IsAndroidTermux()          -> Main -> OS.lib
+#   - BU.Main.OS.IsAndroidTermux()  -> Main -> OS.lib
+#   - BU.Main.OS.IsFreeBSD()        -> Main -> OS.lib
+#   - BU.Main.OS.IsHaiku()          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()          -> Main -> OS.lib
+#   - BU.Main.OS.IsNetBSD()         -> Main -> OS.lib
+#   - BU.Main.OS.IsOpenBSD()        -> Main -> OS.lib
+#   - BU.Main.OS.IsOSX()            -> Main -> OS.lib
 function BU.Main.Filesystem.IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -167,6 +173,17 @@ function BU.Main.Filesystem.IsPartitionFull()
 __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING__GETTING_FILE_SYSTEM_INFORMATIONS="${__BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING}::getting-filesystem-informations";
 
 # Getting the file system path.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -198,6 +215,17 @@ function BU.Main.Filesystem.GetFSDevice()
 }
 
 # Getting the total size in bytes allocated to a given file system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -229,6 +257,17 @@ function BU.Main.Filesystem.GetFSTotalSize()
 }
 
 # Getting the mounted partition of a given file system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -260,6 +299,18 @@ function BU.Main.Filesystem.GetFSMountPoint()
 }
 
 # Getting the used size in bytes of a given file system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                            -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -307,6 +358,18 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 }
 
 # Getting the percentage of the used space of a given file system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Msg()                            -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -355,6 +418,17 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 }
 
 # Getting the available size in bytes of a given file system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -386,6 +460,17 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 }
 
 # Getting the type of the file system of a directory or a file.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
+
+#   - BU.Main.CMDS.GetCommandReturnOutputValue()    -> Main -> CMDS.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 function BU.Main.Filesystem.GetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -437,13 +522,18 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 
 # Fonctions d'attribution de propriété de fichier à l'utilisateur.
 
-# Required functions and files into the "Bash-Utils/src/functions" folder :
-#   - BU.Main.Checkings.CheckRootEUID() -> Checkings.lib
-#   - BU.Main.Echo.Error()              -> Echo.lib
-#   - BU.Main.Echo.Newstep()            -> Echo.lib
-#   - BU.Main.Echo.Success()            -> Echo.lib
-#   - BU.Main.Headers.DrawLine()        -> Headers.lib
-#   - BU.Main.Errors.HandleErrors()     -> Headers.lib
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Checkings.CheckRootEUID() -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+#   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()            -> Main -> Echo.lib
+#   - BU.Main.Echo.Success()            -> Main -> Echo.lib
+
+#   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
+
+#   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
 function BU.Main.Filesystem.Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -542,13 +632,19 @@ __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING__
 
 # Calling the "chown" command to change recursively directory ownership
 
-# Required functions and files into the "Bash-Utils/src/functions" folder :
-#	- BU.Main.Checkings.CheckRootEUID()     -> Checkings.lib
-#	- BU.Main.Echo.Error()			        -> Echo.lib
-#	- BU.Main.Echo.Newstep()		        -> Echo.lib
-#	- BU.Main.Echo.Success()		        -> Echo.lib
-#	- BU.Main.Echo.Newline()			    -> Echo.lib
-#	- BU.Main.Errors.HandleErrors()		    -> Headers.lib
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Filesystem.ChownRec()   -> Main -> Args.lib
+
+#	- BU.Main.Checkings.CheckRootEUID()     -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+#	- BU.Main.Echo.Error()			        -> Main -> Echo.lib
+#	- BU.Main.Echo.Newline()			    -> Main -> Echo.lib
+#	- BU.Main.Echo.Newstep()		        -> Main -> Echo.lib
+#	- BU.Main.Echo.Success()		        -> Main -> Echo.lib
+
+#	- BU.Main.Errors.HandleErrors()		    -> Main -> Headers.lib
 function BU.Main.Filesystem.ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

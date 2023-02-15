@@ -86,6 +86,9 @@ function BU.Main.OS.IsAndroidTermux()               { if [[ "${OSTYPE}" == 'linu
 alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 
 # Checking the current Android version.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsAndroidTermux() -> OS.lib (this file)
 function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid5()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
 function BU.Main.OS.IsAndroid6()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
@@ -140,6 +143,11 @@ __BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="os::bsd";
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD}::checking-informations";
 
 # Checking if the current OS is BSD (general types).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsFreeBSD() -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsNetBSD()  -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsOpenBSD() -> Main -> OS.lib (this file)
 function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD || BU.Main.OS.IsNetBSD || BU.Main.OS.IsOpenBSD; then return 0; else return 1; fi }
 
 # -----------------------------------------------
@@ -303,6 +311,9 @@ __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="${__B
 __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}::gathering-informations";
 
 # Checking the current operating system, by using the functions declared above.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 function BU.Main.OS.GetCurrentOS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.

@@ -1514,10 +1514,10 @@ function BU.Main.Files.UncompressCMD()
 
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
-#   - BU.Main.Echo.Newline()                    -> Main -> Echo.lib
-#   - BU.Main.Echo.Warning()                    -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleSmallErrors()        -> Main -> Errors.lib
+
+#   - BU.Main.Files.UncompressFormat.ErrorMsg   -> Main -> Files.lib (defined into this function, this file)
 function BU.Main.Files.UncompressFormat()
 ({
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1534,6 +1534,10 @@ function BU.Main.Files.UncompressFormat()
     if ! BU.Main.Args__Files.UncompressFormat "${p_form}" "${p_arch}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
 
     # Quick writing of the error message which tells that it's impossible to uncompress the target archive with the default or the specified command.
+
+    # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+    #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
+    #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
     function BU.Main.Files.UncompressFormat.ErrorMsg()
     {
         #**** Parameters ****
