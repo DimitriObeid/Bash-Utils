@@ -725,7 +725,12 @@ function BU.ModuleInit.GetModuleInitLanguage()
 
 ## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
+# ··························································································································································
 # Asking to the user if s/he wants to display the initialization logs on the screen (preferably before stopping the script's execution after a fatal error).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.MsgLine()   -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLog()  -> Modules initializer script (this file)
 function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
@@ -762,7 +767,14 @@ function BU.ModuleInit.AskPrintLog()
 	fi
 }
 
+# ·······························································
 # Printing and / or logging the global variables already defined.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Msg()           -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
+
+#   - DisplayInitGlobalVarsInfos()  -> Modules initializer script (this file)
 function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos()
 {
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS}" '#' 'msg';
