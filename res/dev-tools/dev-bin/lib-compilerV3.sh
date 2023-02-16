@@ -200,9 +200,9 @@ if [[ "${LANG}" == fr_* ]]; then
         ____lang_included='true';
     fi
 fi
-## ------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 # SINCE NO OTHER LANGUAGES ARE SUPPORTED, ENGLISH IS SET AS THE DEFAULT LANGUAGE.
-## ------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------
 
 if [ -n "${____unable_to_include_lang}" ] || [ -z "${____lang_included}" ]; then
     # shellcheck disable=SC1091
@@ -578,13 +578,22 @@ function CheckLangArgDelim()
     return 1;
 }
 
-# ----------------------------------------------
+## ----------------------------------------------
 
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### MISC FUNCTIONS
+
+## ERRORS HANDLING
+
+function HandleIncompatibleOptionalArgs()
+{
+    PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+
+    exit 1;
+}
 
 ## HELP
 
@@ -641,7 +650,7 @@ function CompilerUsage()
     if [ "${p_exit,,}" == 'true' ]; then exit 0; else return 0; fi
 }
 
-# ----------------------------------------------
+## ----------------------------------------------
 
 ## MESSAGES
 
@@ -672,7 +681,7 @@ function QuitErrorMessage.NumberOfFilesCompiled()
     fi
 }
 
-# ----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -769,7 +778,7 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
     elif [ "${arg}" == '-n' ] || [ "${arg,,}" == "${_____value_of__no_shellcheck}" ]; then
         __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
 
-    ## -------------------------------------------------------------------------------
+    # --------------------------------------------------------------------------------
     # Else, if an unsupported argument is passed into the array of optional arguments.
     else
         PrintErrorLine "${__BU_COMPILE__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY}" 'FULL';
@@ -803,14 +812,14 @@ if [[ (-n "${__vArrayVal_compile_stable}") && (-n "${__vArrayVal_no_shellcheck}"
 fi
 
 # Verifying if another "--keep-*" value was passed with the '--keep-raw-document-layout' parameter.
-if [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_comments}") ]] || \
-    [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_exec_safeguards}") ]]; then
+if [ -n "${__vArrayVal_keep_raw_document_layout}" ]; then
+    if  [ -n "${__vArrayVal_keep_comments}" ] || \
+        [ -n "${__vArrayVal_keep_exec_safeguards}" ] || \
+        [ -n "${__vArrayVal_keep_functions_infos}" ] || \
+        [ -n "${__vArrayVal_keep_functions_pvc_infos}" ]; then
 
-
-
-    PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
-
-    exit 1;
+        HandleIncompatibleOptionalArgs;
+    fi
 fi
 
 ## ----------------------------------------------
@@ -1031,7 +1040,7 @@ function CompileInSingleFile()
         # Deleting the existing "Bash-utils.sh" file.
         if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ] && [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then true > "${__BU_MAIN_FULL_FILE_PATH}"; fi
 
-        ## ----------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------
         # Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code.
         if ! CheckISO639_1_LangCode "${v_curr_locale}"; then PrintErrorLine "${__locale_print_code__error} ${__BU_COMPILE__BAD_LANGUAGE_PASSED}" 'FULL'; ____loop_error='error'; break; fi
 
@@ -1039,7 +1048,7 @@ function CompileInSingleFile()
         # Framework compilation start message.
         PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL';
 
-        ## --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
 
         # Checking if the 'en' value is present in the array of languages if the '--lang-include=' option was passed.
@@ -1064,7 +1073,7 @@ function CompileInSingleFile()
             PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
         fi
 
-        ## -----------------------------------------------------------------------------------------
+        # ------------------------------------------------------------------------------------------
         # Writing now the initializer script's translations files content into the file to generate.
 
         # If a file must be compiled for each language.
@@ -1119,7 +1128,7 @@ function CompileInSingleFile()
             PrintSuccessLine "$(printf "SUCCESSFULLLY EMBEDDED THE TRANSLATION FILES FROM EACH OF THESE LANGUAGES INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE : ${__HIGHLIGHT}%s${__RESET}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'LOWER';
         fi
 
-        ## --------------------------------------------------------------------------------------
+        # ---------------------------------------------------------------------------------------
         # Writing the initializer script's configuration files content into the file to generate.
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
@@ -1133,7 +1142,7 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
-        ## ------------------------------------------------------------------
+        # -------------------------------------------------------------------
         # Writing the initializer script's content into the file to generate.
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
@@ -1149,7 +1158,7 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
-        ## -------------------------------------------------------------------------
+        # --------------------------------------------------------------------------
         # Writing the main module's library files content into the file to generate.
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
@@ -1163,7 +1172,7 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
-        ## -------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------
         # Writing the main module's configuration files content into the file to generate.
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
@@ -1177,7 +1186,7 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
-        ## --------------------------------------------------------------------------------
+        # ---------------------------------------------------------------------------------
         # Writing the main module's initializer script's content into the file to generate.
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
@@ -1191,13 +1200,13 @@ function CompileInSingleFile()
 
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
-        ## ------------------------------------------------------------------------------------------------------------------------
+        # ---------------------------------------------------------------------------------------------------------------------------
         # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU_SHELLCHECKED}" variable's value to 'true'.
         # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "BU.Main.DevTools.ShellcheckVerif()" function.
         if [ "${__BU_SHELLCHECKED}" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
 
 
-        ## ----------------------------------------------------------------------------
+        # -----------------------------------------------------------------------------
         # Copying the content of the generated file into the localized language's file.
         PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE}" "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}")" 'UPPER';
 
@@ -1219,7 +1228,7 @@ function CompileInSingleFile()
             fi
         fi
 
-        ## -------------------------------------------------------------------------------------------------------------------------------
+        # --------------------------------------------------------------------------------------------------------------------------------
         # If the user did not decided to keep the original layout of the compiled file, optimizations are being done to the compiled file.
         if [ -z "$__vArrayVal_keep_raw_document_layout" ]; then
             # Erasing every pieces of code which prevent the direct execution of their host files
@@ -1234,7 +1243,7 @@ function CompileInSingleFile()
             WriteCommentCode;
         fi
 
-        ## -------------------------------------------------------------
+        # --------------------------------------------------------------
         # Printing the statistics of the newly generated localized file.
 
         printf "${__BU_COMPILE__LOCALIZED_FILE__STATS}\n" "${__compiled_file_path}"; echo;
@@ -1272,7 +1281,7 @@ function CompileInSingleFile()
                 __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-full.sh";
             fi
 
-            ## -------------------------------------------------------
+            # --------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS}" "${__compiled_file_path}")" 'UPPER';
 
@@ -1285,7 +1294,7 @@ function CompileInSingleFile()
 
             PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS}\n\n" "${__compiled_file_path}")" 'LOWER';
 
-            ## ---------------------------------------------------
+            # -------------------------------------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE}" "${__compiled_file_path}" "${__compiled_stable_file_parent_dir}")" 'UPPER';
 
@@ -1305,7 +1314,7 @@ function CompileInSingleFile()
                 PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS}" "${__compiled_file_path}" "${__compiled_stable_file_parent_dir}")" 'LOWER';
             fi
 
-            ## ----------------------------------------------------------------------
+            # ------------------------------------------------------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD}" "${__compiled_file_path}")" 'UPPER';
 
