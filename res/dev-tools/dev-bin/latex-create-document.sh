@@ -143,7 +143,11 @@ __LATEX_CREATE_DOC__RES_DIR="${__BU_MAIN_MODULE_DEVTOOLS_SRC}/${__BU_MAIN_PROJEC
 
 ## LANGUAGES PROCESSING
 
+# ································
 # Listing the supported languages.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Newstep()            -> Main -> Echo.lib
 function LatexCreateDoc_ListLanguages()
 {
     BU.Main.Echo.Newstep "Currently supported languages --> English (en), French (fr)";
@@ -153,7 +157,7 @@ function LatexCreateDoc_ListLanguages()
     done
 }
 
-# ----------------------------------------------
+## ----------------------------------------------
 
 
 
@@ -171,7 +175,7 @@ read -rp "Please type the wanted language's code from one of the above parenthes
 BU.Main.Echo.Read "${__read_lang}";
 BU.Main.Echo.Newline;
 
-# ----------------------------------------------
+## ----------------------------------------------
 
 ## PROCESSING THE DOCUMENTATION'S LANGUAGE
 
@@ -187,7 +191,7 @@ elif [[ "${__ARG_LANG}" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; the
 
 else
 
-    # ----------------------------------------------
+    ## ----------------------------------------------
 
     ## PROCESSING THE TARGET DIRECTORY
 
@@ -257,7 +261,7 @@ else
         EchoSuccess "The $(DechoHighlightPath "${__read_folder_code}") folder was successfully created";
     fi
 
-    # ----------------------------------------------
+    ## ----------------------------------------------
 
     ## PROCESSING THE NEW FILE
 
@@ -298,7 +302,7 @@ else
 
 	## TODO : PUT THE USER'S KEYBOARD INPUTS AS DOCUMENT'S TITLE, AUTHOR'NAME AND SUBJECT. ALSO WRITE THE YEAR.
 
-    # ----------------------------------------------
+    ## ----------------------------------------------
 
     ## PROCESSING THE DOCUMENT'S TITLE
 
@@ -316,7 +320,7 @@ else
 
 
 
-    # ----------------------------------------------
+    ## ----------------------------------------------
 
     ## PROCESSING THE
 

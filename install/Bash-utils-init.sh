@@ -90,6 +90,7 @@ fi; exit 1; fi
 
 ## USEFUL FUNCTIONS
 
+# ·························································································
 # Use this function to have a better view about a bug location during a "$(bash -x)" debug.
 function DbgMsg()
 {
