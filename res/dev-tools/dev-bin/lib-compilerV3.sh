@@ -453,7 +453,17 @@ EOF
 # Erasing the comments from the targeted compiled file.
 function EraseComments()
 {
-    # Erasing every commented lines, except the ones with the "shellcheck" directive.
+    # If the user decides to keep the description of each function before their declaration.
+    if [ -z "${_____value_of__keep_functions_infos}" ]; then
+        local __value_of_keep_functions_infos='';
+    fi
+
+    # If the user decided to keep the "#**** Parameters", "#**** Variables" and "#**** Code" comments into the body of each function.
+    if [ -n "${_____value_of__keep_functions_pvc_infos}" ]; then
+        local _____value_of__keep_functions_pvc_infos='';
+    fi
+
+    # Erasing every commented lines, except the ones with the "shellcheck" directive, and the ones which the user has decided to keep.
     sed -i '/^[[:blank:]]*#.*shellcheck/d; /^[[:blank:]]*#/d' "${__compiled_file_path}";
 
     # Erasing the extra blank lines from the compiled file.
