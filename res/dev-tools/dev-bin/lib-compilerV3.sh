@@ -1129,7 +1129,7 @@ function CompileInSingleFile()
             translationList="$(for langArr in "${__language_array[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${langArr}" "${__NEWSTEP}"; if [ "${langArr}" != "${__language_array[-1]}" ]; then printf ' | '; fi; done)";
 
             # PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
-            PrintNewstepLine "$(printf "EMBEDDING THE TRANSLATION FILE FROM EACH OF THESE LANGUAGES INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} COMPILED FILE : ${__HIGHLIGHT}%s${__RESET}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'UPPER';
+            PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'UPPER';
 
             for translationLanguage in "${__language_array[@]}"; do
 
@@ -1140,7 +1140,7 @@ function CompileInSingleFile()
                 translationFilePath="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${translationLanguage}.locale";
 
                 if  [ ! -f "${translationFilePath}" ]; then
-                    PrintErrorLine "$(printf "${__locale_print_code__error} UNABLE TO FIND THE PATH TO THIS FILE : ${__HIGHLIGHT}%s${__RESET}" "${translationFilePath}")" 'FULL';
+                    PrintErrorLine "$(printf "${__locale_print_code__error} " "${translationFilePath}")" 'FULL';
 
                     QuitErrorMessage.NumberOfFilesCompiled;
 
@@ -1154,7 +1154,7 @@ function CompileInSingleFile()
                 [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break 2; };
             done
 
-            PrintSuccessLine "$(printf "SUCCESSFULLLY EMBEDDED THE TRANSLATION FILES FROM EACH OF THESE LANGUAGES INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE : ${__HIGHLIGHT}%s${__RESET}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'LOWER';
+            PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}" "${translationList}")" 'LOWER';
         fi
 
         # ---------------------------------------------------------------------------------------
