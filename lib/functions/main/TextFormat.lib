@@ -485,6 +485,10 @@ __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT="${__BU_MAI
 
 # ··········································································
 # Checking if the "${__BU_MAIN_STAT_TXT_FMT}" status value is set to "true".
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.TextFormat.SetTextFormat()
 {
     #**** Parameters ****
