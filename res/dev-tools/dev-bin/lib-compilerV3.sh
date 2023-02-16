@@ -718,21 +718,29 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
         # As the unstable version is the one compiled by default AND before the creation of a stable one, nothing has to be done.
         true;
 
+
     # Else, if the author(s) of the compilation give their name(s).
-    elif [[ "${arg,,}" == "${_____value_of__compilation_authors}"=* ]]; then
+    elif [ "${arg}" == '-A' ] || [[ "${arg,,}" == "${_____value_of__compilation_authors}"=* ]]; then
         __vArrayVal_compilation_authors="${_____value_of__compilation_authors}";
+
+    # Else, if the user decides to give a version number to the compiled file.
+    elif [ "${arg}" == '-V' ] || [ "${arg,,}" == "${_____value_of__compilation_version}" ]; then
+        __vArrayVal_compilation_version="${_____value_of__compilation_version}";
+
 
     # Else, if the user decides to display the content of each compiled file as they are processed by the compiler.
     elif [ "${arg,,}" == "${_____value_of__display}" ]; then
         __vArrayVal_display="${_____value_of__display}";
 
+
     # Else, if the user decides to get a quick help about the compiler.
-    elif [ "${arg,,}" == "${_____value_of__help}" ]; then
+    elif [ "${arg}" == '-h' ] || [ "${arg,,}" == "${_____value_of__help}" ]; then
         CompilerUsage;
+
 
     # Else, if the user decides to remove the comments from the compiled file
     # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
-    elif [ "${arg,,}" == "${_____value_of__keep_comments}" ]; then
+    elif [ "${arg}" == '-k' ] || [ "${arg,,}" == "${_____value_of__keep_comments}" ]; then
         __vArrayVal_keep_comments="${_____value_of__keep_comments}";
 
     # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
@@ -740,19 +748,20 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
         __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
 
     # Else, if the user decides to keep the description of each function.
-    elif [ "${arg}" == '' ] || [ "${arg,,}" == "${_____value_of__keep_functions_infos}" ]; then
+    elif [ "${arg}" == '-i' ] || [ "${arg,,}" == "${_____value_of__keep_functions_infos}" ]; then
         __vArrayVal_keep_functions_infos="${_____value_of__keep_functions_infos}";
 
     # Else, if the user decides to keep the "#**** Parameters ****", "#**** Variables ****" and "#**** Code ****" comments into the functions.
-    elif [ "${arg}" == '' ] || [ "${arg,,}" == "${_____value_of__keep_functions_pvc_infos}" ]; then
+    elif [ "${arg}" == '-p' ] || [ "${arg,,}" == "${_____value_of__keep_functions_pvc_infos}" ]; then
         __vArrayVal_keep_functions_pvc_infos="${_____value_of__keep_functions_pvc_infos}";
 
     # Else, if the user decides to keep the raw layout of the compiled file.
     elif [ "${arg}" == '-r' ] || [ "${arg,,}" == "${_____value_of__keep_raw_document_layout}" ]; then
         __vArrayVal_keep_raw_document_layout="${_____value_of__keep_raw_document_layout}";
 
+
     # Else, if the user decides not to include the aliases file into the compiled file.
-    elif [ "${arg}" == '' ] || [ "${arg,,}" == "${_____value_of__no_alias_include}" ]; then
+    elif [ "${arg}" == '-a' ] || [ "${arg,,}" == "${_____value_of__no_alias_include}" ]; then
         __vArrayVal_no_alias_include="${_____value_of__no_alias_include}";
 
     # Else, if the user decides to prevent the execution of the 'shellcheck' command.
@@ -793,15 +802,11 @@ if [[ (-n "${__vArrayVal_compile_stable}") && (-n "${__vArrayVal_no_shellcheck}"
     exit 1;
 fi
 
-# Verifying if the "${__vArrayVal_keep_raw_document_layout}" value was passed with the "${__vArrayVal_keep_exec_safeguards}" or the "${__vArrayVal_keep_comments}" values.
+# Verifying if another "--keep-*" value was passed with the '--keep-raw-document-layout' parameter.
 if [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_comments}") ]] || \
     [[ (-n "${__vArrayVal_keep_raw_document_layout}") && (-n "${__vArrayVal_keep_exec_safeguards}") ]]; then
-    # shellcheck disable=SC2059
-    PrintWarningLine "$(printf "${__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER}\n\n" "${_____value_of__keep_raw_document_layout}" "${_____value_of__keep_comments}" "${_____value_of__keep_exec_safeguards}")" 'FULL' >&2;
 
-    # shellcheck disable=SC2059
-    printf "${__BU_COMPILE__KEEP_RAW_DOC_LAYOUT__KEEP_COMMENTS__AND__KEEP_EXEC_SAFEGUARD__WERE_PASSED_TOGETHER__ADVICE}" "${_____value_of__keep_raw_document_layout}" "${_____value_of__keep_comments}" "${_____value_of__keep_exec_safeguards}" >&2;
-    echo >&2;
+
 
     PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
