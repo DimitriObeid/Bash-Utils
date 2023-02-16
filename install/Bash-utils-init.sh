@@ -330,6 +330,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 # Printing the message that warns the user that the rest of the framework will use english as default language (this function is not called if the framework is compiled in a single file).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()         -> Modules initializer script (this file)
 
 function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 {
@@ -497,6 +498,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 {
     #**** Parameters ****
@@ -731,6 +733,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.MsgLine()   -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLog()  -> Modules initializer script (this file)
+
 function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
@@ -775,6 +778,7 @@ function BU.ModuleInit.AskPrintLog()
 #   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
 
 #   - DisplayInitGlobalVarsInfos()  -> Modules initializer script (this file)
+
 function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos()
 {
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS}" '#' 'msg';
@@ -873,7 +877,12 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         __bu_module_init__bashx_debug_vals_array__lineno
 }
 
+# ·······························································
 # Displaying the information on the initialized global variables.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Msg()       -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLine()   -> Modules initializer script (this file)
 
 # shellcheck disable=SC2059
 function BU.ModuleInit.DisplayInitGlobalVarsInfos()
@@ -1051,7 +1060,16 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
     fi
 }
 
+# ·········································································································································
 # Handling the initializer's messages. In case of an error, there's no need to call this function, as the error messages MUST be displayed.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.AskPrintLog()       -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()              -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()        -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgAbort()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError()     -> Modules initializer script (this file)
+
 function BU.ModuleInit.Msg()
 {
     #**** Parameters ****
@@ -1187,7 +1205,13 @@ function BU.ModuleInit.Msg()
     return 0;
 }
 
+# ···············································
 # Writing a text under a line with the same size.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Msg()               -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLineCount()      -> Modules initializer script (this file)
+
 function BU.ModuleInit.MsgLine()
 {
     #**** Parameters ****
@@ -1208,7 +1232,12 @@ function BU.ModuleInit.MsgLine()
     return 0;
 }
 
+# ······························································································································
 # Drawing a line with a character, that is the same lenght as a string, in order to separate the messagges from different steps.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Msg()               -> Modules initializer script (this file)
+
 function BU.ModuleInit.MsgLineCount()
 {
     #**** Parameters ****
@@ -1227,7 +1256,13 @@ function BU.ModuleInit.MsgLineCount()
     return 0;
 }
 
+# ············································
 # Writing a non-empty (and translated) string.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Exit()              -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()        -> Modules initializer script (this file)
+
 function BU.ModuleInit.MsgTranslate()
 {
     if [ -n "${1}" ]; then
@@ -1248,16 +1283,25 @@ function BU.ModuleInit.MsgTranslate()
 # BU.ModuleInit.Msg "$(BU.ModuleInit.MsgTranslate "TEST 2")";
 # BU.ModuleInit.Msg;
 
+# ······························································
 # Displaying a text when the script's execution must be stopped.
+
 function BU.ModuleInit.MsgAbort() { echo >&2; echo "${__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT}" >&2; echo >&2; return 0; }
 
+# ·················································
 # Pressing any key on the keyboard to do an action.
 
 # shellcheck disable=SC2059
 function BU.ModuleInit.PressAnyKey() { echo; read -n 1 -s -r -p "$(printf "${__BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS} %s" "${1}")"; echo; return 0; }
 
+# ···························································································································
 # Printing the initialization on the screen. Although this function is called if the '--log-display' value is passed with the
 # "module" argument, this function could be used as a help, in case this value's parameters doesn't work in case of a rework.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLineCount()  -> Modules initializer script (this file)
+#   - BU.ModuleInit.PressAnyKey()   -> Modules initializer script (this file)
 
 # shellcheck disable=SC2129
 function BU.ModuleInit.PrintLog()
@@ -1370,7 +1414,15 @@ function BU.ModuleInit.PrintLog()
 	return 0;
 }
 
+# ···················································
 # Print an error message in the log storage variable.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Msg()       -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLine()   -> Modules initializer script (this file)
+
+#   - BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced() -> Modules initializer script (this file)
+
 function BU.ModuleInit.PrintLogError()
 {
     #**** Parameters ****
@@ -1408,7 +1460,12 @@ function BU.ModuleInit.PrintLogError()
 
 ## FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
+# ····················································
 # Checking the currently used Bash language's version.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.ModuleInit.CheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
