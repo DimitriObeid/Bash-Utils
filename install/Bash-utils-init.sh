@@ -587,7 +587,10 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 # Rewriting the library's languages messages (this function is not called if the framework is compiled in a single file).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()               -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkCompiled()                               -> Modules initializer script (this file)
+#   - BU.ModuleInit.SetInitLocale."${__BU_MODULE_INIT__USER_LANG}"()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.SourceEnglishTranslationFiles()                     -> Modules initializer script (this file)
 
 # shellcheck disable=SC1091,SC1090
 function BU.ModuleInit.GetModuleInitLanguage()
