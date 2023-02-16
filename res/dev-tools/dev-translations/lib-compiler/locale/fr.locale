@@ -130,6 +130,14 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
                                         utilisées ensemble.";
 
 
+# ------------------------------------------------------------------------------------------------
+# Fonction "HandleIncompatibleOptionalArgs()" [-----] "HandleIncompatibleOptionalArgs()" function.
+
+__BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE="${__WARNING}L'option ${__HIGHLIGHT}%s${__WARNING} est incompatible avec cette option : ${__HIGHLIGHT}%s${__RESET}";
+
+__BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE="${__WARNING}L'option ${__HIGHLIGHT}%s${__WARNING} est incompatible avec ces options : ${__HIGHLIGHT}%s${__RESET}";
+
+
 # ----------------------------------------------------------------------------------------------------------------
 # Fonction "QuitErrorMessage.NumberOfFilesCompiled()" [-----] "QuitErrorMessage.NumberOfFilesCompiled()" function.
 

@@ -588,12 +588,37 @@ function CheckLangArgDelim()
 
 ## ERRORS HANDLING
 
+# shellcheck disable=SC2059
 function HandleIncompatibleOptionalArgs()
 {
+    #**** Parameters ****
+    local p_keep_opts=("${@}"); # ARG TYPE : ARRAY  - REQUIRED | DEFAULT VAL : NULL     - DESC :
+
+    #**** Variables ****
+    local v_keep_opts;          # VAR TYPE : CMD    - DESC :
+
+    #**** Code ****
+    # Deleting the empty elements from the "${p_keep_opts}" array.
+    for i in "${!p_keep_opts[@]}"; do
+        if [[ "${p_keep_opts[$i]}" == "" ]]; then unset "p_keep_opts[$i]"; fi
+    done
+
+    v_keep_opts="$(for opts in "${p_keep_opts[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${opts}" "${__WARNING}"; if [ "${opts}" != "${p_keep_opts[-1]}" ] && [ -n "${opts}" ]; then printf ' | '; fi; done)";
+
+    echo >&2;
+
+    if [ "${#p_keep_opts[@]}" -lt 2 ]; then
+        printf "${__BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE}\n" "${__vArrayVal_keep_raw_document_layout}" "${v_keep_opts}" >&2;
+    else
+        printf "${__BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE}\n" "${__vArrayVal_keep_raw_document_layout}" "${v_keep_opts}" >&2;
+    fi
+
     PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
     exit 1;
 }
+
+## ----------------------------------------------
 
 ## HELP
 
@@ -818,7 +843,11 @@ if [ -n "${__vArrayVal_keep_raw_document_layout}" ]; then
         [ -n "${__vArrayVal_keep_functions_infos}" ] || \
         [ -n "${__vArrayVal_keep_functions_pvc_infos}" ]; then
 
-        HandleIncompatibleOptionalArgs;
+        HandleIncompatibleOptionalArgs \
+            "${__vArrayVal_keep_comments}" \
+            "${__vArrayVal_keep_exec_safeguards}" \
+            "${__vArrayVal_keep_functions_infos}" \
+            "${__vArrayVal_keep_functions_pvc_infos}";
     fi
 fi
 
