@@ -79,7 +79,11 @@ __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS="textformat::colors";
 
 __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::getting-color-codes-from-files";
 
+# ················································
 # Writing the error messages in a single location.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.IsInScript()    -> Modules initializer script
 function BU.Main.TextFormat.CannotCreateRessource()
 {
     #**** Parameters ****
@@ -101,7 +105,11 @@ function BU.Main.TextFormat.CannotCreateRessource()
     if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi
 }
 
+# ·································································
 # Getting the current background color from a command substitution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
 function BU.Main.TextFormat.GetBGColorFromCMD()
 {
     #**** Parameters ****
@@ -137,7 +145,11 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
     return 0;
 }
 
+# ···························································
 # Getting the current text color from a command substitution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
 function BU.Main.TextFormat.GetTextColorFromCMD()
 {
     #**** Parameters ****
@@ -180,12 +192,23 @@ function BU.Main.TextFormat.GetTextColorFromCMD()
 
 __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::setting-color-codes-in-files";
 
+# ····································································································································
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
 ## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU.Main.Decho.__Decho()" AND "BU.Main.Decho.Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
 #   - BU.Main.Checkings.CheckProjectRelatedFile()
 #   - BU.Main.Errors.HandleSmallErrors()
 #   - BU.Main.Errors.HandleErrors()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckStatAllowFormatting()     -> Main -> Status.lib
+
+#   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
+
+#   - BU.ModuleInit.IsInScript()                    -> Modules initializer script
 function BU.Main.TextFormat.SetBGColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -235,12 +258,23 @@ function BU.Main.TextFormat.SetBGColor()
     fi
 }
 
+# ······························································································································
 # Writing the text's color code into a file, to be processed by any function which needs to know what is the current text color.
 
 ## WARNING !! DO NOT CALL THESE FUNCTIONS HERE, THEY CALL THE "BU.Main.Decho.__Decho()" AND "BU.Main.Decho.Decho()" FUNCTIONS, AND SO THE FOLLOWING FUNCTION :
 #   - BU.Main.Checkings.CheckProjectRelatedFile()
 #   - BU.Main.Errors.HandleSmallErrors
 #   - BU.Main.Errors.HandleErrors
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckStatAllowFormatting()     -> Main -> Status.lib
+
+#   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
+
+#   - BU.ModuleInit.IsInScript()                    -> Modules initializer script
 function BU.Main.TextFormat.SetTextColor()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -301,7 +335,11 @@ function BU.Main.TextFormat.SetTextColor()
 
 __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::colors-strings-processing-functions";
 
+# ······················································
 # Conversion of color name (string) to color code (int).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
 function BU.Main.TextFormat.Atoi()
 {
     #**** Parameters ****
@@ -359,7 +397,11 @@ function BU.Main.TextFormat.Atoi()
     return 0;
 }
 
+# ······················································
 # Conversion of color code (int) to color code (string).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Text.ToUppercase()    -> Main -> Text.lib
 function BU.Main.TextFormat.Itoa()
 {
     #**** Parameters ****
@@ -441,6 +483,7 @@ __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text';
 
 __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT}:setting-text-format":
 
+# ··········································································
 # Checking if the "${__BU_MAIN_STAT_TXT_FMT}" status value is set to "true".
 function BU.Main.TextFormat.SetTextFormat()
 {

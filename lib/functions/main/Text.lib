@@ -324,12 +324,12 @@ function BU.Main.Text.CutLastFieldAfterDelim()
 # Deleting letters and sub-strings in a main string.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Args__Text.DeleteLettersInString()            -> Main -> Args.lib
+#   - BU.Main.Args__Text.DeleteLettersInString()    -> Main -> Args.lib
 
-#   - BU.Main.Echo.Debug()                                  -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()                               -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
-#   - BU.Main.Text.BU.Main.Text.ReplaceLettersInString()    -> Main -> Text.lib (this file)
+#   - BU.Main.Text.ReplaceLettersInString()         -> Main -> Text.lib (this file)
 function BU.Main.Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -346,7 +346,7 @@ function BU.Main.Text.DeleteLettersInString()
     #**** Code ****
     if ! BU.Main.Args__Text.DeleteLettersInString "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
 
-    BU.Main.Text.BU.Main.Text.ReplaceLettersInString "${p_string}" "${p_chars}" "$([ "${p_replacement}" == '' ] && printf '' || printf ' ')" || {
+    BU.Main.Text.ReplaceLettersInString "${p_string}" "${p_chars}" "$([ "${p_replacement}" == '' ] && printf '' || printf ' ')" || {
         local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}";
     };
 
@@ -617,6 +617,12 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 
 # ······················································································
 # Getting substring after a delimiter, which can be both a single character or a string.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Text.GetSubStringAfterDelim()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 function BU.Main.Text.GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -651,7 +657,17 @@ function BU.Main.Text.GetSubStringAfterDelim()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
 }
 
+# ·······················································································
 # Getting substring before a delimiter, which can be both a single character or a string.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Text.GetSubStringBeforeDelim()  -> Main -> Args.lib
+
+#   - BU.Main.Checkings.IsInt()                     -> Main -> Checkings.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()                        -> Main -> Echo.lib
 function BU.Main.Text.GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -715,7 +731,15 @@ function BU.Main.Text.GetSubStringBeforeDelim()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+
+# ································································································
 # Getting the occurences of a sub-string in a main string (it also works with a single character).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Text.GetSubStringOccurences()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 function BU.Main.Text.GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -755,7 +779,12 @@ function BU.Main.Text.GetSubStringOccurences()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ·····································
 # Getting the size of a string in byte.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Text.GetStringByteSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -770,6 +799,7 @@ function BU.Main.Text.GetStringByteSize()
     echo -ne "${p_string}" | wc --bytes; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ···········································
 # Getting the size of a string in characters.
 function BU.Main.Text.GetStringCharactersNumber()
 {
@@ -786,6 +816,10 @@ function BU.Main.Text.GetStringCharactersNumber()
 }
 
 # Getting the number of words in a string.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Text.GetStringWordsNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -807,7 +841,13 @@ function BU.Main.Text.GetStringWordsNumber()
 
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::listing-text";
 
+# ···········································
 # Getting every characters present in a file.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Text.ListCharactersFromFile() {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -830,7 +870,13 @@ function BU.Main.Text.ListCharactersFromFile() {
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ······································
 # Getting every words present in a file.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 function BU.Main.Text.ListWordsFromFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -860,7 +906,13 @@ function BU.Main.Text.ListWordsFromFile()
 
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::printing-text";
 
+# ················································
 # Printing a single character or a string X times.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+#   - BU.Main.Echo.Newstep()    -> Main -> Echo.lib
 function BU.Main.Text.PrintCharXTimes()
 {
     #**** Parameters ****
@@ -889,11 +941,18 @@ function BU.Main.Text.PrintCharXTimes()
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::reversing-text";
 
+# ·························································
 # Reverse words order of a string according to a delimiter.
 
 # Examples with the '|' and '/' delimiter:
 # animal | big | car | donut    --> donut | car | big | animal
 # /home/user/Documents          --> Documents/user/home
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()  -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 function BU.Main.Text.ReverseStringWordsOrder()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -936,6 +995,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ············································
 # Reverse the order of characters in a string.
 function BU.Main.Text.ReverseCharactersOrder()
 {
@@ -961,9 +1021,18 @@ function BU.Main.Text.ReverseCharactersOrder()
 # shellcheck disable=SC2034
 __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::splitting-text";
 
+# ······················
 # String to words array.
 
 # Pass a string as argument, and after calling this function, copy the content of the generated array into another array, like this : your_array_name=("${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR[@]}")
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Text.StrToWordArray()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+#   - BU.Main.Inputs.Sanitize()             -> Main -> Inputs.lib
 function BU.Main.Text.StrToWordArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -992,7 +1061,12 @@ function BU.Main.Text.StrToWordArray()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ······················
 # Words array to string.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 function BU.Main.Text.WordArrayToStr()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
