@@ -628,6 +628,10 @@ function CompilerUsage()
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS}";
 
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_INFOS}";
+
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_PVC_INFOS}";
+
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT}";
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE}";
@@ -696,6 +700,7 @@ _____value_of__help='--help'
 _____value_of__keep_comments='--keep-comments';
 _____value_of__keep_exec_safeguards='--keep-exec-safeguards';
 _____value_of__keep_functions_infos='--keep-functions-infos';
+_____value_of__keep_functions_pvc_infos='--keep-functions-pvc-infos';
 _____value_of__keep_raw_document_layout='--keep-raw-document-layout';
 
 _____value_of__no_alias_include='--no-alias-include';
@@ -737,6 +742,10 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
     # Else, if the user decides to keep the description of each function.
     elif [ "${arg}" == '' ] || [ "${arg,,}" == "${_____value_of__keep_functions_infos}" ]; then
         __vArrayVal_keep_functions_infos="${_____value_of__keep_functions_infos}";
+
+    # Else, if the user decides to keep the "#**** Parameters ****", "#**** Variables ****" and "#**** Code ****" comments into the functions.
+    elif [ "${arg}" == '' ] || [ "${arg,,}" == "${_____value_of__keep_functions_pvc_infos}" ]; then
+        __vArrayVal_keep_functions_pvc_infos="${_____value_of__keep_functions_pvc_infos}";
 
     # Else, if the user decides to keep the raw layout of the compiled file.
     elif [ "${arg}" == '-r' ] || [ "${arg,,}" == "${_____value_of__keep_raw_document_layout}" ]; then

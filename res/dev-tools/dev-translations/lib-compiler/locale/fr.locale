@@ -100,6 +100,15 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
                                         Cette option n'empêche pas l'ajout d'un tel code de sécurité supplémentaire après les commentaires au niveau
                                         supérieur du fichier compilé.";
 
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_INFOS="
+    -i --keep-functions-infos           garde les commentaires servant d'informations concernant chaque fonction, de la chaîne de caractères séparant une
+                                        fonction d'une autre (# ·········· ...) et le mot clé \"function\" écrit à l'extérieur du bloc de commentaires, et
+                                        qui sert à déclarer une fonction.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_PVC_INFOS="
+    -p --keep-functions-pvc-infos       garde les commentaires commençant par les chaînes \"#**** Parameters\", \"#**** Variables\" et \"#**** Code\", qui
+                                        séparent la définition des paramètres, les déclarations de variables et le code dans le corps d'une fonction.";
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
     -r --keep-raw-document-layout       garde le formatage brut du fichier compilé, sans lui apporter d'optimisations. Dans ce cas, les options '--keep-*'
                                         citées précédemment ne fonctionneront pas.";

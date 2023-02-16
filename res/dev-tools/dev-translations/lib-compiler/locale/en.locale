@@ -98,6 +98,15 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
                                         direct execution of the said file. This option does not prevents the addition of an extra safeguard
                                         code after the top-level of the compiled file.";
 
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_INFOS="
+    -i --keep-functions-infos           keep the comments used as informations about each function, from the string separating a function from
+                                        another (# ·········· ...) and the \"function\" keyword written outside of the commentaries block, and
+                                        which is used to declare a function.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_PVC_INFOS="
+    -p --keep-functions-pvc-infos       keep the comments beginning with the \"#**** Parameters\", \"#**** Variables\" and \"#**** Code\" strings,
+                                        which separate the parameters definition, the variables declarations and the code into the body of a function";
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
     -r --keep-raw-document-layout       keep the raw compiled file's layout, without optimizing it. In this case, the aforementionned '--keep-*'
                                         options will not work.";

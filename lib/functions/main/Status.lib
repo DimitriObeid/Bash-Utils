@@ -660,10 +660,12 @@ function BU.Main.Status.ChangeSTAT_ECHO()
     local p_lineno=${4:-$'\0'}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where the current function is called.
 
     #**** Variables ****
-    local v_log_file_path="${__BU_MAIN_PROJECT_LOG_FILE_PATH}"; # VAR TYPE : Filepath       - DESC : Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.
-    local v_loop_error; # VAR TYPE : String     - DESC : This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+    local v_log_file_path;      # VAR TYPE : Filepath   - DESC : Storing the path of the log file in another variable, in order to avoid reading and writing in the same pipeline.
+    local v_loop_error;         # VAR TYPE : String     - DESC : This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
     #*** Code ****
+    v_log_file_path="${__BU_MAIN_PROJECT_LOG_FILE_PATH}";
+
     if [ "true" == "${p_value,,}" ] && BU.Main.Checkings.IsArrayEmpty "${__BU_MAIN_STATVAR_ECHO_MSG_ARRAY[@]}"; then
 
         # Declare an array of strings, which will store the messages
