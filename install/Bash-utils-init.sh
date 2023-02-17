@@ -1473,7 +1473,7 @@ function BU.ModuleInit.PrintLogError()
 # Checking the currently used Bash language's version.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - Feel free to call a function if it is needed for your contribution.
 
 function BU.ModuleInit.CheckBashMinimalVersion()
 {
@@ -1493,7 +1493,12 @@ function BU.ModuleInit.CheckBashMinimalVersion()
 	fi
 }
 
+# ···········································································································
 # Check if the given path exists (This function is called by the "BU.ModuleInit.SourcingFailure()" function).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.CheckPath()
 {
     #**** Parameters ****
@@ -1543,7 +1548,18 @@ function BU.ModuleInit.CheckPath()
     fi
 }
 
+# ··············································································································
 # Getting the path returned by the "find" command, to make the directories and files searching case insensitive.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.AskPrintLog()                           -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()                                  -> Modules initializer script (this file)
+#   - BU.ModuleInit.FindPathNoTranslationFilesSourced()     -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkBeingInstalled()             -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkCompiled()                   -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()                            -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError()                         -> Modules initializer script (this file)
+
 # shellcheck disable=SC2059
 function BU.ModuleInit.FindPath()
 {
@@ -1650,7 +1666,15 @@ function BU.ModuleInit.FindPath()
 	return 0;
 }
 
+# ······························································································································
 # Getting the module's name from a subdirectory (this function is called in the main module's "module.conf" configuration file).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.AskPrintLog()   -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError() -> Modules initializer script (this file)
+
 function BU.ModuleInit.GetModuleName()
 {
     v_module="$(cd "$(dirname "${1}")" || { local lineno="${LINENO}";
@@ -1670,7 +1694,14 @@ function BU.ModuleInit.GetModuleName()
     echo "${v_module##*/}"; return 0;
 }
 
+# ····························································································································
 # Listing all the installed modules if the developer mistyped the module's name at the beginning of the main project's script.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.AskPrintLog()   -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError() -> Modules initializer script (this file)
 
 # shellcheck disable=SC2059
 function BU.ModuleInit.ListInstalledModules()
@@ -1755,7 +1786,16 @@ function BU.ModuleInit.ListInstalledModules()
     if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 }
 
+# ······················································
 # Printing an error message if a file cannot be sourced.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.AskPrintLog()   -> Modules initializer script (this file)
+#   - BU.ModuleInit.CheckPath()     -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.Msg()           -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError() -> Modules initializer script (this file)
 
 # shellcheck disable=SC2059
 function BU.ModuleInit.SourcingFailure()
@@ -1785,7 +1825,13 @@ function BU.ModuleInit.SourcingFailure()
 
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
+# ··············
 # Usage function
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLineCount()  -> Modules initializer script (this file)
+
 function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__USAGE__SUPVALS}" >&2;
@@ -1811,7 +1857,12 @@ function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
     BU.ModuleInit.MsgLineCount "${#__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG}" '-' >&2;
 }
 
+# ··························
 # Easy writing status error.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.DisplayStatError()
 {
     #**** Parameters ****
@@ -1823,6 +1874,7 @@ function BU.ModuleInit.DisplayStatError()
     # Shifting the same number of time as the former arguments number
     # to avoid including these arguments values in the allowed values array.
     shift 4;
+
     local pa_correctValues=("${@}");
 
     #**** Variables ****
@@ -1858,7 +1910,12 @@ function BU.ModuleInit.DisplayStatError()
     return 1;
 }
 
+# ·············································································
 # Checking the "${__BU_MODULE_INIT_STAT_DEBUG}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.DisplayStatError()  -> Modules initializer script (this file)
+
 function BU.ModuleInit.CheckSTAT_DEBUG()
 {
     #**** Parameters ****
@@ -1876,7 +1933,12 @@ function BU.ModuleInit.CheckSTAT_DEBUG()
     return 0;
 }
 
+# ···················································································
 # Checking the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.DisplayStatError()  -> Modules initializer script (this file)
+
 function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
 {
     #**** Parameters ****
@@ -1896,15 +1958,31 @@ function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
     return 0;
 }
 
+# ·············································································
 # Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.CheckSTAT_DEBUG() -> Modules initializer script (this file)
+
 function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="${1}";         BU.ModuleInit.CheckSTAT_DEBUG         "${2}" "${3}" || return "${?}"; return 0; }
 
+# ·············································································
 # Changing the "${__BU_MODULE_INIT_STAT_DEBUG}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.CheckSTAT_DEBUG_BASHX() Modules initializer script (this file)
+
 function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "${?}"; return 0; }
 
+# ·····································
 # Checking if the debug mode is active.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'true' ] && return 0; return 1; }
 
+# ···········································
 # Processing the "module" value's parameters.
 
 # shellcheck disable=SC1090
