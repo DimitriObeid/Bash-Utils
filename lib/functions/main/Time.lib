@@ -35,32 +35,32 @@
 # Preventing the direct execution of this file, as it is not meant to be directly executed, but sourced.
 if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
     echo -e "ACHTUNG !" >&2; echo >&2;
-    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2;
+    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2; echo >&2;
     echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2; echo >&2;
 
 elif [[ "${LANG}" == es_* ]]; then
     echo -e "ATENCIÓN !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2; echo >&2;
     echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2; echo >&2;
 
 elif [[ "${LANG}" == fr_* ]]; then
     echo -e "ATTENTION !" >&2; echo >&2;
-    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2; echo >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2; echo >&2;
 
 elif [[ "${LANG}" == pt_* ]]; then
     echo -e "ATENÇÃO !" >&2; echo >&2;
-    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2; echo >&2;
     echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2; echo >&2;
 
 elif [[ "${LANG}" == ru_* ]]; then
     echo -e "ВНИМАНИЕ !" >&2; echo >&2;
-    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2;
+    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2; echo >&2;
     echo -e "Используйте только этот скрипт, включив его в свой проект." >&2; echo >&2;
 
 else
     echo -e "WARNING !" >&2; echo >&2;
-    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2; echo >&2;
     echo -e "Use only this script by including it in your project script." >&2; echo >&2;
 
 fi; exit 1; fi
