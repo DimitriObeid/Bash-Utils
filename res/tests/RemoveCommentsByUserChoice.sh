@@ -19,4 +19,4 @@ sed -e "${_____shellcheck}" \
     -e "${_____block}" \
     -e "${_____special}" \
     -e '/^#[[:space:]]*-\{0,\}$/d' \
-    "Bash-utils.sh" > "Bash-utils-modified.sh"
+    "Bash-utils.sh" > "Bash-utils-modified.sh";

@@ -1985,9 +1985,20 @@ function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_D
 # ···········································
 # Processing the "module" value's parameters.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.AskPrintLog()                   -> Modules initializer script (this file)
+#   - BU.ModuleInit.CheckIsDebugging()              -> Modules initializer script (this file)
+#   - BU.ModuleInit.DisplayInitGlobalVarsInfos()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()                          -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkCompiled()           -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()                    -> Modules initializer script (this file)
+#   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgAbort()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
+
 # shellcheck disable=SC1090
 function BU.ModuleInit.ProcessFirstModuleParameters()
-{
+({
     #**** Parameters ****
     local p_module=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Module to include passed as argument, with its own parameters.
     local p_count=${2:-$'\0'};  # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Counting the times the function was called in the "BashUtils_InitModules" function's main loop.
@@ -2036,7 +2047,12 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
             ## MODULE : DEFINING RESOURCES FOR THE « module » ARGUMENTS PROCESSING
 
-            # Defining a function to optimize the displaying of errors for the 3 "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION" global variable's accepted values.
+            # ················································································································································
+            # Defining a function to optimize the displaying of errors for the 3 "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable's accepted values.
+
+            # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+            #   - BU.ModuleInit.PrintLogError() -> Modules initializer script (this file)
+
             function BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()
             {
                 #**** Parameters ****
@@ -2452,7 +2468,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     fi
 
     return 0;
-}
+})
 
 ## ----------------------------------------------
 
@@ -2495,7 +2511,15 @@ BU.ModuleInit.DefineTraps;
 
 ## DEFINING GLOBAL VARIABLES
 
+# ··························································································································································
 # Defining a function in order to suppress every shellcheck advices about the "printf" command, in order to do so at once AND to keep the code's decoration.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.FindPath()                              -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkBeingInstalled()             -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkCompiled()                   -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()                            -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()  -> Modules initializer script (this file)
 
 # shellcheck disable=SC2059,SC2016
 function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()
@@ -2838,7 +2862,33 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
 ## INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
+# ············································································································································
 # Please call immediately this function once this file is sourced, and pass it each module you need as arguments, and their supported options.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Function()                -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Highlight()               -> Main -> Decho.lib
+#   - BU.Main.Decho.Decho.Path()                    -> Main -> Decho.lib
+
+#   - BU.Main.Headers.Header.Green()                -> Main -> Headers.lib
+#   - BU.Main.Headers.Header.Warning()              -> Main -> Headers.lib
+
+#   - BU.Main.Status.ChangeSTAT_INITIALIZING()      -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsInitializing()      -> Main -> Status.lib
+
+#   - BU.ModuleInit.AskPrintLog()                   -> Modules initializer script (this file)
+#   - BU.ModuleInit.DisplayInitGlobalVarsInfos()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()                          -> Modules initializer script (this file)
+#   - BU.ModuleInit.FindPath()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()                    -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkCompiled()           -> Modules initializer script (this file)
+#   - BU.ModuleInit.ListInstalledModules()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgAbort()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLine()                       -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
+#   - BU.ModuleInit.ProcessFirstModuleParameters()  -> Modules initializer script (this file)
+#   - BU.ModuleInit.SourcingFailure()               -> Modules initializer script (this file)
 
 # shellcheck disable=SC1090
 function BashUtils_InitModules()
@@ -3218,7 +3268,12 @@ function BashUtils_InitModules()
 
 ## NOTE : At this point, the "${__BU_MODULE_INIT_MSG__}" variables values are deleted. Do not add message variables related to the following functions in the initializer file's languages files.
 
+# ···························································································································································································································
 # Initializing a single new module after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
+
 function BU.ModuleInit.InitNewModule()
 {
     #**** Parameters ****
@@ -3237,8 +3292,18 @@ function BU.ModuleInit.InitNewModule()
     fi
 }
 
-
+# ································································································································································································································
 # Initializing more than one new modules after the successful initialization of the main module, in case other modules must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Errors.HandleErrors()             -> Main -> Errors.lib
+
+#   - BU.Main.Headers.Header.Aqua.Turquoise()   -> Main -> Headers.lib
+
+#   - BU.ModuleInit.Exit()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.InitNewModule()             -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()                -> Modules initializer script (this file)
+
 function BU.ModuleInit.InitNewModules()
 {
 	#**** Parameters ****
@@ -3260,7 +3325,7 @@ function BU.ModuleInit.InitNewModules()
 
 		return 1;
     else
-        # At this point, the main module is initialized, so its functions can be safely called.
+        # At this point, the main module is initialized, so its functions can be called safely.
         BU.Main.Headers.Header.Aqua.Turquoise "";
 
         for i in "${p_module_list[@]}"; do
@@ -3273,7 +3338,19 @@ function BU.ModuleInit.InitNewModules()
 	fi
 }
 
+# ·························
 # Unsource a single module.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Newline()
+
+#   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
+
+#   - BU.Main.Headers.Newstep()         -> Main -> Headers.lib
+
+#   - BU.UnsourceExceptionFunctions()   -> From the file processed by the function's major condition.
+#   - BU.UnsourceExceptionVariables()   -> From the file processed by the function's major condition.
+
 function BU.ModuleInit.UnsourceModule()
 {
     #**** Parameters ****
@@ -3343,7 +3420,18 @@ function BU.ModuleInit.UnsourceModule()
     fi
 }
 
-# Unsource multiple modules at once from the.
+# ······················································
+# Unsource multiple modules at once from the project.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Errors.HandleErrors()             -> Main -> Errors.lib
+
+#   - BU.Main.Headers.Header.Aqua.Turquoise()   -> Main -> Headers.lib
+
+#   - BU.ModuleInit.Exit()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsInScript()                -> Modules initializer script (this file)
+#   - BU.ModuleInit.UnsourceModule()            -> Modules initializer script (this file)
+
 function BU.ModuleInit.UnsourceModules()
 {
     #**** Parameters ****
@@ -3384,7 +3472,15 @@ function BU.ModuleInit.UnsourceModules()
 
 ## MISC FUNCTIONS DEFINITION
 
+# ·················································································································
 # Remaking the "BU.Main.Errors.HandleErrors()" function in order to make it working for the initialization process.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
+
+#   - BU.ModuleInit.AskPrintLog()   -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgAbort()      -> Modules initializer script (this file)
+
 function BU.ModuleInit.HandleErrors()
 {
     #**** Parameters ****
@@ -3423,6 +3519,7 @@ function BU.ModuleInit.HandleErrors()
 
 ## PARSING THE TRANSLATION FILE OF THE CURRENTLY PROCESSED MODULE
 
+# ················································
 # Parsing the translation CSV file of each module.
 
 # The "BU.ModuleInit.ParseCSVLang" function MUST be called in the current module's initialization script.
