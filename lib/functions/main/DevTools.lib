@@ -73,12 +73,12 @@ fi; exit 1; fi
 #### DEBUG FUNCTIONS
 #### DEBUG ID : "devtools:debug-functions"
 
-__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions';
+declare -r __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools:debug-functions';
 
 ## SHELLCHECK
 ## DEBUG ID : "shellcheck"
 
-__BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="${__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS}:shellcheck";
+declare -r __BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK="${__BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS}:shellcheck";
 
 # ······························································
 # Writing the error message if a Shellcheck verification failed.

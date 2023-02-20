@@ -73,12 +73,12 @@ fi; exit 1; fi
 #### PROCCESSING COMMANDS
 #### DEBUG ID : cmds.processing-commands
 
-__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
+declare -r __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
 
 ## GETTING COMMAND OUTPUTS
 ## DEBUG ID : getting-command-output
 
-__BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
+declare -r __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
 
 # ····················································
 # Getting the target command's executable file's path.

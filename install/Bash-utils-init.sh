@@ -3522,11 +3522,11 @@ function BU.ModuleInit.HandleErrors()
 # ················································
 # Parsing the translation CSV file of each module.
 
-# The "BU.ModuleInit.ParseCSVLang" function MUST be called in the current module's initialization script.
+# The "BU.ModuleInit.ParseCSVLang()" function MUST be called in the current module's initialization script.
 
 # IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig()"
 # functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
-# to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos" function.
+# to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos()" function.
 
 # shellcheck disable=SC1090
 function BU.ModuleInit.ParseCSVLang()
@@ -3841,3 +3841,8 @@ function BU.ModuleInit.ParseCSVLang()
 		fi
 	fi
 }
+
+## ----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

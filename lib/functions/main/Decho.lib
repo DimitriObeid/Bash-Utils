@@ -72,12 +72,12 @@ fi; exit 1; fi
 #### TEXT WRITING AND DECORATION (FORMATTING)
 #### DEBUG ID : decho::text-writing-and-decoration-(formatting)
 
-__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
+declare -r __BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
 ## DEBUG ID : writing-differently-cf-text-between-Text.basis
 
-__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.basis";
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.basis";
 
 # ···························································································································································
 # Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
@@ -91,7 +91,7 @@ function BU.Main.Decho.__Decho()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
-        "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS}";
+        "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS}";
 
 	#**** Parameters ****
 	local p_string=${1:-$'\0'};         # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
@@ -128,7 +128,7 @@ function BU.Main.Decho.Decho()
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
-        "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT_BASIS}";
+        "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS}";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};         # String	- Default : NULL	- String to display.
@@ -310,6 +310,10 @@ function BU.Main.Decho.Decho()
 ## ----------------------------------------------
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST
+
+## DEBUG ID : "writing-differently-cf-text-between-Text.list"
+
+declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__LIST="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.list";
 
 # ···································································································································································
 # Tip : to avoid defining a function for each color and formatting (which would take a monstruous amount of time, especially if new colors or formattings are added),
