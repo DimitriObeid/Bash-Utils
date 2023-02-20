@@ -73,12 +73,12 @@ fi; exit 1; fi
 #### FUNCTIONS DEFINITION
 #### DEBUG ID : headers::functions-definition
 
-__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-definition";
+declare -r __BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION="headers::functions-definition";
 
 ## HEADERS BASIS CREATION FUNCTIONS
 ## DEBUG ID : headers-basis-creation-functions
 
-__BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION}::headers-basis-creation-functions";
+declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION}::headers-basis-creation-functions";
 
 # ······················································································································
 # Function to create and display rows (decorated or not) according to the number of columns in the terminal's text area.
@@ -386,6 +386,8 @@ function BU.Main.Headers.Base.CMD()
 ## UNICOLOR HEADERS
 ## DEBUG ID : unicolor-headers
 
+declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITIONS__UNICOLOR_HEADERS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION}::unicolor-headers";
+
 # ·····················································································································
 # Positional parameters, and their correspondences with the parameters of the "BU.Main.Headers.HeaderBase()" function :
 
@@ -514,6 +516,8 @@ function BU.Main.Headers.Header.CMD.Violet          { BU.Main.Headers.Base "${__
 
 ## BICOLOR HEADERS
 ## DEBUG ID : bicolor-headers
+
+declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITION}::bicolor-headers";
 
 # ··············································································
 # Copy-paste this function to avoid losing time while creating bicolor headers :
