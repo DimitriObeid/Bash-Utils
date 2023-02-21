@@ -93,12 +93,12 @@ fi; exit 1; fi
 #### READING CASE STATEMENTS BY FUNCTIONS
 #### DEBUG ID : "inputs::reading-case-statements-by-functions"
 
-__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="inputs::reading-case-statements-by-functions";
+declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="inputs::reading-case-statements-by-functions";
 
 ## "Directories.lib" FILE
 ## DEBUG ID : "directories.lib-file"
 
-__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::directories.lib-file";
+declare -r __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__DIRECTORIES_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::directories.lib-file";
 
 # ·······················································
 # "BU.Main.Directories.TriggerRootDirWarning()" function.
@@ -167,7 +167,7 @@ function BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()
 ## "Errors.lib" FILE
 ## DEBUG ID : errors.lib-file
 
-__BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::errors.lib-file";
+declare -r __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS__ERRORS_LIB_FILE="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS}::errors.lib-file";
 
 # ··································································································
 # "BU.Main.Errors.HandleErrors" function, with the "${__BU_MAIN_STAT_ECHO}" variable set to "false".
@@ -239,12 +239,12 @@ function BU.Main.Inputs.Read_Errors.HandleErrors()
 #### READING USER'S INPUTS OUTSIDE "CASE" STATEMENTS
 #### DEBUG ID : "inputs::reading-user's-inputs-outside-case-statements"
 
-__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS="inputs::reading-user's-inputs-outside-case-statements";
+declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS="inputs::reading-user's-inputs-outside-case-statements";
 
 ## SANITIZING USER'S INPUTS BEFORE EXECUTION
 ## DEBUG ID : "sanitizing-user-inputs-before-execution"
 
-__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}::sanitizing-user-inputs-before-execution";
+declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS__SANITIZING_USER_INPUTS_BEFORE_EXECUTION="${__BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS}::sanitizing-user-inputs-before-execution";
 
 # ·····································································
 # Sanitizing a string before its evaluation with the "$(eval)" command.

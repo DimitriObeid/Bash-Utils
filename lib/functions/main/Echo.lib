@@ -73,12 +73,12 @@ fi; exit 1; fi
 #### PRINTING FORMATTED STRINGS
 #### DEBUG ID : echo::printing-formatted-strings
 
-__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
+declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
 
 ## DEBUGGING
 ## DEBUG ID : debugging
 
-__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS}::debugging";
+declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBUGGING="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS}::debugging";
 
 # ···················································································
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
@@ -455,12 +455,12 @@ function BU.Main.Echo.__EchoCPLS()
 #### TEXT DISPLAYING
 #### DEBUG ID : echo::text-displaying
 
-__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
+declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
 
 ## DISPLAYING A CONTEXT MESSAGE
 ## DEBUG ID : displaying-a-context-message
 
-__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}::displaying-a-context-message";
+declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}::displaying-a-context-message";
 
 # --> DISPLAYING A COLORED CONTEXT MESSAGE WITH A PAUSE TIME DEPENDING ON THE "${__BU_MAIN_STAT_TIME_TXT}" GLOBAL STATUS VARIABLE.
 
@@ -1252,12 +1252,12 @@ function BU.Main.Echo.Yellow()
 #### LINE BREAKS
 #### DEBUG ID : Echo.line-breaks
 
-__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="Echo::line-breaks";
+declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="Echo::line-breaks";
 
 ## LINE BREAKS ACCORDING TO THE "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" VARIABLE VALUE
 ## DEBUG ID : line-breaks-according-to-the-project-log-file-var-val
 
-__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS}::line-breaks-according-to-the-project-log-file-var-val":
+declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS}::line-breaks-according-to-the-project-log-file-var-val":
 
 # ·············································
 # Redirecting the output of the "echo" command.

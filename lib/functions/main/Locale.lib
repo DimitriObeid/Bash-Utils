@@ -72,12 +72,12 @@ fi; exit 1; fi
 #### LOCALE DISPLAY FUNCTIONS
 #### DEBUG ID : "locale::locale-display-functions"
 
-__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS="locale::locale-display-functions";
+declare -r __BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS="locale::locale-display-functions";
 
 ## OPTIMIZATION FUNCTIONS
 ## DEBUG ID : "optimization-functions"
 
-__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__OPTIMIZATION_FUNCTIONS="${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}::optimization-functions";
+declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__OPTIMIZATION_FUNCTIONS="${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}::optimization-functions";
 
 # ··································································
 # Checking if the language's code matches to a valid ISO 639-1 code.
@@ -286,7 +286,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 ## PRINTING LOCALE
 ## DEBUG ID : "printing-locale"
 
-__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRINTING_LOCALE="${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}::printing-locale";
+declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRINTING_LOCALE="${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}::printing-locale";
 
 # ·····························································································
 # Printing the language name in English, in its own language and in the user's system language.

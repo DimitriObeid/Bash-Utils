@@ -69,12 +69,12 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CONVERSIONS
-#### DEBUG ID : basicmathsconversions
+#### DEBUG ID : "basicmathsconversions"
 
 declare -r __BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
 
 ## NUMERIC CONVERSIONS
-## DEBUG ID : numeric-conversions
+## DEBUG ID : "numeric-conversions"
 
 declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS="${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}::numeric-conversions";
 

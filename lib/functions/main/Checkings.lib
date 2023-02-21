@@ -70,12 +70,12 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### VARIABLES VALUES CHECKINGS
-#### DEBUG ID : checkings::variable-values-checkings
+#### DEBUG ID : "checkings::variable-values-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
 
 ## ARRAYS CHECKINGS
-## DEBUG ID : array-checkings
+## DEBUG ID : "array-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__ARRAY_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::array-checkings";
 
@@ -147,7 +147,7 @@ function BU.Main.Checkings.IsArrayNotEmpty()
 ## ----------------------------------------------
 
 ## COMMAND SUBSTITUTIONS
-## DEBUG ID : command-substitutions
+## DEBUG ID : "command-substitutions"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::command-substitutions";
 
@@ -200,7 +200,7 @@ function BU.Main.Checkings.IsNotCMD()
 ## ----------------------------------------------
 
 ## DATE FORMAT
-## DEBUG ID : date-format
+## DEBUG ID : "date-format"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::date-format";
 
@@ -287,7 +287,7 @@ function BU.Main.Checkings.IsDateYMD_HMS()
 ## ----------------------------------------------
 
 ## NUMBER VALUES
-## DEBUG ID : number-values
+## DEBUG ID : "number-values"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::number-values";
 
@@ -448,7 +448,7 @@ function BU.Main.Checkings.IsPositiveInt()
 ## ----------------------------------------------
 
 ## CHARACTERS AND STRING VALUES
-## DEBUG ID : characters-and-string-values
+## DEBUG ID : "characters-and-string-values"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::characters-and-string-values";
 
@@ -579,7 +579,7 @@ function BU.Main.Checkings.IsAlphaNumStringOnly()
 ## ----------------------------------------------
 
 ## OTHER VARIABLES CHECKINGS
-## DEBUG ID : other-variables-checkings
+## DEBUG ID : "other-variables-checkings"
 
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::other-variables-checkings";
@@ -591,12 +591,12 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### DIFFERENT CHECKINGS
-#### DEBUG ID : checkings::different-checkings
+#### DEBUG ID : "checkings::different-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
 
 ## CHECKING FOR IDENTIFIANTS
-## DEBUG ID : checking-for-identifiants
+## DEBUG ID : "checking-for-identifiants"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}::checking-for-identifiants";
 
@@ -622,7 +622,7 @@ alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
 ## ----------------------------------------------
 
 ## BASIC HARDWARE CHECKINGS
-## DEBUG ID : basic-hardware-checkings
+## DEBUG ID : "basic-hardware-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_HARDWARE_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}::basic-hardware-checkings";
 
@@ -787,7 +787,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PATHS CHECKINGS
-#### DEBUG ID : Checkings.paths-checkings
+#### DEBUG ID : Checkings::paths-checkings
 
 declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
 
@@ -1481,12 +1481,12 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT CHECKINGS
-#### DEBUG ID : Checkings.text-checkings
+#### DEBUG ID : "Checkings::text-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="Checkings::text-checkings";
 
 ## FORMATTING CHECKINGS
-## DEBUG ID : formatting-checkings
+## DEBUG ID : "formatting-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS}::formatting-checkings";
 

@@ -74,13 +74,13 @@ fi; exit 1; fi
 #### DEBUG ID : "text::text-processing-functions"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
+declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
 
 ## CUTTING TEXT
 ## DEBUG ID : "cutting-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::cutting-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::cutting-text";
 
 # ···········································
 # Cutting the date displayed before a string.
@@ -388,7 +388,7 @@ function BU.Main.Text.ReplaceLettersInString()
 ## DEBUG ID : "formatting-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}.formatting-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMATTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}.formatting-text";
 
 # ······························································································································································································
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU.Main.Text.ToLowercase()" OR "BU.Main.Text.ToUppercase()") or a parameter expansion.
@@ -474,7 +474,7 @@ function BU.Main.Text.ToUppercase()
 ## DEBUG ID : "getting-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::getting-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::getting-text";
 
 # ·······················································
 # Getting the occurences of a character in a main string.
@@ -839,7 +839,7 @@ function BU.Main.Text.GetStringWordsNumber()
 ## LISTING TEXT
 ## DEBUG ID : "listing-text"
 
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::listing-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::listing-text";
 
 # ···········································
 # Getting every characters present in a file.
@@ -904,7 +904,7 @@ function BU.Main.Text.ListWordsFromFile()
 ## PRINTING TEXT
 ## DEBUG ID : "printing-text"
 
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::printing-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::printing-text";
 
 # ················································
 # Printing a single character or a string X times.
@@ -939,7 +939,7 @@ function BU.Main.Text.PrintCharXTimes()
 ## DEBUG ID : "reversing-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::reversing-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVERSING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::reversing-text";
 
 # ·························································
 # Reverse words order of a string according to a delimiter.
@@ -1011,7 +1011,9 @@ function BU.Main.Text.ReverseCharactersOrder()
 ## ----------------------------------------------
 
 ## TEXT PROCESSING WITH THE "$(sed)" COMMAND
-## DEBUG ID : ""
+## DEBUG ID : "text-processing-with-the-sed-command"
+
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__TEXT_PROCESSING_WITH_THE_SED_COMMAND="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::text-processing-with-the-sed-command";
 
 ## ----------------------------------------------
 
@@ -1019,7 +1021,7 @@ function BU.Main.Text.ReverseCharactersOrder()
 ## DEBUG ID : "splitting-text"
 
 # shellcheck disable=SC2034
-__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::splitting-text";
+declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}::splitting-text";
 
 # ······················
 # String to words array.

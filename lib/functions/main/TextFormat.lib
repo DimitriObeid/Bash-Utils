@@ -72,12 +72,12 @@ fi; exit 1; fi
 #### COLORS
 #### DEBUG ID : colors::setting-colors
 
-__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS="textformat::colors";
+declare -r __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS="textformat::colors";
 
 ## GETTING COLOR CODES FROM FILES
 ## DEBUG ID : getting-color-codes-from-files
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::getting-color-codes-from-files";
+declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_COLOR_CODES_FROM_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::getting-color-codes-from-files";
 
 # ················································
 # Writing the error messages in a single location.
@@ -190,7 +190,7 @@ function BU.Main.TextFormat.GetTextColorFromCMD()
 ## SETTING COLOR CODES IN FILES
 ## DEBUG ID : setting-color-codes-in-files
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::setting-color-codes-in-files";
+declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::setting-color-codes-in-files";
 
 # ····································································································································
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
@@ -333,7 +333,7 @@ function BU.Main.TextFormat.SetTextColor()
 ## COLORS STRINGS PROCESSING FUNCTIONS
 ## DEBUG ID : colors-strings-processing-functions
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::colors-strings-processing-functions";
+declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::colors-strings-processing-functions";
 
 # ······················································
 # Conversion of color name (string) to color code (int).
@@ -476,12 +476,12 @@ function BU.Main.TextFormat.Itoa()
 #### TEXT
 #### DEBUG ID : text
 
-__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text';
+declare -r __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text';
 
 ## SETTING TEXT FORMAT
 ## DEBUG ID : setting-text-format
 
-__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT}:setting-text-format":
+declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT}:setting-text-format":
 
 # ··········································································
 # Checking if the "${__BU_MAIN_STAT_TXT_FMT}" status value is set to "true".

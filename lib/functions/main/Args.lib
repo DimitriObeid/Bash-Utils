@@ -71,13 +71,13 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### ARGUMENT VALUES CHECKING : UTILITES FUNCTIONS
-#### DEBUG ID : args::argument-values-checking--utilities-functions
+#### DEBUG ID : "args::argument-values-checking--utilities-functions"
 
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="args::argument-values-checking--utilities-functions";
 
 ## PATH CHECKING FUNCTIONS
-## DEBUG ID : path-checking-functions
+## DEBUG ID : "path-checking-functions"
 
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::path-checking-functions";
@@ -85,7 +85,7 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_
 ## ----------------------------------------------
 
 ## QUICK MESSAGE PRINTING
-## DEBUG ID : quick-message-printing
+## DEBUG ID : "quick-message-printing"
 
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::quick-message-printing";
@@ -378,7 +378,7 @@ function BU.Main.Args.PrintBadOption()
 ## ----------------------------------------------
 
 ## ARGUMENT PRESENCE CHECKING
-## DEBUG ID = argument-presence-checking
+## DEBUG ID = "argument-presence-checking"
 
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::argument-presence-checking";
