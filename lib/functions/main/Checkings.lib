@@ -787,12 +787,12 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PATHS CHECKINGS
-#### DEBUG ID : Checkings::paths-checkings
+#### DEBUG ID : "Checkings::paths-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
 
 ## DIRECTORIES PATHS CHECKINGS
-## DEBUG ID : directories-paths-checkings
+## DEBUG ID : "directories-paths-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}::directories-paths-checkings";
 
@@ -857,7 +857,7 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
 ## ----------------------------------------------
 
 ## FILES PATHS CHECKINGS
-## DEBUG ID : files-path-checkings
+## DEBUG ID : "files-path-checkings"
 
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}::files-paths-checkings";
 

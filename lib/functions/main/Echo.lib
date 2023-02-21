@@ -1250,12 +1250,12 @@ function BU.Main.Echo.Yellow()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### LINE BREAKS
-#### DEBUG ID : Echo.line-breaks
+#### DEBUG ID : "echo::line-breaks"
 
-declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="Echo::line-breaks";
+declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="echo::line-breaks";
 
 ## LINE BREAKS ACCORDING TO THE "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" VARIABLE VALUE
-## DEBUG ID : line-breaks-according-to-the-project-log-file-var-val
+## DEBUG ID : "line-breaks-according-to-the-project-log-file-var-val"
 
 declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDING_TO_THE_PROJECT_LOG_FILE_VAR_VAL="${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS}::line-breaks-according-to-the-project-log-file-var-val":
 

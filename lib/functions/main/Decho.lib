@@ -75,9 +75,9 @@ fi; exit 1; fi
 declare -r __BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING="decho::text-writing-and-decoration-(formatting)";
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - BASIS
-## DEBUG ID : writing-differently-cf-text-between-Text.basis
+## DEBUG ID : writing-differently-cf-text-between-text-basis
 
-__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.basis";
+__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-text-basis";
 
 # ···························································································································································
 # Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
@@ -311,9 +311,9 @@ function BU.Main.Decho.Decho()
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST
 
-## DEBUG ID : "writing-differently-cf-text-between-Text.list"
+## DEBUG ID : "writing-differently-cf-text-between-text-list"
 
-declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__LIST="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-Text.list";
+declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__LIST="${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}::writing-differently-cf-text-between-text-list";
 
 # ···································································································································································
 # Tip : to avoid defining a function for each color and formatting (which would take a monstruous amount of time, especially if new colors or formattings are added),

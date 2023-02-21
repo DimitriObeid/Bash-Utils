@@ -71,12 +71,12 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### PROCCESSING COMMANDS
-#### DEBUG ID : cmds.processing-commands
+#### DEBUG ID : "cmds::processing-commands"
 
 declare -r __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
 
 ## GETTING COMMAND OUTPUTS
-## DEBUG ID : getting-command-output
+## DEBUG ID : "getting-command-output"
 
 declare -r __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND_OUTPUTS="${__BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS}::getting-command-output";
 

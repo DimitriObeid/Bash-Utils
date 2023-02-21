@@ -70,12 +70,12 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### DIRECTORIES FUNCTIONS
-#### DEBUG ID : directoriesdirectories-functions
+#### DEBUG ID : "directories::directories-functions"
 
 declare -r __BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::directories-functions";
 
 ## PROCESSING FUNCTIONS
-## DEBUG ID : processing-functions
+## DEBUG ID : "processing-functions"
 
 declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::processing-functions";
 
@@ -143,7 +143,7 @@ function BU.Main.Directories.ProcessingDir()
 ## ----------------------------------------------
 
 ## FOLDER CREATION FUNCTIONS
-## DEBUG ID : folder-creation-functions
+## DEBUG ID : "folder-creation-functions"
 
 declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::folder-creation-functions";
 
@@ -376,7 +376,7 @@ function BU.Main.Directories.MkTmpDir()
 ## ----------------------------------------------
 
 ## PATH PROCESSING
-## DEBUG ID : path-processing
+## DEBUG ID : "path-processing"
 
 declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING="${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}::path-processing";
 

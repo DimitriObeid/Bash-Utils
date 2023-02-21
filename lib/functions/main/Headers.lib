@@ -71,12 +71,12 @@ fi; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### FUNCTIONS DEFINITION
-#### DEBUG ID : headers::functions-definition
+#### DEBUG ID : "headers::functions-definition"
 
 declare -r __BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITIONS="headers::functions-definition";
 
 ## HEADERS BASIS CREATION FUNCTIONS
-## DEBUG ID : headers-basis-creation-functions
+## DEBUG ID : "headers-basis-creation-functions"
 
 declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS_BASIS_CREATION_FUNCTIONS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITIONS}::headers-basis-creation-functions";
 
@@ -384,7 +384,7 @@ function BU.Main.Headers.Base.CMD()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 ## UNICOLOR HEADERS
-## DEBUG ID : unicolor-headers
+## DEBUG ID : "unicolor-headers"
 
 declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__UNICOLOR_HEADERS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITIONS}::unicolor-headers";
 
@@ -515,7 +515,7 @@ function BU.Main.Headers.Header.CMD.Violet          { BU.Main.Headers.Base "${__
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 ## BICOLOR HEADERS
-## DEBUG ID : bicolor-headers
+## DEBUG ID : "bicolor-headers"
 
 declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__BICOLOR_HEADERS="${__BU_MAIN_HEADERS_LIB__CAT_DEBUG_ID__FUNCTIONS_DEFINITIONS}::bicolor-headers";
 
