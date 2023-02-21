@@ -2320,6 +2320,13 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 ## ----------------------------------------------
 
+                ##
+
+                elif [ "${module_args,,}" == '--include-aliases' ]; then
+                    __BU_MODULES_INIT_INCLUDE_ALIASES='--include-aliases';
+
+                ## ----------------------------------------------
+
                 ## MODULE : HANDLING UNSUPPORTED ARGUMENTS
 
                 # Else, if the "module" value's argument is not a supported one.
@@ -3036,43 +3043,46 @@ function BashUtils_InitModules()
 
                 v_loop_error="error"; break;
             else
-                BU.ModuleInit.Msg;
+                # If the '--no-aliases-include' option was not passed to the modules initializer.
+                if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
+                    BU.ModuleInit.Msg;
 
-                ## --------------------------------------------------------------------------------------------------------------
-                # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
+                    ## --------------------------------------------------------------------------------------------------------------
+                    # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
 
-                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
-                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut' 'f' 'modaliasfile')" ]] || \
+                    # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
+                    if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut' 'f' 'modaliasfile')" ]] || \
 
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.conf" 'shut' 'f' 'modaliasfile')" ]] || \
+                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.conf" 'shut' 'f' 'modaliasfile')" ]] || \
 
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.Aliases.conf" 'f' 'shut' 'modaliasfile')" ]] || \
+                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.Aliases.conf" 'f' 'shut' 'modaliasfile')" ]] || \
 
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.${v_module_name}.conf" 'f' 'shut' 'modaliasfile')" ]] \
+                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.${v_module_name}.conf" 'f' 'shut' 'modaliasfile')" ]] \
 
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.conf" 'f' 'shut' 'modaliasfile')" ]]; then
+                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.conf" 'f' 'shut' 'modaliasfile')" ]]; then
 
-                        local v_module_aliases_file_name;
+                            local v_module_aliases_file_name;
 
-                        v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modaliasfile.tmp")")";
-                fi
+                            v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modaliasfile.tmp")")";
+                    fi
 
-                if [ -n "${v_module_aliases_file_name}" ]; then
-                    BU.ModuleInit.IsFrameworkCompiled || {
-                        # If the aliases file is empty.
-                        if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
+                    if [ -n "${v_module_aliases_file_name}" ]; then
+                        BU.ModuleInit.IsFrameworkCompiled || {
+                            # If the aliases file is empty.
+                            if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
 
-                        source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" || {
-                            BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                            source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" || {
+                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
-                            v_loop_error="error";
+                                v_loop_error="error";
 
-                            break;
+                                break;
+                            }
                         }
-                    }
-                fi
+                    fi
 
-                unset v_module_aliases_file_name;
+                    unset v_module_aliases_file_name;
+                fi
 
                 ## ---------------------------------------------------
                 # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
