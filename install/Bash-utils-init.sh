@@ -2320,10 +2320,17 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 ## ----------------------------------------------
 
-                ##
+                ## MODULE : ALIASES FILES INCLUSION
 
-                elif [ "${module_args,,}" == '--include-aliases' ]; then
+                elif [[ "${module_args,,}" == --include-aliases=* ]]; then
                     __BU_MODULES_INIT_INCLUDE_ALIASES='--include-aliases';
+
+                    # Getting the modules list.
+                    value="${module_args#*=}";
+					value="${value% *}";
+
+                    # Looping through the modules list.
+                    echo "LISTE : $value";
 
                 ## ----------------------------------------------
 
