@@ -82,7 +82,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="${
 
 # ·············································································
 # Checking if current OS is Android, running with the Termux terminal emulator.
-function BU.Main.OS.IsAndroidTermux()               { if [[ "${OSTYPE}" == 'linux-android' ]];                          then    return 0; else  return 1; fi }
+function BU.Main.OS.IsAndroidTermux()                       { if [[ "${OSTYPE}" == 'linux-android' ]]; then return 0; else  return 1; fi }
 
 alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 
@@ -91,26 +91,63 @@ alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroidTermux() -> OS.lib (this file)
-function BU.Main.OS.IsAndroid4()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid5()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid6()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid7()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid8()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid9()                    { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid10()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-function BU.Main.OS.IsAndroid11()                   { BU.Main.OS.IsAndroidTermux && return 0; return 1; }
-
-# ·······················································
-# Checking if the current Android device is a smartphone.
-function BU.Main.OS.IsAndroidDeviceSmartphone()     { return 0; }
-
-# ···················································
-# Checking if the current Android device is a Tablet.
-function BU.Main.OS.IsAndroidDeviceTablet()         { return 0; }
+function BU.Main.OS.IsAndroid4()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid5()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid6()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid7()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid8()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid9()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid10()                           { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid11()                           { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
 
 # ·········································
 # Checking if the Android device is rooted.
-function BU.Main.OS.IsAndroidRooted()               { return 0; }
+
+function BU.Main.OS.IsAndroidRooted()                       { return 0; }
+
+# ·······················································
+# Checking if the current Android device is a smartphone.
+
+function BU.Main.OS.IsAndroidDeviceSmartphone()             { return 0; }
+function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndroidDeviceSmartphone  && BU.Main.OS.IsAndroidRooted   && return 0; return 1; }
+
+# ······················································
+# Checking for specific Android smartphone manufacturer.
+
+function BU.Main.OS.IsSmartphoneConstructorAlcatel()        { return 0; }
+function BU.Main.OS.IsSmartphoneConstructorASUS()           { return 0; }
+function BU.Main.OS.IsConstructorHuawei()                   { return 0; }
+function BU.Main.OS.IsConstructorGoogle()                   { return 0; }
+function BU.Main.OS.IsConstructorHTC()                      { return 0; }
+function BU.Main.OS.IsConstructorLG()                       { return 0; }
+function BU.Main.OS.IsConstructorMotorola()                 { return 0; }
+function BU.Main.OS.IsConstructorOppo()                     { return 0; }
+function BU.Main.OS.IsConstructorSamsung()                  { return 0; }
+function BU.Main.OS.IsConstructorSony()                     { return 0; }
+function BU.Main.OS.IsConstructorVivo()                     { return 0; }
+function BU.Main.OS.IsConstructorXiaomi()                   { return 0; }
+
+# ···················································
+# Checking if the current Android device is a Tablet.
+
+function BU.Main.OS.IsAndroidDeviceTablet()                 { return 0; }
+function BU.Main.OS.IsAndroidDeviceTabletRooted()           { BU.Main.OS.IsAndroidDeviceTablet      && BU.Main.OS.IsAndroidRooted   && return 0; return 1; }
+
+# ···········································
+# Checking for specific Android manufacturer.
+
+function BU.Main.OS.IsConstructorAlcatel()                  { return 0; }
+function BU.Main.OS.IsConstructorASUS()                     { return 0; }
+function BU.Main.OS.IsConstructorHuawei()                   { return 0; }
+function BU.Main.OS.IsConstructorGoogle()                   { return 0; }
+function BU.Main.OS.IsConstructorHTC()                      { return 0; }
+function BU.Main.OS.IsConstructorLG()                       { return 0; }
+function BU.Main.OS.IsConstructorMotorola()                 { return 0; }
+function BU.Main.OS.IsConstructorOppo()                     { return 0; }
+function BU.Main.OS.IsConstructorSamsung()                  { return 0; }
+function BU.Main.OS.IsConstructorSony()                     { return 0; }
+function BU.Main.OS.IsConstructorVivo()                     { return 0; }
+function BU.Main.OS.IsConstructorXiaomi()                   { return 0; }
 
 ## ----------------------------------------------
 
@@ -121,6 +158,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$
 
 # ·································
 # Getting the Android device model.
+
 function BU.Main.OS.GetAndroidDevice()
 {
     return 0;
@@ -128,6 +166,7 @@ function BU.Main.OS.GetAndroidDevice()
 
 # ·············································
 # Getting the Android operating system version.
+
 function BU.Main.OS.GetAndroidVersion()
 {
     return 0;
@@ -156,6 +195,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="${__BU
 #   - BU.Main.OS.IsFreeBSD() -> Main -> OS.lib (this file)
 #   - BU.Main.OS.IsNetBSD()  -> Main -> OS.lib (this file)
 #   - BU.Main.OS.IsOpenBSD() -> Main -> OS.lib (this file)
+
 function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD || BU.Main.OS.IsNetBSD || BU.Main.OS.IsOpenBSD; then return 0; else return 1; fi }
 
 ## ----------------------------------------------
@@ -183,6 +223,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="$
 
 # ··································
 # Checking if current OS is FreeBSD.
+
 function BU.Main.OS.IsFreeBSD()                   	{ if [[ "${OSTYPE}" == 'FreeBSD' ]];                                then    return 0; else  return 1; fi }
 
 ## ----------------------------------------------
@@ -210,6 +251,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="${
 
 # ·································
 # Checking if current OS is NetBSD.
+
 function BU.Main.OS.IsNetBSD()                    	{ if [[ "${OSTYPE}" == '' ]];                                       then    return 0; else  return 1; fi }
 
 ## ----------------------------------------------
@@ -237,6 +279,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$
 
 # ··································
 # Checking if current OS is OpenBSD.
+
 function BU.Main.OS.IsOpenBSD()                   	{ if [[ "${OSTYPE}" == 'openbsd'* ]];                               then    return 0; else  return 1; fi }
 
 ## ----------------------------------------------
@@ -291,6 +334,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="${__
 
 # ···································
 # Checking if current OS is Haiku OS.
+
 function BU.Main.OS.IsHaiku()                     	{ if [[ "${OSTYPE}" == 'haiku' ]];                                  then    return 0; else  return 1; fi }
 
 ## ----------------------------------------------
@@ -327,7 +371,11 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMA
 # Checking the current operating system, by using the functions declared above.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.Echo.Debug()
+#   - BU.Main.Echo.DebugEnd()
+
+#   - BU.Main.OS.
+
 function BU.Main.OS.GetCurrentOS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.
