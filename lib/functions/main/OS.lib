@@ -82,6 +82,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__CHECKING_INFORMATIONS="${
 
 # ·············································································
 # Checking if current OS is Android, running with the Termux terminal emulator.
+
 function BU.Main.OS.IsAndroid()         { if [[ "${OSTYPE}" == 'linux-android' ]]; then return 0; else return 1; fi }
 function BU.Main.OS.IsAndroidTermux()   { if [[ "${OSTYPE}" == 'linux-android' ]]; then return 0; else return 1; fi }
 
@@ -92,6 +93,7 @@ alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroidTermux() -> OS.lib (this file)
+
 function BU.Main.OS.IsAndroid4()    { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroid5()    { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroid6()    { BU.Main.OS.IsAndroid && return 0; return 1; }
@@ -381,7 +383,18 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMA
 #   - BU.Main.Echo.Debug()
 #   - BU.Main.Echo.DebugEnd()
 
-#   - BU.Main.OS.
+#   - BU.Main.OS.IsAndroidTermux()
+#   - BU.Main.OS.IsChromeOS()
+#   - BU.Main.OS.IsFreeBSD()
+#   - BU.Main.OS.IsHaiku()
+#   - BU.Main.OS.IsLinux()
+#   - BU.Main.OS.IsLinixWSL
+#   - BU.Main.OS.IsLinuxWSLWin10()
+#   - BU.Main.OS.IsLinuxWSLWin11()
+#   - BU.Main.OS.IsNetBSD()
+#   - BU.Main.OS.IsOSX()
+#   - BU.Main.OS.IsWindows10()
+#   - BU.Main.OS.IsWindows11()
 
 function BU.Main.OS.GetCurrentOS()
 {
@@ -395,9 +408,9 @@ function BU.Main.OS.GetCurrentOS()
     BU.Main.OS.IsHaiku                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsOpenBSD             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsLinux                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+    BU.Main.OS.IsLinuxWSL             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsLinuxWSLWin10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsLinuxWSLWin11        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-    BU.Main.OS.IsLinuxWSL             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsNetBSD               	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsOSX                    && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsWindows10            	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -570,6 +583,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 BU.Main.OS.IsLinuxDistroUbuntu21_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroUbuntu22_04       	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroUbuntu22_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu23_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version of Ubuntu is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -587,36 +601,47 @@ function BU.Main.OS.CheckLinuxDistroVersion()
 
 # ··················································································
 # Checking the major version of the Kernel of the currently used Linux distribution.
+
 function BU.Main.OS.CheckLinuxKernelMajorVersion() { return 0; }
 
 # ··················································································
 # Checking the minor version of the Kernel of the currently used Linux distribution.
+
 function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 
 # ············································································
 # Checking the version of the Kernel of the currently used Linux distribution.
+
 function BU.Main.OS.CheckLinuxKernelVersion() { return 0; }
 
 # ··················································································
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
+
 function BU.Main.OS.IsLinux()                           { [[ "${OSTYPE}" == 'linux'* ]]                             &&      return 0;       return 1; }
 
 # ····················································
 # Checking if current Linux distribuion is Arch Linux.
+
 function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDistro ARCH                            &&      return 0;       return 1; }
 
 # ······························································································································································
 # Checking Arch Linux versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
 
 
+
 # --------------------
 
 # ·················································
+
 # Checking if current Linux distribution is Debian.
 function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
 
 # ··························································································································································
 # Checking debian versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckLinuxDistroVersion() -> Main -> OS.lib (this file)
+
 function BU.Main.OS.IsLinuxDistroDebian4()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '4'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian5()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '5'           &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroDebian6()            	{ BU.Main.OS.CheckLinuxDistroVersion 'Debian' '6'           &&      return 0;       return 1; }
@@ -631,10 +656,15 @@ function BU.Main.OS.IsLinuxDistroDebian11()           	{ BU.Main.OS.CheckLinuxDi
 
 # ·················································
 # Checking if current Linux distribution is Fedora.
+
 function BU.Main.OS.IsLinuxDistroFedora()             	{ BU.Main.OS.GetLinuxDistro Fedora                          &&      return 0;       return 1; }
 
 # ··························································································································································
 # Checking Fedora versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckLinuxDistroVersion() -> Main -> OS.lib (this file)
+
 function BU.Main.OS.IsLinuxDistroFedora18()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '18'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora19()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '19'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora20()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '20'          &&      return 0;       return 1; }
@@ -660,6 +690,7 @@ function BU.Main.OS.IsLinuxDistroFedora36()           	{ BU.Main.OS.CheckLinuxDi
 
 # ··················································
 # Checking if current Linux distribution is Manjaro.
+
 function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistro Manjaro                       	&&      return 0;       return 1; }
 
 # ···························································································································································
@@ -670,6 +701,7 @@ function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistr
 
 # ·····················································
 # Checking if current Linux distribution is Linux Mint.
+
 function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
 
 # ······························································································································································
@@ -680,6 +712,7 @@ function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDist
 
 # ···············································
 # Checking if current Linux distribution is SUSE.
+
 function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
 
 # ························································································································································
@@ -690,10 +723,18 @@ function BU.Main.OS.IsLinuxDistroSUSE()               	{ BU.Main.OS.GetLinuxDist
 
 # ·················································
 # Checking if current Linux distribution is Ubuntu.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsLinuxDistroUbuntu() -> Main -> OS.lib (this file)
+
 function BU.Main.OS.IsLinuxDistroUbuntu()             	{ BU.Main.OS.GetLinuxDistro Ubuntu                          &&      return 0;       return 1; }
 
 # ··························································································································································
 # Checking Ubuntu versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckLinuxDistroVersion()  -> Main -> OS.lib (this file)
+
 function BU.Main.OS.IsLinuxDistroUbuntu10_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.04'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu10_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '10.10'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu11_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '11.04'       &&      return 0;       return 1; }
@@ -720,11 +761,13 @@ function BU.Main.OS.IsLinuxDistroUbuntu21_04()         	{ BU.Main.OS.CheckLinuxD
 function BU.Main.OS.IsLinuxDistroUbuntu21_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '21.10'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu22_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.04'       &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroUbuntu22_10()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '22.10'       &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroUbuntu23_04()         	{ BU.Main.OS.CheckLinuxDistroVersion 'Ubuntu' '23.04'       &&      return 0;       return 1; }
 
 # --------------------
 
 # ················································
 # Checking the current major Linux kernel version.
+
 function BU.Main.OS.IsLinuxKernelMajor3()               { return 0; }
 function BU.Main.OS.IsLinuxKernelMajor4()               { return 0; }
 function BU.Main.OS.IsLinuxKernelMajor5()               { return 0; }
@@ -778,6 +821,7 @@ function BU.Main.OS.GetLinuxDistro()
 
 # ·······················································································································
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
+
 function BU.Main.OS.GetLinuxDistroVersion()
 {
     BU.Main.OS.GetLinuxDistro "${1}" || return 1; return 0;
