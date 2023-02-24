@@ -91,32 +91,32 @@ alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroidTermux() -> OS.lib (this file)
-function BU.Main.OS.IsAndroid4()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid5()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid6()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid7()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid8()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid9()                            { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid10()                           { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
-function BU.Main.OS.IsAndroid11()                           { BU.Main.OS.IsAndroidTermux                &&  return 0;       return 1; }
+function BU.Main.OS.IsAndroid4()    { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid5()    { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid6()    { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid7()    { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid8()    { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid9()    { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid10()   { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
+function BU.Main.OS.IsAndroid11()   { BU.Main.OS.IsAndroidTermux &&  return 0; return 1; }
 
 # ·········································
 # Checking if the Android device is rooted.
 
-function BU.Main.OS.IsAndroidRooted()                       { return 0; }
+function BU.Main.OS.IsAndroidRooted()                           { return 0; }
 
 # ·······················································
 # Checking if the current Android device is a smartphone.
 
-function BU.Main.OS.IsAndroidDeviceSmartphone()             { return 0; }
-function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndroidDeviceSmartphone  && BU.Main.OS.IsAndroidRooted       && return 0; return 1; }
+function BU.Main.OS.IsAndroidDeviceSmartphone()                 { return 0; }
+function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()           { BU.Main.OS.IsAndroidDeviceSmartphone  && BU.Main.OS.IsAndroidRooted       && return 0; return 1; }
 
 # ······················································
 # Checking for specific Android smartphone manufacturer.
 
-function BU.Main.OS.IsSmartphoneManufacturerAlcatel()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerAlcatel  && return 0; return 1; }
-function BU.Main.OS.IsSmartphoneManufacturerASUS()          { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerASUS     && return 0; return 1; }
-function BU.Main.OS.IsSmartphoneManufacturerHuawei()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerHuawei   && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerAlcatel()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerAlcatel  && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerASUS     && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerHuawei   && return 0; return 1; }
 function BU.Main.OS.IsSmartphoneManufacturerGoogle()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerGoogle   && return 0; return 1; }
 function BU.Main.OS.isSmartphoneManufacturerHTC()           { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerHTC      && return 0; return 1; }
 function BU.Main.OS.isSmartphoneManufacturerLG()            { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerLG       && return 0; return 1; }
@@ -133,12 +133,12 @@ function BU.Main.OS.isSmartphoneManufacturerXiaomi()        { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidDeviceTablet()                 { return 0; }
 function BU.Main.OS.IsAndroidDeviceTabletRooted()           { BU.Main.OS.IsAndroidDeviceTablet      && BU.Main.OS.IsAndroidRooted   && return 0; return 1; }
 
-function BU.Main.OS.IsTabletManufacturerASUS()              { return 0; }
+function BU.Main.OS.IsAndroidTabletManufacturerASUS()       { return 0; }
 
 # ···········································
 # Checking for specific Android manufacturer.
 
-function BU.Main.OS.isManufacturerAlcatel()                  { return 0; }
+function BU.Main.OS.isAndroidManufacturerAlcatel()          { return 0; }
 function BU.Main.OS.isManufacturerASUS()                     { return 0; }
 function BU.Main.OS.isManufacturerHuawei()                   { return 0; }
 function BU.Main.OS.isManufacturerGoogle()                   { return 0; }
