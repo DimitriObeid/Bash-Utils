@@ -123,9 +123,9 @@ function BU.Main.OS.isSmartphoneManufacturerLG()            { BU.Main.OS.IsAndro
 function BU.Main.OS.isSmartphoneManufacturerMotorola()      { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerMotorola && return 0; return 1; }
 function BU.Main.OS.isSmartphoneManufacturerOppo()          { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerOppo     && return 0; return 1; }
 function BU.Main.OS.isSmartphoneManufacturerSamsung()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerSamsung  && return 0; return 1; }
-function BU.Main.OS.isSmartphoneManufacturerSony()          { BU.Main.OS.IsAndroidDeviceSmartphone && return 0; return 1; }
-function BU.Main.OS.isSmartphoneManufacturerVivo()          { BU.Main.OS.IsAndroidDeviceSmartphone && return 0; return 1; }
-function BU.Main.OS.isSmartphoneManufacturerXiaomi()        { BU.Main.OS.IsAndroidDeviceSmartphone && return 0; return 1; }
+function BU.Main.OS.isSmartphoneManufacturerSony()          { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerSony     && return 0; return 1; }
+function BU.Main.OS.isSmartphoneManufacturerVivo()          { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerVivo     && return 0; return 1; }
+function BU.Main.OS.isSmartphoneManufacturerXiaomi()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerXiaomi   && return 0; return 1; }
 
 # ···················································
 # Checking if the current Android device is a Tablet.
