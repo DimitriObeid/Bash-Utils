@@ -100,6 +100,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTI
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 #   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
+
 function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ·······································································
@@ -110,6 +111,7 @@ function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 #   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
+
 function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ··················································································
@@ -118,6 +120,7 @@ function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 function BU.Main.Text.CutFirstCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -140,6 +143,7 @@ function BU.Main.Text.CutFirstCharacter()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 function BU.Main.Text.CutLastCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -178,6 +182,7 @@ function BU.Main.Text.CutLastCharacter()
 #   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                            -> Main -> Echo.lib
+
 function BU.Main.Text.CutSubStringAfterNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -238,6 +243,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 
 #   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
+
 function BU.Main.Text.CutSubStringBeforeNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -287,7 +293,9 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 #   - BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
+function.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
 function BU.Main.Text.CutFirstFieldBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -312,7 +320,9 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
 #   - BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
+function.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
 function BU.Main.Text.CutLastFieldAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -340,6 +350,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
 #   - BU.Main.Text.ReplaceLettersInString()         -> Main -> Text.lib (this file)
+
 function BU.Main.Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -366,9 +377,11 @@ function BU.Main.Text.DeleteLettersInString()
 # ···················································
 # Replacing letters and sub-strings in a main string.
 
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
+# Featured function(s) and file(s) by module(s) and.lib
+
+function.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 function BU.Main.Text.ReplaceLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -407,6 +420,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMA
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 function BU.Main.Text.KeepFormatting()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -441,6 +455,7 @@ function BU.Main.Text.KeepFormatting()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 function BU.Main.Text.ToLowercase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -464,6 +479,7 @@ function BU.Main.Text.ToLowercase()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 function BU.Main.Text.ToUppercase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -494,6 +510,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTI
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
 function BU.Main.Text.GetCharacterOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -523,7 +540,9 @@ function BU.Main.Text.GetCharacterOccurences()
 #   - BU.Main.Args__Text.GetFirstLastCharacter()    -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+function.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
 function BU.Main.Text.GetFirstCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -548,6 +567,7 @@ function BU.Main.Text.GetFirstCharacter()
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
 function BU.Main.Text.GetFirstFieldBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -575,6 +595,7 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
 function BU.Main.Text.GetLastCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -608,6 +629,7 @@ function BU.Main.Text.GetLastCharacter()
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
 function BU.Main.Text.GetLastFieldAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -633,6 +655,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
 function BU.Main.Text.GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -678,6 +701,7 @@ function BU.Main.Text.GetSubStringAfterDelim()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                        -> Main -> Echo.lib
+
 function BU.Main.Text.GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -750,6 +774,7 @@ function BU.Main.Text.GetSubStringBeforeDelim()
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
 function BU.Main.Text.GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -795,6 +820,7 @@ function BU.Main.Text.GetSubStringOccurences()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Text.GetStringByteSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -830,6 +856,7 @@ function BU.Main.Text.GetStringCharactersNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Text.GetStringWordsNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -858,6 +885,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTI
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
+
 function BU.Main.Text.ListCharactersFromFile() {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -887,6 +915,7 @@ function BU.Main.Text.ListCharactersFromFile() {
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
+
 function BU.Main.Text.ListWordsFromFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -923,6 +952,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINT
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newstep()    -> Main -> Echo.lib
+
 function BU.Main.Text.PrintCharXTimes()
 {
     #**** Parameters ****
@@ -963,6 +993,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVER
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+
 function BU.Main.Text.ReverseStringWordsOrder()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1045,6 +1076,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLIT
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
 #   - BU.Main.Inputs.Sanitize()             -> Main -> Inputs.lib
+
 function BU.Main.Text.StrToWordArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1079,6 +1111,7 @@ function BU.Main.Text.StrToWordArray()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Text.WordArrayToStr()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

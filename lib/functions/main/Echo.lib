@@ -654,6 +654,7 @@ function BU.Main.Echo.Newstep()
 #   - BU.Main.Echo.__EchoCPLS() -> Main -> Echo.lib (this file)
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib (this file)
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Read()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -798,6 +799,7 @@ function BU.Main.Echo.Warning()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Aqua()
 {
     #**** Parameters ****
@@ -818,6 +820,7 @@ function BU.Main.Echo.Aqua()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Black()
 {
     #**** Parameters ****
@@ -838,6 +841,7 @@ function BU.Main.Echo.Black()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Blue()
 {
     #**** Parameters ****
@@ -858,6 +862,7 @@ function BU.Main.Echo.Blue()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Cyan()
 {
     #**** Parameters ****
@@ -878,6 +883,7 @@ function BU.Main.Echo.Cyan()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Fuchsia()
 {
     #**** Parameters ****
@@ -898,6 +904,7 @@ function BU.Main.Echo.Fuchsia()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Gray()
 {
     #**** Parameters ****
@@ -918,6 +925,7 @@ function BU.Main.Echo.Gray()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Green()
 {
     #**** Parameters ****
@@ -938,6 +946,7 @@ function BU.Main.Echo.Green()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Lime()
 {
     #**** Parameters ****
@@ -958,6 +967,7 @@ function BU.Main.Echo.Lime()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Maroon()
 {
     #**** Parameters ****
@@ -978,6 +988,7 @@ function BU.Main.Echo.Maroon()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Navy()
 {
     #**** Parameters ****
@@ -998,6 +1009,7 @@ function BU.Main.Echo.Navy()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Olive()
 {
     #**** Parameters ****
@@ -1018,6 +1030,7 @@ function BU.Main.Echo.Olive()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Orange()
 {
     #**** Parameters ****
@@ -1038,6 +1051,7 @@ function BU.Main.Echo.Orange()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Pink()
 {
     #**** Parameters ****
@@ -1058,6 +1072,7 @@ function BU.Main.Echo.Pink()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Purple()
 {
     #**** Parameters ****
@@ -1078,6 +1093,7 @@ function BU.Main.Echo.Purple()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Red()
 {
     #**** Parameters ****
@@ -1098,6 +1114,7 @@ function BU.Main.Echo.Red()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Salmon()
 {
     #**** Parameters ****
@@ -1118,6 +1135,7 @@ function BU.Main.Echo.Salmon()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Silver()
 {
     #**** Parameters ****
@@ -1138,6 +1156,7 @@ function BU.Main.Echo.Silver()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Tan()
 {
     #**** Parameters ****
@@ -1158,6 +1177,7 @@ function BU.Main.Echo.Tan()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Teal()
 {
     #**** Parameters ****
@@ -1178,6 +1198,7 @@ function BU.Main.Echo.Teal()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Turquoise()
 {
     #**** Parameters ****
@@ -1198,6 +1219,7 @@ function BU.Main.Echo.Turquoise()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Violet()
 {
     #**** Parameters ****
@@ -1218,6 +1240,7 @@ function BU.Main.Echo.Violet()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.White()
 {
     #**** Parameters ****
@@ -1238,6 +1261,7 @@ function BU.Main.Echo.White()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 function BU.Main.Echo.Yellow()
 {
     #**** Parameters ****

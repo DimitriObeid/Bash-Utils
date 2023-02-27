@@ -236,6 +236,7 @@ function BU.ModuleInit.DefineTraps()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
+
 function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
 {
     # No need to redefine the three arguments inside this function, the scope of the "BU.ModuleInit.PrintLogError()"

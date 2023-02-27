@@ -120,6 +120,7 @@ function BU.Main.TextFormat.CannotCreateRessource()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
+
 function BU.Main.TextFormat.GetBGColorFromCMD()
 {
     #**** Parameters ****
@@ -160,6 +161,7 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
+
 function BU.Main.TextFormat.GetTextColorFromCMD()
 {
     #**** Parameters ****
@@ -412,6 +414,7 @@ function BU.Main.TextFormat.Atoi()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Text.ToUppercase()    -> Main -> Text.lib
+
 function BU.Main.TextFormat.Itoa()
 {
     #**** Parameters ****
@@ -499,6 +502,7 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT=
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.TextFormat.SetTextFormat()
 {
     #**** Parameters ****

@@ -109,6 +109,7 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.DevTools.ShellcheckVerifFailed()  -> Main -> DevTools.lib (this file)
+
 function BU.Main.DevTools.ShellcheckVerif()
 {
     #**** Parameters ****

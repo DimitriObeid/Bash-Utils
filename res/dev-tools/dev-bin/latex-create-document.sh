@@ -148,6 +148,7 @@ __LATEX_CREATE_DOC__RES_DIR="${__BU_MAIN_MODULE_DEVTOOLS_SRC}/${__BU_MAIN_PROJEC
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Newstep()            -> Main -> Echo.lib
+
 function LatexCreateDoc_ListLanguages()
 {
     BU.Main.Echo.Newstep "Currently supported languages --> English (en), French (fr)";

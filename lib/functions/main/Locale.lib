@@ -110,6 +110,7 @@ function BU.Main.Locale.CheckISO_639_1_ValidCode()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Locale.CheckISO_639_1_ValidCode()     -> Main -> Locale.lib (this file)
+
 function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler()
 {
     #**** Parameters ****
