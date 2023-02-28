@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## WORD
 
+# ····································
 # Installing Microsoft Word on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.WordProcessors.Word.Install()
 {
     #**** Code ****

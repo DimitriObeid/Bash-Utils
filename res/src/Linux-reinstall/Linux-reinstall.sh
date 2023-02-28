@@ -86,7 +86,9 @@ __ARG_INSTALL_INDEX='1';    # Packages installation argument's index.
 
 ## DEFINING INITIALIZATION FUNCTIONS
 
+# ·············································
 # Détection du passage des arguments au script.
+
 function Args
 {
     #***** Status *****
@@ -207,7 +209,9 @@ function Args
 
 # CreateLogFile --> Old
 
+# ························
 # Script's initialization.
+
 function ScriptInit
 {
     Args;				    # On appelle la fonction de vérification des arguments passés au script,
@@ -223,7 +227,9 @@ function ScriptInit
         "$(return)" "Abandon $(exit 0)";
 }
 
+# ·······················································································································
 # Demande à l'utilisateur s'il souhaite vraiment lancer le script, puis connecte l'utilisateur en mode super-utilisateur.
+
 function LaunchScript
 {
     # Affichage du header de bienvenue
@@ -239,7 +245,10 @@ function LaunchScript
 ## ----------------------------------------------
 
 ## DÉFINITION DES FONCTIONS DE CONNEXION À INTERNET ET DE MISES À JOUR
+
+# ········································
 # Vérification de la connexion à Internet.
+
 function CheckInternetConnection
 {
 	HeaderCyan "VÉRIFICATION DE LA CONNEXION À INTERNET";
@@ -253,9 +262,12 @@ function CheckInternetConnection
     return;
 }
 
+# ··················································································································
 # Mise à jour des paquets actuels selon le gestionnaire de paquets principal supporté (utilisé par la distribution).
+
 # C'EST UNE ÉTAPE IMPORTANTE SUR UNE INSTALLATION FRAÎCHE, NE MODIFIEZ PAS CE QUI SE TROUVE DANS LA CONDITION "CASE",
-# SAUF EN CAS D'AJOUT D'UN NOUVEAU GESTIONNAIRE DE PAQUETS PRINCIPAL (PAS DE SNAP OU DE FLATPAK) !!!.
+# SAUF EN CAS D'AJOUT D'UN NOUVEAU GESTIONNAIRE DE PAQUETS PRINCIPAL (PAS DE SNAP OU DE FLATPAK) !!!
+
 function DistUpgrade
 {
 	#**** Variables ****
@@ -318,7 +330,10 @@ function DistUpgrade
 
 
 ## DÉFINITION DES FONCTIONS DE PARAMÉTRAGE
+
+# ··································
 # Détection et installation de Sudo.
+
 function SetSudo
 {
 	HeaderStep "DÉTECTION DE SUDO ET AJOUT DE L'UTILISATEUR À LA LISTE DES SUDOERS";
@@ -452,7 +467,9 @@ function SetSudo
 	return
 }
 
+# ······································
 # Installation du framework PHP Laravel.
+
 function LaravelInstall
 {
     #**** Variables ****
@@ -557,7 +574,10 @@ function InstallAndConfig
 
 
 # DÉFINITION DES FONCTIONS DE FIN D'INSTALLATION
+
+# ··································
 # Suppression des paquets obsolètes.
+
 function Autoremove
 {
 	HeaderStep "AUTO-SUPPRESSION DES PAQUETS OBSOLÈTES";
@@ -613,7 +633,9 @@ function Autoremove
 	return;
 }
 
+# ······················
 # Fin de l'installation.
+
 function IsInstallationDone
 {
 	HeaderStep "INSTALLATION TERMINÉE";

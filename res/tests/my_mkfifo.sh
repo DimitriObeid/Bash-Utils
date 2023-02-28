@@ -4,7 +4,9 @@ __BU_MAIN_PROJECT_FIFO_DIR_PATH="/usr/local/lib/Bash-utils/projects/lib-tests/FI
 
 function BU.Main.Decho.Decho { echo -e "$(tput setaf 6)${1}$(tput sgr0)"; }
 
+# ··················································
 # This function is called once in the next function.
+
 function __CreateFIFO
 {
     #**** Parameters ****
@@ -21,7 +23,9 @@ function __CreateFIFO
     done
 }
 
+# ····························································································································
 # Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
+
 function CreateFIFO
 {
     #**** Parameters ****
@@ -58,7 +62,9 @@ function CreateFIFO
 
 ## FIFO READING
 
+# ··························
 # Reading from a named pipe.
+
 function ReadFromFIFO
 {
     #**** Parameters ****

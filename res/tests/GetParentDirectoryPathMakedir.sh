@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# ·················
 # Reverse a string.
+
 function BU.Main.Text.ReverseStringWordsOrder()
 {
     #**** Parameters ****
@@ -11,6 +13,9 @@ function BU.Main.Text.ReverseStringWordsOrder()
     echo "${p_str}" | tr "${p_delim}" '\n' | tac | tr '\n' "${p_delim}";
 
 }
+
+# ····························································
+#
 
 function BU.Main.Directories.GetParentDirectoryPathMkdir()
 {

@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 ## INSTALLATION DES PAQUETS DEPUIS LES DÉPÔTS DES GESTIONNAIRES DE PAQUETS PRINCIPAUX ET SECONDAIRES
+
+# ·································
 # Installation des paquets de base.
+
 function SIOInstall
 {
     HeaderStep "INSTALLATION DES PAQUETS DE BASE DEPUIS LES DÉPÔTS DES GESTIONNAIRES DE PAQUETS PRINCIPAUX ET SECONDAIRES";

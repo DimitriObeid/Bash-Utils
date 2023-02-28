@@ -85,26 +85,35 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ················
 # Get kernel type.
-function BU.SystemKernelGetKernelType() { uname -s; }
-}
 
+function BU.SystemKernelGetKernelType() { uname -s; }
+
+# ·························································
 # Get Windows kernel type, if the script is running on WSL.
+
 function BU.SystemKernelGetWindowsKernelType()
 {
     return 0;
 }
 
+# ···················
 # Get kernel release.
+
 function BU.SystemKernelGetKernelRelease() { uname -r; }
 
+# ···················
 # Get kernel version.
+
 function BU.SystemKernelGetKernelVersion() { uname -v; }
 {
     return 0;
 }
 
+# ····························································
 # Get Windows kernel version, if the script is running on WSL.
+
 function BU.SystemKernelGetWindowsKernelVersion()
 {
     return 0;

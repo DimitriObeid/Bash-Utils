@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# ···············································
 # Display a progress bar while a task is ongoing.
+
 function BU.Main.PosixTerm.DisplayProgressBarOld()
 {
         v_cols="$(tput cols)"
@@ -20,8 +22,9 @@ function BU.Main.PosixTerm.DisplayProgressBarOld()
 	return 0;
 }
 
-
+# ···············································
 # Display a progress bar while a task is ongoing.
+
 function BU.Main.PosixTerm.DisplayProgressBar()
 {
 	v_cols="$(tput cols)";

@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## DIRECTX
 
+# ········································
 # Installing DirectX on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.DirectX.Install()
 {
     #**** Code ****
@@ -109,7 +114,12 @@ function BU.Software.Windows.Libraries.DirectX.Install()
     return 0;
 }
 
+# ······································
 # Updating DirectX on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.DirectX.Update()
 {
     #**** Code ****
@@ -118,7 +128,12 @@ function BU.Software.Windows.Libraries.DirectX.Update()
     return 0;
 }
 
+# ··········································
 # Uninstalling DirectX on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.DirectX.Uninstall()
 {
     #**** Code ****
@@ -131,7 +146,12 @@ function BU.Software.Windows.Libraries.DirectX.Uninstall()
 
 ## OPENGL
 
+# ·······································
 # Installing OpenGL on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.OpenGL.Install()
 {
     #**** Code ****
@@ -140,7 +160,12 @@ function BU.Software.Windows.Libraries.OpenGL.Install()
     return 0;
 }
 
+# ·····································
 # Updating OpenGL on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.OpenGL.Update()
 {
     #**** Code ****
@@ -149,7 +174,12 @@ function BU.Software.Windows.Libraries.OpenGL.Update()
     return 0;
 }
 
+# ·········································
 # Uninstalling OpenGL on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.OpenGL.Uninstall()
 {
     #**** Code ****
@@ -162,7 +192,12 @@ function BU.Software.Windows.Libraries.OpenGL.Uninstall()
 
 ## SDL (Simple DirectMedia Layer)
 
+# ····································
 # Installing SDL on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.SDL.Install()
 {
     #**** Code ****
@@ -171,7 +206,12 @@ function BU.Software.Windows.Libraries.SDL.Install()
     return 0;
 }
 
+# ··································
 # Updating SDL on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.SDL.Update()
 {
     #**** Code ****
@@ -180,7 +220,12 @@ function BU.Software.Windows.Libraries.SDL.Update()
     return 0;
 }
 
+# ······································
 # Uninstalling SDL on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Libraries.SDL.Uninstall()
 {
     #**** Code ****

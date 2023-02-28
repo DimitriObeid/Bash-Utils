@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# ··········································
 # Display a spinner while a task is ongoing.
+
 function BU.Main.PosixTerm.DisplaySpinner()
 {
     #**** Parameters ****

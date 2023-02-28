@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# ················································································································
 # Rewriting the "ReverseStringWordsOrder.sh" file's content in order to write the new string in the correct order.
+
 function ReverseStringOrder()
 {
 	local string=${1:-$'\0'};

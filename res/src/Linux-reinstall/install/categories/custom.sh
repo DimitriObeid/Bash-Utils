@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
+# ·····································
 # Installation des paquets secondaires.
+
 function CustomInstall
 {
     HeaderStep "INSTALLATION DES PAQUETS DE BASE DEPUIS LES DÉPÔTS DES GESTIONNAIRES DE PAQUETS PRINCIPAUX ET SECONDAIRES";
