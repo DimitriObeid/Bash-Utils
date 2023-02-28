@@ -5,9 +5,13 @@
 
 # Name          : Drive.Linux.lib
 # Module        : Hardware
-# Description   :
 # Author(s)     : Dimitri OBEID
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# .
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

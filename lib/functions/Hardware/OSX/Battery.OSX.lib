@@ -77,3 +77,257 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+#### BATTERY CHECKINGS
+
+##
+
+# ···········································
+# Checking if the computer is not AC powered.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsNotOnAC.OSX()
+{
+    return 0;
+}
+
+# ·······································
+# Checking if the computer is AC powered.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsOnAC.OSX()
+{
+    return 0;
+}
+
+# ····································
+# Checking if the battery has history.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasHistory.OSX()
+{
+    return 0;
+}
+
+# ··········································
+# Checking if the computer has power supply.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasPowerSupply.OSX()
+{
+    return 0;
+}
+
+# ·······································
+# Checking if the battery has statistics.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasStatistics.OSX()
+{
+    return 0;
+}
+
+# ···································
+# Checking if the battery is present.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsPresent.OSX()
+{
+    return 0;
+}
+
+# ·········································
+# Checking if the computer is rechargeable.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsRechargeable.OSX()
+{
+    return 0;
+}
+
+# ····································
+# Getting the battery's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetCapacity.OSX()
+{
+    return 0;
+}
+
+# ···························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergy.OSX()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyEmpty.OSX()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyFull.OSX()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyFullDesign.OSX()
+{
+    return 0;
+}
+
+# ··································
+# Getting the battery's energy rate.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyRate.OSX()
+{
+    return 0;
+}
+
+# ····························
+# Getting the battery's model.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetModel.OSX()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+function BU.Hardware.Battery.GetNativePath.OSX()
+{
+    return 0;
+}
+
+# ·································
+# Getting the battery's percentage.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetPercentage.OSX()
+{
+    return 0;
+}
+
+# ····································
+# Getting the battery's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetSerialNumber.OSX()
+{
+    return 0;
+}
+
+# ····························
+# Getting the battery's state.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetState.OSX()
+{
+    return 0;
+}
+
+# ·································
+# Getting the battery's technology.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetTechnology.OSX()
+{
+    return 0;
+}
+
+# ·················································
+# Getting the time remaining until the full charge.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetTimeBeforeFullCharge.OSX()
+{
+    return 0;
+}
+
+# ·····························
+# Getting the battery's vendor.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetVendor.OSX()
+{
+    return 0;
+}
+
+# ··································
+# Getting the battery serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetVoltage.OSX()
+{
+    return 0;
+}
+
+# ··································
+# Getting the battery warning level.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetWarningLevel.OSX()
+{
+    return 0;
+}

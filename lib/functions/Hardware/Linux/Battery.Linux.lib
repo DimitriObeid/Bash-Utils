@@ -5,9 +5,13 @@
 
 # Name          : Battery.Linux.lib
 # Module        : Hardware
-# Description   :
 # Author(s)     : Dimitri OBEID
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
+
+# .
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -78,20 +82,35 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ···········································
 # Checking if the computer is not AC powered.
-function BU.Hardware.Battery.IsNotOnAC()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsNotOnAC.Linux()
 {
     return 0;
 }
 
+# ·······································
 # Checking if the computer is AC powered.
-function BU.Hardware.Battery.IsOnAC()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsOnAC.Linux()
 {
     return 0;
 }
 
+# ····································
 # Checking if the battery has history.
-function BU.Hardware.Battery.HasHistory()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasHistory.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -106,8 +125,13 @@ function BU.Hardware.Battery.HasHistory()
     return 0;
 }
 
+# ··········································
 # Checking if the computer has power supply.
-function BU.Hardware.Battery.HasPowerSupply()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasPowerSupply.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -122,8 +146,13 @@ function BU.Hardware.Battery.HasPowerSupply()
     return 0;
 }
 
+# ·······································
 # Checking if the battery has statistics.
-function BU.Hardware.Battery.HasStatistics()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasStatistics.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -138,8 +167,13 @@ function BU.Hardware.Battery.HasStatistics()
     return 0;
 }
 
-# Checking if the computer is present.
-function BU.Hardware.Battery.IsPresent()
+# ···································
+# Checking if the battery is present.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsPresent.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -154,8 +188,13 @@ function BU.Hardware.Battery.IsPresent()
     return 0;
 }
 
+# ·········································
 # Checking if the computer is rechargeable.
-function BU.Hardware.Battery.IsRechargeable()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsRechargeable.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -170,8 +209,13 @@ function BU.Hardware.Battery.IsRechargeable()
     return 0;
 }
 
-# Getting the battery serial number.
-function BU.Hardware.Battery.GetCapacity()
+# ····································
+# Getting the battery's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetCapacity.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -186,8 +230,13 @@ function BU.Hardware.Battery.GetCapacity()
     return 0;
 }
 
-# Getting the battery
-function BU.Hardware.Battery.GetEnergy()
+# ···························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergy.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -202,9 +251,13 @@ function BU.Hardware.Battery.GetEnergy()
     return 0;
 }
 
+# ························
+# Getting the battery's
 
-# Getting the battery
-function BU.Hardware.Battery.GetEnergyEmpty()
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyEmpty.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -220,8 +273,13 @@ function BU.Hardware.Battery.GetEnergyEmpty()
 }
 
 
-# Getting the battery
-function BU.Hardware.Battery.GetEnergyFull()
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyFull.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -236,9 +294,13 @@ function BU.Hardware.Battery.GetEnergyFull()
     return 0;
 }
 
+# ························
+# Getting the battery's
 
-# Getting the battery
-function BU.Hardware.Battery.GetEnergyFullDesign()
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyFullDesign.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -253,9 +315,13 @@ function BU.Hardware.Battery.GetEnergyFullDesign()
     return 0;
 }
 
+# ··································
+# Getting the battery's energy rate.
 
-# Getting the battery energy rate.
-function BU.Hardware.Battery.GetEnergyRate()
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyRate.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -270,8 +336,13 @@ function BU.Hardware.Battery.GetEnergyRate()
     return 0;
 }
 
-# Getting the battery model.
-function BU.Hardware.Battery.GetModel()
+# ····························
+# Getting the battery's model.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetModel.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
@@ -286,8 +357,10 @@ function BU.Hardware.Battery.GetModel()
     return 0;
 }
 
-# Getting the battery
-function BU.Hardware.Battery.GetNativePath()
+# ························
+# Getting the battery's
+
+function BU.Hardware.Battery.GetNativePath.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
@@ -302,8 +375,13 @@ function BU.Hardware.Battery.GetNativePath()
     return 0;
 }
 
-# Getting the battery percentage.
-function BU.Hardware.Battery.GetPercentage()
+# ·································
+# Getting the battery's percentage.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetPercentage.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
@@ -318,8 +396,13 @@ function BU.Hardware.Battery.GetPercentage()
     return 0;
 }
 
-# Getting the battery serial number.
-function BU.Hardware.Battery.GetSerialNumber()
+# ····································
+# Getting the battery's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetSerialNumber.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -334,8 +417,13 @@ function BU.Hardware.Battery.GetSerialNumber()
     return 0;
 }
 
-# Getting the battery state.
-function BU.Hardware.Battery.GetState()
+# ····························
+# Getting the battery's state.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetState.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -350,8 +438,13 @@ function BU.Hardware.Battery.GetState()
     return 0;
 }
 
-# Getting the battery technology.
-function BU.Hardware.Battery.GetTechnology()
+# ·································
+# Getting the battery's technology.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetTechnology.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -366,8 +459,13 @@ function BU.Hardware.Battery.GetTechnology()
     return 0;
 }
 
+# ·················································
 # Getting the time remaining until the full charge.
-function BU.Hardware.Battery.GetTimeBeforeFullCharge()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetTimeBeforeFullCharge.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -382,7 +480,12 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge()
     return 0;
 }
 
-# Getting the battery vendor.
+# ·····························
+# Getting the battery's vendor.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Battery.GetVendor()
 {
     #**** Variables ****
@@ -398,9 +501,13 @@ function BU.Hardware.Battery.GetVendor()
     return 0;
 }
 
-
+# ··································
 # Getting the battery serial number.
-function BU.Hardware.Battery.GetVoltage()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetVoltage.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -413,8 +520,13 @@ function BU.Hardware.Battery.GetVoltage()
     return 0;
 }
 
+# ··································
 # Getting the battery warning level.
-function BU.Hardware.Battery.GetWarningLevel()
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetWarningLevel.Linux()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;

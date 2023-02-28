@@ -77,3 +77,253 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ···········································
+# Checking if the computer is not AC powered.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsNotOnAC.Haiku()
+{
+    return 0;
+}
+
+# ·······································
+# Checking if the computer is AC powered.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsOnAC.Haiku()
+{
+    return 0;
+}
+
+# ····································
+# Checking if the battery has history.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasHistory.Haiku()
+{
+    return 0;
+}
+
+# ··········································
+# Checking if the computer has power supply.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasPowerSupply.Haiku()
+{
+    return 0;
+}
+
+# ·······································
+# Checking if the battery has statistics.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.HasStatistics.Haiku()
+{
+    return 0;
+}
+
+# ···································
+# Checking if the battery is present.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsPresent.Haiku()
+{
+    return 0;
+}
+
+# ·········································
+# Checking if the computer is rechargeable.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.IsRechargeable.Haiku()
+{
+    return 0;
+}
+
+# ····································
+# Getting the battery's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetCapacity.Haiku()
+{
+    return 0;
+}
+
+# ···························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergy.Haiku()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyEmpty.Haiku()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyFull.Haiku()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyFullDesign.Haiku()
+{
+    return 0;
+}
+
+# ··································
+# Getting the battery's energy rate.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetEnergyRate.Haiku()
+{
+    return 0;
+}
+
+# ····························
+# Getting the battery's model.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetModel.Haiku()
+{
+    return 0;
+}
+
+# ························
+# Getting the battery's
+
+function BU.Hardware.Battery.GetNativePath.Haiku()
+{
+    return 0;
+}
+
+# ·································
+# Getting the battery's percentage.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetPercentage.Haiku()
+{
+    return 0;
+}
+
+# ····································
+# Getting the battery's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetSerialNumber.Haiku()
+{
+    return 0;
+}
+
+# ····························
+# Getting the battery's state.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetState.Haiku()
+{
+    return 0;
+}
+
+# ·································
+# Getting the battery's technology.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetTechnology.Haiku()
+{
+    return 0;
+}
+
+# ·················································
+# Getting the time remaining until the full charge.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetTimeBeforeFullCharge.Haiku()
+{
+    return 0;
+}
+
+# ·····························
+# Getting the battery's vendor.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetVendor.Haiku()
+{
+    return 0;
+}
+
+# ··································
+# Getting the battery serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetVoltage.Haiku()
+{
+    return 0;
+}
+
+# ··································
+# Getting the battery warning level.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Battery.GetWarningLevel.Haiku()
+{
+    return 0;
+}

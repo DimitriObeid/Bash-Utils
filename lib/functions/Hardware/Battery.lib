@@ -3,11 +3,13 @@
 # ---------------------
 # SCRIPT'S INFORMATIONS
 
-# Name          : Battery.Linux.lib
+# Name          : Battery.lib
 # Module        : Hardware
-# Description   :
 # Author(s)     : Dimitri OBEID
 # Version       :
+
+# ------------------
+# FILE DESCRIPTION :
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -108,16 +110,6 @@ function BU.Hardware.Battery.IsOnAC()
 
 function BU.Hardware.Battery.HasHistory()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 7 {print $3}')";
-    else
-        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -129,16 +121,6 @@ function BU.Hardware.Battery.HasHistory()
 
 function BU.Hardware.Battery.HasPowerSupply()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 5 {print $3}')";
-    else
-        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -150,37 +132,17 @@ function BU.Hardware.Battery.HasPowerSupply()
 
 function BU.Hardware.Battery.HasStatistics()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 8 {print $3}')";
-    else
-        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
-# ····································
-# Checking if the computer is present.
+# ···································
+# Checking if the battery is present.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Hardware.Battery.IsPresent()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 10 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -192,16 +154,6 @@ function BU.Hardware.Battery.IsPresent()
 
 function BU.Hardware.Battery.IsRechargeable()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 11 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to check if the battery is rechargeable"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -213,16 +165,6 @@ function BU.Hardware.Battery.IsRechargeable()
 
 function BU.Hardware.Battery.GetCapacity()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 21 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's capacity"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -234,16 +176,6 @@ function BU.Hardware.Battery.GetCapacity()
 
 function BU.Hardware.Battery.GetEnergy()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 14 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's "; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -255,16 +187,6 @@ function BU.Hardware.Battery.GetEnergy()
 
 function BU.Hardware.Battery.GetEnergyEmpty()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 15 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's "; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -276,16 +198,6 @@ function BU.Hardware.Battery.GetEnergyEmpty()
 
 function BU.Hardware.Battery.GetEnergyFull()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 16 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's "; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -297,16 +209,6 @@ function BU.Hardware.Battery.GetEnergyFull()
 
 function BU.Hardware.Battery.GetEnergyFullDesign()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 17 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's "; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -318,16 +220,6 @@ function BU.Hardware.Battery.GetEnergyFullDesign()
 
 function BU.Hardware.Battery.GetEnergyRate()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 18 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's energy rate"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -339,16 +231,6 @@ function BU.Hardware.Battery.GetEnergyRate()
 
 function BU.Hardware.Battery.GetModel()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 3 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's model"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -357,16 +239,6 @@ function BU.Hardware.Battery.GetModel()
 
 function BU.Hardware.Battery.GetNativePath()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 21 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's capacity"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -378,16 +250,6 @@ function BU.Hardware.Battery.GetNativePath()
 
 function BU.Hardware.Battery.GetPercentage()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | grep percentage | grep -o '[0-9]\+' | head -1)";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's percentage"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -399,16 +261,6 @@ function BU.Hardware.Battery.GetPercentage()
 
 function BU.Hardware.Battery.GetSerialNumber()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 4 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's serial number"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -420,16 +272,6 @@ function BU.Hardware.Battery.GetSerialNumber()
 
 function BU.Hardware.Battery.GetState()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 12 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's state"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -441,16 +283,6 @@ function BU.Hardware.Battery.GetState()
 
 function BU.Hardware.Battery.GetTechnology()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 22 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's technology"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -462,37 +294,17 @@ function BU.Hardware.Battery.GetTechnology()
 
 function BU.Hardware.Battery.GetTimeBeforeFullCharge()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 20 {print $4}')";
-    else
-        BU.Main.Echo.Msg "Unable to check if the battery is present"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
-# ···························
-# Getting the battery vendor.
+# ·····························
+# Getting the battery's vendor.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Hardware.Battery.GetVendor()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 2 {print $2}')";
-    else
-        BU.Main.Echo.Msg "Unable to get the battery's vendor"; return 1;
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}";
-
     return 0;
 }
 
@@ -504,14 +316,6 @@ function BU.Hardware.Battery.GetVendor()
 
 function BU.Hardware.Battery.GetVoltage()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 19 {print $2}')";
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }
 
@@ -523,13 +327,5 @@ function BU.Hardware.Battery.GetVoltage()
 
 function BU.Hardware.Battery.GetWarningLevel()
 {
-    #**** Variables ****
-    if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
-        v_batteries="$(upower --enumerate | grep --max-count=1 -i BAT)"; v_command_output="$(upower --show-info "${v_batteries:-}" | awk 'FNR == 13 {print $2}')";
-    fi
-
-    #**** Code ****
-    BU.Main.Echo.Msg "${v_command_output}" '-n';
-
     return 0;
 }

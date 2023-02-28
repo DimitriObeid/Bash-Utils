@@ -162,6 +162,10 @@ function BU.Main.BasicMaths.BytesToHuman()
 
 # ·································································
 # Negative number (float or int) to positive number (float or int).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Main.BasicMaths.NegativeToPositive()
 {
     #**** Parameters ****
@@ -175,6 +179,10 @@ function BU.Main.BasicMaths.NegativeToPositive()
 
 # ·································································
 # Positive number (float or int) to negative number (float or int).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Main.BasicMaths.PositiveToNegative()
 {
     #**** Parameters ****

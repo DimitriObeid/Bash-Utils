@@ -874,6 +874,14 @@ function BU.Main.Args.Argc()
 # ········································································································
 # Checking if any mandatory arguments are provided for any function AND the file, function and line number
 # informations simultaneously, by calling both the "BU.Main.Args.Argc(" and "BU.Main.Args.GetFFL()" functions.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args.Argc()       -> Main -> Args.lib
+#   - BU.Main.Args.GetFFL()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Args.GetArgc-FFL()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
