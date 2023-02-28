@@ -95,6 +95,7 @@
 
 ## SUB-CATEGORY NAME
 
+# ·············································
 # Feel free to define functions here if needed.
 
 # ----------------------------------------------

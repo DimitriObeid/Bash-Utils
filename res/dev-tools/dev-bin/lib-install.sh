@@ -99,6 +99,7 @@ __LIB_INSTALL_STABLE_FILES_HOME_DIR="${HOME}/.Bash-utils/compiled/stable";
 
 ##
 
+# ·············································
 # Feel free to define functions here if needed.
 
 # ----------------------------------------------

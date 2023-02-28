@@ -99,27 +99,13 @@ __BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.tex";
 
 ########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
 
-####
-
-##
-
-# Feel free to define functions here if needed.
-
-# ----------------------------------------------
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
-
-########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
-
 #### FUNCTIONS DEFINITION
 
 ##
 
+# ···························································
 # Printing a line according to the terminal's columns number.
+
 function PrintLine()
 {
     __cols="$(tput cols)";
@@ -156,4 +142,5 @@ fi
 
 ##
 
-# Processing the English documentation
+# ·····································
+# Processing the English documentation.

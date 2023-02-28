@@ -140,7 +140,9 @@ __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
 ## WRITING LINES
 
+# ···························································
 # Printing a line according to the terminal's columns number.
+
 function PrintLine()
 {
     __cols="$(tput cols)"

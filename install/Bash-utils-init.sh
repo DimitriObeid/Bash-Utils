@@ -102,6 +102,7 @@ fi; echo >&2; exit 1; fi
 
 # ·························································································
 # Use this function to have a better view about a bug location during a "$(bash -x)" debug.
+
 function DbgMsg()
 {
     #**** Parameters ****
@@ -187,6 +188,7 @@ function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.Chec
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.SIGINT()
 {
     #**** Variables ****
@@ -211,6 +213,7 @@ function BU.ModuleInit.SIGINT()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.DefineTraps()
 {
     # Defining strings variables.
@@ -268,6 +271,7 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
+
 function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 {
     #**** Parameters ****

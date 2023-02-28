@@ -99,6 +99,7 @@ __ABORTING="Aborting the ${0} script execution";
 
 ##
 
+# ·············································
 # Feel free to define functions here if needed.
 
 # ----------------------------------------------

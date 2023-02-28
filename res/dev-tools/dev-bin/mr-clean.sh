@@ -97,6 +97,7 @@ __ARG_EXTENSION=${1:-$'\0'}
 
 ## SUB-CATEGORY NAME
 
+# ·············································
 # Feel free to define functions here if needed.
 
 # ----------------------------------------------

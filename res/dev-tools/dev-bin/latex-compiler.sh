@@ -96,6 +96,7 @@ __BU_LATEX_COMPILER__CMD='latexmk';
 
 ## SUB-CATEGORY NAME
 
+# ·············································
 # Feel free to define functions here if needed.
 
 # ----------------------------------------------

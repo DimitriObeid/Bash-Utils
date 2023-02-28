@@ -268,7 +268,9 @@ source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 
 ## WRITING LINES
 
+# ···································································································
 # Function to create and display rows according to the number of columns in the terminal's text area.
+
 function PrintLine()
 {
     #**** Parameters ****
@@ -293,6 +295,9 @@ function PrintLine()
             printf '%s' "${v_line_char}";
     done; printf "\n";
 }
+
+# ························································
+# Function to print a line composed of a single character.
 
 function PrintBaseLine()
 {
@@ -324,17 +329,25 @@ function PrintBaseLine()
     return 0;
 }
 
+# ·······················
 # Printing an error line.
+
 function PrintErrorLine()   { PrintBaseLine "${__ERROR}" "${1}" "${2}" "${3}" >&2; }
 
+# ························
 # Printing a newstep line.
+
 function PrintNewstepLine() { PrintBaseLine "${__NEWSTEP}" "${1}" "${2}" "${3}"; }
 
+# ························
 # Printing a success line.
+
 function PrintSuccessLine() { PrintBaseLine "${__SUCCESS}" "${1}" "${2}" "${3}"; }
 
+# ························
 # Printing a warning line.
-function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}"; }
+
+function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}" >&2; }
 
 ## ----------------------------------------------
 
@@ -346,7 +359,9 @@ function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}";
 
 ## RIGHTS PROCESSING
 
+# ·································································
 # Printing the list the every files whose rights were not modified.
+
 # shellcheck disable=SC2059
 function PrintFilesWhichWereNotChmoded()
 {
@@ -375,7 +390,9 @@ function PrintFilesWhichWereNotChmoded()
 
 ## FILES EDITION
 
+# ·····················································································································································
 # Erasing every pieces of code which prevent the direct execution of their host files, since a new one is written in the "WriteCommentCode()" function.
+
 function EraseSafeguardExecLines()
 {
     sed -i "/if \[ \"\${0##\/*}\" == \"\${BASH_SOURCE[0]##\/*}\" \]; then/,/fi; exit 1; fi/d" "${__compiled_file_path}";
@@ -383,9 +400,11 @@ function EraseSafeguardExecLines()
     return 0;
 }
 
+# ·····················································
 # Writing into the compiled file with a here document :
 #   - the comments containing the informations about the compiled file,
 #   - and the pieces of code which prevent the direct execution of their host files.
+
 function WriteCommentCode()
 {
     #**** Variables ****
@@ -450,7 +469,9 @@ EOF
     return 0;
 }
 
+# ·····················································
 # Erasing the comments from the targeted compiled file.
+
 function EraseComments()
 {
     # If the user decides to keep the description of each function before their declaration.
@@ -470,7 +491,9 @@ function EraseComments()
     sed -i '/^$/N;/\n$/D' "${__compiled_file_path}";
 }
 
+# ····························································
 # Writing the target file's content into the file to generate.
+
 function WriteBU()
 {
     #**** Parameters ****
@@ -498,11 +521,13 @@ function WriteBU()
 
 ## RAW BYTE SIZE TO HUMAN-READABLE BYTE SIZE
 
+# ··············································································································
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
 # Initial source of this AWK script (since it's not mine, plus I added more informations as comments and the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
+
 function BytesToHuman()
 {
     #**** Parameters ****
@@ -558,7 +583,9 @@ function BytesToHuman()
 
 ## CHECKINGS
 
+# ·····················································
 # Verifying the list of every ISO 639-1 language codes.
+
 function CheckISO639_1_LangCode()
 {
     #**** Parameters ****
@@ -572,7 +599,9 @@ function CheckISO639_1_LangCode()
 
 ## VALUES GETTER
 
+# ······················
 # Getting the delimiter.
+
 function CheckLangArgDelim()
 {
     #**** Parameters ****
@@ -597,6 +626,9 @@ function CheckLangArgDelim()
 #### MISC FUNCTIONS
 
 ## ERRORS HANDLING
+
+# ····································································
+# Function to handle arguments which are incompatible with each other.
 
 # shellcheck disable=SC2059
 function HandleIncompatibleOptionalArgs()
@@ -632,7 +664,9 @@ function HandleIncompatibleOptionalArgs()
 
 ## HELP
 
-# Usage function
+# ···············
+# Usage function.
+
 function CompilerUsage()
 {
     #**** Parameters ****
@@ -689,6 +723,7 @@ function CompilerUsage()
 
 ## MESSAGES
 
+# ····················
 # Quit error messages.
 
 # shellcheck disable=SC2059
@@ -892,6 +927,9 @@ fi
 
 ## COMPILER'S MAIN FUNCTION
 
+# ······························
+# Main function of the compiler.
+
 # shellcheck disable=SC2059
 function CompileInSingleFile()
 {
@@ -1081,10 +1119,12 @@ function CompileInSingleFile()
 
         # -------------------------------------------------------------------------------
         # Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code.
+
         if ! CheckISO639_1_LangCode "${v_curr_locale}"; then PrintErrorLine "${__locale_print_code__error} ${__BU_COMPILE__BAD_LANGUAGE_PASSED}" 'FULL'; ____loop_error='error'; break; fi
 
         # ------------------------------------
         # Framework compilation start message.
+
         PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL';
 
         # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1169,6 +1209,7 @@ function CompileInSingleFile()
 
         # ---------------------------------------------------------------------------------------
         # Writing the initializer script's configuration files content into the file to generate.
+
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
         for i in "${__BU_MODULE_INIT_CONFIGS_PATH}/"*.conf; do
@@ -1183,6 +1224,7 @@ function CompileInSingleFile()
 
         # -------------------------------------------------------------------
         # Writing the initializer script's content into the file to generate.
+
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
         if [ ! -f "${__BU_INITIALIZER_SCRIPT_PATH}" ]; then PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break;
@@ -1199,6 +1241,7 @@ function CompileInSingleFile()
 
         # --------------------------------------------------------------------------
         # Writing the main module's library files content into the file to generate.
+
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
         for i in "${__BU_ROOT_PATH}/lib/functions/main/"*.lib; do
@@ -1213,6 +1256,7 @@ function CompileInSingleFile()
 
         # --------------------------------------------------------------------------------
         # Writing the main module's configuration files content into the file to generate.
+
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
         for i in "${__BU_ROOT_PATH}/install/.Bash-utils/config/modules/main/"*.conf; do
@@ -1227,6 +1271,7 @@ function CompileInSingleFile()
 
         # ---------------------------------------------------------------------------------
         # Writing the main module's initializer script's content into the file to generate.
+
         PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
         for i in "${__BU_ROOT_PATH}/install/.Bash-utils/modules/main/"*; do
@@ -1269,6 +1314,7 @@ function CompileInSingleFile()
 
         # --------------------------------------------------------------------------------------------------------------------------------
         # If the user did not decided to keep the original layout of the compiled file, optimizations are being done to the compiled file.
+
         if [ -z "$__vArrayVal_keep_raw_document_layout" ]; then
             # Erasing every pieces of code which prevent the direct execution of their host files
             if [ -z "${__vArrayVal_keep_exec_safeguards}" ]; then EraseSafeguardExecLines; fi
@@ -1320,8 +1366,9 @@ function CompileInSingleFile()
                 __compiled_stable_file_path="${__compiled_stable_file_parent_dir}/Bash-utils-stable-full.sh";
             fi
 
-            # --------------------------------------------------------
+            # ---------------------------------------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file.
+
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS}" "${__compiled_file_path}")" 'UPPER';
 
             # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
@@ -1335,6 +1382,7 @@ function CompileInSingleFile()
 
             # -------------------------------------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Copying the compiled file into the "stable" directory.
+
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE}" "${__compiled_file_path}" "${__compiled_stable_file_parent_dir}")" 'UPPER';
 
             if ! cp --verbose "${__compiled_file_path}" "${__compiled_stable_file_path}" ; then
@@ -1355,6 +1403,7 @@ function CompileInSingleFile()
 
             # ------------------------------------------------------------------------------------------------------
             # STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "chmod" command.
+
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD}" "${__compiled_file_path}")" 'UPPER';
 
             if ! chmod --verbose -xw "${__compiled_stable_file_path}"; then

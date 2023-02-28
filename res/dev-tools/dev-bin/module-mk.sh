@@ -104,7 +104,9 @@ fi
 
 ## CHECKING FOR FILES PRESENCE
 
+# ·············································································································
 # Check if the required files for the modules initialization exists in their right folder, or else create them.
+
 function check_mandatory_file_exists()
 {
     #**** Parameters ****

@@ -137,6 +137,7 @@ __ARG_DESC=${4:-$'\0'};
 
 ## SUB-CATEGORY NAME
 
+# ·············································
 # Feel free to define functions here if needed.
 
 # ----------------------------------------------

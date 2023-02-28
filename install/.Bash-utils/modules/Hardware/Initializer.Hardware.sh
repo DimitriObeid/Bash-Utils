@@ -89,7 +89,14 @@ fi; echo >&2; exit 1; fi
 
 ## FUNCTIONS
 
+# ·················································································································································································································
 # Sourcing each library file stored into the "function/Hardware" directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.CheckIsDebugging()      -> Modules initializer script
+#   - BU.ModuleInit.Msg()                   -> Modules initializer script
+#   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
+
 function BU.Hardware.Initializer.SourceLibrary()
 {
     #**** Variables ****
@@ -119,7 +126,13 @@ function BU.Hardware.Initializer.SourceLibrary()
 	return 0;
 }
 
+# ·······································································································································································
 # Sourcing each file listed into the "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.Msg()                   -> Modules initializer script
+#   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
+
 function BU.Hardware.Initializer.SourceConfig()
 {
     #**** Variables ****
@@ -146,7 +159,12 @@ function BU.Hardware.Initializer.SourceConfig()
 
 #### STEP TWO : PROCESSING THE HARDWARE MODULE'S PARAMETERS
 
+# ···············
 # Usage function.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Hardware.Initializer.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS}" >&2;
@@ -181,6 +199,7 @@ function BU.Hardware.Initializer.Usage()
 #### STEP THREE : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES FROM THE "HARDWARE" MODULE
 
 # Sourcing each library file stored into the "function/Hardware" directory, from the "${__BU_HARDWARE_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array.
+
 BU.Hardware.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 ## ----------------------------------------------
@@ -188,6 +207,7 @@ BU.Hardware.Initializer.SourceLibrary || { if BU.ModuleInit.IsInScript; then exi
 ## SOURCING CONFIGURATION FILES
 
 # Sourcing each file listed into the "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array.
+
 BU.Hardware.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
 ## ----------------------------------------------

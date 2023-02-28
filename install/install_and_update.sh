@@ -69,7 +69,9 @@ __F_USERS_LIST_FILE_PATH="${__D_INSTALL_DIR_PATH}/${__F_USERS_LIST_FILE_NAME}";
 
 ## FUNCTIONS
 
+# ·········································
 # Asking to user before engaging an action.
+
 function AskUser()
 {
     #**** Parameters ****
@@ -90,10 +92,14 @@ function AskUser()
     return 0;
 }
 
-# Behavior if the "cd" command failed.
+# ·······································
+# Behavior if the "$(cd)" command failed.
+
 function CDfail() { printf "UNABLE TO CHANGE DIRECTORY"; PrintRoot; exit 1; }
 
+# ····················································
 # Changing recursively a directory's ownership rights.
+
 function ChangeDirOwnership()
 {
 	#**** Parameters ****
@@ -107,7 +113,9 @@ function ChangeDirOwnership()
 
 }
 
+# ·················································
 # Changing individually the files ownership rights.
+
 function ChangeFileOwnership()
 {
 	#**** Parameters ****
@@ -119,7 +127,9 @@ function ChangeFileOwnership()
 	if chown -v "${p_user##*/}" "${p_file}"; then return 0; else PrintLog "UNABLE TO CHANGE THE OWNERSHIP OF THE « ${p_file} » FILE TO « ${user##*/} »"; PrintRoot; exit 1; fi
 }
 
+# ························································································
 # Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
+
 function ChangeOwnership()
 {
 	#**** Parameters ****
@@ -149,7 +159,9 @@ function ChangeOwnership()
     fi
 }
 
+# ······································································
 # Copying the modules inititializer file into the user's home directory.
+
 function CopyModulesInitializer()
 {
 	#**** Parameters ****
@@ -171,7 +183,9 @@ function CopyModulesInitializer()
     fi
 }
 
+# ·····································································
 # Copying the modules manager directory into the user's home directory.
+
 function CopyModulesManagerDirectory()
 {
 	#**** Parameters ****
@@ -202,7 +216,9 @@ function CopyModulesManagerDirectory()
 	fi
 }
 
+# ····················
 # Log file processing.
+
 function Log()
 {
     if [ -f "${__F_INSTALL_LOG_FILE_PATH}" ] && [ -s "${__F_INSTALL_LOG_FILE_PATH}" ]; then
@@ -219,7 +235,9 @@ function Log()
 	PrintLog '' 'log'; PrintLog "$(PrintLine)" 'log'; PrintLog '' 'log';
 }
 
+# ·········································································
 # New line function for the functions called into the following "for" loop.
+
 function BU.Main.Echo.Newline()
 {
     #**** Parameters ****
@@ -235,10 +253,14 @@ function BU.Main.Echo.Newline()
     fi
 }
 
+# ··································································································································
 # New line function called into the the following "for" loop, and after each PrintLog functions, if a linebreak should be displayed.
+
 function BU.Main.Echo.NewlineF() { local p_line_breaks=${1:-$'\0'}; if [[ "${p_line_breaks}" =~ ^[\-0-9]+$ ]]; then PrintLog "$(BU.Main.Echo.Newline "${p_line_breaks}")"; else PrintLog "$(BU.Main.Echo.Newline)"; fi; return 0; }
 
+# ···························································
 # Printing a line according to the terminal's columns number.
+
 function PrintLine()
 {
     if command -v tput &> /dev/null; then
@@ -252,7 +274,9 @@ function PrintLine()
     done; PrintLog "$(BU.Main.Echo.Newline)"; return 0;
 }
 
+# ···············
 # Checking if the
+
 function PrintLog()
 {
     if [ "${__NOLOG}" == 'nolog' ]; then
@@ -266,7 +290,9 @@ function PrintLog()
     fi
 }
 
+# ·····························································
 # Printing back the "/root" path in the normal users list file.
+
 function PrintRoot() { if [ "${__UNROOT}" == 'true' ] && [ "${OSTYPE}" != 'linux-android' ]; then printf '/root' >> "${__F_USERS_LIST_FILE_PATH}"; fi; return 0; }
 
 ## -----------------------------------------------

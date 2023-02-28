@@ -89,7 +89,10 @@ fi; echo >&2; exit 1; fi
 
 ## FUNCTIONS
 
-# Sourcing each library file stored into the "function/main" directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array defined in the "~/.Bash-utils/config/modules/main/module.conf" file.
+# ···········································································································································································································
+# Sourcing each library file stored into the "functions/main" directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array defined in the "~/.Bash-utils/config/modules/main/module.conf" file.
+
+
 function BU.Main.Initializer.SourceLibrary()
 {
     #**** Variables ****
