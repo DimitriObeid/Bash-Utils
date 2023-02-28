@@ -78,19 +78,25 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ···········································
 # Checking if the computer is not AC powered.
+
 function BU.Hardware.Battery.IsNotOnAC()
 {
     return 0;
 }
 
+# ·······································
 # Checking if the computer is AC powered.
+
 function BU.Hardware.Battery.IsOnAC()
 {
     return 0;
 }
 
+# ····································
 # Checking if the battery has history.
+
 function BU.Hardware.Battery.HasHistory()
 {
     #**** Variables ****
@@ -106,7 +112,9 @@ function BU.Hardware.Battery.HasHistory()
     return 0;
 }
 
+# ··········································
 # Checking if the computer has power supply.
+
 function BU.Hardware.Battery.HasPowerSupply()
 {
     #**** Variables ****
@@ -122,7 +130,9 @@ function BU.Hardware.Battery.HasPowerSupply()
     return 0;
 }
 
+# ·······································
 # Checking if the battery has statistics.
+
 function BU.Hardware.Battery.HasStatistics()
 {
     #**** Variables ****
@@ -138,7 +148,9 @@ function BU.Hardware.Battery.HasStatistics()
     return 0;
 }
 
+# ····································
 # Checking if the computer is present.
+
 function BU.Hardware.Battery.IsPresent()
 {
     #**** Variables ****
@@ -154,7 +166,9 @@ function BU.Hardware.Battery.IsPresent()
     return 0;
 }
 
+# ·········································
 # Checking if the computer is rechargeable.
+
 function BU.Hardware.Battery.IsRechargeable()
 {
     #**** Variables ****
@@ -170,7 +184,9 @@ function BU.Hardware.Battery.IsRechargeable()
     return 0;
 }
 
-# Getting the battery serial number.
+# ····································
+# Getting the battery's serial number.
+
 function BU.Hardware.Battery.GetCapacity()
 {
     #**** Variables ****
@@ -186,7 +202,9 @@ function BU.Hardware.Battery.GetCapacity()
     return 0;
 }
 
-# Getting the battery
+# ···························
+# Getting the battery's
+
 function BU.Hardware.Battery.GetEnergy()
 {
     #**** Variables ****
@@ -202,8 +220,9 @@ function BU.Hardware.Battery.GetEnergy()
     return 0;
 }
 
+# ························
+# Getting the battery's
 
-# Getting the battery
 function BU.Hardware.Battery.GetEnergyEmpty()
 {
     #**** Variables ****
@@ -219,8 +238,9 @@ function BU.Hardware.Battery.GetEnergyEmpty()
     return 0;
 }
 
+# ························
+# Getting the battery's
 
-# Getting the battery
 function BU.Hardware.Battery.GetEnergyFull()
 {
     #**** Variables ****
@@ -236,8 +256,8 @@ function BU.Hardware.Battery.GetEnergyFull()
     return 0;
 }
 
-
-# Getting the battery
+# ························
+# Getting the battery's
 function BU.Hardware.Battery.GetEnergyFullDesign()
 {
     #**** Variables ****
@@ -253,8 +273,9 @@ function BU.Hardware.Battery.GetEnergyFullDesign()
     return 0;
 }
 
+# ··································
+# Getting the battery's energy rate.
 
-# Getting the battery energy rate.
 function BU.Hardware.Battery.GetEnergyRate()
 {
     #**** Variables ****
@@ -270,7 +291,9 @@ function BU.Hardware.Battery.GetEnergyRate()
     return 0;
 }
 
-# Getting the battery model.
+# ····························
+# Getting the battery's model.
+
 function BU.Hardware.Battery.GetModel()
 {
     #**** Variables ****
@@ -286,7 +309,9 @@ function BU.Hardware.Battery.GetModel()
     return 0;
 }
 
-# Getting the battery
+# ························
+# Getting the battery's
+
 function BU.Hardware.Battery.GetNativePath()
 {
     #**** Variables ****
@@ -302,7 +327,9 @@ function BU.Hardware.Battery.GetNativePath()
     return 0;
 }
 
-# Getting the battery percentage.
+# ·································
+# Getting the battery's percentage.
+
 function BU.Hardware.Battery.GetPercentage()
 {
     #**** Variables ****
@@ -318,7 +345,9 @@ function BU.Hardware.Battery.GetPercentage()
     return 0;
 }
 
-# Getting the battery serial number.
+# ····································
+# Getting the battery's serial number.
+
 function BU.Hardware.Battery.GetSerialNumber()
 {
     #**** Variables ****
@@ -334,7 +363,9 @@ function BU.Hardware.Battery.GetSerialNumber()
     return 0;
 }
 
-# Getting the battery state.
+# ····························
+# Getting the battery's state.
+
 function BU.Hardware.Battery.GetState()
 {
     #**** Variables ****
@@ -350,7 +381,9 @@ function BU.Hardware.Battery.GetState()
     return 0;
 }
 
-# Getting the battery technology.
+# ·································
+# Getting the battery's technology.
+
 function BU.Hardware.Battery.GetTechnology()
 {
     #**** Variables ****
@@ -366,7 +399,9 @@ function BU.Hardware.Battery.GetTechnology()
     return 0;
 }
 
+# ·················································
 # Getting the time remaining until the full charge.
+
 function BU.Hardware.Battery.GetTimeBeforeFullCharge()
 {
     #**** Variables ****
@@ -382,7 +417,9 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge()
     return 0;
 }
 
+# ···························
 # Getting the battery vendor.
+
 function BU.Hardware.Battery.GetVendor()
 {
     #**** Variables ****
@@ -398,8 +435,9 @@ function BU.Hardware.Battery.GetVendor()
     return 0;
 }
 
-
+# ··································
 # Getting the battery serial number.
+
 function BU.Hardware.Battery.GetVoltage()
 {
     #**** Variables ****
@@ -413,7 +451,9 @@ function BU.Hardware.Battery.GetVoltage()
     return 0;
 }
 
+# ··································
 # Getting the battery warning level.
+
 function BU.Hardware.Battery.GetWarningLevel()
 {
     #**** Variables ****
