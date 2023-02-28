@@ -81,25 +81,40 @@ fi; echo >&2; exit 1; fi
 # ·····························
 # Getting the CPU architecture.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.CPU.GetArch()                  { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
 
 # ····························
 # Getting the clock frequency.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
 
 # ··············································
 # Getting the summary of the CPU's informations.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
 
 # ····························
 # Getting the number of cores.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
 
 # ·······················
 # Getting the CPU vendor.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
 
@@ -109,6 +124,9 @@ function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommand
 
 # ············································
 # Checking if the CPU architecture is 32 bits.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.CPU.Is32bits()
 {
@@ -126,6 +144,9 @@ function BU.Hardware.CPU.Is32bits()
 # ············································
 # Checking if the CPU architecture is 64 bits.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.CPU.Is64bits()
 {
     if BU.Main.CMDS.GetCommandPath 'lshw'; then
@@ -142,44 +163,71 @@ function BU.Hardware.CPU.Is64bits()
 # ··················································
 # Checking if the CPU architecture is AArch 32 bits.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Main.CPU.IsArchAArch32()            { true; }
 
 # ··················································
 # Checking if the CPU architecture is AArch 64 bits.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Main.CPU.IsArchAArch64()            { true; }
 
 # ················································
 # Checking if the CPU architecture is ARM 32 bits.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Main.CPU.IsArchARM32()              { true; }
 
 # ················································
 # Checking if the CPU architecture is ARM 64 bits.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Main.CPU.IsArchARM64()              { true; }
 
 # ··········································
 # Checking if the CPU architecture is AMD64.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Main.CPU.IsArchAMD64()              { true; }
 
 # ·········································
 # Checking if the CPU architecture is i386.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Main.CPU.IsArchi386()               { true; }
 
 # ············································
 # Checking if the CPU architecture is PowerPC.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Main.CPU.IsArchPPC()                { true; }
 
 # ·········································
 # Checking if the CPU architecture is MIPS.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Main.CPU.IsArchMIPS()               { true; }
 
 # ···········································
 # Checking if the CPU architecture is RISC-V.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Main.CPU.IsArchRISCV()              { true; }

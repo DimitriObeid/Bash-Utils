@@ -103,6 +103,9 @@ fi; echo >&2; exit 1; fi
 # ·····························
 # Installing SteamCMD on Linux.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Games.SteamCMD.Install()
 {
     #**** Code ****
@@ -114,6 +117,9 @@ function BU.Software.Linux.Games.SteamCMD.Install()
 # ···························
 # Updating SteamCMD on Linux.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Games.SteamCMD.Update()
 {
     #**** Code ****
@@ -124,6 +130,9 @@ function BU.Software.Linux.Games.SteamCMD.Update()
 
 # ·······························
 # Uninstalling SteamCMD on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Software.Linux.Games.SteamCMD.Uninstall()
 {

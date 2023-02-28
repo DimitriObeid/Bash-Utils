@@ -352,6 +352,7 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTION
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Main.TextFormat.Atoi()
 {
     #**** Parameters ****

@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## RESOURCES FUNCTIONS.
 
+# ··························································
 # Quick writing if the target operating system is not found.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 {
     BU.Main.Echo.Error ""; BU.Main.Echo.Newline;
@@ -110,7 +115,12 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 
 ## PACKAGE MANAGERS INSTALLATION
 
+# ·································
 # Install NPM on several platforms.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.PackageManagers.InstallNPM()
 {
     #**** Code ****
@@ -125,7 +135,12 @@ function BU.Software.PackageManagers.InstallNPM()
 
 ## PACKAGE MANAGERS UPDATE
 
+# ··································
 # Updating NPM on several platforms.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.PackageManagers.UpdateNPM()
 {
     #**** Code ****

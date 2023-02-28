@@ -81,6 +81,9 @@ fi; echo >&2; exit 1; fi
 # ·············································
 # Checking if the targeted hard drive is a HDD.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.IsHDD()
 {
     return 0;
@@ -88,6 +91,9 @@ function BU.Hardware.Drive.IsHDD()
 
 # ·············································
 # Checking if the targeted hard drive is a SDD.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.IsSSD()
 {
@@ -97,6 +103,9 @@ function BU.Hardware.Drive.IsSSD()
 # ········································
 # Checking how many hard drives are plugged.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.CountPluggedDrives()
 {
     return 0;
@@ -104,6 +113,9 @@ function BU.Hardware.Drive.CountPluggedDrives()
 
 # ··························································
 # Counting the number of HDDs among the plugged hard drives.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.CountHDD()
 {
@@ -113,6 +125,9 @@ function BU.Hardware.Drive.CountHDD()
 # ··························································
 # Counting the number of SSDs among the plugged hard drives.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.CountSSD()
 {
     return 0;
@@ -120,6 +135,9 @@ function BU.Hardware.Drive.CountSSD()
 
 # ···································································
 # Counting the number of HDDs and SSDs among the plugged hard drives.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.CountHDD+SSD()
 {
@@ -129,6 +147,9 @@ function BU.Hardware.Drive.CountHDD+SSD()
 # ·································
 # Getting the size of a hard drive.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.GetDriveSize()
 {
     return 0;
@@ -136,6 +157,9 @@ function BU.Hardware.Drive.GetDriveSize()
 
 # ······································································
 # Getting the total size by adding up several or every hard drives size.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.AddUpDrivesSizes()
 {
@@ -145,6 +169,9 @@ function BU.Hardware.Drive.AddUpDrivesSizes()
 # ····································
 # Getting the rotation speed of a HDD.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.GetRotationSpeed()
 {
     return 0;
@@ -152,6 +179,9 @@ function BU.Hardware.Drive.GetRotationSpeed()
 
 # ·····································
 # Getting the vendor of the hard drive.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.GetVendor()
 {
@@ -161,6 +191,9 @@ function BU.Hardware.Drive.GetVendor()
 # ····································
 # Getting the disk's firmware version.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.GetFirmwareVersion()
 {
     return 0;
@@ -168,6 +201,9 @@ function BU.Hardware.Drive.GetFirmwareVersion()
 
 # ··················································································································
 # Creating a new partition (WARNING ! BE SURE YOU KNOW EXACTLY WHAT YOU ARE DOING WHEN CALLING THIS FUNCTION !!!!!).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.CreateNewPartition()
 {
@@ -177,6 +213,9 @@ function BU.Hardware.Drive.CreateNewPartition()
 # ··············································································································
 # Deleting a partition (WARNING ! BE SURE YOU KNOW EXACTLY WHAT YOU ARE DOING WHEN CALLING THIS FUNCTION !!!!!).
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.DeletePartition()
 {
     return 0;
@@ -184,6 +223,9 @@ function BU.Hardware.Drive.DeletePartition()
 
 # ··········································
 # Getting the number of existing partitions.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.GetPartitionsNumber()
 {
@@ -193,6 +235,9 @@ function BU.Hardware.Drive.GetPartitionsNumber()
 # ·····················································································
 # Getting the number of existing partitions by size (more or less than a defined size).
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.GetPartitionsNumberBySize()
 {
     return 0;
@@ -201,6 +246,9 @@ function BU.Hardware.Drive.GetPartitionsNumberBySize()
 # ·········································································
 # Getting the number of existing partitions according to their file system.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Drive.GetPartitionsNumberByFS()
 {
     return 0;
@@ -208,6 +256,9 @@ function BU.Hardware.Drive.GetPartitionsNumberByFS()
 
 # ································
 # Getting the size of a partition.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Drive.GetPartitionSize()
 {

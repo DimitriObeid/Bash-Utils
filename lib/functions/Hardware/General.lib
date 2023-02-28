@@ -81,10 +81,16 @@ fi; echo >&2; exit 1; fi
 # ·······························
 # Getting the computer's chassis.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
 
 # ····································
 # Getting the computer's chassis type.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.General.GetChassisType()
 {
@@ -104,9 +110,15 @@ function BU.Hardware.General.GetChassisType()
 # ·························
 # Getting the machine's ID.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
 
 # ····················
 # Getting the boot ID.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }

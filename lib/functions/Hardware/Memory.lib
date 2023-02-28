@@ -81,6 +81,9 @@ fi; echo >&2; exit 1; fi
 # ·······································
 # Getting the number of RAM slots in use.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Memory.GetUsedRAMSlotsNumber()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 12 {print $4}'; return 0; else return 1; fi; fi
@@ -88,6 +91,9 @@ function BU.Hardware.Memory.GetUsedRAMSlotsNumber()
 
 # ···········································
 # Getting the number of RAM slots available.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Memory.GetAvailableRamSlotsNumber()
 {
@@ -97,6 +103,9 @@ function BU.Hardware.Memory.GetAvailableRamSlotsNumber()
 # ·································
 # Getting the memory max capacity.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Memory.GetMaxMemoryCapacity()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 10 {print $3 " " $4}'; return 0; else return 1; fi; fi
@@ -104,6 +113,9 @@ function BU.Hardware.Memory.GetMaxMemoryCapacity()
 
 # ························
 # Getting the memory type.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Hardware.Memory.GetMemoryType()
 {

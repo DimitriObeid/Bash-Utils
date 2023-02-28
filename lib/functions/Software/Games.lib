@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## STEAMCMD : LOGIN
 
+# ························································
 # Installing SteamCMD on each supported operating systems.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.Install()
 {
     #**** Code ****
@@ -109,7 +114,12 @@ function BU.Software.Games.SteamCMD.Install()
     return 0;
 }
 
+# ··································
 # Checking if SteamCMD is installed.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.IsInstalled()
 {
     #**** Code ****
@@ -118,7 +128,12 @@ function BU.Software.Games.SteamCMD.IsInstalled()
     return 0;
 }
 
+# ····························
 # Login to your Steam account.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.Login()
 {
     #**** Code ****
@@ -129,7 +144,12 @@ function BU.Software.Games.SteamCMD.Login()
     return 0;
 }
 
+# ···················
 # Downloading a game.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.DownloadGame()
 {
     #**** Code ****
@@ -140,7 +160,12 @@ function BU.Software.Games.SteamCMD.DownloadGame()
     return 0;
 }
 
+# ····························································································································
 # Validating the downloaded files, in order to check their integrity, in case a file is corrupted, was modified or is missing.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.ValidateFiles()
 {
     #**** Code ****
@@ -151,7 +176,12 @@ function BU.Software.Games.SteamCMD.ValidateFiles()
     return 0;
 }
 
+# ·······························
 # Adding a product key to a game.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.AddProductKey()
 {
     #**** Code ****
@@ -162,7 +192,12 @@ function BU.Software.Games.SteamCMD.AddProductKey()
     return 0;
 }
 
+# ····················
 # Uninstalling a game.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Games.SteamCMD.UninstallGame()
 {
     #**** Code ****

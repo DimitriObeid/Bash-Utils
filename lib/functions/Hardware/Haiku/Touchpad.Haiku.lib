@@ -81,6 +81,9 @@ fi; echo >&2; exit 1; fi
 # ···································
 # Getting the vendor of the touchpad.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Touchpad.GetVendor()
 {
     return 0;

@@ -837,6 +837,11 @@ function BU.Main.Text.GetStringByteSize()
 
 # ···········································
 # Getting the size of a string in characters.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Text.GetStringCharactersNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -851,6 +856,7 @@ function BU.Main.Text.GetStringCharactersNumber()
     echo -ne "${p_string}" | wc --chars; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ········································
 # Getting the number of words in a string.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1038,6 +1044,10 @@ function BU.Main.Text.ReverseStringWordsOrder()
 
 # ············································
 # Reverse the order of characters in a string.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Main.Text.ReverseCharactersOrder()
 {
     #**** Parameters ****
