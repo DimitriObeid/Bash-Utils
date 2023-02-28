@@ -78,31 +78,35 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ······································
 # Getting the total number of USB ports.
 function BU.Hardware.Ports.GetUSBPortsNumber()
 {
     return 0;
 }
 
+# ··········································
 # Getting the number of available USB ports.
 function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
 {
     return 0;
 }
 
+# ·····································
 # Getting the number of used USB ports.
 function BU.Hardware.Ports.GetUsedUSBPortsNumber()
 {
     return 0;
 }
 
-
+# ················································
 # Checking if an optical disc drive is mounted.
 function BU.Hardware.Ports.CheckIfOpticalDiscDriveExists()
 {
     return 0;
 }
 
+# ········································································
 # Checking if an optical disc drive is mounted, and if no disc is .
 function BU.Hardware.Ports.CheckIfOpticalDiscDriveIsEmpty()
 {
@@ -111,7 +115,12 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveIsEmpty()
     return 0;
 }
 
+# ················································
 # Checking if an optical disc drive is mounted.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -119,7 +128,12 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
     return 0;
 }
 
+# ······················································
 # Checking if an optical disc drive is mounted.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -127,7 +141,12 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
     return 0;
 }
 
+# ······················································
 # Checking if an optical disc drive is mounted.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsdisc()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -135,37 +154,67 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsdisc()
     return 0;
 }
 
+# ······················································
 # Checking if an SD card port is mounted.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfSDCardReaderIsMounted()
 {
     return 0;
 }
 
+# ······························
 # Checking if a VGA port exists.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfVGAPortExists()
 {
     return 0;
 }
 
+# ···············································
 # Checking if the existing VGA port is available.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfVGAPortAvailable()
 {
     return 0;
 }
 
+# ································
 # Checking if an HDMI port exists.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfHDMIPortExists()
 {
     return 0;
 }
 
+# ················································
 # Checking if the existing HDMI port is available.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
 {
     return 0;
 }
 
+# ··································
 # Checking if a joystick is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
 {
     #**** Variables ****
