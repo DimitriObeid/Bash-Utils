@@ -103,7 +103,7 @@ alias BU.Main.OS.IsAndroid='BU.Main.OS.IsAndroidTermux';
 # Checking the current Android version.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.OS.IsAndroidTermux() -> OS.lib (this file)
+#   - BU.Main.OS.IsAndroid() -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroid4()    { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroid5()    { BU.Main.OS.IsAndroid && return 0; return 1; }
@@ -118,7 +118,7 @@ function BU.Main.OS.IsAndroid11()   { BU.Main.OS.IsAndroid && return 0; return 1
 # Checking if the Android device is rooted.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroidRooted()                       { BU.Main.OS.IsAndroid && return 0; return 1; }
 
@@ -126,7 +126,7 @@ function BU.Main.OS.IsAndroidRooted()                       { BU.Main.OS.IsAndro
 # Checking for specific Android manufacturer.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroidManufacturerAlcatel()          { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerASUS()             { BU.Main.OS.IsAndroid && return 0; return 1; }
@@ -145,35 +145,40 @@ function BU.Main.OS.IsAndroidManufacturerXiaomi()           { BU.Main.OS.IsAndro
 # Checking if the current Android device is a smartphone.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid()                    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsAndroidDeviceSmartphone()    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsAndroidRooted()              -> Main -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroidDeviceSmartphone()             { BU.Main.OS.IsAndroid && return 0; return 1; }
-function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidRooted            && return 0; return 1; }
+function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidRooted                    && return 0; return 1; }
 
 # ······················································
 # Checking for specific Android smartphone manufacturer.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroidDeviceSmartphone()    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsAndroidManufacturer*()       -> Main -> OS.lib (this file)
 
-function BU.Main.OS.IsAndroidSmartphoneManufacturerAlcatel()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerAlcatel  && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerASUS     && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerGoogle()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerGoogle   && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerHTC()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerHTC      && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerHuawei   && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerLG()         { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerLG       && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerMotorola()   { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerMotorola && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerOppo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerOppo     && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.isManufacturerSamsung  && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerSony()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerSony     && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerVivo     && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsManufacturerXiaomi   && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerAlcatel()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerAlcatel   && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerASUS      && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerGoogle()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerGoogle    && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerHTC()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHTC       && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHuawei    && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerLG()         { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerLG        && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerMotorola()   { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerMotorola  && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerOppo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerOppo      && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSamsung   && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerSony()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSony      && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerVivo      && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerXiaomi    && return 0; return 1; }
 
 # ···················································
 # Checking if the current Android device is a Tablet.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsAndroidDeviceTablet()    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsAndroidRooted()          -> Main -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroidDeviceTablet()                 { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidDeviceTabletRooted()           { BU.Main.OS.IsAndroidDeviceTablet      && BU.Main.OS.IsAndroidRooted           && return 0; return 1; }
@@ -182,7 +187,8 @@ function BU.Main.OS.IsAndroidDeviceTabletRooted()           { BU.Main.OS.IsAndro
 # Checking for specific Android tablet manufacturer.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroidDeviceTablet()    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsManufacturer*()          -> Main -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroidTabletManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerASUS      && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerHuawei    && return 0; return 1; }
@@ -199,7 +205,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="$
 # Getting the Android device model.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.GetAndroidDeviceModel() { BU.Main.OS.IsAndroid && getprop ro.product.model && return 0; return 1; }
 
@@ -207,7 +213,7 @@ function BU.Main.OS.GetAndroidDeviceModel() { BU.Main.OS.IsAndroid && getprop ro
 # Getting the Android operating system build.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.GetAndroidBuild()       { BU.Main.OS.IsAndroid && getprop ro.build.display.id && return 0; return 1; }
 
@@ -215,7 +221,7 @@ function BU.Main.OS.GetAndroidBuild()       { BU.Main.OS.IsAndroid && getprop ro
 # Getting the Android operating system version.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.GetAndroidVersion()     { BU.Main.OS.IsAndroid && getprop ro.build.version.release && return 0; return 1; }
 
@@ -889,6 +895,9 @@ function BU.Main.OS.GetLinuxDistro()
 # ·······················································································································
 # Getting the name of the currently used Linux distribution, by reading the content of the "/proc/version" file on Linux.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.GetLinuxDistro() -> Main -> OS.lib (this file)
+
 function BU.Main.OS.GetLinuxDistroVersion()
 {
     BU.Main.OS.GetLinuxDistro "${1}" || return 1; return 0;
@@ -1118,15 +1127,25 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="${__BU
 
 function BU.Main.OS.IsRunningInQemu()               { true; }
 
-# ············································
-# Checking if the system is running in VMware.
+# ··························································································
+# Checking if the current system is running in VMware, according to its own system commands.
 
-function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware     > /dev/null; then return 0; else return 1; fi; }
+function BU.Main.OS.IsRunningInVMware.Haiku()       { true; }
+function BU.Main.OS.IsRunningInVMware.Linux()       { if dmesg | grep -i VMware     > /dev/null; then return 0; else return 1; fi; }
+function BU.Main.OS.IsRunningInVMware.OSX()         { true; }
+function BU.Main.OS.IsRunningInVMware.Windows()     { true; }
 
-# ················································
-# Checking if the system is running in VirtualBox.
+function BU.Main.OS.IsRunningInVMware()             { BU.Main.OS.IsRunningInVMware."${}"; }
 
-function BU.Main.OS.IsRunningInVirtualBox()         { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
+# ······························································································
+# Checking if the current system is running in VirtualBox, according to its own system commands.
+
+function BU.Main.OS.IsRunningInVirtualBox.Haiku()   { true; }
+function BU.Main.OS.IsRunningInVirtualBox.Linux()   { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
+function BU.Main.OS.IsRunningInVirtualBox.OSX()     { true; }
+function BU.Main.OS.IsRunningInVirtualBox.Windows() { true; }
+
+function BU.Main.OS.IsRunningInVirtualBox()         { BU.Main.OS.BU.Main.OS.IsRunningInVirtualBox."${}"; }
 
 # ·······················································
 # Checking if the system is running in a virtual machine.
