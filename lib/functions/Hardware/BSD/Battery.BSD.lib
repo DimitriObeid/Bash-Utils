@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsNotOnAC.BSD()
+function BU.Hardware.BSD.Battery.IsNotOnAC()
 {
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.Hardware.Battery.IsNotOnAC.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsOnAC.BSD()
+function BU.Hardware.BSD.Battery.IsOnAC()
 {
     return 0;
 }
@@ -113,7 +113,7 @@ function BU.Hardware.Battery.IsOnAC.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasHistory.BSD()
+function BU.Hardware.BSD.Battery.HasHistory()
 {
     return 0;
 }
@@ -124,7 +124,7 @@ function BU.Hardware.Battery.HasHistory.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasPowerSupply.BSD()
+function BU.Hardware.BSD.Battery.HasPowerSupply()
 {
     return 0;
 }
@@ -135,7 +135,7 @@ function BU.Hardware.Battery.HasPowerSupply.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasStatistics.BSD()
+function BU.Hardware.BSD.Battery.HasStatistics()
 {
     return 0;
 }
@@ -146,7 +146,7 @@ function BU.Hardware.Battery.HasStatistics.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsPresent.BSD()
+function BU.Hardware.BSD.Battery.IsPresent()
 {
     return 0;
 }
@@ -157,7 +157,7 @@ function BU.Hardware.Battery.IsPresent.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsRechargeable.BSD()
+function BU.Hardware.BSD.Battery.IsRechargeable()
 {
     return 0;
 }
@@ -168,7 +168,7 @@ function BU.Hardware.Battery.IsRechargeable.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetCapacity.BSD()
+function BU.Hardware.BSD.Battery.GetCapacity()
 {
     return 0;
 }
@@ -179,7 +179,7 @@ function BU.Hardware.Battery.GetCapacity.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergy.BSD()
+function BU.Hardware.BSD.Battery.GetEnergy()
 {
     return 0;
 }
@@ -190,7 +190,7 @@ function BU.Hardware.Battery.GetEnergy.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyEmpty.BSD()
+function BU.Hardware.BSD.Battery.GetEnergyEmpty()
 {
     return 0;
 }
@@ -201,7 +201,7 @@ function BU.Hardware.Battery.GetEnergyEmpty.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyFull.BSD()
+function BU.Hardware.BSD.Battery.GetEnergyFull()
 {
     return 0;
 }
@@ -212,7 +212,7 @@ function BU.Hardware.Battery.GetEnergyFull.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyFullDesign.BSD()
+function BU.Hardware.BSD.Battery.GetEnergyFullDesign()
 {
     return 0;
 }
@@ -223,7 +223,7 @@ function BU.Hardware.Battery.GetEnergyFullDesign.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyRate.BSD()
+function BU.Hardware.BSD.Battery.GetEnergyRate()
 {
     return 0;
 }
@@ -234,7 +234,7 @@ function BU.Hardware.Battery.GetEnergyRate.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetModel.BSD()
+function BU.Hardware.BSD.Battery.GetModel()
 {
     return 0;
 }
@@ -242,7 +242,7 @@ function BU.Hardware.Battery.GetModel.BSD()
 # ························
 # Getting the battery's
 
-function BU.Hardware.Battery.GetNativePath.BSD()
+function BU.Hardware.BSD.Battery.GetNativePath()
 {
     return 0;
 }
@@ -253,7 +253,7 @@ function BU.Hardware.Battery.GetNativePath.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetPercentage.BSD()
+function BU.Hardware.BSD.Battery.GetPercentage()
 {
     return 0;
 }
@@ -264,7 +264,7 @@ function BU.Hardware.Battery.GetPercentage.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetSerialNumber.BSD()
+function BU.Hardware.BSD.Battery.GetSerialNumber()
 {
     return 0;
 }
@@ -275,7 +275,7 @@ function BU.Hardware.Battery.GetSerialNumber.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetState.BSD()
+function BU.Hardware.BSD.Battery.GetState()
 {
     return 0;
 }
@@ -286,7 +286,7 @@ function BU.Hardware.Battery.GetState.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetTechnology.BSD()
+function BU.Hardware.BSD.Battery.GetTechnology()
 {
     return 0;
 }
@@ -297,7 +297,7 @@ function BU.Hardware.Battery.GetTechnology.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetTimeBeforeFullCharge.BSD()
+function BU.Hardware.BSD.Battery.GetTimeBeforeFullCharge()
 {
     return 0;
 }
@@ -308,7 +308,7 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetVendor.BSD()
+function BU.Hardware.BSD.Battery.GetVendor()
 {
     return 0;
 }
@@ -319,7 +319,7 @@ function BU.Hardware.Battery.GetVendor.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetVoltage.BSD()
+function BU.Hardware.BSD.Battery.GetVoltage()
 {
     return 0;
 }
@@ -330,7 +330,7 @@ function BU.Hardware.Battery.GetVoltage.BSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetWarningLevel.BSD()
+function BU.Hardware.BSD.Battery.GetWarningLevel()
 {
     return 0;
 }

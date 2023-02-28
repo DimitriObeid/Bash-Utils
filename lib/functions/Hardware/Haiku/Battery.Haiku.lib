@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsNotOnAC.Haiku()
+function BU.Hardware.Haiku.Battery.IsNotOnAC()
 {
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.Hardware.Battery.IsNotOnAC.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsOnAC.Haiku()
+function BU.Hardware.Haiku.Battery.IsOnAC()
 {
     return 0;
 }
@@ -113,7 +113,7 @@ function BU.Hardware.Battery.IsOnAC.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasHistory.Haiku()
+function BU.Hardware.Haiku.Battery.HasHistory()
 {
     return 0;
 }
@@ -124,7 +124,7 @@ function BU.Hardware.Battery.HasHistory.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasPowerSupply.Haiku()
+function BU.Hardware.Haiku.Battery.HasPowerSupply()
 {
     return 0;
 }
@@ -135,7 +135,7 @@ function BU.Hardware.Battery.HasPowerSupply.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasStatistics.Haiku()
+function BU.Hardware.Haiku.Battery.HasStatistics()
 {
     return 0;
 }
@@ -146,7 +146,7 @@ function BU.Hardware.Battery.HasStatistics.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsPresent.Haiku()
+function BU.Hardware.Haiku.Battery.IsPresent()
 {
     return 0;
 }
@@ -157,7 +157,7 @@ function BU.Hardware.Battery.IsPresent.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsRechargeable.Haiku()
+function BU.Hardware.Haiku.Battery.IsRechargeable()
 {
     return 0;
 }
@@ -168,7 +168,7 @@ function BU.Hardware.Battery.IsRechargeable.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetCapacity.Haiku()
+function BU.Hardware.Haiku.Battery.GetCapacity()
 {
     return 0;
 }
@@ -179,7 +179,7 @@ function BU.Hardware.Battery.GetCapacity.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergy.Haiku()
+function BU.Hardware.Haiku.Battery.GetEnergy()
 {
     return 0;
 }
@@ -190,7 +190,7 @@ function BU.Hardware.Battery.GetEnergy.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyEmpty.Haiku()
+function BU.Hardware.Haiku.Battery.GetEnergyEmpty()
 {
     return 0;
 }
@@ -201,7 +201,7 @@ function BU.Hardware.Battery.GetEnergyEmpty.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyFull.Haiku()
+function BU.Hardware.Haiku.Battery.GetEnergyFull()
 {
     return 0;
 }
@@ -212,7 +212,7 @@ function BU.Hardware.Battery.GetEnergyFull.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyFullDesign.Haiku()
+function BU.Hardware.Haiku.Battery.GetEnergyFullDesign()
 {
     return 0;
 }
@@ -223,7 +223,7 @@ function BU.Hardware.Battery.GetEnergyFullDesign.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyRate.Haiku()
+function BU.Hardware.Haiku.Battery.GetEnergyRate()
 {
     return 0;
 }
@@ -234,7 +234,7 @@ function BU.Hardware.Battery.GetEnergyRate.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetModel.Haiku()
+function BU.Hardware.Haiku.Battery.GetModel()
 {
     return 0;
 }
@@ -242,7 +242,7 @@ function BU.Hardware.Battery.GetModel.Haiku()
 # ························
 # Getting the battery's
 
-function BU.Hardware.Battery.GetNativePath.Haiku()
+function BU.Hardware.Haiku.Battery.GetNativePath()
 {
     return 0;
 }
@@ -253,7 +253,7 @@ function BU.Hardware.Battery.GetNativePath.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetPercentage.Haiku()
+function BU.Hardware.Haiku.Battery.GetPercentage()
 {
     return 0;
 }
@@ -264,7 +264,7 @@ function BU.Hardware.Battery.GetPercentage.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetSerialNumber.Haiku()
+function BU.Hardware.Haiku.Battery.GetSerialNumber()
 {
     return 0;
 }
@@ -275,7 +275,7 @@ function BU.Hardware.Battery.GetSerialNumber.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetState.Haiku()
+function BU.Hardware.Haiku.Battery.GetState()
 {
     return 0;
 }
@@ -286,7 +286,7 @@ function BU.Hardware.Battery.GetState.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetTechnology.Haiku()
+function BU.Hardware.Haiku.Battery.GetTechnology()
 {
     return 0;
 }
@@ -297,7 +297,7 @@ function BU.Hardware.Battery.GetTechnology.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetTimeBeforeFullCharge.Haiku()
+function BU.Hardware.Haiku.Battery.GetTimeBeforeFullCharge()
 {
     return 0;
 }
@@ -308,7 +308,7 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetVendor.Haiku()
+function BU.Hardware.Haiku.Battery.GetVendor()
 {
     return 0;
 }
@@ -319,7 +319,7 @@ function BU.Hardware.Battery.GetVendor.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetVoltage.Haiku()
+function BU.Hardware.Haiku.Battery.GetVoltage()
 {
     return 0;
 }
@@ -330,7 +330,7 @@ function BU.Hardware.Battery.GetVoltage.Haiku()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetWarningLevel.Haiku()
+function BU.Hardware.Haiku.Battery.GetWarningLevel()
 {
     return 0;
 }

@@ -106,7 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallQemu.Linux()
+function BU.Software.Linux.Virtualization.InstallQemu()
 {
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -120,7 +120,7 @@ function BU.Software.Virtualization.InstallQemu.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallVMwareWorkstation.Linux()
+function BU.Software.Linux.Virtualization.InstallVMwareWorkstation()
 {
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -134,7 +134,7 @@ function BU.Software.Virtualization.InstallVMwareWorkstation.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallVirtualbox.Linux()
+function BU.Software.Linux.Virtualization.InstallVirtualbox()
 {
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -152,7 +152,7 @@ function BU.Software.Virtualization.InstallVirtualbox.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallQemu.OSX()
+function BU.Software.OSX.Virtualization.InstallQemu()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -180,7 +180,7 @@ function BU.Software.Virtualization.InstallVMwareFusion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallVirtualbox.OSX()
+function BU.Software.OSX.Virtualization.InstallVirtualbox()
 {
     #**** Code ****
     BU.Main.OS.IsOSX || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -199,7 +199,7 @@ function BU.Software.Virtualization.InstallVirtualbox.OSX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallQemu.Windows()
+function BU.Software.Windows.Virtualization.InstallQemu()
 {
     #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -213,7 +213,7 @@ function BU.Software.Virtualization.InstallQemu.Windows()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallVirtualbox.Windows()
+function BU.Software.Windows.Virtualization.InstallVirtualbox()
 {
     #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
@@ -227,7 +227,7 @@ function BU.Software.Virtualization.InstallVirtualbox.Windows()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Virtualization.InstallVMwareWorkstation.Windows()
+function BU.Software.Windows.Virtualization.InstallVMwareWorkstation()
 {
     #**** Code ****
     BU.Main.OS.IsWindows || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };

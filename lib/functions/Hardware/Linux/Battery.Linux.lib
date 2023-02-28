@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsNotOnAC.Linux()
+function BU.Hardware.Linux.Battery.IsNotOnAC()
 {
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.Hardware.Battery.IsNotOnAC.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsOnAC.Linux()
+function BU.Hardware.Linux.Battery.IsOnAC()
 {
     return 0;
 }
@@ -113,7 +113,7 @@ function BU.Hardware.Battery.IsOnAC.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasHistory.Linux()
+function BU.Hardware.Linux.Battery.HasHistory()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -134,7 +134,7 @@ function BU.Hardware.Battery.HasHistory.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasPowerSupply.Linux()
+function BU.Hardware.Linux.Battery.HasPowerSupply()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -155,7 +155,7 @@ function BU.Hardware.Battery.HasPowerSupply.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.HasStatistics.Linux()
+function BU.Hardware.Linux.Battery.HasStatistics()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -176,7 +176,7 @@ function BU.Hardware.Battery.HasStatistics.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsPresent.Linux()
+function BU.Hardware.Linux.Battery.IsPresent()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -197,7 +197,7 @@ function BU.Hardware.Battery.IsPresent.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.IsRechargeable.Linux()
+function BU.Hardware.Linux.Battery.IsRechargeable()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -218,7 +218,7 @@ function BU.Hardware.Battery.IsRechargeable.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetCapacity.Linux()
+function BU.Hardware.Linux.Battery.GetCapacity()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -239,7 +239,7 @@ function BU.Hardware.Battery.GetCapacity.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergy.Linux()
+function BU.Hardware.Linux.Battery.GetEnergy()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -260,7 +260,7 @@ function BU.Hardware.Battery.GetEnergy.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyEmpty.Linux()
+function BU.Hardware.Linux.Battery.GetEnergyEmpty()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -282,7 +282,7 @@ function BU.Hardware.Battery.GetEnergyEmpty.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyFull.Linux()
+function BU.Hardware.Linux.Battery.GetEnergyFull()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -303,7 +303,7 @@ function BU.Hardware.Battery.GetEnergyFull.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyFullDesign.Linux()
+function BU.Hardware.Linux.Battery.GetEnergyFullDesign()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -324,7 +324,7 @@ function BU.Hardware.Battery.GetEnergyFullDesign.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetEnergyRate.Linux()
+function BU.Hardware.Linux.Battery.GetEnergyRate()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -345,7 +345,7 @@ function BU.Hardware.Battery.GetEnergyRate.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetModel.Linux()
+function BU.Hardware.Linux.Battery.GetModel()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
@@ -363,7 +363,7 @@ function BU.Hardware.Battery.GetModel.Linux()
 # ························
 # Getting the battery's
 
-function BU.Hardware.Battery.GetNativePath.Linux()
+function BU.Hardware.Linux.Battery.GetNativePath()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
@@ -384,7 +384,7 @@ function BU.Hardware.Battery.GetNativePath.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetPercentage.Linux()
+function BU.Hardware.Linux.Battery.GetPercentage()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries, v_command_output;
@@ -405,7 +405,7 @@ function BU.Hardware.Battery.GetPercentage.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetSerialNumber.Linux()
+function BU.Hardware.Linux.Battery.GetSerialNumber()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -426,7 +426,7 @@ function BU.Hardware.Battery.GetSerialNumber.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetState.Linux()
+function BU.Hardware.Linux.Battery.GetState()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -447,7 +447,7 @@ function BU.Hardware.Battery.GetState.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetTechnology.Linux()
+function BU.Hardware.Linux.Battery.GetTechnology()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -468,7 +468,7 @@ function BU.Hardware.Battery.GetTechnology.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetTimeBeforeFullCharge.Linux()
+function BU.Hardware.Linux.Battery.GetTimeBeforeFullCharge()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries; v_command_output;
@@ -489,7 +489,7 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetVendor()
+function BU.Hardware.Linux.Battery.GetVendor()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -510,7 +510,7 @@ function BU.Hardware.Battery.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetVoltage.Linux()
+function BU.Hardware.Linux.Battery.GetVoltage()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;
@@ -529,7 +529,7 @@ function BU.Hardware.Battery.GetVoltage.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Battery.GetWarningLevel.Linux()
+function BU.Hardware.Linux.Battery.GetWarningLevel()
 {
     #**** Variables ****
     if BU.Main.CMDS.GetCommandPath 'upower'; then local v_batteries v_command_output;

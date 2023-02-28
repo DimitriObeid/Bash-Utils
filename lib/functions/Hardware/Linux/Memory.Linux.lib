@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetUsedRAMSlotsNumber.Linux()
+function BU.Hardware.Linux.Memory.GetUsedRAMSlotsNumber()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 12 {print $4}'; return 0; else return 1; fi; fi
 }
@@ -102,7 +102,7 @@ function BU.Hardware.Memory.GetUsedRAMSlotsNumber.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetAvailableRamSlotsNumber.Linux()
+function BU.Hardware.Linux.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
 }
@@ -113,7 +113,7 @@ function BU.Hardware.Memory.GetAvailableRamSlotsNumber.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetMaxMemoryCapacity.Linux()
+function BU.Hardware.Linux.Memory.GetMaxMemoryCapacity()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 10 {print $3 " " $4}'; return 0; else return 1; fi; fi
 }
@@ -124,7 +124,7 @@ function BU.Hardware.Memory.GetMaxMemoryCapacity.Linux()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetMemoryType.Linux()
+function BU.Hardware.Linux.Memory.GetMemoryType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi
 }

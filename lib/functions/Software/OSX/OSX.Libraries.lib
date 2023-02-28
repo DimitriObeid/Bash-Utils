@@ -100,7 +100,9 @@ fi; echo >&2; exit 1; fi
 
 ## METAL
 
+# ························
 # Installing Metal on OSX.
+
 function BU.Software.OSX.Libraries.Metal.Install()
 {
     #**** Code ****
@@ -109,7 +111,9 @@ function BU.Software.OSX.Libraries.Metal.Install()
     return 0;
 }
 
+# ······················
 # Updating Metal on OSX.
+
 function BU.Software.OSX.Libraries.Metal.Update()
 {
     #**** Code ****
@@ -118,7 +122,9 @@ function BU.Software.OSX.Libraries.Metal.Update()
     return 0;
 }
 
+# ··························
 # Uninstalling Metal on OSX.
+
 function BU.Software.OSX.Libraries.Metal.Uninstall()
 {
     #**** Code ****
@@ -131,7 +137,9 @@ function BU.Software.OSX.Libraries.Metal.Uninstall()
 
 ## OPENGL
 
+# ···························
 # Installing OpenGL on MacOS.
+
 function BU.Software.OSX.Libraries.OpenGL.Install()
 {
     #**** Code ****
@@ -140,7 +148,9 @@ function BU.Software.OSX.Libraries.OpenGL.Install()
     return 0;
 }
 
+# ·························
 # Updating OpenGL on MacOS.
+
 function BU.Software.OSX.Libraries.OpenGL.Update()
 {
     #**** Code ****
@@ -149,7 +159,9 @@ function BU.Software.OSX.Libraries.OpenGL.Update()
     return 0;
 }
 
+# ·····························
 # Uninstalling OpenGL on MacOS.
+
 function BU.Software.OSX.Libraries.OpenGL.Uninstall()
 {
     #**** Code ****

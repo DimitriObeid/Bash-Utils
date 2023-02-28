@@ -100,7 +100,9 @@ fi; echo >&2; exit 1; fi
 
 ## BOOTSTRAP
 
+# ································
 # Installing Bootstrap on Windows.
+
 function BU.Software.Windows.Frameworks.Bootstrap.Install()
 {
     #**** Code ****.
@@ -109,7 +111,9 @@ function BU.Software.Windows.Frameworks.Bootstrap.Install()
     return 0;
 }
 
+# ······························
 # Updating Bootstrap on Windows.
+
 function BU.Software.Windows.Frameworks.Bootstrap.Update()
 {
     #**** Code ****.
@@ -118,7 +122,9 @@ function BU.Software.Windows.Frameworks.Bootstrap.Update()
     return 0;
 }
 
+# ··································
 # Uninstalling Bootstrap on Windows.
+
 function BU.Software.Windows.Frameworks.Bootstrap.Uninstall()
 {
     #**** Code ****.
@@ -137,7 +143,9 @@ function BU.Software.Windows.Frameworks.Bootstrap.Uninstall()
 
 ## ANGULAR
 
+# ········································
 # Installing Angular on Microsoft Windows.
+
 function BU.Software.Windows.Frameworks.AngularJS.Install()
 {
     #**** Code ****.
