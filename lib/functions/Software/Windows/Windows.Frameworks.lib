@@ -103,6 +103,9 @@ fi; echo >&2; exit 1; fi
 # ································
 # Installing Bootstrap on Windows.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Bootstrap.Install()
 {
     #**** Code ****.
@@ -114,6 +117,9 @@ function BU.Software.Windows.Frameworks.Bootstrap.Install()
 # ······························
 # Updating Bootstrap on Windows.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Bootstrap.Update()
 {
     #**** Code ****.
@@ -124,6 +130,9 @@ function BU.Software.Windows.Frameworks.Bootstrap.Update()
 
 # ··································
 # Uninstalling Bootstrap on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Software.Windows.Frameworks.Bootstrap.Uninstall()
 {
@@ -143,8 +152,11 @@ function BU.Software.Windows.Frameworks.Bootstrap.Uninstall()
 
 ## ANGULAR
 
-# ········································
-# Installing Angular on Microsoft Windows.
+# ··········································
+# Installing AngularJS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 function BU.Software.Windows.Frameworks.AngularJS.Install()
 {
@@ -154,7 +166,12 @@ function BU.Software.Windows.Frameworks.AngularJS.Install()
     return 0;
 }
 
+# ········································
 # Updating AngularJS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.AngularJS.Update()
 {
     #**** Code ****.
@@ -163,7 +180,12 @@ function BU.Software.Windows.Frameworks.AngularJS.Update()
     return 0;
 }
 
+# ············································
 # Uninstalling AngularJS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.AngularJS.Uninstall()
 {
     #**** Code ****.
@@ -176,7 +198,12 @@ function BU.Software.Windows.Frameworks.AngularJS.Uninstall()
 
 ## REACT JS
 
+# ·········································
 # Installing React JS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.ReactJS.Install()
 {
     #**** Code ****.
@@ -185,7 +212,12 @@ function BU.Software.Windows.Frameworks.ReactJS.Install()
     return 0;
 }
 
+# ·······································
 # Updating React JS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.ReactJS.Update()
 {
     #**** Code ****.
@@ -194,7 +226,12 @@ function BU.Software.Windows.Frameworks.ReactJS.Update()
     return 0;
 }
 
+# ···········································
 # Uninstalling React JS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.ReactJS.Uninstall()
 {
     #**** Code ****.
@@ -207,7 +244,12 @@ function BU.Software.Windows.Frameworks.ReactJS.Uninstall()
 
 ## VUE.JS
 
+# ·······································
 # Installing Vue.JS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.VueJS.Install()
 {
     #**** Code ****.
@@ -216,7 +258,12 @@ function BU.Software.Windows.Frameworks.VueJS.Install()
     return 0;
 }
 
+# ·····································
 # Updating Vue.JS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.VueJS.Update()
 {
     #**** Code ****.
@@ -225,7 +272,12 @@ function BU.Software.Windows.Frameworks.VueJS.Update()
     return 0;
 }
 
+# ·········································
 # Uninstalling Vue.JS on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.VueJS.Uninstall()
 {
     #**** Code ****.
@@ -244,7 +296,12 @@ function BU.Software.Windows.Frameworks.VueJS.Uninstall()
 
 ## CAKE PHP
 
+# ········································
 # Installing CakePHP on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.CakePHP.Install()
 {
     #**** Code ****.
@@ -253,7 +310,12 @@ function BU.Software.Windows.Frameworks.CakePHP.Install()
     return 0;
 }
 
+# ······································
 # Updating CakePHP on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.CakePHP.Update()
 {
     #**** Code ****.
@@ -262,7 +324,12 @@ function BU.Software.Windows.Frameworks.CakePHP.Update()
     return 0;
 }
 
+# ··········································
 # Uninstalling CakePHP on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.CakePHP.Uninstall()
 {
     #**** Code ****.
@@ -275,7 +342,12 @@ function BU.Software.Windows.Frameworks.CakePHP.Uninstall()
 
 ## LARAVEL
 
+# ········································
 # Installing Laravel on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Laravel.Install()
 {
     #**** Code ****.
@@ -284,7 +356,12 @@ function BU.Software.Windows.Frameworks.Laravel.Install()
     return 0;
 }
 
+# ······································
 # Updating Laravel on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Laravel.Update()
 {
     #**** Code ****.
@@ -293,7 +370,12 @@ function BU.Software.Windows.Frameworks.Laravel.Update()
     return 0;
 }
 
-# Uninstalling of Laravel on Microsoft Windows.
+# ··········································
+# Uninstalling Laravel on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Laravel.Uninstall()
 {
     #**** Code ****.
@@ -306,7 +388,12 @@ function BU.Software.Windows.Frameworks.Laravel.Uninstall()
 
 ## SYMFONY
 
+# ··········································
 # Installation Symfony on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Symfony.Install()
 {
     #**** Code ****.
@@ -315,7 +402,12 @@ function BU.Software.Windows.Frameworks.Symfony.Install()
     return 0;
 }
 
+# ······································
 # Updating Symfony on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Symfony.Update()
 {
     #**** Code ****.
@@ -324,7 +416,12 @@ function BU.Software.Windows.Frameworks.Symfony.Update()
     return 0;
 }
 
+# ··········································
 # Uninstalling Symfony on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Symfony.Uninstall()
 {
     #**** Code ****.
@@ -343,7 +440,12 @@ function BU.Software.Windows.Frameworks.Symfony.Uninstall()
 
 ## DJANGO
 
+# ·····························
 # Installing Django on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Django.Install()
 {
     #**** Code ****
@@ -352,7 +454,12 @@ function BU.Software.Windows.Frameworks.Django.Install()
     return 0;
 }
 
+# ···························
 # Updating Django on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Django.Update()
 {
     #**** Code ****
@@ -361,7 +468,12 @@ function BU.Software.Windows.Frameworks.Django.Update()
     return 0;
 }
 
+# ·······························
 # Uninstalling Django on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Django.Uninstall()
 {
     #**** Code ****
@@ -374,7 +486,12 @@ function BU.Software.Windows.Frameworks.Django.Uninstall()
 
 ## FLASK
 
+# ····························
 # Installing Flask on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Flask.Install()
 {
     #**** Code ****
@@ -383,7 +500,12 @@ function BU.Software.Windows.Frameworks.Flask.Install()
     return 0;
 }
 
+# ··························
 # Updating Flask on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Flask.Update()
 {
     #**** Code ****
@@ -392,7 +514,12 @@ function BU.Software.Windows.Frameworks.Flask.Update()
     return 0;
 }
 
+# ······························
 # Uninstalling Flask on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Flask.Uninstall()
 {
     #**** Code ****
@@ -405,7 +532,12 @@ function BU.Software.Windows.Frameworks.Flask.Uninstall()
 
 ## WEB2PY
 
+# ·····························
 # Installing Web2py on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Web2py.Install()
 {
     #**** Code ****
@@ -414,7 +546,12 @@ function BU.Software.Windows.Frameworks.Web2py.Install()
     return 0;
 }
 
+# ···························
 # Updating Web2py on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Web2py.Update()
 {
     #**** Code ****
@@ -423,7 +560,12 @@ function BU.Software.Windows.Frameworks.Web2py.Update()
     return 0;
 }
 
+# ·······························
 # Uninstalling Web2py on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.Web2py.Uninstall()
 {
     #**** Code ****
@@ -442,7 +584,12 @@ function BU.Software.Windows.Frameworks.Web2py.Uninstall()
 
 ## RUBY ON RAILS
 
+# ····································
 # Installing Ruby on Rails on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.RubyOnRails.Install()
 {
     #**** Code ****
@@ -451,7 +598,12 @@ function BU.Software.Windows.Frameworks.RubyOnRails.Install()
     return 0;
 }
 
+# ··································
 # Updating Ruby on Rails on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.RubyOnRails.Update()
 {
     #**** Code ****
@@ -460,7 +612,12 @@ function BU.Software.Windows.Frameworks.RubyOnRails.Update()
     return 0;
 }
 
+# ······································
 # Uninstalling Ruby on Rails on Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.Frameworks.RubyOnRails.Uninstall()
 {
     #**** Code ****
