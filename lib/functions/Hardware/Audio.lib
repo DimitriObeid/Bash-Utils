@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : Audio.lib
 # Module        : Hardware
@@ -9,8 +9,8 @@
 # Version       :
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script manages the audio-related hardware functionalities of each supported operating systems.
 

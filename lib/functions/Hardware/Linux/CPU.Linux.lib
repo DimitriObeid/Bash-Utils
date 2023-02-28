@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : CPU.Linux.lib
 # Module        : Hardware
-# Description   : Functions used to process information about the CPU.
 # Author(s)     : Dimitri OBEID
 # Version       :
+
+
+# ----------------------
+# SCRIPT'S DESCRIPTION :
+
+# Functions used to process data and parameters about thebout the CPU with the help of the system commands on a Linux-based operating system.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -21,6 +27,7 @@
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
 # shellcheck disable=SC2154
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.

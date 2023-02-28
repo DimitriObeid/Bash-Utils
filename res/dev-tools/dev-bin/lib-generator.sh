@@ -8,8 +8,8 @@
 # Version       : 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script generates a library file with the framework's library file design.
 

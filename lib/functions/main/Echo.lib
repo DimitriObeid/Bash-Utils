@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : Echo.lib
 # Module        : Main
@@ -9,8 +9,8 @@
 # Version       :
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # (Colored) text display functions.
 
@@ -27,6 +27,7 @@
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
 # shellcheck disable=SC2154
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
@@ -240,6 +241,7 @@ function BU.Main.Echo.Debug()
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Main.Echo.__EchoVoid()
 {
 printf "

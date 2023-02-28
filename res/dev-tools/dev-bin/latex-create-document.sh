@@ -8,8 +8,8 @@
 # Version       : Beta 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script creates a ".tex" file.
 

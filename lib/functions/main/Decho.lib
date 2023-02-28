@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : BU.Main.Decho.Decho.lib
 # Module        : Main
@@ -9,8 +9,8 @@
 # Version       :
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 #
 

@@ -5,15 +5,14 @@
 
 # Name          : Games.lib
 # Module        : Software
-# Description   : Installation script for video games and related programs.
 # Author(s)     : Dimitri OBEID
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
-#
+# Installation script for video games and related programs.
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

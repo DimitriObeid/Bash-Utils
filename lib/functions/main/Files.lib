@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : Files.lib
 # Module        : Main
@@ -9,8 +9,8 @@
 # Version       :
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
@@ -24,6 +24,7 @@
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
 # shellcheck disable=SC2154
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
@@ -1501,6 +1502,11 @@ function BU.Main.Files.DeleteInArchive()
 
 # ···················································
 # Searching for a file or a folder inside an archive.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 function BU.Main.Files.SearchInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

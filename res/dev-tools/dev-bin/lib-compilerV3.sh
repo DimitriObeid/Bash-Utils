@@ -9,8 +9,8 @@
 # Beta version  : 3.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script compiles the needed framework ressources and the main module in a single file.
 

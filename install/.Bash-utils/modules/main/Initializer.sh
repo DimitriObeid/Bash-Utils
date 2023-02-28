@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : Initializer.sh
 # Module        : Main
-# Description   : Module initializer file, initializing all the module's functions and variables you need for your scripts.
 # Author(s)     : Dimitri OBEID
 # Version       : 1.0
+
+
+# ----------------------
+# SCRIPT'S DESCRIPTION :
+
+# Module initializer file, initializing all the module's functions and variables you need for your scripts.
 
 
 # ----------------------------
@@ -23,6 +28,7 @@
 
 # shellcheck disable=SC2154
 
+
 # ------------------------
 # NOTES ABOUT SHELLCHECK :
 
@@ -33,8 +39,9 @@
 # If you add new messages to translate, you must call the directive "shellcheck disable=SC2059" before the line where you call the
 # command "printf" to display the translated message, otherwise Shellcheck will display many warnings during the debugging procedure.
 
-# ----------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in the "Bash-utils-init.sh" file's function "BashUtils_InitModules()"
+
+# -----------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it in the "Bash-utils-init.sh" file's function "BashUtils_InitModules()".
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 

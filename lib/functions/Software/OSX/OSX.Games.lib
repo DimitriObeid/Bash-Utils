@@ -9,8 +9,8 @@
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Installation script for video games and related programs designed to run on Mac OS.
 
@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## CLI DEPENDENCES
 
+# ······························
 # Installing SteamCMD on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.Games.SteamCMD.Install()
 {
     #**** Code ****
@@ -109,7 +114,12 @@ function BU.Software.OSX.Games.SteamCMD.Install()
     return 0;
 }
 
+# ····························
 # Updating SteamCMD on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.Games.SteamCMD.Update()
 {
     #**** Code ****
@@ -118,7 +128,12 @@ function BU.Software.OSX.Games.SteamCMD.Update()
     return 0;
 }
 
+# ································
 # Uninstalling SteamCMD on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.Games.SteamCMD.Uninstall()
 {
     #**** Code ****

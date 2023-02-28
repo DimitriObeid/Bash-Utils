@@ -9,8 +9,8 @@
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Package manager functions for Windows.
 
@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## NODE JS
 
+# ·····························································
 # Installing the Node JS packages manager on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.Install()
 {
 	#**** Code ****
@@ -109,7 +114,12 @@ function BU.Software.Windows.PackageManagers.NPM.Install()
 	return 0;
 }
 
+# ················································································
 # Checking if the Node JS packages manager is installed on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.IsInstalled()
 {
 	#**** Code ****
@@ -118,7 +128,12 @@ function BU.Software.Windows.PackageManagers.NPM.IsInstalled()
 	return 0;
 }
 
+# ································································
 # Updating the Node JS packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.Update()
 {
 	#**** Code ****
@@ -127,7 +142,12 @@ function BU.Software.Windows.PackageManagers.NPM.Update()
 	return 0;
 }
 
+# ·············································································
 # Updating the cache of the Node JS packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.UpdateCache()
 {
 	#**** Code ****
@@ -136,7 +156,12 @@ function BU.Software.Windows.PackageManagers.NPM.UpdateCache()
 	return 0;
 }
 
+# ···································································
 # Downgrading the Node JS packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.Downgrade()
 {
 	#**** Code ****
@@ -145,7 +170,12 @@ function BU.Software.Windows.PackageManagers.NPM.Downgrade()
 	return 0;
 }
 
+# ······································································
 # Uninstalling the Node JS packages manager from a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.Uninstall()
 {
 	#**** Code ****
@@ -156,7 +186,12 @@ function BU.Software.Windows.PackageManagers.NPM.Uninstall()
 
 # -------
 
+# ·················································································
 # Checking the availability of a package in the Node JS package manager's database.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -165,7 +200,12 @@ function BU.Software.Windows.PackageManagers.NPM.CheckPackageFromDatabase()
 	return 0;
 }
 
+# ················································································
 # Installing a package on a Microsoft Windows PC with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.DownloadPackage()
 {
 	#**** Code ****
@@ -174,7 +214,12 @@ function BU.Software.Windows.PackageManagers.NPM.DownloadPackage()
 	return 0;
 }
 
+# ·······················································································
 # Updating a specific package on a Microsoft Windows PC with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.UpgradePackage()
 {
 	#**** Code ****
@@ -183,7 +228,12 @@ function BU.Software.Windows.PackageManagers.NPM.UpgradePackage()
 	return 0;
 }
 
+# ···················································································
 # Updating every packages on a Microsoft Windows PC with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.UpgradePackages()
 {
 	#**** Code ****
@@ -192,7 +242,12 @@ function BU.Software.Windows.PackageManagers.NPM.UpgradePackages()
 	return 0;
 }
 
+# ··························································································
 # Downgrading a specific package on a Microsoft Windows PC with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.DowngradePackage()
 {
 	#**** Code ****
@@ -201,7 +256,12 @@ function BU.Software.Windows.PackageManagers.NPM.DowngradePackage()
 	return 0;
 }
 
+# ····················································································
 # Uninstalling a package from a Microsoft Windows PC with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.RemovePackage()
 {
 	#**** Code ****
@@ -210,7 +270,12 @@ function BU.Software.Windows.PackageManagers.NPM.RemovePackage()
 	return 0;
 }
 
+# ····························································································
 # Uninstalling leftover packages from a Microsoft Windows PC with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.NPM.Autoremove()
 {
 	#**** Code ****
@@ -229,7 +294,12 @@ function BU.Software.Windows.PackageManagers.NPM.Autoremove()
 
 ## CHOCOLATEY
 
+# ·····································································
 # Installing the Chocolatey packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.Install()
 {
 	#**** Code ****
@@ -238,7 +308,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Install()
 	return 0;
 }
 
+# ···················································································
 # Checking if the Chocolatey packages manager is installed on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.IsInstalled()
 {
 	#**** Code ****
@@ -247,7 +322,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.IsInstalled()
 	return 0;
 }
 
+# ···································································
 # Updating the Chocolatey packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.Update()
 {
 	#**** Code ****
@@ -256,7 +336,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Update()
 	return 0;
 }
 
+# ················································································
 # Updating the cache of the Chocolatey packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.UpdateCache()
 {
 	#**** Code ****
@@ -265,7 +350,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.UpdateCache()
 	return 0;
 }
 
+# ······································································
 # Downgrading the Chocolatey packages manager on a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.Downgrade()
 {
 	#**** Code ****
@@ -274,7 +364,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Downgrade()
 	return 0;
 }
 
+# ·········································································
 # Uninstalling the Chocolatey packages manager from a Microsoft Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.Uninstall()
 {
 	#**** Code ****
@@ -285,7 +380,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Uninstall()
 
 # -------
 
+# ····················································································
 # Checking the availability of a package in the Chocolatey package manager's database.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -294,7 +394,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.CheckPackageFromDatabase
 	return 0;
 }
 
+# ···················································································
 # Installing a package on a Microsoft Windows PC with the Chocolatey package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.DownloadPackage()
 {
 	#**** Code ****
@@ -303,7 +408,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.DownloadPackage()
 	return 0;
 }
 
+# ··························································································
 # Updating a specific package on a Microsoft Windows PC with the Chocolatey package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackage()
 {
 	#**** Code ****
@@ -312,7 +422,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackage()
 	return 0;
 }
 
+# ······················································································
 # Updating every packages on a Microsoft Windows PC with the Chocolatey package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackages()
 {
 	#**** Code ****
@@ -321,7 +436,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackages()
 	return 0;
 }
 
+# ·····························································································
 # Downgrading a specific package on a Microsoft Windows PC with the Chocolatey package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.DowngradePackage()
 {
 	#**** Code ****
@@ -330,7 +450,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.DowngradePackage()
 	return 0;
 }
 
+# ·······················································································
 # Uninstalling a package from a Microsoft Windows PC with the Chocolatey package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.RemovePackage()
 {
 	#**** Code ****
@@ -339,7 +464,12 @@ function BU.Software.Windows.PackageManagers.Chocolatey.RemovePackage()
 	return 0;
 }
 
+# ·······························································································
 # Uninstalling leftover packages from a Microsoft Windows PC with the Chocolatey package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.PackageManagers.Chocolatey.Autoremove()
 {
 	#**** Code ****

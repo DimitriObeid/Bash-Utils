@@ -8,8 +8,8 @@
 # Version       : 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script prints every color code of an XTERM palette table in a 6 * 40 table, with the corresponding color of each code printed in the background.
 

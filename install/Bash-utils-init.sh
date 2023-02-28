@@ -8,8 +8,8 @@
 # Version       : 3.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This file contains the main part of the framework initializer script.
 

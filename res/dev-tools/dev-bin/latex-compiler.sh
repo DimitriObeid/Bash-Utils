@@ -8,8 +8,8 @@
 # Version       : 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script recursively compiles EVERY ".tex" files from the project's root folder.
 

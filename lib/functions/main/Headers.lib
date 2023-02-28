@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : Headers.lib
 # Module        : Main
@@ -9,8 +9,8 @@
 # Version       : 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Displaying text between two horizontal lines, in order to separate two important steps of a script, for example.
 
@@ -27,6 +27,7 @@
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
 # shellcheck disable=SC2154
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
@@ -408,31 +409,45 @@ declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__UNICOLO
 #   ${3}    --> "${p_bgColorCol}";
 #   ${4}    --> "${p_bgColorPos}";
 
+# ································
 # Header to display without color.
+
 function BU.Main.Headers.Header                     { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_RESET}"          "${__BU_MAIN_COLOR_TXT_RESET}"     	    "${1}" "${2}" "${3}" "${4}" 'false' 	    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD                 { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_RESET}"          "${__BU_MAIN_COLOR_TXT_RESET}"          "${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 
+# ······································
 # Header to display in case of an error.
+
 function BU.Main.Headers.Header.Error               { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_ERROR}"         "${__BU_MAIN_COLOR_CODE_ERROR}"      	"${1}" "${2}" "${3}" "${4}" 'false'		    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Error           { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ERROR}"          "${__BU_MAIN_COLOR_TXT_ERROR}"       	"${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 
+# ·······················································································
 # Header to display when switching to a new package category during package installation.
+
 function BU.Main.Headers.Header.Install             { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_YELLOW}"        "${__BU_MAIN_COLOR_CODE_GREEN}"      	"${1}" "${2}" "${3}" "${4}" 'false' 	    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Install         { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"         "${__BU_MAIN_COLOR_TXT_GREEN}"       	"${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 
+# ······································
 # Header to display when changing step.
+
 function BU.Main.Headers.Header.Newstep             { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_NEWSTEP}"      	"${__BU_MAIN_COLOR_CODE_NEWSTEP}"    	"${1}" "${2}" "${3}" "${4}" 'false' 	    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Newstep         { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_NEWSTEP}"       	"${__BU_MAIN_COLOR_TXT_NEWSTEP}"     	"${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 
+# ·····································
 # Header to display when changing step.
+
 function BU.Main.Headers.Header.Step                { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_CYAN}"         	"${__BU_MAIN_COLOR_CODE_CYAN}"       	"${1}" "${2}" "${3}" "${4}" 'false' 	    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Step            { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_CYAN}"          	"${__BU_MAIN_COLOR_TXT_CYAN}"        	"${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 
+# ······················································
 # Header to display in case of a successfully done step.
+
 function BU.Main.Headers.Header.Success             { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_SUCCESS}"      	"${__BU_MAIN_COLOR_CODE_SUCCESS}"    	"${1}" "${2}" "${3}" "${4}" 'false' 	    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Success         { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SUCCESS}"       	"${__BU_MAIN_COLOR_TXT_SUCCESS}"     	"${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 
+# ···········································
 # Header to display in case of a minor error.
+
 function BU.Main.Headers.Header.Warning             { BU.Main.Headers.Base      "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_CODE_WARNING}"      	"${__BU_MAIN_COLOR_CODE_WARNING}"    	"${1}" "${2}" "${3}" "${4}" 'false' 	    || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Warning         { BU.Main.Headers.Base.CMD  "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WARNING}"     	"${__BU_MAIN_COLOR_TXT_WARNING}"     	"${1}" "${2}" "${3}" "${4}" 'true' "${@}"   || return 1; return 0; }
 

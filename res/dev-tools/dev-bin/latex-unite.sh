@@ -8,8 +8,8 @@
 # Version       : Beta 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script unites every LaTeX source files (each files ending with the ".tex" extension) in a single file,
 # in order to get the total size of the documentation in bytes, number of characters, of words, of columns and lines.

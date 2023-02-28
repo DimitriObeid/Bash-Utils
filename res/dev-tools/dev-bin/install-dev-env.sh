@@ -8,8 +8,8 @@
 # Version       : Beta 0.1
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script install the development environment and the needed ressources to develop this framework in the best conditions.
 

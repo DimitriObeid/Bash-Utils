@@ -5,13 +5,12 @@
 
 # Name          : Linux.Lbraries.lib
 # Module        : Software
-# Description   :
 # Author(s)     : Dimitri OBEID
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Installation script for libraries designed to run on Linux-based operating systems.
 
@@ -101,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## DIRECTX (with compatibility programs).
 
+# ············································
 # Installing DirectX on Linux (Wine required).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.DirectX.Install()
 {
     #**** Code ****
@@ -113,7 +117,12 @@ function BU.Software.Linux.Libraries.DirectX.Install()
     return 0;
 }
 
+# ··········································
 # Updating DirectX on Linux (Wine required).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.DirectX.Update()
 {
     #**** Code ****
@@ -125,7 +134,12 @@ function BU.Software.Linux.Libraries.DirectX.Update()
     return 0;
 }
 
+# ··············································
 # Uninstalling DirectX on Linux (Wine required).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.DirectX.Uninstall()
 {
     #**** Code ****
@@ -141,7 +155,12 @@ function BU.Software.Linux.Libraries.DirectX.Uninstall()
 
 ## OPENGL
 
+# ···························
 # Installing OpenGL on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.OpenGL.Install()
 {
     #**** Code ****
@@ -150,7 +169,12 @@ function BU.Software.Linux.Libraries.OpenGL.Install()
     return 0;
 }
 
+# ·························
 # Updating OpenGL on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.OpenGL.Update()
 {
     #**** Code ****
@@ -159,7 +183,12 @@ function BU.Software.Linux.Libraries.OpenGL.Update()
     return 0;
 }
 
+# ·····························
 # Uninstalling OpenGL on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.OpenGL.Uninstall()
 {
     #**** Code ****
@@ -172,7 +201,12 @@ function BU.Software.Linux.Libraries.OpenGL.Uninstall()
 
 ## SDL (Simple DirectMedia Layer)
 
+# ························
 # Installing SDL on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.SDL.Install()
 {
     #**** Code ****
@@ -181,7 +215,12 @@ function BU.Software.Linux.Libraries.SDL.Install()
     return 0;
 }
 
+# ······················
 # Updating SDL on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.SDL.Update()
 {
     #**** Code ****
@@ -190,7 +229,12 @@ function BU.Software.Linux.Libraries.SDL.Update()
     return 0;
 }
 
+# ··························
 # Uninstalling SDL on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Linux.Libraries.SDL.Uninstall()
 {
     #**** Code ****

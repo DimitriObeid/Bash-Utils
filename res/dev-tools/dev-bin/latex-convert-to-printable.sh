@@ -8,8 +8,8 @@
 # Version       : 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script creates a printable version of every LaTeX source files.
 

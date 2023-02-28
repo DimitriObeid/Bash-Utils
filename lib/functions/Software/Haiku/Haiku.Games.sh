@@ -9,8 +9,8 @@
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Installation script for video games and related programs designed to run on the Haiku operating system.
 

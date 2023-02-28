@@ -9,8 +9,8 @@
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Package manager functions for Mac OS.
 
@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## NODE JS
 
+# ·····························································
 # Installing the Node JS packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.Install()
 {
 	#**** Code ****
@@ -109,7 +114,12 @@ function BU.Software.OSX.PackageManagers.NPM.Install()
 	return 0;
 }
 
+# ···········································································
 # Checking if the Node JS packages manager is installed on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.IsInstalled()
 {
 	#**** Code ****
@@ -118,7 +128,12 @@ function BU.Software.OSX.PackageManagers.NPM.IsInstalled()
 	return 0;
 }
 
+# ···························································
 # Updating the Node JS packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.Update()
 {
 	#**** Code ****
@@ -127,7 +142,12 @@ function BU.Software.OSX.PackageManagers.NPM.Update()
 	return 0;
 }
 
+# ········································································
 # Updating the cache of the Node JS packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.UpdateCache()
 {
 	#**** Code ****
@@ -136,7 +156,12 @@ function BU.Software.OSX.PackageManagers.NPM.UpdateCache()
 	return 0;
 }
 
+# ······························································
 # Downgrading the Node JS packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.Downgrade()
 {
 	#**** Code ****
@@ -145,7 +170,12 @@ function BU.Software.OSX.PackageManagers.NPM.Downgrade()
 	return 0;
 }
 
+# ·································································
 # Uninstalling the Node JS packages manager from a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.Uninstall()
 {
 	#**** Code ****
@@ -156,7 +186,12 @@ function BU.Software.OSX.PackageManagers.NPM.Uninstall()
 
 # -------
 
+# ·················································································
 # Checking the availability of a package in the Node JS package manager's database.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -165,7 +200,12 @@ function BU.Software.OSX.PackageManagers.NPM.CheckPackageFromDatabase()
 	return 0;
 }
 
+# ···········································································
 # Installing a package on a Mac OS computer with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.DownloadPackage()
 {
 	#**** Code ****
@@ -174,7 +214,12 @@ function BU.Software.OSX.PackageManagers.NPM.DownloadPackage()
 	return 0;
 }
 
+# ··················································································
 # Updating a specific package on a Mac OS computer with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.UpgradePackage()
 {
 	#**** Code ****
@@ -183,7 +228,12 @@ function BU.Software.OSX.PackageManagers.NPM.UpgradePackage()
 	return 0;
 }
 
+# ··············································································
 # Updating every packages on a Mac OS computer with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.UpgradePackages()
 {
 	#**** Code ****
@@ -192,7 +242,12 @@ function BU.Software.OSX.PackageManagers.NPM.UpgradePackages()
 	return 0;
 }
 
+# ·····················································································
 # Downgrading a specific package on a Mac OS computer with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.DowngradePackage()
 {
 	#**** Code ****
@@ -201,7 +256,12 @@ function BU.Software.OSX.PackageManagers.NPM.DowngradePackage()
 	return 0;
 }
 
+# ···············································································
 # Uninstalling a package from a Mac OS computer with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.RemovePackage()
 {
 	#**** Code ****
@@ -210,7 +270,12 @@ function BU.Software.OSX.PackageManagers.NPM.RemovePackage()
 	return 0;
 }
 
+# ·······················································································
 # Uninstalling leftover packages from a Mac OS computer with the Node JS package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.NPM.Autoremove()
 {
 	#**** Code ****
@@ -229,7 +294,12 @@ function BU.Software.OSX.PackageManagers.NPM.Autoremove()
 
 ## HOMEBREW
 
+# ······························································
 # Installing the Homebrew packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.Install()
 {
 	#**** Code ****
@@ -238,7 +308,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.Install()
 	return 0;
 }
 
+#·············································································
 # Checking if the Homebrew packages manager is installed on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.IsInstalled()
 {
 	#**** Code ****
@@ -247,7 +322,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.IsInstalled()
 	return 0;
 }
 
+# ····························································
 # Updating the Homebrew packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.Update()
 {
 	#**** Code ****
@@ -256,7 +336,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.Update()
 	return 0;
 }
 
+# ·········································································
 # Updating the cache of the Homebrew packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.UpdateCache()
 {
 	#**** Code ****
@@ -265,7 +350,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.UpdateCache()
 	return 0;
 }
 
+# ·······························································
 # Downgrading the Homebrew packages manager on a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.Downgrade()
 {
 	#**** Code ****
@@ -274,7 +364,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.Downgrade()
 	return 0;
 }
 
+# ··································································
 # Uninstalling the Homebrew packages manager from a Mac OS computer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.Uninstall()
 {
 	#**** Code ****
@@ -285,7 +380,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.Uninstall()
 
 # -------
 
+# ··················································································
 # Checking the availability of a package in the Homebrew package manager's database.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -294,7 +394,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.CheckPackageFromDatabase()
 	return 0;
 }
 
+# ············································································
 # Installing a package on a Mac OS computer with the Homebrew package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.DownloadPackage()
 {
 	#**** Code ****
@@ -303,7 +408,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.DownloadPackage()
 	return 0;
 }
 
+# ···················································································
 # Updating a specific package on a Mac OS computer with the Homebrew package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.UpgradePackage()
 {
 	#**** Code ****
@@ -312,7 +422,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.UpgradePackage()
 	return 0;
 }
 
+# ···············································································
 # Updating every packages on a Mac OS computer with the Homebrew package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.UpgradePackages()
 {
 	#**** Code ****
@@ -321,7 +436,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.UpgradePackages()
 	return 0;
 }
 
+# ······················································································
 # Downgrading a specific package on a Mac OS computer with the Homebrew package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.DowngradePackage()
 {
 	#**** Code ****
@@ -330,7 +450,12 @@ function BU.Software.OSX.PackageManagers.Homebrew.DowngradePackage()
 	return 0;
 }
 
+# ················································································
 # Uninstalling a package from a Mac OS computer with the Homebrew package manager.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.OSX.PackageManagers.Homebrew.RemovePackage()
 {
 	#**** Code ****
@@ -339,7 +464,9 @@ function BU.Software.OSX.PackageManagers.Homebrew.RemovePackage()
 	return 0;
 }
 
+# ························································································
 # Uninstalling leftover packages from a Mac OS computer with the Homebrew package manager.
+
 function BU.Software.OSX.PackageManagers.Homebrew.Autoremove()
 {
 	#**** Code ****

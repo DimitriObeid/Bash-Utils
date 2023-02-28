@@ -9,8 +9,8 @@
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Installing a word processor software on Microsoft Windows.
 
@@ -100,7 +100,12 @@ fi; echo >&2; exit 1; fi
 
 ## WORD
 
+# ··········································
 # Installing Microsoft Word on a Windows PC.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
 function BU.Software.Windows.WordProcessors.Word.Install()
 {
     #**** Code ****

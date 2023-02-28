@@ -8,8 +8,8 @@
 # Version       : 2.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # A very simple script, which copies the "Bash-utils-init.sh" file and the ".Bash-utils" folder in the user's home directory.
 

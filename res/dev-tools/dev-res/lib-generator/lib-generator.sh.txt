@@ -9,8 +9,8 @@
 # Version       : $____VERS
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # $____DESC
 

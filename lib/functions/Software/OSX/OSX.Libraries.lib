@@ -5,13 +5,12 @@
 
 # Name          : OSX.Lbraries.lib
 # Module        : Software
-# Description   :
 # Author(s)     : Dimitri OBEID
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Installation script for libraries designed to run on Mac OS.
 

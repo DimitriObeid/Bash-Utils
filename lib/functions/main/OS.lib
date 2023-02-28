@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ---------------------
-# SCRIPT'S INFORMATIONS
+# FILE'S INFORMATIONS :
 
 # Name          : OS.lib
 # Module        : Main
@@ -9,8 +9,8 @@
 # Version       : beta
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Operating systems types and versions management.
 
@@ -27,6 +27,7 @@
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
 # shellcheck disable=SC2154
+
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
 # DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
@@ -353,6 +354,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="
 
 # ····································
 # Checking if current OS is Chrome OS.
+
 function BU.Main.OS.IsChromeOS()					{ true; }
 
 ## ----------------------------------------------
@@ -686,6 +688,7 @@ function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDist
 # ·················································
 
 # Checking if current Linux distribution is Debian.
+
 function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
 
 # ··························································································································································
@@ -1071,10 +1074,12 @@ function BU.Main.OS.CheckOSXVersion()
 
 # ······························
 # Checking if current OS is OSX.
+
 function BU.Main.OS.IsOSX()                             { if [[ "${OSTYPE}" == 'darwin'* ]];                                    then return 0; else return 1; fi;                    }
 
 # ······················
 # Checking OSX versions.
+
 function BU.Main.OS.IsOSXMavericks()					{ if command -v sw_vers > /dev/null; then if sw_vers | grep -q 10.9; 	then return 0; else return 1; fi; else return 1; fi; }
 function BU.Main.OS.IsOSXYosemite()                    	{ if command -v sw_vers > /dev/null; then if sw_vers | grep -q 10.10; 	then return 0; else return 1; fi; else return 1; fi; }
 function BU.Main.OS.IsOSXElCapitan()                    { if command -v sw_vers > /dev/null; then if sw_vers | grep -q 10.11; 	then return 0; else return 1; fi; else return 1; fi; }
@@ -1110,18 +1115,22 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="${__BU
 
 # ············································
 # Checking if the system is running in Qemu().
+
 function BU.Main.OS.IsRunningInQemu()               { true; }
 
 # ············································
 # Checking if the system is running in VMware.
+
 function BU.Main.OS.IsRunningInVMware()             { if dmesg | grep -i VMware     > /dev/null; then return 0; else return 1; fi; }
 
 # ················································
 # Checking if the system is running in VirtualBox.
+
 function BU.Main.OS.IsRunningInVirtualBox()         { if dmesg | grep -i VirtualBox > /dev/null; then return 0; else return 1; fi; }
 
 # ·······················································
 # Checking if the system is running in a virtual machine.
+
 function BU.Main.OS.IsVirtualized()                 { true; }
 
 ## ----------------------------------------------
@@ -1149,6 +1158,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="${
 
 # ·······································
 # Checking the Microsoft Windows version.
+
 function BU.Main.Checkings.CheckOSWindowsVersion()
 {
     #**** Parameters ****
@@ -1162,66 +1172,82 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
 
 # ·························································
 # Checking if the current Windows' architecture is 32 bits.
+
 function BU.Main.OS.IsWindows32bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 32; then return 0; else return 1; fi else return 1; fi; }
 
 # ·························································
 # Checking if the current Windows' architecture is 64 bits.
+
 function BU.Main.OS.IsWindows64bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 64; then return 0; else return 1; fi else return 1; fi; }
 
 # ······························································
 # Checking if the current Windows licence is the Family licence.
+
 function BU.Main.OS.IsWindowsFamily()					{ if BU.Main.OS.IsWindows10Family   || BU.Main.OS.IsWindows11Family;                        then    return 0; else  return 1; fi; }
 
 # ·····································································
 # Checking if the current Windows licence is the Professionnal licence.
+
 function BU.Main.OS.IsWindowsPro()						{ if BU.Main.OS.IsWindows10Pro      || BU.Main.OS.IsWindows11Pro;                           then    return 0; else  return 1; fi; }
 
 # ··································································
 # Checking if the current Windows licence is the Enterprise licence.
+
 function BU.Main.OS.IsWindowsLTSC() 					{ if BU.Main.OS.IsWindows10LTSC     || BU.Main.OS.IsWindows11LTSC;                          then    return 0; else  return 1; fi; }
 
 # ······································································
 # Checking if the currently used version of Windows is the 10th version.
+
 function BU.Main.OS.IsWindows10()                    	{ if BU.Main.Checkings.CheckOSWindowsVersion '10';          								then    return 0; else  return 1; fi; }
 
 # ···················································································
 # Checking if the currently used version of Windows is the Windows 10 Family version.
+
 function BU.Main.OS.IsWindows10Family()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsFamily;	then 	return 0; else 	return 1; fi; }
 
 # ··························································································
 # Checking if the currently used version of Windows is the Windows 10 Professionnal version.
+
 function BU.Main.OS.IsWindows10Pro()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsPro;		then 	return 0; else 	return 1; fi; }
 
 # ·················································································
 # Checking if the currently used version of Windows is the Windows 10 LTSC version.
+
 function BU.Main.OS.IsWindows10LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsLTSC;	then 	return 0; else 	return 1; fi; }
 
 # ······································································
 # Checking if the currently used version of Windows is the 11th version.
+
 function BU.Main.OS.IsWindows11()                     	{ if BU.Main.Checkings.CheckOSWindowsVersion '11';          								then    return 0; else 	return 1; fi; }
 
 # ···················································································
 # Checking if the currently used version of Windows is the Windows 11 Family version.
+
 function BU.Main.OS.IsWindows11Family()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsFamily;	then 	return 0; else 	return 1; fi; }
 
 # ··························································································
 # Checking if the currently used version of Windows is the Windows 11 Professionnal version.
+
 function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsPro;		then 	return 0; else 	return 1; fi; }
 
 # ·················································································
 # Checking if the currently used version of Windows is the Windows 11 LTSC version.
+
 function BU.Main.OS.IsWindows11LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsLTSC;	then 	return 0; else 	return 1; fi; }
 
 # ··············································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
+
 function BU.Main.OS.IsLinuxWSL()                        { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    						then    return 0; else  return 1; fi; }
 
 # ·······················································································································································································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "Microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
+
 function BU.Main.OS.IsLinuxWSL1()                     	{ uname -r | grep Microsoft                                 &&      								return 0;       return 1; }
 
 # ·······················································································································································································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
+
 function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microsoft                                 &&      								return 0;       return 1; }
 
 ## ----------------------------------------------

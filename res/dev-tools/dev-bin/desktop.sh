@@ -8,8 +8,8 @@
 # Version       : 1.0
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This script serves to create quickly a shortcut file into the wished location.
 # You will just have to fill the empty fields.

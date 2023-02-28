@@ -15,8 +15,8 @@ cat <<-EOF > "${v_filename_tmp}"
 # Version               : $([ -n "$__COMPILED_VERSION" ]    && printf "%s" "${__COMPILED_VERSION}"      || printf '1.0')
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # This file contains the compiled version of the framework initializer script and the main module.
 

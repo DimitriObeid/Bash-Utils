@@ -5,9 +5,15 @@
 
 # Name          : Lbraries.lib
 # Module        : Software
-# Description   : Library installation script.
 # Author(s)     : Dimitri OBEID
 # Version       : beta
+
+
+# ----------------------
+# SCRIPT'S DESCRIPTION :
+
+# Library installation script.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :

@@ -8,8 +8,8 @@
 # Version       :
 
 
-# ------------------
-# FILE DESCRIPTION :
+# ----------------------
+# SCRIPT'S DESCRIPTION :
 
 # Feel free to add a description of this script here.
 
