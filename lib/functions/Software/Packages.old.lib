@@ -14,7 +14,9 @@
 
 ## GETTING INFORMATIONS ABOUT PACKAGE MANAGERS
 
+# ·························································
 # Getting the user's operating system main package manager.
+
 function GetMainPackageManager
 {
 	BU.Main.Headers.Header.Base "-" "$(ColorChar "setaf" "${COL_BLUE}")" "$(ColorChar "setaf" "${COL_BLUE}")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0";
@@ -117,7 +119,9 @@ function PackInstall()
 
 #### INSTALLING FROM WEB
 
+# ·····························································································
 # Installation de logiciels absents de la base de données de tous les gestionnaires de paquets.
+
 function SoftwareInstall
 {
 	#**** Parameters ****

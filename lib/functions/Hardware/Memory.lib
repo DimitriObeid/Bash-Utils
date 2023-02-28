@@ -78,25 +78,33 @@ fi; echo >&2; exit 1; fi
 
 ##
 
-# Get the number of RAM slots in use.
+# ·······································
+# Getting the number of RAM slots in use.
+
 function BU.Hardware.Memory.GetUsedRAMSlotsNumber()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 12 {print $4}'; return 0; else return 1; fi; fi
 }
 
+# ···········································
 # Getting the number of RAM slots available.
+
 function BU.Hardware.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
 }
 
-# Getting memory max capacity.
+# ·································
+# Getting the memory max capacity.
+
 function BU.Hardware.Memory.GetMaxMemoryCapacity()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 10 {print $3 " " $4}'; return 0; else return 1; fi; fi
 }
 
-# Get Memory type.
+# ························
+# Getting the memory type.
+
 function BU.Hardware.Memory.GetMemoryType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi

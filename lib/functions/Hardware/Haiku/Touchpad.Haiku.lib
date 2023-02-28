@@ -78,7 +78,9 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ···································
 # Getting the vendor of the touchpad.
+
 function BU.Hardware.Touchpad.GetVendor()
 {
     return 0;

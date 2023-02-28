@@ -100,7 +100,9 @@ fi; echo >&2; exit 1; fi
 
 ## LINUX VIRTUALIZATION SOFTWARES
 
-# Installing Qemu.
+# ·························
+# Installing Qemu on Linux.
+
 function BU.Software.Virtualization.InstallQemu.Linux()
 {
     #**** Code ****
@@ -109,7 +111,9 @@ function BU.Software.Virtualization.InstallQemu.Linux()
     return 0;
 }
 
-# Installing VMware Workstation.
+# ·······································
+# Installing VMware Workstation on Linux.
+
 function BU.Software.Virtualization.InstallVMwareWorkstation.Linux()
 {
     #**** Code ****
@@ -118,8 +122,9 @@ function BU.Software.Virtualization.InstallVMwareWorkstation.Linux()
     return 0;
 }
 
-
+# ······················
 # Installing Virtualbox.
+
 function BU.Software.Virtualization.InstallVirtualbox.Linux()
 {
     #**** Code ****
@@ -132,7 +137,9 @@ function BU.Software.Virtualization.InstallVirtualbox.Linux()
 
 ## OSX VIRTUALIZATION SOFTWARES
 
+# ························
 # Installing Qemu for OSX.
+
 function BU.Software.Virtualization.InstallQemu.OSX()
 {
     #**** Code ****
@@ -141,7 +148,9 @@ function BU.Software.Virtualization.InstallQemu.OSX()
     return 0;
 }
 
+# ·············································
 # Installing VMware Fusion (OSX software only).
+
 function BU.Software.Virtualization.InstallVMwareFusion()
 {
     #**** Code ****
@@ -150,7 +159,9 @@ function BU.Software.Virtualization.InstallVMwareFusion()
     return 0;
 }
 
+# ······························
 # Installing Virtualbox for OSX.
+
 function BU.Software.Virtualization.InstallVirtualbox.OSX()
 {
     #**** Code ****
@@ -164,7 +175,9 @@ function BU.Software.Virtualization.InstallVirtualbox.OSX()
 
 ## WINDOWS VIRTUALIZATION SOFTWARES
 
+# ····························
 # Installing Qemu for Windows.
+
 function BU.Software.Virtualization.InstallQemu.Windows()
 {
     #**** Code ****
@@ -173,7 +186,9 @@ function BU.Software.Virtualization.InstallQemu.Windows()
     return 0;
 }
 
+# ··································
 # Installing Virtualbox for Windows.
+
 function BU.Software.Virtualization.InstallVirtualbox.Windows()
 {
     #**** Code ****
@@ -182,7 +197,9 @@ function BU.Software.Virtualization.InstallVirtualbox.Windows()
     return 0;
 }
 
+# ··········································
 # Installing VMware Workstation for Windows.
+
 function BU.Software.Virtualization.InstallVMwareWorkstation.Windows()
 {
     #**** Code ****
@@ -196,7 +213,9 @@ function BU.Software.Virtualization.InstallVMwareWorkstation.Windows()
 
 ## MULTI-PLATFORM INSTALLATION
 
+# ················
 # Installing Qemu.
+
 function BU.Software.Virtualization.InstallQemu()
 {
     #**** Code ****
@@ -207,7 +226,9 @@ function BU.Software.Virtualization.InstallQemu()
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                                        return 1;
 }
 
+# ······················
 # Installing Virtualbox.
+
 function BU.Software.Virtualization.InstallVirtualbox()
 {
     #**** Code ****
@@ -218,7 +239,9 @@ function BU.Software.Virtualization.InstallVirtualbox()
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                                        return 1;
 }
 
+# ··················
 # Installing VMware.
+
 function BU.Software.Virtualization.InstallVMware()
 {
     #**** Code ****

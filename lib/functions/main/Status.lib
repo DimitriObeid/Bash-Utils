@@ -577,6 +577,10 @@ function BU.Main.Status.CheckSTAT_TXT_FMT()
 # ········································································
 # Checking the "${__BU_MAIN_STAT_USER_OS}" global status variable's value.
 # This function is empty now, as the OS handling is still in work.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
 function BU.Main.Status.CheckSTAT_USER_OS()
 {
     #**** Parameters ****
@@ -646,6 +650,13 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 #   ${3}    --> Int     : line where the change was made.
 
 # Changing the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
+#   - BU.Main.Status.CheckSTAT_DECHO()  -> Main -> Status.lib (this file)
+
 function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}"; __BU_MAIN_STAT_DECHO="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_DECHO "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ············································································································

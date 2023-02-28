@@ -100,7 +100,9 @@ fi; echo >&2; exit 1; fi
 
 ## BOOTSTRAP
 
+# ······························
 # Installing Bootstrap on Linux.
+
 function BU.Software.Linux.Frameworks.Bootstrap.Install()
 {
     #**** Code ****.
@@ -109,7 +111,9 @@ function BU.Software.Linux.Frameworks.Bootstrap.Install()
     return 0;
 }
 
+# ····························
 # Updating Bootstrap on Linux.
+
 function BU.Software.Linux.Frameworks.Bootstrap.Update()
 {
     #**** Code ****.
@@ -118,7 +122,9 @@ function BU.Software.Linux.Frameworks.Bootstrap.Update()
     return 0;
 }
 
+# ································
 # Uninstalling Bootstrap on Linux.
+
 function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
 {
     #**** Code ****.
@@ -137,7 +143,9 @@ function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
 
 ## ANGULAR
 
+# ······························
 # Installing AngularJS on Linux.
+
 function BU.Software.Linux.Frameworks.AngularJS.Install()
 {
     #**** Code ****.
@@ -146,7 +154,9 @@ function BU.Software.Linux.Frameworks.AngularJS.Install()
     return 0;
 }
 
+# ····························
 # Updating AngularJS on Linux.
+
 function BU.Software.Linux.Frameworks.AngularJS.Update()
 {
     #**** Code ****.
@@ -155,7 +165,9 @@ function BU.Software.Linux.Frameworks.AngularJS.Update()
     return 0;
 }
 
+# ································
 # Uninstalling AngularJS on Linux.
+
 function BU.Software.Linux.Frameworks.AngularJS.Uninstall()
 {
     #**** Code ****.
@@ -168,7 +180,9 @@ function BU.Software.Linux.Frameworks.AngularJS.Uninstall()
 
 ## REACT JS
 
+# ·····························
 # Installing React JS on Linux.
+
 function BU.Software.Linux.Frameworks.ReactJS.Install()
 {
     #**** Code ****.
@@ -177,7 +191,9 @@ function BU.Software.Linux.Frameworks.ReactJS.Install()
     return 0;
 }
 
+# ···························
 # Updating React JS on Linux.
+
 function BU.Software.Linux.Frameworks.ReactJS.Update()
 {
     #**** Code ****.
@@ -186,7 +202,9 @@ function BU.Software.Linux.Frameworks.ReactJS.Update()
     return 0;
 }
 
+# ·······························
 # Uninstalling React JS on Linux.
+
 function BU.Software.Linux.Frameworks.ReactJS.Uninstall()
 {
     #**** Code ****.
@@ -199,7 +217,9 @@ function BU.Software.Linux.Frameworks.ReactJS.Uninstall()
 
 ## VUE.JS
 
+# ···························
 # Installing Vue.JS on Linux.
+
 function BU.Software.Linux.Frameworks.VueJS.Install()
 {
     #**** Code ****.
@@ -208,7 +228,9 @@ function BU.Software.Linux.Frameworks.VueJS.Install()
     return 0;
 }
 
+# ·························
 # Updating Vue.JS on Linux.
+
 function BU.Software.Linux.Frameworks.VueJS.Update()
 {
     #**** Code ****.
@@ -217,7 +239,9 @@ function BU.Software.Linux.Frameworks.VueJS.Update()
     return 0;
 }
 
+# ·····························
 # Uninstalling Vue.JS on Linux.
+
 function BU.Software.Linux.Frameworks.VueJS.Uninstall()
 {
     #**** Code ****.
@@ -236,7 +260,9 @@ function BU.Software.Linux.Frameworks.VueJS.Uninstall()
 
 ## CAKE PHP
 
+# ····························
 # Installing CakePHP on Linux.
+
 function BU.Software.Linux.Frameworks.CakePHP.Install()
 {
     #**** Code ****.
@@ -245,7 +271,9 @@ function BU.Software.Linux.Frameworks.CakePHP.Install()
     return 0;
 }
 
+# ··························
 # Updating CakePHP on Linux.
+
 function BU.Software.Linux.Frameworks.CakePHP.Update()
 {
     #**** Code ****.
@@ -254,7 +282,9 @@ function BU.Software.Linux.Frameworks.CakePHP.Update()
     return 0;
 }
 
+# ······························
 # Uninstalling CakePHP on Linux.
+
 function BU.Software.Linux.Frameworks.CakePHP.Uninstall()
 {
     #**** Code ****.
@@ -267,7 +297,9 @@ function BU.Software.Linux.Frameworks.CakePHP.Uninstall()
 
 ## LARAVEL
 
+# ····························
 # Installing Laravel on Linux.
+
 function BU.Software.Linux.Frameworks.Laravel.Install()
 {
     #**** Code ****.
@@ -276,7 +308,9 @@ function BU.Software.Linux.Frameworks.Laravel.Install()
     return 0;
 }
 
+# ··························
 # Updating Laravel on Linux.
+
 function BU.Software.Linux.Frameworks.Laravel.Update()
 {
     #**** Code ****.
@@ -285,7 +319,9 @@ function BU.Software.Linux.Frameworks.Laravel.Update()
     return 0;
 }
 
+# ·································
 # Uninstalling of Laravel on Linux.
+
 function BU.Software.Linux.Frameworks.Laravel.Uninstall()
 {
     #**** Code ****.
@@ -298,7 +334,9 @@ function BU.Software.Linux.Frameworks.Laravel.Uninstall()
 
 ## SYMFONY
 
+# ······························
 # Installation Symfony on Linux.
+
 function BU.Software.Linux.Frameworks.Symfony.Install()
 {
     #**** Code ****.
@@ -307,7 +345,9 @@ function BU.Software.Linux.Frameworks.Symfony.Install()
     return 0;
 }
 
-# Updating Symfony on Linux on Linux.
+# ··························
+# Updating Symfony on Linux.
+
 function BU.Software.Linux.Frameworks.Symfony.Update()
 {
     #**** Code ****.
@@ -316,7 +356,9 @@ function BU.Software.Linux.Frameworks.Symfony.Update()
     return 0;
 }
 
-# Uninstalling Symfony on Linux on Linux.
+# ······························
+# Uninstalling Symfony on Linux.
+
 function BU.Software.Linux.Frameworks.Symfony.Uninstall()
 {
     #**** Code ****.
@@ -335,7 +377,9 @@ function BU.Software.Linux.Frameworks.Symfony.Uninstall()
 
 ## DJANGO
 
+# ···························
 # Installing Django on Linux.
+
 function BU.Software.Linux.Frameworks.Django.Install()
 {
     #**** Code ****
@@ -344,7 +388,9 @@ function BU.Software.Linux.Frameworks.Django.Install()
     return 0;
 }
 
+# ·························
 # Updating Django on Linux.
+
 function BU.Software.Linux.Frameworks.Django.Update()
 {
     #**** Code ****
@@ -353,7 +399,9 @@ function BU.Software.Linux.Frameworks.Django.Update()
     return 0;
 }
 
+# ·····························
 # Uninstalling Django on Linux.
+
 function BU.Software.Linux.Frameworks.Django.Uninstall()
 {
     #**** Code ****
@@ -366,7 +414,9 @@ function BU.Software.Linux.Frameworks.Django.Uninstall()
 
 ## FLASK
 
+# ··························
 # Installing Flask on Linux.
+
 function BU.Software.Linux.Frameworks.Flask.Install()
 {
     #**** Code ****
@@ -375,7 +425,9 @@ function BU.Software.Linux.Frameworks.Flask.Install()
     return 0;
 }
 
+# ························
 # Updating Flask on Linux.
+
 function BU.Software.Linux.Frameworks.Flask.Update()
 {
     #**** Code ****
@@ -384,7 +436,9 @@ function BU.Software.Linux.Frameworks.Flask.Update()
     return 0;
 }
 
+# ····························
 # Uninstalling Flask on Linux.
+
 function BU.Software.Linux.Frameworks.Flask.Uninstall()
 {
     #**** Code ****
@@ -397,7 +451,9 @@ function BU.Software.Linux.Frameworks.Flask.Uninstall()
 
 ## WEB2PY
 
+# ···························
 # Installing Web2py on Linux.
+
 function BU.Software.Linux.Frameworks.Web2py.Install()
 {
     #**** Code ****
@@ -406,7 +462,9 @@ function BU.Software.Linux.Frameworks.Web2py.Install()
     return 0;
 }
 
+# ·························
 # Updating Web2py on Linux.
+
 function BU.Software.Linux.Frameworks.Web2py.Update()
 {
     #**** Code ****
@@ -415,7 +473,9 @@ function BU.Software.Linux.Frameworks.Web2py.Update()
     return 0;
 }
 
+# ·····························
 # Uninstalling Web2py on Linux.
+
 function BU.Software.Linux.Frameworks.Web2py.Uninstall()
 {
     #**** Code ****
@@ -434,7 +494,9 @@ function BU.Software.Linux.Frameworks.Web2py.Uninstall()
 
 ## RUBY ON RAILS
 
+# ··································
 # Installing Ruby on Rails on Linux.
+
 function BU.Software.Linux.Frameworks.RubyOnRails.Install()
 {
     #**** Code ****
@@ -443,7 +505,9 @@ function BU.Software.Linux.Frameworks.RubyOnRails.Install()
     return 0;
 }
 
+# ································
 # Updating Ruby on Rails on Linux.
+
 function BU.Software.Linux.Frameworks.RubyOnRails.Update()
 {
     #**** Code ****
@@ -452,7 +516,9 @@ function BU.Software.Linux.Frameworks.RubyOnRails.Update()
     return 0;
 }
 
+# ····································
 # Uninstalling Ruby on Rails on Linux.
+
 function BU.Software.Linux.Frameworks.RubyOnRails.Uninstall()
 {
     #**** Code ****

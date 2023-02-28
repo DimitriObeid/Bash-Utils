@@ -78,10 +78,14 @@ fi; echo >&2; exit 1; fi
 
 ##
 
-# Get computer's chassis.
+# ·······························
+# Getting the computer's chassis.
+
 function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
 
-# Get computer's chassis type.
+# ····································
+# Getting the computer's chassis type.
+
 function BU.Hardware.General.GetChassisType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
@@ -97,8 +101,12 @@ function BU.Hardware.General.GetChassisType()
     fi
 }
 
-# Get machine's ID.
+# ·························
+# Getting the machine's ID.
+
 function BU.Hardware.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
 
-# Get boot ID.
+# ····················
+# Getting the boot ID.
+
 function BU.Hardware.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }

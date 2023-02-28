@@ -100,7 +100,9 @@ fi; echo >&2; exit 1; fi
 
 ## CLI DEPENDENCES
 
+# ·····························
 # Installing SteamCMD on Linux.
+
 function BU.Software.Linux.Games.SteamCMD.Install()
 {
     #**** Code ****
@@ -109,7 +111,9 @@ function BU.Software.Linux.Games.SteamCMD.Install()
     return 0;
 }
 
+# ···························
 # Updating SteamCMD on Linux.
+
 function BU.Software.Linux.Games.SteamCMD.Update()
 {
     #**** Code ****
@@ -118,7 +122,9 @@ function BU.Software.Linux.Games.SteamCMD.Update()
     return 0;
 }
 
+# ·······························
 # Uninstalling SteamCMD on Linux.
+
 function BU.Software.Linux.Games.SteamCMD.Uninstall()
 {
     #**** Code ****
