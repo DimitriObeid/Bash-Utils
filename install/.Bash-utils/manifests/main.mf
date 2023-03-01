@@ -1,0 +1,27 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
+
+<DOCTYPE ArchData[
+    <!ELEMENT ArchData (Module*, Library*, OS*)>
+
+    <!ELEMENT Module (Version*,)>
+
+    <!ELEMENT Library (Version*,)>
+
+    <!ELEMENT OS (AllSupported*,)>
+]>
+
+<ArchData>
+    <Module>
+        <Version></Version>
+        <LatestChangelogs></LatestChangelogs>
+    </Module>
+
+    <Library>
+        <Version></Version>
+        <LatestChangelogs></LatestChangelogs>
+    </Library>
+
+    <OS>
+        <AllSupported>
+    </OS>
+</ArchData>
