@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-# INFORMATIONS SUR LE SCRIPT :
+# -----------------------------
+# INFORMATIONS SUR LE FICHIER :
 
 # Nom           : fr.locale
 # Auteur(s)     : Dimitri OBEID
 # Version       : 1.0
 
 
-# ------------------------
-# DESCRIPTION DU FICHIER :
+# -----------------------
+# DESCRIPTION DU SCRIPT :
 
 # Messages de traduction en français du script d'initialisation des modules.
 

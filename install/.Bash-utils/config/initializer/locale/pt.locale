@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 
-# ---------------------------
-## INFORMAÇÃO SOBRE O GUIÃO :
+# ------------------------------
+## INFORMAÇÃO SOBRE O FICHEIRO :
 
 # Nome          : pt.locale
 # Autor(es)     : Dimitri OBEID
 # Versão        : 1.0
 
 
-# -----------------------
-# DESCRIÇÃO DO FICHEIRO :
+# --------------------
+# DESCRIÇÃO DO GUIÃO :
 
 # Mensagens de tradução portuguesa do guião de inicialização do módulo.
 
