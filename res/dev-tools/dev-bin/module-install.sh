@@ -3,7 +3,7 @@
 # ----------------------------------------
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
-# Name          : module-pack.sh
+# Name          : module-install.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 1.0
 
@@ -11,7 +11,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-# Packing the targeted module's files into a folder (and then optionnaly into a compressed file), which can be downloaded and installed by another user.
+# Installing the targeted module's files into their dedicated folders in the Bash Utils framework's architecture.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
