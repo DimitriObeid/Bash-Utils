@@ -3,7 +3,7 @@
 <DOCTYPE ArchData[
     <!ELEMENT ArchData (Module*, Library*, OS*)>
 
-    <!ELEMENT Module (Version*,)>
+    <!ELEMENT Module (Version, LatestChangelogs,)>
 
     <!ELEMENT Library (Version*,)>
 
