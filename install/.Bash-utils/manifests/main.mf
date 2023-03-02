@@ -1,13 +1,34 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
-<DOCTYPE ArchData[
+<!DOCTYPE ArchData [
     <!ELEMENT ArchData (Module*, Library*, OS*)>
 
-    <!ELEMENT Module (Version, LatestChangelogs,)>
+    <!ELEMENT Module (Version, LatestChangelogs)>
 
-    <!ELEMENT Library (Version*,)>
+    <!ELEMENT Library (Version, LatestChangelogs)>
 
-    <!ELEMENT OS (AllSupported*,)>
+    <!-- If some operating systems are not supported by the current module, their tags must be declared -->
+    <!ELEMENT Supported (
+        Android,
+        Chrome,
+        FreeBSD,
+        Haiku,
+        Linux,
+        NetBSD,
+        OpenBSD,
+        OSX,
+        Windows)*>
+    <!ELEMENT OS (AllSupported, Supported?)>
+    <!ELEMENT AllSupported (#PCDATA)>
+    <!ELEMENT Android (#PCDATA)>
+    <!ELEMENT Chrome (#PCDATA)>
+    <!ELEMENT FreeBSD (#PCDATA)>
+    <!ELEMENT Haiku (#PCDATA)>
+    <!ELEMENT Linux (#PCDATA)>
+    <!ELEMENT NetBSD (#PCDATA)>
+    <!ELEMENT OpenBSD (#PCDATA)>
+    <!ELEMENT OSX (#PCDATA)>
+    <!ELEMENT Windows (#PCDATA)>
 ]>
 
 <ArchData>
@@ -22,6 +43,37 @@
     </Library>
 
     <OS>
-        <AllSupported>
+        <!-- If the value contained in the "AllSupported" tag is "false", you have to precise which operating systems are supported or not -->
+
+        <!--\
+            Here is how you can implement this functionnality with modules which support these operating systems -> FreeBSD, Haiku, Linux, OpenBSD and OSX :
+
+            <AllSupported>False</AllSupported>
+            <Supported>
+                <Android>False</Android>
+                <Chrome>False</Chrome>
+                <FreeBSD>True</FreeBSD>
+                <Haiku>True</Haiku>
+                <Linux>True</Linux>
+                <NetBSD>False</NetBSD>
+                <OpenBSD>True</OpenBSD>
+                <OSX>True</OSX>
+                <Windows>False</Windows>
+            </Supported>
+        /-->
+        <AllSupported>True</AllSupported>
     </OS>
 </ArchData>
+
+<!-- Ce DTD décrit la structure d'un document XML appelé "ArchData". Le document peut contenir des éléments "Module", "Library" et "OS" qui peuvent apparaître dans n'importe quel ordre.
+
+La balise "ArchData" est définie comme ayant des balises enfant "Module", "Library" et "OS" qui peuvent apparaître zéro, une ou plusieurs fois. Cela signifie que le document XML peut contenir plusieurs éléments "Module", "Library" et "OS" dans n'importe quel ordre.
+
+Les balises "Module" et "Library" sont définies comme ayant des balises enfant "Version" et "LatestChangelogs".
+
+La balise "OS" est définie comme ayant une balise enfant "AllSupported" obligatoire, suivie d'un groupe optionnel "Supported". La balise "AllSupported" contient une valeur textuelle, tandis que les balises "Supported", "Android", "Chrome", "FreeBSD", "Haiku", "Linux", "NetBSD", "OpenBSD", "OSX" et "Windows" sont définies comme contenant également une valeur textuelle.
+
+La balise "Supported" est un groupe de balises optionnelles qui peuvent être utilisées pour déclarer les systèmes d'exploitation non pris en charge par le module en cours.
+
+En résumé, ce DTD définit la structure d'un document XML qui peut contenir des éléments "Module", "Library" et "OS", où les balises "Module" et "Library" doivent avoir des balises enfant "Version" et "LatestChangelogs", et la balise "OS" doit avoir une balise enfant "AllSupported" obligatoire et un groupe optionnel de balises "Supported" pour déclarer les systèmes d'exploitation non pris en charge.
+-->
