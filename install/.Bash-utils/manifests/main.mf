@@ -33,12 +33,12 @@
 
 <ArchData>
     <Module>
-        <Version></Version>
+        <Version>1.0</Version>
         <LatestChangelogs></LatestChangelogs>
     </Module>
 
     <Library>
-        <Version></Version>
+        <Version>1.0</Version>
         <LatestChangelogs></LatestChangelogs>
     </Library>
 
@@ -76,4 +76,21 @@ La balise "OS" est définie comme ayant une balise enfant "AllSupported" obligat
 La balise "Supported" est un groupe de balises optionnelles qui peuvent être utilisées pour déclarer les systèmes d'exploitation non pris en charge par le module en cours.
 
 En résumé, ce DTD définit la structure d'un document XML qui peut contenir des éléments "Module", "Library" et "OS", où les balises "Module" et "Library" doivent avoir des balises enfant "Version" et "LatestChangelogs", et la balise "OS" doit avoir une balise enfant "AllSupported" obligatoire et un groupe optionnel de balises "Supported" pour déclarer les systèmes d'exploitation non pris en charge.
--->
+
+
+
+
+
+
+
+
+
+Ce sont des types de données et des attributs de définition de contenu utilisés dans les DTD (Document Type Definition) pour décrire la structure des documents XML.
+
+    #PCDATA : signifie "Parsed Character Data" (données de caractères analysées). C'est un type de données qui peut contenir du texte avec des balises HTML ou XML imbriquées. Les données PCDATA sont analysées par le parseur XML et sont généralement utilisées pour stocker des données textuelles simples dans un élément XML.
+
+    CDATA : signifie "Character Data" (données de caractères). C'est un type de données qui peut également contenir du texte, mais sans balises HTML ou XML imbriquées. Les données CDATA sont souvent utilisées pour stocker des données qui contiennent des caractères spéciaux qui seraient autrement interprétés comme des balises XML.
+
+    #REQUIRED : signifie que l'attribut doit être présent dans l'élément XML correspondant. C'est une indication que l'attribut est obligatoire pour que l'élément soit valide.
+
+En résumé, #PCDATA et CDATA sont des types de données qui peuvent être utilisés pour stocker du texte dans un élément XML, tandis que #REQUIRED est un attribut qui indique qu'un attribut spécifique est obligatoire pour que l'élément soit valide.-->
