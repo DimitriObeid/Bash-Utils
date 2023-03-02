@@ -215,7 +215,7 @@ function BU.Main.OS.GetAndroidDeviceModel()         { BU.Main.OS.IsAndroid && ge
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
-function BU.Main.OS.GetAndroidDeviceManufacturer()  { BU.Main.OS.IsAndroid && true; }
+function BU.Main.OS.GetAndroidDeviceManufacturer()  { BU.Main.OS.IsAndroid && getprop && return 0; return 1; }
 
 # ·············································
 # Getting the Android operating system's build.
