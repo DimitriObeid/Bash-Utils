@@ -201,29 +201,37 @@ function BU.Main.OS.IsAndroidTabletManufacturerSamsung()    { BU.Main.OS.IsAndro
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__ANDROID__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID}::gathering-informations";
 
-# ·································
-# Getting the Android device model.
+# ···································
+# Getting the Android device's model.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
-function BU.Main.OS.GetAndroidDeviceModel() { BU.Main.OS.IsAndroid && getprop ro.product.model && return 0; return 1; }
+function BU.Main.OS.GetAndroidDeviceModel()         { BU.Main.OS.IsAndroid && getprop ro.product.model && return 0; return 1; }
 
-# ···········································
-# Getting the Android operating system build.
+# ··········································
+# Getting the Android device's manufacturer.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
-function BU.Main.OS.GetAndroidBuild()       { BU.Main.OS.IsAndroid && getprop ro.build.display.id && return 0; return 1; }
+function BU.Main.OS.GetAndroidDeviceManufacturer()  { BU.Main.OS.IsAndroid && true; }
 
 # ·············································
-# Getting the Android operating system version.
+# Getting the Android operating system's build.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
 
-function BU.Main.OS.GetAndroidVersion()     { BU.Main.OS.IsAndroid && getprop ro.build.version.release && return 0; return 1; }
+function BU.Main.OS.GetAndroidOSBuild()             { BU.Main.OS.IsAndroid && getprop ro.build.display.id && return 0; return 1; }
+
+# ···············································
+# Getting the Android operating system's version.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsAndroid() -> Main -> OS.lib (this file)
+
+function BU.Main.OS.GetAndroidOSVersion()           { BU.Main.OS.IsAndroid && getprop ro.build.version.release && return 0; return 1; }
 
 ## ----------------------------------------------
 
