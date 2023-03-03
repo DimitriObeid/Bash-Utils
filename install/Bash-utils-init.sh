@@ -3370,6 +3370,28 @@ function BU.ModuleInit.InitNewModules()
 	fi
 }
 
+# ···················································
+# Sourcing a single aliases file for a single module.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.ModuleInit.SourceAliasesFile()
+{
+    return 0;
+}
+
+# ················································
+# Sourcing multiple aliases files for each module.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.SourceAliasFile() -> Modules initializer script (this file)
+
+function BU.ModuleInit.SourceAliasesFiles()
+{
+    return 0;
+}
+
 # ·························
 # Unsource a single module.
 
