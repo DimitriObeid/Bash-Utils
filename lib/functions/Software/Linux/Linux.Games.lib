@@ -98,7 +98,7 @@ fi; echo >&2; exit 1; fi
 
 #### STEAM GAMES
 
-## CLI DEPENDENCES
+## CLI DEPENDENCIES
 
 # ·····························
 # Installing SteamCMD on Linux.

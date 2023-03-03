@@ -97,7 +97,7 @@ fi; echo >&2; exit 1; fi
 
 #### STEAM GAMES
 
-## STEAMCMD : LOGIN
+## CLI DEPENDENCIES
 
 # ························································
 # Installing SteamCMD on each supported operating systems.
@@ -107,9 +107,6 @@ fi; echo >&2; exit 1; fi
 
 function BU.Software.Games.SteamCMD.Install()
 {
-    #**** Code ****
-    BU.Software."${__BU_SOFTWARE_CURRENT_OS}".Games.SteamCMD.Install || return 1;
-
     return 0;
 }
 
@@ -121,11 +118,34 @@ function BU.Software.Games.SteamCMD.Install()
 
 function BU.Software.Games.SteamCMD.IsInstalled()
 {
-    #**** Code ****
-    BU.Main.OS.IsWindows && return 0;
-
     return 0;
 }
+
+# ··················
+# Updating SteamCMD.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Games.SteamCMD.Update()
+{
+    return 0;
+}
+
+# ······················
+# Uninstalling SteamCMD.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Games.SteamCMD.Uninstall()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+## STEAMCMD
 
 # ····························
 # Login to your Steam account.
