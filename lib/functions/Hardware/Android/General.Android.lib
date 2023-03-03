@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+
+# ---------------------
+# FILE'S INFORMATIONS :
+
+# Name          : General.Android.lib
+# Module        : Hardware
+# Author(s)     : Dimitri OBEID
+# Version       :
+
+
+# ----------------------
+# SCRIPT'S DESCRIPTION :
+
+#
+
+
+# ----------------------------
+# SHELLCHECK GLOBAL DISABLER :
+
+# Add a coma after each warning code to disable multiple warnings at one go.
+
+# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+
+# IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
+
+# shellcheck disable=SC2154
+
+
+# ----------------------------------------------------------------------------------------------------------------------------------------------
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+# Preventing the direct execution of this file, as it is not meant to be directly executed, but sourced.
+if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then if [[ "${LANG}" == de_* ]]; then
+    echo -e "ACHTUNG !" >&2; echo >&2;
+    echo -e "Dieses Shell-Skript (${BASH_SOURCE[0]}) ist nicht dazu gedacht, direkt ausgeführt zu werden !" >&2; echo >&2;
+    echo -e "Verwenden Sie nur dieses Skript, indem Sie es in Ihr Projekt aufnehmen." >&2;
+
+elif [[ "${LANG}" == es_* ]]; then
+    echo -e "ATENCIÓN !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) no debe ejecutarse directamente !" >&2; echo >&2;
+    echo -e "Utilice sólo este script incluyéndolo en el script de su proyecto." >&2;
+
+elif [[ "${LANG}" == fr_* ]]; then
+    echo -e "ATTENTION !" >&2; echo >&2;
+    echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2; echo >&2;
+    echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2;
+
+elif [[ "${LANG}" == id_* ]]; then
+    echo -e "PERINGATAN !" >&2; echo >&2;
+    echo -e "Skrip shell ini (${BASH_SOURCE[0]}) tidak dimaksudkan untuk dieksekusi secara langsung !" >&2; echo >&2;
+    echo -e "Gunakan skrip ini hanya dengan memasukkannya ke dalam skrip proyek Anda." >&2;
+
+elif [[ "${LANG}" == pt_* ]]; then
+    echo -e "ATENÇÃO !" >&2; echo >&2;
+    echo -e "Este script de shell (${BASH_SOURCE[0]}) não é para ser executado directamente !" >&2; echo >&2;
+    echo -e "Utilize este guião apenas incluindo-o no seu projecto." >&2;
+
+elif [[ "${LANG}" == ru_* ]]; then
+    echo -e "ВНИМАНИЕ !" >&2; echo >&2;
+    echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2; echo >&2;
+    echo -e "Используйте только этот скрипт, включив его в свой проект." >&2;
+
+elif [[ "${LANG}" == uk_* ]]; then
+    echo -e "УВАГА !" >&2; echo >&2;
+    echo -e "Цей скрипт оболонки (${BASH_SOURCE[0]}) не призначений для безпосереднього виконання !" >&2; echo >&2;
+    echo -e "Використовуйте тільки цей скрипт, включивши його в скрипт вашого проекту." >&2;
+
+else
+    echo -e "WARNING !" >&2; echo >&2;
+    echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2; echo >&2;
+    echo -e "Use only this script by including it in your project script." >&2;
+
+fi; echo >&2; exit 1; fi
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+#################################### DEFINING LIBRARY FUNCTIONS ###################################
+
+####
+
+##

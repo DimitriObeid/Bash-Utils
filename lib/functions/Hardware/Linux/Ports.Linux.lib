@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.GetUSBPortsNumber()
+function BU.Hardware.Linux.Ports.GetUSBPortsNumber()
 {
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.Hardware.Ports.GetUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
+function BU.Hardware.Linux.Ports.GetAvailableUSBPortsNumber()
 {
     return 0;
 }
@@ -113,7 +113,7 @@ function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.GetUsedUSBPortsNumber()
+function BU.Hardware.Linux.Ports.GetUsedUSBPortsNumber()
 {
     return 0;
 }
@@ -124,7 +124,7 @@ function BU.Hardware.Ports.GetUsedUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveExists()
+function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveExists()
 {
     return 0;
 }
@@ -135,7 +135,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveIsEmpty()
+function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveIsEmpty()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -148,7 +148,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveIsEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
+function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -161,7 +161,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
+function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -174,7 +174,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsdisc()
+function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveContainsdisc()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -187,7 +187,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsdisc()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfSDCardReaderIsMounted()
+function BU.Hardware.Linux.Ports.CheckIfSDCardReaderIsMounted()
 {
     return 0;
 }
@@ -198,7 +198,7 @@ function BU.Hardware.Ports.CheckIfSDCardReaderIsMounted()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfVGAPortExists()
+function BU.Hardware.Linux.Ports.CheckIfVGAPortExists()
 {
     return 0;
 }
@@ -209,7 +209,7 @@ function BU.Hardware.Ports.CheckIfVGAPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfVGAPortAvailable()
+function BU.Hardware.Linux.Ports.CheckIfVGAPortAvailable()
 {
     return 0;
 }
@@ -220,7 +220,7 @@ function BU.Hardware.Ports.CheckIfVGAPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfHDMIPortExists()
+function BU.Hardware.Linux.Ports.CheckIfHDMIPortExists()
 {
     return 0;
 }
@@ -231,7 +231,7 @@ function BU.Hardware.Ports.CheckIfHDMIPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
+function BU.Hardware.Linux.Ports.CheckIfHDMIPortAvailable()
 {
     return 0;
 }
@@ -242,15 +242,13 @@ function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
+function BU.Hardware.Linux.Ports.CheckIfJoystickIsPlugged()
 {
     #**** Variables ****
-    local JS="$(
-        if      BU.Main.OS.IsLinux;         then    dmesg | grep Joystick;
-        elif    BU.Main.OS.IsHaiku;         then    true;
-        fi
-    )";
+    local JS;
 
     #**** Code ****
+    JS="$(dmesg | grep 'Joystick')";
+
     if [ -n "${JS}" ]; then return 0; else return 1; fi
 }

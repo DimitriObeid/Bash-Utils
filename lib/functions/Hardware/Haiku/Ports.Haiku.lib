@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.GetUSBPortsNumber()
+function BU.Hardware.Haiku.Ports.GetUSBPortsNumber()
 {
     return 0;
 }
@@ -102,7 +102,7 @@ function BU.Hardware.Ports.GetUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
+function BU.Hardware.Haiku.Ports.GetAvailableUSBPortsNumber()
 {
     return 0;
 }
@@ -113,7 +113,7 @@ function BU.Hardware.Ports.GetAvailableUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.GetUsedUSBPortsNumber()
+function BU.Hardware.Haiku.Ports.GetUsedUSBPortsNumber()
 {
     return 0;
 }
@@ -124,7 +124,7 @@ function BU.Hardware.Ports.GetUsedUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveExists()
+function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveExists()
 {
     return 0;
 }
@@ -135,7 +135,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveIsEmpty()
+function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveIsEmpty()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -148,7 +148,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveIsEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
+function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -161,7 +161,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
+function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -174,7 +174,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsDisk()
+function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveContainsDisk()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
 
@@ -187,7 +187,7 @@ function BU.Hardware.Ports.CheckIfOpticalDiscDriveContainsDisk()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfSDCardReaderIsMounted()
+function BU.Hardware.Haiku.Ports.CheckIfSDCardReaderIsMounted()
 {
     return 0;
 }
@@ -198,7 +198,7 @@ function BU.Hardware.Ports.CheckIfSDCardReaderIsMounted()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfVGAPortExists()
+function BU.Hardware.Haiku.Ports.CheckIfVGAPortExists()
 {
     return 0;
 }
@@ -209,7 +209,7 @@ function BU.Hardware.Ports.CheckIfVGAPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfVGAPortAvailable()
+function BU.Hardware.Haiku.Ports.CheckIfVGAPortAvailable()
 {
     return 0;
 }
@@ -220,7 +220,7 @@ function BU.Hardware.Ports.CheckIfVGAPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfHDMIPortExists()
+function BU.Hardware.Haiku.Ports.CheckIfHDMIPortExists()
 {
     return 0;
 }
@@ -231,7 +231,7 @@ function BU.Hardware.Ports.CheckIfHDMIPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
+function BU.Hardware.Haiku.Ports.CheckIfHDMIPortAvailable()
 {
     return 0;
 }
@@ -242,7 +242,7 @@ function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
+function BU.Hardware.Haiku.Ports.CheckIfJoystickIsPlugged()
 {
     #**** Variables ****
     local JS="$(

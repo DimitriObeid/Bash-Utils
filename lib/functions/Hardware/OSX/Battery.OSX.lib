@@ -246,7 +246,7 @@ function BU.Hardware.OSX.Battery.GetModel()
 # ························
 # Getting the battery's
 
-function .OSXBU.Hardware.Battery.GetNativePath()
+function BU.Hardware.OSX.Battery.GetNativePath()
 {
     return 0;
 }
