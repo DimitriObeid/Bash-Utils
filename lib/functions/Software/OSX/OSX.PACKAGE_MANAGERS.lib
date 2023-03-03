@@ -98,7 +98,7 @@ fi; echo >&2; exit 1; fi
 
 #### JAVASCRIPT PACKAGES MANAGERS
 
-## NODE JS
+## NPM
 
 # ·····························································
 # Installing the Node JS packages manager on a Mac OS computer.

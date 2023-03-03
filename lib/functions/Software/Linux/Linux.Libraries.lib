@@ -255,3 +255,34 @@ function BU.Software.Linux.Libraries.SDL.Uninstall()
 
 # ·························
 # Installing Wine on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Linux.Libraries.Wine.Install()
+{
+    return 0;
+}
+
+
+# ·······················
+# Updating Wine on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Linux.Libraries.Wine.Update()
+{
+    return 0;
+}
+
+# ···························
+# Uninstalling Wine on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Linux.Libraries.Wine.Uninstall()
+{
+    return 0;
+}

@@ -96,9 +96,9 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### QUICK PACKAGE INSTALLATION, UPDATE AND PROCESSING FOR MULTIPLE OPERATING SYSTEMS
+#### QUICK PACKAGES MANAGERS CHECKINGS FOR MULTIPLE OPERATING SYSTEMS
 
-## RESOURCES FUNCTIONS.
+## PACKAGE MANAGER NOT AVAILABLE FOR THIS OS
 
 # ··························································
 # Quick writing if the target operating system is not found.
@@ -113,7 +113,13 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 
 ## ----------------------------------------------
 
-## PACKAGE MANAGERS INSTALLATION
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### JAVASCRIPT PACKAGES MANAGERS
+
+## NPM
 
 # ·································
 # Install NPM on several platforms.
@@ -130,10 +136,6 @@ function BU.Software.PackageManagers.InstallNPM()
 
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
-
-## ----------------------------------------------
-
-## PACKAGE MANAGERS UPDATE
 
 # ··································
 # Updating NPM on several platforms.
