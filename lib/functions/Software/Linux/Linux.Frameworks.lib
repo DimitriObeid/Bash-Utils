@@ -96,7 +96,7 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### HTML / CSS
+#### HTML / CSS FRAMEWORKS
 
 ## BOOTSTRAP
 
@@ -108,7 +108,7 @@ fi; echo >&2; exit 1; fi
 
 function BU.Software.Linux.Frameworks.Bootstrap.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -122,7 +122,7 @@ function BU.Software.Linux.Frameworks.Bootstrap.Install()
 
 function BU.Software.Linux.Frameworks.Bootstrap.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -136,7 +136,7 @@ function BU.Software.Linux.Frameworks.Bootstrap.Update()
 
 function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -160,7 +160,7 @@ function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
 
 function BU.Software.Linux.Frameworks.AngularJS.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -174,7 +174,7 @@ function BU.Software.Linux.Frameworks.AngularJS.Install()
 
 function BU.Software.Linux.Frameworks.AngularJS.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -188,7 +188,7 @@ function BU.Software.Linux.Frameworks.AngularJS.Update()
 
 function BU.Software.Linux.Frameworks.AngularJS.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -206,7 +206,7 @@ function BU.Software.Linux.Frameworks.AngularJS.Uninstall()
 
 function BU.Software.Linux.Frameworks.ReactJS.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -220,7 +220,7 @@ function BU.Software.Linux.Frameworks.ReactJS.Install()
 
 function BU.Software.Linux.Frameworks.ReactJS.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -234,7 +234,7 @@ function BU.Software.Linux.Frameworks.ReactJS.Update()
 
 function BU.Software.Linux.Frameworks.ReactJS.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -252,7 +252,7 @@ function BU.Software.Linux.Frameworks.ReactJS.Uninstall()
 
 function BU.Software.Linux.Frameworks.VueJS.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -266,7 +266,7 @@ function BU.Software.Linux.Frameworks.VueJS.Install()
 
 function BU.Software.Linux.Frameworks.VueJS.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -280,7 +280,7 @@ function BU.Software.Linux.Frameworks.VueJS.Update()
 
 function BU.Software.Linux.Frameworks.VueJS.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -304,7 +304,7 @@ function BU.Software.Linux.Frameworks.VueJS.Uninstall()
 
 function BU.Software.Linux.Frameworks.CakePHP.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -318,7 +318,7 @@ function BU.Software.Linux.Frameworks.CakePHP.Install()
 
 function BU.Software.Linux.Frameworks.CakePHP.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -332,7 +332,7 @@ function BU.Software.Linux.Frameworks.CakePHP.Update()
 
 function BU.Software.Linux.Frameworks.CakePHP.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -350,7 +350,7 @@ function BU.Software.Linux.Frameworks.CakePHP.Uninstall()
 
 function BU.Software.Linux.Frameworks.Laravel.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -364,7 +364,7 @@ function BU.Software.Linux.Frameworks.Laravel.Install()
 
 function BU.Software.Linux.Frameworks.Laravel.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -378,7 +378,7 @@ function BU.Software.Linux.Frameworks.Laravel.Update()
 
 function BU.Software.Linux.Frameworks.Laravel.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -396,7 +396,7 @@ function BU.Software.Linux.Frameworks.Laravel.Uninstall()
 
 function BU.Software.Linux.Frameworks.Symfony.Install()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -410,7 +410,7 @@ function BU.Software.Linux.Frameworks.Symfony.Install()
 
 function BU.Software.Linux.Frameworks.Symfony.Update()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
@@ -424,7 +424,7 @@ function BU.Software.Linux.Frameworks.Symfony.Update()
 
 function BU.Software.Linux.Frameworks.Symfony.Uninstall()
 {
-    #**** Code ****.
+    #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
     return 0;
