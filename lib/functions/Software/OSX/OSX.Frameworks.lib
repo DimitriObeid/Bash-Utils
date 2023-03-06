@@ -148,6 +148,48 @@ function BU.Software.OSX.Frameworks.Bootstrap.Uninstall()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### JAVA FRAMEWORKS
+
+## SPRING
+
+# ····························
+# Installing Spring on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Windows.Frameworks.Spring.Install()
+{
+    return 0;
+}
+
+# ··························
+# Updating Spring on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Windows.Frameworks.Spring.Update()
+{
+    return 0;
+}
+
+# ······························
+# Uninstalling Spring on Mac OS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Windows.Frameworks.Spring.Uninstall()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### JAVASCRIPT FRAMEWORKS
 
 ## ANGULAR
