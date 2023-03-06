@@ -108,9 +108,6 @@ fi; echo >&2; exit 1; fi
 
 function BU.Software.Frameworks.Bootstrap.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -122,9 +119,6 @@ function BU.Software.Frameworks.Bootstrap.Install()
 
 function BU.Software.Frameworks.Bootstrap.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -136,9 +130,49 @@ function BU.Software.Frameworks.Bootstrap.Update()
 
 function BU.Software.Frameworks.Bootstrap.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
+    return 0;
+}
 
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### JAVA FRAMEWORKS
+
+## SPRING
+
+# ····················································
+# Installing Spring on any supported operating system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Frameworks.Spring.Install()
+{
+    return 0;
+}
+
+# ··················································
+# Updating Spring on any supported operating system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Frameworks.Spring.Update()
+{
+    return 0;
+}
+
+# ······················································
+# Uninstalling Spring on any supported operating system.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Frameworks.Spring.Uninstall()
+{
     return 0;
 }
 
@@ -152,7 +186,7 @@ function BU.Software.Frameworks.Bootstrap.Uninstall()
 
 ## ANGULAR
 
-# ······························
+# ·······················································
 # Installing AngularJS on any supported operating system.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -160,9 +194,6 @@ function BU.Software.Frameworks.Bootstrap.Uninstall()
 
 function BU.Software.Frameworks.AngularJS.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -174,9 +205,6 @@ function BU.Software.Frameworks.AngularJS.Install()
 
 function BU.Software.Frameworks.AngularJS.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -188,9 +216,6 @@ function BU.Software.Frameworks.AngularJS.Update()
 
 function BU.Software.Frameworks.AngularJS.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -206,9 +231,6 @@ function BU.Software.Frameworks.AngularJS.Uninstall()
 
 function BU.Software.Frameworks.ReactJS.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -220,9 +242,6 @@ function BU.Software.Frameworks.ReactJS.Install()
 
 function BU.Software.Frameworks.ReactJS.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -234,9 +253,6 @@ function BU.Software.Frameworks.ReactJS.Update()
 
 function BU.Software.Frameworks.ReactJS.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -252,9 +268,6 @@ function BU.Software.Frameworks.ReactJS.Uninstall()
 
 function BU.Software.Frameworks.VueJS.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -266,9 +279,6 @@ function BU.Software.Frameworks.VueJS.Install()
 
 function BU.Software.Frameworks.VueJS.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -280,9 +290,6 @@ function BU.Software.Frameworks.VueJS.Update()
 
 function BU.Software.Frameworks.VueJS.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -304,9 +311,6 @@ function BU.Software.Frameworks.VueJS.Uninstall()
 
 function BU.Software.Frameworks.CakePHP.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -318,9 +322,6 @@ function BU.Software.Frameworks.CakePHP.Install()
 
 function BU.Software.Frameworks.CakePHP.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -332,9 +333,6 @@ function BU.Software.Frameworks.CakePHP.Update()
 
 function BU.Software.Frameworks.CakePHP.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -350,9 +348,6 @@ function BU.Software.Frameworks.CakePHP.Uninstall()
 
 function BU.Software.Frameworks.Laravel.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -364,9 +359,6 @@ function BU.Software.Frameworks.Laravel.Install()
 
 function BU.Software.Frameworks.Laravel.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -378,9 +370,6 @@ function BU.Software.Frameworks.Laravel.Update()
 
 function BU.Software.Frameworks.Laravel.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -396,9 +385,6 @@ function BU.Software.Frameworks.Laravel.Uninstall()
 
 function BU.Software.Frameworks.Symfony.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -410,9 +396,6 @@ function BU.Software.Frameworks.Symfony.Install()
 
 function BU.Software.Frameworks.Symfony.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -424,9 +407,6 @@ function BU.Software.Frameworks.Symfony.Update()
 
 function BU.Software.Frameworks.Symfony.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -448,9 +428,6 @@ function BU.Software.Frameworks.Symfony.Uninstall()
 
 function BU.Software.Frameworks.Django.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -462,9 +439,6 @@ function BU.Software.Frameworks.Django.Install()
 
 function BU.Software.Frameworks.Django.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -476,9 +450,6 @@ function BU.Software.Frameworks.Django.Update()
 
 function BU.Software.Frameworks.Django.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -494,9 +465,6 @@ function BU.Software.Frameworks.Django.Uninstall()
 
 function BU.Software.Frameworks.Flask.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -508,9 +476,6 @@ function BU.Software.Frameworks.Flask.Install()
 
 function BU.Software.Frameworks.Flask.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -522,9 +487,6 @@ function BU.Software.Frameworks.Flask.Update()
 
 function BU.Software.Frameworks.Flask.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -540,9 +502,6 @@ function BU.Software.Frameworks.Flask.Uninstall()
 
 function BU.Software.Frameworks.Web2py.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -554,9 +513,6 @@ function BU.Software.Frameworks.Web2py.Install()
 
 function BU.Software.Frameworks.Web2py.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -568,9 +524,6 @@ function BU.Software.Frameworks.Web2py.Update()
 
 function BU.Software.Frameworks.Web2py.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -592,9 +545,6 @@ function BU.Software.Frameworks.Web2py.Uninstall()
 
 function BU.Software.Frameworks.RubyOnRails.Install()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -606,9 +556,6 @@ function BU.Software.Frameworks.RubyOnRails.Install()
 
 function BU.Software.Frameworks.RubyOnRails.Update()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }
 
@@ -620,8 +567,5 @@ function BU.Software.Frameworks.RubyOnRails.Update()
 
 function BU.Software.Frameworks.RubyOnRails.Uninstall()
 {
-    #**** Code ****
-    BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
-
     return 0;
 }

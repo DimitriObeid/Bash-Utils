@@ -121,8 +121,8 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 
 ## NPM
 
-# ·································
-# Install NPM on several platforms.
+# ····································································
+# Installing the Node JS packages manager on each supported platforms.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -137,8 +137,8 @@ function BU.Software.PackageManagers.NPM.Install()
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
 
-# ··································
-# Updating NPM on several platforms.
+# ··································································
+# Updating the Node JS packages manager on each supported platforms.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -

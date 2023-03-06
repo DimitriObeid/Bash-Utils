@@ -148,6 +148,49 @@ function BU.Software.Windows.Frameworks.Bootstrap.Uninstall()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### JAVA FRAMEWORKS
+
+## SPRING
+
+# ·······································
+# Installing Spring on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Windows.Frameworks.Spring.Install()
+{
+    return 0;
+}
+
+# ·····································
+# Updating Spring on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Windows.Frameworks.Spring.Update()
+{
+    return 0;
+}
+
+# ·········································
+# Uninstalling Spring on Microsoft Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Windows.Frameworks.Spring.Uninstall()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### JAVASCRIPT FRAMEWORKS
 
 ## ANGULAR
