@@ -127,12 +127,12 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.PackageManagers.InstallNPM()
+function BU.Software.PackageManagers.NPM.Install()
 {
     #**** Code ****
-    BU.Main.OS.IsLinux      && BU.Software.PackageManagers.InstallNPM.Linux     &&  return 0;
-    BU.Main.OS.IsOSX        && BU.Software.PackageManagers.InstallNPM.OSX       &&  return 0;
-    BU.Main.OS.IsWindows    && BU.Software.PackageManagers.InstallNPM.Windows   &&  return 0;
+    BU.Main.OS.IsLinux      && BU.Software.Linux.PackageManagers.NPM.Install    &&  return 0;
+    BU.Main.OS.IsOSX        && BU.Software.OSX.PackageManagers.NPM.Install      &&  return 0;
+    BU.Main.OS.IsWindows    && BU.Software.Windows.PackageManagers.NPM.Install  &&  return 0;
 
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
@@ -146,9 +146,9 @@ function BU.Software.PackageManagers.InstallNPM()
 function BU.Software.PackageManagers.UpdateNPM()
 {
     #**** Code ****
-    BU.Main.OS.IsLinux      && BU.Software.PackageManagers.UpdateNPM.Linux     &&  return 0;
-    BU.Main.OS.IsOSX        && BU.Software.PackageManagers.UpdateNPM.OSX       &&  return 0;
-    BU.Main.OS.IsWindows    && BU.Software.PackageManagers.UpdateNPM.Windows   &&  return 0;
+    BU.Main.OS.IsLinux      && BU.Software.Linux.PackageManagers.NPM.Update     &&  return 0;
+    BU.Main.OS.IsOSX        && BU.Software.OSX.PackageManagers.NPM.Update       &&  return 0;
+    BU.Main.OS.IsWindows    && BU.Software.Windows.PackageManagers.NPM.Update   &&  return 0;
 
     BU.Software.PackageManagers.SoftwareNotAvailableForThisOS;                      return 1;
 }
