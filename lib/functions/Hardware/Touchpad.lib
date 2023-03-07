@@ -12,7 +12,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-#
+# Functions used to process data and parameters about the laptop's monitor with the help of the system commands on any supported operating system.
 
 
 # ----------------------------
@@ -84,6 +84,17 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ··································
+# Checking if a touchpad is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Touchpad.IsTouchpadPlugged()
+{
+    return 0;
+}
 
 # ···································
 # Getting the vendor of the touchpad.

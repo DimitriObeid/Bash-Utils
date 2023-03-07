@@ -8,8 +8,12 @@
 # Author(s)     : Dimitri OBEID
 # Version       :
 
+
 # ----------------------
 # SCRIPT'S DESCRIPTION :
+
+# Functions used to process data and parameters about the computer's battery with the help of the system commands on any supported operating system.
+
 
 # ----------------------------
 # SHELLCHECK GLOBAL DISABLER :
