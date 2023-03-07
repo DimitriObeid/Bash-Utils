@@ -81,9 +81,9 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### GET INFORMATIONS
+#### BIOS INFORMATIONS
 
-## GET BIOS INFORMATIONS
+## GETTING BIOS INFORMATIONS
 
 # ······························
 # Checking if ACPI is supported.
@@ -142,7 +142,7 @@ function BU.Hardware.Motherboard.IsUSBLegacySupported()
 
 ## ----------------------------------------------
 
-## GETTING BIOS CHARACTERISTICS
+## GETTING BIOS INFORMATIONS
 
 # ················································
 # Getting the motherboard's firmware release date.
@@ -209,12 +209,21 @@ function BU.Hardware.Motherboard.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function
+function BU.Hardware.Motherboard.GetLangDescFormat()
+{
+    return 0;
+}
 
 # ············································
 # Getting the number of installable languages.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
+function BU.Hardware.Motherboard.GetInstallableLanguagesNumber()
+{
+    return 0;
+}
 
 # ··········································
 # Getting the list of installable languages.
@@ -222,7 +231,10 @@ function
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function
+function BU.Hardware.Motherboard.GetInstallableLanguagesList()
+{
+    return 0;
+}
 
 # ·········································
 # Getting the currently installed language.
@@ -230,4 +242,7 @@ function
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function
+function BU.Hardware.Motherboard.GetCurrentlyInstalledLanguage()
+{
+    return 0;
+}

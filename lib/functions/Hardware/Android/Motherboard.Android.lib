@@ -81,54 +81,6 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
-
-##
-
-# ····································
-# Checking if the BIOS is upgradeable.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Android.Motherboard.IsBIOSUpgradeable()
-{
-    return 0;
-}
-
-# ············································
-# Checking if the BIOS shadowing is supported.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Android.Motherboard.IsBIOSShadowingSupported()
-{
-    return 0;
-}
-
-# ·····························
-# Checking if PCI is supported.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Android.Motherboard.IsPCISupported()
-{
-    return 0;
-}
-
-## ----------------------------------------------
+#### BIOS INFORMATIONS
 
 ## GETTING BIOS INFORMATIONS
-
-# ···········································
-# Getting the motherboard's firmware version.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Android.Motherboard.GetFirmwareVersion()
-{
-    return 0;
-}
