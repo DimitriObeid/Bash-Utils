@@ -142,7 +142,7 @@ function BU.Hardware.Motherboard.IsUSBLegacySupported()
 
 ## ----------------------------------------------
 
-## GET BIOS CHARACTERISTICS
+## GETTING BIOS CHARACTERISTICS
 
 # ················································
 # Getting the motherboard's firmware release date.
@@ -198,3 +198,36 @@ function BU.Hardware.Motherboard.GetVendor()
 {
     return 0;
 }
+
+## ----------------------------------------------
+
+## GETTING BIOS LANGUAGE INFORMATIONS
+
+# ········································
+# Getting the language description format.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function
+
+# ············································
+# Getting the number of installable languages.
+
+
+
+# ··········································
+# Getting the list of installable languages.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function
+
+# ·········································
+# Getting the currently installed language.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function
