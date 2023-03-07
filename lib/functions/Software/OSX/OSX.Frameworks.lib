@@ -158,7 +158,7 @@ function BU.Software.OSX.Frameworks.Bootstrap.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Windows.Frameworks.Spring.Install()
+function BU.Software.OSX.Frameworks.Spring.Install()
 {
     return 0;
 }
@@ -169,7 +169,7 @@ function BU.Software.Windows.Frameworks.Spring.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Windows.Frameworks.Spring.Update()
+function BU.Software.OSX.Frameworks.Spring.Update()
 {
     return 0;
 }
@@ -180,7 +180,7 @@ function BU.Software.Windows.Frameworks.Spring.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Software.Windows.Frameworks.Spring.Uninstall()
+function BU.Software.OSX.Frameworks.Spring.Uninstall()
 {
     return 0;
 }

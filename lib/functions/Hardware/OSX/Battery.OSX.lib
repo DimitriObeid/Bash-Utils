@@ -12,7 +12,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-#
+# Functions used to process data and parameters about the Mac's battery with the help of the OSX system's commands.
 
 
 # ----------------------------
@@ -80,10 +80,6 @@ fi; echo >&2; exit 1; fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
-
-####
-
-##
 
 #### BATTERY CHECKINGS
 

@@ -148,6 +148,48 @@ function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### JAVA FRAMEWORKS
+
+## SPRING
+
+# ···························
+# Installing Spring on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Linux.Frameworks.Spring.Install()
+{
+    return 0;
+}
+
+# ·························
+# Updating Spring on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Linux.Frameworks.Spring.Update()
+{
+    return 0;
+}
+
+# ·····························
+# Uninstalling Spring on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Software.Linux.Frameworks.Spring.Uninstall()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### JAVASCRIPT FRAMEWORKS
 
 ## ANGULAR
