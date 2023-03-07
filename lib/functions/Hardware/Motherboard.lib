@@ -85,4 +85,83 @@ fi; echo >&2; exit 1; fi
 
 ## GET BIOS INFORMATIONS
 
-# Getting the
+# ·····························
+# Checking if PCI is supported.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.IsPCISupported()
+{
+    return 0;
+}
+
+# ····································
+# Checking if the BIOS is upgradeable.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.IsBIOSUpgradeable()
+{
+    return 0;
+}
+
+# ············································
+# Checking if the BIOS shadowing is supported.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.IsBIOSShadowingSupported()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+## GET BIOS INFORMATIONS
+
+# ················································
+# Getting the motherboard's firmware release date.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.GetFirmwareReleaseDate()
+{
+    return 0;
+}
+
+# ···········································
+# Getting the motherboard's firmware version.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.GetFirmwareVersion()
+{
+    return 0;
+}
+
+# ···································
+# Getting the motherboard's ROM size.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.GetMotherboardROMSize()
+{
+    return 0;
+}
+
+# ·································
+# Getting the motherboard's vendor.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Motherboard.GetMotherboardVendor()
+{
+    return 0;
+}

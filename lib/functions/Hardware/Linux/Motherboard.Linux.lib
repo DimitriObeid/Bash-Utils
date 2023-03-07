@@ -85,5 +85,13 @@ fi; echo >&2; exit 1; fi
 
 ## GET BIOS INFORMATIONS
 
-# ························
-# Getting the
+# ···········································
+# Getting the motherboard's firmware version.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Motherboard.GetFirmwareVersion()
+{
+    return 0;
+}
