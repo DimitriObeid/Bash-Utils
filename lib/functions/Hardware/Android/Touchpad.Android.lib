@@ -3,7 +3,7 @@
 # ---------------------
 # FILE'S INFORMATIONS :
 
-# Name          : Mouse.Android.lib
+# Name          : Touchpad.Android.lib
 # Module        : Hardware
 # Author(s)     : Dimitri OBEID
 # Version       :
@@ -12,7 +12,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-# Functions used to process data and parameters about the mouse with the help of the system commands on an Android-based operating system.
+# Functions used to process data and parameters about the device's touchpad with the help of the system commands on an Android-based operating system.
 
 
 # ----------------------------
@@ -85,13 +85,24 @@ fi; echo >&2; exit 1; fi
 
 ##
 
-# ·································
-# Checking if a mouse is plugged.
+# ··································
+# Checking if a touchpad is plugged.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Android.Mouse.IsMousePlugged()
+function BU.Hardware.Android.Touchpad.IsTouchpadPlugged()
+{
+    return 0;
+}
+
+# ···································
+# Getting the vendor of the touchpad.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Android.Touchpad.GetVendor()
 {
     return 0;
 }
