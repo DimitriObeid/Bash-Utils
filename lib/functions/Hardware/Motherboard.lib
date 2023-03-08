@@ -209,7 +209,7 @@ function BU.Hardware.Motherboard.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Motherboard.GetLangDescFormat()
+function BU.Hardware.Motherboard.GetLanguageDescriptionFormat()
 {
     return 0;
 }
