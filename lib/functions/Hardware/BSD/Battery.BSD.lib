@@ -162,6 +162,10 @@ function BU.Hardware.BSD.Battery.IsRechargeable()
     return 0;
 }
 
+## ----------------------------------------------
+
+## BATTERY VALUES GETTERS
+
 # ····································
 # Getting the battery's serial number.
 
