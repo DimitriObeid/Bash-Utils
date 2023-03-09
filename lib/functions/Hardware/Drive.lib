@@ -83,7 +83,7 @@ fi; echo >&2; exit 1; fi
 
 ####
 
-##
+## CHECKING THE HARD DRIVE(S) INFORMATIONS
 
 # ·············································
 # Checking if the targeted hard drive is a HDD.
@@ -150,6 +150,10 @@ function BU.Hardware.Drive.CountHDD+SSD()
 {
     return 0;
 }
+
+## ----------------------------------------------
+
+## GETTING THE HARD DRIVE(S) INFORMATIONS
 
 # ·································
 # Getting the size of a hard drive.
