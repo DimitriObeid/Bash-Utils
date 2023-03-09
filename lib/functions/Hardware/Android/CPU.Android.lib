@@ -123,18 +123,7 @@ function BU.Hardware.Android.CPU.GetVendor()                { if BU.Main.CMDS.Ge
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Android.CPU.Is32Bits()
-{
-    if BU.Main.CMDS.GetCommandPath 'lshw'; then
-        if BU.Main.Checkings.IsRoot; then
-            if [ "$(BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 32 ]; then return 0; fi
-        else
-            if [ "$(BU.Main.Echo.Msg "$(sudo lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 32 ]; then return 0; fi
-        fi;
-    else
-        return 1;
-    fi
-}
+function BU.Hardware.Android.CPU.Is32Bits()                 { return 0; }
 
 # ············································
 # Checking if the CPU architecture is 64 bits.
@@ -142,18 +131,7 @@ function BU.Hardware.Android.CPU.Is32Bits()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Android.CPU.Is64Bits()
-{
-    if BU.Main.CMDS.GetCommandPath 'lshw'; then
-        if BU.Main.Checkings.IsRoot; then
-            if [ "$(BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 64 ]; then return 0; fi
-        else
-            if [ "$(BU.Main.Echo.Msg "$(sudo lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 64 ]; then return 0; fi
-        fi;
-    else
-        return 1;
-    fi
-}
+function BU.Hardware.Android.CPU.Is64Bits()                 { return 0; }
 
 # ··················································
 # Checking if the CPU architecture is AArch 32 bits.
