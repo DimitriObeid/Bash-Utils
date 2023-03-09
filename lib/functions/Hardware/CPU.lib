@@ -81,6 +81,38 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### CPU'S GENERAL INFORMATIONS
+
+## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
+
+
+
+## ----------------------------------------------
+
+## GETTING GENERAL DATA
+
+# ··············································
+# Getting the summary of the CPU's informations.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
+
+# ·························
+# Getting the CPU's vendor.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### CPU ARCHITECTURE
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
@@ -253,16 +285,37 @@ function BU.Hardware.CPU.GetLogicalCoresNumber()    { return 0; }
 
 function BU.Hardware.CPU.GetPhysicalCoresNumber()   { return 0; }
 
+## ----------------------------------------------
 
 
 
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CPU CLOCK
+
+## CHECKING CPU'S CLOCK INFORMATIONS
+
+## ----------------------------------------------
+
+## GETTING CPU'S ClOCK DATA
+
+# ····························
+# Getting the clock frequency.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
+
+## ----------------------------------------------
 
 
 
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+####
 
-
-
+##
 
 
 
@@ -279,26 +332,6 @@ function BU.Hardware.CPU.GetPhysicalCoresNumber()   { return 0; }
 
 function BU.BU.Hardware.CPU.GetAdressSizes()        { return 0; }
 
-
-
-# ····························
-# Getting the clock frequency.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
-
-# ··············································
-# Getting the summary of the CPU's informations.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
-
-
-
 # ······························
 # Getting the number of sockets.
 
@@ -307,10 +340,3 @@ function BU.Hardware.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommand
 
 function BU.Hardware.CPU.GetSocketsNumber()         { return 0; }
 
-# ·······················
-# Getting the CPU vendor.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
