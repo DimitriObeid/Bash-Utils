@@ -3,7 +3,7 @@
 # ---------------------
 # FILE'S INFORMATIONS :
 
-# Name          : Drive.Linux.lib
+# Name          : Drive.lib
 # Module        : Hardware
 # Author(s)     : Dimitri OBEID
 # Version       :
@@ -81,7 +81,7 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-####
+#### HARD DRIVES (HDDs / SSDs)
 
 ## CHECKING THE HARD DRIVE(S) INFORMATIONS
 
@@ -275,3 +275,52 @@ function BU.Hardware.Drive.GetPartitionSize()
 {
     return 0;
 }
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////// #
+
+#### SD CARDS
+
+## CHECKING THE SD CARD(S) INFORMATIONS
+
+## ----------------------------------------------
+
+## GETTING THE SD CARD(S) INFORMATIONS
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////// #
+
+#### USB STICKS(S)
+
+## CHECKING THE USB STICK(S) INFORMATIONS
+
+## ----------------------------------------------
+
+## GETTING THE USB STICK(S) INFORMATIONS
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////// #
+
+#### FLOPPY DISKS
+
+## CHECKING THE FLOPPY DISK(S) INFORMATIONS
+
+## ----------------------------------------------
+
+## GETTING THE FLOPPY DISK(S) INFORMATIONS
+
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////// #
