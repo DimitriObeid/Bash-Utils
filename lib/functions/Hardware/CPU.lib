@@ -81,9 +81,9 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### PROCCESSING THE CPU INFORMATIONS
+#### CPU ARCHITECTURE
 
-## CHECK CPU INFORMATIONS
+## CHECKING THE ARCHITECTURE OF THE CPU(s)
 
 # ············································
 # Checking if the CPU architecture is 32 bits.
@@ -197,15 +197,89 @@ function BU.Main.CPU.IsArchRISCV()              { true; }
 
 ## ----------------------------------------------
 
-## GET CPU INFORMATIONS
+## GETTING THE CPU(s) ARCHITECTURE'S DATA
 
-# ·····························
-# Getting the CPU architecture.
+# ·······························
+# Getting the CPU's architecture.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.CPU.GetArch()                  { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### CPU CORES
+
+## CHECKING THE CPU(s) CORES DATA
+
+# ·································
+# Checking if the CPU is mono-core.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.IsCPUMonocore()            { return 0; }
+
+## ----------------------------------------------
+
+## GETTING THE CPU(s) CORES DATA
+
+# ·························································
+# Getting the total number of cores (logical AND physical).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+
+# ····································
+# Getting the number of logical cores.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.GetLogicalCoresNumber()    { return 0; }
+
+# ·····································
+# Getting the number of physical cores.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.GetPhysicalCoresNumber()   { return 0; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## ----------------------------------------------
+
+## GET CPU INFORMATIONS
+
+# ································
+# Getting the CPU's address sizes.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.BU.Hardware.CPU.GetAdressSizes()        { return 0; }
+
+
 
 # ····························
 # Getting the clock frequency.
@@ -223,13 +297,15 @@ function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommand
 
 function BU.Hardware.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
 
-# ····························
-# Getting the number of cores.
+
+
+# ······························
+# Getting the number of sockets.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetSocketsNumber()         { return 0; }
 
 # ·······················
 # Getting the CPU vendor.

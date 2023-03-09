@@ -199,8 +199,8 @@ function BU.Main.CPU.IsArchRISCV()              { true; }
 
 ## GET CPU INFORMATIONS
 
-# ·····························
-# Getting the CPU architecture.
+# ·······························
+# Getting the CPU's architecture.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -

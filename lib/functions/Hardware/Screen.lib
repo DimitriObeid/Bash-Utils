@@ -83,4 +83,85 @@ fi; echo >&2; exit 1; fi
 
 ####
 
-##
+## CHECKING THE SCREEN'S INFORMATIONS
+
+# ·································
+# Checking if a monitor is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.IsMonitorPlugged()
+{
+    return 0;
+}
+
+# ··································
+# Checking if the monitor is active.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.IsMonitorActive()
+{
+    return 0;
+}
+
+# ········································
+# Checking if an extra monitor is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.IsExtraMonitorPlugged()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+## GETTING THE SCREEN'S DATA
+
+# ······························
+# Getting the screen resolution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.GetResolution()
+{
+    return 0;
+}
+
+# ···································
+# Getting the monitor's manufacturer.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.GetMonitorManufacturer()
+{
+    return 0;
+}
+
+# ····································
+# Getting the monitor's serial number.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.GetMonitorSerialNumber()
+{
+    return 0;
+}
+
+# ··········································
+# Getting the monitor's year of manufacture.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Screen.GetMonitorYearOfManufacture()
+{
+    return 0;
+}

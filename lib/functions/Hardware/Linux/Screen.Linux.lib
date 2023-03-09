@@ -84,3 +84,40 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ·································
+# Checking if a monitor is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Screen.IsMonitorPlugged()
+{
+    return 0;
+}
+
+# ········································
+# Checking if an extra monitor is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Screen.IsExtraMonitorPlugged()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+## GETTING THE SCREEN'S DATA
+
+# ······························
+# Getting the screen resolution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Screen.GetResolution()
+{
+    return 0;
+}
