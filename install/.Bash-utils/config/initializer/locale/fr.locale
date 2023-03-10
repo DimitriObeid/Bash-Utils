@@ -143,9 +143,21 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # Chemins des dossiers de configuration.
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initialisation des chemins des répertoires de configuration";
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR="Cette variable globale enregistre le chemin du dossier de configuration utilisé par le script d'initialisation des modules.";
-    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR="Cette variable globale enregistre le chemin du dossier de configurations du module actuellement traité";
+
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configuration de chaque module.";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_NAME="Cette variable globale enregistre le nom du dossier de configuration de chaque module.";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
+
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configuration utilisé par le script d'initialisation des modules.";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_NAME="Cette variable globale enregistre le nom du dossier de configuration utilisé par le script d'initialisation des modules.";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configuration utilisé par le script d'initialisation des modules.";
+
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configurations du module actuellement traité";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_NAME="Cette variable globale enregistre le nom du dossier de configurations du module actuellement traité";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configurations du module actuellement traité";
+
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier parent du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
+    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le nom du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
 
     # Fichiers de configuration du script d'initialisation.
