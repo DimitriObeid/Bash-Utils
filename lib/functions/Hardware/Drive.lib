@@ -81,79 +81,13 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### HARD DRIVES (HDDs / SSDs)
+#### GENERAL STORAGE SUPPORT FUNCTIONS
 
-## CHECKING THE HARD DRIVE(S) INFORMATIONS
-
-# ·············································
-# Checking if the targeted hard drive is a HDD.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.IsHDD()
-{
-    return 0;
-}
-
-# ·············································
-# Checking if the targeted hard drive is a SDD.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.IsSSD()
-{
-    return 0;
-}
-
-# ········································
-# Checking how many hard drives are plugged.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.CountPluggedDrives()
-{
-    return 0;
-}
-
-# ··························································
-# Counting the number of HDDs among the plugged hard drives.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.CountHDD()
-{
-    return 0;
-}
-
-# ··························································
-# Counting the number of SSDs among the plugged hard drives.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.CountSSD()
-{
-    return 0;
-}
-
-# ···································································
-# Counting the number of HDDs and SSDs among the plugged hard drives.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.CountHDD+SSD()
-{
-    return 0;
-}
+##
 
 ## ----------------------------------------------
 
-## GETTING THE HARD DRIVE(S) INFORMATIONS
+##
 
 # ·································
 # Getting the size of a hard drive.
@@ -173,39 +107,6 @@ function BU.Hardware.Drive.GetDriveSize()
 #   -
 
 function BU.Hardware.Drive.AddUpDrivesSizes()
-{
-    return 0;
-}
-
-# ····································
-# Getting the rotation speed of a HDD.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.GetRotationSpeed()
-{
-    return 0;
-}
-
-# ·····································
-# Getting the vendor of the hard drive.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.GetVendor()
-{
-    return 0;
-}
-
-# ····································
-# Getting the disk's firmware version.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Drive.GetFirmwareVersion()
 {
     return 0;
 }
@@ -282,9 +183,144 @@ function BU.Hardware.Drive.GetPartitionSize()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
+#### HARD DRIVES (HDDs / SSDs)
+
+## CHECKING THE HARD DRIVE(S) INFORMATIONS
+
+# ·············································
+# Checking if the targeted hard drive is a HDD.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsHDD()
+{
+    return 0;
+}
+
+# ·············································
+# Checking if the targeted hard drive is a SDD.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsSSD()
+{
+    return 0;
+}
+
+# ········································
+# Checking how many hard drives are plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.CountPluggedDrives()
+{
+    return 0;
+}
+
+# ··························································
+# Counting the number of HDDs among the plugged hard drives.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.CountHDD()
+{
+    return 0;
+}
+
+# ··························································
+# Counting the number of SSDs among the plugged hard drives.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.CountSSD()
+{
+    return 0;
+}
+
+# ···································································
+# Counting the number of HDDs and SSDs among the plugged hard drives.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.CountHDD+SSD()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+## GETTING THE HARD DRIVE(S) INFORMATIONS
+
+# ····································
+# Getting the rotation speed of a HDD.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.GetRotationSpeed()
+{
+    return 0;
+}
+
+# ·····································
+# Getting the vendor of the hard drive.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.GetVendor()
+{
+    return 0;
+}
+
+# ····································
+# Getting the disk's firmware version.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.GetFirmwareVersion()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### SD CARDS
 
 ## CHECKING THE SD CARD(S) INFORMATIONS
+
+# ··································································
+# Checking if the targeted storage device is a SD card (any format).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsSDCard()
+{
+    return 0;
+}
+
+# ···························································
+# Checking if the targeted storage device is a micro SD card.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsMicroSDCard()
+{
+    return 0;
+}
 
 ## ----------------------------------------------
 
@@ -313,6 +349,17 @@ function BU.Hardware.Drive.GetPartitionSize()
 #### FLOPPY DISKS
 
 ## CHECKING THE FLOPPY DISK(S) INFORMATIONS
+
+# ·························································
+# Checking if the targeted storage device is a floppy disk.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsFloppyDisk()
+{
+    return 0;
+}
 
 ## ----------------------------------------------
 
