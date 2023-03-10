@@ -2844,6 +2844,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAME=("");
 
+    # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" GLOBAL VARIABLE HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
     __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="";
@@ -2855,6 +2856,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAME=("");
 
+    # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH}" GLOBAL VARIABLE HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
     __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH="";
