@@ -200,7 +200,9 @@ function BU.ModuleInit.SIGINT()
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && { echo >&2; echo "La ejecución del script fue interrumpida por el usuario" >&2 && v_isPrinted='true'; };
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo >&2; echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && v_isPrinted='true'; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && { echo >&2; echo "" >&2 && v_isPrinted='true'; }
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && { echo >&2; echo "A execução do guião foi interrompida pelo utilizador" >&2 && v_isPrinted='true'; };
+
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && { echo >&2; echo "Выполнение сценария было прервано пользователем" >&2 && v_isPrinted='true'; };
 
     [ "${v_isPrinted}" != 'true' ] && { echo >&2; echo "The script's execution was interrupted by the user" >&2; };
@@ -2677,9 +2679,15 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # Configurations directory path
     # -----------------------------
 
-    __bu_module_init__config_dir_path__lineno="$(( LINENO - + 2 ))";
+    __bu_module_init__config_dir_parent__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_DIR_PARENT="${__BU_MODULE_INIT__ROOT}";
 
-    __BU_MODULE_INIT__CONFIG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "config" 'd')" || {
+    __bu_module_init__config_dir_name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_DIR_NAME='config';
+
+    __bu_module_init__config_dir_path__lineno="$(( LINENO + 2 ))";
+
+    __BU_MODULE_INIT__CONFIG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PARENT}" "${__BU_MODULE_INIT__CONFIG_DIR_NAME}" 'd')" || {
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
         "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_DIR_PATH';
 
@@ -2690,9 +2698,15 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # Module's initializer script directory path
     # ------------------------------------------
 
+    __bu_module_init__config_init_dir_parent__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
+
+    __bu_module_init__config_init_dir_name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_INIT_DIR_NAME='initializer';
+
     __bu_module_init__config_init_dir_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PATH}" "initializer" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_INIT_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT}" "${__BU_MODULE_INIT__CONFIG_INIT_DIR_NAME}" 'd')" || {
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH';
 
@@ -2703,9 +2717,15 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # Modules configurations directory
     # --------------------------------
 
+    __bu_module_init__config_modules_dir_parent__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
+
+    __bu_module_init__config_modules_dir_name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME='modules';
+
     __bu_module_init__config_modules_dir_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_DIR_PATH}" "modules" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT}" "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME}" 'd')" || {
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH';
 
@@ -2716,9 +2736,15 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # Translation files for the initializer script + the main module config and init files
     ## -----------------------------------------------------------------------------------
 
+    __bu_module_init__config_init_lang_dir_parent__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}";
+
+    __bu_module_init__config_init_lang_dir_name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME='locale';
+
     __bu_module_init__config_init_lang_dir_path__lineno="$(( LINENO + 2 ))";
 
-    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}" "locale" 'd')" || {
+    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT}" "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME}" 'd')" || {
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH';
 
@@ -3065,6 +3091,29 @@ function BashUtils_InitModules()
 
                 v_loop_error="error"; break;
             else
+                #**** Conditional variables ****
+                local va_aliasesFileNames;      # VAR TYPE : ARRAY  - DESC :
+                local va_aliasesFileNamesOS;    # VAR TYPE : ARRAY  - DESC :
+
+                #**** Conditional code ****
+                va_aliasesFileNames=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
+
+                va_aliasesFileNamesOS=( "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
+                                        "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf")
+
+                # Getting the aliases file's path with a "for" loop.
+                for aliasesFilename in "${va_aliasesFileNames[@]}"; do
+                    #**** Loop variables ****
+                    local v_
+
+                    #**** Loop code ****
+
+                    # Checking if the path to the aliases file exists, then append it to the "${}" global variable.
+                    if []; then
+
+                    fi
+                done
+
                 # If the '--no-aliases-include' option was not passed to the modules initializer.
                 if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
                     BU.ModuleInit.Msg;
@@ -3073,15 +3122,7 @@ function BashUtils_InitModules()
                     # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
 
                     # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
-                    if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut' 'f' 'modaliasfile')" ]] || \
-
-                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.conf" 'shut' 'f' 'modaliasfile')" ]] || \
-
-                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.Aliases.conf" 'f' 'shut' 'modaliasfile')" ]] || \
-
-                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Aliases.${v_module_name}.conf" 'f' 'shut' 'modaliasfile')" ]] \
-
-                        [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.conf" 'f' 'shut' 'modaliasfile')" ]]; then
+                    if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut' 'f' 'modaliasfile')" ]]; then
 
                             local v_module_aliases_file_name;
 
