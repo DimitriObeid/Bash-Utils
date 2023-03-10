@@ -2620,14 +2620,14 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # -------------------------------------------
 
-    ## FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
+    # FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
 
     __BU_MODULE_INIT__ROOT_HOME="${HOME}";
     __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
     # -------------------------------------------
 
-    ## STORING THE NAME OF THE FRAMEWORK'S TEMPORARY DIRECTORY
+    # STORING THE NAME OF THE FRAMEWORK'S TEMPORARY DIRECTORY
 
     __BU_MODULE_INIT__TMP_DIR_NAME="tmp";
     __bu_module_init__tmp_dir_name__lineno="$(( LINENO - 1 ))";
@@ -2715,7 +2715,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # -------------------------------------------
 
-    ## TEMPORARY DIRECTORY
+    # TEMPORARY DIRECTORY
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}" ]; then mkdir -p "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}"; fi
 
@@ -2810,7 +2810,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # -------------------------------------------
 
-    ## INITIALIZER SCRIPT'S CONFIGURATION FILES
+    # INITIALIZER SCRIPT'S CONFIGURATION FILES
 
     __bu_module_init__config_init_dir__status__lineno="$(( LINENO + 2 ))";
 
@@ -2823,7 +2823,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # -------------------------------------------
 
-    ## MODULES DIRECTORIES
+    # MODULES DIRECTORIES
+
     __bu_module_init__modules_dir__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__MODULES_DIR="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT}" "modules" 'd')" || {
@@ -2832,6 +2833,31 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
+
+    # -------------------------------------------
+
+    # MODULES FILES
+
+    __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="";
+
+    __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAME=("");
+
+    __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
+
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="";
+
+
+    __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="";
+
+    __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAME=("");
+
+    __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
+
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH="";
 
     # -------------------------------------------
 
@@ -2874,7 +2900,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # -------------------------------------------
 
-    ## MISC
+    # MISC
 
     # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
     # function if the framework's main module is translated thanks to the CSV file parser.
@@ -3148,11 +3174,11 @@ function BashUtils_InitModules()
 
                 v_loop_error="error"; break;
             else
-                #**** Conditional variables ****
+                #**** Condition variables ****
                 local va_aliasesFileNames;      # VAR TYPE : ARRAY  - DESC :
                 local va_aliasesFileNamesOS;    # VAR TYPE : ARRAY  - DESC :
 
-                #**** Conditional code ****
+                #**** Condition code ****
                 va_aliasesFileNames=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
 
                 va_aliasesFileNamesOS=( "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
@@ -3161,7 +3187,7 @@ function BashUtils_InitModules()
                 # Getting the aliases file's path with a "for" loop.
                 for aliasesFilename in "${va_aliasesFileNames[@]}"; do
                     #**** Loop variables ****
-                    local v_
+
 
                     #**** Loop code ****
 
