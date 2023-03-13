@@ -129,9 +129,112 @@ function BU.Hardware.GPU.IsNvidiaRTX()
     return 0;
 }
 
+# ····················································
+# Checking if the GPU has a VGA compatible controller.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.IsVGACompatible()
+{
+    return 0;
+}
+
 ## ----------------------------------------------
 
 ##
+
+# ·····················································
+# Display all informations about the computer's GPU(s).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetInfos()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+##
+
+# ··································
+# Getting the CPU's bus information.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetBusInfo()
+{
+    return 0;
+}
+
+# ·······························
+# Getting the CPU's capabilities.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetCapabilities()
+{
+    return 0;
+}
+
+# ··································
+# Getting the CPU's clock frequency.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetClockFrequency()
+{
+    return 0;
+}
+
+# ································
+# Getting the CPU's configuration.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetConfiguration()
+{
+    return 0;
+}
+
+# ······························
+# Getting the CPU's description.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetDescription()
+{
+    return 0;
+}
+
+# ·······························
+# Getting the CPU's logical name.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetLogicalName()
+{
+    return 0;
+}
+
+# ······························
+# Getting the CPU's physical ID.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetPhysicalID()
+{
+    return 0;
+}
 
 # ·······························
 # Getting the CPU's product type.
@@ -140,6 +243,17 @@ function BU.Hardware.GPU.IsNvidiaRTX()
 #   -
 
 function BU.Hardware.GPU.GetProductType()
+{
+    return 0;
+}
+
+# ····························
+# Getting the CPU's resources.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetResources()
 {
     return 0;
 }
@@ -153,4 +267,15 @@ function BU.Hardware.GPU.GetProductType()
 function BU.Hardware.GPU.GetVendor()
 {
     return
+}
+
+# ·······································
+# Getting the CPU's width (32 / 64 bits).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.GPU.GetWidth()
+{
+    return 0;
 }
