@@ -1,7 +1,9 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!DOCTYPE ArchData [
-    <!ELEMENT ArchData (Module*, Library*, OS*)>
+    <!ELEMENT ArchData (Vendor*, Module*, Library*, OS*)>
+
+    <!ELEMENT Vendor (Names, Companies, Email)>
 
     <!ELEMENT Module (Version, LatestChangelogs)>
 
@@ -32,6 +34,10 @@
 ]>
 
 <ArchData>
+    <Vendor>
+        <Names></Names>
+    </Vendor>
+
     <Module>
         <Version>1.0</Version>
         <LatestChangelogs></LatestChangelogs>

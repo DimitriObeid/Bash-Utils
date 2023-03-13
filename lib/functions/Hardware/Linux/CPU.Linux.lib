@@ -113,12 +113,12 @@ function BU.Hardware.Linux.CPU.GetVendor()                { if BU.Main.CMDS.GetC
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CPU ARCHITECTURE
+#### CPU'S ARCHITECTURE
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
 
-# ············································
-# Checking if the CPU architecture is 32 bits.
+# ··············································
+# Checking if the CPU's architecture is 32 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -136,8 +136,8 @@ function BU.Hardware.Linux.CPU.Is32Bits()
     fi
 }
 
-# ············································
-# Checking if the CPU architecture is 64 bits.
+# ··············································
+# Checking if the CPU's architecture is 64 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -155,72 +155,72 @@ function BU.Hardware.Linux.CPU.Is64Bits()
     fi
 }
 
-# ··················································
-# Checking if the CPU architecture is AArch 32 bits.
+# ····················································
+# Checking if the CPU's architecture is AArch 32 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchAArch32()            { true; }
 
-# ··················································
-# Checking if the CPU architecture is AArch 64 bits.
+# ····················································
+# Checking if the CPU's architecture is AArch 64 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchAArch64()            { true; }
 
-# ················································
-# Checking if the CPU architecture is ARM 32 bits.
+# ··················································
+# Checking if the CPU's architecture is ARM 32 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchARM32()              { true; }
 
-# ················································
-# Checking if the CPU architecture is ARM 64 bits.
+# ··················································
+# Checking if the CPU's architecture is ARM 64 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchARM64()              { true; }
 
-# ··········································
-# Checking if the CPU architecture is AMD64.
+# ··············································
+# Checking if the CPU's architecture is is AMD64.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchAMD64()              { true; }
 
-# ·········································
-# Checking if the CPU architecture is i386.
+# ···········································
+# Checking if the CPU's architecture is i386.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchi386()               { true; }
 
-# ············································
-# Checking if the CPU architecture is PowerPC.
+# ··············································
+# Checking if the CPU's architecture is PowerPC.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchPPC()                { true; }
 
-# ·········································
-# Checking if the CPU architecture is MIPS.
+# ···········································
+# Checking if the CPU's architecture is MIPS.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Main.CPU.IsArchMIPS()               { true; }
 
-# ···········································
-# Checking if the CPU architecture is RISC-V.
+# ···············································
+# Checking if the CPU's architecture is RISC-V.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -245,7 +245,7 @@ function BU.Hardware.Linux.CPU.GetArch()              { if BU.Main.CMDS.GetComma
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CPU CORES
+#### CPU'S CORES
 
 ## CHECKING THE CPU(s) CORES DATA
 
@@ -291,13 +291,13 @@ function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()   { return 0; }
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CPU CLOCK
+#### CPU'S CLOCK
 
-## CHECKING CPU'S CLOCK INFORMATIONS
+## CHECKING THE CPU'S CLOCK INFORMATIONS
 
 ## ----------------------------------------------
 
-## GETTING CPU'S ClOCK DATA
+## GETTING THE CPU'S ClOCK DATA
 
 # ····························
 # Getting the clock frequency.
@@ -339,4 +339,3 @@ function BU.BU.Hardware.Linux.CPU.GetAdressSizes()        { return 0; }
 #   -
 
 function BU.Hardware.Linux.CPU.GetSocketsNumber()         { return 0; }
-
