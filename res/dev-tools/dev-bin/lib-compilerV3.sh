@@ -955,7 +955,7 @@ function CompileInSingleFile()
     elif [[ "${p_locale,,}" == ?(-?(-))lang?(-include)=* ]]; then
 
         #**** Conditional variables ****
-        local key;                  # VAR TYPE : Char       - DESC :
+        local key;                  # VAR TYPE : Char       - DESC : User's keyboard input to make the compiler choosing a compilation option in case it cannot determine what the user chose (safeguard mesure, in case the "${p_locale}" or the "${p_locale_old}" values are modified).
 
         local v_locale_str;         # VAR TYPE : String     - DESC : This variable stores the mandatory first argument's value if it contains the "--lang=" sub-string.
         local v_locale_tmp;         # VAR TYPE : String     - DESC : This variable stores the above variable's string
