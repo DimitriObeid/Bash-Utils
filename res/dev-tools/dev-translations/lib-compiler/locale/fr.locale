@@ -298,7 +298,7 @@ __BU_COMPILE__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS="SUCCÈS DE LA COPIE DU CO
 __BU_COMPILE__LOCALIZED_FILE__STATS="Statistiques du fichier ${__HIGHLIGHT}%s${__RESET} :";
 __BU_COMPILE__LOCALIZED_FILE__BYTES="Taille en octets               : %s";
 __BU_COMPILE__LOCALIZED_FILE__CHARS="Nombre de caractères           : %s caractères";
-__BU_COMPILE__LOCALIZED_FILE__LINES="Nombre le lignes               : %s lignes";
+__BU_COMPILE__LOCALIZED_FILE__LINES="Nombre de lignes               : %s lignes";
 __BU_COMPILE__LOCALIZED_FILE__WIDTH="Largeur d'affichage maximale   : %s colonnes";
 __BU_COMPILE__LOCALIZED_FILE__WORDS="Nombre de mots                 : %s mots";
 
