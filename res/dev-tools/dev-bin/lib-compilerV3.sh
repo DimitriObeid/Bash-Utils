@@ -1011,13 +1011,13 @@ function CompileInSingleFile()
             __vMandatoryArgLangInclude='--lang-include';
 
         else
-            echo "${__WARNING}WARNING : The compiler is unable to check if either the ${__HIGHLIGHT}--lang${__WARNING} OR the ${__HIGHLIGHT}--lang-include${__WARNING} parameter was passed as first argument${__RESET}" >&2;
+            echo "${__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_1}" >&2;
             echo >&2;
 
-            echo "${__WARNING}The compiler will create a file which stores every languages you have passed as values for the first argument${__RESET}" >&2;
+            echo "${__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_2}" >&2;
             echo >&2;
 
-            echo "Please press any key to continue, or press L to compile a single file for each language, or press ESC or Q to abort the compiler's execution" >&2;
+            echo "${__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__USER_INPUT}" >&2;
             echo >&2;
 
             read -n 1 key;
@@ -1036,7 +1036,7 @@ function CompileInSingleFile()
     # Else, if the "all" value is passed as the first argument.
     if [ "${v_is_check_to_do}" == 'true' ]; then
         if [ "${p_locale,,}" == 'all' ]; then
-            PrintWarningLine "${__HIGHLIGHT}${p_locale}${__WARNING} | ${__HIGHLIGHT}lang=all${__WARNING} : FEATURE NOT YET FULLY IMPLEMENTED, WATCH OUT FOR THE BUGS" 'FULL'; return 1;
+            PrintWarningLine "${__HIGHLIGHT}${p_locale}${__WARNING} | ${__HIGHLIGHT}lang=all${__WARNING} : THIS FEATURE IS NOT YET FULLY IMPLEMENTED, WATCH OUT FOR THE BUGS" 'FULL'; return 1;
 
             # for langs in "${___BU_COMPILER__LANG_ARRAY[@]}"; do __language_array+=("${langs}"); done;
 

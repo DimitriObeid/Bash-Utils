@@ -171,6 +171,14 @@ __BU_COMPILE__SHELLCHECK__DISABLED="WARNING: IT IS NOT RECOMMENDED TO RUN THIS S
 __BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}THE ${__HIGHLIGHT}SHELLCHECK${__ERROR} COMMAND IS NOT INSTALLED ON YOUR SYSTEM!${__RESET}";
 
 
+# ------------------------------------------------------------------------------------------------------------------------------------------
+# If the compiler was unable to check if either the 'lang=' or the '--lang-include=' parameters were passed as the program's first argument.
+
+__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_1="${__WARNING}WARNING : The compiler is unable to check if either the ${__HIGHLIGHT}--lang${__WARNING} OR the ${__HIGHLIGHT}--lang-include${__WARNING} parameter was passed as the program's first argument${__RESET}";
+__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_2="${__WARNING}The compiler will create a file which stores every languages you have passed as values for the first argument${__RESET}";
+__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__USER_INPUT="Please press any key to continue, or press L to compile a single file for each language, or press ESC or Q to abort the compiler's execution";
+
+
 # -------------------------------------------
 # If a bad value is passed as first argument.
 

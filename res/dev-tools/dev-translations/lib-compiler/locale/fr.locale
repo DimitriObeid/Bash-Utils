@@ -173,6 +173,14 @@ __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'E
 __BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}LA COMMANDE ${__HIGHLIGHT}SHELLCHECK${__ERROR} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
 
 
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Si le compilateur n'a pas réussi à déterminer si le paramètre '--lang=' OU '--lang-include=' a été passé en tant que premier argument du programme [-----] If the compiler was unable to check if either the 'lang=' or the '--lang-include=' parameter was passed as the program's first argument.
+
+__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_1="${__WARNING}ATTENTION : Le compilateur n'a pas réussi à déterminer si le paramètre ${__HIGHLIGHT}--lang${__WARNING} OU ${__HIGHLIGHT}--lang-include${__WARNING} a été passé en tant que premier argument du programme${__RESET}";
+__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_2="${__WARNING}Le compilateur va créer un fichier contenant chaque langue que vous avez passé en tant que valeurs pour le premier argument${__RESET}";
+__BU_COMPILE__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__USER_INPUT="Veuillez appuyer sur n'importe quelle touche pour continuer, or appuyez sur L pour compiler un seul fichier par langue, au appuyez sur Échap ou sur Q pour interrompre l'exécution du compilateur";
+
+
 # ---------------------------------------------------------------------------------------------------------
 # Si une mauvaise valeur est passée en premier argument [-----] If a bad value is passed as first argument.
 
