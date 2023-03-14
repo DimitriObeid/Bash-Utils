@@ -192,7 +192,7 @@ function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.Chec
 function BU.ModuleInit.SIGINT()
 {
     #**** Variables ****
-    local v_isPrinted; # VAR TYPE : Bool   - DESC :
+    local v_isPrinted; # VAR TYPE : Bool   - DESC : Checks if one of the languages supported by the "Bash-utils-init.sh" file was found on the user's system and that the translated message was printed.
 
     #**** Code ****
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && { echo >&2; echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && v_isPrinted='true'; };
@@ -248,7 +248,7 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
     # function's local variables reach the sub-functions called inside the "BU.ModuleInit.PrintLogError()" function.
 
     #**** Variables ****
-    local v_isPrinted;  # VAR TYPE : Bool               - DESC :
+    local v_isPrinted;  # VAR TYPE : Bool               - DESC : Checks if one of the languages supported by the "Bash-utils-init.sh" file was found on the user's system and that the translated message was printed.
     local v_userLang;   # VAR TYPE : ISO 639-1 code     - DESC :
 
     #**** Code ****
@@ -286,7 +286,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
     #**** Variables ****
     local v_isPrinted;  # VAR TYPE : Bool               - DESC :
     local v_type;       # VAR TYPE : CMD                - DESC : Checking the value of the "" parameter in order to display the correct string.
-    local v_userLang;   # VAR TYPE : ISO 639-1 code     - DESC :
+    local v_userLang;   # VAR TYPE : ISO 639-1 code     - DESC : Checks if one of the languages supported by the "Bash-utils-init.sh" file was found on the user's system and that the translated message was printed.
 
     #**** Code ****
     v_type="$([ "${p_type,,}" == 'echo' ] && printf 'echo' || printf 'MSG')";
@@ -361,7 +361,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 {
     #**** Variables ****
-    local v_isPrinted; # VAR TYPE : Bool   - DESC :
+    local v_isPrinted; # VAR TYPE : Bool   - DESC : Checks if one of the languages supported by the "Bash-utils-init.sh" file was found on the user's system and that the translated message was printed.
 
     #**** Code ****
     echo '------------------------------------------------------------------------' >&2;
@@ -535,7 +535,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
     #**** Variables ****
     local __bu_module_init__user_lang;      # VAR TYPE : ISO 639-1 Code     - DESC : Getting the language used / chosen by the user.
     local v_installFile;                    # VAR TYPE : File               - DESC : Name of the framework installation program.
-    local v_isPrinted;                      # VAR TYPE : Bool               - DESC :
+    local v_isPrinted;                      # VAR TYPE : Bool               - DESC : Checks if one of the languages supported by the "Bash-utils-init.sh" file was found on the user's system and that the translated message was printed.
 
     #**** Code ****
     __bu_module_init__user_lang="$(echo "${LANG}" | cut -d _ -f1)";
@@ -615,9 +615,10 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 # Rewriting the library's languages messages (this function is not called if the framework is compiled in a single file).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.ModuleInit.SetInitLocale."${__BU_MODULE_INIT__USER_LANG}"()    -> Modules initializer script's locale files ("config/initializer/locale/${__BU_MODULE_INIT__USER_LANG}.locale").
+
 #   - BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()               -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsFrameworkCompiled()                               -> Modules initializer script (this file)
-#   - BU.ModuleInit.SetInitLocale."${__BU_MODULE_INIT__USER_LANG}"()    -> Modules initializer script (this file)
 #   - BU.ModuleInit.SourceEnglishTranslationFiles()                     -> Modules initializer script (this file)
 
 # shellcheck disable=SC1091,SC1090
@@ -627,10 +628,10 @@ function BU.ModuleInit.GetModuleInitLanguage()
     local p_lang_ISO_639_1=${1:-NULL};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Wanted language.
 
     #**** Variables ****
-    local v_supportedLang;  # VAR TYPE : Array  - DESC :
-    local v_langMatch;      # VAR TYPE :
+    local v_supportedLang;  # VAR TYPE : Array      - DESC :
+    local v_langMatch;      # VAR TYPE : String     - DESC :
 
-    local v_isPrinted;      # VAR TYPE : Bool   - DESC :
+    local v_isPrinted;      # VAR TYPE : Bool       - DESC : Checks if one of the languages supported by the "Bash-utils-init.sh" file was found on the user's system and that the translated message was printed.
 
     #**** Code ****
     v_supportedLang=('bg' 'cs' 'da' 'de' 'el' 'en' 'es' 'et' 'fi' 'fr' 'hu' 'id' 'it' 'ja' 'lt' 'lv' 'nl' 'pl' 'pt' 'ro' 'ru' 'sk' 'sl' 'sv' 'tr' 'uk' 'zh');
