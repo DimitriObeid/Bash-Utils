@@ -28,7 +28,7 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # Ne décommentez pas la ligne "shellcheck disable", sinon la commande shellcheck sera exécutée pendant l'exécution du script, et ne détectera aucune erreur de programmation pendant un processus de débogage.
 
-# N'AJOUTEZ PAS DE VIRGULE APRÈS UN CODE SHELLCHECK S'IL N'Y A PAS D'AUTRES CODES SHELLCHECK QUI LE SUIT, SINON LA COMMANDE "SHELLCHECK" RETOURNERA DES ERREURS PENDANT LE PROCESSUS DE DÉBOGAGE !!!
+# N'AJOUTEZ PAS DE VIRGULE APRÈS UN CODE SHELLCHECK S'IL N'Y A PAS D'AUTRES CODES SHELLCHECK QUI LE SUIT, SINON LA COMMANDE "\$(shellcheck)" RETOURNERA DES ERREURS PENDANT LE PROCESSUS DE DÉBOGAGE !!!
 
 
 # ------------------------------
