@@ -238,7 +238,7 @@ fi
 __BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/heredoc";
 
 # Path of the modules initializer file.
-__BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.sh";
+__BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils-compilation-output.tmp";
 
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
@@ -955,9 +955,13 @@ function CompileInSingleFile()
     elif [[ "${p_locale,,}" == ?(-?(-))lang?(-include)=* ]]; then
 
         #**** Conditional variables ****
+        local key;                  # VAR TYPE : Char       - DESC :
+
         local v_locale_str;         # VAR TYPE : String     - DESC : This variable stores the mandatory first argument's value if it contains the "--lang=" sub-string.
         local v_locale_tmp;         # VAR TYPE : String     - DESC : This variable stores the above variable's string
         local v_locale_delim;       # VAR TYPE : Char       - DESC :
+
+        local v_p_locale_old;       # VAR TYPE : String     - DESC :
 
         #**** Conditional code ****
 
@@ -980,6 +984,7 @@ function CompileInSingleFile()
         v_locale_tmp="${v_locale_str}";
         v_locale_str="${v_locale_tmp}";
 
+        # If the "${v_locale_str}" variables does not contains, the "all/-supported" value, then   .
         if [ "${v_locale_str,,}" != 'all' ] && [[ "${v_locale_str,,}" != ?(all?(-))supported ]]; then
             # Replacing each delimiter with an empty character.
             v_locale_str="${v_locale_str//${v_locale_delim}/" "}";
@@ -987,6 +992,9 @@ function CompileInSingleFile()
             # String to word array.
             read -ra __language_array <<< "${v_locale_str}";
         else
+            # Creating a variable which stores the old value of the "${p_locale}" variable, so that the "${__vMandatoryArgLang}" or the "${__vMandatoryArgLangInclude}" variables can be created.
+            v_p_locale_old="${p_locale}";
+
             # Reassigning the new value in the "${v_locale_str}" variable into the "${p_locale}" original variable, so that the condition can be written only once.
             p_locale="${v_locale_str}";
 
@@ -995,12 +1003,30 @@ function CompileInSingleFile()
         fi
 
         # Checking if the "--lang=" value was passed, so that a file will be compiled for each language.
-        if [[ "${p_locale,,}" == ?(-?(-))lang=* ]]; then
+        if [[ "${p_locale,,}" == ?(-?(-))lang=* ]] || [[ "${v_p_locale_old,,}" == ?(-?(-))lang=* ]]; then
             __vMandatoryArgLang='--lang=';
 
         # Checking if the "--lang-include=" value was passed, so that each language will be embedded in the compiled file.
-        elif [[ "${p_locale,,}" == ?(-?(-))lang-include=* ]]; then
+        elif [[ "${p_locale,,}" == ?(-?(-))lang-include=* ]] || [[ "${v_p_locale_old,,}" == ?(-?(-))lang-include=* ]]; then
             __vMandatoryArgLangInclude='--lang-include';
+
+        else
+            echo "${__WARNING}WARNING : The compiler is unable to check if either the ${__HIGHLIGHT}--lang${__WARNING} OR the ${__HIGHLIGHT}--lang-include${__WARNING} parameter was passed as first argument${__RESET}" >&2;
+            echo >&2;
+
+            echo "${__WARNING}The compiler will create a file which stores every languages you have passed as values for the first argument${__RESET}" >&2;
+            echo >&2;
+
+            echo "Please press any key to continue, or press L to compile a single file for each language, or press ESC or Q to abort the compiler's execution" >&2;
+            echo >&2;
+
+            read -n 1 key;
+
+            if [[ "${key^^}" != "Q" && "${key}" != $'\e' ]]; then
+                if [ "${key^^}" != 'L' ]; then __vMandatoryArgLangInclude='--lang-include'; else __vMandatoryArgLang='--lang'; fi
+            else
+                exit 1;
+            fi
         fi
     else
         # Assigning a value, so that no extra checkings are done to the first argument's value afterwards.
@@ -1083,16 +1109,15 @@ function CompileInSingleFile()
             __compiled_file_name="Bash-utils-${v_curr_locale}.sh";
 
         elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-            __compiled_file_name="Bash-utils-full.sh";
+            __compiled_file_name="Bash-utils-multilang.sh";
         fi
 
         __compiled_file_path="${__compiled_file_parent_dir}/${__compiled_file_name}";
 
-
-        if [ "${__vMandatoryArgLang}" ]; then
+        if [ -n "${__vMandatoryArgLang}" ]; then
             __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')] ]";
 
-        elif [ "${__vMandatoryArgLangInclude}" ]; then
+        elif [ -n "${__vMandatoryArgLangInclude}" ]; then
             __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG ]";
         fi
 
@@ -1114,7 +1139,7 @@ function CompileInSingleFile()
             };
         fi
 
-        # Deleting the existing "Bash-utils.sh" file.
+        # Deleting the existing "${__BU_MAIN_FULL_FILE_PATH}" file.
         if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ] && [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then true > "${__BU_MAIN_FULL_FILE_PATH}"; fi
 
         # -------------------------------------------------------------------------------
