@@ -96,7 +96,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS="
                                         Incompatible with the '-r' / '--keep-raw-document-layout' option.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
-    -e --keep-exec-safeguards           keep the extra safeguard pieces of code (written at the beginning of each source file) which prevent the
+    -E --keep-exec-safeguards           keep the extra safeguard pieces of code (written at the beginning of each source file) which prevent the
                                         direct execution of the said file. This option does not prevents the addition of an extra safeguard
                                         code after the top-level of the compiled file.
 
@@ -119,8 +119,13 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
     -r --keep-raw-document-layout       keep the raw compiled file's layout, without optimizing it. In this case, the aforementionned '--keep-*'
                                         options will not work.";
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE="
-    -a --no-alias-include               does not includes the main module's aliases file into the compiled file.";
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIASES_INCLUDE="
+    -a --no-aliases-include             does not includes the main module's aliases file into the compiled file.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE="
+    -e --no-english-include             does not create any compiled file in English if the ISo 639-1 code of this language was not passed with the
+                                        '--lang=' parameter, and does not includes the English translation file into the output file if this same code
+                                        is not either passed with the '--lang-include=' parameter";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
     -s --no-shellcheck                  prevents the execution of the 'shellcheck' command on each file processed by the compiler. This option is
@@ -221,8 +226,8 @@ __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="UNABLE TO WRITE THE FILE'
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Please check its path, its rights and if it exists.";
 
 
-# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Writing the initializer script's english translation files content first into the file to generate (safeguard, as the english translation is the main supported language).
 
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES CONTENT OF THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="This is a safeguard measure in case the content of a locale file must be updated after an update of the initialization script, since English is the primary supported language, so that a message is not returned as an empty string";
@@ -231,8 +236,8 @@ __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="FAILED
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S ENGLISH BACKUP TRANSLATION FILES FOR THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE, FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";
 
 
-# ------------------------------------------------------------------------------------------
-# Writing now the initializer script's translations files content into the file to generate.
+# -----------------------------------------------------------------------------------------
+# Writing now the initializer script's translation files content into the file to generate.
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPYING THE INITIALIZER SCRIPT'S TRANSLATION FILES CONTENT OF THE ${__HIGHLIGHT}%s${__NEWSTEP} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE INTO THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="FAILED TO COPY THE INITIALIZER SCRIPT'S TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__ERROR} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__ERROR} FILE INTO THE ${__HIGHLIGHT}%s${__ERROR} FILE";
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCESSFULLY COPIED THE INITIALIZER SCRIPT'S TRANSLATION FILES OF THE ${__HIGHLIGHT}%s${__SUCCESS} LANGUAGE FROM THE ${__HIGHLIGHT}%s${__SUCCESS} FILE INTO THE ${__HIGHLIGHT}%s${__SUCCESS} FILE";

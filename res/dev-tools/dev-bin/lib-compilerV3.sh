@@ -237,13 +237,10 @@ fi
 
 __BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/heredoc";
 
-# Path of the modules initializer file.
-__BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils-compilation-output.tmp";
-
-# Path of the modules initialization script's translations files.
+# Path to the modules initialization script's translations files.
 __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
 
-# Path of the modules initialization script's translations files.
+# Path to the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
 # Sourcing the "DevTools.lib" file in order to use the "BU.Main.DevTools.ShellcheckVerif()" function.
@@ -501,7 +498,7 @@ function WriteBU()
     local p_display=${2:-no};   	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
 
 	#**** Variables ****
-	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write in the "${__BU_MAIN_FULL_FILE_PATH}" file.
+	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write into the "${__BU_MAIN_FULL_FILE_PATH}" file.
 
     #**** Code ****
     v_content="$(cat "${p_filepath}")";
@@ -712,7 +709,9 @@ function CompilerUsage()
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT}";
 
-    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE}";
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIASES_INCLUDE}";
+
+    echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE}";
 
     echo "${__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK}";
 
@@ -782,7 +781,8 @@ _____value_of__keep_functions_infos='--keep-functions-infos';
 _____value_of__keep_functions_pvc_infos='--keep-functions-pvc-infos';
 _____value_of__keep_raw_document_layout='--keep-raw-document-layout';
 
-_____value_of__no_alias_include='--no-alias-include';
+_____value_of__no_aliases_include='--no-aliases-include';
+_____value_of__no_english_include='--no-english-include';
 _____value_of__no_shellcheck='--no-shellcheck';
 
 # Looping through the array of optional arguments.
@@ -823,7 +823,7 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
         __vArrayVal_keep_comments="${_____value_of__keep_comments}";
 
     # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
-    elif [ "${arg}" == '-e' ] || [ "${arg,,}" == "${_____value_of__keep_exec_safeguards}" ]; then
+    elif [ "${arg}" == '-E' ] || [ "${arg,,}" == "${_____value_of__keep_exec_safeguards}" ]; then
         __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
 
     # Else, if the user decides to keep the description of each function.
@@ -840,8 +840,12 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
 
 
     # Else, if the user decides not to include the aliases file into the compiled file.
-    elif [ "${arg}" == '-a' ] || [ "${arg,,}" == "${_____value_of__no_alias_include}" ]; then
-        __vArrayVal_no_alias_include="${_____value_of__no_alias_include}";
+    elif [ "${arg}" == '-a' ] || [ "${arg,,}" == "${_____value_of__no_aliases_include}" ]; then
+        __vArrayVal_no_alias_include="${_____value_of__no_aliases_include}";
+
+    # Else, if the user decides not to include the English translation resources into a non-english file to be compiled.
+    elif [ "${arg}" == '-e' ] || [ "${arg,,}" == "${_____value_of__no_english_include}" ]; then
+        __vArrayVal_no_english_include="${_____value_of__no_english_include}";
 
     # Else, if the user decides to prevent the execution of the 'shellcheck' command.
     # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
@@ -1069,21 +1073,23 @@ function CompileInSingleFile()
     for language in "${__language_array[@]}"; do
         #------------------------
         #**** Loop variables ****
-        local v_curr_locale;
+        local v_curr_locale;                # VAR TYPE : ISO 639-1 code     - DESC : ISO 639-1 code of the language to process into this loop.
 
-        local __locale_file_path;
-        local __locale_file_path_en;
+        local __locale_file_path;           # VAR TYPE : Filepath   - DESC : Path to the
+        local __locale_file_path_en;        # VAR TYPE : Filepath   - DESC : Path to the
+
+        # __BU_MAIN_FULL_FILE_PATH;         # VAR TYPE : Filepath   - DESC : Path to the temporary file which stores the output of each file.
 
         # Compiled file's informations.
-        local __compiled_file_parent_dir;
-        local __compiled_file_path;
+        local __compiled_file_parent_dir;   # VAR TYPE : Dirpath    - DESC : Path to the
+        local __compiled_file_path;         # VAR TYPE : Filepath   - DESC : Path to the
 
-        local __locale_print_code;
+        local __locale_print_code;          # VAR TYPE : String     - DESC :
 
-        local __locale_print_code__error;
-        local __locale_print_code__newstep;
-        local __locale_print_code__success;
-        local __locale_print_code__warning;
+        local __locale_print_code__error;   # VAR TYPE : String     - DESC :
+        local __locale_print_code__newstep; # VAR TYPE : String     - DESC :
+        local __locale_print_code__success; # VAR TYPE : String     - DESC :
+        local __locale_print_code__warning; # VAR TYPE : String     - DESC :
 
         # If the "${_____value_of__compile_stable}" value was passed in the array of optional arguments.
         if [ -n "${__vArrayVal_compile_stable}" ]; then
@@ -1102,8 +1108,10 @@ function CompileInSingleFile()
         __locale_file_path="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${v_curr_locale}.locale";
         __locale_file_path_en="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/en.locale";
 
-
         __compiled_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
+
+        # Path to the temporary output file (global variable).
+        __BU_MAIN_FULL_FILE_PATH="${__compiled_file_parent_dir}/Bash-utils-compilation-output.tmp";
 
         if [ -n "${__vMandatoryArgLang}" ]; then
             __compiled_file_name="Bash-utils-${v_curr_locale}.sh";

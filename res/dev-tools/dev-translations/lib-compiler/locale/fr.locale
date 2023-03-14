@@ -98,7 +98,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS="
                                         Incompatible avec l'option '-r' / '--keep-raw-document-layout'.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS="
-    -e --keep-exec-safeguards           garde les morceaux de code (écrits au début de chaque fichier source) prévenant l'exécution directe dudit fichier.
+    -E --keep-exec-safeguards           garde les morceaux de code (écrits au début de chaque fichier source) prévenant l'exécution directe dudit fichier.
                                         Cette option n'empêche pas l'ajout d'un tel code de sécurité supplémentaire après les commentaires au niveau
                                         supérieur du fichier compilé.
 
@@ -121,8 +121,13 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT="
     -r --keep-raw-document-layout       garde le formatage brut du fichier compilé, sans lui apporter d'optimisations. Dans ce cas, les options '--keep-*'
                                         citées précédemment ne fonctionneront pas.";
 
-__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIAS_INCLUDE="
-    -a --no-alias-include               n'inclut pas le fichier des alias du module principal dans le fichier compilé.";
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIASES_INCLUDE="
+    -a --no-aliases-include             n'inclut pas le fichier des alias du module principal dans le fichier compilé.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE="
+    -e --no-english-include             ne crée pas de fichier compilé en anglais si le code ISO 639-1 de cette langue n'est pas passée avec le paramètre
+                                        '--lang=', et n'inclut pas le fichier de traduction en anglais dans le fichier de sortie si ce même code n'est pas
+                                        également passé avec le paramètre '--lang-include='";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
     -s --no-shellcheck                  empêche l'exécution de la commande 'shellcheck' sur chaque fichier traité par le compilateur. Cette option est
@@ -223,8 +228,8 @@ __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="IMPOSSIBLE D'ÉCRIRE LE C
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Veuillez vérifier son chemin, ses droits et s'il existe.";
 
 
-# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+# -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Écriture du contenu des fichiers de traduction en anglais du script d'initialisation dans le fichier à générer [-----] Writing the initializer script's english translation files content first into the file to generate (safeguard, as the english translation is the main supported language).
 
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DES FICHIERS DE TRADUCTION DE SECOURS EN ANGLAIS POUR LA LANGUE ${__HIGHLIGHT}%s${__NEWSTEP} DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN="Il s'agit d'une mesure de sauvegarde au cas où le contenu d'un des fichiers de paramètres régionaux doit être mis à jour après une mise à jour du script d'initialisation, puisque l'anglais est la principale langue prise en charge, afin d'éviter qu'un message nouvellement ajouté ne soit renvoyé sous la forme d'une chaîne vide.";
@@ -233,8 +238,8 @@ __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC
 __BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS="SUCCÈS DE LA COPIE DU CONTENU DES FICHIERS DE TRADUCTION DE SECOURS EN ANGLAIS POUR LA LANGUE ${__HIGHLIGHT}%s${__SUCCESS} DU FICHIER ${__HIGHLIGHT}%s${__SUCCESS} VERS LE FICHIER ${__HIGHLIGHT}%s${__SUCCESS}";
 
 
-# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing now the initializer script's translations files content into the file to generate.
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Écriture du contenu des fichiers de traduction du script d'initialisation dans le fichier à générer [-----] Writing now the initializer script's translation files content into the file to generate.
 
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT="COPIE DU CONTENU DU FICHIER DE TRADUCTION POUR LA LANGUE ${__HIGHLIGHT}%s${__NEWSTEP} DU FICHIER ${__HIGHLIGHT}%s${__NEWSTEP} VERS LE FICHIER ${__HIGHLIGHT}%s${__NEWSTEP}";
 __BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR="ÉCHEC DE LA COPIE DU CONTENU DU FICHIERS DE TRADUCTION POUR LA LANGUE ${__HIGHLIGHT}%s${__ERROR} DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE FICHIER ${__HIGHLIGHT}%s${__ERROR}";
