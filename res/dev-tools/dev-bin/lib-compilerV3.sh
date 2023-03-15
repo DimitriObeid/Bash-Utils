@@ -946,7 +946,7 @@ function CompileInSingleFile()
     # Getting the current system language.
     local ____sys_lang;         # VAR TYPE : CMD        - DESC : This variable stores a ISO 639-1 code, copied from the two first characters of the operating system's ICU locale.
 
-    local __language_array;     # VAR TYPE : ISO 639-1 codes array  - DESC
+    local __language_array;     # VAR TYPE : Array      - DESC : Array of ISO 639-1 codes.
 
     #**** Code ****
     ____sys_lang="$(echo "${LANG}" | cut -d _ -f1)";
@@ -962,7 +962,7 @@ function CompileInSingleFile()
         local key;                  # VAR TYPE : Char       - DESC : User's keyboard input to make the compiler choosing a compilation option in case it cannot determine what the user chose (safeguard mesure, in case the "${p_locale}" or the "${p_locale_old}" values are modified).
 
         local v_locale_str;         # VAR TYPE : String     - DESC : This variable stores the mandatory first argument's value if it contains the "--lang=" sub-string.
-        local v_locale_tmp;         # VAR TYPE : String     - DESC : This variable stores the above variable's string
+        local v_locale_tmp;         # VAR TYPE : String     - DESC : This variable temporarily stores the above variable's string.
         local v_locale_delim;       # VAR TYPE : Char       - DESC :
 
         local v_p_locale_old;       # VAR TYPE : String     - DESC :
@@ -1075,8 +1075,8 @@ function CompileInSingleFile()
         #**** Loop variables ****
         local v_curr_locale;                # VAR TYPE : ISO 639-1 code     - DESC : ISO 639-1 code of the language to process into this loop.
 
-        local __locale_file_path;           # VAR TYPE : Filepath   - DESC : Path to the
-        local __locale_file_path_en;        # VAR TYPE : Filepath   - DESC : Path to the
+        local __locale_file_path;           # VAR TYPE : Filepath   - DESC : Path to the current locale's translation file of the framework's initialization script.
+        local __locale_file_path_en;        # VAR TYPE : Filepath   - DESC : Path to the English translation file of the framework's initialization script.
 
         # __BU_MAIN_FULL_FILE_PATH;         # VAR TYPE : Filepath   - DESC : Path to the temporary file which stores the output of each file.
 
@@ -1084,17 +1084,17 @@ function CompileInSingleFile()
         local __compiled_file_parent_dir;   # VAR TYPE : Dirpath    - DESC : Path to the
         local __compiled_file_path;         # VAR TYPE : Filepath   - DESC : Path to the
 
-        local __locale_print_code;          # VAR TYPE : String     - DESC :
+        local __locale_print_code;          # VAR TYPE : String     - DESC : Printing the current language's name
 
-        local __locale_print_code__error;   # VAR TYPE : String     - DESC :
-        local __locale_print_code__newstep; # VAR TYPE : String     - DESC :
-        local __locale_print_code__success; # VAR TYPE : String     - DESC :
-        local __locale_print_code__warning; # VAR TYPE : String     - DESC :
+        local __locale_print_code__error;   # VAR TYPE : String     - DESC : Printing the current language's name and coloring the concatened text with the error messages color code.
+        local __locale_print_code__newstep; # VAR TYPE : String     - DESC : Printing the current language's name and coloring the concatened text with the newstep messages color code.
+        local __locale_print_code__success; # VAR TYPE : String     - DESC : Printing the current language's name and coloring the concatened text with the success messages color code.
+        local __locale_print_code__warning; # VAR TYPE : String     - DESC : Printing the current language's name and coloring the concatened text with the warning messages color code.
 
         # If the "${_____value_of__compile_stable}" value was passed in the array of optional arguments.
         if [ -n "${__vArrayVal_compile_stable}" ]; then
-            local __compiled_stable_file_parent_dir;
-            local __compiled_stable_file_path;
+            local __compiled_stable_file_parent_dir;    # VAR TYPE : Dirpath    - DESC :
+            local __compiled_stable_file_path;          # VAR TYPE : Filepath   - DESC :
 
             __compiled_stable_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/stable";
         fi
