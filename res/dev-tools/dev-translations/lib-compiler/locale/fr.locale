@@ -22,6 +22,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
                                         Ce fichier de traduction se trouve dans le dossier '.Bash-utils/config/initializer/locale', et porte ce nom :
                                         '\$code_iso_639-1.locale'.
 
+                                        Chaque code ISO 639-1 doit être séparé par un délimiteur. Les délimiteurs suivants sont acceptés (AUCUN ESPACE
+                                        N'EST AUTORISÉ ENTRE CHAQUE CODE) : ,;|~_.:!§
+
                                         Si, parmi les codes ISO 639-1 passés, le code 'en' (anglais) est absent, alors le fichier de traduction en
                                         anglais est embarqué dans le fichier compilé pour des raisons de sécurité : si le fichier de traduction de
                                         la langue actuelle voulue est incomplet, et / ou si l'utilisateur final essaie d'utiliser une autre langue
@@ -46,6 +49,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
 
                                         Chacun de ces fichiers de traduction se trouve dans le dossier mentionné dans la description de l'option obligatoire
                                         '--lang=' décrite ci-dessus, et porte le même nom de fichier.
+
+                                        Chaque code ISO 639-1 doit être séparé par un délimiteur. Les délimiteurs suivants sont acceptés (AUCUN ESPACE N'EST
+                                        AUTORISÉ ENTRE CHAQUE CODE) : ,;|~_.:!§
 
                                         Si, parmi les codes ISO 639-1 passés, le code 'en' (anglais) est absent, alors la même procédure mentionnée dans la
                                         description de l'option obligatoire '--lang=' décrite ci-dessus est appliquée pour les mêmes raisons sus-mentionnées.
