@@ -1155,20 +1155,18 @@ function CompileInSingleFile()
 
         if ! CheckISO639_1_LangCode "${v_curr_locale}"; then PrintErrorLine "${__locale_print_code__error} ${__BU_COMPILE__BAD_LANGUAGE_PASSED}" 'FULL'; ____loop_error='error'; break; fi
 
-        # ------------------------------------
-        # Framework compilation start message.
+        # ----------------------------------------------
+        # Framework compilation process startup message.
 
         PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL';
 
-        # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language).
+        # ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        # Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language along French).
 
-        # Checking if the 'en' value is present in the array of languages if the '--lang-include=' option was passed.
-        if [ -n "${__vMandatoryArgLangInclude}" ]; then
-            [[ ${__language_array[*]} =~ en ]] || local ____no_english_included='true';
-        fi
+        # Checking the mandatory first argument's value in order to include the English translation file into each non-english compiled files if the '--no-english-include' parameter was not passed.
+        if [ -z "${__vArrayVal_no_english_include}" ] && [[ ! ${__language_array[*]} =~ en ]]; then local ____no_english_included='true'; fi
 
-        if [[ (-n "${__vMandatoryArgLang}") && ("${v_curr_locale,,}" != "en") ]] || [[ (-n "${__vMandatoryArgLangInclude}") && (-n "${____no_english_included}") ]]; then
+        if [ "${____no_english_included,,}" == 'true' ]; then
             PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
 
             echo "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN}"; echo;
@@ -1183,6 +1181,9 @@ function CompileInSingleFile()
             [ -n "${__err}" ] || [ -n "${____err}" ] && { PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL'; QuitErrorMessage.NumberOfFilesCompiled; ____loop_error='error'; break; };
 
             PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
+
+            # Setting the value of the "${____no_english_included}" variable to "false", since the English translation file was included into the compiled file.
+            if [ "${____no_english_included,,}" == 'true' ]; then ____no_english_included='false'; fi
         fi
 
         # ------------------------------------------------------------------------------------------

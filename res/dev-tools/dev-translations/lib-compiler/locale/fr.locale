@@ -125,9 +125,8 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIASES_INCLUDE="
     -a --no-aliases-include             n'inclut pas le fichier des alias du module principal dans le fichier compilé.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE="
-    -e --no-english-include             ne crée pas de fichier compilé en anglais si le code ISO 639-1 de cette langue n'est pas passée avec le paramètre
-                                        '--lang=', et n'inclut pas le fichier de traduction en anglais dans le fichier de sortie si ce même code n'est pas
-                                        également passé avec le paramètre '--lang-include='";
+    -e --no-english-include             n'inclut pas le fichier de traduction en anglais dans le fichier de sortie si le framework est compilé dans une
+                                        langue autre que l'anglais."
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
     -s --no-shellcheck                  empêche l'exécution de la commande 'shellcheck' sur chaque fichier traité par le compilateur. Cette option est
