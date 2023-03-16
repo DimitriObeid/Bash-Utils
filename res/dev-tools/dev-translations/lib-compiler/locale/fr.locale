@@ -180,7 +180,7 @@ __BU_COMPILE__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE="
 # Vérifications avec la commande Shellcheck [-----] Shellcheck command verification.
 
 __BU_COMPILE__SHELLCHECK__DISABLED="AVERTISSEMENT : IL N'EST PAS RECOMMANDÉ D'EXÉCUTER CE SCRIPT SANS LA COMMANDE SHELLCHECK, À MOINS QUE VOUS NE SACHIEZ EXACTEMENT CE QUE VOUS FAITES !";
-__BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}LA COMMANDE ${__HIGHLIGHT}SHELLCHECK${__ERROR} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
+__BU_COMPILE__SHELLCHECK__MISSING="${__ERROR}LA COMMANDE ${__HIGHLIGHT}shellcheck${__ERROR} N'EST PAS INSTALLÉE SUR VOTRE SYSTÈME !${__RESET}";
 
 
 # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
