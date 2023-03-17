@@ -3212,6 +3212,7 @@ function BashUtils_InitModules()
                             local v_module_os_aliases_file_name;
 
                             v_module_os_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.osmodaliasfile.tmp")")";
+                    fi
 
                     if [ -n "${v_module_aliases_file_name}" ]; then
                         BU.ModuleInit.IsFrameworkCompiled || {
