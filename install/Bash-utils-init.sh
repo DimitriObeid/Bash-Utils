@@ -2842,10 +2842,10 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
 
+    # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES/PATH}" GLOBAL VARIABLES HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
     __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
-    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES=();
 
-    # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" GLOBAL VARIABLE HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
     __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="";
@@ -2854,11 +2854,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="${}";
 
-    __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
-    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES=( "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
-                                                            "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf");
 
-    # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH}" GLOBAL VARIABLE HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
+    # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES/PATH}" GLOBAL VARIABLES HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
+    __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES=();
+
     __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH="";
@@ -3184,6 +3184,12 @@ function BashUtils_InitModules()
                 # If the '--no-aliases-include' option was not passed to the modules initializer.
                 if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
                     BU.ModuleInit.Msg;
+
+                    # Assigning the files names to the "${__BU_MODULE_INIT__MODULES_DIR__(OS_)ALIASES_CONF__NAMES}" global variables.
+                    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES+=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
+
+                    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES+=(    "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
+                                                                                "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf");
 
                     # Getting the aliases file's path with a "for" loop.
                     for aliasesFilename in "${va_aliasesFileNames[@]}"; do
