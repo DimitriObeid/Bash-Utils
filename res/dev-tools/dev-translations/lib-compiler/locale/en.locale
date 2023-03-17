@@ -137,6 +137,10 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
                                         incompatible with the '-C' / '--compile-stable' option, an error message will be returned if both options
                                         are used together.";
 
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__REMOVE_SHELLCHECK_DIRECTIVES="
+    -S --remove-shellcheck-directives   removes the Shellcheck directives from the compiled file
+";
+
 
 # --------------------------------------------
 # "HandleIncompatibleOptionalArgs()" function.

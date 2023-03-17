@@ -785,6 +785,8 @@ _____value_of__no_aliases_include='--no-aliases-include';
 _____value_of__no_english_include='--no-english-include';
 _____value_of__no_shellcheck='--no-shellcheck';
 
+_____value_of__remove_shellcheck_directives='--remove-shellcheck-directives';
+
 # Looping through the array of optional arguments.
 for arg in "${__BU_ARGS_ARRAY[@]}"; do
     # If the user decided to create a stable version of the compiled framework.
@@ -848,9 +850,19 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
         __vArrayVal_no_english_include="${_____value_of__no_english_include}";
 
     # Else, if the user decides to prevent the execution of the 'shellcheck' command.
-    # WARNING : Do not check for programming errors in the files (not recommended, unless you know what you are doing).
-    elif [ "${arg}" == '-n' ] || [ "${arg,,}" == "${_____value_of__no_shellcheck}" ]; then
+    # WARNING : The compiler will not check for programming errors in the files to compile, the call of this option is not recommended, unless you know what you are doing.
+
+    # This option is not compatible with the "${__vArrayVal_compile_stable}" option.
+    elif [ "${arg}" == '-s' ] || [ "${arg,,}" == "${_____value_of__no_shellcheck}" ]; then
         __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
+
+
+    # Else, if the user decides to remove the Shellcheck directives from the compiled file.
+    # WARNING : Many false positive will be recorded by Shellcheck if you decide to execute this program with the compiled file.
+
+    # This option is not compatible with the "${__vArrayVal_compile_stable}" option.
+    elif [ "${arg}" == '-S' ] || [ "${arg,,}" == "${_____value_of__remove_shellcheck_directives}" ]; then
+        __vArrayVal_remove_shellcheck_directives="${_____value_of__remove_shellcheck_directives}";
 
     # --------------------------------------------------------------------------------
     # Else, if an unsupported argument is passed into the array of optional arguments.
