@@ -2840,10 +2840,10 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     # MODULES FILES
 
     __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
-    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="${}";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
 
     __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
-    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAME=("");
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
 
     # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" GLOBAL VARIABLE HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
     __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
@@ -2855,7 +2855,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="${}";
 
     __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
-    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAME=("");
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES=( "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
+                                                            "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf");
 
     # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH}" GLOBAL VARIABLE HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
     __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
@@ -3177,43 +3178,40 @@ function BashUtils_InitModules()
 
                 v_loop_error="error"; break;
             else
-                #**** Condition variables ****
-                local va_aliasesFileNames;      # VAR TYPE : ARRAY  - DESC :
-                local va_aliasesFileNamesOS;    # VAR TYPE : ARRAY  - DESC :
-
-                #**** Condition code ****
-                va_aliasesFileNames=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
-
-                va_aliasesFileNamesOS=( "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
-                                        "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf")
-
-                # Getting the aliases file's path with a "for" loop.
-                for aliasesFilename in "${va_aliasesFileNames[@]}"; do
-                    #**** Loop variables ****
-
-
-                    #**** Loop code ****
-
-                    # Checking if the path to the aliases file exists, then append it to the "${}" global variable.
-                    if []; then
-
-                    fi
-                done
+                # ---------------------------------------------------------------------------------------------------------------
+                # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
 
                 # If the '--no-aliases-include' option was not passed to the modules initializer.
                 if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
                     BU.ModuleInit.Msg;
 
-                    ## --------------------------------------------------------------------------------------------------------------
-                    # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
+                    # Getting the aliases file's path with a "for" loop.
+                    for aliasesFilename in "${va_aliasesFileNames[@]}"; do
+
+                        # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" variable.
+                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'modaliasfile'; then
+                            __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}/${aliasesFilename}";
+                        fi
+
+                        # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" variable.
+                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'osmodaliasfile'; then
+                            __BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}/${aliasesFilename}";
+                        fi
+                    done
 
                     # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
-                    if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Aliases.${v_module_name}.conf" 'shut' 'f' 'modaliasfile')" ]]; then
+                    if [ -n "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" ]    && [ -f "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" ]; then
 
                             local v_module_aliases_file_name;
 
                             v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modaliasfile.tmp")")";
                     fi
+
+                    if [ -n "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" ] && [ -f "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" ]; then
+
+                            local v_module_os_aliases_file_name;
+
+                            v_module_os_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.osmodaliasfile.tmp")")";
 
                     if [ -n "${v_module_aliases_file_name}" ]; then
                         BU.ModuleInit.IsFrameworkCompiled || {
@@ -3230,10 +3228,26 @@ function BashUtils_InitModules()
                         }
                     fi
 
+                    if [ -n "${v_module_os_aliases_file_name}" ]; then
+                        BU.ModuleInit.IsFrameworkCompiled || {
+                            # If the aliases file is empty.
+                            if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
+
+                            source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" || {
+                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_os_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                                v_loop_error="error";
+
+                                break;
+                            }
+                        }
+                    fi
+
                     unset v_module_aliases_file_name;
+                    unset v_module_os_aliases_file_name;
                 fi
 
-                ## ---------------------------------------------------
+                # ----------------------------------------------------
                 # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
 
                 # shellcheck disable=SC2059
@@ -3292,7 +3306,7 @@ function BashUtils_InitModules()
                 unset v_module_config_file_name;
             fi
 
-            ## ----------------------------------------------
+            # -----------------------------------------------
 
             # MODULES' INITIALIZATION FILES SOURCING
 
