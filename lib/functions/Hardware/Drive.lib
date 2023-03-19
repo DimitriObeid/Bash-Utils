@@ -312,12 +312,71 @@ function BU.Hardware.Drive.IsSDCard()
 }
 
 # ···························································
+# Checking if the targeted storage device is a mini SD card.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsMiniSDCard()
+{
+    return 0;
+}
+
+# ···························································
 # Checking if the targeted storage device is a micro SD card.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 function BU.Hardware.Drive.IsMicroSDCard()
+{
+    return 0;
+}
+
+## ----------------------------------------------
+
+## STORAGE
+
+# ···························································
+# Checking if the targeted SD card's capacity
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsSDCardCapacitySDSC()
+{
+    return 0;
+}
+
+# ···························································
+# Checking if the targeted SD card's capacity
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsSDCardCapacitySDHC()
+{
+    return 0;
+}
+
+# ···························································
+# Checking if the targeted SD card's capacity
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsSDCardCapacitySDXC()
+{
+    return 0;
+}
+
+# ···························································
+# Checking if the targeted SD card's capacity
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.IsSDCardCapacitySDUC()
 {
     return 0;
 }
