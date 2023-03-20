@@ -138,8 +138,10 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
                                         are used together.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__REMOVE_SHELLCHECK_DIRECTIVES="
-    -S --remove-shellcheck-directives   removes the Shellcheck directives from the compiled file
-";
+    -S --remove-shellcheck-directives   removes the Shellcheck directives from the compiled file.
+
+                                        WARNING : Many false positive will be returned by Shellcheck if you decide to execute this program with the
+                                        compiled file, so this option is incompatible with the '--compile-stable' option.";
 
 
 # --------------------------------------------
