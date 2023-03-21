@@ -775,6 +775,7 @@ _____value_of__display='--display';
 
 _____value_of__help='--help'
 
+# If this value is passed as optional argument, the '--keep-functions(-pvc)-infos' parameters will not be processed.
 _____value_of__keep_comments='--keep-comments';
 _____value_of__keep_exec_safeguards='--keep-exec-safeguards';
 _____value_of__keep_functions_infos='--keep-functions-infos';
@@ -785,6 +786,7 @@ _____value_of__no_aliases_include='--no-aliases-include';
 _____value_of__no_english_include='--no-english-include';
 _____value_of__no_shellcheck='--no-shellcheck';
 
+# If the '--keep-comments' or the '--keep-raw-document-layout' value is passed as optional argument, this parameter will not be processed.
 _____value_of__remove_shellcheck_directives='--remove-shellcheck-directives';
 
 # Looping through the array of optional arguments.
@@ -902,13 +904,15 @@ if [ -n "${__vArrayVal_keep_raw_document_layout}" ]; then
     if  [ -n "${__vArrayVal_keep_comments}" ] || \
         [ -n "${__vArrayVal_keep_exec_safeguards}" ] || \
         [ -n "${__vArrayVal_keep_functions_infos}" ] || \
-        [ -n "${__vArrayVal_keep_functions_pvc_infos}" ]; then
-
+        [ -n "${__vArrayVal_keep_functions_pvc_infos}" ] || \
+        [ -n "${__vArrayVal_remove_shellcheck_directives}" ];
+    then
         HandleIncompatibleOptionalArgs \
             "${__vArrayVal_keep_comments}" \
             "${__vArrayVal_keep_exec_safeguards}" \
             "${__vArrayVal_keep_functions_infos}" \
-            "${__vArrayVal_keep_functions_pvc_infos}";
+            "${__vArrayVal_keep_functions_pvc_infos}" \
+            "${__vArrayVal_remove_shellcheck_directives}";
     fi
 fi
 
