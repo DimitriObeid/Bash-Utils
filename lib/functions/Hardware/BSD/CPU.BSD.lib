@@ -233,7 +233,7 @@ function BU.Hardware.BSD.CPU.GetArch()              { if BU.Main.CMDS.GetCommand
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.BSD.CPU.IsCPUMonocore()            { return 0; }
+function BU.Hardware.BSD.CPU.IsMonocore()            { return 0; }
 
 ## ----------------------------------------------
 
@@ -275,7 +275,7 @@ function BU.Hardware.BSD.CPU.GetPhysicalCoresNumber()   { return 0; }
 
 ## ----------------------------------------------
 
-## GETTING THE CPU'S ClOCK DATA
+## GETTING THE CPU'S CLOCK DATA
 
 # ····························
 # Getting the clock frequency.
