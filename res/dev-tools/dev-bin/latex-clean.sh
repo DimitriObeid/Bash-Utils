@@ -108,4 +108,6 @@
 
 ######################################################### CODE ########################################################
 
-find docs/ -name "*.aux" "*.log" "*.out" "*.synctex.gz" "*.toc" -exec rm {} +
+find docs/ -name "*.aux" -o -name "*.log" -o -name "*.fdb_latexmk" -o -name "*.fls" -o -name "*.out" -o -name "*.synctex.gz" -o -name "*.toc";
+
+find docs/ -name "*.aux" -o -name "*.log" -o -name "*.fdb_latexmk" -o -name "*.fls" -o -name "*.out" -o -name "*.synctex.gz" -o -name "*.toc" -exec rm {} +;
