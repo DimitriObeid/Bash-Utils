@@ -235,6 +235,14 @@ function BU.Hardware.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath
 
 function BU.Hardware.CPU.IsMonocore()               { return 0; }
 
+# ·································
+# Checking if the CPU is multi-core.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.CPU.IsMulticore()              { return 0; }
+
 ## ----------------------------------------------
 
 ## GETTING THE CPU(s) CORES DATA

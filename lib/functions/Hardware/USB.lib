@@ -3,7 +3,7 @@
 # ---------------------
 # FILE'S INFORMATIONS :
 
-# Name          : General.lib
+# Name          : USB.lib
 # Module        : Hardware
 # Author(s)     : Dimitri OBEID
 # Version       :
@@ -12,7 +12,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-#
+# Functions used to process data and parameters about the computer's USB port(s) and stick(s) with the help of the system commands on any supported operating system.
 
 
 # ----------------------------
@@ -84,48 +84,3 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
-
-# ·······························
-# Getting the computer's chassis.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
-
-# ····································
-# Getting the computer's chassis type.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.General.GetChassisType()
-{
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
-        if BU.Main.Checkings.CheckRootEUID; then
-            BU.Main.Echo.msg "$(dmidecode -s chassis-type)" 'n';
-
-            return 0;
-        else
-            BU.Main.Echo.Msg "$(sudo dmidecode -s chassis-type)" 'n';
-
-            return 1;
-        fi
-    fi
-}
-
-# ·························
-# Getting the machine's ID.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
-
-# ····················
-# Getting the boot ID.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }
