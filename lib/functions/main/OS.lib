@@ -565,7 +565,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
                 return 1;
-            }
+            };
 
             BU.Main.OS.IsLinuxDistroDebian && {
                 BU.Main.OS.IsLinuxDistroDebian5             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -580,7 +580,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
                 return 1;
-            }
+            };
 
             BU.Main.OS.IsLinuxDistroFedora && {
                 BU.Main.OS.IsLinuxDistroFedora18            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -607,7 +607,34 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
                 return 1;
-            }
+            };
+
+            BU.Main.OS.IsLinuxDistroLinuxMint && {
+                true;
+
+                # Returning an error code if the specific version of Arch Linux is not found.
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            };
+
+            BU.Main.OS.IsLinuxDistroManjaro && {
+                true;
+
+                # Returning an error code if the specific version of Arch Linux is not found.
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            };
+
+            BU.Main.OS.IsLinuxDistroSUSE && {
+                true;
+
+                # Returning an error code if the specific version of Arch Linux is not found.
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            };
 
             BU.Main.OS.IsLinuxDistroUbuntu && {
                 BU.Main.OS.IsLinuxDistroUbuntu10_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -642,7 +669,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
                 return 1;
-            }
+            };
 
             # Returning an error code if the Linux distribution is not found.
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -760,20 +787,6 @@ function BU.Main.OS.IsLinuxDistroFedora36()           	{ BU.Main.OS.CheckLinuxDi
 
 # --------------------
 
-# ··················································
-# Checking if current Linux distribution is Manjaro.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistro Manjaro                       	&&      return 0;       return 1; }
-
-# ···························································································································································
-# Checking Manjaro versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
-
-
-# --------------------
-
 # ·····················································
 # Checking if current Linux distribution is Linux Mint.
 
@@ -784,6 +797,20 @@ function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDist
 
 # ······························································································································································
 # Checking Linux Mint versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
+
+
+# --------------------
+
+# ··················································
+# Checking if current Linux distribution is Manjaro.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Main.OS.IsLinuxDistroManjaro()           	{ BU.Main.OS.GetLinuxDistro Manjaro                       	&&      return 0;       return 1; }
+
+# ···························································································································································
+# Checking Manjaro versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
 
 
 # --------------------
