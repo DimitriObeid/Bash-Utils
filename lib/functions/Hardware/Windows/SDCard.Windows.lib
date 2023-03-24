@@ -3,7 +3,7 @@
 # ---------------------
 # FILE'S INFORMATIONS :
 
-# Name          : General.Windows.lib
+# Name          : SDCard.Windows.lib
 # Module        : Hardware
 # Author(s)     : Dimitri OBEID
 # Version       :
@@ -12,7 +12,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-#
+# Functions used to process data and parameters about the computer's SD card(s) with the help of the WSL / Windows system's commands.
 
 
 # ----------------------------
