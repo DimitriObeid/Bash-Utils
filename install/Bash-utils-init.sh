@@ -850,6 +850,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
     # CONFIGURATION DIRECTORIES
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS}" '+' 'msg'; BU.ModuleInit.Msg;
 
+    # "${__BU_MODULE_INIT__CONFIG_DIR_*}" global variables.
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_DIR_PARENT" "${__BU_MODULE_INIT__CONFIG_DIR_PARENT}" 'Dirpath' "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PARENT}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_dir_parent__lineno}";
 
@@ -860,6 +861,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_dir_path__lineno}";
 
 
+    # "${__BU_MODULE_INIT__CONFIG_INIT_DIR_*}" global variables.
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT" "${__BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT}" 'Dirpath' "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PARENT}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir_parent__lineno}";
 
@@ -870,6 +872,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir_path__lineno}";
 
 
+    # "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_*}" global variables.
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT" "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT}" 'Dirpath' "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PARENT}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_modules_dir_parent__lineno}";
 
@@ -880,6 +883,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_modules_dir_path__lineno}";
 
 
+    # "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_*}" global variables.
     BU.ModuleInit.DisplayInitGlobalVarsInfos "__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT" "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT}" 'Dirpath' "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR_PARENT}"
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_lang_dir_parent__lineno}";
 
@@ -2852,7 +2856,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
 
     __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
-    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="${}";
+    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="";
 
 
     # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES/PATH}" GLOBAL VARIABLES HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
@@ -2898,8 +2902,14 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
         __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}" 'f' || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR'; BU.ModuleInit.IsInScript && exit 1; return 1; })";
-        __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO - 1 ))";
+        __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO + 2 ))";
+
+        __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME}" 'f')" || {
+            printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
+                "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR';
+
+            BU.ModuleInit.IsInScript && exit 1; return 1;
+        };
     fi
 
     # -------------------------------------------
