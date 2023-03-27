@@ -294,8 +294,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 #   - BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
-
-function.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
 function BU.Main.Text.CutFirstFieldBeforeDelim()
 {
@@ -321,8 +320,7 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
 #   - BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()  -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
-
-function.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
 function BU.Main.Text.CutLastFieldAfterDelim()
 {
@@ -378,9 +376,9 @@ function BU.Main.Text.DeleteLettersInString()
 # ···················································
 # Replacing letters and sub-strings in a main string.
 
-# Featured function(s) and file(s) by module(s) and.lib
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 
-function.Main.Echo.Debug()          -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
 function BU.Main.Text.ReplaceLettersInString()
@@ -541,8 +539,7 @@ function BU.Main.Text.GetCharacterOccurences()
 #   - BU.Main.Args__Text.GetFirstLastCharacter()    -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
-
-function.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
 function BU.Main.Text.GetFirstCharacter()
 {
