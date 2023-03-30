@@ -1301,6 +1301,8 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDI
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsPositiveInt() -> Main -> Checkings.lib
 
+#   - BU.Main.Decho.Decho.Function()    -> Main -> Decho.lib
+
 #   - BU.Main.Echo.__EchoCPLS()         -> Main -> Echo.lib
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib

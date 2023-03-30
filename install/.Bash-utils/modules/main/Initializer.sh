@@ -540,7 +540,7 @@ BU.Main.Directories.MkTmpDir || {
 ## ----------------------------------------------
 
 ## PROCESSING SOME DIRECTORIES AND FILES
-rm -rfv "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/:?}/"*;
+# rm -rfv "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT/:?}/"*;
 
 # Creating the text and background color code files if the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatAllowFormatting; then
@@ -579,7 +579,7 @@ fi
 
 # Creating the project's log file if the "${__BU_MAIN_STAT_LOG}" global status variable's value is set to "true".
 if BU.Main.Status.CheckStatIsLogging; then
-if [ -d "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}" ]; then clear; echo "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"; else echo FAILED; echo "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"; fi
+    # if [ -d "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}" ]; then clear; echo "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"; else echo FAILED; echo "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}"; fi
 
     # If the file which stores every log entry doesn't exists, then it must be created.
     if [ ! -f "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" ]; then
@@ -597,7 +597,7 @@ if [ -d "${__BU_MAIN_PROJECT_LOG_FILE_PARENT}" ]; then clear; echo "${__BU_MAIN_
     fi
 fi
 
-exit 0;
+# exit 0;
 
 ## ----------------------------------------------
 
