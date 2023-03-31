@@ -753,7 +753,7 @@ function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 
 function BU.Main.OS.CheckLinuxKernelPatchNumber() { return 0; }
 
-# ·················································································
+# ··················································································
 # Checking the configuration of the Kernel of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
