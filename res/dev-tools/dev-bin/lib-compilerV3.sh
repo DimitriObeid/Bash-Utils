@@ -768,6 +768,7 @@ function QuitErrorMessage.NumberOfFilesCompiled()
 _____value_of__compilation_authors='--compilation-authors';
 _____value_of__compilation_version='--compilation-version';
 
+_____value_of__compile_lite='--compile-lite';
 _____value_of__compile_stable='--compile-stable';
 _____value_of__compile_unstable='--compile-unstable';
 
@@ -812,7 +813,7 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
 
 
     # Else, if the user decides to display the content of each compiled file as they are processed by the compiler.
-    elif [ "${arg,,}" == "${_____value_of__display}" ]; then
+    elif [ "${arg}" == '-d' ] || [ "${arg,,}" == "${_____value_of__display}" ]; then
         __vArrayVal_display="${_____value_of__display}";
 
 

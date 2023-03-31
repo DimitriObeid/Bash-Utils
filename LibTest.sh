@@ -23,7 +23,7 @@ fi
 if ! BashUtils_InitModules \
     "module --log-display --mode-log-full --stat-debug=false --stat-debug-bashx=file --include-aliases=main,hardware" \
     "main --stat-debug=true stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-txt=1 --stat-txt-fmt=true" \
-    "Hardware";
+    "Hardware"
 
     then
 	    echo >&2; echo "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
@@ -82,10 +82,10 @@ fi
 # /////////////////////////////////////////////// TESTING BASH-UTILS FUNCTIONS //////////////////////////////////////////////// #
 
 # Testing functions
-BU.Main.Echo.Newstep "Architecture du processeur : $(BU.Hardware.CPU.GetArch || BU.Main.Echo.Error "False")";
+BU.Main.Echo.Newstep "Architecture du processeur : $(BU.Hardware.Linux.CPU.GetArch || BU.Main.Echo.Error "False")";
 
 # This command pauses the script, in order to see how much memory it uses.
-sleep 1
+# sleep 1
 
 # Testing a BU.Main.Decho.Decho.FMT function
 # BU.Main.Decho.Decho.FMT_BlinkBoldDISU "Hello world" "${__BU_MAIN_COLOR_TXT_ORANGE}";

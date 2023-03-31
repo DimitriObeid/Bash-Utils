@@ -81,6 +81,10 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
     -V --compilation-version=[VERSION]  définit la version du fichier compilé, sauf si l'option '-r' / '--keep-raw-document-layout' est passée. Si cette
                                         valeur est absente, le numéro de version '1.0' est écrit dans la section 'version :'.";
 
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_LITE="
+    -l --compile-lite                   compile une version légère du framework, sans les fonctions du script d'initialisation principal.
+";
+
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
     -C --compile-stable                 convertit le fichier compilé dans une version stable. Cette option force l'exécution de la commande 'shellcheck'
                                         pour chaque fichier à compiler traité par le compilateur, et en fait de même avec le fichier de sortie une fois

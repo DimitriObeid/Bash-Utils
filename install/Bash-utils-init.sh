@@ -2061,8 +2061,8 @@ function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_
 
 function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'true' ] && return 0; return 1; }
 
-# ···········································
-# Processing the "module" value's parameters.
+# ·····················································································
+# Processing the "module" value's parameters during the top priority modules inclusion.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.AskPrintLog()                   -> Modules initializer script (this file)
@@ -2563,6 +2563,354 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     return 0;
 })
 
+# ····························································································
+# Initializing every modules from the "()" function or any other modules initializer function.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Decho.Decho.Highlight()               -> Main -> Decho.lib
+
+#   - BU.Main.Headers.Header.Green()                -> Main -> Headers.lib
+
+#   - BU.ModuleInit.DisplayInitGlobalVarsInfos()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.Exit()                          -> Modules initializer script (this file)
+#   - BU.ModuleInit.FindPath()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkCompiled()           -> Modules initializer script (this file)
+#   - BU.ModuleInit.ListInstalledModules()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgAbort()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgLine()                       -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
+#   - BU.ModuleInit.ProcessFirstModuleParameters()  -> Modules initializer script (this file)
+
+# shellcheck disable=SC1090
+function BashUtils_InitModules._()
+{
+    #**** Parameters ****
+    local p_modules_list=("${@}");
+
+    #**** Variables ****
+    local v_index=0;    # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
+
+    #**** Code ****
+    # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
+    for module in "${p_modules_list[@]}"; do
+
+        ## ----------------------------------------------
+
+        ## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
+
+        # Calling the function which processes the « module » argument and its parameters, along with the « main » module.
+        if [ "${FUNCNAME[1]}" == 'BashUtils_InitModules' ]; then
+            BU.ModuleInit.ProcessFirstModuleParameters "${module}" "${v_index}" || { v_loop_error='error'; break; }
+        fi
+
+        ## ----------------------------------------------
+
+        ## DEFINING LOCAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+
+        # Defining variables for each iteration.
+        local v_module_name;
+
+        v_module_name="$(echo "${module}" | cut -d' ' -f1)";
+
+        ## ----------------------------------------------
+
+        ## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+
+        __BU_MODULE_INIT_MODULE_NAME="${v_module_name}";
+
+        # Getting the current module's configurations directory AND its initialization directory (the "module --"* value is NOT a module).
+        if [[ "${module}" != 'module --'* ]]; then
+
+            # Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
+            __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" "${v_module_name}" 'd' || {
+                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+            })";
+
+            # shellcheck disable=SC2059
+            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
+                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" \
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+
+
+            # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
+            __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR}" "${v_module_name}" 'd' || {
+                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+
+                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+            })";
+
+            # shellcheck disable=SC2059
+            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'Dirpath' \
+                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+        fi
+
+        # Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
+        if [[ "${p_modules_list[i]}" == "${v_module_name} --"* ]]; then
+
+            # shellcheck disable=SC2034
+            __BU_MODULE_INIT_MODULE_AND_ARGS_STRING="${module}";
+
+            # shellcheck disable=SC2059
+            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" 'String' \
+                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" "${FUNCNAME[0]}" "${#p_modules_list}" "${module}")" \
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+        fi
+
+        # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
+        if [[ "${module}" != 'module --'* ]]; then
+
+            ## ----------------------------------------------
+
+            # MODULES' CONFIGURATION FILES SOURCING
+
+            # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
+            if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}"; then local lineno="${LINENO}";
+                # shellcheck disable=SC2059
+                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__INITMODULE__MODULE_CONFIG_DIR_NOT_FOUND";
+
+                printf '\n' >&2;
+
+                # shellcheck disable=SC2059
+                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_module_name}" >&2;
+
+                # shellcheck disable=SC2059
+                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE}" >&2; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'f' >&2;
+                printf '\n\n';
+
+                # Listing all the installed modules in the user's hard drive.
+                # No need to call the function "BU.ModuleInit.AskPrintLog" function, it's already called in the function "BU.ModuleInit.ListInstalledModules".
+                BU.ModuleInit.ListInstalledModules || { v_loop_error="error"; break; }
+
+                v_loop_error="error"; break;
+            else
+                # ---------------------------------------------------------------------------------------------------------------
+                # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
+
+                # If the '--no-aliases-include' option was not passed to the modules initializer.
+                if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
+                    BU.ModuleInit.Msg;
+
+                    # Assigning the files names to the "${__BU_MODULE_INIT__MODULES_DIR__(OS_)ALIASES_CONF__NAMES}" global variables.
+                    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES+=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
+
+                    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES+=(    "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
+                                                                                    "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf");
+
+                    # Getting the aliases file's path with a "for" loop.
+                    for aliasesFilename in "${va_aliasesFileNames[@]}"; do
+
+                        # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" variable.
+                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'modaliasfile'; then
+                            __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}/${aliasesFilename}";
+                        fi
+
+                        # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" variable.
+                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'osmodaliasfile'; then
+                            __BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}/${aliasesFilename}";
+                        fi
+                    done
+
+                    # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
+                    if [ -n "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" ]    && [ -f "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" ]; then
+
+                            local v_module_aliases_file_name;
+
+                            v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modaliasfile.tmp")")";
+                    fi
+
+                    if [ -n "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" ] && [ -f "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" ]; then
+
+                            local v_module_os_aliases_file_name;
+
+                            v_module_os_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.osmodaliasfile.tmp")")";
+                    fi
+
+                    if [ -n "${v_module_aliases_file_name}" ]; then
+                        BU.ModuleInit.IsFrameworkCompiled || {
+                            # If the aliases file is empty.
+                            if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
+
+                            source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" || {
+                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                                v_loop_error="error";
+
+                                break;
+                            }
+                        }
+                    fi
+
+                    if [ -n "${v_module_os_aliases_file_name}" ]; then
+                        BU.ModuleInit.IsFrameworkCompiled || {
+                            # If the aliases file is empty.
+                            if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
+
+                            source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" || {
+                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_os_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                                v_loop_error="error";
+
+                                break;
+                            }
+                        }
+                    fi
+
+                    unset v_module_aliases_file_name;
+                    unset v_module_os_aliases_file_name;
+                fi
+
+                # ----------------------------------------------------
+                # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
+
+                # shellcheck disable=SC2059
+                BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE_MSG}" "${v_module_name}")" '#' 'msg'; BU.ModuleInit.Msg;
+
+                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
+                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Module.${v_module_name}.conf" 'f' 'shut' 'modconffile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Module.conf" 'f' 'shut' 'modconffile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Module.${v_module_name}.Module.conf" 'f' 'shut' 'modconffile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Module.${v_module_name}.conf" 'f' 'shut' 'modconffile')" ]] \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "module.conf" 'f' 'shut' 'modconffile')" ]]; then
+
+                        local v_module_config_file_name;
+
+                        v_module_config_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modconffile.tmp")")";
+                else
+                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
+
+                    # shellcheck disable=SC2059
+                    printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
+
+                    BU.ModuleInit.MsgAbort;
+
+                    BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
+
+                    v_loop_error="error"; break;
+                fi
+
+                BU.ModuleInit.IsFrameworkCompiled || {
+                    # If the module's configuration file is empty, then the initialization stops.
+                    if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" ]; then
+
+                        # shellcheck disable=SC2059
+                        BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_IS_EMPTY}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_IS_EMPTY";
+
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                        BU.ModuleInit.MsgAbort;
+
+                        BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
+
+                        v_loop_error='error';
+
+                        break;
+                    fi
+
+                    source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" || {
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
+                    }
+                }
+
+                unset v_module_config_file_name;
+            fi
+
+            # -----------------------------------------------
+
+            # MODULES' INITIALIZATION FILES SOURCING
+
+            # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
+            if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}"; then local lineno="${LINENO}";
+                # shellcheck disable=SC2059
+                BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" "${v_module_name}")" "$(basename "${BASH_SOURCE[0]}")" "${lineno}" "E_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
+
+                printf '\n' >&2;
+
+                # shellcheck disable=SC2059
+                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_module_name}" >&2;
+
+                # shellcheck disable=SC2059
+                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE}"; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'f' >&2;
+                printf '\n\n' >&2;
+
+                BU.ModuleInit.MsgAbort;
+
+                v_loop_error="error"; break;
+            else
+                # shellcheck disable=SC2059
+                BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE}" "${v_module_name}")" '-' 'msg';
+
+                ## ----------------------------------------------------
+                # MANDATORY : SOURCING THE MODULE'S INITIALIZATION FILE
+
+                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
+                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.sh" 'f' 'shut' 'modinitfile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.sh" 'f' 'shut' 'modinitfile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.Initializer.sh" 'f' 'shut' 'modinitfile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.${v_module_name}.sh" 'f' 'shut' 'modinitfile')" ]] || \
+
+                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.sh" 'f' 'shut' 'modinitfile')" ]]; then
+                        local v_module_init_file_name;
+
+                        v_module_init_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modinitfile.tmp")")";
+                else
+                    # shellcheck disable=SC2059
+                    BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
+
+                    BU.ModuleInit.MsgAbort;
+
+                    BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
+
+                    v_loop_error="error"; break;
+                fi
+
+                BU.ModuleInit.IsFrameworkCompiled || {
+                    # If the module's initializer file is empty, then the initialization stops.
+                    if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" ]; then
+
+                        # shellcheck disable=SC2059
+                        BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_IS_EMPTY";
+
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                        BU.ModuleInit.MsgAbort;
+
+                        BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
+
+                        v_loop_error='error';
+
+                        break;
+                    fi
+
+                    source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" || {
+                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
+                    }
+                }
+
+                unset v_module_init_file_name;
+
+                # shellcheck disable=SC2059
+                BU.Main.Headers.Header.Green "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT}" "$(BU.Main.Decho.Decho.Highlight "${v_module_name}")")";
+            fi
+        fi
+
+        # Incrementing the modules array index variable.
+        v_index="$(( v_index + 1 ))";
+
+    done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+}
+
 ## ----------------------------------------------
 
 
@@ -3029,22 +3377,15 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 #   - BU.Main.Status.CheckStatIsInitializing()      -> Main -> Status.lib
 
 #   - BU.ModuleInit.AskPrintLog()                   -> Modules initializer script (this file)
-#   - BU.ModuleInit.DisplayInitGlobalVarsInfos()    -> Modules initializer script (this file)
 #   - BU.ModuleInit.Exit()                          -> Modules initializer script (this file)
-#   - BU.ModuleInit.FindPath()                      -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsInScript()                    -> Modules initializer script (this file)
-#   - BU.ModuleInit.IsFrameworkCompiled()           -> Modules initializer script (this file)
-#   - BU.ModuleInit.ListInstalledModules()          -> Modules initializer script (this file)
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
-#   - BU.ModuleInit.MsgAbort()                      -> Modules initializer script (this file)
-#   - BU.ModuleInit.MsgLine()                       -> Modules initializer script (this file)
-#   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
-#   - BU.ModuleInit.ProcessFirstModuleParameters()  -> Modules initializer script (this file)
 #   - BU.ModuleInit.SourcingFailure()               -> Modules initializer script (this file)
 
 # shellcheck disable=SC1090
 function BashUtils_InitModules()
 {
+
     #**** Pre-initialization processing ****
     if [ -n "${__BU_MODULE_INIT_IS_SOURCED}" ] && [ "sourced" == "${__BU_MODULE_INIT_IS_SOURCED}" ]; then
         # shellcheck disable=SC2059
@@ -3057,8 +3398,6 @@ function BashUtils_InitModules()
 	#**** Variables (global) ****
 
 	#**** Variables (local) ****
-    local v_index=0;    # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
-    local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
 	#**** Code ****
 	# Checking if the arguments array length is equal to zero (no arguments passed).
@@ -3095,320 +3434,10 @@ function BashUtils_InitModules()
 	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
-	# Checking if any wanted module exists with its configuration and its library, then source every related shell files.
-	for module in "${p_modules_list[@]}"; do
-
-		## ----------------------------------------------
-
-		## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
-
-		# Calling the function which processes the « module » argument and its parameters, along with the « main » module.
-        BU.ModuleInit.ProcessFirstModuleParameters "${module}" "${v_index}" || { v_loop_error='error'; break; }
-
-		## ----------------------------------------------
-
-		## DEFINING LOCAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
-
-		# Defining variables for each iteration.
-		local v_module_name;
-
-        v_module_name="$(echo "${module}" | cut -d' ' -f1)";
-
-		## ----------------------------------------------
-
-		## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
-
-		__BU_MODULE_INIT_MODULE_NAME="${v_module_name}";
-
-		# Getting the current module's configurations directory AND its initialization directory (the "module --"* value is NOT a module).
-		if [[ "${module}" != 'module --'* ]]; then
-
-            # Getting the current module's configurations directory, in order to process each directory's files and sub-folders.
-            __BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" "${v_module_name}" 'd' || {
-                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
-
-                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
-            })";
-
-            # shellcheck disable=SC2059
-            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
-                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-
-
-            # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
-            __BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR}" "${v_module_name}" 'd' || {
-                BU.ModuleInit.AskPrintLog || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
-
-                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
-            })";
-
-            # shellcheck disable=SC2059
-            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'Dirpath' \
-                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-        fi
-
-		# Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
-		if [[ "${p_modules_list[i]}" == "${v_module_name} --"* ]]; then
-
-            # shellcheck disable=SC2034
-			__BU_MODULE_INIT_MODULE_AND_ARGS_STRING="${module}";
-
-			# shellcheck disable=SC2059
-			BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" 'String' \
-				"$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" "${FUNCNAME[0]}" "${#p_modules_list}" "${module}")" \
-				"${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
-		fi
-
-        # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
-        if [[ "${module}" != 'module --'* ]]; then
-
-            ## ----------------------------------------------
-
-            # MODULES' CONFIGURATION FILES SOURCING
-
-            # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
-            if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}"; then local lineno="${LINENO}";
-                # shellcheck disable=SC2059
-                BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__INITMODULE__MODULE_CONFIG_DIR_NOT_FOUND";
-
-                printf '\n' >&2;
-
-                # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_module_name}" >&2;
-
-                # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE}" >&2; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'f' >&2;
-                printf '\n\n';
-
-                # Listing all the installed modules in the user's hard drive.
-                # No need to call the function "BU.ModuleInit.AskPrintLog" function, it's already called in the function "BU.ModuleInit.ListInstalledModules".
-                BU.ModuleInit.ListInstalledModules || { v_loop_error="error"; break; }
-
-                v_loop_error="error"; break;
-            else
-                # ---------------------------------------------------------------------------------------------------------------
-                # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
-
-                # If the '--no-aliases-include' option was not passed to the modules initializer.
-                if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
-                    BU.ModuleInit.Msg;
-
-                    # Assigning the files names to the "${__BU_MODULE_INIT__MODULES_DIR__(OS_)ALIASES_CONF__NAMES}" global variables.
-                    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES+=("Aliases.conf" "Aliases.${v_module_name}.conf" "${v_module_name}.Aliases.conf");
-
-                    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES+=(    "${}.Aliases.${v_module_name}" "Aliases.${v_module_name}.${}.conf" \
-                                                                                "${}.${v_module_name}.Aliases.conf" "Aliases.${}.${v_module_name}.conf");
-
-                    # Getting the aliases file's path with a "for" loop.
-                    for aliasesFilename in "${va_aliasesFileNames[@]}"; do
-
-                        # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" variable.
-                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'modaliasfile'; then
-                            __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}/${aliasesFilename}";
-                        fi
-
-                        # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" variable.
-                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'osmodaliasfile'; then
-                            __BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}/${aliasesFilename}";
-                        fi
-                    done
-
-                    # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
-                    if [ -n "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" ]    && [ -f "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" ]; then
-
-                            local v_module_aliases_file_name;
-
-                            v_module_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modaliasfile.tmp")")";
-                    fi
-
-                    if [ -n "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" ] && [ -f "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" ]; then
-
-                            local v_module_os_aliases_file_name;
-
-                            v_module_os_aliases_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.osmodaliasfile.tmp")")";
-                    fi
-
-                    if [ -n "${v_module_aliases_file_name}" ]; then
-                        BU.ModuleInit.IsFrameworkCompiled || {
-                            # If the aliases file is empty.
-                            if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
-
-                            source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" || {
-                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
-
-                                v_loop_error="error";
-
-                                break;
-                            }
-                        }
-                    fi
-
-                    if [ -n "${v_module_os_aliases_file_name}" ]; then
-                        BU.ModuleInit.IsFrameworkCompiled || {
-                            # If the aliases file is empty.
-                            if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
-
-                            source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" || {
-                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_os_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
-
-                                v_loop_error="error";
-
-                                break;
-                            }
-                        }
-                    fi
-
-                    unset v_module_aliases_file_name;
-                    unset v_module_os_aliases_file_name;
-                fi
-
-                # ----------------------------------------------------
-                # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
-
-                # shellcheck disable=SC2059
-                BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE_MSG}" "${v_module_name}")" '#' 'msg'; BU.ModuleInit.Msg;
-
-                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
-                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Module.${v_module_name}.conf" 'f' 'shut' 'modconffile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Module.conf" 'f' 'shut' 'modconffile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Module.${v_module_name}.Module.conf" 'f' 'shut' 'modconffile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_name}.Module.${v_module_name}.conf" 'f' 'shut' 'modconffile')" ]] \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "module.conf" 'f' 'shut' 'modconffile')" ]]; then
-
-                        local v_module_config_file_name;
-
-                        v_module_config_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modconffile.tmp")")";
-                else
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
-
-                    # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
-
-                    BU.ModuleInit.MsgAbort;
-
-                    BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
-
-                    v_loop_error="error"; break;
-                fi
-
-                BU.ModuleInit.IsFrameworkCompiled || {
-                    # If the module's configuration file is empty, then the initialization stops.
-                    if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" ]; then
-
-                        # shellcheck disable=SC2059
-                        BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_IS_EMPTY}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_IS_EMPTY";
-
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
-
-                        BU.ModuleInit.MsgAbort;
-
-                        BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
-
-                        v_loop_error='error';
-
-                        break;
-                    fi
-
-                    source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" || {
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
-                    }
-                }
-
-                unset v_module_config_file_name;
-            fi
-
-            # -----------------------------------------------
-
-            # MODULES' INITIALIZATION FILES SOURCING
-
-            # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
-            if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}"; then local lineno="${LINENO}";
-                # shellcheck disable=SC2059
-                BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" "${v_module_name}")" "$(basename "${BASH_SOURCE[0]}")" "${lineno}" "E_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
-
-                printf '\n' >&2;
-
-                # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_module_name}" >&2;
-
-                # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE}"; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'f' >&2;
-                printf '\n\n' >&2;
-
-                BU.ModuleInit.MsgAbort;
-
-                v_loop_error="error"; break;
-            else
-                # shellcheck disable=SC2059
-                BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE}" "${v_module_name}")" '-' 'msg';
-
-                ## ----------------------------------------------------
-                # MANDATORY : SOURCING THE MODULE'S INITIALIZATION FILE
-
-                # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
-                if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.sh" 'f' 'shut' 'modinitfile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.sh" 'f' 'shut' 'modinitfile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.Initializer.sh" 'f' 'shut' 'modinitfile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_name}.Initializer.${v_module_name}.sh" 'f' 'shut' 'modinitfile')" ]] || \
-
-                    [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.sh" 'f' 'shut' 'modinitfile')" ]]; then
-                        local v_module_init_file_name;
-
-                        v_module_init_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modinitfile.tmp")")";
-                else
-                    # shellcheck disable=SC2059
-                    BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
-
-                    BU.ModuleInit.MsgAbort;
-
-                    BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
-
-                    v_loop_error="error"; break;
-                fi
-
-                BU.ModuleInit.IsFrameworkCompiled || {
-                    # If the module's initializer file is empty, then the initialization stops.
-                    if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" ]; then
-
-                        # shellcheck disable=SC2059
-                        BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_IS_EMPTY";
-
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
-
-                        BU.ModuleInit.MsgAbort;
-
-                        BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
-
-                        v_loop_error='error';
-
-                        break;
-                    fi
-
-                    source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" || {
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
-                    }
-                }
-
-                unset v_module_init_file_name;
-
-                # shellcheck disable=SC2059
-                BU.Main.Headers.Header.Green "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT}" "$(BU.Main.Decho.Decho.Highlight "${v_module_name}")")";
-            fi
-        fi
-
-        # Incrementing the modules array index variable.
-        v_index="$(( v_index + 1 ))";
-
-	done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
+	# The modules initialization's main process was moved in the "BashUtils_InitModules._()" function, in order for its functionnalities to be accessed by any module initializer function.
+    BashUtils_InitModules._ || {
+        if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+    };
 
 	# Sourcing the user defined aliases file if the library is directly used from a script file.
 	if ! BU.ModuleInit.IsInScript && [ -f "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}" ] && [ -n "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}" ]; then BU.Main.Files.SourceFile "${__BU_MAIN_PROJECT_ALIAS_FILE_PATH}" || return 1; fi
@@ -3478,6 +3507,8 @@ function BU.ModuleInit.InitNewModule()
 
         return 1;
     else
+        BashUtils_InitModules._ || return 1;
+
         return 0;
     fi
 }
@@ -3739,6 +3770,9 @@ function BU.ModuleInit.HandleErrors()
 # IMPORTANT : It MUST be called AFTER the "BU.Main.Initializer.SourceLibrary" and BEFORE the "BU.Main.Initializer.SourceConfig()"
 # functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
 # to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos()" function.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - TODO
 
 # shellcheck disable=SC1090
 function BU.ModuleInit.ParseCSVLang()
