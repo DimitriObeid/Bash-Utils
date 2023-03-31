@@ -800,7 +800,9 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ] && [ 'true' == "${1}" ]; then
 		BU.Main.Echo.Warning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_STAT_INITIALIZING}") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
 	else
-		__BU_MAIN_STAT_INITIALIZING="${1:-$'\0'}";     BU.Main.Status.CheckSTAT_INITIALIZING "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+		__BU_MAIN_STAT_INITIALIZING=${1:-$'\0'};
+
+		BU.Main.Status.CheckSTAT_INITIALIZING "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
