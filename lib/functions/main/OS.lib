@@ -721,8 +721,8 @@ function BU.Main.OS.CheckLinuxDistroVersion()
     }
 }
 
-# ············································································
-# Checking the version of the Kernel of the currently used Linux distribution.
+# ·················································································
+# Checking the full version of the Kernel of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
