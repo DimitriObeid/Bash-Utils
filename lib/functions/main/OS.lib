@@ -429,8 +429,8 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMAT
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}::gathering-informations";
 
-# ·············································································
-# Checking the current operating system, by using the functions declared above.
+# ······································································································································
+# Checking the current operating system, by using the functions declared above, and returning '0' if the OS is supported, or '1' if not.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()
@@ -441,7 +441,6 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMA
 #   - BU.Main.OS.IsFreeBSD()
 #   - BU.Main.OS.IsHaiku()
 #   - BU.Main.OS.IsLinux()
-#   - BU.Main.OS.IsLinixWSL
 #   - BU.Main.OS.IsLinuxWSLWin10()
 #   - BU.Main.OS.IsLinuxWSLWin11()
 #   - BU.Main.OS.IsNetBSD()
@@ -461,13 +460,56 @@ function BU.Main.OS.GetCurrentOS()
     BU.Main.OS.IsHaiku                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsOpenBSD             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsLinux                	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-    BU.Main.OS.IsLinuxWSL             	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsLinuxWSLWin10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsLinuxWSLWin11        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsNetBSD               	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsOSX                    && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsWindows10            	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
     BU.Main.OS.IsWindows11            	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+
+    # Return an error code if the OS is not supported.
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 1;
+}
+
+# ···········································································································
+# Printing the name of the current operating system, and returning '0' if the OS is supported, or '1' if not.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()
+#   - BU.Main.Echo.DebugEnd()
+
+#   - BU.Main.OS.IsAndroidTermux()
+#   - BU.Main.OS.IsChromeOS()
+#   - BU.Main.OS.IsFreeBSD()
+#   - BU.Main.OS.IsHaiku()
+#   - BU.Main.OS.IsLinux()
+#   - BU.Main.OS.IsLinuxWSLWin10()
+#   - BU.Main.OS.IsLinuxWSLWin11()
+#   - BU.Main.OS.IsNetBSD()
+#   - BU.Main.OS.IsOSX()
+#   - BU.Main.OS.IsWindows10()
+#   - BU.Main.OS.IsWindows11()
+
+function BU.Main.OS.PrintCurrentOS()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
+
+    #**** Code ****
+    BU.Main.OS.IsAndroidTermux          && { BU.Main.Echo.Msg 'Android';                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsChromeOS               && { BU.Main.Echo.Msg 'Chrome OS';              BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsFreeBSD                && { BU.Main.Echo.Msg 'Free BSD';               BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsHaiku                  && { BU.Main.Echo.Msg 'Haiku';                  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsLinux                  && { BU.Main.Echo.Msg 'Linux';                  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsLinuxWSLWin10          && { BU.Main.Echo.Msg 'Linux WSL Windows 10';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsLinuxWSLWin11          && { BU.Main.Echo.Msg 'Linux WSL Windows 11';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsNetBSD                 && { BU.Main.Echo.Msg 'Net BSD';                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsOpenBSD                && { BU.Main.Echo.Msg 'OpenBSD';                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsOSX                    && { BU.Main.Echo.Msg 'OSX';                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsWindows10              && { BU.Main.Echo.Msg 'Windows 10';             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
+    BU.Main.OS.IsWindows11              && { BU.Main.Echo.Msg 'Windows 11';             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
 
     # Return an error code if the OS is not supported.
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -679,6 +721,14 @@ function BU.Main.OS.CheckLinuxDistroVersion()
     }
 }
 
+# ············································································
+# Checking the version of the Kernel of the currently used Linux distribution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Main.OS.CheckLinuxKernelFullVersion() { return 0; }
+
 # ··················································································
 # Checking the major version of the Kernel of the currently used Linux distribution.
 
@@ -695,13 +745,21 @@ function BU.Main.OS.CheckLinuxKernelMajorVersion() { return 0; }
 
 function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 
-# ············································································
-# Checking the version of the Kernel of the currently used Linux distribution.
+# ·················································································
+# Checking the patch number of the Kernel of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Main.OS.CheckLinuxKernelVersion() { return 0; }
+function BU.Main.OS.CheckLinuxKernelPatchNumber() { return 0; }
+
+# ·················································································
+# Checking the configuration of the Kernel of the currently used Linux distribution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Main.OS.CheckLinuxKernelConfiguration() { return 0; }
 
 # ··················································································
 # Checking if current OS is Linux (or Android without the Termux terminal emulator).
@@ -901,27 +959,47 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="${_
 function BU.Main.OS.GetLinuxDistro()
 {
     #**** Parameters ****
-    local v_distro=${1:-NULL}; # ARG TYPE : String      - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+    local p_distro=${1:-NULL}; # ARG TYPE : String      - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
+
+    #**** Variables ****
+    local v_distro; # VAR TYPE : String                 - DESC : Stores the name of the current Linux distribuion.
 
     #**** Code ****
-    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
-            local X;
+    if BU.Main.OS.IsLinux; then
+        if [ -n "${p_distro}" ]; then [ -r /proc/version ] && {
+                local X;
 
-            X="$(cat '/proc/version')";
+                X="$(cat '/proc/version')";
 
-            echo "${X}" | grep -qi "${v_distro}" || return 1;
+                echo "${X}" | grep -qi "${p_distro}" || return 1;
 
-            return 0;
-        };
+                return 0;
+            };
 
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
+            BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
-        BU.Main.Echo.Newline;
+            BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
+            BU.Main.Echo.Newline;
 
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
+            BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
-        return 1;
+            return 1;
+        else
+            v_distro="$(grep '^NAME=' '/etc/os-release' | cut -d '"' -f 2)";
+
+            if [ -n "${v_distro}" ]; then
+                return 0;
+            else
+                BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
+
+                BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to get the name of the current Linux distribution";
+                BU.Main.Echo.Newline;
+
+                BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
+
+                return 1;
+            fi
+        fi
     else
         return 1;
     fi
@@ -938,123 +1016,59 @@ function BU.Main.OS.GetLinuxDistroVersion()
     BU.Main.OS.GetLinuxDistro "${1}" || return 1; return 0;
 }
 
+# ················································································
+# Getting the full version of the Kernel of the currently used Linux distribution.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
+
+function BU.Main.OS.GetLinuxKernelFullVersion()
+{
+    BU.Main.OS.IsLinux && uname -r && return 0; return 1;
+}
+
+# ·················································································
 # Getting the major version of the Kernel of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
-#   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
-
-#   - BU.Main.OS.IsLinux()              -> Main -> OS.lib
-
-#   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
+#   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.GetLinuxKernelMajorVersion()
 {
-    #**** Parameters ****
-    local v_major=${1:-NULL}; # ARG TYPE : Int   - REQUIRED | DEFAULT VAL : NULL    - DESC : Linux kernel's major version.
-
-    #**** Code ****
-    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
-            local X;
-
-            X="$(cat '/proc/version')";
-
-            echo "${X}" | grep -qi "${v_major}" || return 1;
-
-            return 0;
-        };
-
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
-
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
-        BU.Main.Echo.Newline;
-
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
-
-        return 1;
-    else
-        return 1;
-    fi
+    BU.Main.OS.IsLinux && uname -r | cut -d. -f1 && return 0; return 1;
 }
 
 # ·················································································
 # Getting the minor version of the Kernel of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
-#   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
-
-#   - BU.Main.OS.IsLinux()              -> Main -> OS.lib
-
-#   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
+#   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
 function BU.Main.OS.GetLinuxKernelMinorVersion()
 {
-    #**** Parameters ****
-    local v_minor=${1:-NULL}; # ARG TYPE : Int      - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux kernel's minor version.
-
-    #**** Code ****
-    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
-            local X;
-
-            X="$(cat '/proc/version')";
-
-            echo "${X}" | grep -qi "${v_minor}" || return 1;
-
-            return 0;
-        };
-
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
-
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
-        BU.Main.Echo.Newline;
-
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
-
-        return 1;
-    else
-        return 1;
-    fi
+    BU.Main.OS.IsLinux && uname -r | cut -d. -f2 && return 0; return 1;
 }
 
-# ·······································································································································
-# Getting the version of the Kernel of the currently used Linux distribution by reading the content of the "/proc/version" file on Linux.
+# ················································································
+# Getting the patch number of the Kernel of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
-#   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
+#   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
-#   - BU.Main.OS.IsLinux()              -> Main -> OS.lib
-
-#   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
-
-function BU.Main.OS.GetLinuxKernelVersion()
+function BU.Main.OS.GetLinuxKernelPatchNumber()
 {
-    #**** Parameters ****
-    local v_kernelVer=${1:-NULL}; # ARG TYPE : Int | String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux kernel's version (can be passed like this : '5.15.0-53', or this : '5.15.0-53-generic').
+    BU.OS.IsLinux && uname -r | cut -d"-" -f2 && return 0; return 1;
+}
 
-    #**** Code ****
-    if BU.Main.OS.IsLinux; then [ -r /proc/version ] && {
-            local X;
+# ·················································································
+# Getting the configuration of the Kernel of the currently used Linux distribution.
 
-            X="$(cat '/proc/version')";
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
-            echo "${X}" | grep -qi "${v_kernelVer}" || return 1;
-
-            return 0;
-        };
-
-        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
-
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Warning "${FUNCNAME[0]}") : Unable to find or to read the $(BU.Main.Decho.Decho.Path '/proc/version') file";
-        BU.Main.Echo.Newline;
-
-        BU.Main.Status.ChangeSTAT_ECHO "false" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
-
-        return 1;
-    else
-        return 1;
-    fi
+function BU.Main.OS.GetLinuxKernelConfiguration()
+{
+    BU.OS.IsLinux && uname -r | cut -d"-" -f3 && return 0; return 1;
 }
 
 ## ----------------------------------------------
