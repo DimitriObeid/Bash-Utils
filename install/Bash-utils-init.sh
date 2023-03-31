@@ -2581,6 +2581,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 #   - BU.ModuleInit.MsgLine()                       -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
 #   - BU.ModuleInit.ProcessFirstModuleParameters()  -> Modules initializer script (this file)
+#   - BU.ModuleInit.SourcingFailure()               -> Modules initializer script (this file)
 
 # shellcheck disable=SC1090
 function BashUtils_InitModules._()
@@ -3380,7 +3381,6 @@ __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 #   - BU.ModuleInit.Exit()                          -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsInScript()                    -> Modules initializer script (this file)
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
-#   - BU.ModuleInit.SourcingFailure()               -> Modules initializer script (this file)
 
 # shellcheck disable=SC1090
 function BashUtils_InitModules()
@@ -3435,7 +3435,7 @@ function BashUtils_InitModules()
 	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
 	# The modules initialization's main process was moved in the "BashUtils_InitModules._()" function, in order for its functionnalities to be accessed by any module initializer function.
-    BashUtils_InitModules._ || {
+    BashUtils_InitModules._ "${p_modules_list[@]}" || {
         if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
     };
 
@@ -3496,7 +3496,7 @@ function BashUtils_InitModules()
 function BU.ModuleInit.InitNewModule()
 {
     #**** Parameters ****
-    local p_newmodule=${:-$'\0'};   # String    - Default : NULL    - Name of the module to include.
+    local p_newmodule=${1:-$'\0'};  # String    - Default : NULL    - Name of the module to include.
 
     #**** Code ****
     # If no module name is passed as argument.
@@ -3507,7 +3507,7 @@ function BU.ModuleInit.InitNewModule()
 
         return 1;
     else
-        BashUtils_InitModules._ || return 1;
+        BashUtils_InitModules._ "${p_newmodule}" || return 1;
 
         return 0;
     fi
@@ -3528,7 +3528,7 @@ function BU.ModuleInit.InitNewModule()
 function BU.ModuleInit.InitNewModules()
 {
 	#**** Parameters ****
-	local p_module_list=("${@}"); # Array    - Default : NULL    - List of the new modules to init.
+	local p_modules_list=("${@}"); # Array    - Default : NULL    - List of the new modules to init.
 
 	#**** Variables (global) ****
 
@@ -3549,9 +3549,7 @@ function BU.ModuleInit.InitNewModules()
         # At this point, the main module is initialized, so its functions can be called safely.
         BU.Main.Headers.Header.Aqua.Turquoise "";
 
-        for i in "${p_module_list[@]}"; do
-            BU.ModuleInit.InitNewModule "${i}" || { v_loop_error='error'; break; };
-        done
+        BashUtils_InitModules._ "${p_modules_list[@]}" || return 1;
 
         if [ "${v_loop_error}" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
 
@@ -3597,7 +3595,7 @@ function BU.ModuleInit.SourceAliasesFiles()
 function BU.ModuleInit.UnsourceModule()
 {
     #**** Parameters ****
-    local p_module=${:-$'\0'};  # String    - Default : NULL    - Name of the module to unsource.
+    local p_module=${1:-$'\0'};  # String    - Default : NULL    - Name of the module to unsource.
 
     #**** Code ****
     # If no module name is passed as argument.
@@ -3693,7 +3691,7 @@ function BU.ModuleInit.UnsourceModules()
         # At this point, the main module is initialized, so its functions can be safely called.
         BU.Main.Headers.Header.Aqua.Turquoise "";
 
-        for i in "${p_module_list[@]}"; do
+        for i in "${p_modules_list[@]}"; do
             BU.ModuleInit.UnsourceModule "${i}" || { v_loop_error='error'; break; };
         done
 
