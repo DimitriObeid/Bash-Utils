@@ -2956,6 +2956,8 @@ BU.ModuleInit.DefineTraps;
 # ··························································································································································
 # Defining a function in order to suppress every shellcheck advices about the "printf" command, in order to do so at once AND to keep the code's decoration.
 
+# Note : the purpose of this function is to hide its long code in any code editor, in order to make the navigation easier into this file.
+
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.FindPath()                              -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsFrameworkBeingInstalled()             -> Modules initializer script (this file)
@@ -3434,7 +3436,7 @@ function BashUtils_InitModules()
 	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 	__BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
-	# The modules initialization's main process was moved in the "BashUtils_InitModules._()" function, in order for its functionnalities to be accessed by any module initializer function.
+	# The modules initialization's main process was moved into the "BashUtils_InitModules._()" function, in order ease the access of its functionnalities from any module initializer function.
     BashUtils_InitModules._ "${p_modules_list[@]}" || {
         if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
     };
@@ -3661,8 +3663,8 @@ function BU.ModuleInit.UnsourceModule()
     fi
 }
 
-# ······················································
-# Unsource multiple modules at once from the project.
+# ·····················································
+# Unsourcing multiple modules at once from the project.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.HandleErrors()             -> Main -> Errors.lib
