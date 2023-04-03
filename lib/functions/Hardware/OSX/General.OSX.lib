@@ -84,3 +84,72 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ···············································
+# Getting every computer's hardware informations.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Hardware.OSX.Audio.GetHardwareInfos()          -> Hardware -> Audio.OSX.lib
+#   - BU.Hardware.OSX.Battery.GetHardwareInfos()        -> Hardware -> Battery.OSX.lib
+#   - BU.Hardware.OSX.Bluetooth.GetHardwareInfos()      -> Hardware -> Bluetooth.OSX.lib
+#   - BU.Hardware.OSX.CPU.GetHardwareInfos()            -> Hardware -> CPU.OSX.lib
+#   - BU.Hardware.OSX.Drive.GetHardwareInfos()          -> Hardware -> Drive.OSX.lib
+#   - BU.Hardware.OSX.Fan.GetHardwareInfos()            -> Hardware -> Fan.OSX.lib
+#   - BU.Hardware.OSX.FloppyDisk.GetHardwareInfos()     -> Hardware -> FloppyDisk.OSX.lib
+#   - BU.Hardware.OSX.General.GetHardwareInfos()        -> Hardware -> General.OSX.lib (this file)
+#   - BU.Hardware.OSX.GPU.GetHardwareInfos()            -> Hardware -> GPU.OSX.lib
+#   - BU.Hardware.OSX.HDMI.GetHardwareInfos()           -> Hardware -> HDMI.OSX.lib
+#   - BU.Hardware.OSX.Keyboard.GetHardwareInfos()       -> Hardware -> Keyboard.OSX.lib
+#   - BU.Hardware.OSX.Memory.GetHardwareInfos()         -> Hardware -> Memory.OSX.lib
+#   - BU.Hardware.OSX.Motherboard.GetHardwareInfos()    -> Hardware -> Motherboard.OSX.lib
+#   - BU.Hardware.OSX.Mouse.GetHardwareInfos()          -> Hardware -> Mouse.OSX.lib
+#   - BU.Hardware.OSX.PCI.GetHardwareInfos()            -> Hardware -> PCI.OSX.lib
+#   - BU.Hardware.OSX.Ports.GetHardwareInfos()          -> Hardware -> Ports.OSX.lib
+#   - BU.Hardware.OSX.Screen.GetHardwareInfos()         -> Hardware -> Screen.OSX.lib
+#   - BU.Hardware.OSX.SDCard.GetHardwareInfos()         -> Hardware -> SDCard.OSX.lib
+#   - BU.Hardware.OSX.Touchpad.GetHardwareInfos()       -> Hardware -> Touchpad.OSX.lib
+#   - BU.Hardware.OSX.USB.GetHardwareInfos()            -> Hardware -> USB.OSX.lib
+#   - BU.Hardware.OSX.VGA.GetHardwareInfos()            -> Hardware -> VGA.OSX.lib
+
+function BU.Hardware.OSX.General.GetAllHardwareInfos()
+{
+    BU.Hardware.OSX.Audio.GetHardwareInfos;
+    BU.Hardware.OSX.Battery.GetHardwareInfos;
+    BU.Hardware.OSX.Bluetooth.GetHardwareInfos;
+
+    BU.Hardware.OSX.CPU.GetHardwareInfos;
+    BU.Hardware.OSX.Drive.GetHardwareInfos;
+    BU.Hardware.OSX.Fan.GetHardwareInfos;
+
+    BU.Hardware.OSX.FloppyDisk.GetHardwareInfos;
+    BU.Hardware.OSX.General.GetHardwareInfos;
+    BU.Hardware.OSX.GPU.GetHardwareInfos;
+
+    BU.Hardware.OSX.HDMI.GetHardwareInfos;
+    BU.Hardware.OSX.Keyboard.GetHardwareInfos;
+    BU.Hardware.OSX.Memory.GetHardwareInfos;
+
+    BU.Hardware.OSX.Motherboard.GetHardwareInfos;
+    BU.Hardware.OSX.Mouse.GetHardwareInfos;
+    BU.Hardware.OSX.PCI.GetHardwareInfos;
+
+    BU.Hardware.OSX.Ports.GetHardwareInfos;
+    BU.Hardware.OSX.Screen.GetHardwareInfos;
+    BU.Hardware.OSX.SDCard.GetHardwareInfos;
+
+    BU.Hardware.OSX.Touchpad.GetHardwareInfos;
+    BU.Hardware.OSX.USB.GetHardwareInfos;
+    BU.Hardware.OSX.VGA.GetHardwareInfos;
+
+    return 0;
+}
+
+## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+####
+
+##

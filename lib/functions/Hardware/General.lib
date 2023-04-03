@@ -85,39 +85,26 @@ fi; echo >&2; exit 1; fi
 
 ##
 
-# ····································
-# Getting every hardware informations.
+# ···············································
+# Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Hardware.${}.General.GetAllHardwareInfos() -> Hardware -> General.${}.lib
 
-function BU.Hardware.General.GetHardwareInfos()
+function BU.Hardware.General.GetAllHardwareInfos()
 {
-    # BU.Hardware.Audio.GetHardwareInfos;
-    # BU.Hardware.Battery.GetHardwareInfos;
-    # BU.Hardware.Bluetooth.
-    # BU.Hardware.CPU.GetHardwareInfos;
-    # BU.Hardware.Drive.GetHardwareInfos;
-    # BU.Hardware.Fan.GetHardwareInfos;
-    # BU.Hardware.FloppyDisk.GetHardwareInfos;
-    # BU.Hardware.General.GetGeneralInfos;
-    # BU.Hardware.GPU.GetHardwareInfos;
-    # BU.Hardware.HDMI.GetHardwareInfos;
-    # BU.Hardware.Keyboard.GetHardwareInfos;
-    # BU.Hardware.Memory.GetHardwareInfos;
-    # BU.Hardware.Motherboard.GetHardwareInfos;
-    # BU.Hardware.Mouse.GetHardwareInfos;
-    # BU.Hardware.PCI.GetHardwareInfos;
-    # BU.Hardware.Ports.GetHardwareInfos;
-    # BU.Hardware.Screen.GetHardwareInfos;
-    # BU.Hardware.SDCard.GetHardwareInfos;
-    # BU.Hardware.Touchpad.GetHardwareInfos;
-    # BU.Hardware.USB.GetHardwareInfos;
-    # BU.Hardware.VGA.GetHardwareInfos;
+    BU.Hardware.${}.General.GetAllHardwareInfos;
+
     return 0;
 }
 
 ## ----------------------------------------------
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+####
 
 ##
 
