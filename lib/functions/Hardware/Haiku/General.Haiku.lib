@@ -84,3 +84,62 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ···············································
+# Getting every computer's hardware informations.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Hardware.Haiku.Audio.GetHardwareInfos()        -> Hardware -> Audio.Haiku.lib
+#   - BU.Hardware.Haiku.Battery.GetHardwareInfos()      -> Hardware -> Battery.Haiku.lib
+#   - BU.Hardware.Haiku.Bluetooth.GetHardwareInfos()    -> Hardware -> Bluetooth.Haiku.lib
+#   - BU.Hardware.Haiku.CPU.GetHardwareInfos()          -> Hardware -> CPU.Haiku.lib
+#   - BU.Hardware.Haiku.Drive.GetHardwareInfos()        -> Hardware -> Drive.Haiku.lib
+#   - BU.Hardware.Haiku.Fan.GetHardwareInfos()          -> Hardware -> Fan.Haiku.lib
+#   - BU.Hardware.Haiku.FloppyDisk.GetHardwareInfos()   -> Hardware -> FloppyDisk.Haiku.lib
+#   - BU.Hardware.Haiku.General.GetHardwareInfos()      -> Hardware -> General.Haiku.lib (this file)
+#   - BU.Hardware.Haiku.GPU.GetHardwareInfos()          -> Hardware -> GPU.Haiku.lib
+#   - BU.Hardware.Haiku.HDMI.GetHardwareInfos()         -> Hardware -> HDMI.Haiku.lib
+#   - BU.Hardware.Haiku.Keyboard.GetHardwareInfos()     -> Hardware -> Keyboard.Haiku.lib
+#   - BU.Hardware.Haiku.Memory.GetHardwareInfos()       -> Hardware -> Memory.Haiku.lib
+#   - BU.Hardware.Haiku.Motherboard.GetHardwareInfos()  -> Hardware -> Motherboard.Haiku.lib
+#   - BU.Hardware.Haiku.Mouse.GetHardwareInfos()        -> Hardware -> Mouse.Haiku.lib
+#   - BU.Hardware.Haiku.PCI.GetHardwareInfos()          -> Hardware -> PCI.Haiku.lib
+#   - BU.Hardware.Haiku.Ports.GetHardwareInfos()        -> Hardware -> Ports.Haiku.lib
+#   - BU.Hardware.Haiku.Screen.GetHardwareInfos()       -> Hardware -> Screen.Haiku.lib
+#   - BU.Hardware.Haiku.SDCard.GetHardwareInfos()       -> Hardware -> SDCard.Haiku.lib
+#   - BU.Hardware.Haiku.Touchpad.GetHardwareInfos()     -> Hardware -> Touchpad.Haiku.lib
+#   - BU.Hardware.Haiku.USB.GetHardwareInfos()          -> Hardware -> USB.Haiku.lib
+#   - BU.Hardware.Haiku.VGA.GetHardwareInfos()          -> Hardware -> VGA.Haiku.lib
+
+function BU.Hardware.Haiku.General.GetAllHardwareInfos()
+{
+    BU.Hardware.Haiku.Audio.GetHardwareInfos;
+    BU.Hardware.Haiku.Battery.GetHardwareInfos;
+    BU.Hardware.Haiku.Bluetooth.GetHardwareInfos;
+
+    BU.Hardware.Haiku.CPU.GetHardwareInfos;
+    BU.Hardware.Haiku.Drive.GetHardwareInfos;
+    BU.Hardware.Haiku.Fan.GetHardwareInfos;
+
+    BU.Hardware.Haiku.FloppyDisk.GetHardwareInfos;
+    BU.Hardware.Haiku.General.GetHardwareInfos;
+    BU.Hardware.Haiku.GPU.GetHardwareInfos;
+
+    BU.Hardware.Haiku.HDMI.GetHardwareInfos;
+    BU.Hardware.Haiku.Keyboard.GetHardwareInfos;
+    BU.Hardware.Haiku.Memory.GetHardwareInfos;
+
+    BU.Hardware.Haiku.Motherboard.GetHardwareInfos;
+    BU.Hardware.Haiku.Mouse.GetHardwareInfos;
+    BU.Hardware.Haiku.PCI.GetHardwareInfos;
+
+    BU.Hardware.Haiku.Ports.GetHardwareInfos;
+    BU.Hardware.Haiku.Screen.GetHardwareInfos;
+    BU.Hardware.Haiku.SDCard.GetHardwareInfos;
+
+    BU.Hardware.Haiku.Touchpad.GetHardwareInfos;
+    BU.Hardware.Haiku.USB.GetHardwareInfos;
+    BU.Hardware.Haiku.VGA.GetHardwareInfos;
+
+    return 0;
+}

@@ -84,3 +84,62 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ···············································
+# Getting every computer's hardware informations.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Hardware.BSD.Audio.GetHardwareInfos()          -> Hardware -> Audio.BSD.lib
+#   - BU.Hardware.BSD.Battery.GetHardwareInfos()        -> Hardware -> Battery.BSD.lib
+#   - BU.Hardware.BSD.Bluetooth.GetHardwareInfos()      -> Hardware -> Bluetooth.BSD.lib
+#   - BU.Hardware.BSD.CPU.GetHardwareInfos()            -> Hardware -> CPU.BSD.lib
+#   - BU.Hardware.BSD.Drive.GetHardwareInfos()          -> Hardware -> Drive.BSD.lib
+#   - BU.Hardware.BSD.Fan.GetHardwareInfos()            -> Hardware -> Fan.BSD.lib
+#   - BU.Hardware.BSD.FloppyDisk.GetHardwareInfos()     -> Hardware -> FloppyDisk.BSD.lib
+#   - BU.Hardware.BSD.General.GetHardwareInfos()        -> Hardware -> General.BSD.lib (this file)
+#   - BU.Hardware.BSD.GPU.GetHardwareInfos()            -> Hardware -> GPU.BSD.lib
+#   - BU.Hardware.BSD.HDMI.GetHardwareInfos()           -> Hardware -> HDMI.BSD.lib
+#   - BU.Hardware.BSD.Keyboard.GetHardwareInfos()       -> Hardware -> Keyboard.BSD.lib
+#   - BU.Hardware.BSD.Memory.GetHardwareInfos()         -> Hardware -> Memory.BSD.lib
+#   - BU.Hardware.BSD.Motherboard.GetHardwareInfos()    -> Hardware -> Motherboard.BSD.lib
+#   - BU.Hardware.BSD.Mouse.GetHardwareInfos()          -> Hardware -> Mouse.BSD.lib
+#   - BU.Hardware.BSD.PCI.GetHardwareInfos()            -> Hardware -> PCI.BSD.lib
+#   - BU.Hardware.BSD.Ports.GetHardwareInfos()          -> Hardware -> Ports.BSD.lib
+#   - BU.Hardware.BSD.Screen.GetHardwareInfos()         -> Hardware -> Screen.BSD.lib
+#   - BU.Hardware.BSD.SDCard.GetHardwareInfos()         -> Hardware -> SDCard.BSD.lib
+#   - BU.Hardware.BSD.Touchpad.GetHardwareInfos()       -> Hardware -> Touchpad.BSD.lib
+#   - BU.Hardware.BSD.USB.GetHardwareInfos()            -> Hardware -> USB.BSD.lib
+#   - BU.Hardware.BSD.VGA.GetHardwareInfos()            -> Hardware -> VGA.BSD.lib
+
+function BU.Hardware.BSD.General.GetAllHardwareInfos()
+{
+    BU.Hardware.BSD.Audio.GetHardwareInfos;
+    BU.Hardware.BSD.Battery.GetHardwareInfos;
+    BU.Hardware.BSD.Bluetooth.GetHardwareInfos;
+
+    BU.Hardware.BSD.CPU.GetHardwareInfos;
+    BU.Hardware.BSD.Drive.GetHardwareInfos;
+    BU.Hardware.BSD.Fan.GetHardwareInfos;
+
+    BU.Hardware.BSD.FloppyDisk.GetHardwareInfos;
+    BU.Hardware.BSD.General.GetHardwareInfos;
+    BU.Hardware.BSD.GPU.GetHardwareInfos;
+
+    BU.Hardware.BSD.HDMI.GetHardwareInfos;
+    BU.Hardware.BSD.Keyboard.GetHardwareInfos;
+    BU.Hardware.BSD.Memory.GetHardwareInfos;
+
+    BU.Hardware.BSD.Motherboard.GetHardwareInfos;
+    BU.Hardware.BSD.Mouse.GetHardwareInfos;
+    BU.Hardware.BSD.PCI.GetHardwareInfos;
+
+    BU.Hardware.BSD.Ports.GetHardwareInfos;
+    BU.Hardware.BSD.Screen.GetHardwareInfos;
+    BU.Hardware.BSD.SDCard.GetHardwareInfos;
+
+    BU.Hardware.BSD.Touchpad.GetHardwareInfos;
+    BU.Hardware.BSD.USB.GetHardwareInfos;
+    BU.Hardware.BSD.VGA.GetHardwareInfos;
+
+    return 0;
+}

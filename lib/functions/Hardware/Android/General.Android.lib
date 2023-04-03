@@ -84,3 +84,62 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ···············································
+# Getting every computer's hardware informations.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Hardware.Android.Audio.GetHardwareInfos()          -> Hardware -> Audio.Android.lib
+#   - BU.Hardware.Android.Battery.GetHardwareInfos()        -> Hardware -> Battery.Android.lib
+#   - BU.Hardware.Android.Bluetooth.GetHardwareInfos()      -> Hardware -> Bluetooth.Android.lib
+#   - BU.Hardware.Android.CPU.GetHardwareInfos()            -> Hardware -> CPU.Android.lib
+#   - BU.Hardware.Android.Drive.GetHardwareInfos()          -> Hardware -> Drive.Android.lib
+#   - BU.Hardware.Android.Fan.GetHardwareInfos()            -> Hardware -> Fan.Android.lib
+#   - BU.Hardware.Android.FloppyDisk.GetHardwareInfos()     -> Hardware -> FloppyDisk.Android.lib
+#   - BU.Hardware.Android.General.GetHardwareInfos()        -> Hardware -> General.Android.lib (this file)
+#   - BU.Hardware.Android.GPU.GetHardwareInfos()            -> Hardware -> GPU.Android.lib
+#   - BU.Hardware.Android.HDMI.GetHardwareInfos()           -> Hardware -> HDMI.Android.lib
+#   - BU.Hardware.Android.Keyboard.GetHardwareInfos()       -> Hardware -> Keyboard.Android.lib
+#   - BU.Hardware.Android.Memory.GetHardwareInfos()         -> Hardware -> Memory.Android.lib
+#   - BU.Hardware.Android.Motherboard.GetHardwareInfos()    -> Hardware -> Motherboard.Android.lib
+#   - BU.Hardware.Android.Mouse.GetHardwareInfos()          -> Hardware -> Mouse.Android.lib
+#   - BU.Hardware.Android.PCI.GetHardwareInfos()            -> Hardware -> PCI.Android.lib
+#   - BU.Hardware.Android.Ports.GetHardwareInfos()          -> Hardware -> Ports.Android.lib
+#   - BU.Hardware.Android.Screen.GetHardwareInfos()         -> Hardware -> Screen.Android.lib
+#   - BU.Hardware.Android.SDCard.GetHardwareInfos()         -> Hardware -> SDCard.Android.lib
+#   - BU.Hardware.Android.Touchpad.GetHardwareInfos()       -> Hardware -> Touchpad.Android.lib
+#   - BU.Hardware.Android.USB.GetHardwareInfos()            -> Hardware -> USB.Android.lib
+#   - BU.Hardware.Android.VGA.GetHardwareInfos()            -> Hardware -> VGA.Android.lib
+
+function BU.Hardware.Android.General.GetAllHardwareInfos()
+{
+    BU.Hardware.Android.Audio.GetHardwareInfos;
+    BU.Hardware.Android.Battery.GetHardwareInfos;
+    BU.Hardware.Android.Bluetooth.GetHardwareInfos;
+
+    BU.Hardware.Android.CPU.GetHardwareInfos;
+    BU.Hardware.Android.Drive.GetHardwareInfos;
+    BU.Hardware.Android.Fan.GetHardwareInfos;
+
+    BU.Hardware.Android.FloppyDisk.GetHardwareInfos;
+    BU.Hardware.Android.General.GetHardwareInfos;
+    BU.Hardware.Android.GPU.GetHardwareInfos;
+
+    BU.Hardware.Android.HDMI.GetHardwareInfos;
+    BU.Hardware.Android.Keyboard.GetHardwareInfos;
+    BU.Hardware.Android.Memory.GetHardwareInfos;
+
+    BU.Hardware.Android.Motherboard.GetHardwareInfos;
+    BU.Hardware.Android.Mouse.GetHardwareInfos;
+    BU.Hardware.Android.PCI.GetHardwareInfos;
+
+    BU.Hardware.Android.Ports.GetHardwareInfos;
+    BU.Hardware.Android.Screen.GetHardwareInfos;
+    BU.Hardware.Android.SDCard.GetHardwareInfos;
+
+    BU.Hardware.Android.Touchpad.GetHardwareInfos;
+    BU.Hardware.Android.USB.GetHardwareInfos;
+    BU.Hardware.Android.VGA.GetHardwareInfos;
+
+    return 0;
+}
