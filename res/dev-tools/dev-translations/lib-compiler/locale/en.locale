@@ -20,7 +20,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
                                         content must be embedded in each final file during the compilation process.
 
                                         This translation file can be found in the '.Bash-utils/config/initializer/locale' folder, and is named :
-                                        '\$iso_639-1_code.locale'
+                                        '\${iso_639-1_code}.locale'
 
                                         Each of these ISO 639-1 codes must be separated by a delimiter, which can be any of the following (NO BLANK
                                         SPACES IS ALLOWED BETWEEN EACH CODE) : ,;|~_.:!§
@@ -78,6 +78,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS="
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
     -V --compilation-version=[VERSION]  sets the version of the compiled file, except if the '-r' / '--keep-raw-document-layout' option is passed.
                                         If the value is absent, the '1.0' version number is written into the 'version :' section.";
+
+__BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_LITE="
+    -l --compile-lite                   compiles a lite version of the framework, without the functions from the modules initializer script.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
     -C --compile-stable                 sets the compiled file into a stable version. It will force the execution of the 'shellcheck' command

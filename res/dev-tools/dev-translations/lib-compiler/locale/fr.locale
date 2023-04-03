@@ -20,7 +20,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
                                         le contenu doit être embarqué dans chaque fichier final lors de la compilation.
 
                                         Ce fichier de traduction se trouve dans le dossier '.Bash-utils/config/initializer/locale', et porte ce nom :
-                                        '\$code_iso_639-1.locale'.
+                                        '\${code_iso_639-1}.locale'.
 
                                         Chaque code ISO 639-1 doit être séparé par un délimiteur. Les délimiteurs suivants sont acceptés (AUCUN ESPACE
                                         N'EST AUTORISÉ ENTRE CHAQUE CODE) : ,;|~_.:!§
@@ -82,8 +82,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION="
                                         valeur est absente, le numéro de version '1.0' est écrit dans la section 'version :'.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_LITE="
-    -l --compile-lite                   compile une version légère du framework, sans les fonctions du script d'initialisation principal.
-";
+    -l --compile-lite                   compile une version légère du framework, sans les fonctions du script d'initialisation principal.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE="
     -C --compile-stable                 convertit le fichier compilé dans une version stable. Cette option force l'exécution de la commande 'shellcheck'

@@ -2563,8 +2563,8 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     return 0;
 })
 
-# ····························································································
-# Initializing every modules from the "()" function or any other modules initializer function.
+# ·················································································································
+# Initializing every modules from the "BashUtils_InitModules()" function or any other modules initializer function.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Highlight()               -> Main -> Decho.lib
@@ -3462,18 +3462,21 @@ function BashUtils_InitModules()
 	# Setting a global variable that prevent a new call of this function.
 	__BU_MODULE_INIT_IS_SOURCED='sourced';
 
+	# ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 	# Backupping a message variable in case the current function is called again, in order to display again the same error message after unsetting every initialization message variables.
-	local var_backup="${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED}";
+	# local var_backup="${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED}";
 
+	# ---------------------------------------------------------------------------------
 	# Unsetting every initialization message variables in order to free up some memory.
 
 	# DO NOT DOUBLE QUOTE THE COMMAND SUBSTITUTION !!!!!
 
 	# shellcheck disable=SC2046
-	unset $(compgen -v "__BU_MODULE_INIT_MSG__");
+	# unset $(compgen -v "__BU_MODULE_INIT_MSG__");
 
-	# Resetting the "${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED" variable.
-	__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="${var_backup}";
+	# ---------------------------------------------------------------------------
+	# Resetting the "${__BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED}" variable.
+	# __BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="${var_backup}";
 
     # Defining a function which is to be used to check if the framework is already sourced, in order to avoid too many checkings in the very beginning of any script that uses this framework, and a new inclusion of the framework's files.
 
