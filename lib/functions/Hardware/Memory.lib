@@ -91,7 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Drive.GetHardwareInfos()
+function BU.Hardware.Memory.GetHardwareInfos()
 {
     return 0;
 }
