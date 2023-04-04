@@ -144,13 +144,13 @@ function BU.Hardware.GPU.IsVGACompatible()
 
 ##
 
-# ·····················································
-# Display all informations about the computer's GPU(s).
+# ················································································
+# Getting every informations about the computer's GPU-related hardware components.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.GPU.GetInfos()
+function BU.Hardware.Drive.GetHardwareInfos()
 {
     return 0;
 }

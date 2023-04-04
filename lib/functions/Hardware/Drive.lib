@@ -89,6 +89,17 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ·······················································································
+# Getting every informations about the computer's hard drive-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Drive.GetHardwareInfos()
+{
+    return 0;
+}
+
 # ·································
 # Getting the size of a hard drive.
 
