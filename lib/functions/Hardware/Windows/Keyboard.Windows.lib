@@ -85,6 +85,17 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ····································
+# Checking if the keyboard is plugged.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Windows.Keyboard.IsKeyboardPlugged()
+{
+    return 0;
+}
+
 # ·····················································································
 # Getting every informations about the computer's keyboard-related hardware components.
 
@@ -96,13 +107,13 @@ function BU.Hardware.Windows.Keyboard.GetHardwareInfos()
     return 0;
 }
 
-# ····································
-# Checking if the keyboard is plugged.
+# ·············································
+# Getting the current layout (AZERTY | QWERTY).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Windows.Keyboard.IsKeyboardPlugged()
+function BU.Hardware.Windows.Keyboard.GetLayout()
 {
     return 0;
 }

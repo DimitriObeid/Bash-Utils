@@ -108,3 +108,14 @@ function BU.Hardware.Keyboard.GetHardwareInfos()
 {
     return 0;
 }
+
+# ·············································
+# Getting the current layout (AZERTY | QWERTY).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Keyboard.GetLayout()
+{
+    return 0;
+}
