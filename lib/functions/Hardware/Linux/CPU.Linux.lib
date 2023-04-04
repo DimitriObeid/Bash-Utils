@@ -91,6 +91,17 @@ fi; echo >&2; exit 1; fi
 
 ## GETTING GENERAL DATA
 
+# ················································································
+# Getting every informations about the computer's CPU-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.CPU.GetHardwareInfos()
+{
+    return 0;
+}
+
 # ··············································
 # Getting the summary of the CPU's informations.
 

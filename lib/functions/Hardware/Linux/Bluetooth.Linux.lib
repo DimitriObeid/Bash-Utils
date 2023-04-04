@@ -82,3 +82,14 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 ####
+
+# ······················································································
+# Getting every informations about the computer's bluetooth-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Bluetooth.GetHardwareInfos()
+{
+    return 0;
+}
