@@ -144,17 +144,6 @@ function BU.Hardware.Motherboard.IsUSBLegacySupported()
 
 ## GETTING BIOS INFORMATIONS
 
-# ····························································
-# Getting every informations about the computer's motherboard.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-function BU.Hardware.Motherboard.GetHardwareInfos()
-{
-    return 0;
-}
-
 # ················································
 # Getting the motherboard's firmware release date.
 
