@@ -84,6 +84,7 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
 # ··································
 # Checking if a touchpad is plugged.
 
@@ -91,6 +92,17 @@ fi; echo >&2; exit 1; fi
 #   -
 
 function BU.Hardware.Linux.Touchpad.IsTouchpadPlugged()
+{
+    return 0;
+}
+
+# ·····················································································
+# Getting every informations about the computer's touchpad-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Touchpad.GetHardwareInfos()
 {
     return 0;
 }

@@ -84,3 +84,14 @@ fi; echo >&2; exit 1; fi
 ####
 
 ##
+
+# ·····················································································
+# Getting every informations about the computer's SD cards-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.SDCard.GetHardwareInfos()
+{
+    return 0;
+}
