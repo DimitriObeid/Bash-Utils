@@ -151,6 +151,21 @@ function BU.Hardware.Drive.CountHDD+SSD()
     return 0;
 }
 
+## ----------------------------------------------
+
+##
+
+# ················································································
+# Getting every informations about the computer's fan-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Fan.GetHardwareInfos()
+{
+    return 0;
+}
+
 # ·································
 # Getting the size of a hard drive.
 

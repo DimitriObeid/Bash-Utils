@@ -106,7 +106,7 @@ function BU.Hardware.Linux.Keyboard.IsKeyboardPlugged()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Linux.Memory.GetHardwareInfos()
+function BU.Hardware.Linux.Keyboard.GetHardwareInfos()
 {
     return 0;
 }
