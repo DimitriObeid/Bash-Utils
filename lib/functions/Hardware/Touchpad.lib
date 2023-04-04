@@ -96,6 +96,21 @@ function BU.Hardware.Touchpad.IsTouchpadPlugged()
     return 0;
 }
 
+## ----------------------------------------------
+
+##
+
+# ·····················································································
+# Getting every informations about the computer's touchpad-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Touchpad.GetHardwareInfos()
+{
+    return 0;
+}
+
 # ···································
 # Getting the vendor of the touchpad.
 
