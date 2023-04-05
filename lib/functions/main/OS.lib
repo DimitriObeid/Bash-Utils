@@ -610,13 +610,13 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             };
 
             BU.Main.OS.IsLinuxDistroDebian && {
-                BU.Main.OS.IsLinuxDistroDebian5             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroDebian6             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroDebian7             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroDebian8             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroDebian9             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroDebian10            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroDebian11            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian10            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian9             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian8             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian7             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian6             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroDebian5             && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version of Debian is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -625,27 +625,33 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             };
 
             BU.Main.OS.IsLinuxDistroFedora && {
-                BU.Main.OS.IsLinuxDistroFedora18            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora19            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora20            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora21            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora22            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora23            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora24            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora25            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora26            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora27            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora28          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora29          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora30          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora31          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora32          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora33          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora34          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora35          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora36          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroFedora37          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroFedora38          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora37          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora36          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora35          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora34          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora33          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora32          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora31          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora30          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora29          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora28          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora27            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora26            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora25            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora24            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora23            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora22            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora21            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora20            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora19            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora18            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora17            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora16            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora15            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora14            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora13            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora12            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version of Fedora is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -681,33 +687,33 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             };
 
             BU.Main.OS.IsLinuxDistroUbuntu && {
-                BU.Main.OS.IsLinuxDistroUbuntu10_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu10_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu11_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu11_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu12_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu12_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu13_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu13_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu14_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu14_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu15_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu15_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu16_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu16_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu17_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu17_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu18_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu18_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu19_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu19_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu20_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu20_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu21_04        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu21_10        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu22_04       	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
-                BU.Main.OS.IsLinuxDistroUbuntu22_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroUbuntu23_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu22_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu22_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu21_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu21_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu20_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu20_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu19_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu19_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu18_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu18_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu17_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu17_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu16_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu16_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu15_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu15_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu14_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu14_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu13_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu13_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu12_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu12_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu11_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu11_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu10_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroUbuntu10_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version of Ubuntu is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -824,6 +830,12 @@ function BU.Main.OS.IsLinuxDistroFedora()             	{ BU.Main.OS.GetLinuxDist
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.CheckLinuxDistroVersion() -> Main -> OS.lib (this file)
 
+function BU.Main.OS.IsLinuxDistroFedora12()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '12'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora13()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '13'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora14()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '14'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora15()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '15'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora16()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '16'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora17()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '17'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora18()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '18'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora19()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '19'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora20()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '20'          &&      return 0;       return 1; }
