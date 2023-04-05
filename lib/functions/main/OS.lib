@@ -873,10 +873,26 @@ function BU.Main.OS.IsLinuxDistroFedora38()           	{ BU.Main.OS.CheckLinuxDi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Main.OS.IsLinuxDistroLinuxMint()          	{ BU.Main.OS.GetLinuxDistro ''                              &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint()            { BU.Main.OS.GetLinuxDistro 'Linux Mint'                    &&      return 0;       return 1; }
 
 # ······························································································································································
 # Checking Linux Mint versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckLinuxDistroVersion() -> Main -> OS.lib (this file)
+
+function BU.Main.OS.IsLinuxDistroLinuxMint19()          { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '19'      &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint19_2()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '19.1'    &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint19_2()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '19.2'    &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint19_3()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '19.3'    &&      return 0;       return 1; }
+
+function BU.Main.OS.IsLinuxDistroLinuxMint20()          { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '20'      &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint20_1()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '20.1'    &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint20_2()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '20.2'    &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint20_3()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '20.3'    &&      return 0;       return 1; }
+
+function BU.Main.OS.IsLinuxDistroLinuxMint21()          { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '21'      &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroLinuxMint21_1()        { BU.Main.OS.CheckLinuxDistroVersion 'Linux Mint' '21.1'    &&      return 0;       return 1; }
 
 
 # --------------------
