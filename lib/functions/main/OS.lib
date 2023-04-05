@@ -600,6 +600,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             if BU.Main.OS.GetLinuxDistro "${p_distro}"      	&& BU.Main.OS.GetLinuxDistroVersion "${p_version}"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroArchLinux && {
                 true;
 
@@ -609,6 +610,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             };
 
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroDebian && {
                 BU.Main.OS.IsLinuxDistroDebian11            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroDebian10            && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -624,6 +626,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             };
 
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroFedora && {
                 BU.Main.OS.IsLinuxDistroFedora38          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroFedora37          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -659,6 +662,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             };
 
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroLinuxMint && {
                 true;
 
@@ -668,6 +672,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             };
 
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroManjaro && {
                 true;
 
@@ -677,6 +682,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             };
 
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroSUSE && {
                 true;
 
@@ -686,6 +692,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 return 1;
             };
 
+            # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroUbuntu && {
                 BU.Main.OS.IsLinuxDistroUbuntu23_04         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroUbuntu22_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -777,8 +784,8 @@ function BU.Main.OS.CheckLinuxKernelConfiguration() { return 0; }
 
 function BU.Main.OS.IsLinux()                           { [[ "${OSTYPE}" == 'linux'* ]]                             &&      return 0;       return 1; }
 
-# ····················································
-# Checking if current Linux distribuion is Arch Linux.
+# ·····················································
+# Checking if current Linux distribution is Arch Linux.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -793,7 +800,6 @@ function BU.Main.OS.IsLinuxDistroArchLinux()          	{ BU.Main.OS.GetLinuxDist
 # --------------------
 
 # ·················································
-
 # Checking if current Linux distribution is Debian.
 
 function BU.Main.OS.IsLinuxDistroDebian()             	{ BU.Main.OS.GetLinuxDistro debian                          &&      return 0;       return 1; }
@@ -978,7 +984,7 @@ function BU.Main.OS.GetLinuxDistro()
     local p_distro=${1:-NULL}; # ARG TYPE : String      - REQUIRED | DEFAULT VAL : NULL     - DESC : Linux distribution's version (can be an integer or a string (like 'Focal Fossa' for Ubuntu 20.04)).
 
     #**** Variables ****
-    local v_distro; # VAR TYPE : String                 - DESC : Stores the name of the current Linux distribuion.
+    local v_distro; # VAR TYPE : String                 - DESC : Stores the name of the current Linux distribution.
 
     #**** Code ****
     if BU.Main.OS.IsLinux; then
