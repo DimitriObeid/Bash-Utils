@@ -166,6 +166,17 @@ function BU.Hardware.BSD.Battery.IsRechargeable()
 
 ## BATTERY VALUES GETTERS
 
+# ····················································································
+# Getting every informations about the computer's battery-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.BSD.Battery.GetHardwareInfos()
+{
+    return 0;
+}
+
 # ····································
 # Getting the battery's serial number.
 

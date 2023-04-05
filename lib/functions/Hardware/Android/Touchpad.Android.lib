@@ -96,6 +96,21 @@ function BU.Hardware.Android.Touchpad.IsTouchpadPlugged()
     return 0;
 }
 
+## ----------------------------------------------
+
+##
+
+# ···················································································
+# Getting every informations about the device's touchpad-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Android.Touchpad.GetHardwareInfos()
+{
+    return 0;
+}
+
 # ···································
 # Getting the vendor of the touchpad.
 

@@ -84,3 +84,14 @@ fi; echo >&2; exit 1; fi
 #### BIOS INFORMATIONS
 
 ## GETTING BIOS INFORMATIONS
+
+# ··························································
+# Getting every informations about the device's motherboard.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Android.Motherboard.GetHardwareInfos()
+{
+    return 0;
+}

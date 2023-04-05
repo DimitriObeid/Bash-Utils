@@ -644,6 +644,8 @@ function BU.Main.OS.CheckLinuxDistroVersion()
                 BU.Main.OS.IsLinuxDistroFedora34          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroFedora35          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
                 BU.Main.OS.IsLinuxDistroFedora36          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora37          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroFedora38          	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
                 # Returning an error code if the specific version of Fedora is not found.
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -841,6 +843,8 @@ function BU.Main.OS.IsLinuxDistroFedora33()           	{ BU.Main.OS.CheckLinuxDi
 function BU.Main.OS.IsLinuxDistroFedora34()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '34'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora35()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '35'          &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroFedora36()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '36'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora37()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '37'          &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroFedora38()           	{ BU.Main.OS.CheckLinuxDistroVersion 'Fedora' '38'          &&      return 0;       return 1; }
 
 
 # --------------------

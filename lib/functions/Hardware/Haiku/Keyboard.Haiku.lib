@@ -95,3 +95,27 @@ function BU.Hardware.Haiku.Keyboard.IsKeyboardPlugged()
 {
     return 0;
 }
+
+## ----------------------------------------------
+
+# ·····················································································
+# Getting every informations about the computer's keyboard-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Haiku.Keyboard.GetHardwareInfos()
+{
+    return 0;
+}
+
+# ·············································
+# Getting the current layout (AZERTY | QWERTY).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Haiku.Keyboard.GetLayout()
+{
+    return 0;
+}

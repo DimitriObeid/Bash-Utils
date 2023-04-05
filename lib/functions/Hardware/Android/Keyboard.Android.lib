@@ -95,3 +95,29 @@ function BU.Hardware.Android.Keyboard.IsKeyboardPlugged()
 {
     return 0;
 }
+
+## ----------------------------------------------
+
+##
+
+# ···················································································
+# Getting every informations about the device's keyboard-related hardware components.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Android.Keyboard.GetHardwareInfos()
+{
+    return 0;
+}
+
+# ·············································
+# Getting the current layout (AZERTY | QWERTY).
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Android.Keyboard.GetLayout()
+{
+    return 0;
+}
