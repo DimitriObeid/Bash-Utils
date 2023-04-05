@@ -600,6 +600,22 @@ function BU.Main.OS.CheckLinuxDistroVersion()
             if BU.Main.OS.GetLinuxDistro "${p_distro}"          && BU.Main.OS.GetLinuxDistroVersion "${p_version}"; then return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi
 
         else
+
+            BU.Main.OS.IsLinuxDistroAlpineLinux && {
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_17         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_16         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_15         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_14         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_13         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_12         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_11         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_10         && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_9          && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_8          && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+                BU.Main.OS.IsLinuxDistroAlpineLinux3_7          && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+            }
+
             # Please call the newer versions first, in order to optimize the conditions for the most used distribution.
             BU.Main.OS.IsLinuxDistroArchLinux && {
                 BU.Main.OS.IsLinuxDistroArchLinux2023_04_01     && { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -853,11 +869,18 @@ function BU.Main.OS.IsLinuxDistroAlpineLinux()          { BU.Main.OS.GetLinuxDis
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Main.OS.IsLinuxDistroAlpineLinux3_17()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.17' &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroAlpineLinux3_16()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.16' &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroAlpineLinux3_15()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.15' &&      return 0;       return 1; }
-function BU.Main.OS.IsLinuxDistroAlpineLinux3_14()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.14' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_7()       { BU.Main.OS.CheckLinuxDistroVersion '' '3.7'  &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_8()       { BU.Main.OS.CheckLinuxDistroVersion '' '3.8'  &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_9()       { BU.Main.OS.CheckLinuxDistroVersion '' '3.9'  &&      return 0;       return 1; }
+
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_10()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.10' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_11()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.11' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_12()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.12' &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxDistroAlpineLinux3_13()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.13' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_14()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.14' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_15()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.15' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_16()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.16' &&      return 0;       return 1; }
+function BU.Main.OS.IsLinuxDistroAlpineLinux3_17()      { BU.Main.OS.CheckLinuxDistroVersion '' '3.17' &&      return 0;       return 1; }
 
 
 # --------------------
