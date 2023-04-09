@@ -134,6 +134,11 @@ printf "
 
 function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; BU.ModuleInit.IsInScript && exit "${p_code}"; return "${p_code}"; }
 
+# ·······································································································································
+# Checking if the script file which runs the Bash code is the "lib-compilerV3.sh" file, which only contains very basic sourced resources.
+
+function BU.ModuleInit.IsCompiler()                     { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
+
 # ······················································································
 # Checking if the framework is being installed thanks to the installation script (TODO).
 

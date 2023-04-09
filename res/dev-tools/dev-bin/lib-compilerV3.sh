@@ -622,6 +622,17 @@ function CheckLangArgDelim()
 
 #### MISC FUNCTIONS
 
+## CHECKINGS
+
+# ·······································································································································
+# Checking if the script file which runs the Bash code is the "lib-compilerV3.sh" file, which only contains very basic sourced resources.
+
+# This function is imported from the "Bash-utils-init.sh" file, and serves in the "Locale.lib" file from the main module.
+
+function BU.ModuleInit.IsCompiler() { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
+
+## ----------------------------------------------
+
 ## ERRORS HANDLING
 
 # ····································································
