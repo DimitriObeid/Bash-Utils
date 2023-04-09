@@ -259,12 +259,25 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 
 		p_dispOrder="${charsArray[${rand}]}";
 
-		# Malheureusement, il n'est pas possible de faire en sorte que la boucle for traite les caractères unicode en utilisant la syntaxe de base de shell.
+		# -------------------------------
+		# Chat GPT-3.5 answer (fr | en) :
+
+		# Malheureusement, il n'est pas possible de faire en sorte que la boucle "for" traite les caractères unicode en utilisant la syntaxe de base de shell.
 		# Vous pouvez cependant utiliser une alternative telle que la commande "$(xargs)", qui est capable de traiter les caractères unicode.
 
 		# La commande "$(xargs)" permet de générer des entrées à partir d'une entrée standard, ce qui signifie que vous pouvez l'utiliser pour traiter les caractères unicode.
-		# Dans ce cas, la boucle for est remplacée par une commande grep qui permet de filtrer les éléments de la liste array et de les transmettre à la commande "$(xargs)".
+		# Dans ce cas, la boucle "for" est remplacée par une commande "$(grep)" qui permet de filtrer les éléments de la liste array et de les transmettre à la commande "$(xargs)".
 		# La commande "$(xargs)" utilise alors la substitution de chaînes pour construire la chaîne de résultat finale.
+
+		# -------------------------------
+
+		# Unfortunately, it is not possible to make the "for" loop handle unicode characters using the basic shell syntax.
+		# You can however use an alternative like the "$(xargs)" command, which is able to process the unicode characters.
+
+		# The "$(xargs)" command allows to generate inputs from a standard input, which means that you can use it to process the unicode characters.
+		# In this case, the "for" loop is replaced by a "$(grep)" command which allows to filter the elements of the array list and to transmit them to the "$(xargs)" command.
+		# The "$(xargs)" command then uses the string substitution to build the final result string.
+
 		printf "%s\n" "${charsArray[@]}" | grep -v "${charsArray[${rand}]}" | xargs -I{} printf "%s,%s" "${p_dispOrder}" "{}";
 
 		echo; echo; echo "Generated string : ${p_dispOrder}"; echo;
