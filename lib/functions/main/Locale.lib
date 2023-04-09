@@ -321,6 +321,13 @@ declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRIN
 # shellcheck disable=SC2154
 function BU.Main.Locale.PrintLanguageName()
 ({
+	if ! BU.ModuleInit.IsCompiler; then
+		# This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+		BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+			"${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}" \
+			"${__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRINTING_LOCALE}";
+	fi
+
 	#**** Parameters ****
 	local p_code=${1:-NULL};        # ARG TYPE : ISO 639-1 code		- REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
 	local p_dispOrder=${2:-$'\0'};  # ARG TYPE : String				- OPTIONAL | DEFAULT VAL : NULL		- DESC : Display order of the name of the targeted language in its own language, in English or in the user's system language.
@@ -353,6 +360,7 @@ function BU.Main.Locale.PrintLanguageName()
 
         # Testing the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}}" variable with a value,
         # since the main module's files were not translated with the "lang.csv" file as the date of Feb. 02 of 2023, when this function was coded.
+
 #         __BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__FRENCH="FRANÇAISE";
 #
 #         echo; echo;
@@ -651,6 +659,8 @@ function BU.Main.Locale.PrintLanguageName()
 		elif [ "${p_code,,}" == 'zu' ]; then BUPLNOptimizer 'Zulu'          "isiZulu";
 		  fi
 	fi;
+
+	! BU.ModuleInit.IsCompiler && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 	return 0;
 })
