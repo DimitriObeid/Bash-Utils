@@ -2943,6 +2943,13 @@ fi
 
 ## ----------------------------------------------
 
+## STARTING A TIMER IN ORDER TO CHECK THE INITIALIZATION PROCESS'S TIME
+
+# Do not assign any value here now, it will be done at the end of the framework's initialization process.
+declare -i __BU_MODULE_INIT__FRAMEWORK_INITIALIZATION_PROCESS_TIMER;
+
+## ----------------------------------------------
+
 ## CHECKING THE CURRENT VERSION OF THE LANGUAGE
 
 # Checking the version of the Bash language currently used on the user's system.
