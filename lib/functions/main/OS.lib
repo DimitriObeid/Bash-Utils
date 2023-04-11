@@ -204,6 +204,7 @@ function BU.Main.OS.IsAndroidTabletManufacturerFujitsu()    { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidTabletManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerHuawei        && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerPanasonic     && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerVivo          && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerXiaomi        && return 0; return 1; }
 
 ## ----------------------------------------------
