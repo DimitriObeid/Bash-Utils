@@ -130,6 +130,7 @@ function BU.Main.OS.IsAndroidRooted()                       { BU.Main.OS.IsAndro
 
 function BU.Main.OS.IsAndroidManufacturerAlcatel()          { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerASUS()             { BU.Main.OS.IsAndroid && return 0; return 1; }
+function BU.Main.OS.IsAndroidManufacturerBlackBerry()       { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerFujitsu()          { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerGoogle()           { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerHTC()              { BU.Main.OS.IsAndroid && return 0; return 1; }
@@ -152,7 +153,7 @@ function BU.Main.OS.IsAndroidManufacturerXiaomi()           { BU.Main.OS.IsAndro
 #   - BU.Main.OS.IsAndroidRooted()              -> Main -> OS.lib (this file)
 
 function BU.Main.OS.IsAndroidDeviceSmartphone()             { BU.Main.OS.IsAndroid && return 0; return 1; }
-function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidRooted                    && return 0; return 1; }
+function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidRooted                        && return 0; return 1; }
 
 # ······················································
 # Checking for specific Android smartphone manufacturer.
@@ -161,20 +162,21 @@ function BU.Main.OS.IsAndroidDeviceSmartphoneRooted()       { BU.Main.OS.IsAndro
 #   - BU.Main.OS.IsAndroidDeviceSmartphone()    -> Main -> OS.lib (this file)
 #   - BU.Main.OS.IsAndroidManufacturer*()       -> Main -> OS.lib (this file)
 
-function BU.Main.OS.IsAndroidSmartphoneManufacturerAlcatel()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerAlcatel   && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerASUS      && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerFujitsu()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerFujitsu   && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerGoogle()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerGoogle    && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerHTC()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHTC       && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHuawei    && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerLG()         { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerLG        && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerMotorola()   { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerMotorola  && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerOppo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerOppo      && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerPanasonic && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSamsung   && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerSony()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSony      && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerVivo      && return 0; return 1; }
-function BU.Main.OS.IsAndroidSmartphoneManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerXiaomi    && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerAlcatel()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerAlcatel       && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerASUS          && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerBlackBerry() { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerBlackBerry    && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerFujitsu()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerFujitsu       && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerGoogle()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerGoogle        && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerHTC()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHTC           && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHuawei        && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerLG()         { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerLG            && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerMotorola()   { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerMotorola      && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerOppo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerOppo          && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerPanasonic     && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerSony()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSony          && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerVivo          && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerXiaomi        && return 0; return 1; }
 
 # ···················································
 # Checking if the current Android device is a Tablet.
@@ -194,11 +196,12 @@ function BU.Main.OS.IsAndroidDeviceTabletRooted()           { BU.Main.OS.IsAndro
 #   - BU.Main.OS.IsAndroidDeviceTablet()    -> Main -> OS.lib (this file)
 #   - BU.Main.OS.IsManufacturer*()          -> Main -> OS.lib (this file)
 
-function BU.Main.OS.IsAndroidTabletManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerASUS      && return 0; return 1; }
-function BU.Main.OS.IsAndroidTabletManufacturerFujitsu()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerFujitsu   && return 0; return 1; }
-function BU.Main.OS.IsAndroidTabletManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerHuawei    && return 0; return 1; }
-function BU.Main.OS.IsAndroidTabletManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerPanasonic && return 0; return 1; }
-function BU.Main.OS.IsAndroidTabletManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerSamsung   && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerASUS()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerASUS          && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerBlackBerry() { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerBlackBerry    && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerFujitsu()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerFujitsu       && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerHuawei        && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerPanasonic     && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
 
 ## ----------------------------------------------
 
