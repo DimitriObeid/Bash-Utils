@@ -1387,33 +1387,33 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__CHECKING_INFORMATIONS="${__BU
 # ············································
 # Checking if the system is running in Qemu().
 
-function BU.Main.OS.IsRunningInQemu.Android()     { return 0; }
-function BU.Main.OS.IsRunningInQemu.BSD()         { if BU.Main.OS.IsRunningInQemu.FreeBSD || BU.Main.OS.IsRunningInQemu.NetBSD || BU.Main.OS.IsRunningInQemu.OpenBSD; then return 0; else return 1; fi }
-function BU.Main.OS.IsRunningInQemu.FreeBSD()     { return 0; }
-function BU.Main.OS.IsRunningInQemu.Haiku()       { return 0; }
-function BU.Main.OS.IsRunningInQemu.Linux()       { if dmesg | grep -i Qemu > /dev/null; then return 0; else return 1; fi; }
-function BU.Main.OS.IsRunningInQemu.NetBSD()      { return 0; }
-function BU.Main.OS.IsRunningInQemu.OpenBSD()     { return 0; }
-function BU.Main.OS.IsRunningInQemu.OSX()         { return 0; }
-function BU.Main.OS.IsRunningInQemu.Windows()     { return 0; }
+function BU.Main.OS.IsRunningInQemu.Android()           { return 0; }
+function BU.Main.OS.IsRunningInQemu.BSD()               { if BU.Main.OS.IsRunningInQemu.FreeBSD || BU.Main.OS.IsRunningInQemu.NetBSD || BU.Main.OS.IsRunningInQemu.OpenBSD; then return 0; else return 1; fi }
+function BU.Main.OS.IsRunningInQemu.FreeBSD()           { return 0; }
+function BU.Main.OS.IsRunningInQemu.Haiku()             { return 0; }
+function BU.Main.OS.IsRunningInQemu.Linux()             { if dmesg | grep -i Qemu > /dev/null; then return 0; else return 1; fi; }
+function BU.Main.OS.IsRunningInQemu.NetBSD()            { return 0; }
+function BU.Main.OS.IsRunningInQemu.OpenBSD()           { return 0; }
+function BU.Main.OS.IsRunningInQemu.OSX()               { return 0; }
+function BU.Main.OS.IsRunningInQemu.Windows()           { return 0; }
 
 
-function BU.Main.OS.IsRunningInQemu()               { return 0; }
+function BU.Main.OS.IsRunningInQemu()                   { return 0; }
 
 # ··························································································
 # Checking if the current system is running in VMware, according to its own system commands.
 
-function BU.Main.OS.IsRunningInVMware.Android()     { return 0; }
-function BU.Main.OS.IsRunningInVMware.BSD()         { if BU.Main.OS.IsRunningInVMware.FreeBSD || BU.Main.OS.IsRunningInVMware.NetBSD || BU.Main.OS.IsRunningInVMware.OpenBSD; then return 0; else return 1; fi }
-function BU.Main.OS.IsRunningInVMware.FreeBSD()     { return 0; }
-function BU.Main.OS.IsRunningInVMware.Haiku()       { return 0; }
-function BU.Main.OS.IsRunningInVMware.Linux()       { if dmesg | grep -i VMware > /dev/null; then return 0; else return 1; fi; }
-function BU.Main.OS.IsRunningInVMware.NetBSD()      { return 0; }
-function BU.Main.OS.IsRunningInVMware.OpenBSD()     { return 0; }
-function BU.Main.OS.IsRunningInVMware.OSX()         { return 0; }
-function BU.Main.OS.IsRunningInVMware.Windows()     { return 0; }
+function BU.Main.OS.IsRunningInVMware.Android()         { return 0; }
+function BU.Main.OS.IsRunningInVMware.BSD()             { if BU.Main.OS.IsRunningInVMware.FreeBSD || BU.Main.OS.IsRunningInVMware.NetBSD || BU.Main.OS.IsRunningInVMware.OpenBSD; then return 0; else return 1; fi }
+function BU.Main.OS.IsRunningInVMware.FreeBSD()         { return 0; }
+function BU.Main.OS.IsRunningInVMware.Haiku()           { return 0; }
+function BU.Main.OS.IsRunningInVMware.Linux()           { if dmesg | grep -i VMware > /dev/null; then return 0; else return 1; fi; }
+function BU.Main.OS.IsRunningInVMware.NetBSD()          { return 0; }
+function BU.Main.OS.IsRunningInVMware.OpenBSD()         { return 0; }
+function BU.Main.OS.IsRunningInVMware.OSX()             { return 0; }
+function BU.Main.OS.IsRunningInVMware.Windows()         { return 0; }
 
-function BU.Main.OS.IsRunningInVMware()             { BU.Main.OS.IsRunningInVMware."${}"; }
+function BU.Main.OS.IsRunningInVMware()                 { BU.Main.OS.IsRunningInVMware."${}"; }
 
 # ······························································································
 # Checking if the current system is running in VirtualBox, according to its own system commands.
@@ -1428,12 +1428,12 @@ function BU.Main.OS.IsRunningInVirtualBox.OpenBSD()     { return 0; }
 function BU.Main.OS.IsRunningInVirtualBox.OSX()         { return 0; }
 function BU.Main.OS.IsRunningInVirtualBox.Windows()     { return 0; }
 
-function BU.Main.OS.IsRunningInVirtualBox()         { BU.Main.OS.BU.Main.OS.IsRunningInVirtualBox."${}"; }
+function BU.Main.OS.IsRunningInVirtualBox()             { BU.Main.OS.BU.Main.OS.IsRunningInVirtualBox."${}"; }
 
 # ·······················································
 # Checking if the system is running in a virtual machine.
 
-function BU.Main.OS.IsVirtualized()                 { return 0; }
+function BU.Main.OS.IsVirtualized()                     { return 0; }
 
 ## ----------------------------------------------
 
