@@ -135,8 +135,10 @@ function BU.Main.OS.IsAndroidManufacturerFujitsu()          { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidManufacturerGoogle()           { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerHTC()              { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerHuawei()           { BU.Main.OS.IsAndroid && return 0; return 1; }
+function BU.Main.OS.IsAndroidManufacturerLenovo()           { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerLG()               { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerMotorola()         { BU.Main.OS.IsAndroid && return 0; return 1; }
+function BU.Main.OS.IsAndroidManufacturerNokia()            { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerOppo()             { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerPanasonic()        { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerSamsung()          { BU.Main.OS.IsAndroid && return 0; return 1; }
@@ -169,8 +171,10 @@ function BU.Main.OS.IsAndroidSmartphoneManufacturerFujitsu()    { BU.Main.OS.IsA
 function BU.Main.OS.IsAndroidSmartphoneManufacturerGoogle()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerGoogle        && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerHTC()        { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHTC           && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerHuawei        && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerLenovo()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerLenovo        && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerLG()         { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerLG            && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerMotorola()   { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerMotorola      && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerNokia()      { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerNokia         && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerOppo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerOppo          && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerPanasonic     && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
@@ -201,7 +205,12 @@ function BU.Main.OS.IsAndroidTabletManufacturerASUS()       { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidTabletManufacturerBlackBerry() { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerBlackBerry    && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerGoogle()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerGoogle        && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerFujitsu()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerFujitsu       && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerHTC()        { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerHTC           && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerHuawei()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerHuawei        && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerLenovo()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerLenovo        && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerLG()         { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerLG            && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerMotorola()   { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerMotorola      && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerNokia()      { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerNokia         && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerOppo()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerOppo          && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerPanasonic()  { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerPanasonic     && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
