@@ -144,6 +144,7 @@ function BU.Main.OS.IsAndroidManufacturerPanasonic()        { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidManufacturerSamsung()          { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerSony()             { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerVivo()             { BU.Main.OS.IsAndroid && return 0; return 1; }
+function BU.Main.OS.IsAndroidManufacturerWiko()             { BU.Main.OS.IsAndroid && return 0; return 1; }
 function BU.Main.OS.IsAndroidManufacturerXiaomi()           { BU.Main.OS.IsAndroid && return 0; return 1; }
 
 # ·······················································
@@ -180,6 +181,7 @@ function BU.Main.OS.IsAndroidSmartphoneManufacturerPanasonic()  { BU.Main.OS.IsA
 function BU.Main.OS.IsAndroidSmartphoneManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerSony()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerSony          && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerVivo          && return 0; return 1; }
+function BU.Main.OS.IsAndroidSmartphoneManufacturerWiko()       { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerWiko          && return 0; return 1; }
 function BU.Main.OS.IsAndroidSmartphoneManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceSmartphone && BU.Main.OS.IsAndroidManufacturerXiaomi        && return 0; return 1; }
 
 # ···················································
@@ -216,6 +218,7 @@ function BU.Main.OS.IsAndroidTabletManufacturerPanasonic()  { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidTabletManufacturerSamsung()    { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerSamsung       && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerSony()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerSony          && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerVivo()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerVivo          && return 0; return 1; }
+function BU.Main.OS.IsAndroidTabletManufacturerWiko()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerWiko          && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerXiaomi        && return 0; return 1; }
 
 ## ----------------------------------------------
