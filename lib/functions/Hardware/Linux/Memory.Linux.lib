@@ -83,7 +83,19 @@ fi; echo >&2; exit 1; fi
 
 ####
 
-##
+## CHECKING THE COMPUTER'S MEMORY HARDWARE DATA
+
+# ································································
+# Checking if the type of the currently used memory stick is DDR4.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Linux.Memory.CheckIfMemoryDDR4() { BU.Hardware.Linux.Memory.GetMemoryType 'DDR4' || return 1; }
+
+## ----------------------------------------------
+
+## GETTING THE COMPUTER'S MEMORY HARDWARE DATA
 
 # ···················································································
 # Getting every informations about the computer's memory-related hardware components.
@@ -139,5 +151,3 @@ function BU.Hardware.Linux.Memory.GetMemoryType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi
 }
-
-function BU.Hardware.Memory.CheckIfMemoryDDR4() { BU.Hardware.Memory.GetMemoryType 'DDR4' || return 1; }

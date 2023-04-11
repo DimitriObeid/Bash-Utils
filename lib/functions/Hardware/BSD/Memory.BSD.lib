@@ -83,6 +83,20 @@ fi; echo >&2; exit 1; fi
 
 ####
 
+## CHECKING THE COMPUTER'S MEMORY HARDWARE DATA
+
+# ································································
+# Checking if the type of the currently used memory stick is DDR4.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.BSD.Memory.CheckIfMemoryDDR4() { BU.Hardware.BSD.Memory.GetMemoryType 'DDR4' || return 1; }
+
+## ----------------------------------------------
+
+## GETTING THE COMPUTER'S MEMORY HARDWARE DATA
+
 ##
 
 # ···················································································
@@ -92,6 +106,50 @@ fi; echo >&2; exit 1; fi
 #   -
 
 function BU.Hardware.BSD.Memory.GetHardwareInfos()
+{
+    return 0;
+}
+
+# ·······································
+# Getting the number of RAM slots in use.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.BSD.Memory.GetUsedRAMSlotsNumber()
+{
+    return 0;
+}
+
+# ················································
+# Getting the number of RAM slots available.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.BSD.Memory.GetAvailableRamSlotsNumber()
+{
+    return 0;
+}
+
+# ····························
+# Getting memory max capacity.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.BSD.Memory.GetMaxMemoryCapacity()
+{
+    return 0;
+}
+
+# ····················
+# Getting memory type.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.BSD.Memory.GetMemoryType()
 {
     return 0;
 }

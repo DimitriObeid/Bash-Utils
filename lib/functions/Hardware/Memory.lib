@@ -83,7 +83,22 @@ fi; echo >&2; exit 1; fi
 
 ####
 
-##
+## CHECKING THE COMPUTER'S MEMORY HARDWARE DATA
+
+# ································································
+# Checking if the type of the currently used memory stick is DDR4.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Hardware.Memory.CheckIfMemoryDDR4()
+{
+    BU.Hardware.Memory.GetMemoryType 'DDR4' || return "${?}"; return 0;
+}
+
+## ----------------------------------------------
+
+## GETTING THE COMPUTER'S MEMORY HARDWARE DATA
 
 # ···················································································
 # Getting every informations about the computer's memory-related hardware components.
@@ -93,7 +108,7 @@ fi; echo >&2; exit 1; fi
 
 function BU.Hardware.Memory.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".Memory.GetHardwareInfos || return "${?}"; return 0;
 }
 
 # ·······································
@@ -102,42 +117,40 @@ function BU.Hardware.Memory.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetUsedRAMSlotsNumber()
+function BU.Hardware.OSX.Memory.GetUsedRAMSlotsNumber()
 {
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 12 {print $4}'; return 0; else return 1; fi; fi
+    return 0;
 }
 
-# ···········································
+# ················································
 # Getting the number of RAM slots available.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetAvailableRamSlotsNumber()
+function BU.Hardware.OSX.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
 }
 
-# ·································
-# Getting the memory max capacity.
+# ····························
+# Getting memory max capacity.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetMaxMemoryCapacity()
+function BU.Hardware.OSX.Memory.GetMaxMemoryCapacity()
 {
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode -t 16 | awk 'FNR == 10 {print $3 " " $4}'; return 0; else return 1; fi; fi
+    return 0;
 }
 
-# ························
-# Getting the memory type.
+# ····················
+# Getting memory type.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.Memory.GetMemoryType()
+function BU.Hardware.OSX.Memory.GetMemoryType()
 {
-    if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi
+    return 0;
 }
-
-function BU.Hardware.Memory.CheckIfMemoryDDR4() { BU.Hardware.Memory.GetMemoryType 'DDR4' || return 1; }

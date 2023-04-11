@@ -179,7 +179,7 @@ function BU.Hardware.Linux.General.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
+function BU.Hardware.Linux.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
 
 # ····································
 # Getting the computer's chassis type.
@@ -187,7 +187,7 @@ function BU.Hardware.General.GetChassis()        { if BU.Main.CMDS.GetCommandPat
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.General.GetChassisType()
+function BU.Hardware.Linux.General.GetChassisType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
         if BU.Main.Checkings.CheckRootEUID; then
@@ -208,11 +208,11 @@ function BU.Hardware.General.GetChassisType()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-function BU.Hardware.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
+function BU.Hardware.Linux.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
 
 # ····················
 # Getting the boot ID.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
-function BU.Hardware.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }
+function BU.Hardware.Linux.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }
