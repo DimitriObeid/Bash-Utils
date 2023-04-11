@@ -11,7 +11,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-# Generating a library file with specific code for each operating system, with every basic stuff needed for each file :
+# Generating a library file with specific code for each supported operating system, with every basic stuff needed for each file :
 #   - the file's informations,
 #   - the script's description,
 #   - the Shellcheck global disabler,
@@ -42,9 +42,21 @@
 
 #### POSITIONAL ARGUMENTS
 
-## SUB-CATEGORY NAME
+## FILE'S INFORMATIONS
 
-# Feel free to define positional arguments here.
+# ARG TYPE : String
+# REQUIRED
+# DEFAULT VAL : NULL
+# DESC : Target module's name.
+
+__BU_MOD_ADD__ARG_MODULE_NAME=${1:-$'\0'};
+
+# ARG TYPE : String
+# REQUIRED
+# DEFAULT VAL : NULL
+# DESC : Name of the library file to create.
+
+__BU_MOD_ADD__ARG_FILE_NAME=${2:-$'\0'};
 
 ## ----------------------------------------------
 
@@ -56,7 +68,10 @@
 
 ## SUB-CATEGORY NAME
 
-# Feel free to define an array of arguments here if needed.
+# Array of operating systems names.
+# REQUIRED
+# DEFAULT VAL : NULL
+__BU_MOD_ADD__ARGS_OS_ARRAY=("${@}");
 
 ## ----------------------------------------------
 
@@ -112,3 +127,14 @@
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
+
+####
+
+##
+
+# Main loop.
+for file in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
+    #
+done
+
+exit 0;
