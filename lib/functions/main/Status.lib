@@ -180,7 +180,7 @@ function BU.Main.Status.ConfEcho()
     echo >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CHECKINGS
 ## DEBUG ID : "checkings"
@@ -637,7 +637,7 @@ function BU.Main.Status.CheckProjectStatusVars()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CHANGING VALUES MORE EASILY
 ## DEBUG ID : "changing-values-more-easily"
@@ -883,7 +883,7 @@ function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "main"
 
 function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TXT_FMT="${1:-$'\0'}";      BU.Main.Status.CheckSTAT_TXT_FMT        "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## EASIER BOOLEAN VALUES CHECKINGS
 ## DEBUG ID : "easier-boolean-values-checkings"
@@ -935,7 +935,7 @@ function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "
 
 function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

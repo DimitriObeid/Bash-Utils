@@ -2602,27 +2602,27 @@ function BashUtils_InitModules._()
     # Checking if any wanted module exists with its configuration and its library, then source every related shell files.
     for module in "${p_modules_list[@]}"; do
 
-        ## ----------------------------------------------
-
-        ## INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
+        #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #~ INITIALIZER'S FIRST ARGUMENTS PROCESSING ("module --*" AND "main --*" VALUES)
+        #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         # Calling the function which processes the « module » argument and its parameters, along with the « main » module.
         if [ "${FUNCNAME[1]}" == 'BashUtils_InitModules' ]; then
             BU.ModuleInit.ProcessFirstModuleParameters "${module}" "${v_index}" || { v_loop_error='error'; break; }
         fi
 
-        ## ----------------------------------------------
-
-        ## DEFINING LOCAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+        #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #~ DEFINING LOCAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+        #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         # Defining variables for each iteration.
         local v_module_name;
 
         v_module_name="$(echo "${module}" | cut -d' ' -f1)";
 
-        ## ----------------------------------------------
-
-        ## DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+        #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        #~ DEFINING GLOBAL VARIABLES FOR EACH MODULE TO BE INITIALIZED
+        #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         __BU_MODULE_INIT_MODULE_NAME="${v_module_name}";
 
@@ -2670,9 +2670,9 @@ function BashUtils_InitModules._()
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
         if [[ "${module}" != 'module --'* ]]; then
 
-            ## ----------------------------------------------
-
-            # MODULES' CONFIGURATION FILES SOURCING
+            #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            #~ MODULES' CONFIGURATION FILES SOURCING
+            #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
             # Checking if the module's configuration directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}"; then local lineno="${LINENO}";
@@ -2694,8 +2694,9 @@ function BashUtils_InitModules._()
 
                 v_loop_error="error"; break;
             else
-                # ---------------------------------------------------------------------------------------------------------------
-                # OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # If the '--no-aliases-include' option was not passed to the modules initializer.
                 if [ -n "${__BU_MODULES_INIT_INCLUDE_ALIASES}" ]; then
@@ -2770,8 +2771,9 @@ function BashUtils_InitModules._()
                     unset v_module_os_aliases_file_name;
                 fi
 
-                # ----------------------------------------------------
-                # MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE_MSG}" "${v_module_name}")" '#' 'msg'; BU.ModuleInit.Msg;
@@ -2829,9 +2831,9 @@ function BashUtils_InitModules._()
                 unset v_module_config_file_name;
             fi
 
-            # -----------------------------------------------
-
-            # MODULES' INITIALIZATION FILES SOURCING
+            #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            #~ MODULES' INITIALIZATION FILES SOURCING
+            #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}"; then local lineno="${LINENO}";
@@ -2854,8 +2856,9 @@ function BashUtils_InitModules._()
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE}" "${v_module_name}")" '-' 'msg';
 
-                ## ----------------------------------------------------
-                # MANDATORY : SOURCING THE MODULE'S INITIALIZATION FILE
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ MANDATORY : SOURCING THE MODULE'S INITIALIZATION FILE
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
                 if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "Initializer.${v_module_name}.sh" 'f' 'shut' 'modinitfile')" ]] || \
@@ -2986,23 +2989,23 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__PROJECT_PID="${$}";
     __bu_module_init__project_pid__lineno="$(( LINENO - 1 ))";
 
-    # -------------------------------------------
-
-    # FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     __BU_MODULE_INIT__ROOT_HOME="${HOME}";
     __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
-    # -------------------------------------------
-
-    # STORING THE NAME OF THE FRAMEWORK'S TEMPORARY DIRECTORY
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ STORING THE NAME OF THE FRAMEWORK'S TEMPORARY DIRECTORY
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     __BU_MODULE_INIT__TMP_DIR_NAME="tmp";
     __bu_module_init__tmp_dir_name__lineno="$(( LINENO - 1 ))";
 
-    # -------------------------------------------
-
-    ## FINDING THE ".Bash-utils" FOLDER
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ FINDING THE ".Bash-utils" FOLDER
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # If the framework base is not being installed on the user's hard drive.
     if ! BU.ModuleInit.IsFrameworkBeingInstalled; then
@@ -3081,9 +3084,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         fi
     fi
 
-    # -------------------------------------------
-
-    # TEMPORARY DIRECTORY
+    #~ ~~~~~~~~~~~~~~~~~~~
+    #~ TEMPORARY DIRECTORY
+    #~ ~~~~~~~~~~~~~~~~~~~
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}" ]; then mkdir -p "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}"; fi
 
@@ -3096,14 +3099,11 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # -------------------------------------------
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ CONFIGURATIONS DIRECTORIES
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    # CONFIGURATIONS DIRECTORIES
-
-    # -----------------------------
     # Configurations directory path
-    # -----------------------------
-
     __bu_module_init__config_dir_parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__CONFIG_DIR_PARENT="${__BU_MODULE_INIT__ROOT}";
 
@@ -3119,10 +3119,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # ------------------------------------------
     # Module's initializer script directory path
-    # ------------------------------------------
-
     __bu_module_init__config_init_dir_parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
 
@@ -3138,10 +3135,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # --------------------------------
     # Modules configurations directory
-    # --------------------------------
-
     __bu_module_init__config_modules_dir_parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
 
@@ -3157,10 +3151,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    ## -----------------------------------------------------------------------------------
     # Translation files for the initializer script + the main module config and init files
-    ## -----------------------------------------------------------------------------------
-
     __bu_module_init__config_init_lang_dir_parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}";
 
@@ -3176,9 +3167,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # -------------------------------------------
-
-    # INITIALIZER SCRIPT'S CONFIGURATION FILES
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ INITIALIZER SCRIPT'S CONFIGURATION FILES
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     __bu_module_init__config_init_dir__status__lineno="$(( LINENO + 2 ))";
 
@@ -3189,9 +3180,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # -------------------------------------------
-
-    # MODULES DIRECTORIES
+    #~ ~~~~~~~~~~~~~~~~~~~
+    #~ MODULES DIRECTORIES
+    #~ ~~~~~~~~~~~~~~~~~~~
 
     __bu_module_init__modules_dir__lineno="$(( LINENO + 2 ))";
 
@@ -3202,9 +3193,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         BU.ModuleInit.IsInScript && exit 1; return 1;
     };
 
-    # -------------------------------------------
-
-    # MODULES FILES
+    #~ ~~~~~~~~~~~~~
+    #~ MODULES FILES
+    #~ ~~~~~~~~~~~~~
 
     __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
@@ -3230,9 +3221,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH="";
 
-    # -------------------------------------------
-
-    # OTHER FILES
+    #~ ~~~~~~~~~~~
+    #~ OTHER FILES
+    #~ ~~~~~~~~~~~
 
     # Creating a global variable for storing the instruction not to stop the script if the "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" is not found, since a super-user privileged version exists.
     __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR='no-err';
@@ -3243,10 +3234,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
     __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-    # ----------------------------------------------
     # Path to the framework's library root directory
-    # ----------------------------------------------
-
     __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH="$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR}" "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME}" 'f')" || {
@@ -3275,9 +3263,9 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         };
     fi
 
-    # -------------------------------------------
-
-    # MISC
+    #~ ~~~~
+    #~ MISC
+    #~ ~~~~
 
     # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
     # function if the framework's main module is translated thanks to the CSV file parser.
@@ -3294,10 +3282,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
     __bu_module_init__user_lang__lineno="$(( LINENO - 1 ))";
 
-    ## -------------------------------------------------------------------------------------
     # Array of allowed values for the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" global variable
-    ## -------------------------------------------------------------------------------------
-
     __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO + 2 ))";
 
     __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cs' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \

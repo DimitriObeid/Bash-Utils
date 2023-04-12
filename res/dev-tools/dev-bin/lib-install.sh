@@ -114,9 +114,9 @@ __LIB_INSTALL_STABLE_FILES_HOME_DIR="${HOME}/.Bash-utils/compiled/stable";
 
 cp -r install/.Bash-utils/ ~
 
-### ---------------------------------------------------------------------------------------------------------------------------------------
-## COMMENTING THE FOLLOWING LINES UNTIL THIS SCRIPT WILL SUPPORT THE OPTIONS TO PROCESS THE READ-ONLY FILES ACCORDING TO THE USER'S DESIRES
-### ---------------------------------------------------------------------------------------------------------------------------------------
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+### COMMENTING THE FOLLOWING LINES UNTIL THIS SCRIPT WILL SUPPORT THE OPTIONS TO PROCESS THE READ-ONLY FILES ACCORDING TO THE USER'S DESIRES
+### ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # cp "install/Bash-utils-init.sh" ~   || { echo "Unable to copy the initializer script in the ${HOME} directory"; exit 1; };
 # echo "Successfully copied the initializer script in the ${HOME} directory";

@@ -221,7 +221,7 @@ function BU.Main.OS.IsAndroidTabletManufacturerVivo()       { BU.Main.OS.IsAndro
 function BU.Main.OS.IsAndroidTabletManufacturerWiko()       { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerWiko          && return 0; return 1; }
 function BU.Main.OS.IsAndroidTabletManufacturerXiaomi()     { BU.Main.OS.IsAndroidDeviceTablet && BU.Main.OS.IsAndroidManufacturerXiaomi        && return 0; return 1; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
@@ -260,7 +260,7 @@ function BU.Main.OS.GetAndroidOSBuild()             { BU.Main.OS.IsAndroid && ge
 
 function BU.Main.OS.GetAndroidOSVersion()           { BU.Main.OS.IsAndroid && getprop ro.build.version.release && return 0; return 1; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -286,14 +286,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__CHECKING_INFORMATIONS="${__BU
 
 function BU.Main.OS.IsBSD()                         { if BU.Main.OS.IsFreeBSD || BU.Main.OS.IsNetBSD || BU.Main.OS.IsOpenBSD; then return 0; else return 1; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -314,14 +314,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__CHECKING_INFORMATIONS="$
 
 function BU.Main.OS.IsFreeBSD()                   	{ if [[ "${OSTYPE}" == 'FreeBSD' ]];                                then    return 0; else  return 1; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -342,14 +342,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="${
 
 function BU.Main.OS.IsNetBSD()                    	{ if [[ "${OSTYPE}" == '' ]];                                       then    return 0; else  return 1; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -370,14 +370,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$
 
 function BU.Main.OS.IsOpenBSD()                   	{ if [[ "${OSTYPE}" == 'openbsd'* ]];                               then    return 0; else  return 1; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -398,14 +398,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="
 
 function BU.Main.OS.IsChromeOS()					{ true; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -426,14 +426,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="${__
 
 function BU.Main.OS.IsHaiku()                     	{ if [[ "${OSTYPE}" == 'haiku' ]];                                  then    return 0; else  return 1; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -449,7 +449,7 @@ declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT="os::general-os-funct
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__CHECKING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}::checking-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
@@ -544,7 +544,7 @@ function BU.Main.OS.PrintCurrentOS()
     return 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1151,7 +1151,7 @@ function BU.Main.OS.IsLinuxKernelMajor3() { local x; x="$(BU.Main.OS.GetLinuxKer
 function BU.Main.OS.IsLinuxKernelMajor4() { local x; x="$(BU.Main.OS.GetLinuxKernelMajorVersion)"; [ "${x}" == '4' ]    &&      return 0;       return 1; }
 function BU.Main.OS.IsLinuxKernelMajor5() { local x; x="$(BU.Main.OS.GetLinuxKernelMajorVersion)"; [ "${x}" == '5' ]    &&      return 0;       return 1; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
@@ -1284,7 +1284,7 @@ function BU.Main.OS.GetLinuxKernelConfiguration()
     BU.OS.IsLinux && uname -r | cut -d"-" -f3 && return 0; return 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1361,14 +1361,14 @@ function BU.Main.OS.IsOSXCatalina()                     { if command -v sw_vers 
 function BU.Main.OS.IsOSXBigSur() 	                    { if command -v sw_vers > /dev/null; then if sw_vers | grep -q 11;		then return 0; else return 1; fi; else return 1; fi; }
 function BU.Main.OS.IsOSXMonterey()                     { if command -v sw_vers > /dev/null; then if sw_vers | grep -q 12;		then return 0; else return 1; fi; else return 1; fi; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1435,14 +1435,14 @@ function BU.Main.OS.IsRunningInVirtualBox()             { BU.Main.OS.BU.Main.OS.
 
 function BU.Main.OS.IsVirtualized()                     { return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1552,14 +1552,14 @@ function BU.Main.OS.IsLinuxWSL1()                     	{ uname -r | grep Microso
 
 function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microsoft                                 &&      								return 0;       return 1; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GATHERING INFORMATIONS
 ## DEBUG ID : "gathering-informations"
 
 declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__GATHERING_INFORMATIONS="${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS}::gathering-informations";
 
-## ----------------------------------------------
+## ==============================================
 
 
 

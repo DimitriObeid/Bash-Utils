@@ -302,22 +302,23 @@ else
     echo;
 fi
 
-# ------------------------------------------------------------------------------------------------
-# STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document.
+#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
+#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 WriteFileInformations "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}" || exit 1;
 
-# -------------------------------------------------------------------------------------------------
-# STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document.
+#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
+#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 WriteScriptDescription "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}" || exit 1;
 
-# ---------------------------------------------------------------------------------------------------------------------------------
-# STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file.
+#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#~ STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file
+#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}" || exit 1;
-
-## ==============================================
 
 ## ==============================================
 
@@ -349,18 +350,21 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
         __ERR='error'; break 1;
     fi
 
-    # ------------------------------------------------------------------------------------------------
-    # STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     WriteFileInformations "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
 
-    # -------------------------------------------------------------------------------------------------
-    # STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     WriteScriptDescription "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
 
-    # ---------------------------------------------------------------------------------------------------------------------------------
-    # STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
 done
