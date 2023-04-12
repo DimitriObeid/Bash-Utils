@@ -194,7 +194,7 @@ EOF
 }
 
 # ·························································································
-# Writing the Shellcheck and the pieces of code which prevent the direct execution of their host files.
+# Writing the Shellcheck and the pieces of code which prevent the direct execution of its host file.
 
 function WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode()
 {
@@ -312,7 +312,12 @@ WriteFileInformations "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_F
 # -------------------------------------------------------------------------------------------------
 # STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document.
 
-WriteScriptDescription "" || exit 1;
+WriteScriptDescription "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}" || exit 1;
+
+# ---------------------------------------------------------------------------------------------------------------------------------
+# STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file.
+
+WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}" || exit 1;
 
 ## ----------------------------------------------
 
@@ -330,25 +335,36 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
     else
         echo "The ${operating_system} operating system is not supported" >&2;
         echo >&2;
+
+        __ERR='error'; break 1;
     fi
 
+    __OS_FILEPATH="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__BU_MOD_ADD__ARG_FILE_NAME}";
+
     # Creating the library file into the module's OS directory where it belongs.
-    if [ ! -f "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__BU_MOD_ADD__ARG_FILE_NAME}" ]; then
-        touch "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__BU_MOD_ADD__ARG_FILE_NAME}";
+    if [ ! -f "${__OS_FILEPATH}" ]; then
+        touch "${__OS_FILEPATH}";
     else
-        echo "The ${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__BU_MOD_ADD__ARG_FILE_NAME} file already exists";
-        echo;
+        echo "The ${__OS_FILEPATH} file already exists" >&2;
+        echo >&2;
+
+        __ERR='error'; break 1;
     fi
 
     # ------------------------------------------------------------------------------------------------
     # STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document.
 
-    WriteFileInformations "" || { __ERR='error'; break 1; };
+    WriteFileInformations "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
 
     # -------------------------------------------------------------------------------------------------
     # STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document.
 
-    WriteScriptDescription "" || { __ERR='error'; break 1; };
+    WriteScriptDescription "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
+
+    # ---------------------------------------------------------------------------------------------------------------------------------
+    # STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file.
+
+    WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
 done
 
 if [ "${__ERR}" == 'error' ]; then exit 1; else exit 0; fi
