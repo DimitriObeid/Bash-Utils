@@ -389,7 +389,7 @@ function BU.Main.Headers.Base.CMD()
     BU.Main.Headers.Base "${@}";
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -454,7 +454,7 @@ function BU.Main.Headers.Header.CMD.Warning         { BU.Main.Headers.Base.CMD  
 # Copy-paste this function to avoid losing time while creating unicolor headers :
 # function BU.Header<col> { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_<COLOR>}" -"${__BU_MAIN_COLOR_<COLOR>}" "${1}" "${2}" "${3}" "${4}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ······························
 # OLD COLORS (BEFORE 2022 01 07)
@@ -497,7 +497,7 @@ function BU.Main.Headers.Header.CMD.Turquoise       { BU.Main.Headers.Base "${__
 function BU.Main.Headers.Header.CMD.White           { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WHITE}"          		"${__BU_MAIN_COLOR_TXT_WHITE}"       	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"         		"${__BU_MAIN_COLOR_TXT_YELLOW}"      	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·····························
 # NEW COLORS (SINCE 2022 01 07)
@@ -538,7 +538,7 @@ function BU.Main.Headers.Header.CMD.Tan             { BU.Main.Headers.Base "${__
 function BU.Main.Headers.Header.CMD.Teal            { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TEAL}"          		"${__BU_MAIN_COLOR_TXT_TEAL}"        	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 function BU.Main.Headers.Header.CMD.Violet          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_VIOLET}"        		"${__BU_MAIN_COLOR_TXT_VIOLET}"      	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -622,7 +622,7 @@ function BU.Main.Headers.Header.CMD.Aqua.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Aqua.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_AQUA}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ······································
 ## BLACK LINES, DIFFERENTLY COLORED TEXT
@@ -693,7 +693,7 @@ function BU.Main.Headers.Header.CMD.Black.White         { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Black.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLACK}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·····································
 ## BLUE LINES, DIFFERENTLY COLORED TEXT
@@ -764,7 +764,7 @@ function BU.Main.Headers.Header.CMD.Blue.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Blue.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_BLUE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ······································
 ## CYAN LINES, DIFFERENTLY COLORED TEXT
@@ -834,7 +834,7 @@ function BU.Main.Headers.Header.CMD.Cyan.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Cyan.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_CYAN}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ········································
 ## FUCHSIA LINES, DIFFERENTLY COLORED TEXT
@@ -905,7 +905,7 @@ function BU.Main.Headers.Header.CMD.Fuchsia.White       { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Fuchsia.Yellow      { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_FUCHSIA}" "${__BU_MAIN_COLOR_TXT_YELLOW}"         		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·····································
 ## GRAY LINES, DIFFERENTLY COLORED TEXT
@@ -976,7 +976,7 @@ function BU.Main.Headers.CMD.Header.Gray.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.CMD.Header.Gray.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GRAY}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ············································
 ## LIGHT GREEN LINES, DIFFERENTLY COLORED TEXT
@@ -1047,7 +1047,7 @@ function BU.Main.Headers.CMD.Header.Green.White         { BU.Main.Headers.Base "
 
 function BU.Main.Headers.CMD.Header.Green.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_GREEN}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ···········································
 ## LIME GREEN LINES, DIFFERENTLY COLORED TEXT
@@ -1118,7 +1118,7 @@ function BU.Main.Headers.CMD.Header.Lime.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.CMD.Header.Lime.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_LIME}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·······································
 ## MAROON LINES, DIFFERENTLY COLORED TEXT
@@ -1189,7 +1189,7 @@ function BU.Main.Headers.Header.CMD.Maroon.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Maroon.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_MAROON}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ··········································
 ## NAVY BLUE LINES, DIFFERENTLY COLORED TEXT
@@ -1260,7 +1260,7 @@ function BU.Main.Headers.Header.CMD.Navy.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Navy.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_NAVY}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ············································
 ## OLIVE GREEN LINES, DIFFERENTLY COLORED TEXT
@@ -1331,7 +1331,7 @@ function BU.Main.Headers.Header.CMD.Olive.White        { BU.Main.Headers.Base "$
 
 function BU.Main.Headers.Header.CMD.Olive.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_OLIVE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           		"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·······································
 ## ORANGE LINES, DIFFERENTLY COLORED TEXT
@@ -1402,7 +1402,7 @@ function BU.Main.Headers.Header.CMD.Orange.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Orange.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_ORANGE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·····································
 ## PINK LINES, DIFFERENTLY COLORED TEXT
@@ -1473,7 +1473,7 @@ function BU.Main.Headers.Header.CMD.Pink.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Pink.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PINK}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·······································
 ## PURPLE LINES, DIFFERENTLY COLORED TEXT
@@ -1544,7 +1544,7 @@ function BU.Main.Headers.Header.CMD.Purple.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Purple.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_PURPLE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ····································
 ## RED LINES, DIFFERENTLY COLORED TEXT
@@ -1615,7 +1615,7 @@ function BU.Main.Headers.Header.CMD.Red.White           { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Red.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_RED}" "${__BU_MAIN_COLOR_TXT_YELLOW}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·······································
 ## SALMON LINES, DIFFERENTLY COLORED TEXT
@@ -1686,7 +1686,7 @@ function BU.Main.Headers.Header.CMD.Salmon.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Salmon.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SALMON}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·······································
 ## SILVER LINES, DIFFERENTLY COLORED TEXT
@@ -1757,7 +1757,7 @@ function BU.Main.Headers.Header.CMD.Silver.White        { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Silver.Yellow       { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_SILVER}" "${__BU_MAIN_COLOR_TXT_YELLOW}"          	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ····································
 ## TAN LINES, DIFFERENTLY COLORED TEXT
@@ -1828,7 +1828,7 @@ function BU.Main.Headers.Header.CMD.Tan.White           { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Tan.Yellow          { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TAN}" "${__BU_MAIN_COLOR_TXT_YELLOW}"             	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·····································
 ## TEAL LINES, DIFFERENTLY COLORED TEXT
@@ -1899,7 +1899,7 @@ function BU.Main.Headers.Header.CMD.Teal.White          { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Teal.Yellow         { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TEAL}" "${__BU_MAIN_COLOR_TXT_YELLOW}"            	"${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ··········································
 ## TURQUOISE LINES, DIFFERENTLY COLORED TEXT
@@ -1970,7 +1970,7 @@ function BU.Main.Headers.Header.CMD.Turquoise.White     { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Turquoise.Yellow    { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_TURQUOISE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"           "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 # ······································
 ## WHITE LINES, DIFFERENTLY COLORED TEXT
@@ -2042,7 +2042,7 @@ function BU.Main.Headers.Header.CMD.White.Turquoise     { BU.Main.Headers.Base "
 function BU.Main.Headers.Header.CMD.White.Yellow        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_WHITE}" "${__BU_MAIN_COLOR_TXT_YELLOW}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
 
-## ----------------------------------------------
+## ==============================================
 
 # ·······································
 ## YELLOW LINES, DIFFERENTLY COLORED TEXT
@@ -2113,7 +2113,7 @@ function BU.Main.Headers.Header.CMD.Yellow.Violet       { BU.Main.Headers.Base "
 
 function BU.Main.Headers.Header.CMD.Yellow.White        { BU.Main.Headers.Base "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" "${__BU_MAIN_COLOR_TXT_YELLOW}" "${__BU_MAIN_COLOR_TXT_WHITE}"               "${1}" "${2}" "${3}" "${4}" 'true' "${@}" || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

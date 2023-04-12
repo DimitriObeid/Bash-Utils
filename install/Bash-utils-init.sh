@@ -179,7 +179,7 @@ function BU.ModuleInit.SetInitErrorMsg()                { if BU.Main.Status.Chec
 
 function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.CheckStatIsInitializing && [ -n "${v_msg_arr_permission_global_backup}" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_permission_global_backup}"; unset v_msg_arr_permission_global_backup; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
@@ -232,7 +232,7 @@ function BU.ModuleInit.DefineTraps()
     trap "BU.ModuleInit.SIGINT; BU.ModuleInit.Exit 2" SIGINT;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FUNCTIONS NEEDED FOR THE TRANSLATIONS OF MESSAGES BEFORE THE INCLUSION OF THE TRANSLATION FILES.
 
@@ -348,7 +348,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
     };
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FUNCTIONS NEEDED FOR THE INITIALIZATION PROCESS TRANSLATIONS
 
@@ -755,7 +755,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
     fi
 }
 #"
-## ----------------------------------------------
+## ==============================================
 
 ## FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
@@ -1549,7 +1549,7 @@ function BU.ModuleInit.PrintLogError()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
@@ -1905,7 +1905,7 @@ function BU.ModuleInit.SourcingFailure()
     if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
@@ -2917,7 +2917,7 @@ function BashUtils_InitModules._()
     done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1; fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -2941,27 +2941,27 @@ if ! ps -a | grep -E "${$}" | grep "bash" > /dev/null; then
     BU.ModuleInit.IsInScript && exit 1; return 1;
 fi
 
-## ----------------------------------------------
+## ==============================================
 
 ## STARTING A TIMER IN ORDER TO CHECK THE INITIALIZATION PROCESS'S TIME
 
 # Do not assign any value here now, it will be done at the end of the framework's initialization process.
 declare -i __BU_MODULE_INIT__FRAMEWORK_INITIALIZATION_PROCESS_TIMER;
 
-## ----------------------------------------------
+## ==============================================
 
 ## CHECKING THE CURRENT VERSION OF THE LANGUAGE
 
 # Checking the version of the Bash language currently used on the user's system.
 BU.ModuleInit.CheckBashMinimalVersion || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
 
-## ----------------------------------------------
+## ==============================================
 
 ## CALLING THE TRAPS RESOURCES
 
 BU.ModuleInit.DefineTraps;
 
-## ----------------------------------------------
+## ==============================================
 
 ## DEFINING GLOBAL VARIABLES
 
@@ -3315,7 +3315,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 # Calling the function previously defined, or else the global variables will not be declared.
 BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 
-## ----------------------------------------------
+## ==============================================
 
 ## CALLING THE NEEDED FUNCTIONS (DEFINED IN THIS FILE) THAT MUST BE CALLED BEFORE INITIALIZING THE FIRST GLOBAL VARIABLES
 
@@ -3335,7 +3335,7 @@ BU.ModuleInit.IsFrameworkLocalizedCompiled || {
 
 declare __BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED='true';
 
-## ----------------------------------------------
+## ==============================================
 
 ## DEFINING NEW GLOBAL VARIABLES TO STORE THE INITIALIZATION LOGS AND DISPLAY THEM OR NO
 
@@ -3359,7 +3359,7 @@ declare __BU_MODULE_INIT_MSG_ARRAY_MODE='--mode-log-partial';
 # without being redirected to the screen too (these instructions are processed in the "BU.ModuleInit.Msg" function).
 declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
 
-## ----------------------------------------------
+## ==============================================
 
 ## CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
@@ -3367,7 +3367,7 @@ declare __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='';
 __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg "${__BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES}")");
 __BU_MODULE_INIT_MSG_ARRAY+=("$(BU.ModuleInit.Msg)");
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -3720,7 +3720,7 @@ function BU.ModuleInit.UnsourceModules()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -3773,7 +3773,7 @@ function BU.ModuleInit.HandleErrors()
     return 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## PARSING THE TRANSLATION FILE OF THE CURRENTLY PROCESSED MODULE
 
@@ -4103,7 +4103,7 @@ function BU.ModuleInit.ParseCSVLang()
 	fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

@@ -184,7 +184,7 @@ function BU.Hardware.OSX.Drive.GetPartitionSize()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -260,7 +260,7 @@ function BU.Hardware.OSX.Drive.CountHDD+SSD()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE HARD DRIVE(S) INFORMATIONS
 
@@ -297,7 +297,7 @@ function BU.Hardware.OSX.Drive.GetFirmwareVersion()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

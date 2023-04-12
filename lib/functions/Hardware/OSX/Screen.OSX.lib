@@ -107,7 +107,7 @@ function BU.Hardware.OSX.Screen.IsExtraMonitorPlugged()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE SCREEN'S DATA
 

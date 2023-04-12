@@ -3,26 +3,26 @@
 use strict;
 use warnings;
 
-## ----------------------------------------------
+## ==============================================
 
 ## EXIT CODES :
 
 # 2 : The system cannot find the file specified.
 $__BU_SML__NO_FILE_SPECIFIED = 2;
 
-# 
+#
 
 # 10022 : An invalid argument was supplied.
 $__BU_SML__INVALID_ARG = 10022;
 
-## ----------------------------------------------
+## ==============================================
 
 ## VARIABLES
 
 my ($file_extension) = $file =~ /(\.[^.]+)$/;
 my $output_file = ""
 
-## ----------------------------------------------
+## ==============================================
 
 # ARGUMENTS :
 #	- $arg_file_path	--> MANDATORY	: Path of the translations CSV file to process.
@@ -32,7 +32,7 @@ my $output_file = ""
 
 my ($arg_file_path; $arg_target_col $arg_output_file $arg_print) = @ARGV;
 
-## ----------------------------------------------
+## ==============================================
 
 # If no file is passed to the "$arg_file_path" parameter.
 if (-z $arg_file_path) {
@@ -79,7 +79,7 @@ elsif (-n $arg_target_col) && ( ! $arg_target_col =~ /^[+-]?\d+$/ ) {
 open(FH, '>', "$arg_file_path") or die $!;
 
 while (<FH>) {
-	
+
 }
 
 # If the CSV file cannot be read by the Perl script.
@@ -87,7 +87,7 @@ while (<FH>) {
 
 # The output file cannot be created by the Perl script.
 # if (-e "$arg_output_file") {
-	
+
 # }
 #}
 

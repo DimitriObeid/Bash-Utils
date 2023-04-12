@@ -92,7 +92,7 @@ declare -r __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="args::ar
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__PATH_CHECKING_FUNCTIONS="${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}::path-checking-functions";
 
-## ----------------------------------------------
+## ==============================================
 
 ## QUICK MESSAGE PRINTING
 ## DEBUG ID : "quick-message-printing"
@@ -385,7 +385,7 @@ function BU.Main.Args.PrintBadOption()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## ARGUMENT PRESENCE CHECKING
 ## DEBUG ID = "argument-presence-checking"
@@ -903,7 +903,7 @@ function BU.Main.Args.GetArgc-FFL()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -969,7 +969,7 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1015,7 +1015,7 @@ function BU.Main.Args__CMDS.GetCommandPath()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1072,7 +1072,7 @@ function BU.Main.Args__Decho.Decho()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1132,7 +1132,7 @@ function BU.Main.Args__Directories.ProcessingDir()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - FOLDER CREATION FUNCTIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -1274,7 +1274,7 @@ function BU.Main.Args__Directories.MakePath()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "MAIN MODULE'S "Directories.lib" FILE'S FUNCTIONS - PATH PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -1429,7 +1429,7 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1442,7 +1442,7 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 
 #
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1636,7 +1636,7 @@ function BU.Main.Args__Files.MakePath()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "SETTING FILE INFORMATIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -1689,7 +1689,7 @@ function BU.Main.Args__Files.SetLastAccess()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "ARCHIVES PROCESSING FUNCTIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -1923,7 +1923,7 @@ function BU.Main.Args__Files.UncompressFormat()
 	return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1975,7 +1975,7 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "GETTING FILE SYSTEM'S INFORMATIONS"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -2021,7 +2021,7 @@ function BU.Main.Args__Filesystem.GetFSInfos()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -2081,7 +2081,7 @@ function BU.Main.Args__Filesystem.Chown()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "RECURSIVE PERMISSION AND OWNERSHIP PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -2141,7 +2141,7 @@ function BU.Main.Args__Filesystem.ChownRec()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -2213,7 +2213,7 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -2271,7 +2271,7 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "CUTTING TEXT"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -2412,7 +2412,7 @@ function BU.Main.Args__Text.DeleteLettersInString()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "GETTING TEXT"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.
@@ -2644,7 +2644,7 @@ function BU.Main.Args__Text.GetSubStringOccurences()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CATEGORY : "SPLITTING TEXT AND SPLITTED TEXT PROCESSING"
 ## DEBUG ID : Dependant on the debug ID from the original function's file sub-category.	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -2691,7 +2691,7 @@ function BU.Main.Args__Text.StrToWordArray()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

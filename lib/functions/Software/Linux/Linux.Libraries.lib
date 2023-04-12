@@ -151,7 +151,7 @@ function BU.Software.Linux.Libraries.DirectX.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## OPENGL
 
@@ -197,7 +197,7 @@ function BU.Software.Linux.Libraries.OpenGL.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SDL (Simple DirectMedia Layer)
 
@@ -243,7 +243,7 @@ function BU.Software.Linux.Libraries.SDL.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

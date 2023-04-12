@@ -184,7 +184,7 @@ function BU.Hardware.BSD.Drive.GetPartitionSize()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -260,7 +260,7 @@ function BU.Hardware.BSD.Drive.CountHDD+SSD()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE HARD DRIVE(S) INFORMATIONS
 
@@ -297,7 +297,7 @@ function BU.Hardware.BSD.Drive.GetFirmwareVersion()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

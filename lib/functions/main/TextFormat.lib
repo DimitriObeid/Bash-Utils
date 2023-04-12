@@ -198,7 +198,7 @@ function BU.Main.TextFormat.GetTextColorFromCMD()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SETTING COLOR CODES IN FILES
 ## DEBUG ID : setting-color-codes-in-files
@@ -341,7 +341,7 @@ function BU.Main.TextFormat.SetTextColor()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## COLORS STRINGS PROCESSING FUNCTIONS
 ## DEBUG ID : colors-strings-processing-functions
@@ -482,7 +482,7 @@ function BU.Main.TextFormat.Itoa()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -541,7 +541,7 @@ function BU.Main.TextFormat.SetTextFormat()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

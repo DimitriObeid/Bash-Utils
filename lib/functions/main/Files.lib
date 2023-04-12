@@ -198,7 +198,7 @@ function BU.Main.Files.ProcessingFile()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FILE CREATION FUNCTIONS
 ## DEBUG ID : "file-creation-functions"
@@ -578,7 +578,7 @@ function BU.Main.Files.CreateProjectLogFile()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FILE DELETION FUNCTIONS
 ## DEBUG ID : "file-deletion-functions"
@@ -616,7 +616,7 @@ function BU.Main.Files.DeleteFile()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CHECKING FILE INFORMATIONS
 ## DEBUG ID : "checking-file-informations"
@@ -798,7 +798,7 @@ function BU.Main.Files.IsExecutableOnly()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING FILE INFORMATIONS
 ## DEBUG ID : "getting-file-informations"
@@ -1139,7 +1139,7 @@ function BU.Main.Files.GetWordsNumber()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SETTING FILE INFORMATIONS
 ## DEBUG ID : "setting-file-informations"
@@ -1172,7 +1172,7 @@ function BU.Main.File.SetFileLastAccess()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FILE SOURCING
 ## DEBUG ID : "file-sourcing"
@@ -1228,7 +1228,7 @@ function BU.Main.Files.SourceFile()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## TEXT FILE PARSING
 ## DEBUG ID : "text-file-parsing"
@@ -1274,7 +1274,7 @@ function BU.Main.Files.GetLineFromTextFile()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -1704,7 +1704,7 @@ function BU.Main.Files.UncompressFormat()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 })
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

@@ -87,7 +87,7 @@ fi; echo >&2; exit 1; fi
 
 
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING GENERAL DATA
 
@@ -118,7 +118,7 @@ function BU.Hardware.Linux.CPU.GetInfos()                 { if BU.Main.CMDS.GetC
 
 function BU.Hardware.Linux.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -238,7 +238,7 @@ function BU.Main.CPU.IsArchMIPS()               { true; }
 
 function BU.Main.CPU.IsArchRISCV()              { true; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE CPU(s) ARCHITECTURE'S DATA
 
@@ -250,7 +250,7 @@ function BU.Main.CPU.IsArchRISCV()              { true; }
 
 function BU.Hardware.Linux.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -268,7 +268,7 @@ function BU.Hardware.Linux.CPU.GetArch()              { if BU.Main.CMDS.GetComma
 
 function BU.Hardware.Linux.CPU.IsMonocore()            { return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE CPU(s) CORES DATA
 
@@ -296,7 +296,7 @@ function BU.Hardware.Linux.CPU.GetLogicalCoresNumber()    { return 0; }
 
 function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()   { return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -306,7 +306,7 @@ function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()   { return 0; }
 
 ## CHECKING THE CPU'S CLOCK INFORMATIONS
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE CPU'S CLOCK DATA
 
@@ -318,7 +318,7 @@ function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()   { return 0; }
 
 function BU.Hardware.Linux.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -331,7 +331,7 @@ function BU.Hardware.Linux.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetC
 
 
 
-## ----------------------------------------------
+## ==============================================
 
 ## GET CPU INFORMATIONS
 

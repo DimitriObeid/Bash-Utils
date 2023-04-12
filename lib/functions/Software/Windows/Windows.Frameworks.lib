@@ -142,7 +142,7 @@ function BU.Software.Windows.Frameworks.Bootstrap.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -185,7 +185,7 @@ function BU.Software.Windows.Frameworks.Spring.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -237,7 +237,7 @@ function BU.Software.Windows.Frameworks.AngularJS.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## REACT JS
 
@@ -283,7 +283,7 @@ function BU.Software.Windows.Frameworks.ReactJS.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## VUE.JS
 
@@ -329,7 +329,7 @@ function BU.Software.Windows.Frameworks.VueJS.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -381,7 +381,7 @@ function BU.Software.Windows.Frameworks.CakePHP.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## LARAVEL
 
@@ -427,7 +427,7 @@ function BU.Software.Windows.Frameworks.Laravel.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SYMFONY
 
@@ -473,7 +473,7 @@ function BU.Software.Windows.Frameworks.Symfony.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -525,7 +525,7 @@ function BU.Software.Windows.Frameworks.Django.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FLASK
 
@@ -571,7 +571,7 @@ function BU.Software.Windows.Frameworks.Flask.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## WEB2PY
 
@@ -617,7 +617,7 @@ function BU.Software.Windows.Frameworks.Web2py.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

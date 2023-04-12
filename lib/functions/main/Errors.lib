@@ -188,7 +188,7 @@ function BU.Main.Errors.HandleSmallErrors()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## EXIT AND RETURN CODES HANDLING
 ## DEBUG ID : "exit-and-return-codes-handling"
@@ -250,7 +250,7 @@ function BU.Main.Errors.Exit()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SCRIPT'S ERRORS HANDLING
 ## DEBUG ID : "script-errors-handling"
@@ -489,7 +489,7 @@ function BU.Main.Errors.HandleErrors()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

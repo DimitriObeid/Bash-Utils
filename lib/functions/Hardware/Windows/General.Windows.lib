@@ -163,7 +163,7 @@ function BU.Hardware.Windows.General.GetHardwareInfos()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

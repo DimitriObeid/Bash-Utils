@@ -107,7 +107,7 @@ function BU.Hardware.BSD.Screen.IsExtraMonitorPlugged()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE SCREEN'S DATA
 

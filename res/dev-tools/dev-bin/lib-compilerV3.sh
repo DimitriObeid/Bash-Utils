@@ -33,7 +33,7 @@
 #            echo >&2; echo "In $(basename "$0"), line $(( LINENO - 1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
 # fi
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -64,7 +64,7 @@ if [[ "${1,,}" == '--lang-comments'* ]]; then
     __BU_ARG_LANG_DOC="${1,,}";
 fi
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -79,7 +79,7 @@ fi
 # DESC : Fitting the arguments following the "${__BU_ARG_LANG}" parameter in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
 __BU_ARGS_ARRAY=("${@}");
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -102,7 +102,7 @@ __BU_ARRAY__COMPILED_FILES_LIST=();
 # Storing each compiled stable files path.
 __BU_ARRAY__COMPILED_STABLE_FILES_LIST=();
 
-## ----------------------------------------------
+## ==============================================
 
 ## LANGUAGES ARRAYS
 
@@ -119,7 +119,7 @@ ___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'a
 # List of the currently supported languages in the framework (in the far future, the 'all' argument will be replaced to support the previous array).
 __BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -157,7 +157,7 @@ __SUCCESS="${__GREEN}";
 
 __WARNING="${__YELLOW}";
 
-## ----------------------------------------------
+## ==============================================
 
 ## HIGH PRIORITY PATHS DEFINITION
 
@@ -183,7 +183,7 @@ fi
 # Path to the locale files.
 __BU_LIB_COMPILER_RESOURCES__MSG_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/locale";
 
-## ----------------------------------------------
+## ==============================================
 
 ## MESSAGE TRANSLATIONS
 
@@ -224,7 +224,7 @@ fi
 [ -n "${____unable_to_include_lang}" ]  && unset ____unable_to_include_lang;
 [ -n "${____lang_included}" ]           && unset ____lang_included;
 
-## ----------------------------------------------
+## ==============================================
 
 ## LOW PRIORTITY PATHS DEFINITION
 
@@ -251,7 +251,7 @@ source "${__BU_ROOT_PATH}/lib/functions/main/DevTools.lib";
 # shellcheck disable=SC1091
 source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -346,7 +346,7 @@ function PrintSuccessLine() { PrintBaseLine "${__SUCCESS}" "${1}" "${2}" "${3}";
 
 function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}" >&2; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -383,7 +383,7 @@ function PrintFilesWhichWereNotChmoded()
     echo >&2; printf "${__BU_COMPILE__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP}\n" "${__compiled_stable_file_parent_dir}/" >&2;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FILES EDITION
 
@@ -508,7 +508,7 @@ function WriteBU()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -570,7 +570,7 @@ function BytesToHuman()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -592,7 +592,7 @@ function CheckISO639_1_LangCode()
     [[ ${___BU_COMPILER__LANG_ARRAY[*]} =~ ${p_code,,} ]] && return 0; return 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## VALUES GETTER
 
@@ -614,7 +614,7 @@ function CheckLangArgDelim()
     return 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -631,7 +631,7 @@ function CheckLangArgDelim()
 
 function BU.ModuleInit.IsCompiler() { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
 
-## ----------------------------------------------
+## ==============================================
 
 ## ERRORS HANDLING
 
@@ -668,7 +668,7 @@ function HandleIncompatibleOptionalArgs()
     exit 1;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## HELP
 
@@ -729,7 +729,7 @@ function CompilerUsage()
     if [ "${p_exit,,}" == 'true' ]; then exit 0; else return 0; fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## MESSAGES
 
@@ -761,7 +761,7 @@ function QuitErrorMessage.NumberOfFilesCompiled()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -893,7 +893,7 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
     fi
 done
 
-## ----------------------------------------------
+## ==============================================
 
 ## CHECKING FOR ANY INCOMPATIBLE VALUES
 
@@ -928,7 +928,7 @@ if [ -n "${__vArrayVal_keep_raw_document_layout}" ]; then
     fi
 fi
 
-## ----------------------------------------------
+## ==============================================
 
 ## LAST MODIFICATIONS BEFORE THE COMPILATION PROCESS
 
@@ -949,7 +949,7 @@ else
     __BU_SHELLCHECKED='false';
 fi
 
-## ----------------------------------------------
+## ==============================================
 
 
 

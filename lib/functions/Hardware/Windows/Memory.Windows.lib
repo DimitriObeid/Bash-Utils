@@ -96,7 +96,7 @@ function BU.Hardware.Windows.Memory.CheckIfMemoryDDR4()
     BU.Hardware.Windows.Memory.GetMemoryType 'DDR4' || return "${?}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE COMPUTER'S MEMORY HARDWARE DATA
 

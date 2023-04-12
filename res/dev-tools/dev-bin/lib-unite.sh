@@ -27,7 +27,7 @@
 
 # Feel free to source any dependencies here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -64,7 +64,7 @@ __BU_ARG_DEL_EMPTY_LINES="${2:-$'\0'}";
 # DESC : Delete comments that are not on the same line as a piece of code.
 __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -76,7 +76,7 @@ __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 # Feel free to define an array of arguments here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -92,7 +92,7 @@ __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 # Feel free to define arrays here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -126,7 +126,7 @@ __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/init
 # Path of the modules initialization script's translations files.
 __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -152,7 +152,7 @@ function PrintLine()
     done; printf "\n";
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -203,7 +203,7 @@ function BytesToHuman()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -216,8 +216,6 @@ function BytesToHuman()
 # function BU.Main.Echo.Newline { local iterations="${1}"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU_MAIN_FULL_FILE_PATH}"; done; }
 function CatBU { cat "${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO DISPLAY THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 function EchoBU { echo -e "# ${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO WRITE THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
-
-# ----------------------------------------------
 
 
 

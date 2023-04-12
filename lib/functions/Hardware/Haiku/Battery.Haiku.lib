@@ -162,7 +162,7 @@ function BU.Hardware.Haiku.Battery.IsRechargeable()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## BATTERY VALUES GETTERS
 

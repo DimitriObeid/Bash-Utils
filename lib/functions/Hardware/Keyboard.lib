@@ -96,7 +96,7 @@ function BU.Hardware.Keyboard.IsKeyboardPlugged()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 # ·····················································································
 # Getting every informations about the computer's keyboard-related hardware components.

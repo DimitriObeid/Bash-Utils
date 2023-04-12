@@ -284,7 +284,7 @@ function BU.Software.Linux.PackageManagers.NPM.Autoremove()
 	return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

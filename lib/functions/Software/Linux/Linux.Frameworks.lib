@@ -142,7 +142,7 @@ function BU.Software.Linux.Frameworks.Bootstrap.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -185,7 +185,7 @@ function BU.Software.Linux.Frameworks.Spring.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -236,7 +236,7 @@ function BU.Software.Linux.Frameworks.AngularJS.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## REACT JS
 
@@ -282,7 +282,7 @@ function BU.Software.Linux.Frameworks.ReactJS.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## VUE.JS
 
@@ -328,7 +328,7 @@ function BU.Software.Linux.Frameworks.VueJS.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -380,7 +380,7 @@ function BU.Software.Linux.Frameworks.CakePHP.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## LARAVEL
 
@@ -426,7 +426,7 @@ function BU.Software.Linux.Frameworks.Laravel.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SYMFONY
 
@@ -472,7 +472,7 @@ function BU.Software.Linux.Frameworks.Symfony.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -524,7 +524,7 @@ function BU.Software.Linux.Frameworks.Django.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FLASK
 
@@ -570,7 +570,7 @@ function BU.Software.Linux.Frameworks.Flask.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## WEB2PY
 
@@ -616,7 +616,7 @@ function BU.Software.Linux.Frameworks.Web2py.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 

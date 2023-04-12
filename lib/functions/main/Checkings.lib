@@ -155,7 +155,7 @@ function BU.Main.Checkings.IsArrayNotEmpty()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## COMMAND SUBSTITUTIONS
 ## DEBUG ID : "command-substitutions"
@@ -208,7 +208,7 @@ function BU.Main.Checkings.IsNotCMD()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## DATE FORMAT
 ## DEBUG ID : "date-format"
@@ -295,7 +295,7 @@ function BU.Main.Checkings.IsDateYMD_HMS()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## NUMBER VALUES
 ## DEBUG ID : "number-values"
@@ -456,7 +456,7 @@ function BU.Main.Checkings.IsPositiveInt()
 	fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## CHARACTERS AND STRING VALUES
 ## DEBUG ID : "characters-and-string-values"
@@ -587,7 +587,7 @@ function BU.Main.Checkings.IsAlphaNumStringOnly()
 	fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## OTHER VARIABLES CHECKINGS
 ## DEBUG ID : "other-variables-checkings"
@@ -595,7 +595,7 @@ function BU.Main.Checkings.IsAlphaNumStringOnly()
 # shellcheck disable=SC2034
 declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__OTHER_VARIABLES_CHECKINGS="${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}::other-variables-checkings";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -630,7 +630,7 @@ function BU.Main.Checkings.CheckRootEUID()
 
 alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
 
-## ----------------------------------------------
+## ==============================================
 
 ## BASIC HARDWARE CHECKINGS
 ## DEBUG ID : "basic-hardware-checkings"
@@ -791,7 +791,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -865,7 +865,7 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
 	fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FILES PATHS CHECKINGS
 ## DEBUG ID : "files-path-checkings"
@@ -1485,7 +1485,7 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -1558,7 +1558,7 @@ function BU.Main.Checkings.CheckDecho()
 	fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

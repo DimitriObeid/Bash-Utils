@@ -151,7 +151,7 @@ function BU.Main.Directories.ProcessingDir()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## FOLDER CREATION FUNCTIONS
 ## DEBUG ID : "folder-creation-functions"
@@ -384,7 +384,7 @@ function BU.Main.Directories.MkTmpDir()
 	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## PATH PROCESSING
 ## DEBUG ID : "path-processing"
@@ -672,7 +672,7 @@ function BU.Main.Directories.TriggerRootDirWarning()
 	return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

@@ -212,7 +212,7 @@ function BU.Hardware.Linux.Battery.IsRechargeable()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## BATTERY VALUES GETTERS
 

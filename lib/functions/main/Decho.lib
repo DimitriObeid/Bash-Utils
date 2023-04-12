@@ -317,7 +317,7 @@ function BU.Main.Decho.Decho()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST
 
@@ -575,7 +575,7 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 
 function BU.Main.Decho.Decho.FMT_U      { BU.Main.Decho.Decho "${1}" "${2}" "${3}" 'U'  || return 1; return 0; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

@@ -142,7 +142,7 @@ function BU.Software.OSX.Libraries.Metal.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## OPENGL
 
@@ -188,7 +188,7 @@ function BU.Software.OSX.Libraries.OpenGL.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SDL (Simple DirectMedia Layer)
 

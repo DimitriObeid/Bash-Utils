@@ -25,7 +25,7 @@ source "~/.bash_profile" || { echo >&2; echo -e "BASH-UTILS ERROR : Unable to so
 
 source "${__BU_MAIN_LIB_FILE_INITIALIZER}" || { echo >&2; echo -e "BASH-UTILS ERROR : Unable to source the Bash-utils initializer file." >&2; echo >&2; exit 1; }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -43,7 +43,7 @@ source "${__BU_MAIN_LIB_FILE_INITIALIZER}" || { echo >&2; echo -e "BASH-UTILS ER
 
 __ARG_EXTENSION=${1:-$'\0'}
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -55,7 +55,7 @@ __ARG_EXTENSION=${1:-$'\0'}
 
 # Feel free to define an array of arguments here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -71,7 +71,7 @@ __ARG_EXTENSION=${1:-$'\0'}
 
 # Feel free to define arrays here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -83,7 +83,7 @@ __ARG_EXTENSION=${1:-$'\0'}
 
 # Feel free to define variables here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -100,7 +100,7 @@ __ARG_EXTENSION=${1:-$'\0'}
 # ·············································
 # Feel free to define functions here if needed.
 
-# ----------------------------------------------
+## ==============================================
 
 
 

@@ -177,7 +177,7 @@ function BU.Main.Filesystem.IsPartitionFull()
 	}
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : "getting-filesystem-informations"
@@ -530,7 +530,7 @@ function BU.Main.Filesystem.GetFSType()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${v_code}";
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -651,7 +651,7 @@ function BU.Main.Filesystem.Chown()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : "recursive"
@@ -720,7 +720,7 @@ function BU.Main.Filesystem.ChownRec()
     fi
 }
 
-## ----------------------------------------------
+## ==============================================
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #

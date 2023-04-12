@@ -93,7 +93,7 @@ fi; echo >&2; exit 1; fi
 
 function BU.Hardware.Haiku.Memory.CheckIfMemoryDDR4() { BU.Hardware.Haiku.Memory.GetMemoryType 'DDR4' || return 1; }
 
-## ----------------------------------------------
+## ==============================================
 
 ## GETTING THE COMPUTER'S MEMORY HARDWARE DATA
 

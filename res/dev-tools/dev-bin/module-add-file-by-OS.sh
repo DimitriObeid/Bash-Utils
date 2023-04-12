@@ -28,7 +28,7 @@
 
 # Feel free to source any dependencies here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -74,7 +74,7 @@ __BU_MOD_ADD__ARG_FILE_VERSION=${4:-$'\0'};
 
 [[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && shift 4 || shift 3;
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -90,7 +90,7 @@ __BU_MOD_ADD__ARG_FILE_VERSION=${4:-$'\0'};
 # DESC : Array of operating systems names.
 __BU_MOD_ADD__ARGS_OS_ARRAY=("${@}");
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -106,7 +106,7 @@ __BU_MOD_ADD__ARGS_OS_ARRAY=("${@}");
 
 # Feel free to define arrays here if needed.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -124,7 +124,7 @@ __BU_MOD_ADD__GLOBVAR_MODULE_DIR="lib/functions/${__BU_MOD_ADD__ARG_MODULE_NAME}
 # Do not set a value now, it will be done in the program's main loop.
 __BU_MOD_ADD__GLOBVAR_OS_NAME;
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -278,8 +278,6 @@ EOF
     return 0;
 }
 
-# ----------------------------------------------
-
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -319,9 +317,9 @@ WriteScriptDescription "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_
 
 WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}" || exit 1;
 
-## ----------------------------------------------
+## ==============================================
 
-## OPERATING SYSTEM-DEPENDENT FILES
+## ==============================================
 
 # Main loop.
 for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do

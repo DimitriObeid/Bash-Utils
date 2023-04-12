@@ -142,7 +142,7 @@ function BU.Software.Windows.Libraries.DirectX.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## OPENGL
 
@@ -188,7 +188,7 @@ function BU.Software.Windows.Libraries.OpenGL.Uninstall()
     return 0;
 }
 
-## ----------------------------------------------
+## ==============================================
 
 ## SDL (Simple DirectMedia Layer)
 
