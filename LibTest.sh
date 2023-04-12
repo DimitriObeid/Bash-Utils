@@ -32,7 +32,7 @@ echo "INIT HARDWARE MODULE : LIBTEST";
 
 BU.ModuleInit.InitNewModule "Hardware";
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -48,7 +48,7 @@ BU.ModuleInit.InitNewModule "Hardware";
 
 # Please define any needed arguments here.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -60,7 +60,7 @@ BU.ModuleInit.InitNewModule "Hardware";
 
 # Please define any needed global variables here.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
@@ -72,7 +72,7 @@ BU.ModuleInit.InitNewModule "Hardware";
 
 # Please define any needed functions here.
 
-## ----------------------------------------------
+## ==============================================
 
 
 
