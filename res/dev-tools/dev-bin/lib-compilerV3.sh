@@ -863,7 +863,7 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
     elif [ "${arg}" == '-e' ] || [ "${arg,,}" == "${_____value_of__no_english_include}" ]; then
         __vArrayVal_no_english_include="${_____value_of__no_english_include}";
 
-    # Else, if the user decides to prevent the execution of the 'shellcheck' command.
+    # Else, if the user decides to prevent the execution of the "$(shellcheck)" command.
     # WARNING : The compiler will not check for programming errors in the files to compile, the call of this option is not recommended, unless you know what you are doing.
 
     # This option is not compatible with the "${__vArrayVal_compile_stable}" option.
@@ -944,7 +944,7 @@ if [[ (-n "${__vArrayVal_no_shellcheck}") && (-n "${__vArrayVal_no_shellcheck}")
 
     __BU_SHELLCHECKED='true';
 else
-    # Checking first if Shellcheck is installed in order to check for code errors.
+    # Checking first if the "$(shellcheck)" command is installed in order to check for code errors.
     if ! command -v shellcheck; then PrintErrorLine "${__BU_COMPILE__SHELLCHECK__MISSING}" 'FULL'; exit 1; fi
 
     # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
@@ -1445,7 +1445,7 @@ function CompileInSingleFile()
 
             PrintNewstepLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS}" "${__compiled_file_path}")" 'UPPER';
 
-            # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the 'shellcheck' command.
+            # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the "$(shellcheck)" command.
             if ! BU.Main.DevTools.ShellcheckVerif "${__compiled_file_path}" "${__vArrayVal_compile_stable}"; then
                 PrintErrorLine "$(printf "${__locale_print_code__error} ${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR}" "${__compiled_file_path}")" 'FULL';
 

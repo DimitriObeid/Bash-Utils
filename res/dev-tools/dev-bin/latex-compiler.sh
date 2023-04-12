@@ -79,7 +79,7 @@
 
 ## COMMANDS
 
-# Storing the name of the "latexmk" command.
+# Storing the name of the "$(latexmk)" command.
 __BU_LATEX_COMPILER__CMD='latexmk';
 
 ## ==============================================

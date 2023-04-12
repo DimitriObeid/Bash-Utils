@@ -30,7 +30,7 @@ cat <<-EOF > "${v_filename_tmp}"
 
 # Add a coma after each warning code to disable multiple warnings at one go.
 
-# Do not uncomment the "shellcheck disable" line, or else the shellcheck command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+# Do not uncomment the "shellcheck disable" line, or else the "\$(shellcheck)" command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
 # DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "\$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
