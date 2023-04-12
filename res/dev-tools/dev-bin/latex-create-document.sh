@@ -192,9 +192,8 @@ elif [[ "${__ARG_LANG}" =~ ${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[*]} ]]; the
 
 else
 
-    ## ----------------------------------------------
-
-    ## PROCESSING THE TARGET DIRECTORY
+    # -------------------------------
+    # PROCESSING THE TARGET DIRECTORY
 
 	#***** Target paths variables definition.
 	__target_path_master="${__read_lang}";
@@ -262,9 +261,8 @@ else
         EchoSuccess "The $(DechoHighlightPath "${__read_folder_code}") folder was successfully created";
     fi
 
-    ## ----------------------------------------------
-
-    ## PROCESSING THE NEW FILE
+    # -----------------------
+    # PROCESSING THE NEW FILE
 
 	if [ -z "${__ARG_FILENAME}" ]; then
         BU.Main.Echo.Newstep "How do you want to name your document ?";
@@ -303,9 +301,8 @@ else
 
 	## TODO : PUT THE USER'S KEYBOARD INPUTS AS DOCUMENT'S TITLE, AUTHOR'NAME AND SUBJECT. ALSO WRITE THE YEAR.
 
-    ## ----------------------------------------------
-
-    ## PROCESSING THE DOCUMENT'S TITLE
+    # -------------------------------
+    # PROCESSING THE DOCUMENT'S TITLE
 
     if [ -z "${__ARG_AUTHOR}" ]; then
         read -rp "$(EchoNewstep Please enter your full name : )" __read_author_name;
@@ -321,9 +318,8 @@ else
 
 
 
-    ## ----------------------------------------------
-
-    ## PROCESSING THE
+    # --------------
+    # PROCESSING THE
 
 	exit 0;
 fi

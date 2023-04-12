@@ -2094,9 +2094,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
     #**** Code ****
     v_module_name="$(echo "${p_module}" | cut -d' ' -f1)";
 
-    ## ----------------------------------------------
-
-    ## PROCESSING THE 'module' VALUE'S ARGUMENTS VALUES
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ PROCESSING THE 'module' VALUE'S ARGUMENTS VALUES
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Checking if the "module --" value is passed as first argument, in order to configure immediately the initialization language and the authorization to display the initialization logs on the screen.
 
@@ -2127,9 +2127,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 			# Unsetting the "module" value from the newly created array, in order to avoid an "unsupported argument" error.
 			unset "module_array[0]";
 
-            ## ----------------------------------------------
-
-            ## MODULE : DEFINING RESOURCES FOR THE « module » ARGUMENTS PROCESSING
+            #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            #~ MODULE : DEFINING RESOURCES FOR THE « module » ARGUMENTS PROCESSING
+            #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
             # ················································································································································
             # Defining a function to optimize the displaying of errors for the 3 "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable's accepted values.
@@ -2175,9 +2175,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
             # Processing the list of arguments for the "module" module.
             for module_args in "${module_array[@]}"; do
 
-                ## ----------------------------------------------
-
-                ## "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ "DEBUG" AND "DEBUG_BASHX" STATUS VARIABLES
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # Creating a function to print the correct values for the current option in different languages structures.
                 function BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()
@@ -2252,9 +2252,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         ;;
                     esac
 
-                ## ----------------------------------------------
-
-                ## MODULE : LOG MESSAGES PROCESSING
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ MODULE : LOG MESSAGES PROCESSING
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # Else, if the "module" parameter's value is a log redirection parameter : '--log-display', '--log-shut' or '--log-shut-display'.
 
@@ -2337,9 +2337,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         ;;
 					esac
 
-                ## ----------------------------------------------
-
-                ## MODULE : MODES PROCESSING
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ MODULE : MODES PROCESSING
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 				# Else, if the "module" parameter's value is a logging option : "--mode-log-full" or "--mode-log-partial".
 
@@ -2402,9 +2402,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                         ;;
 					esac
 
-                ## ----------------------------------------------
-
-                ## MODULE : ALIASES FILES INCLUSION
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ MODULE : ALIASES FILES INCLUSION
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 elif [[ "${module_args,,}" == --include-aliases=* ]]; then
                     __BU_MODULES_INIT_INCLUDE_ALIASES='--include-aliases';
@@ -2416,9 +2416,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     # Looping through the modules list.
                     echo "LISTE : $value";
 
-                ## ----------------------------------------------
-
-                ## MODULE : HANDLING UNSUPPORTED ARGUMENTS
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                #~ MODULE : HANDLING UNSUPPORTED ARGUMENTS
+                #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # Else, if the "module" value's argument is not a supported one.
                 else
@@ -2464,9 +2464,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         fi
 
-    ## ----------------------------------------------
-
-    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE AND THE 'main' MODULE PASSING
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ HANDLING OTHER MODULES, AFTER THE 'module' VALUE AND THE 'main' MODULE PASSING
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Else, if the "main" module is passed as second argument, after the "module" value.
 
@@ -2478,9 +2478,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
-    ## ----------------------------------------------
-
-    ## 'module' VALUE NOT PASSED, BUT 'main' MODULE PASSED AS FIRST ARGUMENT
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ THE 'module' VALUE WAS NOT PASSED, BUT THE 'main' MODULE WAS PASSED AS FIRST ARGUMENT
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Else, if the "module --*" value is not passed as first argument.
 
@@ -2494,9 +2494,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         # Since the arguments processings are made in the "main" module's initializer, the function can be exited.
         return 0;
 
-    ## ----------------------------------------------
-
-    ## MISSING 'main' MODULE AFTER THE 'module' VALUE
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ MISSING 'main' MODULE AFTER THE 'module' VALUE
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Else, if the the "module --" value is passed as first argument, but the "main" module is missing.
 
@@ -2517,9 +2517,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         return 1;
 
-	## ----------------------------------------------
-
-    ## 'Main' MODULE PASSED AS FIRST ARGUMENT, BUT BEFORE THE 'module' VALUE
+	#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ THE 'main' MODULE WAS PASSED AS FIRST ARGUMENT, BUT BEFORE THE 'module' VALUE
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 	# Else, if the "main" module is passed as first argument, BUT before the "module --*" value.
 
@@ -2537,18 +2537,18 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
 
-    ## ----------------------------------------------
-
-    ## HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ HANDLING OTHER MODULES, AFTER THE 'module' VALUE OR THE 'main' MODULE PASSING
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Else, if the count is superior to 0 or 1, then the function'e execution is stopped.
     elif [ "${p_count}" -ge 1 ]; then
 
         return 0;
 
-    ## ----------------------------------------------
-
-    ## NO 'module' AND 'main' PASSED AS FIRST, THEN AS SECOND ARGUMENTS
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ NO 'module' AND 'main' PASSED AS FIRST, THEN AS SECOND ARGUMENTS
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     else
         # shellcheck disable=SC2059
