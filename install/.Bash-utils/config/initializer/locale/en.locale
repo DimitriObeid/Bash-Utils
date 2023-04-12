@@ -50,7 +50,7 @@ function BU.ModuleInit.SetInitLocale.en()
     # Writing the beginning of the text of any text that must be printed with the "BU.ModuleInit.PrintLogError()" function.
     __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -86,13 +86,13 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALIZING THE MODULES";
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -107,7 +107,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
@@ -344,7 +344,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
@@ -407,7 +407,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
@@ -540,7 +540,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -599,7 +599,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -839,7 +839,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -856,13 +856,13 @@ function BU.ModuleInit.SetInitLocale.en()
     __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY="Successfully sourced this library file : %s";
     __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Successfully sourced this configuration file : %s":
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
 
     # No text to display in this section for now.
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
 
@@ -912,13 +912,13 @@ function BU.ModuleInit.SetInitLocale.en()
         __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT \
         __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
 
     # No text to display in this section for now.
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## STEP FIVE : PROCESSING PROJECT'S RESOURCES
 

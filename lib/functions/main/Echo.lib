@@ -388,7 +388,7 @@ function BU.Main.Echo.__EchoCPLS()
 
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : Any        - OPTIONAL | DEFAULT VAL : NULL     - DESC : Text to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
 
     shift 2; pa_extraArgs=("${@}"); # VAR TYPE : Array  - DESC : More processing arguments (like the processing of a whole line-long string).
 
@@ -806,7 +806,7 @@ function BU.Main.Echo.Aqua()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -827,7 +827,7 @@ function BU.Main.Echo.Black()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -848,7 +848,7 @@ function BU.Main.Echo.Blue()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -869,7 +869,7 @@ function BU.Main.Echo.Cyan()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -890,7 +890,7 @@ function BU.Main.Echo.Fuchsia()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -911,7 +911,7 @@ function BU.Main.Echo.Gray()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -932,7 +932,7 @@ function BU.Main.Echo.Green()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -953,7 +953,7 @@ function BU.Main.Echo.Lime()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -974,7 +974,7 @@ function BU.Main.Echo.Maroon()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -995,7 +995,7 @@ function BU.Main.Echo.Navy()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1016,7 +1016,7 @@ function BU.Main.Echo.Olive()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1037,7 +1037,7 @@ function BU.Main.Echo.Orange()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1058,7 +1058,7 @@ function BU.Main.Echo.Pink()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1079,7 +1079,7 @@ function BU.Main.Echo.Purple()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1100,7 +1100,7 @@ function BU.Main.Echo.Red()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1121,7 +1121,7 @@ function BU.Main.Echo.Salmon()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1142,7 +1142,7 @@ function BU.Main.Echo.Silver()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1163,7 +1163,7 @@ function BU.Main.Echo.Tan()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1184,7 +1184,7 @@ function BU.Main.Echo.Teal()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1205,7 +1205,7 @@ function BU.Main.Echo.Turquoise()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1226,7 +1226,7 @@ function BU.Main.Echo.Violet()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1247,7 +1247,7 @@ function BU.Main.Echo.White()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
@@ -1268,7 +1268,7 @@ function BU.Main.Echo.Yellow()
 {
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.

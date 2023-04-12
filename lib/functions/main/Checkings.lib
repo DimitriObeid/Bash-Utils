@@ -1035,7 +1035,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : Any        - REQUIRED | DEFAULT VAL : NULL     - DESC : Text to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
     local pa_extraArgs=("${@}");   # Array - More processing arguments (like the processing of a whole line-long string).
