@@ -4,6 +4,7 @@ __ARG_STR=${1:-c};
 
 __ARG_NB=${2:-5};
 
+# shellcheck disable=
 function PrintCharXTimes()
 {
 	#**** Parameters ****

@@ -98,6 +98,7 @@ declare -r __BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTI
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.PosixTerm.DisplayCountdown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -115,6 +116,7 @@ function BU.Main.PosixTerm.DisplayCountdown()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.PosixTerm.DisplayProgressBar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -133,6 +135,7 @@ function BU.Main.PosixTerm.DisplayProgressBar()
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Msg          -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.PosixTerm.DisplaySpinner()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function CutSubStringAfterNthDelim()
 {
 	string=${1:-$'\0'};

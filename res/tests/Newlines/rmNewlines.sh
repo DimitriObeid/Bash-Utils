@@ -3,6 +3,7 @@
 __INPUT="original.txt";
 __OUTPUT="FileToProcess.txt";
 
+# shellcheck disable=
 function RMNewline()
 {
     echo;

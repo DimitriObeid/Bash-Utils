@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.DirectX.Install()
 {
     #**** Code ****
@@ -120,6 +121,7 @@ function BU.Software.Windows.Libraries.DirectX.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.DirectX.Update()
 {
     #**** Code ****
@@ -134,6 +136,7 @@ function BU.Software.Windows.Libraries.DirectX.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.DirectX.Uninstall()
 {
     #**** Code ****
@@ -152,6 +155,7 @@ function BU.Software.Windows.Libraries.DirectX.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.OpenGL.Install()
 {
     #**** Code ****
@@ -166,6 +170,7 @@ function BU.Software.Windows.Libraries.OpenGL.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.OpenGL.Update()
 {
     #**** Code ****
@@ -180,6 +185,7 @@ function BU.Software.Windows.Libraries.OpenGL.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.OpenGL.Uninstall()
 {
     #**** Code ****
@@ -198,6 +204,7 @@ function BU.Software.Windows.Libraries.OpenGL.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.SDL.Install()
 {
     #**** Code ****
@@ -212,6 +219,7 @@ function BU.Software.Windows.Libraries.SDL.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.SDL.Update()
 {
     #**** Code ****
@@ -226,6 +234,7 @@ function BU.Software.Windows.Libraries.SDL.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.Libraries.SDL.Uninstall()
 {
     #**** Code ****

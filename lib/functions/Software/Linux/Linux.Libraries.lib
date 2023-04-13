@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.DirectX.Install()
 {
     #**** Code ****
@@ -123,6 +124,7 @@ function BU.Software.Linux.Libraries.DirectX.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.DirectX.Update()
 {
     #**** Code ****
@@ -140,6 +142,7 @@ function BU.Software.Linux.Libraries.DirectX.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.DirectX.Uninstall()
 {
     #**** Code ****
@@ -161,6 +164,7 @@ function BU.Software.Linux.Libraries.DirectX.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.OpenGL.Install()
 {
     #**** Code ****
@@ -175,6 +179,7 @@ function BU.Software.Linux.Libraries.OpenGL.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.OpenGL.Update()
 {
     #**** Code ****
@@ -189,6 +194,7 @@ function BU.Software.Linux.Libraries.OpenGL.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.OpenGL.Uninstall()
 {
     #**** Code ****
@@ -207,6 +213,7 @@ function BU.Software.Linux.Libraries.OpenGL.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.SDL.Install()
 {
     #**** Code ****
@@ -221,6 +228,7 @@ function BU.Software.Linux.Libraries.SDL.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.SDL.Update()
 {
     #**** Code ****
@@ -235,6 +243,7 @@ function BU.Software.Linux.Libraries.SDL.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.SDL.Uninstall()
 {
     #**** Code ****
@@ -259,6 +268,7 @@ function BU.Software.Linux.Libraries.SDL.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.Wine.Install()
 {
     return 0;
@@ -271,6 +281,7 @@ function BU.Software.Linux.Libraries.Wine.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.Wine.Update()
 {
     return 0;
@@ -282,6 +293,7 @@ function BU.Software.Linux.Libraries.Wine.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.Libraries.Wine.Uninstall()
 {
     return 0;

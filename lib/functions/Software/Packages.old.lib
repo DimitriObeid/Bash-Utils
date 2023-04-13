@@ -17,6 +17,7 @@
 # ·························································
 # Getting the user's operating system main package manager.
 
+# shellcheck disable=
 function GetMainPackageManager
 {
 	BU.Main.Headers.Header.Base "-" "$(ColorChar "setaf" "${COL_BLUE}")" "$(ColorChar "setaf" "${COL_BLUE}")" "DÉTECTION DU GESTIONNAIRE DE PAQUETS DE VOTRE DISTRIBUTION" "0";
@@ -53,6 +54,7 @@ function GetMainPackageManager
 
 #### NEW FUNCTIONS :
 
+# shellcheck disable=
 function APTInstall()
 {
     #**** Parameters ****
@@ -62,6 +64,7 @@ function APTInstall()
 
 }
 
+# shellcheck disable=
 function DNFInstall()
 {
     #**** Parameters ****
@@ -71,6 +74,7 @@ function DNFInstall()
 
 }
 
+# shellcheck disable=
 function PacmanInstall()
 {
     #**** Parameters ****
@@ -80,16 +84,19 @@ function PacmanInstall()
 
 }
 
+# shellcheck disable=
 function PackHDCheck()
 {
     return;
 }
 
+# shellcheck disable=
 function PackDBCheck()
 {
     return;
 }
 
+# shellcheck disable=
 function PackInstall()
 {
     #**** Parameters ****
@@ -122,6 +129,7 @@ function PackInstall()
 # ·····························································································
 # Installation de logiciels absents de la base de données de tous les gestionnaires de paquets.
 
+# shellcheck disable=
 function SoftwareInstall
 {
 	#**** Parameters ****

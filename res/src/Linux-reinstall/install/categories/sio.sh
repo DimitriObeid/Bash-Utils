@@ -5,6 +5,7 @@
 # ·································
 # Installation des paquets de base.
 
+# shellcheck disable=
 function SIOInstall
 {
     HeaderStep "INSTALLATION DES PAQUETS DE BASE DEPUIS LES DÉPÔTS DES GESTIONNAIRES DE PAQUETS PRINCIPAUX ET SECONDAIRES";

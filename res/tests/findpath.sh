@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function BashProfile_FindPath
 {
     l="$(find "${1}" -maxdepth 1 -iname "${2}")";

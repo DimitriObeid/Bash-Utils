@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.Install()
 {
 	#**** Code ****
@@ -120,6 +121,7 @@ function BU.Software.Linux.PackageManagers.NPM.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.IsInstalled()
 {
 	#**** Code ****
@@ -134,6 +136,7 @@ function BU.Software.Linux.PackageManagers.NPM.IsInstalled()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.Update()
 {
 	#**** Code ****
@@ -148,6 +151,7 @@ function BU.Software.Linux.PackageManagers.NPM.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.UpdateCache()
 {
 	#**** Code ****
@@ -162,6 +166,7 @@ function BU.Software.Linux.PackageManagers.NPM.UpdateCache()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.Downgrade()
 {
 	#**** Code ****
@@ -176,6 +181,7 @@ function BU.Software.Linux.PackageManagers.NPM.Downgrade()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.Uninstall()
 {
 	#**** Code ****
@@ -192,6 +198,7 @@ function BU.Software.Linux.PackageManagers.NPM.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -206,6 +213,7 @@ function BU.Software.Linux.PackageManagers.NPM.CheckPackageFromDatabase()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.DownloadPackage()
 {
 	#**** Code ****
@@ -220,6 +228,7 @@ function BU.Software.Linux.PackageManagers.NPM.DownloadPackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.UpgradePackage()
 {
 	#**** Code ****
@@ -234,6 +243,7 @@ function BU.Software.Linux.PackageManagers.NPM.UpgradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.UpgradePackages()
 {
 	#**** Code ****
@@ -248,6 +258,7 @@ function BU.Software.Linux.PackageManagers.NPM.UpgradePackages()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.DowngradePackage()
 {
 	#**** Code ****
@@ -262,6 +273,7 @@ function BU.Software.Linux.PackageManagers.NPM.DowngradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.RemovePackage()
 {
 	#**** Code ****
@@ -276,6 +288,7 @@ function BU.Software.Linux.PackageManagers.NPM.RemovePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.NPM.Autoremove()
 {
 	#**** Code ****
@@ -300,6 +313,7 @@ function BU.Software.Linux.PackageManagers.NPM.Autoremove()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.Install()
 {
 	#**** Code ****
@@ -314,6 +328,7 @@ function BU.Software.Linux.PackageManagers.Snap.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.IsInstalled()
 {
 	#**** Code ****
@@ -328,6 +343,7 @@ function BU.Software.Linux.PackageManagers.Snap.IsInstalled()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.Update()
 {
 	#**** Code ****
@@ -342,6 +358,7 @@ function BU.Software.Linux.PackageManagers.Snap.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.UpdateCache()
 {
 	#**** Code ****
@@ -356,6 +373,7 @@ function BU.Software.Linux.PackageManagers.Snap.UpdateCache()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.Downgrade()
 {
 	#**** Code ****
@@ -370,6 +388,7 @@ function BU.Software.Linux.PackageManagers.Snap.Downgrade()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.Uninstall()
 {
 	#**** Code ****
@@ -383,6 +402,7 @@ function BU.Software.Linux.PackageManagers.Snap.Uninstall()
 # ··············································································
 # Checking the availability of a package in the Snap package manager's database.
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -397,6 +417,7 @@ function BU.Software.Linux.PackageManagers.Snap.CheckPackageFromDatabase()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.DownloadPackage()
 {
 	#**** Code ****
@@ -411,6 +432,7 @@ function BU.Software.Linux.PackageManagers.Snap.DownloadPackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.UpgradePackage()
 {
 	#**** Code ****
@@ -425,6 +447,7 @@ function BU.Software.Linux.PackageManagers.Snap.UpgradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.UpgradePackages()
 {
 	#**** Code ****
@@ -439,6 +462,7 @@ function BU.Software.Linux.PackageManagers.Snap.UpgradePackages()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.DowngradePackage()
 {
 	#**** Code ****
@@ -453,6 +477,7 @@ function BU.Software.Linux.PackageManagers.Snap.DowngradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.RemovePackage()
 {
 	#**** Code ****
@@ -467,6 +492,7 @@ function BU.Software.Linux.PackageManagers.Snap.RemovePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Linux.PackageManagers.Snap.Autoremove()
 {
 	#**** Code ****

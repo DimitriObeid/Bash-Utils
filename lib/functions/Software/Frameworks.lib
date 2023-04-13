@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Install()
 {
     return 0;
@@ -117,6 +118,7 @@ function BU.Software.Frameworks.Bootstrap.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Update()
 {
     return 0;
@@ -128,6 +130,7 @@ function BU.Software.Frameworks.Bootstrap.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Uninstall()
 {
     return 0;
@@ -149,6 +152,7 @@ function BU.Software.Frameworks.Bootstrap.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Spring.Install()
 {
     return 0;
@@ -160,6 +164,7 @@ function BU.Software.Frameworks.Spring.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Spring.Update()
 {
     return 0;
@@ -171,6 +176,7 @@ function BU.Software.Frameworks.Spring.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Spring.Uninstall()
 {
     return 0;
@@ -192,6 +198,7 @@ function BU.Software.Frameworks.Spring.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.AngularJS.Install()
 {
     return 0;
@@ -203,6 +210,7 @@ function BU.Software.Frameworks.AngularJS.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.AngularJS.Update()
 {
     return 0;
@@ -214,6 +222,7 @@ function BU.Software.Frameworks.AngularJS.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.AngularJS.Uninstall()
 {
     return 0;
@@ -229,6 +238,7 @@ function BU.Software.Frameworks.AngularJS.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.ReactJS.Install()
 {
     return 0;
@@ -240,6 +250,7 @@ function BU.Software.Frameworks.ReactJS.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.ReactJS.Update()
 {
     return 0;
@@ -251,6 +262,7 @@ function BU.Software.Frameworks.ReactJS.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.ReactJS.Uninstall()
 {
     return 0;
@@ -266,6 +278,7 @@ function BU.Software.Frameworks.ReactJS.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.VueJS.Install()
 {
     return 0;
@@ -277,6 +290,7 @@ function BU.Software.Frameworks.VueJS.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.VueJS.Update()
 {
     return 0;
@@ -288,6 +302,7 @@ function BU.Software.Frameworks.VueJS.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.VueJS.Uninstall()
 {
     return 0;
@@ -309,6 +324,7 @@ function BU.Software.Frameworks.VueJS.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.CakePHP.Install()
 {
     return 0;
@@ -320,6 +336,7 @@ function BU.Software.Frameworks.CakePHP.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.CakePHP.Update()
 {
     return 0;
@@ -331,6 +348,7 @@ function BU.Software.Frameworks.CakePHP.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.CakePHP.Uninstall()
 {
     return 0;
@@ -346,6 +364,7 @@ function BU.Software.Frameworks.CakePHP.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Laravel.Install()
 {
     return 0;
@@ -357,6 +376,7 @@ function BU.Software.Frameworks.Laravel.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Laravel.Update()
 {
     return 0;
@@ -368,6 +388,7 @@ function BU.Software.Frameworks.Laravel.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Laravel.Uninstall()
 {
     return 0;
@@ -383,6 +404,7 @@ function BU.Software.Frameworks.Laravel.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Symfony.Install()
 {
     return 0;
@@ -394,6 +416,7 @@ function BU.Software.Frameworks.Symfony.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Symfony.Update()
 {
     return 0;
@@ -405,6 +428,7 @@ function BU.Software.Frameworks.Symfony.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Symfony.Uninstall()
 {
     return 0;
@@ -426,6 +450,7 @@ function BU.Software.Frameworks.Symfony.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Django.Install()
 {
     return 0;
@@ -437,6 +462,7 @@ function BU.Software.Frameworks.Django.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Django.Update()
 {
     return 0;
@@ -448,6 +474,7 @@ function BU.Software.Frameworks.Django.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Django.Uninstall()
 {
     return 0;
@@ -463,6 +490,7 @@ function BU.Software.Frameworks.Django.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Flask.Install()
 {
     return 0;
@@ -474,6 +502,7 @@ function BU.Software.Frameworks.Flask.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Flask.Update()
 {
     return 0;
@@ -485,6 +514,7 @@ function BU.Software.Frameworks.Flask.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Flask.Uninstall()
 {
     return 0;
@@ -500,6 +530,7 @@ function BU.Software.Frameworks.Flask.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Web2py.Install()
 {
     return 0;
@@ -511,6 +542,7 @@ function BU.Software.Frameworks.Web2py.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Web2py.Update()
 {
     return 0;
@@ -522,6 +554,7 @@ function BU.Software.Frameworks.Web2py.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.Web2py.Uninstall()
 {
     return 0;
@@ -543,6 +576,7 @@ function BU.Software.Frameworks.Web2py.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.RubyOnRails.Install()
 {
     return 0;
@@ -554,6 +588,7 @@ function BU.Software.Frameworks.RubyOnRails.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.RubyOnRails.Update()
 {
     return 0;
@@ -565,6 +600,7 @@ function BU.Software.Frameworks.RubyOnRails.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Frameworks.RubyOnRails.Uninstall()
 {
     return 0;

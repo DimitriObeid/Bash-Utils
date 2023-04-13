@@ -2,11 +2,13 @@
 
 __BU_MAIN_PROJECT_FIFO_DIR_PATH="/usr/local/lib/Bash-utils/projects/lib-tests/FIFO";
 
+# shellcheck disable=
 function BU.Main.Decho.Decho { echo -e "$(tput setaf 6)${1}$(tput sgr0)"; }
 
 # ··················································
 # This function is called once in the next function.
 
+# shellcheck disable=
 function __CreateFIFO
 {
     #**** Parameters ****
@@ -26,6 +28,7 @@ function __CreateFIFO
 # ····························································································································
 # Creating a named pipe to get a variable's value instead of declaring it in a sub-shell, and thus, losing its modified value.
 
+# shellcheck disable=
 function CreateFIFO
 {
     #**** Parameters ****
@@ -65,6 +68,7 @@ function CreateFIFO
 # ··························
 # Reading from a named pipe.
 
+# shellcheck disable=
 function ReadFromFIFO
 {
     #**** Parameters ****

@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Bootstrap.Install()
 {
     #**** Code ****
@@ -120,6 +121,7 @@ function BU.Software.OSX.Frameworks.Bootstrap.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Bootstrap.Update()
 {
     #**** Code ****
@@ -134,6 +136,7 @@ function BU.Software.OSX.Frameworks.Bootstrap.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Bootstrap.Uninstall()
 {
     #**** Code ****
@@ -158,6 +161,7 @@ function BU.Software.OSX.Frameworks.Bootstrap.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Spring.Install()
 {
     return 0;
@@ -169,6 +173,7 @@ function BU.Software.OSX.Frameworks.Spring.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Spring.Update()
 {
     return 0;
@@ -180,6 +185,7 @@ function BU.Software.OSX.Frameworks.Spring.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Spring.Uninstall()
 {
     return 0;
@@ -200,6 +206,7 @@ function BU.Software.OSX.Frameworks.Spring.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.AngularJS.Install()
 {
     #**** Code ****
@@ -214,6 +221,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.AngularJS.Update()
 {
     #**** Code ****
@@ -228,6 +236,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.AngularJS.Uninstall()
 {
     #**** Code ****
@@ -246,6 +255,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.ReactJS.Install()
 {
     #**** Code ****
@@ -260,6 +270,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.ReactJS.Update()
 {
     #**** Code ****
@@ -274,6 +285,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.ReactJS.Uninstall()
 {
     #**** Code ****
@@ -292,6 +304,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.VueJS.Install()
 {
     #**** Code ****
@@ -306,6 +319,7 @@ function BU.Software.OSX.Frameworks.VueJS.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.VueJS.Update()
 {
     #**** Code ****
@@ -320,6 +334,7 @@ function BU.Software.OSX.Frameworks.VueJS.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.VueJS.Uninstall()
 {
     #**** Code ****
@@ -344,6 +359,7 @@ function BU.Software.OSX.Frameworks.VueJS.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.CakePHP.Install()
 {
     #**** Code ****
@@ -358,6 +374,7 @@ function BU.Software.OSX.Frameworks.CakePHP.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.CakePHP.Update()
 {
     #**** Code ****
@@ -372,6 +389,7 @@ function BU.Software.OSX.Frameworks.CakePHP.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.CakePHP.Uninstall()
 {
     #**** Code ****
@@ -390,6 +408,7 @@ function BU.Software.OSX.Frameworks.CakePHP.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Laravel.Install()
 {
     #**** Code ****
@@ -404,6 +423,7 @@ function BU.Software.OSX.Frameworks.Laravel.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Laravel.Update()
 {
     #**** Code ****
@@ -418,6 +438,7 @@ function BU.Software.OSX.Frameworks.Laravel.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Laravel.Uninstall()
 {
     #**** Code ****
@@ -436,6 +457,7 @@ function BU.Software.OSX.Frameworks.Laravel.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Symfony.Install()
 {
     #**** Code ****
@@ -450,6 +472,7 @@ function BU.Software.OSX.Frameworks.Symfony.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Symfony.Update()
 {
     #**** Code ****
@@ -464,6 +487,7 @@ function BU.Software.OSX.Frameworks.Symfony.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Symfony.Uninstall()
 {
     #**** Code ****
@@ -488,6 +512,7 @@ function BU.Software.OSX.Frameworks.Symfony.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Django.Install()
 {
     #**** Code ****
@@ -502,6 +527,7 @@ function BU.Software.OSX.Frameworks.Django.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Django.Update()
 {
     #**** Code ****
@@ -516,6 +542,7 @@ function BU.Software.OSX.Frameworks.Django.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Django.Uninstall()
 {
     #**** Code ****
@@ -534,6 +561,7 @@ function BU.Software.OSX.Frameworks.Django.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Flask.Install()
 {
     #**** Code ****
@@ -548,6 +576,7 @@ function BU.Software.OSX.Frameworks.Flask.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Flask.Update()
 {
     #**** Code ****
@@ -562,6 +591,7 @@ function BU.Software.OSX.Frameworks.Flask.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Flask.Uninstall()
 {
     #**** Code ****
@@ -580,6 +610,7 @@ function BU.Software.OSX.Frameworks.Flask.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Web2py.Install()
 {
     #**** Code ****
@@ -594,6 +625,7 @@ function BU.Software.OSX.Frameworks.Web2py.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Web2py.Update()
 {
     #**** Code ****
@@ -608,6 +640,7 @@ function BU.Software.OSX.Frameworks.Web2py.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.Web2py.Uninstall()
 {
     #**** Code ****
@@ -632,6 +665,7 @@ function BU.Software.OSX.Frameworks.Web2py.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.RubyOnRails.Install()
 {
     #**** Code ****
@@ -646,6 +680,7 @@ function BU.Software.OSX.Frameworks.RubyOnRails.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.RubyOnRails.Update()
 {
     #**** Code ****
@@ -660,6 +695,7 @@ function BU.Software.OSX.Frameworks.RubyOnRails.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Frameworks.RubyOnRails.Uninstall()
 {
     #**** Code ****

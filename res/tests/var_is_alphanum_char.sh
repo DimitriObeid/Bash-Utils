@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function char__()
 {
 	if [[ ${1} != [a-zA-Z0-9] ]]; then

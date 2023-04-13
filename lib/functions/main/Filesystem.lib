@@ -104,6 +104,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PRO
 #   - BU.Main.OS.IsOpenBSD()        -> Main -> OS.lib
 #   - BU.Main.OS.IsOSX()            -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.IsPartitionFull()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -198,6 +199,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PRO
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSDevice()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -242,6 +244,7 @@ function BU.Main.Filesystem.GetFSDevice()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSTotalSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -286,6 +289,7 @@ function BU.Main.Filesystem.GetFSTotalSize()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSMountPoint()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -331,6 +335,7 @@ function BU.Main.Filesystem.GetFSMountPoint()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSUsedSizeBytes()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -392,6 +397,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -453,6 +459,7 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSAvailableSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -497,6 +504,7 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.GetFSType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -562,6 +570,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_P
 
 #   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.Chown()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -675,6 +684,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_P
 
 #	- BU.Main.Errors.HandleErrors()		    -> Main -> Headers.lib
 
+# shellcheck disable=
 function BU.Main.Filesystem.ChownRec()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

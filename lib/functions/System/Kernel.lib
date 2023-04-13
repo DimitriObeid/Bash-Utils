@@ -88,11 +88,13 @@ fi; echo >&2; exit 1; fi
 # ················
 # Get kernel type.
 
+# shellcheck disable=
 function BU.SystemKernelGetKernelType() { uname -s; }
 
 # ·························································
 # Get Windows kernel type, if the script is running on WSL.
 
+# shellcheck disable=
 function BU.SystemKernelGetWindowsKernelType()
 {
     return 0;
@@ -101,11 +103,13 @@ function BU.SystemKernelGetWindowsKernelType()
 # ···················
 # Get kernel release.
 
+# shellcheck disable=
 function BU.SystemKernelGetKernelRelease() { uname -r; }
 
 # ···················
 # Get kernel version.
 
+# shellcheck disable=
 function BU.SystemKernelGetKernelVersion() { uname -v; }
 {
     return 0;
@@ -114,6 +118,7 @@ function BU.SystemKernelGetKernelVersion() { uname -v; }
 # ····························································
 # Get Windows kernel version, if the script is running on WSL.
 
+# shellcheck disable=
 function BU.SystemKernelGetWindowsKernelVersion()
 {
     return 0;

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function BU.Main.Locale.PrintLanguageName.Optimize()
 {
 	#**** Parameters ****

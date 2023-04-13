@@ -3,6 +3,7 @@
 # ···············································
 # Display a progress bar while a task is ongoing.
 
+# shellcheck disable=
 function BU.Main.PosixTerm.DisplayProgressBarOld()
 {
         v_cols="$(tput cols)"
@@ -25,6 +26,7 @@ function BU.Main.PosixTerm.DisplayProgressBarOld()
 # ···············································
 # Display a progress bar while a task is ongoing.
 
+# shellcheck disable=
 function BU.Main.PosixTerm.DisplayProgressBar()
 {
 	v_cols="$(tput cols)";

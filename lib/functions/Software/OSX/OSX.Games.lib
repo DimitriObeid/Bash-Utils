@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Games.SteamCMD.Install()
 {
     #**** Code ****
@@ -120,6 +121,7 @@ function BU.Software.OSX.Games.SteamCMD.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Games.SteamCMD.Update()
 {
     #**** Code ****
@@ -134,6 +136,7 @@ function BU.Software.OSX.Games.SteamCMD.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.OSX.Games.SteamCMD.Uninstall()
 {
     #**** Code ****

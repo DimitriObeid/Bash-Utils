@@ -3,6 +3,7 @@
 # ·················
 # Reverse a string.
 
+# shellcheck disable=
 function BU.Main.Text.ReverseStringWordsOrder()
 {
     #**** Parameters ****
@@ -17,6 +18,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
 # ····························································
 #
 
+# shellcheck disable=
 function BU.Main.Directories.GetParentDirectoryPathMkdir()
 {
     #**** Parameetrs ****

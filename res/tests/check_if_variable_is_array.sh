@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function check_if_variable_is_array()
 {
     if declare -p "$1" 2>/dev/null | grep -q 'declare -a'; then

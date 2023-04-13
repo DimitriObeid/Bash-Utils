@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function Check
 {
 	# Supports '+' and '-' signs

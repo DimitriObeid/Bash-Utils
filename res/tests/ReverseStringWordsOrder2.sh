@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# shellcheck disable=
 function BU.Main.Text.ReverseStringWordsOrder()
 {
     #**** Parameters ****

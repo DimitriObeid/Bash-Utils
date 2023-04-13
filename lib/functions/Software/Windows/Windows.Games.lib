@@ -103,6 +103,7 @@ fi; echo >&2; exit 1; fi
 # ·······························
 # Installing SteamCMD on Windows.
 
+# shellcheck disable=
 function BU.Software.Windows.Games.SteamCMD.Install()
 {
     #**** Code ****
@@ -114,6 +115,7 @@ function BU.Software.Windows.Games.SteamCMD.Install()
 # ·····························
 # Updating SteamCMD on Windows.
 
+# shellcheck disable=
 function BU.Software.Windows.Games.SteamCMD.Update()
 {
     #**** Code ****
@@ -125,6 +127,7 @@ function BU.Software.Windows.Games.SteamCMD.Update()
 # ·································
 # Uninstalling SteamCMD on Windows.
 
+# shellcheck disable=
 function BU.Software.Windows.Games.SteamCMD.Uninstall()
 {
     #**** Code ****

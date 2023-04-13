@@ -2,6 +2,7 @@
 
 __TEST="CECI EST UN TEST DE LA FONCTION ${FUNCTION}";
 
+# shellcheck disable=
 function __test()
 {
 	echo "${__TEST}";

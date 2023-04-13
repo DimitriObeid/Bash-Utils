@@ -102,6 +102,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTI
 
 #   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ·······································································
@@ -113,6 +114,7 @@ function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(
 
 #   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ··················································································
@@ -122,6 +124,7 @@ function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.CutFirstCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -145,6 +148,7 @@ function BU.Main.Text.CutFirstCharacter()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.CutLastCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -184,6 +188,7 @@ function BU.Main.Text.CutLastCharacter()
 #   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                            -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.CutSubStringAfterNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -245,6 +250,7 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 #   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.CutSubStringBeforeNthDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -296,6 +302,7 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.CutFirstFieldBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -322,6 +329,7 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.CutLastFieldAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -350,6 +358,7 @@ function BU.Main.Text.CutLastFieldAfterDelim()
 
 #   - BU.Main.Text.ReplaceLettersInString()         -> Main -> Text.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Text.DeleteLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -381,6 +390,7 @@ function BU.Main.Text.DeleteLettersInString()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.ReplaceLettersInString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -420,6 +430,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMA
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.KeepFormatting()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -455,6 +466,7 @@ function BU.Main.Text.KeepFormatting()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.ToLowercase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -479,6 +491,7 @@ function BU.Main.Text.ToLowercase()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.ToUppercase()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -510,6 +523,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTI
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetCharacterOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -541,6 +555,7 @@ function BU.Main.Text.GetCharacterOccurences()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetFirstCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -566,6 +581,7 @@ function BU.Main.Text.GetFirstCharacter()
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetFirstFieldBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -594,6 +610,7 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetLastCharacter()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -628,6 +645,7 @@ function BU.Main.Text.GetLastCharacter()
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetLastFieldAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -654,6 +672,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetSubStringAfterDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -700,6 +719,7 @@ function BU.Main.Text.GetSubStringAfterDelim()
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                        -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetSubStringBeforeDelim()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -773,6 +793,7 @@ function BU.Main.Text.GetSubStringBeforeDelim()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetSubStringOccurences()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -819,6 +840,7 @@ function BU.Main.Text.GetSubStringOccurences()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetStringByteSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -840,6 +862,7 @@ function BU.Main.Text.GetStringByteSize()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetStringCharactersNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -861,6 +884,7 @@ function BU.Main.Text.GetStringCharactersNumber()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.GetStringWordsNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -890,6 +914,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTI
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.ListCharactersFromFile() {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -920,6 +945,7 @@ function BU.Main.Text.ListCharactersFromFile() {
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.ListWordsFromFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -957,6 +983,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINT
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newstep()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.PrintCharXTimes()
 {
     #**** Parameters ****
@@ -998,6 +1025,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVER
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.ReverseStringWordsOrder()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1046,6 +1074,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.Main.Text.ReverseCharactersOrder()
 {
     #**** Parameters ****
@@ -1085,6 +1114,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLIT
 
 #   - BU.Main.Inputs.Sanitize()             -> Main -> Inputs.lib
 
+# shellcheck disable=
 function BU.Main.Text.StrToWordArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1120,6 +1150,7 @@ function BU.Main.Text.StrToWordArray()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Text.WordArrayToStr()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

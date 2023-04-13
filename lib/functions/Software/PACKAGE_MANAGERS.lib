@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 {
     BU.Main.Echo.Error ""; BU.Main.Echo.Newline;
@@ -127,6 +128,7 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.PackageManagers.NPM.Install()
 {
     #**** Code ****
@@ -143,6 +145,7 @@ function BU.Software.PackageManagers.NPM.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.PackageManagers.UpdateNPM()
 {
     #**** Code ****

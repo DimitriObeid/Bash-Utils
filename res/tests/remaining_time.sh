@@ -2,6 +2,7 @@
 
 __ARG=${1:-$'\0'};
 
+# shellcheck disable=
 function __for()
 {
     #**** Parameters ****
@@ -17,6 +18,7 @@ function __for()
     return 0;
 }
 
+# shellcheck disable=
 function remaining()
 {
     #**** Parameters ****

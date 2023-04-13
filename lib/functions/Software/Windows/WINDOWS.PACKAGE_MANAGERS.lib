@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.Install()
 {
 	#**** Code ****
@@ -120,6 +121,7 @@ function BU.Software.Windows.PackageManagers.NPM.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.IsInstalled()
 {
 	#**** Code ****
@@ -134,6 +136,7 @@ function BU.Software.Windows.PackageManagers.NPM.IsInstalled()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.Update()
 {
 	#**** Code ****
@@ -148,6 +151,7 @@ function BU.Software.Windows.PackageManagers.NPM.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.UpdateCache()
 {
 	#**** Code ****
@@ -162,6 +166,7 @@ function BU.Software.Windows.PackageManagers.NPM.UpdateCache()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.Downgrade()
 {
 	#**** Code ****
@@ -176,6 +181,7 @@ function BU.Software.Windows.PackageManagers.NPM.Downgrade()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.Uninstall()
 {
 	#**** Code ****
@@ -192,6 +198,7 @@ function BU.Software.Windows.PackageManagers.NPM.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -206,6 +213,7 @@ function BU.Software.Windows.PackageManagers.NPM.CheckPackageFromDatabase()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.DownloadPackage()
 {
 	#**** Code ****
@@ -220,6 +228,7 @@ function BU.Software.Windows.PackageManagers.NPM.DownloadPackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.UpgradePackage()
 {
 	#**** Code ****
@@ -234,6 +243,7 @@ function BU.Software.Windows.PackageManagers.NPM.UpgradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.UpgradePackages()
 {
 	#**** Code ****
@@ -248,6 +258,7 @@ function BU.Software.Windows.PackageManagers.NPM.UpgradePackages()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.DowngradePackage()
 {
 	#**** Code ****
@@ -262,6 +273,7 @@ function BU.Software.Windows.PackageManagers.NPM.DowngradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.RemovePackage()
 {
 	#**** Code ****
@@ -276,6 +288,7 @@ function BU.Software.Windows.PackageManagers.NPM.RemovePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.NPM.Autoremove()
 {
 	#**** Code ****
@@ -300,6 +313,7 @@ function BU.Software.Windows.PackageManagers.NPM.Autoremove()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.Install()
 {
 	#**** Code ****
@@ -314,6 +328,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Install()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.IsInstalled()
 {
 	#**** Code ****
@@ -328,6 +343,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.IsInstalled()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.Update()
 {
 	#**** Code ****
@@ -342,6 +358,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Update()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.UpdateCache()
 {
 	#**** Code ****
@@ -356,6 +373,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.UpdateCache()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.Downgrade()
 {
 	#**** Code ****
@@ -370,6 +388,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Downgrade()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.Uninstall()
 {
 	#**** Code ****
@@ -386,6 +405,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.Uninstall()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.CheckPackageFromDatabase()
 {
 	#**** Code ****
@@ -400,6 +420,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.CheckPackageFromDatabase
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.DownloadPackage()
 {
 	#**** Code ****
@@ -414,6 +435,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.DownloadPackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackage()
 {
 	#**** Code ****
@@ -428,6 +450,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackages()
 {
 	#**** Code ****
@@ -442,6 +465,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.UpgradePackages()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.DowngradePackage()
 {
 	#**** Code ****
@@ -456,6 +480,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.DowngradePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.RemovePackage()
 {
 	#**** Code ****
@@ -470,6 +495,7 @@ function BU.Software.Windows.PackageManagers.Chocolatey.RemovePackage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Software.Windows.PackageManagers.Chocolatey.Autoremove()
 {
 	#**** Code ****

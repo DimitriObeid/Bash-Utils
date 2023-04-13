@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=
 function BU.Main.Text.KeepFormattingl
 {
     #**** Parameters ****
@@ -9,6 +10,7 @@ function BU.Main.Text.KeepFormattingl
     echo -e "${p_string}" | tr '[lower]' '[lower]';
 }
 
+# shellcheck disable=
 function BU.Main.Text.KeepFormattingU
 {
 	#**** Parameters ****

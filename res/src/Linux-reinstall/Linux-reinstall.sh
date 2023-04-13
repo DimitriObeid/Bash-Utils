@@ -89,6 +89,7 @@ __ARG_INSTALL_INDEX='1';    # Packages installation argument's index.
 # ·············································
 # Détection du passage des arguments au script.
 
+# shellcheck disable=
 function Args
 {
     #***** Status *****
@@ -212,6 +213,7 @@ function Args
 # ························
 # Script's initialization.
 
+# shellcheck disable=
 function ScriptInit
 {
     Args;				    # On appelle la fonction de vérification des arguments passés au script,
@@ -230,6 +232,7 @@ function ScriptInit
 # ·······················································································································
 # Demande à l'utilisateur s'il souhaite vraiment lancer le script, puis connecte l'utilisateur en mode super-utilisateur.
 
+# shellcheck disable=
 function LaunchScript
 {
     # Affichage du header de bienvenue
@@ -249,6 +252,7 @@ function LaunchScript
 # ········································
 # Vérification de la connexion à Internet.
 
+# shellcheck disable=
 function CheckInternetConnection
 {
 	HeaderCyan "VÉRIFICATION DE LA CONNEXION À INTERNET";
@@ -268,6 +272,7 @@ function CheckInternetConnection
 # C'EST UNE ÉTAPE IMPORTANTE SUR UNE INSTALLATION FRAÎCHE, NE MODIFIEZ PAS CE QUI SE TROUVE DANS LA CONDITION "CASE",
 # SAUF EN CAS D'AJOUT D'UN NOUVEAU GESTIONNAIRE DE PAQUETS PRINCIPAL (PAS DE SNAP OU DE FLATPAK) !!!
 
+# shellcheck disable=
 function DistUpgrade
 {
 	#**** Variables ****
@@ -334,6 +339,7 @@ function DistUpgrade
 # ··································
 # Détection et installation de Sudo.
 
+# shellcheck disable=
 function SetSudo
 {
 	HeaderStep "DÉTECTION DE SUDO ET AJOUT DE L'UTILISATEUR À LA LISTE DES SUDOERS";
@@ -470,6 +476,7 @@ function SetSudo
 # ······································
 # Installation du framework PHP Laravel.
 
+# shellcheck disable=
 function LaravelInstall
 {
     #**** Variables ****
@@ -578,6 +585,7 @@ function InstallAndConfig
 # ··································
 # Suppression des paquets obsolètes.
 
+# shellcheck disable=
 function Autoremove
 {
 	HeaderStep "AUTO-SUPPRESSION DES PAQUETS OBSOLÈTES";
@@ -636,6 +644,7 @@ function Autoremove
 # ······················
 # Fin de l'installation.
 
+# shellcheck disable=
 function IsInstallationDone
 {
 	HeaderStep "INSTALLATION TERMINÉE";

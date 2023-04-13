@@ -3,6 +3,7 @@
 # ·····································
 # Installation des paquets secondaires.
 
+# shellcheck disable=
 function CustomInstall
 {
     HeaderStep "INSTALLATION DES PAQUETS DE BASE DEPUIS LES DÉPÔTS DES GESTIONNAIRES DE PAQUETS PRINCIPAUX ET SECONDAIRES";

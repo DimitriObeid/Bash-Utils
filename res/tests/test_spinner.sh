@@ -3,6 +3,7 @@
 # ··········································
 # Display a spinner while a task is ongoing.
 
+# shellcheck disable=
 function BU.Main.PosixTerm.DisplaySpinner()
 {
     #**** Parameters ****

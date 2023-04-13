@@ -3,6 +3,7 @@
 # ················································································································
 # Rewriting the "ReverseStringWordsOrder.sh" file's content in order to write the new string in the correct order.
 
+# shellcheck disable=
 function ReverseStringOrder()
 {
 	local string=${1:-$'\0'};
@@ -27,6 +28,7 @@ function ReverseStringOrder()
 	echo "${reversed}";
 }
 
+# shellcheck disable=
 function CutSubStringBeforeNthDelim()
 {
         string=${1:-$'\0'};

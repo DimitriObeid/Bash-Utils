@@ -2,6 +2,7 @@
 
 source "${HOME}/Projets/Bash-utils/lib/functions/main/Text.lib" || { echo "Fail source"; exit 1; }
 
+# shellcheck disable=
 function test_condition()
 {
 	if [ "${1}" == "$(BU.Main.Text.CutDashFromOption "${1}")" ]; then

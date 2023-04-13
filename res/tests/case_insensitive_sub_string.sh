@@ -2,6 +2,7 @@
 
 __ARG=${1:-$'\0'};
 
+# shellcheck disable=
 function BU.ModuleInit.CaseInsensitiveSubString()
 {
     #**** Parameters ****
