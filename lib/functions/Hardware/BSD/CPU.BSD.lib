@@ -156,7 +156,7 @@ function BU.Hardware.BSD.CPU.Is64Bits()                 { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchAArch32()            { true; }
+function BU.Hardware.BSD.CPU.IsArchAArch32()            { true; }
 
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
@@ -165,7 +165,7 @@ function BU.Main.CPU.IsArchAArch32()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchAArch64()            { true; }
+function BU.Hardware.BSD.CPU.IsArchAArch64()            { true; }
 
 # ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
@@ -174,7 +174,7 @@ function BU.Main.CPU.IsArchAArch64()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchARM32()              { true; }
+function BU.Hardware.BSD.CPU.IsArchARM32()              { true; }
 
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
@@ -183,7 +183,7 @@ function BU.Main.CPU.IsArchARM32()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchARM64()              { true; }
+function BU.Hardware.BSD.CPU.IsArchARM64()              { true; }
 
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
@@ -192,7 +192,7 @@ function BU.Main.CPU.IsArchARM64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchAMD64()              { true; }
+function BU.Hardware.BSD.CPU.IsArchAMD64()              { true; }
 
 # ···········································
 # Checking if the CPU's architecture is i386.
@@ -201,7 +201,7 @@ function BU.Main.CPU.IsArchAMD64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchi386()               { true; }
+function BU.Hardware.BSD.CPU.IsArchi386()               { true; }
 
 # ··············································
 # Checking if the CPU's architecture is PowerPC.
@@ -210,7 +210,7 @@ function BU.Main.CPU.IsArchi386()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchPPC()                { true; }
+function BU.Hardware.BSD.CPU.IsArchPPC()                { true; }
 
 # ···········································
 # Checking if the CPU's architecture is MIPS.
@@ -219,7 +219,7 @@ function BU.Main.CPU.IsArchPPC()                { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchMIPS()               { true; }
+function BU.Hardware.BSD.CPU.IsArchMIPS()               { true; }
 
 # ···············································
 # Checking if the CPU's architecture is RISC-V.
@@ -228,7 +228,7 @@ function BU.Main.CPU.IsArchMIPS()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchRISCV()              { true; }
+function BU.Hardware.BSD.CPU.IsArchRISCV()              { true; }
 
 ## ==============================================
 
@@ -340,7 +340,10 @@ function BU.Hardware.BSD.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.BU.Hardware.BSD.CPU.GetAdressSizes()        { return 0; }
+function BU.Hardware.BSD.CPU.GetAdressSizes()
+{
+    return 0;
+}
 
 # ······························
 # Getting the number of sockets.
@@ -349,4 +352,13 @@ function BU.BU.Hardware.BSD.CPU.GetAdressSizes()        { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetSocketsNumber()         { return 0; }
+function BU.Hardware.BSD.CPU.GetSocketsNumber()
+{
+    return 0;
+}
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

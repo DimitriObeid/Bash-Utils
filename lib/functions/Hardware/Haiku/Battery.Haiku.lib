@@ -92,7 +92,6 @@ fi; echo >&2; exit 1; fi
 #   -
 
 # shellcheck disable=
-functionheck disable=
 function BU.Hardware.Haiku.Battery.IsNotOnAC()
 {
     return 0;
@@ -101,10 +100,9 @@ function BU.Hardware.Haiku.Battery.IsNotOnAC()
 # ·······································
 # Checking if the computer is AC powered.
 
-# Fea
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
-# shellcheck disable=
-function
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.IsOnAC()
 {
@@ -114,9 +112,8 @@ function BU.Hardware.Haiku.Battery.IsOnAC()
 # ····································
 # Checking if the battery has history.
 
-
-# shellcheck disable=
-function
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.HasHistory()
@@ -125,10 +122,9 @@ function BU.Hardware.Haiku.Battery.HasHistory()
 }
 
 # ··········································
-# Che
+# Checking if the computer has power supply.
 
-# shellcheck disable=
-functioned function(s) and file(s) by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
@@ -137,10 +133,9 @@ function BU.Hardware.Haiku.Battery.HasPowerSupply()
     return 0;
 }
 
-# ···
+# ·······································
+# Checking if the battery has statistics.
 
-# shellcheck disable=
-function
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -150,9 +145,8 @@ function BU.Hardware.Haiku.Battery.HasStatistics()
     return 0;
 }
 
-
-# shellcheck disable=
-functionng if the battery is present.
+# ···································
+# Checking if the battery is present.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -163,8 +157,7 @@ function BU.Hardware.Haiku.Battery.IsPresent()
     return 0;
 }
 
-# shellcheck disable=
-function···································
+# ·········································
 # Checking if the computer is rechargeable.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -178,9 +171,8 @@ function BU.Hardware.Haiku.Battery.IsRechargeable()
 
 ## ==============================================
 
+## BATTERY VALUES GETTERS
 
-# shellcheck disable=
-function
 # ····················································································
 # Getting every informations about the computer's battery-related hardware components.
 
@@ -190,9 +182,8 @@ function
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetHardwareInfos()
 {
-
-# shellcheck disable=
-function
+    return 0;
+}
 
 # ····································
 # Getting the battery's serial number.
@@ -201,10 +192,9 @@ function
 #   -
 
 # shellcheck disable=
-funct
-
-# shellcheck disable=
-functionrn 0;
+function BU.Hardware.Haiku.Battery.GetCapacity()
+{
+    return 0;
 }
 
 # ···························
@@ -213,10 +203,9 @@ functionrn 0;
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-# she
-
 # shellcheck disable=
-function
+function BU.Hardware.Haiku.Battery.GetEnergy()
+{
     return 0;
 }
 
@@ -225,7 +214,6 @@ function
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
-
 
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetEnergyEmpty()
@@ -240,7 +228,6 @@ function BU.Hardware.Haiku.Battery.GetEnergyEmpty()
 #   -
 
 # shellcheck disable=
-functionheck disable=
 function BU.Hardware.Haiku.Battery.GetEnergyFull()
 {
     return 0;
@@ -249,10 +236,9 @@ function BU.Hardware.Haiku.Battery.GetEnergyFull()
 # ························
 # Getting the battery's
 
-# Fea
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
-# shellcheck disable=
-function
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetEnergyFullDesign()
 {
@@ -262,9 +248,8 @@ function BU.Hardware.Haiku.Battery.GetEnergyFullDesign()
 # ··································
 # Getting the battery's energy rate.
 
-
-# shellcheck disable=
-function
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetEnergyRate()
@@ -272,8 +257,7 @@ function BU.Hardware.Haiku.Battery.GetEnergyRate()
     return 0;
 }
 
-# shellcheck disable=
-function······················
+# ····························
 # Getting the battery's model.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -282,10 +266,9 @@ function······················
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetModel()
 {
-    r
+    return 0;
+}
 
-# shellcheck disable=
-function
 # ························
 # Getting the battery's
 
@@ -295,9 +278,8 @@ function BU.Hardware.Haiku.Battery.GetNativePath()
     return 0;
 }
 
-
-# shellcheck disable=
-functiong the battery's percentage.
+# ·································
+# Getting the battery's percentage.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -308,8 +290,7 @@ function BU.Hardware.Haiku.Battery.GetPercentage()
     return 0;
 }
 
-# shellcheck disable=
-function······························
+# ····································
 # Getting the battery's serial number.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -318,10 +299,9 @@ function······························
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetSerialNumber()
 {
-    r
+    return 0;
+}
 
-# shellcheck disable=
-function
 # ····························
 # Getting the battery's state.
 
@@ -331,9 +311,8 @@ function
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetState()
 {
-
-# shellcheck disable=
-function
+    return 0;
+}
 
 # ·································
 # Getting the battery's technology.
@@ -342,10 +321,9 @@ function
 #   -
 
 # shellcheck disable=
-funct
-
-# shellcheck disable=
-functionrn 0;
+function BU.Hardware.Haiku.Battery.GetTechnology()
+{
+    return 0;
 }
 
 # ·················································
@@ -354,10 +332,9 @@ functionrn 0;
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-# she
-
 # shellcheck disable=
-function
+function BU.Hardware.Haiku.Battery.GetTimeBeforeFullCharge()
+{
     return 0;
 }
 
@@ -366,7 +343,6 @@ function
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
-
 
 # shellcheck disable=
 function BU.Hardware.Haiku.Battery.GetVendor()
@@ -397,3 +373,9 @@ function BU.Hardware.Haiku.Battery.GetWarningLevel()
 {
     return 0;
 }
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

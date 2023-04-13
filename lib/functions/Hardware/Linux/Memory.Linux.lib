@@ -157,3 +157,9 @@ function BU.Hardware.Linux.Memory.GetMemoryType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then if BU.Main.Checkings.CheckRootEUID; then dmidecode ; return 0; else return 1; fi; fi
 }
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

@@ -178,7 +178,7 @@ function BU.Hardware.Linux.CPU.Is64Bits()
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchAArch32()            { true; }
+function BU.Hardware.Linux.CPU.IsArchAArch32()          { true; }
 
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
@@ -187,7 +187,7 @@ function BU.Main.CPU.IsArchAArch32()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchAArch64()            { true; }
+function BU.Hardware.Linux.CPU.IsArchAArch64()          { true; }
 
 # ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
@@ -196,7 +196,7 @@ function BU.Main.CPU.IsArchAArch64()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchARM32()              { true; }
+function BU.Hardware.Linux.CPU.IsArchARM32()            { true; }
 
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
@@ -205,7 +205,7 @@ function BU.Main.CPU.IsArchARM32()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchARM64()              { true; }
+function BU.Hardware.Linux.CPU.IsArchARM64()            { true; }
 
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
@@ -214,7 +214,7 @@ function BU.Main.CPU.IsArchARM64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchAMD64()              { true; }
+function BU.Hardware.Linux.CPU.IsArchAMD64()            { true; }
 
 # ···········································
 # Checking if the CPU's architecture is i386.
@@ -223,7 +223,7 @@ function BU.Main.CPU.IsArchAMD64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchi386()               { true; }
+function BU.Hardware.Linux.CPU.IsArchi386()             { true; }
 
 # ··············································
 # Checking if the CPU's architecture is PowerPC.
@@ -232,7 +232,7 @@ function BU.Main.CPU.IsArchi386()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchPPC()                { true; }
+function BU.Hardware.Linux.CPU.IsArchPPC()              { true; }
 
 # ···········································
 # Checking if the CPU's architecture is MIPS.
@@ -241,7 +241,7 @@ function BU.Main.CPU.IsArchPPC()                { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchMIPS()               { true; }
+function BU.Hardware.Linux.CPU.IsArchMIPS()             { true; }
 
 # ···············································
 # Checking if the CPU's architecture is RISC-V.
@@ -250,7 +250,7 @@ function BU.Main.CPU.IsArchMIPS()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchRISCV()              { true; }
+function BU.Hardware.Linux.CPU.IsArchRISCV()            { true; }
 
 ## ==============================================
 
@@ -263,7 +263,7 @@ function BU.Main.CPU.IsArchRISCV()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.Linux.CPU.GetArch()                { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
 
 ## ==============================================
 
@@ -282,7 +282,7 @@ function BU.Hardware.Linux.CPU.GetArch()              { if BU.Main.CMDS.GetComma
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.IsMonocore()            { return 0; }
+function BU.Hardware.Linux.CPU.IsMonocore()             { return 0; }
 
 ## ==============================================
 
@@ -295,7 +295,7 @@ function BU.Hardware.Linux.CPU.IsMonocore()            { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.Linux.CPU.GetCoresNumber()         { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
 
 # ····································
 # Getting the number of logical cores.
@@ -304,7 +304,7 @@ function BU.Hardware.Linux.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetC
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.GetLogicalCoresNumber()    { return 0; }
+function BU.Hardware.Linux.CPU.GetLogicalCoresNumber()  { return 0; }
 
 # ·····································
 # Getting the number of physical cores.
@@ -313,7 +313,7 @@ function BU.Hardware.Linux.CPU.GetLogicalCoresNumber()    { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()   { return 0; }
+function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber() { return 0; }
 
 ## ==============================================
 
@@ -336,7 +336,7 @@ function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()   { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
+function BU.Hardware.Linux.CPU.GetClockFrequency()      { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
 
 ## ==============================================
 
@@ -362,7 +362,7 @@ function BU.Hardware.Linux.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetC
 #   -
 
 # shellcheck disable=
-function BU.BU.Hardware.Linux.CPU.GetAdressSizes()        { return 0; }
+function BU.Hardware.Linux.CPU.GetAdressSizes()         { return 0; }
 
 # ······························
 # Getting the number of sockets.
@@ -371,4 +371,10 @@ function BU.BU.Hardware.Linux.CPU.GetAdressSizes()        { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.GetSocketsNumber()         { return 0; }
+function BU.Hardware.Linux.CPU.GetSocketsNumber()       { return 0; }
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

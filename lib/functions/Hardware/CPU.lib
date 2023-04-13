@@ -110,18 +110,22 @@ function BU.Hardware.CPU.GetHardwareInfos()
 #   -
 
 # shellcheck disable=
-functionheck disable=
-function BU.Hardware.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
+function BU.Hardware.CPU.GetInfos()
+{
+    return 0;
+}
 
 # ·························
 # Getting the CPU's vendor.
 
-# Fea
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
-function
-# shellcheck disable=
-function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetVendor()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -136,63 +140,74 @@ function BU.Hardware.CPU.GetVendor()                { if BU.Main.CMDS.GetCommand
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
-function
-
-# shellcheck disable=
-function BU.Hardware.CPU.Is32Bits()                 { return 0; }
+function BU.Hardware.CPU.Is32Bits()
+{
+    return 0;
+}
 
 # ··············································
-# Che
-
-# shellcheck disable=
-functioned function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Hardware.CPU.Is64Bits()                 { return 0; }
-
-# ···
-
-# shellcheck disable=
-function
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Main.CPU.IsArchAArch32()            { true; }
-
-
-# shellcheck disable=
-functionng if the CPU's architecture is AArch 64 bits.
+# Checking if the CPU's architecture is 64 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-funct
+function BU.Hardware.CPU.Is64Bits()
+{
+    return 0;
+}
+
+# ····················································
+# Checking if the CPU's architecture is AArch 32 bits.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
-function············································
+function BU.Hardware.CPU.IsArchAArch32()
+{
+    return 0;
+}
+
+# ····················································
+# Checking if the CPU's architecture is AArch 64 bits.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.CPU.IsArchAArch64()
+{
+    return 0;
+}
+
+# ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-# she
-
 # shellcheck disable=
-function
+function BU.Hardware.CPU.IsArchARM32()
+{
+    return 0;
+}
+
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
-
 # shellcheck disable=
-function BU.Main.CPU.IsArchARM64()              { true; }
+function BU.Hardware.CPU.IsArchARM64()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
@@ -201,38 +216,46 @@ function BU.Main.CPU.IsArchARM64()              { true; }
 #   -
 
 # shellcheck disable=
-functionheck disable=
-function BU.Main.CPU.IsArchAMD64()              { true; }
+function BU.Hardware.CPU.IsArchAMD64()
+{
+    return 0;
+}
 
 # ···········································
 # Checking if the CPU's architecture is i386.
 
-# Fea
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
-function
-# shellcheck disable=
-function BU.Main.CPU.IsArchi386()               { true; }
+function BU.Hardware.CPU.IsArchi386()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is PowerPC.
 
-
-# shellcheck disable=
-function
-
-# shellcheck disable=
-function BU.Main.CPU.IsArchPPC()                { true; }
-
-# ···········································
-# Che
-
-# shellcheck disable=
-functioned function(s) and file(s) by module(s) and from the "functions" folder :
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Main.CPU.IsArchMIPS()               { true; }
+function BU.Hardware.CPU.IsArchPPC()
+{
+    return 0;
+}
+
+# ···········································
+# Checking if the CPU's architecture is MIPS.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.CPU.IsArchMIPS()
+{
+    return 0;
+}
 
 # ···············································
 # Checking if the CPU's architecture is RISC-V.
@@ -241,8 +264,10 @@ function BU.Main.CPU.IsArchMIPS()               { true; }
 #   -
 
 # shellcheck disable=
-functionheck disable=
-function BU.Main.CPU.IsArchRISCV()              { true; }
+function BU.Hardware.CPU.IsArchRISCV()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -255,43 +280,36 @@ function BU.Main.CPU.IsArchRISCV()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetArch()
+{
+    return 0;
+}
 
-## ==
+## ==============================================
 
-# shellcheck disable=
-function
+
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
 
-## CH
+## CHECKING THE CPU(s) CORES DATA
 
-# shellcheck disable=
-function···························
+# ·································
 # Checking if the CPU is mono-core.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.IsMonocore()               { return 0; }
+function BU.Hardware.CPU.IsMonocore()
+{
+    return 0;
+}
 
-# ·································
-# Che
+## ==============================================
 
-# shellcheck disable=
-functioned function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Hardware.CPU.IsMulticore()              { return 0; }
-
-## ==
-
-# shellcheck disable=
-functionNG THE CPU(s) CORES DATA
+## GETTING THE CPU(s) CORES DATA
 
 # ·························································
 # Getting the total number of cores (logical AND physical).
@@ -300,8 +318,10 @@ functionNG THE CPU(s) CORES DATA
 #   -
 
 # shellcheck disable=
-functionheck disable=
-function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.CPU.GetCoresNumber()
+{
+    return 0;
+}
 
 # ····································
 # Getting the number of logical cores.
@@ -310,7 +330,10 @@ function BU.Hardware.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommand
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.GetLogicalCoresNumber()    { return 0; }
+function BU.Hardware.CPU.GetLogicalCoresNumber()
+{
+    return 0;
+}
 
 # ·····································
 # Getting the number of physical cores.
@@ -319,11 +342,13 @@ function BU.Hardware.CPU.GetLogicalCoresNumber()    { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.GetPhysicalCoresNumber()   { return 0; }
+function BU.Hardware.CPU.GetPhysicalCoresNumber()
+{
+    return 0;
+}
 
+## ==============================================
 
-# shellcheck disable=
-function
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -339,12 +364,14 @@ function
 # ····························
 # Getting the clock frequency.
 
-# Fea
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
 
 # shellcheck disable=
-function
-# shellcheck disable=
-function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
+function BU.Hardware.CPU.GetClockFrequency()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -352,19 +379,10 @@ function BU.Hardware.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommand
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### CPU'S SOCKETS
+####
 
 ##
 
-# shellcheck disable=
-function························
-# Getting the number of sockets.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Hardware.CPU.GetSocketsNumber()         { return 0; }
 
 
 
@@ -379,4 +397,25 @@ function BU.Hardware.CPU.GetSocketsNumber()         { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.BU.Hardware.CPU.GetAdressSizes()        { return 0; }
+function BU.Hardware.CPU.GetAdressSizes()
+{
+    return 0;
+}
+
+# ······························
+# Getting the number of sockets.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.CPU.GetSocketsNumber()
+{
+    return 0;
+}
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

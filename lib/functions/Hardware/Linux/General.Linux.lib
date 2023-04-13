@@ -220,4 +220,12 @@ function BU.Hardware.Linux.General.GetMachineID()      { if BU.Main.CMDS.GetComm
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
+
+# shellcheck disable=
 function BU.Hardware.Linux.General.GetBootID()         { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 5 {print $3}'; return 0; else return 1; fi; }
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #

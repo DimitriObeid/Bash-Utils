@@ -270,13 +270,11 @@ function BU.Hardware.Ports.CheckIfHDMIPortAvailable()
 # shellcheck disable=
 function BU.Hardware.Ports.CheckIfJoystickIsPlugged()
 {
-    #**** Variables ****
-    local JS="$(
-        if      BU.Main.OS.IsLinux;         then    dmesg | grep Joystick;
-        elif    BU.Main.OS.IsHaiku;         then    true;
-        fi
-    )";
-
-    #**** Code ****
-    if [ -n "${JS}" ]; then return 0; else return 1; fi
+    return 0;
 }
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
