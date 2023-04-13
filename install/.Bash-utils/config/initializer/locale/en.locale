@@ -80,7 +80,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## SUB-SECTION : DEFINING GLOBAL VARIABLES
 
-    ## FUNCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
+    # ·······················································································
+    # FUNCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
     # Note: This variable is also used in the main module configuration files.
     __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : Unable to define the path to store in the « %s » global variable\n";
@@ -103,7 +104,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## SUB-SECTION : FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
-    ## FUNCTION : "BU.ModuleInit.DefineTraps()"
+    # ········································
+    # FUNCTION : "BU.ModuleInit.DefineTraps()"
     __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Exiting script";
 
     # --------
@@ -112,7 +114,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-    ## FUNCTION : "BU.ModuleInit.AskPrintLog()"
+    # ········································
+    # FUNCTION : "BU.ModuleInit.AskPrintLog()"
 
     __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="No logs to display";
     __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Do you want to display the initialization logs (stored in the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » array) ? (yes / no)";
@@ -122,7 +125,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
+    # ······························································
+    # FUNCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
     # Initialization message.
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALIZING THE GLOBAL VARIABLES";
@@ -191,7 +195,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
+    # ·······················································
+    # FUNCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
 
     # List of different messages, used to better measure the space between the text and the colon.
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Modl  : %s";
@@ -295,26 +300,30 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.Msg()"
+    # ································
+    # FUNCTION : "BU.ModuleInit.Msg()"
 
     __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » GLOBAL VARIABLE'S VALUE '%s' IS NOT SUPPORTED\n";
     __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Please change its value by '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value.";
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.MsgAbort()"
+    # ·····································
+    # FUNCTION : "BU.ModuleInit.MsgAbort()"
 
     __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Aborting the module initialization script's execution";
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.MsgAbort()"
+    # ·····································
+    # FUNCTION : "BU.ModuleInit.MsgAbort()"
 
     __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Press any key to";
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.PrintLog"
+    # ·····································
+    # FUNCTION : "BU.ModuleInit.PrintLog()"
 
     # Title.
     __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="INITIALIZATION LOGS";
@@ -339,7 +348,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.PrintLogError"
+    # ··········································
+    # FUNCTION : "BU.ModuleInit.PrintLogError()"
 
     __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERROR ] FILE : %s | LINE : %s | CODE : %s";
 
@@ -349,7 +359,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
-    ## FUNCTION : "BU.ModuleInit.CheckPath()"
+    # ······································
+    # FUNCTION : "BU.ModuleInit.CheckPath()"
 
     # Missing file path.
     __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="No file path";
@@ -367,20 +378,23 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.FindPath()"
+    # ·····································
+    # FUNCTION : "BU.ModuleInit.FindPath()"
 
     __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : WARNING : UNABLE TO FIND THIS PATH";
     __BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION="Function where the « %s() » function was called : %s()";
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.GetModuleName()"
+    # ··········································
+    # FUNCTION : "BU.ModuleInit.GetModuleName()"
 
     __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : Unable to get the module's name from the parent directory name";
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.ListInstalledModules()"
+    # ·················································
+    # FUNCTION : "BU.ModuleInit.ListInstalledModules()"
 
     # Unable to create the temporary directory.
     __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
@@ -402,7 +416,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.SourcingFailure()"
+    # ············································
+    # FUNCTION : "BU.ModuleInit.SourcingFailure()"
 
     __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : UNABLE TO SOURCE THIS « %s » MODULE'S FILE --> %s";
 
@@ -412,7 +427,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-    ## FUNCTION : "BU.ModuleInit.Usage()"
+    # ··································
+    # FUNCTION : "BU.ModuleInit.Usage()"
 
     # List of different messages, used to better measure the space between the text and the colon.
     __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                  : the four following parameters are incompatible with each other, they will overwrite each other :";
@@ -462,7 +478,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
+    # ······················································································
+    # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
     # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable when calling the « BashUtils_InitModules » function"
@@ -478,20 +495,23 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
+    # ······················································································
+    # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
 
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG="Warning : the supported values for the « %s » option are : %s";
 
     # --------
 
-    ## FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
+    # ·························································
+    # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
 
     # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
 
-    # -------------------------------------------
-    # The arguments checking loop is running now.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ The arguments checking loop is running now
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Processing each status global variable's value description : writing redundant sentences.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_BOOL="This Bash Utils framework status global variable stores a boolean value, which is used to";
@@ -508,8 +528,9 @@ function BU.ModuleInit.SetInitLocale.en()
     # If the "--stat-*" argument is not a supported value.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : « %s » IS NOT A SUPPORTED STATUS ARGUMENT BY THE « module » PARAMETER";
 
-    ## -------------------------------------------------------
-    # End of the execution of the arguments verification loop.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ End of the execution of the arguments verification loop
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--log-*" option passed.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » VALUE'S LOG PERMISSION OPTION « %s » IS NOT SUPPORTED";
@@ -551,7 +572,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## SUB-SECTION : INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
-    ## FUNCTION : "BashUtils_InitModules()"
+    # ····································
+    # FUNCTION : "BashUtils_InitModules()"
 
     # First checkings.
     __BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="You have already called the %s function in your script";
@@ -562,8 +584,9 @@ function BU.ModuleInit.SetInitLocale.en()
     __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM="Module %s : %s       <-- Arguments passed to configure the initialization process";
     __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM="Module %s : %s";
 
-    # -----------------------------
-    # The main loop is running now.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ The main loop is running now
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Definition of the information about the global variables that are defined in the "BashUtils_InitModules" function.
     __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI="This global variable stores the path of the currently processed module's configurations directory (current : %s | path : %s)";
@@ -592,8 +615,9 @@ function BU.ModuleInit.SetInitLocale.en()
     # End of the current module's initialization.
     __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT="END OF THE %s MODULE INITIALIZATION !";
 
-    # ---------------------------------
-    # End of the main loop's execution.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ End of the main loop's execution
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # End of the framework's initialization process.
     __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="END OF THE FRAMEWORK INITIALIZATION PROCESS ! BEGINNING PROCESSING THE %s PROJECT'S MAIN SCRIPT %s !";

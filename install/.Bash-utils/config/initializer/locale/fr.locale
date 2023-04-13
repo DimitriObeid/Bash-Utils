@@ -51,7 +51,7 @@ function BU.ModuleInit.SetInitLocale.fr()
     # Écriture du début du texte de tout texte qui doit être imprimé avec la fonction "BU.ModuleInit.PrintLogError()".
     __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -70,7 +70,7 @@ function BU.ModuleInit.SetInitLocale.fr()
         __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « install_and_update.sh », ou vous pouvez le trouver dans le dossier « Bash-utils/install ».";
     fi
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -80,20 +80,21 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## SOUS-SECTION : DÉFINITION DES VARIABLES GLOBALES [-----] DEFINING GLOBAL VARIABLES
 
-    ## FONCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
+    # ·······················································································
+    # FONCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
     # Note : Cette variable est également utilisée dans les fichiers de configuration du module principal.
     __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : Impossible de définir le chemin à enregistrer dans la variable globale « %s »\n";
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## SOUS-SECTION : APPEL DES AUTRES FONCTIONS POUR L'INITIALISATION [-----] CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
     __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION DES MODULES";
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -103,16 +104,19 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## SOUS-SECTION : FONCTIONS ET RESSOURCES NÉCESSAIRES POUR LE PIÉGEAGE DES SIGNAUX [-----] FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
-    ## FONCTION : "BU.ModuleInit.DefineTraps()"
+    # ········································
+    # FONCTION : "BU.ModuleInit.DefineTraps()"
+
     __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Fin de l'exécution du script";
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION [-----] FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
-    ## FONCTION : "BU.ModuleInit.AskPrintLog()"
+    # ········································
+    # FONCTION : "BU.ModuleInit.AskPrintLog()"
 
     __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="Aucune entrée de journal à afficher";
     __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Souhaitez-vous afficher à l'écran les entrées d'initialisation (enregistrées dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » ) ?";
@@ -122,7 +126,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
+    # ······························································
+    # FONCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
     # Message d'initialisation.
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISATION DES VARIABLES GLOBALES";
@@ -191,7 +196,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
+    # ·······················································
+    # FONCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
 
     # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
     __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Module      : %s";
@@ -295,26 +301,30 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.Msg()"
+    #~ ································
+    #~ FONCTION : "BU.ModuleInit.Msg()"
 
     __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : LA VALEUR DE LA VARIABLE GLOBALE « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » '%s' N'EST PAS SUPPORTÉE\n";
     __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Veuillez changer sa valeur par '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' ou une valeur vide où vous avez (re)défini la valeur.";
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.MsgAbort()"
+    # ·····································
+    # FONCTION : "BU.ModuleInit.MsgAbort()"
 
     __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Interruption de l'exécution du script d'initialisation du module";
 
     ## -------
 
+    # ·····································
     # FONCTION : "BU.ModuleInit.MsgAbort()"
 
     __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Appuyez sur n'importe quelle touche pour";
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.PrintLog()"
+    # ·····································
+    # FONCTION : "BU.ModuleInit.PrintLog()"
 
     # Titre
     __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="ENTRÉE DU JOURNAL D'INITIALISATION";
@@ -339,7 +349,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.PrintLogError()"
+    # ··········································
+    # FONCTION : "BU.ModuleInit.PrintLogError()"
 
     __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERREUR ] FICHER : %s | LIGNE : %s | CODE : %s";
 
@@ -349,7 +360,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
-    ## FONCTION : "BU.ModuleInit.CheckPath()"
+    # ······································
+    # FONCTION : "BU.ModuleInit.CheckPath()"
 
     # Chemin de fichier manquant.
     __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="Aucun chemin de fichier";
@@ -367,20 +379,23 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.FindPath"
+    # ·····································
+    # FONCTION : "BU.ModuleInit.FindPath()"
 
     __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : IMPOSSIBLE DE TROUVER CE CHEMIN";
     __BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION="Fonction où la fonction « %s() » a été appelée : %s()";
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.GetModuleName"
+    # ··········································
+    # FONCTION : "BU.ModuleInit.GetModuleName()"
 
     __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : Impossible d'obtenir le nom du module depuis le nom de son dossier parent";
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.ListInstalledModules()"
+    # ·················································
+    # FONCTION : "BU.ModuleInit.ListInstalledModules()"
 
     # Impossible de créer le dossier temporaire.
     __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : Impossible de créer le dossier temporaire « tmp » de stockage des journaux d'initialisation dans le dossier « %s/ »";
@@ -402,7 +417,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.SourcingFailure()"
+    # ············································
+    # FONCTION : "BU.ModuleInit.SourcingFailure()"
 
     __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : IMPOSSIBLE DE SOURCER CE FICHIER DU MODULE « %s » --> %s";
 
@@ -412,7 +428,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## SOUS-SECTION : FONCTIONS NÉCESSAIRES AU TRAITEMENT DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
-    ## FONCTION : "BU.ModuleInit.Usage()"
+    # ··································
+    # FONCTION : "BU.ModuleInit.Usage()"
 
     # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
     __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="ATTENTION             : les quatre paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
@@ -462,7 +479,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
+    # ······················································································
+    # FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
     # La même valeur pour l'option "--log-*" a été passée deux fois ou plus comme argument lors de l'appel de la fonction "BashUtils_InitModules".
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : vous avez déjà passé la valeur « %s » comme argument de la valeur « module » pour la variable globale « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} »";
@@ -478,20 +496,23 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
+    # ······················································································
+    # FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
 
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG="Attention : les valeurs supportées pour l'option « %s » sont : %s";
 
     # --------
 
-    ## FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
+    # ·························································
+    # FONCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
 
     # Aucun argument n'a été passé en tant que valeur(s) du paramètre "module", dans le cas où ce paramètre a été invoqué en tant que premier argument lors de l'appel de la fonction "BashUtils_InitModules".
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : LE PARAMÈTRE « module » A ÉTÉ PASSÉE SANS VALEUR(S)";
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE="Veuillez passer au moins un argument valide entre les guillemets où vous passez la valeur « module »";
 
-    ## --------------------------------------------------------------
-    # La boucle de vérification d'arguments est en cours d'exécution.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ La boucle de vérification d'arguments est en cours d'exécution
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Traitement de la description de chaque variable globale de statut : écriture de phrases redondantes.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT_VAL_IS_BOOL="Cette variable globale de statut du framework Bash Utils enregistre une valeur booléenne, servant à";
@@ -508,8 +529,9 @@ function BU.ModuleInit.SetInitLocale.fr()
     # Si l'argument "--stat-*" n'est pas une valeur supportée.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : « %s » N'EST PAS UN ARGUMENT DE STATUT SUPPORTÉ PAR LE PARAMÈTRE « module »";
 
-    ## -----------------------------------------------------------
-    # Fin de l'exécution de la boucle de vérification d'arguments.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ Fin de l'exécution de la boucle de vérification d'arguments
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Un ou plusieurs arguments ont été passés en tant que valeur(s) paramètre "module" lors de l'appel de la fonction "BashUtils_InitModules" : option "--log-*" non supportée passée.
     __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : L'OPTION DE PERMISSION DE JOURNALISATION « %s » DU PARAMÈTRE « module » N'EST PAS SUPPORTÉE";
@@ -551,7 +573,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## SOUS-SECTION : INCLUSION DES FICHIERS DE LA LIBRAIRIE SELON LE MODULE INCLUS [-----] INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
-    ## FONCTION : "BashUtils_InitModules()"
+    # ····································
+    # FONCTION : "BashUtils_InitModules()"
 
     # Premières vérifications.
     __BU_MODULE_INIT_MSG__BU_IM__IS_ALREADY_CALLED="Vous avez déjà appelé la fonction %s dans votre script";
@@ -562,8 +585,9 @@ function BU.ModuleInit.SetInitLocale.fr()
     __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_MODULE_PARAM="Module %s : %s       <-- Arguments passés pour configurer le processus d'initialisation";
     __BU_MODULE_INIT_MSG__BU_IM__MODULES_INIT_MSG__LOOP_ADD_ARRAY_INDEX__IS_NOT_MODULE_PARAM="Module %s : %s";
 
-    # ----------------------------------------------
-    # La boucle principale est en cours d'exécution.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ La boucle principale est en cours d'exécution
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Définition des informations sur les variables globales qui sont définies dans la fonction "BashUtils_InitModules".
     __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI="Cette variable globale enregistre le chemin du répertoire des configurations du module actuellement traité (actuel : %s | chemin : %s)";
@@ -592,8 +616,9 @@ function BU.ModuleInit.SetInitLocale.fr()
     # Fin de l'initialisation du module actuel.
     __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT="FIN DE LA PROCÉDURE D'INITIALISATION DU MODULE %s!";
 
-    # -------------------------------------------
-    # Fin de l'exécution de la boucle principale.
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    #~ Fin de l'exécution de la boucle principale
+    #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Fin du processus d'initialisation du framework.
     __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALISATION DU FRAMEWORK ! DÉBUT DU TRAITEMENT DU PROJET %s VIA LE SCRIPT PRINCIPAL %s !";
@@ -844,7 +869,7 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # --------
 
-    ## ----------------------------------------------
+    ## ==============================================
 
 
 
@@ -861,13 +886,13 @@ function BU.ModuleInit.SetInitLocale.fr()
     __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY="Ce fichier de librairie a été sourcé avec succès : %s";
     __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Ce fichier de configuration a été sourcé avec succès : %s":
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## ÉTAPE DEUX : INCLUSION MINIMALE DE FICHIERS AFIN D'UTILISER LEURS RESSOURCES PENDANT LA PARTIE DE TRADUCTION [-----] STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
 
     # Aucun texte à afficher dans cette section pour le moment.
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## ÉTAPE TROIS : TRAITEMENT DES PARAMÈTRES DU MODULE PRINCIPAL [-----] STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
 
@@ -917,13 +942,13 @@ function BU.ModuleInit.SetInitLocale.fr()
         __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT \
         __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     # ÉTAPE QUATRE : INCLUSION DU RESTE DE LA LIBRAIRIE ET DES FICHIERS DE CONFIGURATION [-----] STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
 
     # Aucun texte à afficher dans cette section pour le moment.
 
-    ## ----------------------------------------------
+    ## ==============================================
 
     ## ÉTAPE CINQ : TRAITEMENT DES RESSOURCES DU PROJET [-----] STEP FIVE : PROCESSING PROJECT'S RESOURCES
 

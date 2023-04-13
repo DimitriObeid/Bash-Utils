@@ -138,7 +138,7 @@ __BU_MOD_ADD__GLOBVAR_OS_NAME;
 
 ## SUB-CATEGORY NAME
 
-# ························································
+# ·······························································
 # Writing the file's informations section into the targeted file.
 
 # shellcheck disable=
@@ -166,7 +166,7 @@ EOF
     return 0;
 }
 
-# ·························································
+# ································································
 # Writing the script's description section into the targeted file.
 
 # shellcheck disable=
@@ -195,7 +195,7 @@ EOF
     return 0;
 }
 
-# ·························································································
+# ··································································································
 # Writing the Shellcheck and the pieces of code which prevent the direct execution of its host file.
 
 # shellcheck disable=
