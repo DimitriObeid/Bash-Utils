@@ -106,6 +106,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # ········································
     # FUNCTION : "BU.ModuleInit.DefineTraps()"
+
     __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Exiting script";
 
     # --------
@@ -690,12 +691,16 @@ function BU.ModuleInit.SetInitLocale.en()
     # --------
 
     ## FILE : "ColorsBG.conf"
+
+    # Definition of the functions necessary for the direct inclusion of the file (commands are executed directly at inclusion, and not later, with the code written in the function loaded in memory).
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS_BG__PrintColorVarNameCmdSub_FNCT_A="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » action color code";
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS_BG__PrintColorVarNameCmdSub_FNCT_C="This command substitution executes the « BU.Main.TextFormat.SetBGColor() » function in order to color the text's background with the defined « %s » color code";
 
     # --------
 
     ## FILE : "ColorsText.conf"
+
+    # Definition of the functions necessary for the direct inclusion of the file (commands are executed directly at inclusion, and not later, with the code written in the function loaded in memory).
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS_TEXT__PrintColorVarNameCmdSub_FNCT_A="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » action color code";
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__COLORS_TEXT__PrintColorVarNameCmdSub_FNCT_C="This command substitution executes the « BU.Main.TextFormat.SetTextColor() » function in order to color the text with the defined « %s » color code";
 
