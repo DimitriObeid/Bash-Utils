@@ -25,6 +25,7 @@
 
 ## PAGRINDINĖ FUNKCIJA
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.lt()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

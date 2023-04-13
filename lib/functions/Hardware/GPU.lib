@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.IsAMD()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.GPU.IsAMD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.IsNvidia()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.GPU.IsNvidia()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.IsNvidiaGTX()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.GPU.IsNvidiaGTX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.IsNvidiaRTX()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.GPU.IsNvidiaRTX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.IsVGACompatible()
 {
     return 0;
@@ -150,6 +155,7 @@ function BU.Hardware.GPU.IsVGACompatible()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetHardwareInfos()
 {
     return 0;
@@ -165,6 +171,7 @@ function BU.Hardware.Drive.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetBusInfo()
 {
     return 0;
@@ -176,6 +183,7 @@ function BU.Hardware.GPU.GetBusInfo()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetCapabilities()
 {
     return 0;
@@ -187,6 +195,7 @@ function BU.Hardware.GPU.GetCapabilities()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetClockFrequency()
 {
     return 0;
@@ -198,6 +207,7 @@ function BU.Hardware.GPU.GetClockFrequency()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetConfiguration()
 {
     return 0;
@@ -209,6 +219,7 @@ function BU.Hardware.GPU.GetConfiguration()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetDescription()
 {
     return 0;
@@ -220,6 +231,7 @@ function BU.Hardware.GPU.GetDescription()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetLogicalName()
 {
     return 0;
@@ -231,6 +243,7 @@ function BU.Hardware.GPU.GetLogicalName()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetPhysicalID()
 {
     return 0;
@@ -242,6 +255,7 @@ function BU.Hardware.GPU.GetPhysicalID()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetProductType()
 {
     return 0;
@@ -253,6 +267,7 @@ function BU.Hardware.GPU.GetProductType()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetResources()
 {
     return 0;
@@ -264,6 +279,7 @@ function BU.Hardware.GPU.GetResources()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetVendor()
 {
     return
@@ -275,6 +291,7 @@ function BU.Hardware.GPU.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.GPU.GetWidth()
 {
     return 0;

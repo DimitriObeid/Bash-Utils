@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Memory.CheckIfMemoryDDR4()
 {
     BU.Hardware.Windows.Memory.GetMemoryType 'DDR4' || return "${?}"; return 0;
@@ -106,6 +107,7 @@ function BU.Hardware.Windows.Memory.CheckIfMemoryDDR4()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Memory.GetHardwareInfos()
 {
     return 0;
@@ -117,6 +119,7 @@ function BU.Hardware.Windows.Memory.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Memory.GetUsedRAMSlotsNumber()
 {
     return 0;
@@ -128,6 +131,7 @@ function BU.Hardware.Windows.Memory.GetUsedRAMSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
@@ -139,6 +143,7 @@ function BU.Hardware.Windows.Memory.GetAvailableRamSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Memory.GetMaxMemoryCapacity()
 {
     return 0;
@@ -150,6 +155,7 @@ function BU.Hardware.Windows.Memory.GetMaxMemoryCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Memory.GetMemoryType()
 {
     return 0;

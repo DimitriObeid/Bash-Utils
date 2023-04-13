@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.SDCard.GetHardwareInfos()
 {
     return 0;

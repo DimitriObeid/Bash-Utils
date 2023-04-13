@@ -103,6 +103,7 @@ declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS
 
 #   - BU.Main.Errors.HandleSmallErrors()    -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Headers.DrawLine()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -204,6 +205,7 @@ function BU.Main.Headers.DrawLine()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Headers.DrawLine()    -> Headers.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Headers.Light()
 {
     #**** Parameters ****
@@ -283,6 +285,7 @@ function BU.Main.Headers.LightDeco()
 
 #   - BU.Main.Errors.HandleSmallErrors()    -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Headers.Base () {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -384,6 +387,7 @@ function BU.Main.Headers.Base () {
     return 0;
 }
 
+# shellcheck disable=
 function BU.Main.Headers.Base.CMD()
 {
     BU.Main.Headers.Base "${@}";

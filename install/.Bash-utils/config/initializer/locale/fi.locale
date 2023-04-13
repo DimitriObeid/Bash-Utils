@@ -25,6 +25,7 @@
 
 ## TIETOKONEOHJELMAN PÄÄASIALLINEN TEHTÄVÄ
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.fi()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

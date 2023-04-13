@@ -25,6 +25,7 @@
 
 ## HOVEDFUNKSJON
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.nb()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

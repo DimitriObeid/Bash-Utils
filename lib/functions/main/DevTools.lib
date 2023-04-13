@@ -96,6 +96,7 @@ declare -r __BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK=
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.Main.DevTools.ShellcheckVerifFailed()
 {
     #**** Parameters ****
@@ -114,6 +115,7 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.DevTools.ShellcheckVerifFailed()  -> Main -> DevTools.lib (this file)
 
+# shellcheck disable=
 function BU.Main.DevTools.ShellcheckVerif()
 {
     #**** Parameters ****

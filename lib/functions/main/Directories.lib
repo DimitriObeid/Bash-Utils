@@ -110,6 +110,7 @@ declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PR
 
 #   - BU.Main.Headers.DrawLine()                -> Main -> Headers.lib
 
+# shellcheck disable=
 function BU.Main.Directories.ProcessingDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -174,6 +175,7 @@ declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FO
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Directories.OverwriteDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -247,6 +249,7 @@ function BU.Main.Directories.OverwriteDir()
 
 #   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
+# shellcheck disable=
 function BU.Main.Directories.Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -318,6 +321,7 @@ function BU.Main.Directories.Make()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Directories.MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -357,6 +361,7 @@ function BU.Main.Directories.MakePath()
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()      -> Main -> Status.lib
 
+# shellcheck disable=
 function BU.Main.Directories.MkTmpDir()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -402,6 +407,7 @@ declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PA
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Directories.GetDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -448,6 +454,7 @@ function BU.Main.Directories.GetDirectoryName()
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Directories.GetDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -484,6 +491,7 @@ function BU.Main.Directories.GetDirectoryPath()
 
 #   - BU.Main.Errors.HandleErrors()                         -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Directories.GetParentDirectoryName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -536,6 +544,7 @@ function BU.Main.Directories.GetParentDirectoryName()
 
 #   - BU.Main.Text.ReverseStringWordsOrder()                -> Main -> Text.lib
 
+# shellcheck disable=
 function BU.Main.Directories.GetParentDirectoryPath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -624,6 +633,7 @@ function BU.Main.Directories.GetParentDirectoryPath()
 
 #   - BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()    -> Main -> Inputs.lib
 
+# shellcheck disable=
 function BU.Main.Directories.TriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

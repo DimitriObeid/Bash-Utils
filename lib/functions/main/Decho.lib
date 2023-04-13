@@ -134,6 +134,7 @@ function BU.Main.Decho.__Decho()
 #   - BU.Main.TextFormat.SetBGColor()       -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetTextColor()     -> Main -> TextFormat.lib
 
+# shellcheck disable=
 function BU.Main.Decho.Decho()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

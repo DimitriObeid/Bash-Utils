@@ -72,6 +72,7 @@ __F_USERS_LIST_FILE_PATH="${__D_INSTALL_DIR_PATH}/${__F_USERS_LIST_FILE_NAME}";
 # ·········································
 # Asking to user before engaging an action.
 
+# shellcheck disable=
 function AskUser()
 {
     #**** Parameters ****
@@ -95,11 +96,13 @@ function AskUser()
 # ·······································
 # Behavior if the "$(cd)" command failed.
 
+# shellcheck disable=
 function CDfail() { printf "UNABLE TO CHANGE DIRECTORY"; PrintRoot; exit 1; }
 
 # ····················································
 # Changing recursively a directory's ownership rights.
 
+# shellcheck disable=
 function ChangeDirOwnership()
 {
 	#**** Parameters ****
@@ -116,6 +119,7 @@ function ChangeDirOwnership()
 # ·················································
 # Changing individually the files ownership rights.
 
+# shellcheck disable=
 function ChangeFileOwnership()
 {
 	#**** Parameters ****
@@ -130,6 +134,7 @@ function ChangeFileOwnership()
 # ························································································
 # Changing the ownership of the ".Bash-utils" directory and the "Bash-utils-init.sh" file.
 
+# shellcheck disable=
 function ChangeOwnership()
 {
 	#**** Parameters ****
@@ -162,6 +167,7 @@ function ChangeOwnership()
 # ······································································
 # Copying the modules inititializer file into the user's home directory.
 
+# shellcheck disable=
 function CopyModulesInitializer()
 {
 	#**** Parameters ****
@@ -186,6 +192,7 @@ function CopyModulesInitializer()
 # ·····································································
 # Copying the modules manager directory into the user's home directory.
 
+# shellcheck disable=
 function CopyModulesManagerDirectory()
 {
 	#**** Parameters ****
@@ -219,6 +226,7 @@ function CopyModulesManagerDirectory()
 # ····················
 # Log file processing.
 
+# shellcheck disable=
 function Log()
 {
     if [ -f "${__F_INSTALL_LOG_FILE_PATH}" ] && [ -s "${__F_INSTALL_LOG_FILE_PATH}" ]; then
@@ -238,6 +246,7 @@ function Log()
 # ·········································································
 # New line function for the functions called into the following "for" loop.
 
+# shellcheck disable=
 function BU.Main.Echo.Newline()
 {
     #**** Parameters ****
@@ -256,11 +265,13 @@ function BU.Main.Echo.Newline()
 # ··································································································································
 # New line function called into the the following "for" loop, and after each PrintLog functions, if a linebreak should be displayed.
 
+# shellcheck disable=
 function BU.Main.Echo.NewlineF() { local p_line_breaks=${1:-$'\0'}; if [[ "${p_line_breaks}" =~ ^[\-0-9]+$ ]]; then PrintLog "$(BU.Main.Echo.Newline "${p_line_breaks}")"; else PrintLog "$(BU.Main.Echo.Newline)"; fi; return 0; }
 
 # ···························································
 # Printing a line according to the terminal's columns number.
 
+# shellcheck disable=
 function PrintLine()
 {
     if command -v tput &> /dev/null; then
@@ -277,6 +288,7 @@ function PrintLine()
 # ···············
 # Checking if the
 
+# shellcheck disable=
 function PrintLog()
 {
     if [ "${__NOLOG}" == 'nolog' ]; then
@@ -293,6 +305,7 @@ function PrintLog()
 # ·····························································
 # Printing back the "/root" path in the normal users list file.
 
+# shellcheck disable=
 function PrintRoot() { if [ "${__UNROOT}" == 'true' ] && [ "${OSTYPE}" != 'linux-android' ]; then printf '/root' >> "${__F_USERS_LIST_FILE_PATH}"; fi; return 0; }
 
 ## -----------------------------------------------

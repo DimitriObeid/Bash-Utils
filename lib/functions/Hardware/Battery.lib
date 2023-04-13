@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.IsNotOnAC()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Battery.IsNotOnAC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.IsOnAC()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Battery.IsOnAC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.HasHistory()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Battery.HasHistory()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.HasPowerSupply()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Battery.HasPowerSupply()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.HasStatistics()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.Battery.HasStatistics()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.IsPresent()
 {
     return 0;
@@ -157,6 +163,7 @@ function BU.Hardware.Battery.IsPresent()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.IsRechargeable()
 {
     return 0;
@@ -172,6 +179,7 @@ function BU.Hardware.Battery.IsRechargeable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetHardwareInfos()
 {
     BU.Hardware.Battery.GetCapacity;
@@ -186,6 +194,7 @@ function BU.Hardware.Battery.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetCapacity()
 {
     return 0;
@@ -197,6 +206,7 @@ function BU.Hardware.Battery.GetCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetEnergy()
 {
     return 0;
@@ -208,6 +218,7 @@ function BU.Hardware.Battery.GetEnergy()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetEnergyEmpty()
 {
     return 0;
@@ -219,6 +230,7 @@ function BU.Hardware.Battery.GetEnergyEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetEnergyFull()
 {
     return 0;
@@ -230,6 +242,7 @@ function BU.Hardware.Battery.GetEnergyFull()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetEnergyFullDesign()
 {
     return 0;
@@ -241,6 +254,7 @@ function BU.Hardware.Battery.GetEnergyFullDesign()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetEnergyRate()
 {
     return 0;
@@ -252,6 +266,7 @@ function BU.Hardware.Battery.GetEnergyRate()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetModel()
 {
     return 0;
@@ -260,6 +275,7 @@ function BU.Hardware.Battery.GetModel()
 # ························
 # Getting the battery's
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetNativePath()
 {
     return 0;
@@ -271,6 +287,7 @@ function BU.Hardware.Battery.GetNativePath()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetPercentage()
 {
     return 0;
@@ -282,6 +299,7 @@ function BU.Hardware.Battery.GetPercentage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetSerialNumber()
 {
     return 0;
@@ -293,6 +311,7 @@ function BU.Hardware.Battery.GetSerialNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetState()
 {
     return 0;
@@ -304,6 +323,7 @@ function BU.Hardware.Battery.GetState()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetTechnology()
 {
     return 0;
@@ -315,6 +335,7 @@ function BU.Hardware.Battery.GetTechnology()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetTimeBeforeFullCharge()
 {
     return 0;
@@ -326,6 +347,7 @@ function BU.Hardware.Battery.GetTimeBeforeFullCharge()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetVendor()
 {
     return 0;
@@ -337,6 +359,7 @@ function BU.Hardware.Battery.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetVoltage()
 {
     return 0;
@@ -348,6 +371,7 @@ function BU.Hardware.Battery.GetVoltage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Battery.GetWarningLevel()
 {
     return 0;

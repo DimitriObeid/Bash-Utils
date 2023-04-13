@@ -25,6 +25,7 @@
 
 ## ANA FONKSİYON
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.tr()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

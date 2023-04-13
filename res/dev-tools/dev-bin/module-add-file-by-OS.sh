@@ -141,13 +141,14 @@ __BU_MOD_ADD__GLOBVAR_OS_NAME;
 # ························································
 # Writing the file's informations section into the targeted file.
 
+# shellcheck disable=
 function WriteFileInformations()
 {
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : Filepath     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file where the file's informations have to be written.
 
     #**** Code ****
-    if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1;
+    if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1; fi
 
 cat <<-EOF >> "${p_filepath}"
 #!/usr/bin/env bash
@@ -168,13 +169,14 @@ EOF
 # ·························································
 # Writing the script's description section into the targeted file.
 
+# shellcheck disable=
 function WriteScriptDescription()
 {
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : Filepath     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file where the file's informations have to be written.
 
     #**** Code ****
-    if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1;
+    if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1; fi
 
 cat <<-EOF >> "${p_filepath}"
 # ----------------------
@@ -196,13 +198,14 @@ EOF
 # ·························································································
 # Writing the Shellcheck and the pieces of code which prevent the direct execution of its host file.
 
+# shellcheck disable=
 function WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode()
 {
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : Filepath     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file where the file's informations have to be written.
 
     #**** Code ****
-    if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1;
+    if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1; fi
 
 cat <<-EOF >> "${p_filepath}"
 # ----------------------------

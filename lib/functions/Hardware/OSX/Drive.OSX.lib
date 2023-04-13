@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetHardwareInfos()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.OSX.Drive.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetDriveSize()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.OSX.Drive.GetDriveSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.AddUpDrivesSizes()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.OSX.Drive.AddUpDrivesSizes()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.CreateNewPartition()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.OSX.Drive.CreateNewPartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.DeletePartition()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.OSX.Drive.DeletePartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetPartitionsNumber()
 {
     return 0;
@@ -157,6 +163,7 @@ function BU.Hardware.OSX.Drive.GetPartitionsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetPartitionsNumberBySize()
 {
     return 0;
@@ -168,6 +175,7 @@ function BU.Hardware.OSX.Drive.GetPartitionsNumberBySize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetPartitionsNumberByFS()
 {
     return 0;
@@ -179,6 +187,7 @@ function BU.Hardware.OSX.Drive.GetPartitionsNumberByFS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetPartitionSize()
 {
     return 0;
@@ -200,6 +209,7 @@ function BU.Hardware.OSX.Drive.GetPartitionSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.IsHDD()
 {
     return 0;
@@ -211,6 +221,7 @@ function BU.Hardware.OSX.Drive.IsHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.IsSSD()
 {
     return 0;
@@ -222,6 +233,7 @@ function BU.Hardware.OSX.Drive.IsSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.CountPluggedDrives()
 {
     return 0;
@@ -233,6 +245,7 @@ function BU.Hardware.OSX.Drive.CountPluggedDrives()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.CountHDD()
 {
     return 0;
@@ -244,6 +257,7 @@ function BU.Hardware.OSX.Drive.CountHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.CountSSD()
 {
     return 0;
@@ -255,6 +269,7 @@ function BU.Hardware.OSX.Drive.CountSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.CountHDD+SSD()
 {
     return 0;
@@ -270,6 +285,7 @@ function BU.Hardware.OSX.Drive.CountHDD+SSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetRotationSpeed()
 {
     return 0;
@@ -281,6 +297,7 @@ function BU.Hardware.OSX.Drive.GetRotationSpeed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetVendor()
 {
     return 0;
@@ -292,6 +309,7 @@ function BU.Hardware.OSX.Drive.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.OSX.Drive.GetFirmwareVersion()
 {
     return 0;

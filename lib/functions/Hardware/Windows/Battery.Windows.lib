@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.IsNotOnAC()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Windows.Battery.IsNotOnAC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.IsOnAC()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Windows.Battery.IsOnAC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.HasHistory()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Windows.Battery.HasHistory()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.HasPowerSupply()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Windows.Battery.HasPowerSupply()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.HasStatistics()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.Windows.Battery.HasStatistics()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.IsPresent()
 {
     return 0;
@@ -157,6 +163,7 @@ function BU.Hardware.Windows.Battery.IsPresent()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.IsRechargeable()
 {
     return 0;
@@ -168,6 +175,7 @@ function BU.Hardware.Windows.Battery.IsRechargeable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetHardwareInfos()
 {
     return 0;
@@ -179,6 +187,7 @@ function BU.Hardware.Linux.Battery.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetCapacity()
 {
     return 0;
@@ -190,6 +199,7 @@ function BU.Hardware.Windows.Battery.GetCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetEnergy()
 {
     return 0;
@@ -201,6 +211,7 @@ function BU.Hardware.Windows.Battery.GetEnergy()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetEnergyEmpty()
 {
     return 0;
@@ -212,6 +223,7 @@ function BU.Hardware.Windows.Battery.GetEnergyEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetEnergyFull()
 {
     return 0;
@@ -223,6 +235,7 @@ function BU.Hardware.Windows.Battery.GetEnergyFull()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetEnergyFullDesign()
 {
     return 0;
@@ -234,6 +247,7 @@ function BU.Hardware.Windows.Battery.GetEnergyFullDesign()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetEnergyRate()
 {
     return 0;
@@ -245,6 +259,7 @@ function BU.Hardware.Windows.Battery.GetEnergyRate()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetModel()
 {
     return 0;
@@ -253,6 +268,7 @@ function BU.Hardware.Windows.Battery.GetModel()
 # ························
 # Getting the battery's
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetNativePath()
 {
     return 0;
@@ -264,6 +280,7 @@ function BU.Hardware.Windows.Battery.GetNativePath()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetPercentage()
 {
     return 0;
@@ -275,6 +292,7 @@ function BU.Hardware.Windows.Battery.GetPercentage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetSerialNumber()
 {
     return 0;
@@ -286,6 +304,7 @@ function BU.Hardware.Windows.Battery.GetSerialNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetState()
 {
     return 0;
@@ -297,6 +316,7 @@ function BU.Hardware.Windows.Battery.GetState()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetTechnology()
 {
     return 0;
@@ -308,6 +328,7 @@ function BU.Hardware.Windows.Battery.GetTechnology()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetTimeBeforeFullCharge()
 {
     return 0;
@@ -319,6 +340,7 @@ function BU.Hardware.Windows.Battery.GetTimeBeforeFullCharge()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetVendor()
 {
     return 0;
@@ -330,6 +352,7 @@ function BU.Hardware.Windows.Battery.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetVoltage()
 {
     return 0;
@@ -341,6 +364,7 @@ function BU.Hardware.Windows.Battery.GetVoltage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Battery.GetWarningLevel()
 {
     return 0;

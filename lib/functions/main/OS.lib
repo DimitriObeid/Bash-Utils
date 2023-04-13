@@ -340,6 +340,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__CHECKING_INFORMATIONS="${
 # ·································
 # Checking if current OS is NetBSD.
 
+# shellcheck disable=
 function BU.Main.OS.IsNetBSD()                    	{ if [[ "${OSTYPE}" == '' ]];                                       then    return 0; else  return 1; fi }
 
 ## ==============================================
@@ -396,6 +397,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="
 # ····································
 # Checking if current OS is Chrome OS.
 
+# shellcheck disable=
 function BU.Main.OS.IsChromeOS()					{ true; }
 
 ## ==============================================
@@ -424,6 +426,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__CHECKING_INFORMATIONS="${__
 # ···································
 # Checking if current OS is Haiku OS.
 
+# shellcheck disable=
 function BU.Main.OS.IsHaiku()                     	{ if [[ "${OSTYPE}" == 'haiku' ]];                                  then    return 0; else  return 1; fi }
 
 ## ==============================================
@@ -475,6 +478,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMA
 #   - BU.Main.OS.IsWindows10()
 #   - BU.Main.OS.IsWindows11()
 
+# shellcheck disable=
 function BU.Main.OS.GetCurrentOS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.
@@ -572,6 +576,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__CHECKING_INFORMATIONS="${__
 
 #   - BU.Main.OS.IsLinux()      -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxDistro()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -604,14 +609,20 @@ function BU.Main.OS.CheckLinuxDistro()
 # Checking the version of the currently used Linux distribution.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
-#   - BU.Main.OS.IsLinux()              -> Main -> OS.lib
-#   - BU.Main.OS.IsLinuxDistroDebian*() -> Main -> OS.lib
-#   - BU.Main.OS.IsLinuxDistroFedora*() -> Main -> OS.lib
-#   - BU.Main.OS.IsLinuxDistroUbuntu*() -> Main -> OS.lib
+#   - BU.Main.OS.IsLinux()                      -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroAlpineLinux*()    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroArchLinux*()      -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroDebian*()         -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroFedora*()         -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroLinuxMint*()      -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroManjaro*()        -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroSUSE*()           -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsLinuxDistroUbuntu*()         -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxDistroVersion()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -840,6 +851,7 @@ function BU.Main.OS.CheckLinuxDistroVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxKernelFullVersion() { return 0; }
 
 # ··················································································
@@ -848,6 +860,7 @@ function BU.Main.OS.CheckLinuxKernelFullVersion() { return 0; }
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxKernelMajorVersion() { return 0; }
 
 # ··················································································
@@ -856,6 +869,7 @@ function BU.Main.OS.CheckLinuxKernelMajorVersion() { return 0; }
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 
 # ·················································································
@@ -864,6 +878,7 @@ function BU.Main.OS.CheckLinuxKernelMinorVersion() { return 0; }
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxKernelPatchNumber() { return 0; }
 
 # ··················································································
@@ -872,6 +887,7 @@ function BU.Main.OS.CheckLinuxKernelPatchNumber() { return 0; }
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.CheckLinuxKernelConfiguration() { return 0; }
 
 # ··················································································
@@ -880,6 +896,7 @@ function BU.Main.OS.CheckLinuxKernelConfiguration() { return 0; }
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.IsLinux()                           { [[ "${OSTYPE}" == 'linux'* ]]                                 &&      return 0;       return 1; }
 
 # ·······················································
@@ -888,6 +905,7 @@ function BU.Main.OS.IsLinux()                           { [[ "${OSTYPE}" == 'lin
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.IsLinuxDistroAlpineLinux()          { BU.Main.OS.GetLinuxDistro ''                                  &&      return 0;       return 1; }
 
 # ································································································································································
@@ -977,6 +995,7 @@ function BU.Main.OS.IsLinuxDistroDebian11()             { BU.Main.OS.CheckLinuxD
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.IsLinuxDistroFedora()               { BU.Main.OS.GetLinuxDistro Fedora                              &&      return 0;       return 1; }
 
 # ··························································································································································
@@ -1024,6 +1043,7 @@ function BU.Main.OS.IsLinuxDistroFedora38()             { BU.Main.OS.CheckLinuxD
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.IsLinuxDistroLinuxMint()            { BU.Main.OS.GetLinuxDistro 'Linux Mint'                        &&      return 0;       return 1; }
 
 # ······························································································································································
@@ -1075,6 +1095,7 @@ function BU.Main.OS.IsLinuxDistroLinuxMint21_1()        { BU.Main.OS.CheckLinuxD
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.IsLinuxDistroManjaro()              { BU.Main.OS.GetLinuxDistro Manjaro                             &&      return 0;       return 1; }
 
 # ···························································································································································
@@ -1089,6 +1110,7 @@ function BU.Main.OS.IsLinuxDistroManjaro()              { BU.Main.OS.GetLinuxDis
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Main.OS.IsLinuxDistroSUSE()                 { BU.Main.OS.GetLinuxDistro ''                                  &&      return 0;       return 1; }
 
 # ························································································································································
@@ -1103,6 +1125,7 @@ function BU.Main.OS.IsLinuxDistroSUSE()                 { BU.Main.OS.GetLinuxDis
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinuxDistroUbuntu() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.IsLinuxDistroUbuntu()               { BU.Main.OS.GetLinuxDistro Ubuntu                              &&      return 0;       return 1; }
 
 # ··························································································································································
@@ -1224,6 +1247,7 @@ function BU.Main.OS.GetLinuxDistro()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.GetLinuxDistro() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.GetLinuxDistroVersion()
 {
     BU.Main.OS.GetLinuxDistro "${1}" || return 1; return 0;
@@ -1235,6 +1259,7 @@ function BU.Main.OS.GetLinuxDistroVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.GetLinuxKernelFullVersion()
 {
     BU.Main.OS.IsLinux && uname -r && return 0; return 1;
@@ -1246,6 +1271,7 @@ function BU.Main.OS.GetLinuxKernelFullVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.GetLinuxKernelMajorVersion()
 {
     BU.Main.OS.IsLinux && uname -r | cut -d. -f1 && return 0; return 1;
@@ -1257,6 +1283,7 @@ function BU.Main.OS.GetLinuxKernelMajorVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.GetLinuxKernelMinorVersion()
 {
     BU.Main.OS.IsLinux && uname -r | cut -d. -f2 && return 0; return 1;
@@ -1268,6 +1295,7 @@ function BU.Main.OS.GetLinuxKernelMinorVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.GetLinuxKernelPatchNumber()
 {
     BU.OS.IsLinux && uname -r | cut -d"-" -f2 && return 0; return 1;
@@ -1279,6 +1307,7 @@ function BU.Main.OS.GetLinuxKernelPatchNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
 
+# shellcheck disable=
 function BU.Main.OS.GetLinuxKernelConfiguration()
 {
     BU.OS.IsLinux && uname -r | cut -d"-" -f3 && return 0; return 1;
@@ -1311,6 +1340,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="${__BU
 
 #   - BU.Main.OS.IsOSX*()       -> Main -> OS.lib
 
+# shellcheck disable=
 function BU.Main.OS.CheckOSXVersion()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1346,6 +1376,7 @@ function BU.Main.OS.CheckOSXVersion()
 # ······························
 # Checking if current OS is OSX.
 
+# shellcheck disable=
 function BU.Main.OS.IsOSX()                             { if [[ "${OSTYPE}" == 'darwin'* ]];                                    then return 0; else return 1; fi;                    }
 
 # ······················
@@ -1433,6 +1464,7 @@ function BU.Main.OS.IsRunningInVirtualBox()             { BU.Main.OS.BU.Main.OS.
 # ·······················································
 # Checking if the system is running in a virtual machine.
 
+# shellcheck disable=
 function BU.Main.OS.IsVirtualized()                     { return 0; }
 
 ## ==============================================
@@ -1461,10 +1493,14 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="${
 # ·······································
 # Checking the Microsoft Windows version.
 
-function BU.Main.Checkings.CheckOSWindowsVersion()
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
+# shellcheck disable=
+function BU.Main.OS.CheckOSWindowsVersion()
 {
     #**** Parameters ****
-    local p_versionNumber=${1:-NULL};   # Int       - Default : NULL    - Microsoft Windows operating system's version number.
+    local p_versionNumber=${1:-NULL};   # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Microsoft Windows operating system's version number.
 
     #**** Code ****
     if [ -z "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(if command -v powershell.exe > /dev/null; then powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}'; fi)"; fi
@@ -1475,81 +1511,154 @@ function BU.Main.Checkings.CheckOSWindowsVersion()
 # ·························································
 # Checking if the current Windows' architecture is 32 bits.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
+# shellcheck disable=
 function BU.Main.OS.IsWindows32bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 32; then return 0; else return 1; fi else return 1; fi; }
 
 # ·························································
 # Checking if the current Windows' architecture is 64 bits.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
+# shellcheck disable=
 function BU.Main.OS.IsWindows64bits()					{ if command -v powershell.exe > /dev/null; then if powershell.exe '(Get-WmiObject Win32_OperatingSystem).OSArchitecture' | grep -q 64; then return 0; else return 1; fi else return 1; fi; }
 
 # ······························································
 # Checking if the current Windows licence is the Family licence.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsWindows10Family()                    -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindows11Family()                    -> Main -> OS.lib (this file)
+
+# shellcheck disable=
 function BU.Main.OS.IsWindowsFamily()					{ if BU.Main.OS.IsWindows10Family   || BU.Main.OS.IsWindows11Family;                        then    return 0; else  return 1; fi; }
 
 # ·····································································
 # Checking if the current Windows licence is the Professionnal licence.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsWindows10Pro()                       -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindows11Pro()                       -> Main -> OS.lib (this file)
+
+# shellcheck disable=
 function BU.Main.OS.IsWindowsPro()						{ if BU.Main.OS.IsWindows10Pro      || BU.Main.OS.IsWindows11Pro;                           then    return 0; else  return 1; fi; }
 
 # ··································································
 # Checking if the current Windows licence is the Enterprise licence.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsWindows10LTSC()                      -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindows11LTSC()                      -> Main -> OS.lib (this file)
+
+# shellcheck disable=
 function BU.Main.OS.IsWindowsLTSC() 					{ if BU.Main.OS.IsWindows10LTSC     || BU.Main.OS.IsWindows11LTSC;                          then    return 0; else  return 1; fi; }
 
 # ······································································
 # Checking if the currently used version of Windows is the 10th version.
 
-function BU.Main.OS.IsWindows10()                    	{ if BU.Main.Checkings.CheckOSWindowsVersion '10';          								then    return 0; else  return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows10()                    	{ if BU.Main.OS.CheckOSWindowsVersion '10';          								        then    return 0; else  return 1; fi; }
 
 # ···················································································
 # Checking if the currently used version of Windows is the Windows 10 Family version.
 
-function BU.Main.OS.IsWindows10Family()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsFamily;	then 	return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindowsFamily()                      -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows10Family()					{ if BU.Main.OS.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsFamily;	        then 	return 0; else 	return 1; fi; }
 
 # ··························································································
 # Checking if the currently used version of Windows is the Windows 10 Professionnal version.
 
-function BU.Main.OS.IsWindows10Pro()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsPro;		then 	return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindowsPro()                         -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows10Pro()					{ if BU.Main.OS.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsPro;		        then 	return 0; else 	return 1; fi; }
 
 # ·················································································
 # Checking if the currently used version of Windows is the Windows 10 LTSC version.
 
-function BU.Main.OS.IsWindows10LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsLTSC;	then 	return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindowsLTSC()                        -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows10LTSC()					{ if BU.Main.OS.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsLTSC;	        then 	return 0; else 	return 1; fi; }
 
 # ······································································
 # Checking if the currently used version of Windows is the 11th version.
 
-function BU.Main.OS.IsWindows11()                     	{ if BU.Main.Checkings.CheckOSWindowsVersion '11';          								then    return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows11()                     	{ if BU.Main.OS.CheckOSWindowsVersion '11';          								        then    return 0; else 	return 1; fi; }
 
 # ···················································································
 # Checking if the currently used version of Windows is the Windows 11 Family version.
 
-function BU.Main.OS.IsWindows11Family()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsFamily;	then 	return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindowsFamily()                      -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows11Family()					{ if BU.Main.OS.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsFamily;	        then 	return 0; else 	return 1; fi; }
 
 # ··························································································
 # Checking if the currently used version of Windows is the Windows 11 Professionnal version.
 
-function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsPro;		then 	return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindowsPro()                         -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.OS.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsPro;		        then 	return 0; else 	return 1; fi; }
 
 # ·················································································
 # Checking if the currently used version of Windows is the Windows 11 LTSC version.
 
-function BU.Main.OS.IsWindows11LTSC()					{ if BU.Main.Checkings.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsLTSC;	then 	return 0; else 	return 1; fi; }
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindowsLTSC()                        -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows11LTSC()					{ if BU.Main.OS.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsLTSC;	        then 	return 0; else 	return 1; fi; }
 
 # ··············································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
 function BU.Main.OS.IsLinuxWSL()                        { if [[ "$(< /proc/sys/kernel/osrelease)" == *[M-m]icrosoft* ]];    						then    return 0; else  return 1; fi; }
 
 # ·······················································································································································································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 1, on any Windows version (WARNING : here, the 'M' from the "Microsoft" string MUST be in uppercase, as the 'm' in lower case is form the WSL version 2).
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
 function BU.Main.OS.IsLinuxWSL1()                     	{ uname -r | grep Microsoft                                 &&      								return 0;       return 1; }
 
 # ·······················································································································································································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux version 2, on any Windows version (WARNING : here, the 'm' from the "microsoft" string MUST be in lowercase, as the 'M' in upper case is form the WSL version 1).
 
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
 function BU.Main.OS.IsLinuxWSL2()                     	{ uname -r | grep microsoft                                 &&      								return 0;       return 1; }
 
 ## ==============================================

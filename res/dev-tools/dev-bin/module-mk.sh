@@ -107,6 +107,7 @@ fi
 # ·············································································································
 # Check if the required files for the modules initialization exists in their right folder, or else create them.
 
+# shellcheck disable=
 function check_mandatory_file_exists()
 {
     #**** Parameters ****

@@ -106,6 +106,7 @@ __BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.tex";
 # ···························································
 # Printing a line according to the terminal's columns number.
 
+# shellcheck disable=
 function PrintLine()
 {
     __cols="$(tput cols)";

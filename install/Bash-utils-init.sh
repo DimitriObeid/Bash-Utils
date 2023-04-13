@@ -239,6 +239,7 @@ function BU.ModuleInit.UnsetInitErrorMsg()              { if BU.Main.Status.Chec
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.SIGINT()
 {
     #**** Variables ****
@@ -266,6 +267,7 @@ function BU.ModuleInit.SIGINT()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.DefineTraps()
 {
     # Defining strings variables.
@@ -292,6 +294,7 @@ function BU.ModuleInit.DefineTraps()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
 {
     # No need to redefine the three arguments inside this function, the scope of the "BU.ModuleInit.PrintLogError()"
@@ -324,6 +327,7 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 {
     #**** Parameters ****
@@ -408,6 +412,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()         -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 {
     #**** Variables ****
@@ -575,6 +580,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 {
     #**** Parameters ****
@@ -811,6 +817,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 #   - BU.ModuleInit.MsgLine()   -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLog()  -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.AskPrintLog()
 {
     #**** Code ****
@@ -856,6 +863,7 @@ function BU.ModuleInit.AskPrintLog()
 
 #   - DisplayInitGlobalVarsInfos()  -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsInfos()
 {
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS}" '#' 'msg';
@@ -1208,6 +1216,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 #   - BU.ModuleInit.MsgAbort()          -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError()     -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.Msg()
 {
     #**** Parameters ****
@@ -1350,6 +1359,7 @@ function BU.ModuleInit.Msg()
 #   - BU.ModuleInit.Msg()               -> Modules initializer script (this file)
 #   - BU.ModuleInit.MsgLineCount()      -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.MsgLine()
 {
     #**** Parameters ****
@@ -1376,6 +1386,7 @@ function BU.ModuleInit.MsgLine()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Msg()               -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.MsgLineCount()
 {
     #**** Parameters ****
@@ -1401,6 +1412,7 @@ function BU.ModuleInit.MsgLineCount()
 #   - BU.ModuleInit.Exit()              -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsInScript()        -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.MsgTranslate()
 {
     if [ -n "${1}" ]; then
@@ -1424,6 +1436,7 @@ function BU.ModuleInit.MsgTranslate()
 # ······························································
 # Displaying a text when the script's execution must be stopped.
 
+# shellcheck disable=
 function BU.ModuleInit.MsgAbort() { echo >&2; echo "${__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT}" >&2; echo >&2; return 0; }
 
 # ·················································
@@ -1561,6 +1574,7 @@ function BU.ModuleInit.PrintLog()
 
 #   - BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced() -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.PrintLogError()
 {
     #**** Parameters ****
@@ -1604,6 +1618,7 @@ function BU.ModuleInit.PrintLogError()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.CheckBashMinimalVersion()
 {
 	if [ "${BASH_VERSINFO[0]}" -lt 4 ]; then
@@ -1628,6 +1643,7 @@ function BU.ModuleInit.CheckBashMinimalVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.CheckPath()
 {
     #**** Parameters ****
@@ -1804,6 +1820,7 @@ function BU.ModuleInit.FindPath()
 #   - BU.ModuleInit.IsInScript()    -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError() -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.GetModuleName()
 {
     v_module="$(cd "$(dirname "${1}")" || { local lineno="${LINENO}";
@@ -1961,6 +1978,7 @@ function BU.ModuleInit.SourcingFailure()
 #   - BU.ModuleInit.MsgLine()       -> Modules initializer script (this file)
 #   - BU.ModuleInit.MsgLineCount()  -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__USAGE__SUPVALS}" >&2;
@@ -1992,6 +2010,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters.Usage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.DisplayStatError()
 {
     #**** Parameters ****
@@ -2045,6 +2064,7 @@ function BU.ModuleInit.DisplayStatError()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.DisplayStatError()  -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.CheckSTAT_DEBUG()
 {
     #**** Parameters ****
@@ -2068,6 +2088,7 @@ function BU.ModuleInit.CheckSTAT_DEBUG()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.DisplayStatError()  -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
 {
     #**** Parameters ****
@@ -2093,6 +2114,7 @@ function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.CheckSTAT_DEBUG() -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="${1}";         BU.ModuleInit.CheckSTAT_DEBUG         "${2}" "${3}" || return "${?}"; return 0; }
 
 # ·············································································
@@ -2101,6 +2123,7 @@ function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG=
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.CheckSTAT_DEBUG_BASHX() Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "${?}"; return 0; }
 
 # ·····································
@@ -2109,6 +2132,7 @@ function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'true' ] && return 0; return 1; }
 
 # ·····················································································
@@ -3540,6 +3564,7 @@ function BashUtils_InitModules()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.ModuleInit.InitNewModule()
 {
     #**** Parameters ****
@@ -3572,6 +3597,7 @@ function BU.ModuleInit.InitNewModule()
 #   - BU.ModuleInit.InitNewModule()             -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsInScript()                -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.InitNewModules()
 {
 	#**** Parameters ****
@@ -3610,6 +3636,7 @@ function BU.ModuleInit.InitNewModules()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.ModuleInit.SourceAliasesFile()
 {
     return 0;
@@ -3621,6 +3648,7 @@ function BU.ModuleInit.SourceAliasesFile()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.SourceAliasFile() -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.SourceAliasesFiles()
 {
     return 0;
@@ -3639,6 +3667,7 @@ function BU.ModuleInit.SourceAliasesFiles()
 #   - BU.UnsourceExceptionFunctions()   -> From the file processed by the function's major condition.
 #   - BU.UnsourceExceptionVariables()   -> From the file processed by the function's major condition.
 
+# shellcheck disable=
 function BU.ModuleInit.UnsourceModule()
 {
     #**** Parameters ****
@@ -3720,6 +3749,7 @@ function BU.ModuleInit.UnsourceModule()
 #   - BU.ModuleInit.IsInScript()                -> Modules initializer script (this file)
 #   - BU.ModuleInit.UnsourceModule()            -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.UnsourceModules()
 {
     #**** Parameters ****
@@ -3769,6 +3799,7 @@ function BU.ModuleInit.UnsourceModules()
 #   - BU.ModuleInit.AskPrintLog()   -> Modules initializer script (this file)
 #   - BU.ModuleInit.MsgAbort()      -> Modules initializer script (this file)
 
+# shellcheck disable=
 function BU.ModuleInit.HandleErrors()
 {
     #**** Parameters ****

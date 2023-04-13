@@ -25,6 +25,7 @@
 
 ## HLAVNÍ FUNKCE
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.cs()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

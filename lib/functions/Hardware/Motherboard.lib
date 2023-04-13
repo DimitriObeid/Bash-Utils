@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.IsACPISupported()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Motherboard.IsACPISupported()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.IsBIOSUpgradeable()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Motherboard.IsBIOSUpgradeable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.IsBIOSShadowingSupported()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Motherboard.IsBIOSShadowingSupported()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.IsPCISupported()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Motherboard.IsPCISupported()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.IsUSBLegacySupported()
 {
     return 0;
@@ -150,6 +155,7 @@ function BU.Hardware.Motherboard.IsUSBLegacySupported()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetFirmwareReleaseDate()
 {
     return 0;
@@ -161,6 +167,7 @@ function BU.Hardware.Motherboard.GetFirmwareReleaseDate()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetFirmwareVersion()
 {
     return 0;
@@ -172,6 +179,7 @@ function BU.Hardware.Motherboard.GetFirmwareVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetROMSize()
 {
     return 0;
@@ -183,6 +191,7 @@ function BU.Hardware.Motherboard.GetROMSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetRuntimeSize()
 {
     return 0;
@@ -194,6 +203,7 @@ function BU.Hardware.Motherboard.GetRuntimeSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetVendor()
 {
     return 0;
@@ -209,6 +219,7 @@ function BU.Hardware.Motherboard.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetLanguageDescriptionFormat()
 {
     return 0;
@@ -220,6 +231,7 @@ function BU.Hardware.Motherboard.GetLanguageDescriptionFormat()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetInstallableLanguagesNumber()
 {
     return 0;
@@ -231,6 +243,7 @@ function BU.Hardware.Motherboard.GetInstallableLanguagesNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetInstallableLanguagesList()
 {
     return 0;
@@ -242,6 +255,7 @@ function BU.Hardware.Motherboard.GetInstallableLanguagesList()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Motherboard.GetCurrentlyInstalledLanguage()
 {
     return 0;

@@ -268,6 +268,7 @@ source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 # ···································································································
 # Function to create and display rows according to the number of columns in the terminal's text area.
 
+# shellcheck disable=
 function PrintLine()
 {
     #**** Parameters ****
@@ -296,6 +297,7 @@ function PrintLine()
 # ························································
 # Function to print a line composed of a single character.
 
+# shellcheck disable=
 function PrintBaseLine()
 {
     #**** Parameters ****
@@ -329,21 +331,25 @@ function PrintBaseLine()
 # ·······················
 # Printing an error line.
 
+# shellcheck disable=
 function PrintErrorLine()   { PrintBaseLine "${__ERROR}" "${1}" "${2}" "${3}" >&2; }
 
 # ························
 # Printing a newstep line.
 
+# shellcheck disable=
 function PrintNewstepLine() { PrintBaseLine "${__NEWSTEP}" "${1}" "${2}" "${3}"; }
 
 # ························
 # Printing a success line.
 
+# shellcheck disable=
 function PrintSuccessLine() { PrintBaseLine "${__SUCCESS}" "${1}" "${2}" "${3}"; }
 
 # ························
 # Printing a warning line.
 
+# shellcheck disable=
 function PrintWarningLine() { PrintBaseLine "${__WARNING}" "${1}" "${2}" "${3}" >&2; }
 
 ## ==============================================
@@ -390,6 +396,7 @@ function PrintFilesWhichWereNotChmoded()
 # ·····················································································································································
 # Erasing every pieces of code which prevent the direct execution of their host files, since a new one is written in the "WriteCommentCode()" function.
 
+# shellcheck disable=
 function EraseSafeguardExecLines()
 {
     sed -i "/if \[ \"\${0##\/*}\" == \"\${BASH_SOURCE[0]##\/*}\" \]; then/,/fi; exit 1; fi/d" "${__compiled_file_path}";
@@ -402,6 +409,7 @@ function EraseSafeguardExecLines()
 #   - the comments containing the informations about the compiled file,
 #   - and the pieces of code which prevent the direct execution of their host files.
 
+# shellcheck disable=
 function WriteCommentCode()
 {
     #**** Variables ****
@@ -469,6 +477,7 @@ EOF
 # ·····················································
 # Erasing the comments from the targeted compiled file.
 
+# shellcheck disable=
 function EraseComments()
 {
     # If the user decides to keep the description of each function before their declaration.
@@ -491,6 +500,7 @@ function EraseComments()
 # ····························································
 # Writing the target file's content into the file to generate.
 
+# shellcheck disable=
 function WriteBU()
 {
     #**** Parameters ****
@@ -525,6 +535,7 @@ function WriteBU()
 # Initial source of this AWK script (since it's not mine, plus I added more informations as comments and the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 
+# shellcheck disable=
 function BytesToHuman()
 {
     #**** Parameters ****
@@ -583,6 +594,7 @@ function BytesToHuman()
 # ·····················································
 # Verifying the list of every ISO 639-1 language codes.
 
+# shellcheck disable=
 function CheckISO639_1_LangCode()
 {
     #**** Parameters ****
@@ -599,6 +611,7 @@ function CheckISO639_1_LangCode()
 # ······················
 # Getting the delimiter.
 
+# shellcheck disable=
 function CheckLangArgDelim()
 {
     #**** Parameters ****
@@ -629,6 +642,7 @@ function CheckLangArgDelim()
 
 # This function is imported from the "Bash-utils-init.sh" file, and serves in the "Locale.lib" file from the main module.
 
+# shellcheck disable=
 function BU.ModuleInit.IsCompiler() { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
 
 ## ==============================================
@@ -675,6 +689,7 @@ function HandleIncompatibleOptionalArgs()
 # ···············
 # Usage function.
 
+# shellcheck disable=
 function CompilerUsage()
 {
     #**** Parameters ****

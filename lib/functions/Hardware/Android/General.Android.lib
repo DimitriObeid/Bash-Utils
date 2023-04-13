@@ -111,6 +111,7 @@ fi; echo >&2; exit 1; fi
 #   - BU.Hardware.Android.USB.GetHardwareInfos()            -> Hardware -> USB.Android.lib
 #   - BU.Hardware.Android.VGA.GetHardwareInfos()            -> Hardware -> VGA.Android.lib
 
+# shellcheck disable=
 function BU.Hardware.Android.General.GetAllHardwareInfos()
 {
     BU.Hardware.Android.Audio.GetHardwareInfos;
@@ -153,6 +154,7 @@ function BU.Hardware.Android.General.GetAllHardwareInfos()
 #   - BU.Hardware.Android.General.GetMachineID()    -> Hardware -> General.Android.lib (this file)
 #   - BU.Hardware.Android.General.GetBootID()       -> Hardware -> General.Android.lib (this file)
 
+# shellcheck disable=
 function BU.Hardware.Android.General.GetHardwareInfos()
 {
     BU.Hardware.Android.General.GetChassis;
@@ -179,6 +181,7 @@ function BU.Hardware.Android.General.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.General.GetChassis()
 {
     return 0;
@@ -190,6 +193,7 @@ function BU.Hardware.Android.General.GetChassis()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.General.GetChassisType()
 {
     return 0;
@@ -201,6 +205,7 @@ function BU.Hardware.Android.General.GetChassisType()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.General.GetMachineID()
 {
     return 0;
@@ -212,6 +217,7 @@ function BU.Hardware.Android.General.GetMachineID()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.General.GetBootID()
 {
     return 0;

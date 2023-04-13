@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Memory.CheckIfMemoryDDR4() { BU.Hardware.BSD.Memory.GetMemoryType 'DDR4' || return 1; }
 
 ## ==============================================
@@ -105,6 +106,7 @@ function BU.Hardware.BSD.Memory.CheckIfMemoryDDR4() { BU.Hardware.BSD.Memory.Get
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Memory.GetHardwareInfos()
 {
     return 0;
@@ -116,6 +118,7 @@ function BU.Hardware.BSD.Memory.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Memory.GetUsedRAMSlotsNumber()
 {
     return 0;
@@ -127,6 +130,7 @@ function BU.Hardware.BSD.Memory.GetUsedRAMSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
@@ -138,6 +142,7 @@ function BU.Hardware.BSD.Memory.GetAvailableRamSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Memory.GetMaxMemoryCapacity()
 {
     return 0;
@@ -149,6 +154,7 @@ function BU.Hardware.BSD.Memory.GetMaxMemoryCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Memory.GetMemoryType()
 {
     return 0;

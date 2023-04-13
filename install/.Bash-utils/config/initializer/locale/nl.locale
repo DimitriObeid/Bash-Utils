@@ -28,6 +28,7 @@
 
 ## HOOFDFUNCTIE
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.nl()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

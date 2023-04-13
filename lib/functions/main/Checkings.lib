@@ -97,6 +97,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsArray()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -116,6 +117,7 @@ function BU.Main.Checkings.IsArray()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsArrayEmpty()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -139,6 +141,7 @@ function BU.Main.Checkings.IsArrayEmpty()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsArrayNotEmpty()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -174,6 +177,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsCMD()
 {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS}";
@@ -197,6 +201,7 @@ function BU.Main.Checkings.IsCMD()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsNotCMD()
 {
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__COMMAND_SUBSTITUTIONS}";
@@ -223,6 +228,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ "$(date "+%H:%M:%S" > /dev/null)" ]] || { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;}; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ··································································································
@@ -238,6 +244,7 @@ function BU.Main.Checkings.IsDateHMS() { BU.Main.Echo.Debug "main" "$(basename "
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS}" "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__DATE_FORMAT}"; [[ $(date "+%d-%m-%Y" -d "${1}" > /dev/null) ]] || { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;}; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
 
 # ·································································································
@@ -257,6 +264,7 @@ function BU.Main.Checkings.IsDateYMD() { BU.Main.Echo.Debug "main" "$(basename "
 #   - BU.Main.Echo.Newline()        -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()        -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsDateYMD_HMS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -309,6 +317,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsEven()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -328,6 +337,7 @@ function BU.Main.Checkings.IsEven()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.isOdd()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -349,6 +359,7 @@ alias BU.Main.Checkings.IsUneven='BU.Main.Checkings.isOdd';
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -368,6 +379,7 @@ function BU.Main.Checkings.IsFloat()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsNegativeFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -387,6 +399,7 @@ function BU.Main.Checkings.IsNegativeFloat()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsPositiveFloat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -406,6 +419,7 @@ function BU.Main.Checkings.IsPositiveFloat()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -425,6 +439,7 @@ function BU.Main.Checkings.IsInt()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsNegativeInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -444,6 +459,7 @@ function BU.Main.Checkings.IsNegativeInt()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsPositiveInt()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -470,6 +486,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsAlphaChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -489,6 +506,7 @@ function BU.Main.Checkings.IsAlphaChar()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsAlphaString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -508,6 +526,7 @@ function BU.Main.Checkings.IsAlphaString()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsAlphaStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -532,6 +551,7 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsAlphaNumChar()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -551,6 +571,7 @@ function BU.Main.Checkings.IsAlphaNumChar()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsAlphaNumString()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -570,6 +591,7 @@ function BU.Main.Checkings.IsAlphaNumString()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.IsAlphaNumStringOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -618,6 +640,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKI
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckRootEUID()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -654,6 +677,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_
 #   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckDiskUsedSpace()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -816,6 +840,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIE
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckDirPathExists()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -847,6 +872,7 @@ function BU.Main.Checkings.CheckDirPathExists()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckDirPathWasCreated()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -881,6 +907,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATH
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckFilePathExists()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -914,6 +941,7 @@ function BU.Main.Checkings.CheckFilePathExists()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckFilePathWasCreated()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -952,6 +980,7 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 #   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckProjectLogPath()
 {
     # If the framework is still initializing when an error occurs.
@@ -1023,6 +1052,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Status.CheckProjectLogStatus()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1374,6 +1404,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 #   - BU.Main.TextFormat.SetBGColor()                   -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetTextColor()                 -> Main -> TextFormat.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckProjectRelatedFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1515,6 +1546,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_
 
 #   - BU.Main.Errors.HandleSmallErrors()            -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Checkings.CheckDecho()
 {
     #**** Code ****

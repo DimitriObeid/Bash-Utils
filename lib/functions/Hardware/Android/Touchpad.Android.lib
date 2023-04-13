@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Touchpad.IsTouchpadPlugged()
 {
     return 0;
@@ -106,6 +107,7 @@ function BU.Hardware.Android.Touchpad.IsTouchpadPlugged()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Touchpad.GetHardwareInfos()
 {
     return 0;
@@ -117,6 +119,7 @@ function BU.Hardware.Android.Touchpad.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Touchpad.GetVendor()
 {
     return 0;

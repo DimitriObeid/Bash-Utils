@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.GetHardwareInfos()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.BSD.Ports.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.GetUSBPortsNumber()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.BSD.Ports.GetUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.GetAvailableUSBPortsNumber()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.BSD.Ports.GetAvailableUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.GetUsedUSBPortsNumber()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.BSD.Ports.GetUsedUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveExists()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveIsEmpty()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -159,6 +165,7 @@ function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveIsEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -172,6 +179,7 @@ function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -185,6 +193,7 @@ function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveContainsDisk()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -198,6 +207,7 @@ function BU.Hardware.BSD.Ports.CheckIfOpticalDiscDriveContainsDisk()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfSDCardReaderIsMounted()
 {
     return 0;
@@ -209,6 +219,7 @@ function BU.Hardware.BSD.Ports.CheckIfSDCardReaderIsMounted()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfVGAPortExists()
 {
     return 0;
@@ -220,6 +231,7 @@ function BU.Hardware.BSD.Ports.CheckIfVGAPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfVGAPortAvailable()
 {
     return 0;
@@ -231,6 +243,7 @@ function BU.Hardware.BSD.Ports.CheckIfVGAPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfHDMIPortExists()
 {
     return 0;
@@ -242,6 +255,7 @@ function BU.Hardware.BSD.Ports.CheckIfHDMIPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfHDMIPortAvailable()
 {
     return 0;
@@ -253,6 +267,7 @@ function BU.Hardware.BSD.Ports.CheckIfHDMIPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.Ports.CheckIfJoystickIsPlugged()
 {
     return 0;

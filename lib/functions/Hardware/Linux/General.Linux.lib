@@ -111,6 +111,7 @@ fi; echo >&2; exit 1; fi
 #   - BU.Hardware.Linux.USB.GetHardwareInfos()          -> Hardware -> USB.Linux.lib
 #   - BU.Hardware.Linux.VGA.GetHardwareInfos()          -> Hardware -> VGA.Linux.lib
 
+# shellcheck disable=
 function BU.Hardware.Linux.General.GetAllHardwareInfos()
 {
     BU.Hardware.Linux.Audio.GetHardwareInfos;
@@ -153,6 +154,7 @@ function BU.Hardware.Linux.General.GetAllHardwareInfos()
 #   - BU.Hardware.Linux.General.GetMachineID()      -> Hardware -> General.Linux.lib (this file)
 #   - BU.Hardware.Linux.General.GetBootID()         -> Hardware -> General.Linux.lib (this file)
 
+# shellcheck disable=
 function BU.Hardware.Linux.General.GetHardwareInfos()
 {
     BU.Hardware.Linux.General.GetChassis;
@@ -179,6 +181,7 @@ function BU.Hardware.Linux.General.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.General.GetChassis()        { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 3 {print $2}'; return 0; else return 1; fi; }
 
 # ····································
@@ -187,6 +190,7 @@ function BU.Hardware.Linux.General.GetChassis()        { if BU.Main.CMDS.GetComm
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.General.GetChassisType()
 {
     if BU.Main.CMDS.GetCommandPath 'dmidecode'; then
@@ -208,6 +212,7 @@ function BU.Hardware.Linux.General.GetChassisType()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.General.GetMachineID()      { if BU.Main.CMDS.GetCommandPath 'hostnamectl';  then hostnamectl | awk 'FNR == 4 {print $3}'; return 0; else return 1; fi; }
 
 # ····················

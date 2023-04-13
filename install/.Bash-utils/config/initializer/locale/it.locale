@@ -25,6 +25,7 @@
 
 ## FUNZIONE PRINCIPALE
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.it()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

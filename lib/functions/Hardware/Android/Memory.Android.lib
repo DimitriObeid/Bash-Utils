@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Memory.CheckIfMemoryDDR4() { BU.Hardware.Android.Memory.GetMemoryType 'DDR4' || return 1; }
 
 ## ==============================================
@@ -105,6 +106,7 @@ function BU.Hardware.Android.Memory.CheckIfMemoryDDR4() { BU.Hardware.Android.Me
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Memory.GetHardwareInfos()
 {
     return 0;
@@ -116,6 +118,7 @@ function BU.Hardware.Android.Memory.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Memory.GetUsedRAMSlotsNumber()
 {
     return 0;
@@ -127,6 +130,7 @@ function BU.Hardware.Android.Memory.GetUsedRAMSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
@@ -138,6 +142,7 @@ function BU.Hardware.Android.Memory.GetAvailableRamSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Memory.GetMaxMemoryCapacity()
 {
     return 0;
@@ -149,6 +154,7 @@ function BU.Hardware.Android.Memory.GetMaxMemoryCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Android.Memory.GetMemoryType()
 {
     return 0;

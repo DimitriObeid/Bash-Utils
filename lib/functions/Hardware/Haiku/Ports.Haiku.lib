@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.GetHardwareInfos()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Haiku.Ports.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.GetUSBPortsNumber()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Haiku.Ports.GetUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.GetAvailableUSBPortsNumber()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Haiku.Ports.GetAvailableUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.GetUsedUSBPortsNumber()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Haiku.Ports.GetUsedUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveExists()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveIsEmpty()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -159,6 +165,7 @@ function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveIsEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -172,6 +179,7 @@ function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -185,6 +193,7 @@ function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveContainsDisk()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -198,6 +207,7 @@ function BU.Hardware.Haiku.Ports.CheckIfOpticalDiscDriveContainsDisk()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfSDCardReaderIsMounted()
 {
     return 0;
@@ -209,6 +219,7 @@ function BU.Hardware.Haiku.Ports.CheckIfSDCardReaderIsMounted()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfVGAPortExists()
 {
     return 0;
@@ -220,6 +231,7 @@ function BU.Hardware.Haiku.Ports.CheckIfVGAPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfVGAPortAvailable()
 {
     return 0;
@@ -231,6 +243,7 @@ function BU.Hardware.Haiku.Ports.CheckIfVGAPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfHDMIPortExists()
 {
     return 0;
@@ -242,6 +255,7 @@ function BU.Hardware.Haiku.Ports.CheckIfHDMIPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfHDMIPortAvailable()
 {
     return 0;
@@ -253,6 +267,7 @@ function BU.Hardware.Haiku.Ports.CheckIfHDMIPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Ports.CheckIfJoystickIsPlugged()
 {
     #**** Variables ****

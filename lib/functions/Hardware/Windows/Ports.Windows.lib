@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.GetHardwareInfos()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Windows.Ports.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.GetUSBPortsNumber()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Windows.Ports.GetUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.GetAvailableUSBPortsNumber()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Windows.Ports.GetAvailableUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.GetUsedUSBPortsNumber()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Windows.Ports.GetUsedUSBPortsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveExists()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveIsEmpty()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -159,6 +165,7 @@ function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveIsEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -172,6 +179,7 @@ function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -185,6 +193,7 @@ function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveContainsdisc()
 {
     BU.Hardware.Ports.CheckIfOpticalDiscDriveExists &&
@@ -198,6 +207,7 @@ function BU.Hardware.Windows.Ports.CheckIfOpticalDiscDriveContainsdisc()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfSDCardReaderIsMounted()
 {
     return 0;
@@ -209,6 +219,7 @@ function BU.Hardware.Windows.Ports.CheckIfSDCardReaderIsMounted()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfVGAPortExists()
 {
     return 0;
@@ -220,6 +231,7 @@ function BU.Hardware.Windows.Ports.CheckIfVGAPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfVGAPortAvailable()
 {
     return 0;
@@ -231,6 +243,7 @@ function BU.Hardware.Windows.Ports.CheckIfVGAPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfHDMIPortExists()
 {
     return 0;
@@ -242,6 +255,7 @@ function BU.Hardware.Windows.Ports.CheckIfHDMIPortExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfHDMIPortAvailable()
 {
     return 0;
@@ -253,6 +267,7 @@ function BU.Hardware.Windows.Ports.CheckIfHDMIPortAvailable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Ports.CheckIfJoystickIsPlugged()
 {
     #**** Variables ****

@@ -143,6 +143,7 @@ __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 # ···························································
 # Printing a line according to the terminal's columns number.
 
+# shellcheck disable=
 function PrintLine()
 {
     __cols="$(tput cols)"

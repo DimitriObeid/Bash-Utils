@@ -25,6 +25,7 @@
 
 ## FUNGSI UTAMA
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.id()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

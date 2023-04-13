@@ -99,6 +99,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBU
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.__Debug()
 {
     BU.ModuleInit.CheckIsDebugging && {
@@ -125,6 +126,7 @@ function BU.Main.Echo.__Debug()
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.DebugEnd()
 {
  #   set +x;
@@ -153,6 +155,7 @@ function BU.Main.Echo.DebugEnd()
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.Debug()
 {
     # The six following conditional lines are used as test / debug procedures. Please leave them commented if you are not debugging the behavior of the modules debugger.
@@ -242,6 +245,7 @@ function BU.Main.Echo.Debug()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.Main.Echo.__EchoVoid()
 {
 printf "
@@ -284,6 +288,7 @@ printf "
 #   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing()     -> Main -> Status.lib
 
+# shellcheck disable=
 function BU.Main.Echo.__EchoOutput()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -379,6 +384,7 @@ function BU.Main.Echo.__EchoOutput()
 
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.__EchoCPLS()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -496,6 +502,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.Error()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -556,6 +563,7 @@ function BU.Main.Echo.Error()
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.Msg()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -610,6 +618,7 @@ function BU.Main.Echo.Msg()
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.Newstep()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -657,6 +666,7 @@ function BU.Main.Echo.Newstep()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib (this file)
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Read()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -693,6 +703,7 @@ function BU.Main.Echo.Read()
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.Success()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -747,6 +758,7 @@ function BU.Main.Echo.Success()
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Echo.Warning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -802,6 +814,7 @@ function BU.Main.Echo.Warning()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Aqua()
 {
     #**** Parameters ****
@@ -823,6 +836,7 @@ function BU.Main.Echo.Aqua()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Black()
 {
     #**** Parameters ****
@@ -844,6 +858,7 @@ function BU.Main.Echo.Black()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Blue()
 {
     #**** Parameters ****
@@ -865,6 +880,7 @@ function BU.Main.Echo.Blue()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Cyan()
 {
     #**** Parameters ****
@@ -886,6 +902,7 @@ function BU.Main.Echo.Cyan()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Fuchsia()
 {
     #**** Parameters ****
@@ -907,6 +924,7 @@ function BU.Main.Echo.Fuchsia()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Gray()
 {
     #**** Parameters ****
@@ -928,6 +946,7 @@ function BU.Main.Echo.Gray()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Green()
 {
     #**** Parameters ****
@@ -949,6 +968,7 @@ function BU.Main.Echo.Green()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Lime()
 {
     #**** Parameters ****
@@ -970,6 +990,7 @@ function BU.Main.Echo.Lime()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Maroon()
 {
     #**** Parameters ****
@@ -991,6 +1012,7 @@ function BU.Main.Echo.Maroon()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Navy()
 {
     #**** Parameters ****
@@ -1012,6 +1034,7 @@ function BU.Main.Echo.Navy()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Olive()
 {
     #**** Parameters ****
@@ -1033,6 +1056,7 @@ function BU.Main.Echo.Olive()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Orange()
 {
     #**** Parameters ****
@@ -1054,6 +1078,7 @@ function BU.Main.Echo.Orange()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Pink()
 {
     #**** Parameters ****
@@ -1075,6 +1100,7 @@ function BU.Main.Echo.Pink()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Purple()
 {
     #**** Parameters ****
@@ -1096,6 +1122,7 @@ function BU.Main.Echo.Purple()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Red()
 {
     #**** Parameters ****
@@ -1117,6 +1144,7 @@ function BU.Main.Echo.Red()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Salmon()
 {
     #**** Parameters ****
@@ -1138,6 +1166,7 @@ function BU.Main.Echo.Salmon()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Silver()
 {
     #**** Parameters ****
@@ -1159,6 +1188,7 @@ function BU.Main.Echo.Silver()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Tan()
 {
     #**** Parameters ****
@@ -1180,6 +1210,7 @@ function BU.Main.Echo.Tan()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Teal()
 {
     #**** Parameters ****
@@ -1201,6 +1232,7 @@ function BU.Main.Echo.Teal()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Turquoise()
 {
     #**** Parameters ****
@@ -1222,6 +1254,7 @@ function BU.Main.Echo.Turquoise()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Violet()
 {
     #**** Parameters ****
@@ -1243,6 +1276,7 @@ function BU.Main.Echo.Violet()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.White()
 {
     #**** Parameters ****
@@ -1264,6 +1298,7 @@ function BU.Main.Echo.White()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+# shellcheck disable=
 function BU.Main.Echo.Yellow()
 {
     #**** Parameters ****
@@ -1310,6 +1345,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDI
 
 #	- BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Echo.Newline()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

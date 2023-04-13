@@ -25,6 +25,7 @@
 
 ## FUNCȚIA PRINCIPALĂ
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.ro()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

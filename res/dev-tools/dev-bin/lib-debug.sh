@@ -15,6 +15,7 @@ fi
 
 bash -x LibTest.sh 2>&1 | tee -a "${debug_tmp_f}";
 
+# shellcheck disable=
 function BU.EchoDbg()
 {
 	echo -e "${1}" >> "${debug_log}";

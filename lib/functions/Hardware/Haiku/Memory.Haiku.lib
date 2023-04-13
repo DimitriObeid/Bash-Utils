@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Memory.CheckIfMemoryDDR4() { BU.Hardware.Haiku.Memory.GetMemoryType 'DDR4' || return 1; }
 
 ## ==============================================
@@ -105,6 +106,7 @@ function BU.Hardware.Haiku.Memory.CheckIfMemoryDDR4() { BU.Hardware.Haiku.Memory
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Memory.GetHardwareInfos()
 {
     return 0;
@@ -116,6 +118,7 @@ function BU.Hardware.Haiku.Memory.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Memory.GetUsedRAMSlotsNumber()
 {
     return 0;
@@ -127,6 +130,7 @@ function BU.Hardware.Haiku.Memory.GetUsedRAMSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Memory.GetAvailableRamSlotsNumber()
 {
     return 0;
@@ -138,6 +142,7 @@ function BU.Hardware.Haiku.Memory.GetAvailableRamSlotsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Memory.GetMaxMemoryCapacity()
 {
     return 0;
@@ -149,6 +154,7 @@ function BU.Hardware.Haiku.Memory.GetMaxMemoryCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.Memory.GetMemoryType()
 {
     return 0;

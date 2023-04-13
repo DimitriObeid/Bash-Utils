@@ -104,6 +104,7 @@ fi; echo >&2; exit 1; fi
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
 
+# shellcheck disable=
 function BU.Hardware.Initializer.SourceLibrary()
 {
     #**** Variables ****
@@ -140,6 +141,7 @@ function BU.Hardware.Initializer.SourceLibrary()
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
 
+# shellcheck disable=
 function BU.Hardware.Initializer.SourceConfig()
 {
     #**** Variables ****
@@ -172,6 +174,7 @@ function BU.Hardware.Initializer.SourceConfig()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.Hardware.Initializer.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_TWO__USAGE__SUPPORTED_ARGS}" >&2;

@@ -100,6 +100,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PRO
 #   - BU.Main.Echo.Success()        -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()        -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.__ProcessingFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -153,6 +154,7 @@ function BU.Main.Files.__ProcessingFile()
 
 #   - BU.Main.Headers.DrawLine()            -> Main -> Headers.lib
 
+# shellcheck disable=
 function BU.Main.Files.ProcessingFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -222,6 +224,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FIL
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Files.OverwriteFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -283,6 +286,7 @@ function BU.Main.Files.OverwriteFile()
 
 #   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
+# shellcheck disable=
 function BU.Main.Files.Make()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -360,6 +364,7 @@ function BU.Main.Files.Make()
 
 #   - BU.Main.Files.Make()                      -> Main -> Files.lib
 
+# shellcheck disable=
 function BU.Main.Files.MakePath()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -396,6 +401,7 @@ function BU.Main.Files.MakePath()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.MakeFileInMemory()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -442,6 +448,7 @@ function BU.Main.Files.MakeFileInMemory()
 #   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
 #   - BU.Main.Status.CheckProjectLogStatus()        -> Main -> Status.lib
 
+# shellcheck disable=
 function BU.Main.Files.CreateProjectLogFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -595,6 +602,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FIL
 
 #   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Files.DeleteFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -630,6 +638,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHE
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsReadOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -655,6 +664,7 @@ function BU.Main.Files.IsReadOnly()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsRW()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -680,6 +690,7 @@ function BU.Main.Files.IsRW()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsRWX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -705,6 +716,7 @@ function BU.Main.Files.IsRWX()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsRX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -730,6 +742,7 @@ function BU.Main.Files.IsRX()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsWriteOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -755,6 +768,7 @@ function BU.Main.Files.IsWriteOnly()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsWX()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -780,6 +794,7 @@ function BU.Main.Files.IsWX()
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.IsExecutableOnly()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -818,6 +833,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GET
 #   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetByteSize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -865,6 +881,7 @@ function BU.Main.Files.GetByteSize()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetCreationDate()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -898,6 +915,7 @@ function BU.Main.Files.GetCreationDate()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetCharactersNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -924,6 +942,7 @@ function BU.Main.Files.GetCharactersNumber()
 
 #   - BU.Main.Text.CutLastFieldAfterDelim() -> Main -> Text.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetExtension()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -949,6 +968,7 @@ function BU.Main.Files.GetExtension()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetLastAccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -974,6 +994,7 @@ function BU.Main.Files.GetLastAccess()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetLastModification()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -998,6 +1019,7 @@ function BU.Main.Files.GetLastModification()
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetMIMEType()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1023,6 +1045,7 @@ function BU.Main.Files.GetMIMEType()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetLinesNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1048,6 +1071,7 @@ function BU.Main.Files.GetLinesNumber()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetMaxLineLength()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1073,6 +1097,7 @@ function BU.Main.Files.GetMaxLineLength()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetOwnerName()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1098,6 +1123,7 @@ function BU.Main.Files.GetOwnerName()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetOwnerGroup()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1123,6 +1149,7 @@ function BU.Main.Files.GetOwnerGroup()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetWordsNumber()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1155,6 +1182,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SET
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.File.SetFileLastAccess()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1191,6 +1219,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FIL
 
 #   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Files.SourceFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1242,6 +1271,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEX
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.GetLineFromTextFile()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1301,6 +1331,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.AddToArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1350,6 +1381,7 @@ function BU.Main.Files.AddToArchive()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.CompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1384,6 +1416,7 @@ function BU.Main.Files.CompressCMD()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.CompressFormat()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1475,6 +1508,7 @@ function BU.Main.Files.CompressFormat()
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.DeleteInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1507,6 +1541,7 @@ function BU.Main.Files.DeleteInArchive()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+# shellcheck disable=
 function BU.Main.Files.SearchInArchive()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -1541,6 +1576,7 @@ function BU.Main.Files.SearchInArchive()
 
 #   - BU.Main.Files.DeleteFile()            -> Main -> Files.lib
 
+# shellcheck disable=
 function BU.Main.Files.UncompressCMD()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.

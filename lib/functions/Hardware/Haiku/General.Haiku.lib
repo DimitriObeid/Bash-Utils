@@ -111,6 +111,7 @@ fi; echo >&2; exit 1; fi
 #   - BU.Hardware.Haiku.USB.GetHardwareInfos()          -> Hardware -> USB.Haiku.lib
 #   - BU.Hardware.Haiku.VGA.GetHardwareInfos()          -> Hardware -> VGA.Haiku.lib
 
+# shellcheck disable=
 function BU.Hardware.Haiku.General.GetAllHardwareInfos()
 {
     BU.Hardware.Haiku.Audio.GetHardwareInfos;
@@ -153,6 +154,7 @@ function BU.Hardware.Haiku.General.GetAllHardwareInfos()
 #   - BU.Hardware.Haiku.General.GetMachineID()      -> Hardware -> General.Haiku.lib (this file)
 #   - BU.Hardware.Haiku.General.GetBootID()         -> Hardware -> General.Haiku.lib (this file)
 
+# shellcheck disable=
 function BU.Hardware.Haiku.General.GetHardwareInfos()
 {
     BU.Hardware.Haiku.General.GetChassis;
@@ -175,6 +177,7 @@ function BU.Hardware.Haiku.General.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.General.GetChassis()
 {
     return 0;
@@ -186,6 +189,7 @@ function BU.Hardware.Haiku.General.GetChassis()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.General.GetChassisType()
 {
     return 0;
@@ -197,6 +201,7 @@ function BU.Hardware.Haiku.General.GetChassisType()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.General.GetMachineID()
 {
     return 0;
@@ -208,6 +213,7 @@ function BU.Hardware.Haiku.General.GetMachineID()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Haiku.General.GetBootID()
 {
     return 0;

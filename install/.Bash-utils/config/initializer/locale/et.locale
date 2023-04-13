@@ -25,6 +25,7 @@
 
 ## PEAMINE FUNKTSIOON
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.et()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

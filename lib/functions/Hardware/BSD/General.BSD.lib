@@ -111,6 +111,7 @@ fi; echo >&2; exit 1; fi
 #   - BU.Hardware.BSD.USB.GetHardwareInfos()            -> Hardware -> USB.BSD.lib
 #   - BU.Hardware.BSD.VGA.GetHardwareInfos()            -> Hardware -> VGA.BSD.lib
 
+# shellcheck disable=
 function BU.Hardware.BSD.General.GetAllHardwareInfos()
 {
     BU.Hardware.BSD.Audio.GetHardwareInfos;
@@ -153,6 +154,7 @@ function BU.Hardware.BSD.General.GetAllHardwareInfos()
 #   - BU.Hardware.BSD.General.GetMachineID()    -> Hardware -> General.BSD.lib (this file)
 #   - BU.Hardware.BSD.General.GetBootID()       -> Hardware -> General.BSD.lib (this file)
 
+# shellcheck disable=
 function BU.Hardware.BSD.General.GetHardwareInfos()
 {
     BU.Hardware.BSD.General.GetChassis;
@@ -179,6 +181,7 @@ function BU.Hardware.BSD.General.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.General.GetChassis()
 {
     return 0;
@@ -190,6 +193,7 @@ function BU.Hardware.BSD.General.GetChassis()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.General.GetChassisType()
 {
     return 0;
@@ -201,6 +205,7 @@ function BU.Hardware.BSD.General.GetChassisType()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.General.GetMachineID()
 {
     return 0;
@@ -212,6 +217,7 @@ function BU.Hardware.BSD.General.GetMachineID()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.BSD.General.GetBootID()
 {
     return 0;

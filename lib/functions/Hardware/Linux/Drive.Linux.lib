@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.IsHDD()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Linux.Drive.IsHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.IsSSD()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Linux.Drive.IsSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountPluggedDrives()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Linux.Drive.CountPluggedDrives()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountHDD()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Linux.Drive.CountHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountSSD()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.Linux.Drive.CountSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountHDD+SSD()
 {
     return 0;
@@ -161,6 +167,7 @@ function BU.Hardware.Linux.Drive.CountHDD+SSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetHardwareInfos()
 {
     return 0;
@@ -172,6 +179,7 @@ function BU.Hardware.Linux.Drive.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetDriveSize()
 {
     return 0;
@@ -183,6 +191,7 @@ function BU.Hardware.Linux.Drive.GetDriveSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.AddUpDrivesSizes()
 {
     return 0;
@@ -194,6 +203,7 @@ function BU.Hardware.Linux.Drive.AddUpDrivesSizes()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetRotationSpeed()
 {
     return 0;
@@ -205,6 +215,7 @@ function BU.Hardware.Linux.Drive.GetRotationSpeed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetVendor()
 {
     return 0;
@@ -216,6 +227,7 @@ function BU.Hardware.Linux.Drive.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetFirmwareVersion()
 {
     return 0;
@@ -227,6 +239,7 @@ function BU.Hardware.Linux.Drive.GetFirmwareVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CreateNewPartition()
 {
     return 0;
@@ -238,6 +251,7 @@ function BU.Hardware.Linux.Drive.CreateNewPartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.DeletePartition()
 {
     return 0;
@@ -249,6 +263,7 @@ function BU.Hardware.Linux.Drive.DeletePartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetPartitionsNumber()
 {
     return 0;
@@ -260,6 +275,7 @@ function BU.Hardware.Linux.Drive.GetPartitionsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetPartitionsNumberBySize()
 {
     return 0;
@@ -271,6 +287,7 @@ function BU.Hardware.Linux.Drive.GetPartitionsNumberBySize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetPartitionsNumberByFS()
 {
     return 0;
@@ -282,6 +299,7 @@ function BU.Hardware.Linux.Drive.GetPartitionsNumberByFS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetPartitionSize()
 {
     return 0;
@@ -303,6 +321,7 @@ function BU.Hardware.Linux.Drive.GetPartitionSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.IsHDD()
 {
     return 0;
@@ -314,6 +333,7 @@ function BU.Hardware.Linux.Drive.IsHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.IsSSD()
 {
     return 0;
@@ -325,6 +345,7 @@ function BU.Hardware.Linux.Drive.IsSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountPluggedDrives()
 {
     return 0;
@@ -336,6 +357,7 @@ function BU.Hardware.Linux.Drive.CountPluggedDrives()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountHDD()
 {
     return 0;
@@ -347,6 +369,7 @@ function BU.Hardware.Linux.Drive.CountHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountSSD()
 {
     return 0;
@@ -358,6 +381,7 @@ function BU.Hardware.Linux.Drive.CountSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.CountHDD+SSD()
 {
     return 0;
@@ -373,6 +397,7 @@ function BU.Hardware.Linux.Drive.CountHDD+SSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetRotationSpeed()
 {
     return 0;
@@ -384,6 +409,7 @@ function BU.Hardware.Linux.Drive.GetRotationSpeed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetVendor()
 {
     return 0;
@@ -395,6 +421,7 @@ function BU.Hardware.Linux.Drive.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Drive.GetFirmwareVersion()
 {
     return 0;

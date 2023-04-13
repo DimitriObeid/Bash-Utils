@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetHardwareInfos()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Windows.Drive.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetDriveSize()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Windows.Drive.GetDriveSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.AddUpDrivesSizes()
 {
     return 0;
@@ -124,6 +127,7 @@ function BU.Hardware.Windows.Drive.AddUpDrivesSizes()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.CreateNewPartition()
 {
     return 0;
@@ -135,6 +139,7 @@ function BU.Hardware.Windows.Drive.CreateNewPartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.DeletePartition()
 {
     return 0;
@@ -146,6 +151,7 @@ function BU.Hardware.Windows.Drive.DeletePartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetPartitionsNumber()
 {
     return 0;
@@ -157,6 +163,7 @@ function BU.Hardware.Windows.Drive.GetPartitionsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetPartitionsNumberBySize()
 {
     return 0;
@@ -168,6 +175,7 @@ function BU.Hardware.Windows.Drive.GetPartitionsNumberBySize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetPartitionsNumberByFS()
 {
     return 0;
@@ -179,6 +187,7 @@ function BU.Hardware.Windows.Drive.GetPartitionsNumberByFS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetPartitionSize()
 {
     return 0;
@@ -200,6 +209,7 @@ function BU.Hardware.Windows.Drive.GetPartitionSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.IsHDD()
 {
     return 0;
@@ -211,6 +221,7 @@ function BU.Hardware.Windows.Drive.IsHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.IsSSD()
 {
     return 0;
@@ -222,6 +233,7 @@ function BU.Hardware.Windows.Drive.IsSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.CountPluggedDrives()
 {
     return 0;
@@ -233,6 +245,7 @@ function BU.Hardware.Windows.Drive.CountPluggedDrives()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.CountHDD()
 {
     return 0;
@@ -244,6 +257,7 @@ function BU.Hardware.Windows.Drive.CountHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.CountSSD()
 {
     return 0;
@@ -255,6 +269,7 @@ function BU.Hardware.Windows.Drive.CountSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.CountHDD+SSD()
 {
     return 0;
@@ -270,6 +285,7 @@ function BU.Hardware.Windows.Drive.CountHDD+SSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetRotationSpeed()
 {
     return 0;
@@ -281,6 +297,7 @@ function BU.Hardware.Windows.Drive.GetRotationSpeed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetVendor()
 {
     return 0;
@@ -292,6 +309,7 @@ function BU.Hardware.Windows.Drive.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Drive.GetFirmwareVersion()
 {
     return 0;

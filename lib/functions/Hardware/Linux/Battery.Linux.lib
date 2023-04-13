@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.IsNotOnAC()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Linux.Battery.IsNotOnAC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.IsOnAC()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Linux.Battery.IsOnAC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.HasHistory()
 {
     #**** Variables ****
@@ -134,6 +137,7 @@ function BU.Hardware.Linux.Battery.HasHistory()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.HasPowerSupply()
 {
     #**** Variables ****
@@ -155,6 +159,7 @@ function BU.Hardware.Linux.Battery.HasPowerSupply()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.HasStatistics()
 {
     #**** Variables ****
@@ -176,6 +181,7 @@ function BU.Hardware.Linux.Battery.HasStatistics()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.IsPresent()
 {
     #**** Variables ****
@@ -197,6 +203,7 @@ function BU.Hardware.Linux.Battery.IsPresent()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.IsRechargeable()
 {
     #**** Variables ****
@@ -222,6 +229,7 @@ function BU.Hardware.Linux.Battery.IsRechargeable()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetHardwareInfos()
 {
     return 0;
@@ -233,6 +241,7 @@ function BU.Hardware.Linux.Battery.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetCapacity()
 {
     #**** Variables ****
@@ -254,6 +263,7 @@ function BU.Hardware.Linux.Battery.GetCapacity()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetEnergy()
 {
     #**** Variables ****
@@ -275,6 +285,7 @@ function BU.Hardware.Linux.Battery.GetEnergy()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetEnergyEmpty()
 {
     #**** Variables ****
@@ -297,6 +308,7 @@ function BU.Hardware.Linux.Battery.GetEnergyEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetEnergyFull()
 {
     #**** Variables ****
@@ -318,6 +330,7 @@ function BU.Hardware.Linux.Battery.GetEnergyFull()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetEnergyFullDesign()
 {
     #**** Variables ****
@@ -339,6 +352,7 @@ function BU.Hardware.Linux.Battery.GetEnergyFullDesign()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetEnergyRate()
 {
     #**** Variables ****
@@ -360,6 +374,7 @@ function BU.Hardware.Linux.Battery.GetEnergyRate()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetModel()
 {
     #**** Variables ****
@@ -378,6 +393,7 @@ function BU.Hardware.Linux.Battery.GetModel()
 # ························
 # Getting the battery's
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetNativePath()
 {
     #**** Variables ****
@@ -399,6 +415,7 @@ function BU.Hardware.Linux.Battery.GetNativePath()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetPercentage()
 {
     #**** Variables ****
@@ -420,6 +437,7 @@ function BU.Hardware.Linux.Battery.GetPercentage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetSerialNumber()
 {
     #**** Variables ****
@@ -441,6 +459,7 @@ function BU.Hardware.Linux.Battery.GetSerialNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetState()
 {
     #**** Variables ****
@@ -462,6 +481,7 @@ function BU.Hardware.Linux.Battery.GetState()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetTechnology()
 {
     #**** Variables ****
@@ -483,6 +503,7 @@ function BU.Hardware.Linux.Battery.GetTechnology()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetTimeBeforeFullCharge()
 {
     #**** Variables ****
@@ -504,6 +525,7 @@ function BU.Hardware.Linux.Battery.GetTimeBeforeFullCharge()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetVendor()
 {
     #**** Variables ****
@@ -525,6 +547,7 @@ function BU.Hardware.Linux.Battery.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetVoltage()
 {
     #**** Variables ****
@@ -544,6 +567,7 @@ function BU.Hardware.Linux.Battery.GetVoltage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Linux.Battery.GetWarningLevel()
 {
     #**** Variables ****

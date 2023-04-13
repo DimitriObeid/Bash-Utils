@@ -91,6 +91,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Keyboard.IsKeyboardPlugged()
 {
     return 0;
@@ -102,6 +103,7 @@ function BU.Hardware.Windows.Keyboard.IsKeyboardPlugged()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Keyboard.GetHardwareInfos()
 {
     return 0;
@@ -113,6 +115,7 @@ function BU.Hardware.Windows.Keyboard.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Windows.Keyboard.GetLayout()
 {
     return 0;

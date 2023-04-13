@@ -95,6 +95,7 @@ fi; echo >&2; exit 1; fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetHardwareInfos()
 {
     return 0;
@@ -106,6 +107,7 @@ function BU.Hardware.Drive.GetHardwareInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetDriveSize()
 {
     return 0;
@@ -117,6 +119,7 @@ function BU.Hardware.Drive.GetDriveSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.AddUpDrivesSizes()
 {
     return 0;
@@ -128,6 +131,7 @@ function BU.Hardware.Drive.AddUpDrivesSizes()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.CreateNewPartition()
 {
     return 0;
@@ -139,6 +143,7 @@ function BU.Hardware.Drive.CreateNewPartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.DeletePartition()
 {
     return 0;
@@ -150,6 +155,7 @@ function BU.Hardware.Drive.DeletePartition()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetPartitionsNumber()
 {
     return 0;
@@ -161,6 +167,7 @@ function BU.Hardware.Drive.GetPartitionsNumber()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetPartitionsNumberBySize()
 {
     return 0;
@@ -172,6 +179,7 @@ function BU.Hardware.Drive.GetPartitionsNumberBySize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetPartitionsNumberByFS()
 {
     return 0;
@@ -183,6 +191,7 @@ function BU.Hardware.Drive.GetPartitionsNumberByFS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetPartitionSize()
 {
     return 0;
@@ -204,6 +213,7 @@ function BU.Hardware.Drive.GetPartitionSize()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsHDD()
 {
     return 0;
@@ -215,6 +225,7 @@ function BU.Hardware.Drive.IsHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsSSD()
 {
     return 0;
@@ -226,6 +237,7 @@ function BU.Hardware.Drive.IsSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.CountPluggedDrives()
 {
     return 0;
@@ -237,6 +249,7 @@ function BU.Hardware.Drive.CountPluggedDrives()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.CountHDD()
 {
     return 0;
@@ -248,6 +261,7 @@ function BU.Hardware.Drive.CountHDD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.CountSSD()
 {
     return 0;
@@ -259,6 +273,7 @@ function BU.Hardware.Drive.CountSSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.CountHDD+SSD()
 {
     return 0;
@@ -274,6 +289,7 @@ function BU.Hardware.Drive.CountHDD+SSD()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetRotationSpeed()
 {
     return 0;
@@ -285,6 +301,7 @@ function BU.Hardware.Drive.GetRotationSpeed()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetVendor()
 {
     return 0;
@@ -296,6 +313,7 @@ function BU.Hardware.Drive.GetVendor()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.GetFirmwareVersion()
 {
     return 0;
@@ -317,6 +335,7 @@ function BU.Hardware.Drive.GetFirmwareVersion()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsSDCard()
 {
     return 0;
@@ -328,6 +347,7 @@ function BU.Hardware.Drive.IsSDCard()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsMiniSDCard()
 {
     return 0;
@@ -339,6 +359,7 @@ function BU.Hardware.Drive.IsMiniSDCard()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsMicroSDCard()
 {
     return 0;
@@ -354,6 +375,7 @@ function BU.Hardware.Drive.IsMicroSDCard()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsSDCardCapacitySDSC()
 {
     return 0;
@@ -365,6 +387,7 @@ function BU.Hardware.Drive.IsSDCardCapacitySDSC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsSDCardCapacitySDHC()
 {
     return 0;
@@ -376,6 +399,7 @@ function BU.Hardware.Drive.IsSDCardCapacitySDHC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsSDCardCapacitySDXC()
 {
     return 0;
@@ -387,6 +411,7 @@ function BU.Hardware.Drive.IsSDCardCapacitySDXC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsSDCardCapacitySDUC()
 {
     return 0;
@@ -426,6 +451,7 @@ function BU.Hardware.Drive.IsSDCardCapacitySDUC()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
+# shellcheck disable=
 function BU.Hardware.Drive.IsFloppyDisk()
 {
     return 0;

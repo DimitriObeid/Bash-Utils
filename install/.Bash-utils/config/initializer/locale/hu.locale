@@ -25,6 +25,7 @@
 
 ## FŐ FUNKCIÓ
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.hu()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

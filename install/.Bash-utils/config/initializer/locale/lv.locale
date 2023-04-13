@@ -25,6 +25,7 @@
 
 ## GALVENĀ FUNKCIJA
 
+# shellcheck disable=
 function BU.ModuleInit.SetInitLocale.lv()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #

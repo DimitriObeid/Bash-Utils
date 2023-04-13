@@ -106,6 +106,7 @@ fi; echo >&2; exit 1; fi
 #   - BU.ModuleInit.IsInScript()            -> Modules initializer script
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Initializer.SourceLibrary()
 {
     #**** Variables ****
@@ -146,6 +147,7 @@ function BU.Main.Initializer.SourceLibrary()
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Initializer.SourceConfig()
 {
     #**** Variables ****
@@ -226,6 +228,7 @@ BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_MODULE_CONF_FILE_INIT_P
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+# shellcheck disable=
 function BU.Main.Initializer.Usage()
 {
     echo >&2; echo "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS}" >&2;
@@ -261,6 +264,7 @@ function BU.Main.Initializer.Usage()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Msg() -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Initializer.ProcessBadStatusOptionValues()
 {
     BU.ModuleInit.Msg "$(printf "Warning : the supported values for the « %s » option are : %s" "${1}" "${2}")" >&2;

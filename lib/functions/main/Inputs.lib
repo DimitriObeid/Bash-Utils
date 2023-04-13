@@ -127,6 +127,7 @@ declare -r __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_F
 #   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -196,6 +197,7 @@ declare -r __BU_MAIN_INPUTS_LIB__SUBCAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_F
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
+# shellcheck disable=
 function BU.Main.Inputs.Read_Errors.HandleErrors()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
@@ -266,6 +268,7 @@ declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_
 
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 
+# shellcheck disable=
 function BU.Main.Inputs.Sanitize()
 {
     # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
