@@ -82,8 +82,12 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 ####
+#### DEBUG ID :
 
 ##
+## DEBUG ID :
+##
+## DEBUG ID :
 
 # ··································
 # Checking if a touchpad is plugged.
@@ -100,6 +104,7 @@ function BU.Hardware.Android.Touchpad.IsTouchpadPlugged()
 ## ==============================================
 
 ##
+## DEBUG ID :
 
 # ···················································································
 # Getting every informations about the device's touchpad-related hardware components.

@@ -82,8 +82,10 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 ####
+#### DEBUG ID :
 
 ##
+## DEBUG ID :
 
 # ···············································
 # Getting every computer's hardware informations.
@@ -168,8 +170,10 @@ function BU.Hardware.Haiku.General.GetHardwareInfos()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 ####
+#### DEBUG ID :
 
 ##
+## DEBUG ID :
 
 # ·······························
 # Getting the computer's chassis.

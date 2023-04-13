@@ -148,6 +148,7 @@ function BU.Hardware.GPU.IsVGACompatible()
 ## ==============================================
 
 ##
+## DEBUG ID :
 
 # ················································································
 # Getting every informations about the computer's GPU-related hardware components.
@@ -164,6 +165,7 @@ function BU.Hardware.Drive.GetHardwareInfos()
 ## ==============================================
 
 ##
+## DEBUG ID :
 
 # ··································
 # Getting the CPU's bus information.

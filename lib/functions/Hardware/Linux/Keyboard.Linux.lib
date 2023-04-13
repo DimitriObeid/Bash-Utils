@@ -82,8 +82,10 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 ####
+#### DEBUG ID :
 
 ##
+## DEBUG ID :
 
 # ····································
 # Checking if the keyboard is plugged.
@@ -100,6 +102,7 @@ function BU.Hardware.Linux.Keyboard.IsKeyboardPlugged()
 ## ==============================================
 
 ##
+## DEBUG ID :
 
 # ·····················································································
 # Getting every informations about the computer's keyboard-related hardware components.
