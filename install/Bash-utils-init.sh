@@ -331,6 +331,8 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
     [ "${v_isPrinted}" != 'true' ] && BU.ModuleInit.MsgLine "$(printf "[ERROR] FILE : %s | LINE : %s | CODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2;
 
     echo >&2;
+
+    return 0;
 }
 
 # ············································································································
@@ -407,6 +409,8 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
         printf "(%s) Function where the « %s() » function was called : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2;
     };
+
+    return 0;
 }
 
 ## ==============================================
@@ -450,6 +454,8 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     sleep 0.5;
 
     BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage || return 1;
+
+    return 0;
 }
 
 # ·········································································································································································································
@@ -469,7 +475,9 @@ function BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()
     # Changing the current language to English.
     LANG="en_US.UTF-8"; __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
 
-    BU.ModuleInit.SourceEnglishTranslationFiles "${v_lang_backup}";
+    BU.ModuleInit.SourceEnglishTranslationFiles "${v_lang_backup}" || return 1;
+
+    return 0;
 }
 
 # ·······································
@@ -486,7 +494,8 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
     local p_lang_backup=${1:-'en'}; # ARG TYPE : ISO 639-1 code    - REQUIRED | DEFAULT VAL : en    - DESC : language in which the  language's backup from the "BU.ModuleInit.GetModuleInitLanguage_SetEnglishAsDefaultLanguage()" function.
 
     #**** Code ****
-    BU.ModuleInit.IsFrameworkCompiled || { source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/en.locale" || {
+    BU.ModuleInit.IsFrameworkCompiled || {
+        source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/en.locale" || {
             echo >&2;
 
             # Deutch | German
@@ -582,8 +591,12 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
         }
 
         # Calling the function which defines every variables containing the messages in English.
-        BU.ModuleInit.SetInitLocale.en;
+        BU.ModuleInit.SetInitLocale.en || return 1;
+
+        return 0;
     }
+
+    return 0;
 }
 
 # ······························································································································
@@ -708,7 +721,6 @@ function BU.ModuleInit.GetModuleInitLanguage()
 
     # If the selected language was not found among the supported languages.
     if [ -z "${v_langMatch}" ]; then
-
         if [ -n "${p_lang_ISO_639_1}" ]; then
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "WARNUNG : Die von Ihnen gewählte Sprache (${p_lang_ISO_639_1,,}) wird (noch) nicht vom Initialisierungsskript unterstützt" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2 && v_isPrinted='true';
@@ -810,11 +822,15 @@ function BU.ModuleInit.GetModuleInitLanguage()
                 echo >&2;
 
                 BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
+
+                return 0;
             }
         }
 
         # Calling the function which defines every variables containing the translated messages.
-        BU.ModuleInit.SetInitLocale."${__BU_MODULE_INIT__USER_LANG}";
+        BU.ModuleInit.SetInitLocale."${__BU_MODULE_INIT__USER_LANG}" || return 1;
+
+        return 0;
     fi
 }
 #"
