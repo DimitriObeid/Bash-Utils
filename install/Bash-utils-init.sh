@@ -1784,8 +1784,6 @@ function BU.ModuleInit.FindPath()
                 if [ "${v_shut,,}" != 'shut' ]; then declare -i lineno="${LINENO}";
                     BU.ModuleInit.Msg >&2;
 
-                    BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__FINDPATH__PATH_NOT_FOUND";
-
                     # If the "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}" directory is not defined yet, or if the current file is not a compiled version of the Bash Utils Framework,
                     # it means that the translation files are not sourced yet, so the messages to display are hard-coded in this file.
                     if [ -z "${__BU_MODULE_INIT_IS_TRANSLATION_FILES_SOURCED}" ] && ! BU.ModuleInit.IsFrameworkCompiled && ! BU.ModuleInit.IsFrameworkBeingInstalled; then
