@@ -129,7 +129,7 @@ function BU.Main.Initializer.SourceLibrary()
 		BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY}" "${f}")";
 	done
 
-	if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
+	if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.Exit 1; return "${?}"; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;
@@ -174,7 +174,7 @@ function BU.Main.Initializer.SourceConfig()
 		BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG}" "${f}")";
 	done;
 
-	if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
+	if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.Exit 1; return "${?}"; fi
 
 	# Leaving a newline for a better text display in the log file and the terminal.
 	BU.ModuleInit.Msg;
@@ -536,9 +536,9 @@ BU.Main.Directories.MkTmpDir || {
 
     BU.ModuleInit.MsgAbort;
 
-    BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
+    BU.ModuleInit.AskPrintLog >&2 || { BU.ModuleInit.Exit 1; return "${?}"; };
 
-    if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi
+    BU.ModuleInit.Exit 1; return "${?}";
 };
 
 ## ==============================================
