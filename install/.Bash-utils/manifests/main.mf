@@ -1,13 +1,13 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
-<!DOCTYPE ArchData [
-    <!ELEMENT ArchData (Vendor*, Module*, Library*, OS*)>
+<!DOCTYPE BUArchData [
+    <!ELEMENT BUArchData (BUVendor*, BUModule*, BULibrary*, OS*)>
 
-    <!ELEMENT Vendor (Names, Companies, Email)>
+    <!ELEMENT BUVendor (Names, Companies, Email)>
 
-    <!ELEMENT Module (Version, LatestChangelogs)>
+    <!ELEMENT BUModule (Version, LatestChangelogs)>
 
-    <!ELEMENT Library (Version, LatestChangelogs)>
+    <!ELEMENT BULibrary (Version, LatestChangelogs)>
 
     <!-- If some operating systems are not supported by the current module, their tags must be declared -->
     <!ELEMENT Supported (
@@ -33,20 +33,20 @@
     <!ELEMENT Windows (#PCDATA)>
 ]>
 
-<ArchData>
-    <Vendor>
+<BUArchData>
+    <BUVendor>
         <Names></Names>
-    </Vendor>
+    </BUVendor>
 
-    <Module>
+    <BUModule>
         <Version>1.0</Version>
         <LatestChangelogs></LatestChangelogs>
-    </Module>
+    </BUModule>
 
-    <Library>
+    <BULibrary>
         <Version>1.0</Version>
         <LatestChangelogs></LatestChangelogs>
-    </Library>
+    </BULibrary>
 
     <OS>
         <!-- If the value contained in the "AllSupported" tag is "false", you have to precise which operating systems are supported or not -->
@@ -69,19 +69,19 @@
         /-->
         <AllSupported>True</AllSupported>
     </OS>
-</ArchData>
+</BUArchData>
 
-<!-- Ce DTD décrit la structure d'un document XML appelé "ArchData". Le document peut contenir des éléments "Module", "Library" et "OS" qui peuvent apparaître dans n'importe quel ordre.
+<!-- Ce DTD décrit la structure d'un document XML appelé "BUArchData". Le document peut contenir des éléments "BUModule", "BULibrary" et "OS" qui peuvent apparaître dans n'importe quel ordre.
 
-La balise "ArchData" est définie comme ayant des balises enfant "Module", "Library" et "OS" qui peuvent apparaître zéro, une ou plusieurs fois. Cela signifie que le document XML peut contenir plusieurs éléments "Module", "Library" et "OS" dans n'importe quel ordre.
+La balise "BUArchData" est définie comme ayant des balises enfant "BUModule", "BULibrary" et "OS" qui peuvent apparaître zéro, une ou plusieurs fois. Cela signifie que le document XML peut contenir plusieurs éléments "BUModule", "BULibrary" et "OS" dans n'importe quel ordre.
 
-Les balises "Module" et "Library" sont définies comme ayant des balises enfant "Version" et "LatestChangelogs".
+Les balises "BUModule" et "BULibrary" sont définies comme ayant des balises enfant "Version" et "LatestChangelogs".
 
 La balise "OS" est définie comme ayant une balise enfant "AllSupported" obligatoire, suivie d'un groupe optionnel "Supported". La balise "AllSupported" contient une valeur textuelle, tandis que les balises "Supported", "Android", "Chrome", "FreeBSD", "Haiku", "Linux", "NetBSD", "OpenBSD", "OSX" et "Windows" sont définies comme contenant également une valeur textuelle.
 
 La balise "Supported" est un groupe de balises optionnelles qui peuvent être utilisées pour déclarer les systèmes d'exploitation non pris en charge par le module en cours.
 
-En résumé, ce DTD définit la structure d'un document XML qui peut contenir des éléments "Module", "Library" et "OS", où les balises "Module" et "Library" doivent avoir des balises enfant "Version" et "LatestChangelogs", et la balise "OS" doit avoir une balise enfant "AllSupported" obligatoire et un groupe optionnel de balises "Supported" pour déclarer les systèmes d'exploitation non pris en charge.
+En résumé, ce DTD définit la structure d'un document XML qui peut contenir des éléments "BUModule", "BULibrary" et "OS", où les balises "Module" et "BULibrary" doivent avoir des balises enfant "Version" et "LatestChangelogs", et la balise "OS" doit avoir une balise enfant "AllSupported" obligatoire et un groupe optionnel de balises "Supported" pour déclarer les systèmes d'exploitation non pris en charge.
 
 
 
