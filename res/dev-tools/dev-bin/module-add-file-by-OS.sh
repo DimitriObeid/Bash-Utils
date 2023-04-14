@@ -79,13 +79,13 @@ __BU_MOD_ADD__ARG_FILE_VERSION=${4:-$'\0'};
 
 __BU_MOD_ADD__ARG_FILE_OS_POSITION=${5:-$'\0'};
 
-[[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 5;
+[[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 6;
 
 [[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] || \
 
-[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 4;
+[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 5;
 
-[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 3;
+[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 4;
 
 ## ==============================================
 
@@ -376,8 +376,6 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
 
         __FILE_PATH_LIB_OS_DEPENDENT="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__os_pos_l}${__BU_MOD_ADD__ARG_FILE_NAME}${__os_pos_r}.lib";
 
-        unset __BU_MOD_ADD__GLOBVAR_OS_NAME;
-
         # Creating the library file into the module's OS directory where it belongs.
         if [ ! -f "${__FILE_PATH_LIB_OS_DEPENDENT}" ]; then
             touch "${__FILE_PATH_LIB_OS_DEPENDENT}";
@@ -385,7 +383,7 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
             echo "The ${__FILE_PATH_LIB_OS_DEPENDENT} file already exists" >&2;
             echo >&2;
 
-            __ERR='error'; break 1;
+            #__ERR='error'; break 1;
         fi
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -406,6 +404,9 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
 
         WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
     else
+        echo "The folder for the ${__BU_MOD_ADD__GLOBVAR_OS_NAME} operating system was not found in the ${__BU_MOD_ADD__ARG_MODULE_NAME} module's folder" >&2;
+        echo >&2;
+
         false;
     fi
 done

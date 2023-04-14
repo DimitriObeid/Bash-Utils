@@ -3,13 +3,27 @@
 <!DOCTYPE BUArchData [
     <!ELEMENT BUArchData (BUVendor*, BUModule*, BULibrary*, OS*)>
 
+    <!-- BUVendor tag from "BUArchData" -->
     <!ELEMENT BUVendor (Names, Companies, Email)>
+    <!ELEMENT Names (#PCDATA)>
+    <!ELEMENT Companies (#PCDATA)>
+    <!ELEMENT Email (#PCDATA)>
 
+    <!-- BUModule tag from "BUArchData" -->
     <!ELEMENT BUModule (Version, LatestChangelogs)>
+    <!ELEMENT Version (#PCDATA)>
+    <!ELEMENT LatestChangelogs (#PCDATA)>
 
+    <!-- BULibrary tag from "BUArchData" -->
     <!ELEMENT BULibrary (Version, LatestChangelogs)>
+    <!ELEMENT Version (#PCDATA)>
+    <!ELEMENT LatestChangelogs (#PCDATA)>
 
-    <!-- If some operating systems are not supported by the current module, their tags must be declared -->
+    <!-- OS tag from "BUArchData" -->
+    <!ELEMENT OS (Position, AllSupported, Supported?)>
+    <!ELEMENT Position (#PCDATA)>
+    <!ELEMENT AllSupported (#PCDATA)>
+    <!-- If some operating systems are not supported by the current module, their tags must be declared. Please read the informations written into the "<OS>" tag -->
     <!ELEMENT Supported (
         Android,
         Chrome,
@@ -20,8 +34,6 @@
         OpenBSD,
         OSX,
         Windows)*>
-    <!ELEMENT OS (AllSupported, Supported?)>
-    <!ELEMENT AllSupported (#PCDATA)>
     <!ELEMENT Android (#PCDATA)>
     <!ELEMENT Chrome (#PCDATA)>
     <!ELEMENT FreeBSD (#PCDATA)>
@@ -36,6 +48,8 @@
 <BUArchData>
     <BUVendor>
         <Names></Names>
+        <Companies>NULL</Companies>
+        <Email><Email>
     </BUVendor>
 
     <BUModule>
