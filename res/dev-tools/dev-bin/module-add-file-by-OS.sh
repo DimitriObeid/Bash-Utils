@@ -81,7 +81,9 @@ __BU_MOD_ADD__ARG_FILE_OS_POSITION=${5:-$'\0'};
 
 [[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 5;
 
-[[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] || [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 4;
+[[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] || \
+
+[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 4;
 
 [[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 3;
 
@@ -224,9 +226,9 @@ cat <<-EOF >> "${p_filepath}"
 
 # Add a coma after each warning code to disable multiple warnings at one go.
 
-# Do not uncomment the "shellcheck disable" line, or else the "$(shellcheck)" command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
+# Do not uncomment the "shellcheck disable" line, or else the "\$(shellcheck)" command will be executed during the script's execution, and will not detect any coding mistake during a debugging process.
 
-# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
+# DO NOT ADD A COMA AFTER A SHELLCHECK CODE IF THERE'S NO OTHER SHELLCHECK CODE FOLLOWING IT, OR ELSE THE "\$(shellcheck)" COMMAND WILL RETURN ERRORS DURING THE DEBUGGING PROCESS !!!
 
 # IF YOU WANT TO ADD ANOTHER SHELLCHECK CODE, WRITE THIS CODE DIRECTLY AFTER THE COMMA, WITHOUT ADDING A BLANK SPACE AFTER IT !!!
 
@@ -234,7 +236,7 @@ cat <<-EOF >> "${p_filepath}"
 
 
 # ----------------------------------------------------------------------------------------------------------------------------------------------
-# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
+# DO NOT EXECUTE THIS SCRIPT DIRECTLY, instead, just source it by calling the "\${__BU_MAIN_FUNCTIONS_FILES_PATH}" array in the initializer file.
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -320,11 +322,13 @@ if [ -z "${__BU_MOD_ADD__ARG_FILE_NAME}" ];     then echo "No specified file" >&
 
 if [ "${#__BU_MOD_ADD__ARGS_OS_ARRAY[@]}" -eq 0 ]; then __BU_MOD_ADD__ARGS_OS_ARRAY=("Android" "BSD" "Haiku" "Linux" "OSX" "Windows"); fi
 
+__FILE_PATH_LIB_NO_OS="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib";
+
 # Creating the library file into the module's root directory.
-if [ ! -f "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib" ]; then
-    touch "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib";
+if [ ! -f "${__FILE_PATH_LIB_NO_OS}" ]; then
+    touch "${__FILE_PATH_LIB_NO_OS}";
 else
-    echo "The ${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib file already exists";
+    echo "The ${__FILE_PATH_LIB_NO_OS} file already exists";
     echo;
 fi
 
@@ -332,19 +336,19 @@ fi
 #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteFileInformations "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib" || exit 1;
+WriteFileInformations "${__FILE_PATH_LIB_NO_OS}" || exit 1;
 
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteScriptDescription "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib" || exit 1;
+WriteScriptDescription "${__FILE_PATH_LIB_NO_OS}" || exit 1;
 
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~ STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib" || exit 1;
+WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__FILE_PATH_LIB_NO_OS}" || exit 1;
 
 ## ==============================================
 
@@ -364,19 +368,21 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
         __ERR='error'; break 1;
     fi
 
-    [ "${__BU_MOD_ADD__ARG_FILE_OS_POSITION,,}" == 'left' ]     && __os_pos_l="${__BU_MOD_ADD__GLOBVAR_OS_NAME}";
-    [ "${__BU_MOD_ADD__ARG_FILE_OS_POSITION,,}" == 'right' ]    && __os_pos_r="${__BU_MOD_ADD__GLOBVAR_OS_NAME}";
+    [ "${__BU_MOD_ADD__ARG_FILE_OS_POSITION,,}" == 'left' ]     && __os_pos_l="${__BU_MOD_ADD__GLOBVAR_OS_NAME}.";
+    [ "${__BU_MOD_ADD__ARG_FILE_OS_POSITION,,}" == 'right' ]    && __os_pos_r=".${__BU_MOD_ADD__GLOBVAR_OS_NAME}";
 
     # If the OS directory is found in the module's folder.
     if [ -d "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}" ]; then
 
-        __OS_FILEPATH="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__os_pos_l}${__BU_MOD_ADD__ARG_FILE_NAME}${__os_pos_r}.lib";
+        __FILE_PATH_LIB_OS_DEPENDENT="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__os_pos_l}${__BU_MOD_ADD__ARG_FILE_NAME}${__os_pos_r}.lib";
+
+        unset __BU_MOD_ADD__GLOBVAR_OS_NAME;
 
         # Creating the library file into the module's OS directory where it belongs.
-        if [ ! -f "${__OS_FILEPATH}" ]; then
-            touch "${__OS_FILEPATH}";
+        if [ ! -f "${__FILE_PATH_LIB_OS_DEPENDENT}" ]; then
+            touch "${__FILE_PATH_LIB_OS_DEPENDENT}";
         else
-            echo "The ${__OS_FILEPATH} file already exists" >&2;
+            echo "The ${__FILE_PATH_LIB_OS_DEPENDENT} file already exists" >&2;
             echo >&2;
 
             __ERR='error'; break 1;
@@ -386,19 +392,19 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
         #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteFileInformations "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
+        WriteFileInformations "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteScriptDescription "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
+        WriteScriptDescription "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__OS_FILEPATH}" || { __ERR='error'; break 1; };
+        WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
     else
         false;
     fi
