@@ -158,9 +158,11 @@ declare __BU_MOD_ADD__GLOBVAR_OS_NAME;
 function WriteFileInformations()
 {
     #**** Parameters ****
-    local p_filepath=${1:-$'\0'}; # ARG TYPE : Filepath     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file where the file's informations have to be written.
+    local p_filename=${1:-$'\0'}; # ARG TYPE : String       - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the file where the file's informations have to be written.
+    local p_filepath=${2:-$'\0'}; # ARG TYPE : Filepath     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file where the file's informations have to be written.
 
     #**** Code ****
+    if [ -z "${p_filename}" ]; then echo "${FUNCNAME[0]}() function : file name argument required" >&2; echo >&2; return 1; fi
     if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1; fi
 
 cat <<-EOF >> "${p_filepath}"
@@ -169,10 +171,10 @@ cat <<-EOF >> "${p_filepath}"
 # ---------------------
 # FILE'S INFORMATIONS :
 
-# Name          : \${p_filepath}
-# Module        : \${__BU_MOD_ADD__ARG_MODULE_NAME}
-# Author(s)     : \${__BU_MOD_ADD__ARG_AUTHOR_NAME}
-# Version       : \${__BU_MOD_ADD__ARG_FILE_VERSION}
+# Name          : ${p_filename}
+# Module        : ${__BU_MOD_ADD__ARG_MODULE_NAME}
+# Author(s)     : ${__BU_MOD_ADD__ARG_AUTHOR_NAME}
+# Version       : ${__BU_MOD_ADD__ARG_FILE_VERSION}
 
 
 EOF
@@ -184,29 +186,34 @@ EOF
 
 # shellcheck disable=
 function WriteScriptDescription()
-{
+{(
     #**** Parameters ****
     local p_filepath=${1:-$'\0'}; # ARG TYPE : Filepath     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file where the file's informations have to be written.
 
     #**** Code ****
     if [ -z "${p_filepath}" ]; then echo "${FUNCNAME[0]}() function : file path argument required" >&2; echo >&2; return 1; fi
 
+    function WriteScriptDescription.OS()
+    {
+        [ -z "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" ]             && echo -n "# Functions used to process data and parameters about [ INSERT ${p_filepath} INFO ] with the help of the system commands on any supported operating system.";
+        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Android' ]   && echo -n "# Functions used to process data and parameters about the device's [ INSERT ${p_filepath} INFO ] with the help of the system commands on an Android-based operating system.";
+        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'BSD' ]       && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a BSD-based operating system.";
+        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Haiku' ]     && echo -n "# This script manages the [ INSERT ${p_filepath} INFO ]-related hardware functionalities of the Haiku operating system.";
+        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Linux' ]     && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a Linux-based operating system.";
+        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'OSX' ]       && echo -n "# Functions used to process data and parameters about the Mac's [ INSERT ${p_filepath} INFO ] with the help of the OSX system's commands.";
+        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Windows' ]   && echo -n "# Functions used to process data and parameters about the PC's [ INSERT ${p_filepath} INFO ] with the help of the WSL / Windows system's commands.";
+    }
+
 cat <<-EOF >> "${p_filepath}"
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-$([ -z "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" ]             && echo -n "# Functions used to process data and parameters about [ INSERT ${p_filepath} INFO ] with the help of the system commands";)
-$([ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Android' ]   && echo -n "# Functions used to process data and parameters about the device's [ INSERT ${p_filepath} INFO ] with the help of the system commands on an Android-based operating system.";)
-$([ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'BSD' ]       && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a BSD-based operating system.";)
-$([ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Haiku' ]     && echo -n "# This script manages the [ INSERT ${p_filepath} INFO ]-related hardware functionalities of the Haiku operating system.";)
-$([ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Linux' ]     && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a Linux-based operating system.";)
-$([ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'OSX' ]       && echo -n "# Functions used to process data and parameters about the Mac's [ INSERT ${p_filepath} INFO ] with the help of the OSX system's commands.";)
-$([ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Windows' ]   && echo -n "# Functions used to process data and parameters about the PC's [ INSERT ${p_filepath} INFO ] with the help of the WSL / Windows system's commands.";)
+$(WriteScriptDescription.OS;)
 
 
 EOF
     return 0;
-}
+)}
 
 # ··································································································
 # Writing the Shellcheck and the pieces of code which prevent the direct execution of its host file.
@@ -322,7 +329,8 @@ if [ -z "${__BU_MOD_ADD__ARG_FILE_NAME}" ];     then echo "No specified file" >&
 
 if [ "${#__BU_MOD_ADD__ARGS_OS_ARRAY[@]}" -eq 0 ]; then __BU_MOD_ADD__ARGS_OS_ARRAY=("Android" "BSD" "Haiku" "Linux" "OSX" "Windows"); fi
 
-__FILE_PATH_LIB_NO_OS="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__ARG_FILE_NAME}.lib";
+__FILE_NAME_LIB_NO_OS="${__BU_MOD_ADD__ARG_FILE_NAME}.lib";
+__FILE_PATH_LIB_NO_OS="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__FILE_NAME_LIB_NO_OS}";
 
 # Creating the library file into the module's root directory.
 if [ ! -f "${__FILE_PATH_LIB_NO_OS}" ]; then
@@ -336,7 +344,7 @@ fi
 #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteFileInformations "${__FILE_PATH_LIB_NO_OS}" || exit 1;
+WriteFileInformations "${__FILE_NAME_LIB_NO_OS}" "${__FILE_PATH_LIB_NO_OS}" || exit 1;
 
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
@@ -374,7 +382,8 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
     # If the OS directory is found in the module's folder.
     if [ -d "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}" ]; then
 
-        __FILE_PATH_LIB_OS_DEPENDENT="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__os_pos_l}${__BU_MOD_ADD__ARG_FILE_NAME}${__os_pos_r}.lib";
+        __FILE_NAME_LIB_OS_DEPENDENT="${__os_pos_l}${__BU_MOD_ADD__ARG_FILE_NAME}${__os_pos_r}.lib";
+        __FILE_PATH_LIB_OS_DEPENDENT="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__FILE_NAME_LIB_OS_DEPENDENT}";
 
         # Creating the library file into the module's OS directory where it belongs.
         if [ ! -f "${__FILE_PATH_LIB_OS_DEPENDENT}" ]; then
@@ -390,7 +399,7 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
         #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteFileInformations "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
+        WriteFileInformations "${__FILE_NAME_LIB_OS_DEPENDENT}" "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
