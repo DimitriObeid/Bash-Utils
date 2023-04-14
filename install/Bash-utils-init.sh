@@ -92,7 +92,19 @@ else
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2; echo >&2;
     echo -e "Use only this script by including it in your project script." >&2;
 
-fi; echo >&2; exit 1; fi
+fi; echo >&2; __err='error'; fi
+
+# Exiting the script if the exectued code is not being sourced into the terminal, in case the current file is executed.
+if [ "${__err,,}" == 'error' ]; then
+    filename="$(basename "${0}")";
+    extension="$(expr "$filename" : '.*\.\(.*\)')";
+
+    if [ "$extension" = 'sh' ] || [ "$extension" = 'bash' ] || [ "${0#./}" != "${0}" ]; then
+        return 1;
+    else
+        exit 1;
+    fi
+fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -1784,7 +1796,7 @@ function BU.ModuleInit.FindPath()
         fi
 	};
 
-	if [ "${v_hasFailed}" == 'failed' ]; then echo "FAILED"; if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
+	if [ "${v_hasFailed}" == 'failed' ]; then echo "FAILED"; if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
 
 	if [ -n "${v_specific_var}" ]; then
         if [ -n "${__BU_MODULE_INIT__TMP_DIR_PATH}" ]; then
@@ -2516,7 +2528,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                     v_loop_error='error'; break;
                 fi
-            done; if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi; fi
+            done; if [ "${v_loop_error,,}" == 'error' ]; then if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi; fi
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
             if ! BU.ModuleInit.IsFrameworkCompiled && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
@@ -3087,7 +3099,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                 printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
                     "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
 
-                BU.ModuleInit.IsInScript && exit 1; return 1;
+                BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
             })";
 
             # If the base code of the framework is not compiled in a single file.
@@ -3099,7 +3111,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                     printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" \
                         "${__bu_module_init__initializer_path__lineno}" '$__BU_MODULE_INIT__INITIALIZER_PATH';
 
-                    BU.ModuleInit.IsInScript && exit 1; return 1;
+                    BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
                 })";
             fi
         # Else, if the ".Bash-utils" folder does not exists in its defined parent directory.
@@ -3107,7 +3119,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
             BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 1 ))";
 
             # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
-            BU.ModuleInit.IsInScript && exit 1; return 1;
+            BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
         fi
 
     # Else, if the ".Bash-utils" folder doesn't exists in its defined parent directory AND the framework base is being installed on the user's hard drive,
@@ -3135,7 +3147,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                     printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
                         "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
 
-                    BU.ModuleInit.IsInScript && exit 1; return 1;
+                    BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
                 })";
             };
 
@@ -3147,7 +3159,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
                     printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
                         "$(basename "${BASH_SOURCE[0]}")" "${__bu_module_init__root__lineno}" '$__BU_MODULE_INIT__ROOT';
 
-                    BU.ModuleInit.IsInScript && exit 1; return 1;
+                    BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
                 })";
             };
         fi
@@ -3165,7 +3177,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__TMP_DIR_PATH';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3185,7 +3197,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
         "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_DIR_PATH';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     # Module's initializer script directory path
@@ -3201,7 +3213,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     # Modules configurations directory
@@ -3217,7 +3229,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     # Translation files for the initializer script + the main module config and init files
@@ -3233,7 +3245,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3246,7 +3258,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     #~ ~~~~~~~~~~~~~~~~~~~
@@ -3259,7 +3271,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     #~ ~~~~~~~~~~~~~
@@ -3310,7 +3322,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
             "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR';
 
-        BU.ModuleInit.IsInScript && exit 1; return 1;
+        BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
     };
 
     unset __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR;
@@ -3328,7 +3340,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
             printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" \
                 "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MODULE_INIT__MODULES_DIR';
 
-            BU.ModuleInit.IsInScript && exit 1; return 1;
+            BU.ModuleInit.IsInScript && BU.ModuleInit.Exit 1; return 1;
         };
     fi
 
@@ -3383,7 +3395,7 @@ BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules;
 # If the framework is compiled, then you should call the "Bash-utils-${language}.sh" file which corresponds to the language that you want to use.
 BU.ModuleInit.IsFrameworkLocalizedCompiled || {
     if [ "${__BU_MODULE_INIT__USER_LANG,,}" != 'en' ]; then
-        BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+        BU.ModuleInit.GetModuleInitLanguage "${__BU_MODULE_INIT__USER_LANG}" || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
     fi
 }
 
@@ -4156,9 +4168,9 @@ function BU.ModuleInit.ParseCSVLang()
                     echo >&2;
                 fi
 
-                BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+                BU.ModuleInit.AskPrintLog >&2 || { if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit 1; else return 1; fi };
 
-                if BU.ModuleInit.IsInScript; then exit "${v_perlScriptReturnCode}"; else return "${v_perlScriptReturnCode}"; fi
+                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit "${v_perlScriptReturnCode}"; else return "${v_perlScriptReturnCode}"; fi
             fi
 		fi
 	fi
