@@ -16,7 +16,7 @@ LANG='fr_FR.UTF-8';
 if ! source "${HOME}/Bash-utils-init.sh"; then
 # if ! source "${HOME}/.Bash-utils/compiled/stable/Bash-utils-fr.sh"; then
 # if ! source "${HOME}/.Bash-utils/compiled/unstable/Bash-utils-fr.sh"; then
-    echo >&2; echo -e "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : unable to source the modules initializer file." >&2; echo >&2; exit 1
+    echo >&2; echo -e "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : unable to source the modules initializer file." >&2; echo >&2; exit 1;
 fi
 
 # Calling the "BashUtils_InitModules()" function.

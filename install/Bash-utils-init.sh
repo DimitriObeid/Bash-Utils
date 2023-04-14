@@ -3012,7 +3012,7 @@ function BashUtils_InitModules._()
 ## CHECKING IF THE CURRENT SHELL IS BASH
 
 # shellcheck disable=SC2009
-if ! ps -a | grep -E "${$}" | grep "bash" > /dev/null; then
+if [ -z "${BASH_VERSION}" ]; then
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'de' ] && echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2 && echo >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2 && echo >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'es' ] && echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »" && echo >&2;
@@ -3021,8 +3021,17 @@ if ! ps -a | grep -E "${$}" | grep "bash" > /dev/null; then
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'pt' ] && echo "BASH-UTILS ERRO : O seu intérprete shell actual não é o intérprete « Bash », mas o intérprete « ${SHELL##*/} »" >&2 && echo >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ru' ] && echo "ОШИБКА « BASH-UTILS » : Ваш текущий интерпретатор оболочки - это не интерпретатор « Bash », а интерпретатор « ${SHELL##*/} »" >&2 && echo >&2;
 
-	# WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY" array.
-    BU.ModuleInit.IsInScript && exit 1; return 1;
+	# WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY[@]}" array.
+
+    # Handling the situation where the code is executed from a script or when this file is included in the user's prompt.
+    filename="$(basename "${0}")";
+    extension="$(expr "$filename" : '.*\.\(.*\)')";
+
+    if [ "$extension" = 'sh' ] || [ "$extension" = 'bash' ] || [ "${0#./}" != "${0}" ]; then
+        return 1;
+    else
+        exit 1;
+    fi
 fi
 
 ## ==============================================
@@ -3860,7 +3869,17 @@ function BU.ModuleInit.HandleErrors()
 # to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos()" function.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - TODO
+#   - BU.Main.Headers.Header.Blue()                     -> Main -> Headers.lib
+
+#   - BU.Main.Text.GetSubStringAfterDelim()             -> Main -> Text.lib
+#   - BU.Main.Text.GetSubStringBeforeDelim()            -> Main -> Text.lib
+
+#   - BU.ModuleInit.Exit()                              -> Modules initializer script (this file)
+#   - BU.ModuleInit.HandleErrors()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.IsFrameworkUnlocalizedCompiled()    -> Modules initializer script (this file)
+#   - BU.ModuleInit.Msg()                               -> Modules initializer script (this file)
+#   - BU.ModuleInit.PrintLogError()                     -> Modules initializer script (this file)
+#   - BU.ModuleInit.SourcingFailure()                   -> Modules initializer script (this file)
 
 # shellcheck disable=SC1090
 function BU.ModuleInit.ParseCSVLang()
@@ -4168,9 +4187,9 @@ function BU.ModuleInit.ParseCSVLang()
                     echo >&2;
                 fi
 
-                BU.ModuleInit.AskPrintLog >&2 || { BU.ModuleInit.Exit 1; return "${?}"; };
+                BU.ModuleInit.AskPrintLog >&2 || { BU.ModuleInit.Exit "${v_perlScriptReturnCode}"; return "${?}"; };
 
-                if BU.ModuleInit.IsInScript; then BU.ModuleInit.Exit "${v_perlScriptReturnCode}"; else return "${v_perlScriptReturnCode}"; fi
+                BU.ModuleInit.Exit "${v_perlScriptReturnCode}"; return "${?}";
             fi
 		fi
 	fi
