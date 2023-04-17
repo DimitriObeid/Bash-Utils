@@ -85,6 +85,17 @@ fi; echo >&2; exit 1; fi
 
 ##
 
+# ································
+# Checking if
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Main.Hardware.Drive.IsSCSI()
+{
+    return 0;
+}
+
 ## ==============================================
 
 ##
