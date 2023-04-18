@@ -82,11 +82,13 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### GENERAL STORAGE SUPPORT FUNCTIONS
+#### DEBUG ID :
 
-##
+## DISK INTERFACE
+## DEBUG ID :
 
-# ································
-# Checking if
+# ·········································
+# Checking if the disk's interface is SCSI.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
