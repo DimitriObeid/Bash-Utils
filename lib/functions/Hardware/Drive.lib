@@ -88,6 +88,17 @@ fi; echo >&2; exit 1; fi
 ## DEBUG ID :
 
 # ·········································
+# Checking if the disk's interface is SATA.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+function BU.Main.Hardware.Drive.IsSATA()
+{
+    return 0;
+}
+
+# ·········································
 # Checking if the disk's interface is SCSI.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
