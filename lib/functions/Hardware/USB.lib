@@ -81,10 +81,12 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### USB - GENERAL
-#### DEBUG ID :
+#### USB - GENERAL USB FUNCTIONALITIES
+#### DEBUG ID : "general-usb-functionalities"
 
-##
+declare -r __BU_HARDWARE_USB_LIB__CAT_DEBUG_ID__GENERAL='usb::general-usb-functionalities';
+
+## GET USB INFORMATIONS
 ## DEBUG ID :
 
 # ················································································

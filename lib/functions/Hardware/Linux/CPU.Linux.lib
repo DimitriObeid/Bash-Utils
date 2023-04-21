@@ -82,14 +82,21 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CPU'S GENERAL INFORMATIONS
+#### DEBUG ID : "cpu's-general-informations"
+
+declare -r __BU_HARDWARE_LINUX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu-linux::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
+## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
+
+declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_LINUX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
 
 
 
 ## ==============================================
 
-## GETTING GENERAL DATA
+## GETTING THE CPU(s) GENERAL DATA
+## DEBUG ID : "getting-the-cpu(s)general-data";
 
 # ················································································
 # Getting every informations about the computer's CPU-related hardware components.
