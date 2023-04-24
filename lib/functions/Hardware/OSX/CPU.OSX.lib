@@ -84,12 +84,12 @@ fi; echo >&2; exit 1; fi
 #### CPU'S GENERAL INFORMATIONS
 #### DEBUG ID : "cpu's-general-informations"
 
-declare -r __BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu-osx::cpu's-general-informations";
+declare -r __BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu::osx::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
 
-declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
 
 
 
@@ -98,8 +98,10 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF
 ## GETTING THE CPU(s) GENERAL DATA
 ## DEBUG ID : "getting-the-cpu(s)general-data";
 
-# ················································································
-# Getting every informations about the computer's CPU-related hardware components.
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__GETTING_THE_CPUS_DATA="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::getting-the-cpu(s)general-data";
+
+# ···········································································
+# Getting every informations about the Mac's CPU-related hardware components.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -117,7 +119,10 @@ function BU.Hardware.OSX.CPU.GetHardwareInfos()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
+function BU.Hardware.OSX.CPU.GetInfos()
+{
+    return 0;
+}
 
 # ·························
 # Getting the CPU's vendor.
@@ -126,7 +131,10 @@ function BU.Hardware.OSX.CPU.GetInfos()                 { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.OSX.CPU.GetVendor()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -135,8 +143,14 @@ function BU.Hardware.OSX.CPU.GetVendor()                { if BU.Main.CMDS.GetCom
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
+#### DEBUG ID : "cpu::cpu's-architecture"
+
+declare -r __BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="cpu::osx::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
+## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
+
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHECKING_THE_ARCHITECTURE_OF_THE_CPUS="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::checking-the-architecture-of-the-cpu(s)";
 
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
@@ -145,7 +159,10 @@ function BU.Hardware.OSX.CPU.GetVendor()                { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.Is32Bits()                 { return 0;}
+function BU.Hardware.OSX.CPU.Is32Bits()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is 64 bits.
@@ -154,7 +171,10 @@ function BU.Hardware.OSX.CPU.Is32Bits()                 { return 0;}
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.Is64Bits()                 { return 0; }
+function BU.Hardware.OSX.CPU.Is64Bits()
+{
+    return 0;
+}
 
 # ····················································
 # Checking if the CPU's architecture is AArch 32 bits.
@@ -163,7 +183,10 @@ function BU.Hardware.OSX.CPU.Is64Bits()                 { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchAArch32()            { true; }
+function BU.Hardware.OSX.CPU.IsArchAArch32()
+{
+    return 0;
+}
 
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
@@ -172,7 +195,10 @@ function BU.Hardware.OSX.CPU.IsArchAArch32()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchAArch64()            { true; }
+function BU.Hardware.OSX.CPU.IsArchAArch64()
+{
+    return 0;
+}
 
 # ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
@@ -181,7 +207,10 @@ function BU.Hardware.OSX.CPU.IsArchAArch64()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchARM32()              { true; }
+function BU.Hardware.OSX.CPU.IsArchARM32()
+{
+    return 0;
+}
 
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
@@ -190,7 +219,10 @@ function BU.Hardware.OSX.CPU.IsArchARM32()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchARM64()              { true; }
+function BU.Hardware.OSX.CPU.IsArchARM64()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
@@ -199,7 +231,10 @@ function BU.Hardware.OSX.CPU.IsArchARM64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchAMD64()              { true; }
+function BU.Hardware.OSX.CPU.IsArchAMD64()
+{
+    return 0;
+}
 
 # ···········································
 # Checking if the CPU's architecture is i386.
@@ -208,7 +243,10 @@ function BU.Hardware.OSX.CPU.IsArchAMD64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchi386()               { true; }
+function BU.Hardware.OSX.CPU.IsArchi386()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is PowerPC.
@@ -217,7 +255,10 @@ function BU.Hardware.OSX.CPU.IsArchi386()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchPPC()                { true; }
+function BU.Hardware.OSX.CPU.IsArchPPC()
+{
+    return 0;
+}
 
 # ···········································
 # Checking if the CPU's architecture is MIPS.
@@ -226,7 +267,10 @@ function BU.Hardware.OSX.CPU.IsArchPPC()                { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchMIPS()               { true; }
+function BU.Hardware.OSX.CPU.IsArchMIPS()
+{
+    return 0;
+}
 
 # ···············································
 # Checking if the CPU's architecture is RISC-V.
@@ -235,11 +279,17 @@ function BU.Hardware.OSX.CPU.IsArchMIPS()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsArchRISCV()              { true; }
+function BU.Hardware.OSX.CPU.IsArchRISCV()
+{
+    return 0;
+}
 
 ## ==============================================
 
 ## GETTING THE CPU(s) ARCHITECTURE'S DATA
+## DEBUG ID : "getting-the-cpu(s)-architecture's-data"
+
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_THE_CPUS_ARCH_DATA="${__BU_OSX_ANDROID_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::getting-the-cpu(s)-architecture's-data";
 
 # ·······························
 # Getting the CPU's architecture.
@@ -248,7 +298,10 @@ function BU.Hardware.OSX.CPU.IsArchRISCV()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.OSX.CPU.GetArch()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -257,8 +310,14 @@ function BU.Hardware.OSX.CPU.GetArch()              { if BU.Main.CMDS.GetCommand
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
+#### DEBUG ID : "cpu's-cores"
+
+declare -r __BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="cpu::osx::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
+## DEBUG ID : "checking-the-cpu(s)-cores-data"
+
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_THE_CPUS_CORES_DATA="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES}::checking-the-cpu(s)-cores-data";
 
 # ·································
 # Checking if the CPU is mono-core.
@@ -267,7 +326,10 @@ function BU.Hardware.OSX.CPU.GetArch()              { if BU.Main.CMDS.GetCommand
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.IsMonocore()            { return 0; }
+function BU.Hardware.OSX.CPU.IsMonocore()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -280,7 +342,10 @@ function BU.Hardware.OSX.CPU.IsMonocore()            { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.OSX.CPU.GetCoresNumber()
+{
+    return 0;
+}
 
 # ····································
 # Getting the number of logical cores.
@@ -289,7 +354,10 @@ function BU.Hardware.OSX.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetLogicalCoresNumber()    { return 0; }
+function BU.Hardware.OSX.CPU.GetLogicalCoresNumber()
+{
+    return 0;
+}
 
 # ·····································
 # Getting the number of physical cores.
@@ -298,7 +366,10 @@ function BU.Hardware.OSX.CPU.GetLogicalCoresNumber()    { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetPhysicalCoresNumber()   { return 0; }
+function BU.Hardware.OSX.CPU.GetPhysicalCoresNumber()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -321,7 +392,10 @@ function BU.Hardware.OSX.CPU.GetPhysicalCoresNumber()   { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
+function BU.Hardware.OSX.CPU.GetClockFrequency()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -349,7 +423,10 @@ function BU.Hardware.OSX.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetAdressSizes()           { return 0; }
+function BU.Hardware.OSX.CPU.GetAdressSizes()
+{
+    return 0;
+}
 
 # ······························
 # Getting the number of sockets.
@@ -358,7 +435,10 @@ function BU.Hardware.OSX.CPU.GetAdressSizes()           { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.OSX.CPU.GetSocketsNumber()         { return 0; }
+function BU.Hardware.OSX.CPU.GetSocketsNumber()
+{
+    return 0;
+}
 
 ## ==============================================
 

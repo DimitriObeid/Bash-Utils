@@ -84,12 +84,12 @@ fi; echo >&2; exit 1; fi
 #### CPU'S GENERAL INFORMATIONS
 #### DEBUG ID : "cpu's-general-informations"
 
-declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu-bsd::cpu's-general-informations";
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu::bsd::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
 
-declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
 
 
 
@@ -97,6 +97,8 @@ declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF
 
 ## GETTING THE CPU(s) GENERAL DATA
 ## DEBUG ID : "getting-the-cpu(s)general-data";
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__GETTING_THE_CPUS_DATA="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::getting-the-cpu(s)general-data";
 
 # ················································································
 # Getting every informations about the computer's CPU-related hardware components.
@@ -117,7 +119,10 @@ function BU.Hardware.BSD.CPU.GetHardwareInfos()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
+function BU.Hardware.BSD.CPU.GetInfos()
+{
+    return 0;
+}
 
 # ·························
 # Getting the CPU's vendor.
@@ -126,7 +131,10 @@ function BU.Hardware.BSD.CPU.GetInfos()                 { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.BSD.CPU.GetVendor()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -135,8 +143,14 @@ function BU.Hardware.BSD.CPU.GetVendor()                { if BU.Main.CMDS.GetCom
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
+#### DEBUG ID : "cpu::cpu's-architecture"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="cpu::bsd::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
+## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHECKING_THE_ARCHITECTURE_OF_THE_CPUS="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::checking-the-architecture-of-the-cpu(s)";
 
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
@@ -145,8 +159,10 @@ function BU.Hardware.BSD.CPU.GetVendor()                { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.Is32Bits()                 { return 0; }
-
+function BU.Hardware.BSD.CPU.Is32Bits()
+{
+    return 0;
+}
 # ··············································
 # Checking if the CPU's architecture is 64 bits.
 
@@ -154,7 +170,10 @@ function BU.Hardware.BSD.CPU.Is32Bits()                 { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.Is64Bits()                 { return 0; }
+function BU.Hardware.BSD.CPU.Is64Bits()
+{
+    return 0;
+}
 
 # ····················································
 # Checking if the CPU's architecture is AArch 32 bits.
@@ -163,7 +182,10 @@ function BU.Hardware.BSD.CPU.Is64Bits()                 { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchAArch32()            { true; }
+function BU.Hardware.BSD.CPU.IsArchAArch32()
+{
+    return 0;
+}
 
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
@@ -172,7 +194,10 @@ function BU.Hardware.BSD.CPU.IsArchAArch32()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchAArch64()            { true; }
+function BU.Hardware.BSD.CPU.IsArchAArch64()
+{
+    return 0;
+}
 
 # ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
@@ -181,7 +206,10 @@ function BU.Hardware.BSD.CPU.IsArchAArch64()            { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchARM32()              { true; }
+function BU.Hardware.BSD.CPU.IsArchARM32()
+{
+    return 0;
+}
 
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
@@ -190,7 +218,10 @@ function BU.Hardware.BSD.CPU.IsArchARM32()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchARM64()              { true; }
+function BU.Hardware.BSD.CPU.IsArchARM64()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
@@ -199,7 +230,10 @@ function BU.Hardware.BSD.CPU.IsArchARM64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchAMD64()              { true; }
+function BU.Hardware.BSD.CPU.IsArchAMD64()
+{
+    return 0;
+}
 
 # ···········································
 # Checking if the CPU's architecture is i386.
@@ -208,7 +242,10 @@ function BU.Hardware.BSD.CPU.IsArchAMD64()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchi386()               { true; }
+function BU.Hardware.BSD.CPU.IsArchi386()
+{
+    return 0;
+}
 
 # ··············································
 # Checking if the CPU's architecture is PowerPC.
@@ -217,7 +254,10 @@ function BU.Hardware.BSD.CPU.IsArchi386()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchPPC()                { true; }
+function BU.Hardware.BSD.CPU.IsArchPPC()
+{
+    return 0;
+}
 
 # ···········································
 # Checking if the CPU's architecture is MIPS.
@@ -226,7 +266,10 @@ function BU.Hardware.BSD.CPU.IsArchPPC()                { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchMIPS()               { true; }
+function BU.Hardware.BSD.CPU.IsArchMIPS()
+{
+    return 0;
+}
 
 # ···············································
 # Checking if the CPU's architecture is RISC-V.
@@ -235,11 +278,17 @@ function BU.Hardware.BSD.CPU.IsArchMIPS()               { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsArchRISCV()              { true; }
+function BU.Hardware.BSD.CPU.IsArchRISCV()
+{
+    return 0;
+}
 
 ## ==============================================
 
 ## GETTING THE CPU(s) ARCHITECTURE'S DATA
+## DEBUG ID : "getting-the-cpu(s)-architecture's-data"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_THE_CPUS_ARCH_DATA="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::getting-the-cpu(s)-architecture's-data";
 
 # ·······························
 # Getting the CPU's architecture.
@@ -248,7 +297,10 @@ function BU.Hardware.BSD.CPU.IsArchRISCV()              { true; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetArch()              { if BU.Main.CMDS.GetCommandPath 'uname'; then BU.Main.Echo.Msg "$(uname -m)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.BSD.CPU.GetArch()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -257,8 +309,14 @@ function BU.Hardware.BSD.CPU.GetArch()              { if BU.Main.CMDS.GetCommand
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
+#### DEBUG ID : "cpu's-cores"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="cpu::bsd::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
+## DEBUG ID : "checking-the-cpu(s)-cores-data"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_THE_CPUS_CORES_DATA="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES}::checking-the-cpu(s)-cores-data";
 
 # ·································
 # Checking if the CPU is mono-core.
@@ -267,7 +325,10 @@ function BU.Hardware.BSD.CPU.GetArch()              { if BU.Main.CMDS.GetCommand
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.IsMonocore()            { return 0; }
+function BU.Hardware.BSD.CPU.IsMonocore()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -280,7 +341,10 @@ function BU.Hardware.BSD.CPU.IsMonocore()            { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCommandPath 'nproc'; then BU.Main.Echo.Msg "$(nproc)" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.BSD.CPU.GetCoresNumber()
+{
+    return 0;
+}
 
 # ····································
 # Getting the number of logical cores.
@@ -289,7 +353,10 @@ function BU.Hardware.BSD.CPU.GetCoresNumber()           { if BU.Main.CMDS.GetCom
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetLogicalCoresNumber()    { return 0; }
+function BU.Hardware.BSD.CPU.GetLogicalCoresNumber()
+{
+    return 0;
+}
 
 # ·····································
 # Getting the number of physical cores.
@@ -298,7 +365,10 @@ function BU.Hardware.BSD.CPU.GetLogicalCoresNumber()    { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetPhysicalCoresNumber()   { return 0; }
+function BU.Hardware.BSD.CPU.GetPhysicalCoresNumber()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -321,7 +391,10 @@ function BU.Hardware.BSD.CPU.GetPhysicalCoresNumber()   { return 0; }
 #   -
 
 # shellcheck disable=
-function BU.Hardware.BSD.CPU.GetClockFrequency()        { if BU.Main.CMDS.GetCommandPath 'lshw'; then if BU.Main.Checkings.CheckRootEUID; then BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n'; return 0; else return 1; fi; else return 1; fi; }
+function BU.Hardware.BSD.CPU.GetClockFrequency()
+{
+    return 0;
+}
 
 ## ==============================================
 

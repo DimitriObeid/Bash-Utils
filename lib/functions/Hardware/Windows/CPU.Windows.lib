@@ -84,12 +84,12 @@ fi; echo >&2; exit 1; fi
 #### CPU'S GENERAL INFORMATIONS
 #### DEBUG ID : "cpu's-general-informations"
 
-declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu-windows::cpu's-general-informations";
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu::windows::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
 
-declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
 
 
 
@@ -98,8 +98,10 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKIN
 ## GETTING THE CPU(s) GENERAL DATA
 ## DEBUG ID : "getting-the-cpu(s)general-data";
 
-# ················································································
-# Getting every informations about the computer's CPU-related hardware components.
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__GETTING_THE_CPUS_DATA="${__BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::getting-the-cpu(s)general-data";
+
+# ··········································································
+# Getting every informations about the PC's CPU-related hardware components.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -117,7 +119,10 @@ function BU.Hardware.Windows.CPU.GetHardwareInfos()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Windows.CPU.GetInfos()                 { if BU.Main.CMDS.GetCommandPath 'lscpu'; then lscpu; fi }
+function BU.Hardware.Windows.CPU.GetInfos()
+{
+    return 0;
+}
 
 # ·························
 # Getting the CPU's vendor.
@@ -126,7 +131,10 @@ function BU.Hardware.Windows.CPU.GetInfos()                 { if BU.Main.CMDS.Ge
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Windows.CPU.GetVendor()                { if BU.Main.CMDS.GetCommandPath 'lshw'; then BU.Main.Echo.Msg "$(lshw -class processor | grep )" '-n'; return 0; else return 1; fi; }
+function BU.Hardware.Windows.CPU.GetVendor()
+{
+    return 0;
+}
 
 ## ==============================================
 
@@ -135,8 +143,14 @@ function BU.Hardware.Windows.CPU.GetVendor()                { if BU.Main.CMDS.Ge
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
+#### DEBUG ID : "cpu::cpu's-architecture"
+
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="cpu::windows::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
+## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
+
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHECKING_THE_ARCHITECTURE_OF_THE_CPUS="${__BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::checking-the-architecture-of-the-cpu(s)";
 
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
@@ -273,6 +287,9 @@ function BU.Hardware.Windows.CPU.IsArchRISCV()
 ## ==============================================
 
 ## GETTING THE CPU(s) ARCHITECTURE'S DATA
+## DEBUG ID : "getting-the-cpu(s)-architecture's-data"
+
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_THE_CPUS_ARCH_DATA="${__BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::getting-the-cpu(s)-architecture's-data";
 
 # ·······························
 # Getting the CPU's architecture.
@@ -293,8 +310,14 @@ function BU.Hardware.Windows.CPU.GetArch()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
+#### DEBUG ID : "cpu's-cores"
+
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="cpu::windows::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
+## DEBUG ID : "checking-the-cpu(s)-cores-data"
+
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_THE_CPUS_CORES_DATA="${__BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES}::checking-the-cpu(s)-cores-data";
 
 # ·································
 # Checking if the CPU is mono-core.

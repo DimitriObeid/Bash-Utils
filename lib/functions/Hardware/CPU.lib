@@ -89,7 +89,7 @@ declare -r __BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu::
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
 
-declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
+declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__CHECKING_IF_THE_CPU_CORRESPONDS_TO_A_CERTAIN_VALUE="${__BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::checking-if-the-cpu-corresponds-to-a-certain-value";
 
 
 
@@ -98,8 +98,10 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL__CHECKING_IF_THE
 ## GETTING THE CPU(s) GENERAL DATA
 ## DEBUG ID : "getting-the-cpu(s)general-data";
 
-# ················································································
-# Getting every informations about the computer's CPU-related hardware components.
+declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__GETTING_THE_CPUS_DATA="${__BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS}::getting-the-cpu(s)general-data";
+
+# ··············································································
+# Getting every
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
@@ -141,8 +143,14 @@ function BU.Hardware.CPU.GetVendor()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
+#### DEBUG ID : "cpu::cpu's-architecture"
+
+declare -r __BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="cpu::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
+## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
+
+declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHECKING_THE_ARCHITECTURE_OF_THE_CPUS="${__BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::checking-the-architecture-of-the-cpu(s)";
 
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
@@ -279,6 +287,9 @@ function BU.Hardware.CPU.IsArchRISCV()
 ## ==============================================
 
 ## GETTING THE CPU(s) ARCHITECTURE'S DATA
+## DEBUG ID : "getting-the-cpu(s)-architecture's-data"
+
+declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_THE_CPUS_ARCH_DATA="${__BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::getting-the-cpu(s)-architecture's-data";
 
 # ·······························
 # Getting the CPU's architecture.
@@ -299,8 +310,14 @@ function BU.Hardware.CPU.GetArch()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
+#### DEBUG ID : "cpu's-cores"
+
+declare -r __BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="cpu::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
+## DEBUG ID : "checking-the-cpu(s)-cores-data"
+
+declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_THE_CPUS_CORES_DATA="${__BU_HARDWARE_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES}::checking-the-cpu(s)-cores-data";
 
 # ·································
 # Checking if the CPU is mono-core.
