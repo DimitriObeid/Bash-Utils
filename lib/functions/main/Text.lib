@@ -82,10 +82,10 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TEXT PROCESSING FUNCTIONS
-#### DEBUG ID : "text::text-processing-functions"
+#### DEBUG ID : "bu::main::text::text-processing-functions"
 
 # shellcheck disable=SC2034
-declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="text::text-processing-functions";
+declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS="bu::main::text::text-processing-functions";
 
 ## CUTTING TEXT
 ## DEBUG ID : "cutting-text"

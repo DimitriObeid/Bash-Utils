@@ -81,9 +81,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### VARIABLES VALUES FUNCTIONS
-#### DEBUG ID : "status::variables-values-functions"
+#### DEBUG ID : "bu::main::status::variables-values-functions"
 
-declare -r __BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="status::variables-values-functions";
+declare -r __BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS="bu::main::status::variables-values-functions";
 
 ## CHECKING VALUES
 ## DEBUG ID : "checking-values"

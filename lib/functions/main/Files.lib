@@ -79,9 +79,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### FILES PROCESSING FUNCTIONS
-## DEBUG ID : "files::files-processing-functions"
+## DEBUG ID : "bu::main::files::files-processing-functions"
 
-declare -r __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS="files::files-processing-functions";
+declare -r __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS="bu::main::files::files-processing-functions";
 
 ## PROCESSING FUNCTIONS
 ## DEBUG ID : "processing-functions"
@@ -1311,9 +1311,9 @@ function BU.Main.Files.GetLineFromTextFile()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### ARCHIVES PROCESSING FUNCTIONS
-#### DEBUG ID : "files::archive-processing-functions"
+#### DEBUG ID : "bu::main::files::archive-processing-functions"
 
-declare -r __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="files::archive-processing-functions";
+declare -r __BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS="bu::main::files::archive-processing-functions";
 
 ## (UN)COMPRESSION FUNCTIONS
 ## DEBUG ID : "(un)compression-functions"

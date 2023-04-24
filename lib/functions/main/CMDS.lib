@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### PROCCESSING COMMANDS
-#### DEBUG ID : "cmds::processing-commands"
+#### DEBUG ID : "bu::main::cmds::processing-commands"
 
-declare -r __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="cmds::processing-commands";
+declare -r __BU_MAIN_CMDS_LIB__CAT_DEBUG_ID__PROCESSING_COMMANDS="bu::main::cmds::processing-commands";
 
 ## GETTING COMMAND OUTPUTS
 ## DEBUG ID : "getting-command-output"

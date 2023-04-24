@@ -80,9 +80,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### HARD DRIVE'S FILE SYSTEM PROCESSING
-#### DEBUG ID : "filesystem::hard-drive-file-system-processing"
+#### DEBUG ID : "bu::main::filesystem::hard-drive-file-system-processing"
 
-declare -r __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="filesystem::hard-drive-file-system-processing";
+declare -r __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PROCESSING="bu::main::filesystem::hard-drive-file-system-processing";
 
 ## CHECKING FILE SYSTEM'S INFORMATIONS
 ## DEBUG ID : "checking-filesystem-informations"
@@ -545,9 +545,9 @@ function BU.Main.Filesystem.GetFSType()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PERMISSION AND OWNERSHIP PROCESSING
-#### DEBUG ID : "filesystem::permission-and-ownership-processing"
+#### DEBUG ID : "bu::main::filesystem::permission-and-ownership-processing"
 
-declare -r __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="filesystem::permission-and-ownership-processing";
+declare -r __BU_MAIN_FILESYSTEM_LIB__CAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_PROCESSING="bu::main::filesystem::permission-and-ownership-processing";
 
 ## NON-RECURSIVE PERMISSION AND OWNERSHIP PROCESSING
 ## DEBUG ID : "non-recursive"

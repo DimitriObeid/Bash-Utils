@@ -81,9 +81,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### DIRECTORIES FUNCTIONS
-#### DEBUG ID : "directories::directories-functions"
+#### DEBUG ID : "bu::main::directories::directories-functions"
 
-declare -r __BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="directories::directories-functions";
+declare -r __BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS="bu::main::directories::directories-functions";
 
 ## PROCESSING FUNCTIONS
 ## DEBUG ID : "processing-functions"

@@ -81,9 +81,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### DEBUG FUNCTIONS
-#### DEBUG ID : "devtools::debug-functions"
+#### DEBUG ID : "bu::main::devtools::debug-functions"
 
-declare -r __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='devtools::debug-functions';
+declare -r __BU_MAIN_DEVTOOLS_LIB__CAT_DEBUG_ID__DEBUG_FUNCTIONS='bu::main::devtools::debug-functions';
 
 ## SHELLCHECK
 ## DEBUG ID : "shellcheck"

@@ -80,9 +80,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CONVERSIONS
-#### DEBUG ID : "basicmathsconversions"
+#### DEBUG ID : "bu::main::basicmaths::conversions"
 
-declare -r __BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="basicmaths::conversions";
+declare -r __BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS="bu::main::basicmaths::conversions";
 
 ## NUMERIC CONVERSIONS
 ## DEBUG ID : "numeric-conversions"
@@ -93,7 +93,7 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVE
 # Converts a byte count to a human readable format in IEC binary notation (base-1024 (eg : GiB)), rounded to two
 # decimal places for anything larger than a byte. Switchable to padded format and base-1000 (eg : MB) if desired.
 
-# Initial source of this AWK script (since it's not mine, plus I added more informations as comments and the localization) :
+# Initial source of this AWK script (since it's not mine, plus I added more informations as comments, as well as the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -113,7 +113,7 @@ function BU.Main.BasicMaths.BytesToHuman()
     local L_BYTES="${1:-0}"     # ARG TYPE : Int                - REQUIRED | DEFAULT VAL : 0        - DESC : Raw size in bytes.
     local L_PAD="${2:-no}"      # ARG TYPE : String             - REQUIRED | DEFAULT VAL : no       - DESC : Allow result display padding.
     local L_BASE="${3:-1024}"   # ARG TYPE : Int                - REQUIRED | DEFAULT VAL : 1024     - DESC : Base (1000 (metric) or 1024 (binary notation))
-    local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : en       - DESC : Language, for localizing the byte count (default language : English).
+    local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : en       - DESC : Localization of the byte count (default language : English).
 
     #**** Code ****
     if [[ "${L_PAD^^}" == N?(I|U)L?(L) ]]; then L_PAD='no'; fi

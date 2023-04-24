@@ -80,9 +80,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### LOCALE DISPLAY FUNCTIONS
-#### DEBUG ID : "locale::locale-display-functions"
+#### DEBUG ID : "bu::main::locale::locale-display-functions"
 
-declare -r __BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS="locale::locale-display-functions";
+declare -r __BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS="bu::main::locale::locale-display-functions";
 
 ## OPTIMIZATION FUNCTIONS
 ## DEBUG ID : "optimization-functions"

@@ -81,7 +81,7 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### COLORS
-#### DEBUG ID : colors::setting-colors
+#### DEBUG ID : "bu::main::textformat::colors"
 
 declare -r __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS="textformat::colors";
 
@@ -493,9 +493,9 @@ function BU.Main.TextFormat.Itoa()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT
-#### DEBUG ID : text
+#### DEBUG ID : "bu::main::textformat::text"
 
-declare -r __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='textformat:text';
+declare -r __BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT='bu::main::textformat:text';
 
 ## SETTING TEXT FORMAT
 ## DEBUG ID : setting-text-format

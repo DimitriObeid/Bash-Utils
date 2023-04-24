@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### TERMINAL INTERACTION FUNCTIONS
-#### DEBUG ID : "posixterm::terminal-interaction-functions"
+#### DEBUG ID : "bu::main::posixterm::terminal-interaction-functions"
 
-declare -r __BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS="posixterm::terminal-interaction-functions";
+declare -r __BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS="bu::main::posixterm::terminal-interaction-functions";
 
 ## DISPLAYING TEXT AND MORE WHILE A TASK IS ONGOING
 ## DEBUG ID : "displaying-text-and-more-while-a-task-is-ongoing"

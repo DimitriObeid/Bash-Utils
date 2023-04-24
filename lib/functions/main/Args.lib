@@ -81,10 +81,10 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### ARGUMENT VALUES CHECKING : UTILITES FUNCTIONS
-#### DEBUG ID : "args::argument-values-checking--utilities-functions"
+#### DEBUG ID : "bu::main::args::argument-values-checking--utilities-functions"
 
 # shellcheck disable=SC2034
-declare -r __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="args::argument-values-checking--utilities-functions";
+declare -r __BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS="bu::main::args::argument-values-checking--utilities-functions";
 
 ## PATH CHECKING FUNCTIONS
 ## DEBUG ID : "path-checking-functions"

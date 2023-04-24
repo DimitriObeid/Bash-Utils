@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### ANDROID
-#### DEBUG ID : "os::android"
+#### DEBUG ID : "bu::main::os::android"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID="os::android";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__ANDROID="bu::main::os::android";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -267,9 +267,9 @@ function BU.Main.OS.GetAndroidOSVersion()           { BU.Main.OS.IsAndroid && ge
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### BSD (GENERAL)
-#### DEBUG ID : "os::bsd"
+#### DEBUG ID : "bu::main::os::bsd"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="os::bsd";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__BSD="bu::main::os::bsd";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -300,9 +300,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__BSD__GATHERING_INFORMATIONS="${__B
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### BSD (FREE BSD)
-#### DEBUG ID : "os::free-bsd"
+#### DEBUG ID : "bu::main::os::free-bsd"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD="os::free-bsd";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__FREE_BSD="bu::main::os::free-bsd";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -328,9 +328,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__FREE_BSD__GATHERING_INFORMATIONS="
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### BSD (NET BSD)
-#### DEBUG ID : "os::free-bsd"
+#### DEBUG ID : "bu::main::os::free-bsd"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD="os::net-bsd";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__NET_BSD="bu::main::os::net-bsd";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -357,9 +357,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__NET_BSD__GATHERING_INFORMATIONS="$
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### BSD (OPEN BSD)
-#### DEBUG ID : "os::open-bsd"
+#### DEBUG ID : "bu::main::os::open-bsd"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD="os::open-bsd";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OPEN_BSD="bu::main::os::open-bsd";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-information
@@ -385,9 +385,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__GATHERING_INFORMATIONS="
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CHROME OS
-#### DEBUG ID : "os::chrome"
+#### DEBUG ID : "bu::main::os::chrome"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS="os::chrome";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__CHROME_OS="bu::main::os::chrome";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -414,9 +414,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__GATHERING_INFORMATIONS=
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### HAIKU
-#### DEBUG ID : "os::haiku"
+#### DEBUG ID : "bu::main::os::haiku"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU="os::haiku";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__HAIKU="bu::main::os::haiku";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -443,9 +443,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__HAIKU__GATHERING_INFORMATIONS="${_
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### GENERAL OS FUNCTIONS
-#### DEBUG ID : "os::general-os-functions"
+#### DEBUG ID : "bu::main::os::general-os-functions"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT="os::general-os-functions";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT="bu::main::os::general-os-functions";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -555,9 +555,9 @@ function BU.Main.OS.PrintCurrentOS()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### LINUX
-#### DEBUG ID : os::linux
+#### DEBUG ID : bu::main::os::linux
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX="os::linux";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__LINUX="bu::main::os::linux";
 
 ## SPECIFIC OS VERSIONS CHECKINGS FUNCTIONS
 ## DEBUG ID : specific-os-versions-checkings
@@ -1320,9 +1320,9 @@ function BU.Main.OS.GetLinuxKernelConfiguration()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### OSX
-#### DEBUG ID : "os::osx"
+#### DEBUG ID : "bu::main::os::osx"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX="os::osx";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX="bu::main::os::osx";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -1406,9 +1406,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__GATHERING_INFORMATIONS="${__B
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### VIRTUAL MACHINES
-#### DEBUG ID : "os::vms"
+#### DEBUG ID : "bu::main::os::vms"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS="os::vms";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__VMS="bu::main::os::vms";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"
@@ -1481,9 +1481,9 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__VMS__GATHERING_INFORMATIONS="${__B
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### WINDOWS
-#### DEBUG ID : "os::windows"
+#### DEBUG ID : "bu::main::os::windows"
 
-declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS="os::windows";
+declare -r __BU_MAIN_OS_LIB__CAT_DEBUG_ID__WINDOWS="bu::main::os::windows";
 
 ## CHECKING INFORMATIONS
 ## DEBUG ID : "checking-informations"

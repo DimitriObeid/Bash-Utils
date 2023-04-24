@@ -102,9 +102,9 @@ fi; echo >&2; exit 1; fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### READING CASE STATEMENTS BY FUNCTIONS
-#### DEBUG ID : "inputs::reading-case-statements-by-functions"
+#### DEBUG ID : "bu::main::inputs::reading-case-statements-by-functions"
 
-declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="inputs::reading-case-statements-by-functions";
+declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_INPUTS_STATEMENTS_BY_FUNCTIONS="bu::main::inputs::reading-case-statements-by-functions";
 
 ## "Directories.lib" FILE
 ## DEBUG ID : "directories.lib-file"
@@ -251,9 +251,9 @@ function BU.Main.Inputs.Read_Errors.HandleErrors()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### READING USER'S INPUTS OUTSIDE "CASE" STATEMENTS
-#### DEBUG ID : "inputs::reading-user's-inputs-outside-case-statements"
+#### DEBUG ID : "bu::main::inputs::reading-user's-inputs-outside-case-statements"
 
-declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS="inputs::reading-user's-inputs-outside-case-statements";
+declare -r __BU_MAIN_INPUTS_LIB__CAT_DEBUG_ID__READING_USER_INPUTS_OUTSIDE_CASE_STATEMENTS="bu::main::inputs::reading-user's-inputs-outside-case-statements";
 
 ## SANITIZING USER'S INPUTS BEFORE EXECUTION
 ## DEBUG ID : "sanitizing-user-inputs-before-execution"

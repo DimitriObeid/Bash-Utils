@@ -81,9 +81,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### VARIABLES VALUES CHECKINGS
-#### DEBUG ID : "checkings::variable-values-checkings"
+#### DEBUG ID : "bu::main::checkings::variable-values-checkings"
 
-declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="checkings::variable-values-checkings";
+declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS="bu::main::checkings::variable-values-checkings";
 
 ## ARRAYS CHECKINGS
 ## DEBUG ID : "array-checkings"
@@ -624,9 +624,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### DIFFERENT CHECKINGS
-#### DEBUG ID : "checkings::different-checkings"
+#### DEBUG ID : "bu::main::checkings::different-checkings"
 
-declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="checkings::different-checkings";
+declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS="bu::main::checkings::different-checkings";
 
 ## CHECKING FOR IDENTIFIANTS
 ## DEBUG ID : "checking-for-identifiants"
@@ -822,9 +822,9 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PATHS CHECKINGS
-#### DEBUG ID : "Checkings::paths-checkings"
+#### DEBUG ID : "bu::main::checkings::paths-checkings"
 
-declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="checkings::paths-checkings";
+declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS="bu::main::checkings::paths-checkings";
 
 ## DIRECTORIES PATHS CHECKINGS
 ## DEBUG ID : "directories-paths-checkings"
@@ -1523,9 +1523,9 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT CHECKINGS
-#### DEBUG ID : "Checkings::text-checkings"
+#### DEBUG ID : "bu::main::checkings::text-checkings"
 
-declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="Checkings::text-checkings";
+declare -r __BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS="bu::main::checkings::text-checkings";
 
 ## FORMATTING CHECKINGS
 ## DEBUG ID : "formatting-checkings"

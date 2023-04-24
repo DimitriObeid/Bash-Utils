@@ -84,9 +84,9 @@ fi; echo >&2; exit 1; fi
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### ERRORS HANDLING FUNCTIONS
-#### DEBUG ID : "errors::errors-handling-functions"
+#### DEBUG ID : "bu::main::errors::errors-handling-functions"
 
-declare -r __BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="errors::errors-handling-functions";
+declare -r __BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS="bu::main::errors::errors-handling-functions";
 
 ## CLASSIC ERRORS HANDLING
 ## DEBUG ID : "classic-errors-handling"

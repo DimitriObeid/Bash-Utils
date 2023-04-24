@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### PRINTING FORMATTED STRINGS
-#### DEBUG ID : echo::printing-formatted-strings
+#### DEBUG ID : "bu::main::echo::printing-formatted-strings"
 
-declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="echo::printing-formatted-strings";
+declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS="bu::main::echo::printing-formatted-strings";
 
 ## DEBUGGING
 ## DEBUG ID : debugging
@@ -471,9 +471,9 @@ function BU.Main.Echo.__EchoCPLS()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### TEXT DISPLAYING
-#### DEBUG ID : echo::text-displaying
+#### DEBUG ID : "bu::main::echo::text-displaying"
 
-declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="echo::text-displaying";
+declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="bu::main::echo::text-displaying";
 
 ## DISPLAYING A CONTEXT MESSAGE
 ## DEBUG ID : displaying-a-context-message
@@ -1321,9 +1321,9 @@ function BU.Main.Echo.Yellow()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### LINE BREAKS
-#### DEBUG ID : "echo::line-breaks"
+#### DEBUG ID : "bu::main::echo::line-breaks"
 
-declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="echo::line-breaks";
+declare -r __BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__LINE_BREAKS="bu::main::echo::line-breaks";
 
 ## LINE BREAKS ACCORDING TO THE "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" VARIABLE VALUE
 ## DEBUG ID : "line-breaks-according-to-the-project-log-file-var-val"
