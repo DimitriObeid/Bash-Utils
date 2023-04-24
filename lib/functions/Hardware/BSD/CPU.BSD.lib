@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CPU'S GENERAL INFORMATIONS
-#### DEBUG ID : "cpu's-general-informations"
+#### DEBUG ID : "bu::hardware::cpu::bsd::cpu's-general-informations"
 
-declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="cpu::bsd::cpu's-general-informations";
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="bu::hardware::cpu::bsd::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
@@ -143,9 +143,9 @@ function BU.Hardware.BSD.CPU.GetVendor()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
-#### DEBUG ID : "cpu::cpu's-architecture"
+#### DEBUG ID : "bu::hardware::cpu::bsd::cpu's-architecture"
 
-declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="cpu::bsd::cpu's-architecture";
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="bu::hardware::cpu::bsd::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
 ## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
@@ -309,9 +309,9 @@ function BU.Hardware.BSD.CPU.GetArch()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
-#### DEBUG ID : "cpu's-cores"
+#### DEBUG ID : "bu::hardware::cpu::bsd::cpu's-cores"
 
-declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="cpu::bsd::cpu's-cores";
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="bu::hardware::cpu::bsd::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
 ## DEBUG ID : "checking-the-cpu(s)-cores-data"
@@ -377,12 +377,23 @@ function BU.Hardware.BSD.CPU.GetPhysicalCoresNumber()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CLOCK
+#### DEBUG ID : "bu::hardware::cpu::bsd::cpu's-clock"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CLOCK="bu::hardware::cpu::bsd::cpu's-clock";
 
 ## CHECKING THE CPU'S CLOCK INFORMATIONS
+## DEBUG ID : "checking-the-cpu's-clock-information"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CLOCK__CHECKING_THE_CPUS_CLOCK_INFORMATIONS="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CLOCK}::checking-the-cpu's-clock-information";
+
+
 
 ## ==============================================
 
 ## GETTING THE CPU'S CLOCK DATA
+## DEBUG ID : "getting-the-cpu's-clock-data"
+
+declare -r __BU_HARDWARE_BSD_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CLOCK__GETTING_THE_CPUS_CLOCK_DATA="${__BU_HARDWARE_BSD_CPU_LIB__CAT_DEBUG_ID__CPUS_CLOCK}::getting-the-cpu's-clock-data";
 
 # ····························
 # Getting the clock frequency.
