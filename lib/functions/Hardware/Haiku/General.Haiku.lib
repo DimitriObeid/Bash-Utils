@@ -91,27 +91,27 @@ fi; echo >&2; exit 1; fi
 # Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.Haiku.Audio.GetHardwareInfos()        -> Hardware -> Audio.Haiku.lib
-#   - BU.Hardware.Haiku.Battery.GetHardwareInfos()      -> Hardware -> Battery.Haiku.lib
-#   - BU.Hardware.Haiku.Bluetooth.GetHardwareInfos()    -> Hardware -> Bluetooth.Haiku.lib
-#   - BU.Hardware.Haiku.CPU.GetHardwareInfos()          -> Hardware -> CPU.Haiku.lib
-#   - BU.Hardware.Haiku.Drive.GetHardwareInfos()        -> Hardware -> Drive.Haiku.lib
-#   - BU.Hardware.Haiku.Fan.GetHardwareInfos()          -> Hardware -> Fan.Haiku.lib
-#   - BU.Hardware.Haiku.FloppyDisk.GetHardwareInfos()   -> Hardware -> FloppyDisk.Haiku.lib
-#   - BU.Hardware.Haiku.General.GetHardwareInfos()      -> Hardware -> General.Haiku.lib (this file)
-#   - BU.Hardware.Haiku.GPU.GetHardwareInfos()          -> Hardware -> GPU.Haiku.lib
-#   - BU.Hardware.Haiku.HDMI.GetHardwareInfos()         -> Hardware -> HDMI.Haiku.lib
-#   - BU.Hardware.Haiku.Keyboard.GetHardwareInfos()     -> Hardware -> Keyboard.Haiku.lib
-#   - BU.Hardware.Haiku.Memory.GetHardwareInfos()       -> Hardware -> Memory.Haiku.lib
-#   - BU.Hardware.Haiku.Motherboard.GetHardwareInfos()  -> Hardware -> Motherboard.Haiku.lib
-#   - BU.Hardware.Haiku.Mouse.GetHardwareInfos()        -> Hardware -> Mouse.Haiku.lib
-#   - BU.Hardware.Haiku.PCI.GetHardwareInfos()          -> Hardware -> PCI.Haiku.lib
-#   - BU.Hardware.Haiku.Ports.GetHardwareInfos()        -> Hardware -> Ports.Haiku.lib
-#   - BU.Hardware.Haiku.Screen.GetHardwareInfos()       -> Hardware -> Screen.Haiku.lib
-#   - BU.Hardware.Haiku.SDCard.GetHardwareInfos()       -> Hardware -> SDCard.Haiku.lib
-#   - BU.Hardware.Haiku.Touchpad.GetHardwareInfos()     -> Hardware -> Touchpad.Haiku.lib
-#   - BU.Hardware.Haiku.USB.GetHardwareInfos()          -> Hardware -> USB.Haiku.lib
-#   - BU.Hardware.Haiku.VGA.GetHardwareInfos()          -> Hardware -> VGA.Haiku.lib
+#   - BU.Hardware.Haiku.Audio.GetHardwareInfos()        -> Hardware -> Haiku -> Audio.Haiku.lib
+#   - BU.Hardware.Haiku.Battery.GetHardwareInfos()      -> Hardware -> Haiku -> Battery.Haiku.lib
+#   - BU.Hardware.Haiku.Bluetooth.GetHardwareInfos()    -> Hardware -> Haiku -> Bluetooth.Haiku.lib
+#   - BU.Hardware.Haiku.CPU.GetHardwareInfos()          -> Hardware -> Haiku -> CPU.Haiku.lib
+#   - BU.Hardware.Haiku.Drive.GetHardwareInfos()        -> Hardware -> Haiku -> Drive.Haiku.lib
+#   - BU.Hardware.Haiku.Fan.GetHardwareInfos()          -> Hardware -> Haiku -> Fan.Haiku.lib
+#   - BU.Hardware.Haiku.FloppyDisk.GetHardwareInfos()   -> Hardware -> Haiku -> FloppyDisk.Haiku.lib
+#   - BU.Hardware.Haiku.General.GetHardwareInfos()      -> Hardware -> Haiku -> General.Haiku.lib (this file)
+#   - BU.Hardware.Haiku.GPU.GetHardwareInfos()          -> Hardware -> Haiku -> GPU.Haiku.lib
+#   - BU.Hardware.Haiku.HDMI.GetHardwareInfos()         -> Hardware -> Haiku -> HDMI.Haiku.lib
+#   - BU.Hardware.Haiku.Keyboard.GetHardwareInfos()     -> Hardware -> Haiku -> Keyboard.Haiku.lib
+#   - BU.Hardware.Haiku.Memory.GetHardwareInfos()       -> Hardware -> Haiku -> Memory.Haiku.lib
+#   - BU.Hardware.Haiku.Motherboard.GetHardwareInfos()  -> Hardware -> Haiku -> Motherboard.Haiku.lib
+#   - BU.Hardware.Haiku.Mouse.GetHardwareInfos()        -> Hardware -> Haiku -> Mouse.Haiku.lib
+#   - BU.Hardware.Haiku.PCI.GetHardwareInfos()          -> Hardware -> Haiku -> PCI.Haiku.lib
+#   - BU.Hardware.Haiku.Ports.GetHardwareInfos()        -> Hardware -> Haiku -> Ports.Haiku.lib
+#   - BU.Hardware.Haiku.Screen.GetHardwareInfos()       -> Hardware -> Haiku -> Screen.Haiku.lib
+#   - BU.Hardware.Haiku.SDCard.GetHardwareInfos()       -> Hardware -> Haiku -> SDCard.Haiku.lib
+#   - BU.Hardware.Haiku.Touchpad.GetHardwareInfos()     -> Hardware -> Haiku -> Touchpad.Haiku.lib
+#   - BU.Hardware.Haiku.USB.GetHardwareInfos()          -> Hardware -> Haiku -> USB.Haiku.lib
+#   - BU.Hardware.Haiku.VGA.GetHardwareInfos()          -> Hardware -> Haiku -> VGA.Haiku.lib
 
 # shellcheck disable=
 function BU.Hardware.Haiku.General.GetAllHardwareInfos()
@@ -151,10 +151,10 @@ function BU.Hardware.Haiku.General.GetAllHardwareInfos()
 # Getting every general hardware components (like the computer's chassis, etc...).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.Haiku.General.GetChassis()        -> Hardware -> General.Haiku.lib (this file)
-#   - BU.Hardware.Haiku.General.GetChassisType()    -> Hardware -> General.Haiku.lib (this file)
-#   - BU.Hardware.Haiku.General.GetMachineID()      -> Hardware -> General.Haiku.lib (this file)
-#   - BU.Hardware.Haiku.General.GetBootID()         -> Hardware -> General.Haiku.lib (this file)
+#   - BU.Hardware.Haiku.General.GetChassis()        -> Hardware -> Haiku -> General.Haiku.lib (this file)
+#   - BU.Hardware.Haiku.General.GetChassisType()    -> Hardware -> Haiku -> General.Haiku.lib (this file)
+#   - BU.Hardware.Haiku.General.GetMachineID()      -> Hardware -> Haiku -> General.Haiku.lib (this file)
+#   - BU.Hardware.Haiku.General.GetBootID()         -> Hardware -> Haiku -> General.Haiku.lib (this file)
 
 # shellcheck disable=
 function BU.Hardware.Haiku.General.GetHardwareInfos()

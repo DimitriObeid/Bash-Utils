@@ -91,27 +91,27 @@ fi; echo >&2; exit 1; fi
 # Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.BSD.Audio.GetHardwareInfos()          -> Hardware -> Audio.BSD.lib
-#   - BU.Hardware.BSD.Battery.GetHardwareInfos()        -> Hardware -> Battery.BSD.lib
-#   - BU.Hardware.BSD.Bluetooth.GetHardwareInfos()      -> Hardware -> Bluetooth.BSD.lib
-#   - BU.Hardware.BSD.CPU.GetHardwareInfos()            -> Hardware -> CPU.BSD.lib
-#   - BU.Hardware.BSD.Drive.GetHardwareInfos()          -> Hardware -> Drive.BSD.lib
-#   - BU.Hardware.BSD.Fan.GetHardwareInfos()            -> Hardware -> Fan.BSD.lib
-#   - BU.Hardware.BSD.FloppyDisk.GetHardwareInfos()     -> Hardware -> FloppyDisk.BSD.lib
-#   - BU.Hardware.BSD.General.GetHardwareInfos()        -> Hardware -> General.BSD.lib (this file)
-#   - BU.Hardware.BSD.GPU.GetHardwareInfos()            -> Hardware -> GPU.BSD.lib
-#   - BU.Hardware.BSD.HDMI.GetHardwareInfos()           -> Hardware -> HDMI.BSD.lib
-#   - BU.Hardware.BSD.Keyboard.GetHardwareInfos()       -> Hardware -> Keyboard.BSD.lib
-#   - BU.Hardware.BSD.Memory.GetHardwareInfos()         -> Hardware -> Memory.BSD.lib
-#   - BU.Hardware.BSD.Motherboard.GetHardwareInfos()    -> Hardware -> Motherboard.BSD.lib
-#   - BU.Hardware.BSD.Mouse.GetHardwareInfos()          -> Hardware -> Mouse.BSD.lib
-#   - BU.Hardware.BSD.PCI.GetHardwareInfos()            -> Hardware -> PCI.BSD.lib
-#   - BU.Hardware.BSD.Ports.GetHardwareInfos()          -> Hardware -> Ports.BSD.lib
-#   - BU.Hardware.BSD.Screen.GetHardwareInfos()         -> Hardware -> Screen.BSD.lib
-#   - BU.Hardware.BSD.SDCard.GetHardwareInfos()         -> Hardware -> SDCard.BSD.lib
-#   - BU.Hardware.BSD.Touchpad.GetHardwareInfos()       -> Hardware -> Touchpad.BSD.lib
-#   - BU.Hardware.BSD.USB.GetHardwareInfos()            -> Hardware -> USB.BSD.lib
-#   - BU.Hardware.BSD.VGA.GetHardwareInfos()            -> Hardware -> VGA.BSD.lib
+#   - BU.Hardware.BSD.Audio.GetHardwareInfos()          -> Hardware -> BSD -> Audio.BSD.lib
+#   - BU.Hardware.BSD.Battery.GetHardwareInfos()        -> Hardware -> BSD -> Battery.BSD.lib
+#   - BU.Hardware.BSD.Bluetooth.GetHardwareInfos()      -> Hardware -> BSD -> Bluetooth.BSD.lib
+#   - BU.Hardware.BSD.CPU.GetHardwareInfos()            -> Hardware -> BSD -> CPU.BSD.lib
+#   - BU.Hardware.BSD.Drive.GetHardwareInfos()          -> Hardware -> BSD -> Drive.BSD.lib
+#   - BU.Hardware.BSD.Fan.GetHardwareInfos()            -> Hardware -> BSD -> Fan.BSD.lib
+#   - BU.Hardware.BSD.FloppyDisk.GetHardwareInfos()     -> Hardware -> BSD -> FloppyDisk.BSD.lib
+#   - BU.Hardware.BSD.General.GetHardwareInfos()        -> Hardware -> BSD -> General.BSD.lib (this file)
+#   - BU.Hardware.BSD.GPU.GetHardwareInfos()            -> Hardware -> BSD -> GPU.BSD.lib
+#   - BU.Hardware.BSD.HDMI.GetHardwareInfos()           -> Hardware -> BSD -> HDMI.BSD.lib
+#   - BU.Hardware.BSD.Keyboard.GetHardwareInfos()       -> Hardware -> BSD -> Keyboard.BSD.lib
+#   - BU.Hardware.BSD.Memory.GetHardwareInfos()         -> Hardware -> BSD -> Memory.BSD.lib
+#   - BU.Hardware.BSD.Motherboard.GetHardwareInfos()    -> Hardware -> BSD -> Motherboard.BSD.lib
+#   - BU.Hardware.BSD.Mouse.GetHardwareInfos()          -> Hardware -> BSD -> Mouse.BSD.lib
+#   - BU.Hardware.BSD.PCI.GetHardwareInfos()            -> Hardware -> BSD -> PCI.BSD.lib
+#   - BU.Hardware.BSD.Ports.GetHardwareInfos()          -> Hardware -> BSD -> Ports.BSD.lib
+#   - BU.Hardware.BSD.Screen.GetHardwareInfos()         -> Hardware -> BSD -> Screen.BSD.lib
+#   - BU.Hardware.BSD.SDCard.GetHardwareInfos()         -> Hardware -> BSD -> SDCard.BSD.lib
+#   - BU.Hardware.BSD.Touchpad.GetHardwareInfos()       -> Hardware -> BSD -> Touchpad.BSD.lib
+#   - BU.Hardware.BSD.USB.GetHardwareInfos()            -> Hardware -> BSD -> USB.BSD.lib
+#   - BU.Hardware.BSD.VGA.GetHardwareInfos()            -> Hardware -> BSD -> VGA.BSD.lib
 
 # shellcheck disable=
 function BU.Hardware.BSD.General.GetAllHardwareInfos()
@@ -151,10 +151,10 @@ function BU.Hardware.BSD.General.GetAllHardwareInfos()
 # Getting every general hardware components (like the computer's chassis, etc...).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.BSD.General.GetChassis()      -> Hardware -> General.BSD.lib (this file)
-#   - BU.Hardware.BSD.General.GetChassisType()  -> Hardware -> General.BSD.lib (this file)
-#   - BU.Hardware.BSD.General.GetMachineID()    -> Hardware -> General.BSD.lib (this file)
-#   - BU.Hardware.BSD.General.GetBootID()       -> Hardware -> General.BSD.lib (this file)
+#   - BU.Hardware.BSD.General.GetChassis()      -> Hardware -> BSD -> General.BSD.lib (this file)
+#   - BU.Hardware.BSD.General.GetChassisType()  -> Hardware -> BSD -> General.BSD.lib (this file)
+#   - BU.Hardware.BSD.General.GetMachineID()    -> Hardware -> BSD -> General.BSD.lib (this file)
+#   - BU.Hardware.BSD.General.GetBootID()       -> Hardware -> BSD -> General.BSD.lib (this file)
 
 # shellcheck disable=
 function BU.Hardware.BSD.General.GetHardwareInfos()

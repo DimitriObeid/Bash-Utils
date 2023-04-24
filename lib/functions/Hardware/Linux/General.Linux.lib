@@ -91,27 +91,27 @@ fi; echo >&2; exit 1; fi
 # Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.Linux.Audio.GetHardwareInfos()        -> Hardware -> Audio.Linux.lib
-#   - BU.Hardware.Linux.Battery.GetHardwareInfos()      -> Hardware -> Battery.Linux.lib
-#   - BU.Hardware.Linux.Bluetooth.GetHardwareInfos()    -> Hardware -> Bluetooth.Linux.lib
-#   - BU.Hardware.Linux.CPU.GetHardwareInfos()          -> Hardware -> CPU.Linux.lib
-#   - BU.Hardware.Linux.Drive.GetHardwareInfos()        -> Hardware -> Drive.Linux.lib
-#   - BU.Hardware.Linux.Fan.GetHardwareInfos()          -> Hardware -> Fan.Linux.lib
-#   - BU.Hardware.Linux.FloppyDisk.GetHardwareInfos()   -> Hardware -> FloppyDisk.Linux.lib
-#   - BU.Hardware.Linux.General.GetHardwareInfos()      -> Hardware -> General.Linux.lib (this file)
-#   - BU.Hardware.Linux.GPU.GetHardwareInfos()          -> Hardware -> GPU.Linux.lib
-#   - BU.Hardware.Linux.HDMI.GetHardwareInfos()         -> Hardware -> HDMI.Linux.lib
-#   - BU.Hardware.Linux.Keyboard.GetHardwareInfos()     -> Hardware -> Keyboard.Linux.lib
-#   - BU.Hardware.Linux.Memory.GetHardwareInfos()       -> Hardware -> Memory.Linux.lib
-#   - BU.Hardware.Linux.Motherboard.GetHardwareInfos()  -> Hardware -> Motherboard.Linux.lib
-#   - BU.Hardware.Linux.Mouse.GetHardwareInfos()        -> Hardware -> Mouse.Linux.lib
-#   - BU.Hardware.Linux.PCI.GetHardwareInfos()          -> Hardware -> PCI.Linux.lib
-#   - BU.Hardware.Linux.Ports.GetHardwareInfos()        -> Hardware -> Ports.Linux.lib
-#   - BU.Hardware.Linux.Screen.GetHardwareInfos()       -> Hardware -> Screen.Linux.lib
-#   - BU.Hardware.Linux.SDCard.GetHardwareInfos()       -> Hardware -> SDCard.Linux.lib
-#   - BU.Hardware.Linux.Touchpad.GetHardwareInfos()     -> Hardware -> Touchpad.Linux.lib
-#   - BU.Hardware.Linux.USB.GetHardwareInfos()          -> Hardware -> USB.Linux.lib
-#   - BU.Hardware.Linux.VGA.GetHardwareInfos()          -> Hardware -> VGA.Linux.lib
+#   - BU.Hardware.Linux.Audio.GetHardwareInfos()        -> Hardware -> Linux -> Audio.Linux.lib
+#   - BU.Hardware.Linux.Battery.GetHardwareInfos()      -> Hardware -> Linux -> Battery.Linux.lib
+#   - BU.Hardware.Linux.Bluetooth.GetHardwareInfos()    -> Hardware -> Linux -> Bluetooth.Linux.lib
+#   - BU.Hardware.Linux.CPU.GetHardwareInfos()          -> Hardware -> Linux -> CPU.Linux.lib
+#   - BU.Hardware.Linux.Drive.GetHardwareInfos()        -> Hardware -> Linux -> Drive.Linux.lib
+#   - BU.Hardware.Linux.Fan.GetHardwareInfos()          -> Hardware -> Linux -> Fan.Linux.lib
+#   - BU.Hardware.Linux.FloppyDisk.GetHardwareInfos()   -> Hardware -> Linux -> FloppyDisk.Linux.lib
+#   - BU.Hardware.Linux.General.GetHardwareInfos()      -> Hardware -> Linux -> General.Linux.lib (this file)
+#   - BU.Hardware.Linux.GPU.GetHardwareInfos()          -> Hardware -> Linux -> GPU.Linux.lib
+#   - BU.Hardware.Linux.HDMI.GetHardwareInfos()         -> Hardware -> Linux -> HDMI.Linux.lib
+#   - BU.Hardware.Linux.Keyboard.GetHardwareInfos()     -> Hardware -> Linux -> Keyboard.Linux.lib
+#   - BU.Hardware.Linux.Memory.GetHardwareInfos()       -> Hardware -> Linux -> Memory.Linux.lib
+#   - BU.Hardware.Linux.Motherboard.GetHardwareInfos()  -> Hardware -> Linux -> Motherboard.Linux.lib
+#   - BU.Hardware.Linux.Mouse.GetHardwareInfos()        -> Hardware -> Linux -> Mouse.Linux.lib
+#   - BU.Hardware.Linux.PCI.GetHardwareInfos()          -> Hardware -> Linux -> PCI.Linux.lib
+#   - BU.Hardware.Linux.Ports.GetHardwareInfos()        -> Hardware -> Linux -> Ports.Linux.lib
+#   - BU.Hardware.Linux.Screen.GetHardwareInfos()       -> Hardware -> Linux -> Screen.Linux.lib
+#   - BU.Hardware.Linux.SDCard.GetHardwareInfos()       -> Hardware -> Linux -> SDCard.Linux.lib
+#   - BU.Hardware.Linux.Touchpad.GetHardwareInfos()     -> Hardware -> Linux -> Touchpad.Linux.lib
+#   - BU.Hardware.Linux.USB.GetHardwareInfos()          -> Hardware -> Linux -> USB.Linux.lib
+#   - BU.Hardware.Linux.VGA.GetHardwareInfos()          -> Hardware -> Linux -> VGA.Linux.lib
 
 # shellcheck disable=
 function BU.Hardware.Linux.General.GetAllHardwareInfos()
@@ -151,10 +151,10 @@ function BU.Hardware.Linux.General.GetAllHardwareInfos()
 # Getting every general hardware components (like the computer's chassis, etc...).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.Linux.General.GetChassis()        -> Hardware -> General.Linux.lib (this file)
-#   - BU.Hardware.Linux.General.GetChassisType()    -> Hardware -> General.Linux.lib (this file)
-#   - BU.Hardware.Linux.General.GetMachineID()      -> Hardware -> General.Linux.lib (this file)
-#   - BU.Hardware.Linux.General.GetBootID()         -> Hardware -> General.Linux.lib (this file)
+#   - BU.Hardware.Linux.General.GetChassis()        -> Hardware -> Linux -> General.Linux.lib (this file)
+#   - BU.Hardware.Linux.General.GetChassisType()    -> Hardware -> Linux -> General.Linux.lib (this file)
+#   - BU.Hardware.Linux.General.GetMachineID()      -> Hardware -> Linux -> General.Linux.lib (this file)
+#   - BU.Hardware.Linux.General.GetBootID()         -> Hardware -> Linux -> General.Linux.lib (this file)
 
 # shellcheck disable=
 function BU.Hardware.Linux.General.GetHardwareInfos()

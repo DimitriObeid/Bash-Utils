@@ -96,7 +96,7 @@ fi; echo >&2; exit 1; fi
 # shellcheck disable=
 function BU.Hardware.Bluetooth.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".Bluetooth.GetHardwareInfos || return "${?}"; return 0;
 }
 
 ## ==============================================

@@ -91,27 +91,27 @@ fi; echo >&2; exit 1; fi
 # Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.Windows.Audio.GetHardwareInfos()          -> Hardware -> Audio.Windows.lib
-#   - BU.Hardware.Windows.Battery.GetHardwareInfos()        -> Hardware -> Battery.Windows.lib
-#   - BU.Hardware.Windows.Bluetooth.GetHardwareInfos()      -> Hardware -> Bluetooth.Windows.lib
-#   - BU.Hardware.Windows.CPU.GetHardwareInfos()            -> Hardware -> CPU.Windows.lib
-#   - BU.Hardware.Windows.Drive.GetHardwareInfos()          -> Hardware -> Drive.Windows.lib
-#   - BU.Hardware.Windows.Fan.GetHardwareInfos()            -> Hardware -> Fan.Windows.lib
-#   - BU.Hardware.Windows.FloppyDisk.GetHardwareInfos()     -> Hardware -> FloppyDisk.Windows.lib
-#   - BU.Hardware.Windows.General.GetHardwareInfos()        -> Hardware -> General.Windows.lib (this file)
-#   - BU.Hardware.Windows.GPU.GetHardwareInfos()            -> Hardware -> GPU.Windows.lib
-#   - BU.Hardware.Windows.HDMI.GetHardwareInfos()           -> Hardware -> HDMI.Windows.lib
-#   - BU.Hardware.Windows.Keyboard.GetHardwareInfos()       -> Hardware -> Keyboard.Windows.lib
-#   - BU.Hardware.Windows.Memory.GetHardwareInfos()         -> Hardware -> Memory.Windows.lib
-#   - BU.Hardware.Windows.Motherboard.GetHardwareInfos()    -> Hardware -> Motherboard.Windows.lib
-#   - BU.Hardware.Windows.Mouse.GetHardwareInfos()          -> Hardware -> Mouse.Windows.lib
-#   - BU.Hardware.Windows.PCI.GetHardwareInfos()            -> Hardware -> PCI.Windows.lib
-#   - BU.Hardware.Windows.Ports.GetHardwareInfos()          -> Hardware -> Ports.Windows.lib
-#   - BU.Hardware.Windows.Screen.GetHardwareInfos()         -> Hardware -> Screen.Windows.lib
-#   - BU.Hardware.Windows.SDCard.GetHardwareInfos()         -> Hardware -> SDCard.Windows.lib
-#   - BU.Hardware.Windows.Touchpad.GetHardwareInfos()       -> Hardware -> Touchpad.Windows.lib
-#   - BU.Hardware.Windows.USB.GetHardwareInfos()            -> Hardware -> USB.Windows.lib
-#   - BU.Hardware.Windows.VGA.GetHardwareInfos()            -> Hardware -> VGA.Windows.lib
+#   - BU.Hardware.Windows.Audio.GetHardwareInfos()          -> Hardware -> Windows -> Audio.Windows.lib
+#   - BU.Hardware.Windows.Battery.GetHardwareInfos()        -> Hardware -> Windows -> Battery.Windows.lib
+#   - BU.Hardware.Windows.Bluetooth.GetHardwareInfos()      -> Hardware -> Windows -> Bluetooth.Windows.lib
+#   - BU.Hardware.Windows.CPU.GetHardwareInfos()            -> Hardware -> Windows -> CPU.Windows.lib
+#   - BU.Hardware.Windows.Drive.GetHardwareInfos()          -> Hardware -> Windows -> Drive.Windows.lib
+#   - BU.Hardware.Windows.Fan.GetHardwareInfos()            -> Hardware -> Windows -> Fan.Windows.lib
+#   - BU.Hardware.Windows.FloppyDisk.GetHardwareInfos()     -> Hardware -> Windows -> FloppyDisk.Windows.lib
+#   - BU.Hardware.Windows.General.GetHardwareInfos()        -> Hardware -> Windows -> General.Windows.lib (this file)
+#   - BU.Hardware.Windows.GPU.GetHardwareInfos()            -> Hardware -> Windows -> GPU.Windows.lib
+#   - BU.Hardware.Windows.HDMI.GetHardwareInfos()           -> Hardware -> Windows -> HDMI.Windows.lib
+#   - BU.Hardware.Windows.Keyboard.GetHardwareInfos()       -> Hardware -> Windows -> Keyboard.Windows.lib
+#   - BU.Hardware.Windows.Memory.GetHardwareInfos()         -> Hardware -> Windows -> Memory.Windows.lib
+#   - BU.Hardware.Windows.Motherboard.GetHardwareInfos()    -> Hardware -> Windows -> Motherboard.Windows.lib
+#   - BU.Hardware.Windows.Mouse.GetHardwareInfos()          -> Hardware -> Windows -> Mouse.Windows.lib
+#   - BU.Hardware.Windows.PCI.GetHardwareInfos()            -> Hardware -> Windows -> PCI.Windows.lib
+#   - BU.Hardware.Windows.Ports.GetHardwareInfos()          -> Hardware -> Windows -> Ports.Windows.lib
+#   - BU.Hardware.Windows.Screen.GetHardwareInfos()         -> Hardware -> Windows -> Screen.Windows.lib
+#   - BU.Hardware.Windows.SDCard.GetHardwareInfos()         -> Hardware -> Windows -> SDCard.Windows.lib
+#   - BU.Hardware.Windows.Touchpad.GetHardwareInfos()       -> Hardware -> Windows -> Touchpad.Windows.lib
+#   - BU.Hardware.Windows.USB.GetHardwareInfos()            -> Hardware -> Windows -> USB.Windows.lib
+#   - BU.Hardware.Windows.VGA.GetHardwareInfos()            -> Hardware -> Windows -> VGA.Windows.lib
 
 # shellcheck disable=
 function BU.Hardware.Windows.General.GetAllHardwareInfos()
@@ -151,10 +151,10 @@ function BU.Hardware.Windows.General.GetAllHardwareInfos()
 # Getting every general hardware components (like the computer's chassis, etc...).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.Windows.General.GetChassis()      -> Hardware -> General.Windows.lib (this file)
-#   - BU.Hardware.Windows.General.GetChassisType()  -> Hardware -> General.Windows.lib (this file)
-#   - BU.Hardware.Windows.General.GetMachineID()    -> Hardware -> General.Windows.lib (this file)
-#   - BU.Hardware.Windows.General.GetBootID()       -> Hardware -> General.Windows.lib (this file)
+#   - BU.Hardware.Windows.General.GetChassis()      -> Hardware -> Windows -> General.Windows.lib (this file)
+#   - BU.Hardware.Windows.General.GetChassisType()  -> Hardware -> Windows -> General.Windows.lib (this file)
+#   - BU.Hardware.Windows.General.GetMachineID()    -> Hardware -> Windows -> General.Windows.lib (this file)
+#   - BU.Hardware.Windows.General.GetBootID()       -> Hardware -> Windows -> General.Windows.lib (this file)
 
 # shellcheck disable=
 function BU.Hardware.Windows.General.GetHardwareInfos()

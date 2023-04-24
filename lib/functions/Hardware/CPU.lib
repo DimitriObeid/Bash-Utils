@@ -109,7 +109,7 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS__GE
 # shellcheck disable=
 function BU.Hardware.CPU.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetHardwareInfos || return "${?}"; return 0;
 }
 
 # ··············································
@@ -121,7 +121,7 @@ function BU.Hardware.CPU.GetHardwareInfos()
 # shellcheck disable=
 function BU.Hardware.CPU.GetInfos()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetInfos || return "${?}"; return 0;
 }
 
 # ·························
@@ -133,7 +133,7 @@ function BU.Hardware.CPU.GetInfos()
 # shellcheck disable=
 function BU.Hardware.CPU.GetVendor()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetVendor || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -161,7 +161,7 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHECKING_T
 # shellcheck disable=
 function BU.Hardware.CPU.Is32Bits()
 {
-    return 0;
+    BU.Hardware."${}".CPU.Is32Bits || return "${?}"; return 0;
 }
 
 # ··············································
@@ -173,7 +173,7 @@ function BU.Hardware.CPU.Is32Bits()
 # shellcheck disable=
 function BU.Hardware.CPU.Is64Bits()
 {
-    return 0;
+    BU.Hardware."${}".CPU.Is64Bits || return "${?}"; return 0;
 }
 
 # ····················································
@@ -185,7 +185,7 @@ function BU.Hardware.CPU.Is64Bits()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchAArch32()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchAArch32 || return "${?}"; return 0;
 }
 
 # ····················································
@@ -197,7 +197,7 @@ function BU.Hardware.CPU.IsArchAArch32()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchAArch64()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchAArch64 || return "${?}"; return 0;
 }
 
 # ··················································
@@ -209,7 +209,7 @@ function BU.Hardware.CPU.IsArchAArch64()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchARM32()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchARM32 || return "${?}"; return 0;
 }
 
 # ··················································
@@ -221,7 +221,7 @@ function BU.Hardware.CPU.IsArchARM32()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchARM64()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchARM64 || return "${?}"; return 0;
 }
 
 # ··············································
@@ -233,7 +233,7 @@ function BU.Hardware.CPU.IsArchARM64()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchAMD64()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchAMD64 || return "${?}"; return 0;
 }
 
 # ···········································
@@ -245,7 +245,7 @@ function BU.Hardware.CPU.IsArchAMD64()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchi386()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchi386 || return "${?}"; return 0;
 }
 
 # ··············································
@@ -257,7 +257,7 @@ function BU.Hardware.CPU.IsArchi386()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchPPC()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchPPC || return "${?}"; return 0;
 }
 
 # ···········································
@@ -269,7 +269,7 @@ function BU.Hardware.CPU.IsArchPPC()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchMIPS()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchMIPS || return "${?}"; return 0;
 }
 
 # ···············································
@@ -281,7 +281,7 @@ function BU.Hardware.CPU.IsArchMIPS()
 # shellcheck disable=
 function BU.Hardware.CPU.IsArchRISCV()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsArchRISCV || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -300,7 +300,7 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_TH
 # shellcheck disable=
 function BU.Hardware.CPU.GetArch()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetArch || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -328,7 +328,7 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_THE_CPUS
 # shellcheck disable=
 function BU.Hardware.CPU.IsMonocore()
 {
-    return 0;
+    BU.Hardware."${}".CPU.IsMonocore || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -347,7 +347,7 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE_CPUS_
 # shellcheck disable=
 function BU.Hardware.CPU.GetCoresNumber()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetCoresNumber || return "${?}"; return 0;
 }
 
 # ····································
@@ -359,7 +359,7 @@ function BU.Hardware.CPU.GetCoresNumber()
 # shellcheck disable=
 function BU.Hardware.CPU.GetLogicalCoresNumber()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetLogicalCoresNumber || return "${?}"; return 0;
 }
 
 # ·····································
@@ -371,7 +371,7 @@ function BU.Hardware.CPU.GetLogicalCoresNumber()
 # shellcheck disable=
 function BU.Hardware.CPU.GetPhysicalCoresNumber()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetPhysicalCoresNumber || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -408,7 +408,7 @@ declare -r __BU_HARDWARE_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CLOCK__GETTING_THE_CPUS_
 # shellcheck disable=
 function BU.Hardware.CPU.GetClockFrequency()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetClockFrequency || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -439,7 +439,7 @@ function BU.Hardware.CPU.GetClockFrequency()
 # shellcheck disable=
 function BU.Hardware.CPU.GetAdressSizes()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetAdressSizes || return "${?}"; return 0;
 }
 
 # ······························
@@ -451,7 +451,7 @@ function BU.Hardware.CPU.GetAdressSizes()
 # shellcheck disable=
 function BU.Hardware.CPU.GetSocketsNumber()
 {
-    return 0;
+    BU.Hardware."${}".CPU.GetSocketsNumber || return "${?}"; return 0;
 }
 
 ## ==============================================

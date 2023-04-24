@@ -134,7 +134,7 @@ function BU.Hardware.Memory.GetHardwareInfos()
 # shellcheck disable=
 function BU.Hardware.OSX.Memory.GetUsedRAMSlotsNumber()
 {
-    return 0;
+    BU.Hardware."${}".Memory.GetUsedRAMSlotsNumber || return "${?}"; return 0;
 }
 
 # ················································
@@ -146,7 +146,7 @@ function BU.Hardware.OSX.Memory.GetUsedRAMSlotsNumber()
 # shellcheck disable=
 function BU.Hardware.OSX.Memory.GetAvailableRamSlotsNumber()
 {
-    return 0;
+    BU.Hardware."${}".Memory.GetAvailableRamSlotsNumber || return "${?}"; return 0;
 }
 
 # ····························
@@ -158,7 +158,7 @@ function BU.Hardware.OSX.Memory.GetAvailableRamSlotsNumber()
 # shellcheck disable=
 function BU.Hardware.OSX.Memory.GetMaxMemoryCapacity()
 {
-    return 0;
+    BU.Hardware."${}".Memory.GetMaxMemoryCapacity || return "${?}"; return 0;
 }
 
 # ····················
@@ -170,7 +170,7 @@ function BU.Hardware.OSX.Memory.GetMaxMemoryCapacity()
 # shellcheck disable=
 function BU.Hardware.OSX.Memory.GetMemoryType()
 {
-    return 0;
+    BU.Hardware."${}".Memory.GetMemoryType || return "${?}"; return 0;
 }
 
 ## ==============================================

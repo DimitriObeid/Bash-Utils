@@ -91,27 +91,27 @@ fi; echo >&2; exit 1; fi
 # Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.OSX.Audio.GetHardwareInfos()          -> Hardware -> Audio.OSX.lib
-#   - BU.Hardware.OSX.Battery.GetHardwareInfos()        -> Hardware -> Battery.OSX.lib
-#   - BU.Hardware.OSX.Bluetooth.GetHardwareInfos()      -> Hardware -> Bluetooth.OSX.lib
-#   - BU.Hardware.OSX.CPU.GetHardwareInfos()            -> Hardware -> CPU.OSX.lib
-#   - BU.Hardware.OSX.Drive.GetHardwareInfos()          -> Hardware -> Drive.OSX.lib
-#   - BU.Hardware.OSX.Fan.GetHardwareInfos()            -> Hardware -> Fan.OSX.lib
-#   - BU.Hardware.OSX.FloppyDisk.GetHardwareInfos()     -> Hardware -> FloppyDisk.OSX.lib
-#   - BU.Hardware.OSX.General.GetHardwareInfos()        -> Hardware -> General.OSX.lib (this file)
-#   - BU.Hardware.OSX.GPU.GetHardwareInfos()            -> Hardware -> GPU.OSX.lib
-#   - BU.Hardware.OSX.HDMI.GetHardwareInfos()           -> Hardware -> HDMI.OSX.lib
-#   - BU.Hardware.OSX.Keyboard.GetHardwareInfos()       -> Hardware -> Keyboard.OSX.lib
-#   - BU.Hardware.OSX.Memory.GetHardwareInfos()         -> Hardware -> Memory.OSX.lib
-#   - BU.Hardware.OSX.Motherboard.GetHardwareInfos()    -> Hardware -> Motherboard.OSX.lib
-#   - BU.Hardware.OSX.Mouse.GetHardwareInfos()          -> Hardware -> Mouse.OSX.lib
-#   - BU.Hardware.OSX.PCI.GetHardwareInfos()            -> Hardware -> PCI.OSX.lib
-#   - BU.Hardware.OSX.Ports.GetHardwareInfos()          -> Hardware -> Ports.OSX.lib
-#   - BU.Hardware.OSX.Screen.GetHardwareInfos()         -> Hardware -> Screen.OSX.lib
-#   - BU.Hardware.OSX.SDCard.GetHardwareInfos()         -> Hardware -> SDCard.OSX.lib
-#   - BU.Hardware.OSX.Touchpad.GetHardwareInfos()       -> Hardware -> Touchpad.OSX.lib
-#   - BU.Hardware.OSX.USB.GetHardwareInfos()            -> Hardware -> USB.OSX.lib
-#   - BU.Hardware.OSX.VGA.GetHardwareInfos()            -> Hardware -> VGA.OSX.lib
+#   - BU.Hardware.OSX.Audio.GetHardwareInfos()          -> Hardware -> OSX -> Audio.OSX.lib
+#   - BU.Hardware.OSX.Battery.GetHardwareInfos()        -> Hardware -> OSX -> Battery.OSX.lib
+#   - BU.Hardware.OSX.Bluetooth.GetHardwareInfos()      -> Hardware -> OSX -> Bluetooth.OSX.lib
+#   - BU.Hardware.OSX.CPU.GetHardwareInfos()            -> Hardware -> OSX -> CPU.OSX.lib
+#   - BU.Hardware.OSX.Drive.GetHardwareInfos()          -> Hardware -> OSX -> Drive.OSX.lib
+#   - BU.Hardware.OSX.Fan.GetHardwareInfos()            -> Hardware -> OSX -> Fan.OSX.lib
+#   - BU.Hardware.OSX.FloppyDisk.GetHardwareInfos()     -> Hardware -> OSX -> FloppyDisk.OSX.lib
+#   - BU.Hardware.OSX.General.GetHardwareInfos()        -> Hardware -> OSX -> General.OSX.lib (this file)
+#   - BU.Hardware.OSX.GPU.GetHardwareInfos()            -> Hardware -> OSX -> GPU.OSX.lib
+#   - BU.Hardware.OSX.HDMI.GetHardwareInfos()           -> Hardware -> OSX -> HDMI.OSX.lib
+#   - BU.Hardware.OSX.Keyboard.GetHardwareInfos()       -> Hardware -> OSX -> Keyboard.OSX.lib
+#   - BU.Hardware.OSX.Memory.GetHardwareInfos()         -> Hardware -> OSX -> Memory.OSX.lib
+#   - BU.Hardware.OSX.Motherboard.GetHardwareInfos()    -> Hardware -> OSX -> Motherboard.OSX.lib
+#   - BU.Hardware.OSX.Mouse.GetHardwareInfos()          -> Hardware -> OSX -> Mouse.OSX.lib
+#   - BU.Hardware.OSX.PCI.GetHardwareInfos()            -> Hardware -> OSX -> PCI.OSX.lib
+#   - BU.Hardware.OSX.Ports.GetHardwareInfos()          -> Hardware -> OSX -> Ports.OSX.lib
+#   - BU.Hardware.OSX.Screen.GetHardwareInfos()         -> Hardware -> OSX -> Screen.OSX.lib
+#   - BU.Hardware.OSX.SDCard.GetHardwareInfos()         -> Hardware -> OSX -> SDCard.OSX.lib
+#   - BU.Hardware.OSX.Touchpad.GetHardwareInfos()       -> Hardware -> OSX -> Touchpad.OSX.lib
+#   - BU.Hardware.OSX.USB.GetHardwareInfos()            -> Hardware -> OSX -> USB.OSX.lib
+#   - BU.Hardware.OSX.VGA.GetHardwareInfos()            -> Hardware -> OSX -> VGA.OSX.lib
 
 # shellcheck disable=
 function BU.Hardware.OSX.General.GetAllHardwareInfos()
@@ -151,10 +151,10 @@ function BU.Hardware.OSX.General.GetAllHardwareInfos()
 # Getting every general hardware components (like the computer's chassis, etc...).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.OSX.General.GetChassis()      -> Hardware -> General.OSX.lib (this file)
-#   - BU.Hardware.OSX.General.GetChassisType()  -> Hardware -> General.OSX.lib (this file)
-#   - BU.Hardware.OSX.General.GetMachineID()    -> Hardware -> General.OSX.lib (this file)
-#   - BU.Hardware.OSX.General.GetBootID()       -> Hardware -> General.OSX.lib (this file)
+#   - BU.Hardware.OSX.General.GetChassis()      -> Hardware -> OSX -> General.OSX.lib (this file)
+#   - BU.Hardware.OSX.General.GetChassisType()  -> Hardware -> OSX -> General.OSX.lib (this file)
+#   - BU.Hardware.OSX.General.GetMachineID()    -> Hardware -> OSX -> General.OSX.lib (this file)
+#   - BU.Hardware.OSX.General.GetBootID()       -> Hardware -> OSX -> General.OSX.lib (this file)
 
 # shellcheck disable=
 function BU.Hardware.OSX.General.GetHardwareInfos()
