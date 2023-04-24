@@ -86,13 +86,25 @@ fi; echo >&2; exit 1; fi
 ## CHECKING THE COMPUTER'S MEMORY HARDWARE DATA
 
 # ································································
+# Checking if the type of the currently used memory stick is DDR3.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Memory.IsMemoryDDR3()
+{
+    BU.Hardware.Memory.GetMemoryType 'DDR3' || return "${?}"; return 0;
+}
+
+# ································································
 # Checking if the type of the currently used memory stick is DDR4.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Memory.CheckIfMemoryDDR4()
+function BU.Hardware.Memory.IsMemoryDDR4()
 {
     BU.Hardware.Memory.GetMemoryType 'DDR4' || return "${?}"; return 0;
 }

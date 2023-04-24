@@ -134,7 +134,7 @@ function BU.Hardware.GPU.IsNvidiaRTX()
 }
 
 # ····················································
-# Checking if the GPU has a VGA compatible controller.
+# Checking if the GPU has a VGA-compatible controller.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -

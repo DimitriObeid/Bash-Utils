@@ -289,7 +289,7 @@ function BU.Hardware.OSX.CPU.IsArchRISCV()
 ## GETTING THE CPU(s) ARCHITECTURE'S DATA
 ## DEBUG ID : "getting-the-cpu(s)-architecture's-data"
 
-declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_THE_CPUS_ARCH_DATA="${__BU_OSX_ANDROID_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::getting-the-cpu(s)-architecture's-data";
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTING_THE_CPUS_ARCH_DATA="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE}::getting-the-cpu(s)-architecture's-data";
 
 # ·······························
 # Getting the CPU's architecture.
@@ -334,6 +334,9 @@ function BU.Hardware.OSX.CPU.IsMonocore()
 ## ==============================================
 
 ## GETTING THE CPU(s) CORES DATA
+## DEBUG ID : "getting-the-cpu(s)-cores-data"
+
+declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE_CPUS_CORES_DATA="${__BU_HARDWARE_OSX_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES}::getting-the-cpu(s)-cores-data";
 
 # ·························································
 # Getting the total number of cores (logical AND physical).

@@ -343,6 +343,9 @@ function BU.Hardware.Android.CPU.IsMonocore()
 ## ==============================================
 
 ## GETTING THE CPU(s) CORES DATA
+## DEBUG ID : "getting-the-cpu(s)-cores-data"
+
+declare -r __BU_HARDWARE_ANDROID_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE_CPUS_CORES_DATA="${__BU_HARDWARE_ANDROID_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES}::getting-the-cpu(s)-cores-data";
 
 # ·························································
 # Getting the total number of cores (logical AND physical).
