@@ -2598,8 +2598,6 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
         BU.ModuleInit.Exit 1; return "${?}";
 
-        return 1;
-
 	#~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #~ THE 'main' MODULE WAS PASSED AS FIRST ARGUMENT, BUT BEFORE THE 'module' VALUE
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3799,8 +3797,6 @@ function BU.ModuleInit.UnsourceModules()
 
         return 0;
 	fi
-
-    return 0;
 }
 
 ## ==============================================
@@ -3853,8 +3849,6 @@ function BU.ModuleInit.HandleErrors()
             return "${p_returnCode}";
         fi
     fi
-
-    return 1;
 }
 
 ## ==============================================
