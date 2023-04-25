@@ -98,7 +98,7 @@ declare -r __BU_HARDWARE_USB_LIB__CAT_DEBUG_ID__GENERAL='usb::general-usb-functi
 # shellcheck disable=
 function BU.Hardware.USB.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".USB.GetHardwareInfos || return "${?}"; return 0;
 }
 
 ## ==============================================

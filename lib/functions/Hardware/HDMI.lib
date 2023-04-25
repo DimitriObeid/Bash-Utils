@@ -96,7 +96,7 @@ fi; echo >&2; exit 1; fi
 # shellcheck disable=
 function BU.Hardware.HDMI.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".HDMI.GetHardwareInfos || return "${?}"; return 0;
 }
 
 ## ==============================================

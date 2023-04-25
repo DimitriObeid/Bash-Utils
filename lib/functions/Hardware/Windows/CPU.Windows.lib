@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CPU'S GENERAL INFORMATIONS
-#### DEBUG ID : "bu::hardware::cpu::windows::cpu's-general-informations"
+#### DEBUG ID : "bu::hardware::windows::cpu::cpu's-general-informations"
 
-declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="bu::hardware::cpu::windows::cpu's-general-informations";
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="bu::hardware::windows::cpu::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
@@ -169,9 +169,9 @@ function BU.Hardware.Windows.CPU.GetVendor()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
-#### DEBUG ID : "bu::hardware::cpu::windows::cpu's-architecture"
+#### DEBUG ID : "bu::hardware::windows::cpu::cpu's-architecture"
 
-declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="bu::hardware::cpu::windows::cpu's-architecture";
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="bu::hardware::windows::cpu::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
 ## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
@@ -336,9 +336,9 @@ function BU.Hardware.Windows.CPU.GetArch()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
-#### DEBUG ID : "bu::hardware::cpu::windows::cpu's-cores"
+#### DEBUG ID : "bu::hardware::windows::cpu::cpu's-cores"
 
-declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="bu::hardware::cpu::windows::cpu's-cores";
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="bu::hardware::windows::cpu::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
 ## DEBUG ID : "checking-the-cpu(s)-cores-data"
@@ -407,9 +407,9 @@ function BU.Hardware.Windows.CPU.GetPhysicalCoresNumber()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CLOCK
-#### DEBUG ID : "bu::hardware::cpu::windows::cpu's-clock"
+#### DEBUG ID : "bu::hardware::windows::cpu::cpu's-clock"
 
-declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_CLOCK="bu::hardware::cpu::windows::cpu's-clock";
+declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__CAT_DEBUG_ID__CPUS_CLOCK="bu::hardware::windows::cpu::cpu's-clock";
 
 ## CHECKING THE CPU'S CLOCK INFORMATIONS
 ## DEBUG ID : "checking-the-cpu's-clock-information"

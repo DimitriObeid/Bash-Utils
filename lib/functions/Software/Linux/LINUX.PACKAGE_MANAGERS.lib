@@ -97,8 +97,14 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### JAVASCRIPT PACKAGES MANAGERS
+#### DEBUG ID : "bu::software::linux::packagemanagers::javascript-packages-managers"
+
+declare -r __BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER="bu::software::linux::packagemanagers::javascript-packages-managers";
 
 ## NPM
+## DEBUG ID : "npm"
+
+declare -r __BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER__NPM="${__BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER}::npm";
 
 # ··········································································
 # Installing the Node JS packages manager on a Linux-based operating system.
@@ -304,8 +310,14 @@ function BU.Software.Linux.PackageManagers.NPM.Autoremove()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### SYSTEM PACKAGES MANAGERS
+#### DEBUG ID : "bu::software::linux::packagemanagers::system-packages-managers"
+
+declare -r __BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__SYSTEM_PACKAGES_MANAGER="bu::software::linux::packagemanagers::system-packages-managers";
 
 ## SNAP
+## DEBUG ID : "snap"
+
+declare -r __BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__SYSTEM_PACKAGES_MANAGER__SNAP="${__BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__SYSTEM_PACKAGES_MANAGER}::snap";
 
 # ·······································································
 # Installing the Snap packages manager on a Linux-based operating system.

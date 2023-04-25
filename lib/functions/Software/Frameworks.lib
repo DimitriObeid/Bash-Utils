@@ -97,8 +97,14 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### HTML / CSS FRAMEWORKS
+#### DEBUG ID : "bu::software::frameworks::html-css-frameworks"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__HTML_CSS_FRAMEWORKS="bu::software::frameworks::html-css-frameworks";
 
 ## BOOTSTRAP
+## DEBUG ID : "boostrap"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAMEWORKS__BOOTSTRAP="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__HTML_CSS_FRAMEWORKS}::bootstrap";
 
 # ·······················································
 # Installing Bootstrap on any supported operating system.
@@ -143,8 +149,14 @@ function BU.Software.Frameworks.Bootstrap.Uninstall()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### JAVA FRAMEWORKS
+#### DEBUG ID : "bu::software::frameworks::java-frameworks"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__JAVA_FRAMEWORKS="bu::software::frameworks::java-frameworks";
 
 ## SPRING
+## DEBUG ID : "spring"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVA_FRAMEWORKS__SPRING="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__JAVA_FRAMEWORKS}::spring";
 
 # ····················································
 # Installing Spring on any supported operating system.
@@ -189,8 +201,14 @@ function BU.Software.Frameworks.Spring.Uninstall()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### JAVASCRIPT FRAMEWORKS
+#### DEBUG ID : "bu::software::frameworks::javascript-frameworks"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS="bu::software::frameworks::javascript-frameworks";
 
 ## ANGULAR
+## DEBUG ID : "angularjs"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS__ANGULARJS="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS}::angularjs";
 
 # ·······················································
 # Installing AngularJS on any supported operating system.
@@ -231,6 +249,9 @@ function BU.Software.Frameworks.AngularJS.Uninstall()
 ## ==============================================
 
 ## REACT JS
+## DEBUG ID : "reactjs"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS__REACTJS="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS}::reactjs";
 
 # ······················································
 # Installing React JS on any supported operating system.
@@ -271,6 +292,9 @@ function BU.Software.Frameworks.ReactJS.Uninstall()
 ## ==============================================
 
 ## VUE.JS
+## DEBUG ID : "vuejs"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS__VUEJS="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS}::vuejs";
 
 # ····················································
 # Installing Vue.JS on any supported operating system.
@@ -315,8 +339,14 @@ function BU.Software.Frameworks.VueJS.Uninstall()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PHP FRAMEWORKS
+#### DEBUG ID : "bu::software::frameworks::php-frameworks"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PHP_FRAMEWORKS="bu::software::frameworks::php-frameworks";
 
 ## CAKE PHP
+## DEBUG ID : "cake-php"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__CAKE_PHP="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PHP_FRAMEWORKS}::cake-php";
 
 # ·····················································
 # Installing CakePHP on any supported operating system.
@@ -357,6 +387,9 @@ function BU.Software.Frameworks.CakePHP.Uninstall()
 ## ==============================================
 
 ## LARAVEL
+## DEBUG ID : "laravel"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__LARAVEL="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PHP_FRAMEWORKS}::laravel";
 
 # ·····················································
 # Installing Laravel on any supported operating system.
@@ -397,6 +430,9 @@ function BU.Software.Frameworks.Laravel.Uninstall()
 ## ==============================================
 
 ## SYMFONY
+## DEBUG ID : "symfony"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PHP_FRAMEWORKS}::symfony";
 
 # ·······················································
 # Installation Symfony on any supported operating system.
@@ -441,8 +477,14 @@ function BU.Software.Frameworks.Symfony.Uninstall()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### PYTHON FRAMEWORKS
+#### DEBUG ID : "bu::software::frameworks::python-frameworks"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PYTHON_FRAMEWORKS="bu::software::frameworks::python-frameworks";
 
 ## DJANGO
+## DEBUG ID : "django"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__DJANGO="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PYTHON_FRAMEWORKS}::django";
 
 # ···························
 # Installing Django on any supported operating system.
@@ -483,6 +525,9 @@ function BU.Software.Frameworks.Django.Uninstall()
 ## ==============================================
 
 ## FLASK
+## DEBUG ID : "flask"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__FLASK="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PYTHON_FRAMEWORKS}::flask";
 
 # ···················································
 # Installing Flask on any supported operating system.
@@ -523,6 +568,9 @@ function BU.Software.Frameworks.Flask.Uninstall()
 ## ==============================================
 
 ## WEB2PY
+## DEBUG ID : "web2py"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__WEB2PY="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__PYTHON_FRAMEWORKS}::web2py";
 
 # ····················································
 # Installing Web2py on any supported operating system.
@@ -567,8 +615,14 @@ function BU.Software.Frameworks.Web2py.Uninstall()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### RUBY FRAMEWORKS
+#### DEBUG ID : "bu::software::frameworks::ruby-frameworks"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__RUBY_FRAMEWORKS="bu::software::frameworks::ruby-frameworks";
 
 ## RUBY ON RAILS
+## DEBUG ID : "ruby-on-rails"
+
+declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__RUBY_FRAMEWORKS__RUBY_ON_RAILS="${__BU_SOFTWARE_FRAMEWORKS_LIB__CAT_DEBUG_ID__RUBY_FRAMEWORKS}::ruby-on-rails";
 
 # ···························································
 # Installing Ruby on Rails on any supported operating system.

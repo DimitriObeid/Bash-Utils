@@ -82,9 +82,9 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### CPU'S GENERAL INFORMATIONS
-#### DEBUG ID : "bu::hardware::cpu::haiku::cpu's-general-informations"
+#### DEBUG ID : "bu::hardware::haiku::cpu::cpu's-general-informations"
 
-declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="bu::hardware::cpu::haiku::cpu's-general-informations";
+declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS="bu::hardware::haiku::cpu::cpu's-general-informations";
 
 ## CHECKING IF THE CPU CORRESPONDS TO A CERTAIN VALUE
 ## DEBUG ID : "checking-if-the-cpu-corresponds-to-a-certain-value"
@@ -143,9 +143,9 @@ function BU.Hardware.Haiku.CPU.GetVendor()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S ARCHITECTURE
-#### DEBUG ID : "bu::hardware::cpu::haiku::cpu's-architecture"
+#### DEBUG ID : "bu::hardware::haiku::cpu::cpu's-architecture"
 
-declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="bu::hardware::cpu::haiku::cpu's-architecture";
+declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_ARCHITECTURE="bu::hardware::haiku::cpu::cpu's-architecture";
 
 ## CHECKING THE ARCHITECTURE OF THE CPU(s)
 ## DEBUG ID : "checking-the-architecture-of-the-cpu(s)";
@@ -310,9 +310,9 @@ function BU.Hardware.Haiku.CPU.GetArch()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CORES
-#### DEBUG ID : "bu::hardware::cpu::haiku::cpu's-cores"
+#### DEBUG ID : "bu::hardware::haiku::cpu::cpu's-cores"
 
-declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="bu::hardware::cpu::haiku::cpu's-cores";
+declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_CORES="bu::hardware::haiku::cpu::cpu's-cores";
 
 ## CHECKING THE CPU(s) CORES DATA
 ## DEBUG ID : "checking-the-cpu(s)-cores-data"
@@ -381,7 +381,7 @@ function BU.Hardware.Haiku.CPU.GetPhysicalCoresNumber()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### CPU'S CLOCK
-#### DEBUG ID : "bu::hardware::cpu::haiku::cpu's-clock"
+#### DEBUG ID : "bu::hardware::haiku::cpu::cpu's-clock"
 
 declare -r __BU_HARDWARE_HAIKU_CPU_LIB__CAT_DEBUG_ID__CPUS_CLOCK="bu::hardware::cpu::cpu's-clock";
 

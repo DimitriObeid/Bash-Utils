@@ -119,8 +119,14 @@ function BU.Software.PackageManagers.SoftwareNotAvailableForThisOS()
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### JAVASCRIPT PACKAGES MANAGERS
+#### DEBUG ID : "bu::software::packagemanagers::javascript-packages-managers"
+
+declare -r __BU_SOFTWARE_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER="bu::software::packagemanagers::javascript-packages-managers";
 
 ## NPM
+## DEBUG ID : "npm"
+
+declare -r __BU_SOFTWARE_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER__NPM="${__BU_SOFTWARE_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER}::npm";
 
 # ····································································
 # Installing the Node JS packages manager on each supported platforms.

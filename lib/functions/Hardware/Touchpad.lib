@@ -96,7 +96,7 @@ fi; echo >&2; exit 1; fi
 # shellcheck disable=
 function BU.Hardware.Touchpad.IsTouchpadPlugged()
 {
-    return 0;
+    BU.Hardware."${}".Touchpad.IsTouchpadPlugged || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -113,7 +113,7 @@ function BU.Hardware.Touchpad.IsTouchpadPlugged()
 # shellcheck disable=
 function BU.Hardware.Touchpad.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".Touchpad.GetHardwareInfos || return "${?}"; return 0;
 }
 
 # ···································
@@ -125,7 +125,7 @@ function BU.Hardware.Touchpad.GetHardwareInfos()
 # shellcheck disable=
 function BU.Hardware.Touchpad.GetVendor()
 {
-    return 0;
+    BU.Hardware."${}".Touchpad.GetVendor || return "${?}"; return 0;
 }
 
 ## ==============================================

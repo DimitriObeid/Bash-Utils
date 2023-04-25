@@ -97,8 +97,14 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### JAVASCRIPT PACKAGES MANAGERS
+#### DEBUG ID : "bu::software::osx::packagemanagers::javascript-packages-managers"
+
+declare -r __BU_SOFTWARE_OSX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER="bu::software::osx::packagemanagers::javascript-packages-managers";
 
 ## NPM
+## DEBUG ID : "npm"
+
+declare -r __BU_SOFTWARE_OSX_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER__NPM="${__BU_SOFTWARE_OSX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__JAVASCRIPT_PACKAGES_MANAGER}::npm";
 
 # ·····························································
 # Installing the Node JS packages manager on a Mac OS computer.
@@ -305,7 +311,14 @@ function BU.Software.OSX.PackageManagers.NPM.Autoremove()
 
 #### SYSTEM PACKAGES MANAGERS
 
+#### DEBUG ID : "bu::software::linux::packagemanagers::system-packages-managers"
+
+declare -r __BU_SOFTWARE_OSX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__SYSTEM_PACKAGES_MANAGER="bu::software::osx::packagemanagers::system-packages-managers";
+
 ## HOMEBREW
+## DEBUG ID : "homebrew"
+
+declare -r __BU_SOFTWARE_OSX_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__SYSTEM_PACKAGES_MANAGER__HOMEBREW="${__BU_SOFTWARE_OSX_PACKAGEMANAGERS_LIB__CAT_DEBUG_ID__SYSTEM_PACKAGES_MANAGER}::homebrew";
 
 # ······························································
 # Installing the Homebrew packages manager on a Mac OS computer.
