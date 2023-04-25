@@ -96,9 +96,68 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### COMPATIBILITY LAYERS
+#### DEBUG ID : "bu::software::linux::libraries::compatibility-layers"
+
+declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS="bu::software::linux::libraries::compatibility-layers";
+
+## WINE
+## DEBUG ID : "wine"
+
+declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__COMPATIBILITY_LAYERS__WINE="${__BU_SOFTWARE_LINUX_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS}::wine";
+
+# ·························
+# Installing Wine on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Software.Linux.Libraries.Wine.Install()
+{
+    return 0;
+}
+
+
+# ·······················
+# Updating Wine on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Software.Linux.Libraries.Wine.Update()
+{
+    return 0;
+}
+
+# ···························
+# Uninstalling Wine on Linux.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Software.Linux.Libraries.Wine.Uninstall()
+{
+    return 0;
+}
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### GRAPHICAL PROGRAMMING LIBRARIES
+#### DEBUD ID : "bu::software::linux::libraries::graphical-programming-libraries"
+
+declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES="bu::software::linux::libraries::graphical-programming-libraries";
 
 ## DIRECTX (with compatibility programs).
+## DEBUG ID : "directx"
+
+declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__DIRECTX="${__BU_SOFTWARE_LINUX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::directx";
 
 # ············································
 # Installing DirectX on Linux (Wine required).
@@ -157,6 +216,9 @@ function BU.Software.Linux.Libraries.DirectX.Uninstall()
 ## ==============================================
 
 ## OPENGL
+## DEBUG ID : "opengl"
+
+declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__OPENGL="${__BU_SOFTWARE_LINUX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::opengl";
 
 # ···························
 # Installing OpenGL on Linux.
@@ -206,6 +268,9 @@ function BU.Software.Linux.Libraries.OpenGL.Uninstall()
 ## ==============================================
 
 ## SDL (Simple DirectMedia Layer)
+## DEBUG ID : "sdl"
+
+declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__SDL="${__BU_SOFTWARE_LINUX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::sdl";
 
 # ························
 # Installing SDL on Linux.
@@ -249,53 +314,6 @@ function BU.Software.Linux.Libraries.SDL.Uninstall()
     #**** Code ****
     BU.Main.OS.IsLinux || { BU.Main.Echo.Warning ""; BU.Main.Echo.Newline >&2; return 1; };
 
-    return 0;
-}
-
-## ==============================================
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### COMPATIBILITY LAYERS
-
-## WINE
-
-# ·························
-# Installing Wine on Linux.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Software.Linux.Libraries.Wine.Install()
-{
-    return 0;
-}
-
-
-# ·······················
-# Updating Wine on Linux.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Software.Linux.Libraries.Wine.Update()
-{
-    return 0;
-}
-
-# ···························
-# Uninstalling Wine on Linux.
-
-# Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
-
-# shellcheck disable=
-function BU.Software.Linux.Libraries.Wine.Uninstall()
-{
     return 0;
 }
 

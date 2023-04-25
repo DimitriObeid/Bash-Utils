@@ -96,11 +96,32 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
-#### GRAPHICAL PROGRAMMING LIBRARIES
+#### COMPATIBILITY LAYERS
+#### DEBUG ID : "bu::software::libraries::compatibility-layers"
+
+declare -r __BU_SOFTWARE_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS="bu::software::libraries::compatibility-layers";
 
 ##
+## DEBUG ID : ""
+
+declare -r __BU_SOFTWARE_LIBRARIES_LIB__SUBCAT_DEBUG_ID__COMPATIBILITY_LAYERS__="${__BU_SOFTWARE_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS}::";
 
 
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### GRAPHICAL PROGRAMMING LIBRARIES
+#### DEBUG ID : "bu::software::libraries::graphical-programming-libraries"
+
+declare -r __BU_SOFTWARE_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES="bu::software::libraries::graphical-programming-libraries";
+
+## DIRECTX
+## DEBUG ID : "directx"
+
+declare -r __BU_SOFTWARE_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES="${__BU_SOFTWARE_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::directx";
 
 ## ==============================================
 

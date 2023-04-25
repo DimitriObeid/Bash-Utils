@@ -96,9 +96,32 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### COMPATIBILITY LAYERS
+#### DEBUG ID : "bu::software::osx::libraries::compatibility-layers"
+
+declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS="bu::software::osx::libraries::compatibility-layers";
+
+##
+## DEBUG ID : ""
+
+declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__COMPATIBILITY_LAYERS__="${__BU_SOFTWARE_OSX_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS}::";
+
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### GRAPHICAL PROGRAMMING LIBRARIES
+#### DEBUD ID : "bu::software::osx::libraries::graphical-programming-libraries"
+
+declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES="bu::software::osx::libraries::graphical-programming-libraries";
 
 ## METAL
+## DEBUG ID : "metal"
+
+declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__DIRECTX="${__BU_SOFTWARE_OSX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::metal";
 
 # ························
 # Installing Metal on OSX.
@@ -148,6 +171,9 @@ function BU.Software.OSX.Libraries.Metal.Uninstall()
 ## ==============================================
 
 ## OPENGL
+## DEBUG ID : "opengl"
+
+declare -r __BU_SOFTWARE_OSXX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__OPENGL="${__BU_SOFTWARE_OSX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::opengl";
 
 # ···························
 # Installing OpenGL on MacOS.
@@ -197,6 +223,9 @@ function BU.Software.OSX.Libraries.OpenGL.Uninstall()
 ## ==============================================
 
 ## SDL (Simple DirectMedia Layer)
+## DEBUG ID : "sdl"
+
+declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__SDL="${__BU_SOFTWARE_OSX_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::sdl";
 
 # ························
 # Installing SDL on MacOS.

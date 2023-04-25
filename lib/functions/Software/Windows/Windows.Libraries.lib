@@ -96,9 +96,32 @@ fi; echo >&2; exit 1; fi
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
+#### COMPATIBILITY LAYERS
+#### DEBUG ID : "bu::software::windows::libraries::compatibility-layers"
+
+declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS="bu::software::windows::libraries::compatibility-layers";
+
+##
+## DEBUG ID : ""
+
+declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__COMPATIBILITY_LAYERS__="${__BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__CAT_DEBUG_ID__COMPATIBILITY_LAYERS}::";
+
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
 #### GRAPHICAL PROGRAMMING LIBRARIES
+#### DEBUD ID : "bu::software::windows::libraries::graphical-programming-libraries"
+
+declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES="bu::software::windows::libraries::graphical-programming-libraries";
 
 ## DIRECTX
+## DEBUG ID : "directx"
+
+declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__DIRECTX="${__BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::directx";
 
 # ········································
 # Installing DirectX on Microsoft Windows.
@@ -148,6 +171,9 @@ function BU.Software.Windows.Libraries.DirectX.Uninstall()
 ## ==============================================
 
 ## OPENGL
+## DEBUG ID : "opengl"
+
+declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__OPENGL="${__BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::opengl";
 
 # ·······································
 # Installing OpenGL on Microsoft Windows.
@@ -197,6 +223,9 @@ function BU.Software.Windows.Libraries.OpenGL.Uninstall()
 ## ==============================================
 
 ## SDL (Simple DirectMedia Layer)
+## DEBUG ID : "sdl"
+
+declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES__OPENGL="${__BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__CAT_DEBUG_ID__GRAPHICAL_PROGRAMMING_LIBRARIES}::opengl";
 
 # ····································
 # Installing SDL on Microsoft Windows.

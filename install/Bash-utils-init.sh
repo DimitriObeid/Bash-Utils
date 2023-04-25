@@ -92,19 +92,7 @@ else
     echo -e "This shell script (${BASH_SOURCE[0]}) is not meant to be executed directly !" >&2; echo >&2;
     echo -e "Use only this script by including it in your project script." >&2;
 
-fi; echo >&2; __err='error'; fi
-
-# Exiting the script if the exectued code is not being sourced into the terminal, in case the current file is executed.
-if [ "${__err,,}" == 'error' ]; then
-    filename="$(basename "${0}")";
-    extension="$(expr "$filename" : '.*\.\(.*\)')";
-
-    if [ "$extension" = 'sh' ] || [ "$extension" = 'bash' ] || [ "${0#./}" != "${0}" ]; then
-        return 1;
-    else
-        exit 1;
-    fi
-fi
+fi; echo >&2; exit 1; fi
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
@@ -3060,7 +3048,7 @@ declare -i __BU_MODULE_INIT__FRAMEWORK_INITIALIZATION_PROCESS_TIMER;
 ## CHECKING THE CURRENT VERSION OF THE LANGUAGE
 
 # Checking the version of the Bash language currently used on the user's system.
-BU.ModuleInit.CheckBashMinimalVersion || { if BU.ModuleInit.IsInScript; then exit 1; else return 1; fi };
+BU.ModuleInit.CheckBashMinimalVersion || { BU.ModuleInit.Exit 1; return "${?}"; };
 
 ## ==============================================
 
@@ -3075,7 +3063,7 @@ BU.ModuleInit.DefineTraps;
 # ··························································································································································
 # Defining a function in order to suppress every shellcheck advices about the "printf" command, in order to do so at once AND to keep the code's decoration.
 
-# Note : the purpose of this function is to hide its long code in any code editor, in order to make the navigation easier into this file.
+# Note : the second purpose of this function is to hide its long code in any code editor, in order to make the navigation easier into this very large file.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.FindPath()                              -> Modules initializer script (this file)
