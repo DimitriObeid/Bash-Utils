@@ -94,7 +94,7 @@ fi; echo >&2; exit 1; fi
 # shellcheck disable=
 function BU.Hardware.Motherboard.IsACPISupported()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.IsACPISupported || return "${?}"; return 0;
 }
 
 # ····································
@@ -106,7 +106,7 @@ function BU.Hardware.Motherboard.IsACPISupported()
 # shellcheck disable=
 function BU.Hardware.Motherboard.IsBIOSUpgradeable()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.IsBIOSUpgradeable || return "${?}"; return 0;
 }
 
 # ············································
@@ -118,7 +118,7 @@ function BU.Hardware.Motherboard.IsBIOSUpgradeable()
 # shellcheck disable=
 function BU.Hardware.Motherboard.IsBIOSShadowingSupported()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.IsBIOSShadowingSupported || return "${?}"; return 0;
 }
 
 # ·····························
@@ -130,7 +130,7 @@ function BU.Hardware.Motherboard.IsBIOSShadowingSupported()
 # shellcheck disable=
 function BU.Hardware.Motherboard.IsPCISupported()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.IsPCISupported || return "${?}"; return 0;
 }
 
 # ····································
@@ -142,12 +142,24 @@ function BU.Hardware.Motherboard.IsPCISupported()
 # shellcheck disable=
 function BU.Hardware.Motherboard.IsUSBLegacySupported()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.IsUSBLegacySupported || return "${?}"; return 0;
 }
 
 ## ==============================================
 
 ## GETTING BIOS INFORMATIONS
+
+# ····························································
+# Getting every informations about the computer's motherboard.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Motherboard.GetHardwareInfos()
+{
+    BU.Hardware."${}".Motherboard.GetHardwareInfos || return "${?}"; return 0;
+}
 
 # ················································
 # Getting the motherboard's firmware release date.
@@ -158,7 +170,7 @@ function BU.Hardware.Motherboard.IsUSBLegacySupported()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetFirmwareReleaseDate()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetFirmwareReleaseDate || return "${?}"; return 0;
 }
 
 # ···········································
@@ -170,7 +182,7 @@ function BU.Hardware.Motherboard.GetFirmwareReleaseDate()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetFirmwareVersion()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetFirmwareVersion || return "${?}"; return 0;
 }
 
 # ···································
@@ -182,7 +194,7 @@ function BU.Hardware.Motherboard.GetFirmwareVersion()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetROMSize()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetROMSize || return "${?}"; return 0;
 }
 
 # ·······································
@@ -194,7 +206,7 @@ function BU.Hardware.Motherboard.GetROMSize()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetRuntimeSize()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetRuntimeSize || return "${?}"; return 0;
 }
 
 # ·································
@@ -206,7 +218,7 @@ function BU.Hardware.Motherboard.GetRuntimeSize()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetVendor()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetVendor || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -222,7 +234,7 @@ function BU.Hardware.Motherboard.GetVendor()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetLanguageDescriptionFormat()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetLanguageDescriptionFormat || return "${?}"; return 0;
 }
 
 # ············································
@@ -234,7 +246,7 @@ function BU.Hardware.Motherboard.GetLanguageDescriptionFormat()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetInstallableLanguagesNumber()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetInstallableLanguagesNumber || return "${?}"; return 0;
 }
 
 # ··········································
@@ -246,7 +258,7 @@ function BU.Hardware.Motherboard.GetInstallableLanguagesNumber()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetInstallableLanguagesList()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetInstallableLanguagesList || return "${?}"; return 0;
 }
 
 # ·········································
@@ -258,7 +270,7 @@ function BU.Hardware.Motherboard.GetInstallableLanguagesList()
 # shellcheck disable=
 function BU.Hardware.Motherboard.GetCurrentlyInstalledLanguage()
 {
-    return 0;
+    BU.Hardware."${}".Motherboard.GetCurrentlyInstalledLanguage || return "${?}"; return 0;
 }
 
 ## ==============================================

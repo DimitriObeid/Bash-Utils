@@ -104,12 +104,38 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMAT
 # Getting every informations about the PC's CPU-related hardware components.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
+#   - BU.Hardware.Windows.CPU.
 
 # shellcheck disable=
 function BU.Hardware.Windows.CPU.GetHardwareInfos()
 {
-    return 0;
+    BU.Main.Echo.Msg "CPU's summary informations    : $(BU.Hardware.Windows.CPU.GetInfos)";
+    BU.Main.Echo.Msg "Vendor                        : $(BU.Hardware.Windows.CPU.GetVendor)";
+    BU.Hardware.Windows.CPU.Is32Bits        && BU.Main.Echo.Msg 'Architecture                  : 32 bits';
+    BU.Hardware.Windows.CPU.Is64Bits        && BU.Main.Echo.Msg 'Architecture                  : 64 bits';
+
+    BU.Hardware.Windows.CPU.IsArchAArch32   && BU.Main.Echo.Msg "Architecture (cont'd)         : AArch32";
+    BU.Hardware.Windows.CPU.IsArchAArch64   && BU.Main.Echo.Msg "Architecture (cont'd)         : AArch64";
+    BU.Hardware.Windows.CPU.IsArchARM32     && BU.Main.Echo.Msg "Architecture (cont'd)         : ARM32";
+    BU.Hardware.Windows.CPU.IsArchARM64     && BU.Main.Echo.Msg "Architecture (cont'd)         : ARM64";
+    BU.Hardware.Windows.CPU.IsArchAMD64     && BU.Main.Echo.Msg "Architecture (cont'd)         : AMD64";
+    BU.Hardware.Windows.CPU.IsArchi386      && BU.Main.Echo.Msg "Architecture (cont'd)         : i386";
+    BU.Hardware.Windows.CPU.IsArchPPC       && BU.Main.Echo.Msg "Architecture (cont'd)         : PowerPC";
+    BU.Hardware.Windows.CPU.IsArchMIPS      && BU.Main.Echo.Msg "Architecture (cont'd)         : MIPS";
+    BU.Hardware.Windows.CPU.IsArchRISCV     && BU.Main.Echo.Msg "Architecture (cont'd)         : RISCV";
+
+    BU.Hardware.Windows.CPU.IsMonocore      && BU.Main.Echo.Msg "Cores                         : Monocore";
+    BU.Hardware.Windows.CPU.;
+    BU.Hardware.Windows.CPU.;
+    BU.Hardware.Windows.CPU.;
+    BU.Hardware.Windows.CPU.;
 }
 
 # ··············································

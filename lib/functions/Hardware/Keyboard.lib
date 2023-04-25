@@ -96,7 +96,7 @@ fi; echo >&2; exit 1; fi
 # shellcheck disable=
 function BU.Hardware.Keyboard.IsKeyboardPlugged()
 {
-    return 0;
+    BU.Hardware."${}".Keyboard.IsKeyboardPlugged || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -110,7 +110,7 @@ function BU.Hardware.Keyboard.IsKeyboardPlugged()
 # shellcheck disable=
 function BU.Hardware.Keyboard.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".Keyboard.GetHardwareInfos || return "${?}"; return 0;
 }
 
 # ·············································
@@ -122,7 +122,7 @@ function BU.Hardware.Keyboard.GetHardwareInfos()
 # shellcheck disable=
 function BU.Hardware.Keyboard.GetLayout()
 {
-    return 0;
+    BU.Hardware."${}".Keyboard.GetLayout || return "${?}"; return 0;
 }
 
 ## ==============================================

@@ -91,12 +91,12 @@ fi; echo >&2; exit 1; fi
 # Getting every computer's hardware informations.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Hardware.${}.General.GetAllHardwareInfos() -> Hardware -> General.${}.lib
+#   - BU.Hardware."${}".General.GetAllHardwareInfos()   -> Hardware -> General."${}".lib
 
 # shellcheck disable=
 function BU.Hardware.General.GetAllHardwareInfos()
 {
-    BU.Hardware."${}".General.GetAllHardwareInfos;
+    BU.Hardware."${}".General.GetAllHardwareInfos || return "${?}";
 
     return 0;
 }
@@ -104,18 +104,12 @@ function BU.Hardware.General.GetAllHardwareInfos()
 # ················································································
 # Getting every general hardware components (like the computer's chassis, etc...).
 
-#   - BU.Hardware.General.GetChassis()      -> Hardware -> General.lib (this file)
-#   - BU.Hardware.General.GetChassisType()  -> Hardware -> General.lib (this file)
-#   - BU.Hardware.General.GetMachineID()    -> Hardware -> General.lib (this file)
-#   - BU.Hardware.General.GetBootID()       -> Hardware -> General.lib (this file)
+#   - BU.Hardware."${}".General.GetHardwareInfos()      -> Hardware -> General."${}".lib
 
 # shellcheck disable=
 function BU.Hardware.General.GetHardwareInfos()
 {
-    BU.Hardware.General.GetChassis;
-    BU.Hardware.General.GetChassisType;
-    BU.Hardware.General.GetMachineID;
-    BU.Hardware.General.GetBootID;
+    BU.Hardware."${}".General.GetHardwareInfos || return "${?}";
 
     return 0;
 }
@@ -141,7 +135,7 @@ function BU.Hardware.General.GetHardwareInfos()
 # shellcheck disable=
 function BU.Hardware.General.GetChassis()
 {
-    return 0;
+    BU.Hardware."${?}".General.GetChassis || return "${?}"; return 0;
 }
 
 # ····································
@@ -153,7 +147,7 @@ function BU.Hardware.General.GetChassis()
 # shellcheck disable=
 function BU.Hardware.General.GetChassisType()
 {
-    return 0;
+    BU.Hardware."${?}".General.GetChassis || return "${?}"; return 0;
 }
 
 # ·························
@@ -165,7 +159,7 @@ function BU.Hardware.General.GetChassisType()
 # shellcheck disable=
 function BU.Hardware.General.GetMachineID()
 {
-    return 0;
+    BU.Hardware."${?}".General.GetMachineID || return "${?}"; return 0;
 }
 
 # ····················
@@ -177,7 +171,7 @@ function BU.Hardware.General.GetMachineID()
 # shellcheck disable=
 function BU.Hardware.General.GetBootID()
 {
-    return 0;
+    BU.Hardware."${?}".General.GetBootID || return "${?}"; return 0;
 }
 
 ## ==============================================

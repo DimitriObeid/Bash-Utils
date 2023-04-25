@@ -376,7 +376,7 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE
 function BU.Hardware.Linux.CPU.GetCoresNumber()
 {
     if BU.Main.CMDS.GetCommandPath 'nproc'; then
-        BU.Main.Echo.Msg "$(nproc)" '-n';
+        echo "$(nproc)";
 
         return 0;
     else
@@ -444,7 +444,7 @@ function BU.Hardware.Linux.CPU.GetClockFrequency()
 {
     if BU.Main.CMDS.GetCommandPath 'lshw'; then
         if BU.Main.Checkings.CheckRootEUID; then
-            BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 13 {print $2}' )" '-n';
+            echo "$(lshw -class processor | awk 'FNR == 13 {print $2}')";
 
             return 0;
         else

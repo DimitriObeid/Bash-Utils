@@ -96,7 +96,7 @@ fi; echo >&2; exit 1; fi
 # shellcheck disable=
 function BU.Hardware.Mouse.IsMousePlugged()
 {
-    return 0;
+    BU.Hardware."${}".Mouse.IsMousePlugged || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -113,7 +113,7 @@ function BU.Hardware.Mouse.IsMousePlugged()
 # shellcheck disable=
 function BU.Hardware.Mouse.GetHardwareInfos()
 {
-    return 0;
+    BU.Hardware."${}".Mouse.GetHardwareInfos || return "${?}"; return 0;
 }
 
 ## ==============================================
