@@ -115,7 +115,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAMEWORKS__B
 # shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Bootstrap.Install || return 1; return 0;
 }
 
 # ·····················································

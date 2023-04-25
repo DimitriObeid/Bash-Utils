@@ -97,8 +97,14 @@ fi; echo >&2; exit 1; fi
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
 
 #### STEAM GAMES
+#### DEBUG ID : "bu::software::osx::games::steamgames"
+
+declare -r __BU_SOFTWARE_OSX_GAMES_LIB__CAT_DEBUG_ID__STEAM_GAMES="bu::software::osx::games::steamgames";
 
 ## CLI DEPENDENCIES
+## DEBUG ID : "cli-dependencies"
+
+declare -r __BU_SOFTWARE_OSX_GAMES_LIB__SUBCAT_DEBUG_ID__STEAM_GAMES__CLI_DEPENDENCIES="${__BU_SOFTWARE_OSX_GAMES_LIB__CAT_DEBUG_ID__STEAM_GAMES}::cli-dependencies";
 
 # ······························
 # Installing SteamCMD on Mac OS.
