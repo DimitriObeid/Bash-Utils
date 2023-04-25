@@ -115,7 +115,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAMEWORKS__B
 # shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Install()
 {
-    BU.Software."${}".Frameworks.Bootstrap.Install || return 1; return 0;
+    BU.Software."${}".Frameworks.Bootstrap.Install || return "${?}"; return 0;
 }
 
 # ·····················································
@@ -127,7 +127,7 @@ function BU.Software.Frameworks.Bootstrap.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Bootstrap.Update || return "${?}"; return 0;
 }
 
 # ·························································
@@ -139,7 +139,7 @@ function BU.Software.Frameworks.Bootstrap.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Bootstrap.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Bootstrap.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -167,7 +167,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVA_FRAMEWORKS__SPRIN
 # shellcheck disable=
 function BU.Software.Frameworks.Spring.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Spring.Install || return "${?}"; return 0;
 }
 
 # ··················································
@@ -179,7 +179,7 @@ function BU.Software.Frameworks.Spring.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Spring.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Spring.Update || return "${?}"; return 0;
 }
 
 # ······················································
@@ -191,7 +191,7 @@ function BU.Software.Frameworks.Spring.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Spring.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Spring.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -219,7 +219,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS_
 # shellcheck disable=
 function BU.Software.Frameworks.AngularJS.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.AngularJS.Install || return "${?}"; return 0;
 }
 
 # ·····················································
@@ -231,7 +231,7 @@ function BU.Software.Frameworks.AngularJS.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.AngularJS.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.AngularJS.Update || return "${?}"; return 0;
 }
 
 # ·························································
@@ -243,7 +243,7 @@ function BU.Software.Frameworks.AngularJS.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.AngularJS.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.AngularJS.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -262,7 +262,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS_
 # shellcheck disable=
 function BU.Software.Frameworks.ReactJS.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.ReactJS.Install || return "${?}"; return 0;
 }
 
 # ····················································
@@ -274,7 +274,7 @@ function BU.Software.Frameworks.ReactJS.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.ReactJS.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.ReactJS.Update || return "${?}"; return 0;
 }
 
 # ························································
@@ -286,7 +286,7 @@ function BU.Software.Frameworks.ReactJS.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.ReactJS.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.ReactJS.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -305,7 +305,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS_
 # shellcheck disable=
 function BU.Software.Frameworks.VueJS.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.VueJS.Install || return "${?}"; return 0;
 }
 
 # ··················································
@@ -317,7 +317,7 @@ function BU.Software.Frameworks.VueJS.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.VueJS.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.VueJS.Update || return "${?}"; return 0;
 }
 
 # ······················································
@@ -329,7 +329,7 @@ function BU.Software.Frameworks.VueJS.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.VueJS.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.VueJS.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -357,7 +357,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__CAKE_P
 # shellcheck disable=
 function BU.Software.Frameworks.CakePHP.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.CakePHP.Install || return "${?}"; return 0;
 }
 
 # ···················································
@@ -369,7 +369,7 @@ function BU.Software.Frameworks.CakePHP.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.CakePHP.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.CakePHP.Update || return "${?}"; return 0;
 }
 
 # ·······················································
@@ -381,7 +381,7 @@ function BU.Software.Frameworks.CakePHP.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.CakePHP.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.CakePHP.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -400,7 +400,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__LARAVE
 # shellcheck disable=
 function BU.Software.Frameworks.Laravel.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Laravel.Install || return "${?}"; return 0;
 }
 
 # ···················································
@@ -412,7 +412,7 @@ function BU.Software.Frameworks.Laravel.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Laravel.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Laravel.Update || return "${?}"; return 0;
 }
 
 # ··························································
@@ -424,7 +424,7 @@ function BU.Software.Frameworks.Laravel.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Laravel.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Laravel.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -443,7 +443,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__="${__
 # shellcheck disable=
 function BU.Software.Frameworks.Symfony.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Symfony.Install || return "${?}"; return 0;
 }
 
 # ···················································
@@ -455,7 +455,7 @@ function BU.Software.Frameworks.Symfony.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Symfony.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Symfony.Update || return "${?}"; return 0;
 }
 
 # ·······················································
@@ -467,7 +467,7 @@ function BU.Software.Frameworks.Symfony.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Symfony.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Symfony.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -495,7 +495,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__DJA
 # shellcheck disable=
 function BU.Software.Frameworks.Django.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Django.Install || return "${?}"; return 0;
 }
 
 # ··················································
@@ -507,7 +507,7 @@ function BU.Software.Frameworks.Django.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Django.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Django.Update || return "${?}"; return 0;
 }
 
 # ······················································
@@ -519,7 +519,7 @@ function BU.Software.Frameworks.Django.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Django.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Django.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -538,7 +538,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__FLA
 # shellcheck disable=
 function BU.Software.Frameworks.Flask.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Flask.Install || return "${?}"; return 0;
 }
 
 # ·················································
@@ -550,7 +550,7 @@ function BU.Software.Frameworks.Flask.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Flask.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Flask.Update || return "${?}"; return 0;
 }
 
 # ·····················································
@@ -562,7 +562,7 @@ function BU.Software.Frameworks.Flask.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Flask.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Flask.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -581,7 +581,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__WEB
 # shellcheck disable=
 function BU.Software.Frameworks.Web2py.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Web2py.Install || return "${?}"; return 0;
 }
 
 # ··················································
@@ -593,7 +593,7 @@ function BU.Software.Frameworks.Web2py.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.Web2py.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Web2py.Update || return "${?}"; return 0;
 }
 
 # ······················································
@@ -605,7 +605,7 @@ function BU.Software.Frameworks.Web2py.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.Web2py.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.Web2py.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
@@ -633,7 +633,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__RUBY_FRAMEWORKS__RUBY_
 # shellcheck disable=
 function BU.Software.Frameworks.RubyOnRails.Install()
 {
-    return 0;
+    BU.Software."${}".Frameworks.RubyOnRails.Install || return "${?}"; return 0;
 }
 
 # ·························································
@@ -645,7 +645,7 @@ function BU.Software.Frameworks.RubyOnRails.Install()
 # shellcheck disable=
 function BU.Software.Frameworks.RubyOnRails.Update()
 {
-    return 0;
+    BU.Software."${}".Frameworks.RubyOnRails.Update || return "${?}"; return 0;
 }
 
 # ·····························································
@@ -657,7 +657,7 @@ function BU.Software.Frameworks.RubyOnRails.Update()
 # shellcheck disable=
 function BU.Software.Frameworks.RubyOnRails.Uninstall()
 {
-    return 0;
+    BU.Software."${}".Frameworks.RubyOnRails.Uninstall || return "${?}"; return 0;
 }
 
 ## ==============================================
