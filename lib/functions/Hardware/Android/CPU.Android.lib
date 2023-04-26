@@ -179,7 +179,11 @@ function BU.Hardware.Android.CPU.Is32Bits()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.Is64Bits()
 {
-    return 0;
+    if [ "$(getprop ro.product.cpu.abilist64)" != "" ] || [ "$(getprop ro.product.cpu.abilist)" == *"arm64-v8a"* ]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 # ····················································
@@ -189,8 +193,10 @@ function BU.Hardware.Android.CPU.Is64Bits()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Android.CPU.IsArchAArch32()
-
+function BU.Hardware.Linux.CPU.IsArchAArch32()
+{
+    return 0;
+}
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
 
@@ -198,7 +204,7 @@ function BU.Hardware.Android.CPU.IsArchAArch32()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Android.CPU.IsArchAArch64()
+function BU.Hardware.Linux.CPU.IsArchAArch64()
 {
     return 0;
 }
@@ -304,7 +310,7 @@ declare -r __BU_HARDWARE_ANDROID_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GE
 function BU.Hardware.Android.CPU.GetArch()
 {
     if BU.Main.CMDS.GetCommandPath 'uname'; then
-        BU.Main.Echo.Msg "$(uname -m)" '-n';
+        uname -m;
 
         return 0;
     else
@@ -332,12 +338,28 @@ declare -r __BU_HARDWARE_ANDROID_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_
 # Checking if the CPU is mono-core.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsMonocore()
 {
-    return 0;
+    if [ -r /proc/cpuinfo ]; then
+        if [ "$(grep -c 'processor' /proc/cpuinfo)" -eq 1 ]; then
+            return 0;
+        else
+            return 1;
+        fi
+    else
+        if BU.Main.CMDS.GetCommandPath 'nproc'; then
+            if [ "$(nproc)" -eq 1 ]; then
+                return 0;
+            else
+                return 1;
+            fi
+        else
+            echo "Unable to get the number of cores for this device"; return 1;
+        fi
+    fi
 }
 
 ## ==============================================
@@ -351,17 +373,21 @@ declare -r __BU_HARDWARE_ANDROID_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_T
 # Getting the total number of cores (logical AND physical).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
 # shellcheck disable=
 function BU.Hardware.Android.CPU.GetCoresNumber()
 {
-    if BU.Main.CMDS.GetCommandPath 'nproc'; then
-        echo "$(nproc)";
-
+    if [ -r /proc/cpuinfo ] && grep -c 'processor' /proc/cpuinfo; then
         return 0;
     else
-        return 1;
+        if BU.Main.CMDS.GetCommandPath 'nproc'; then
+            nproc;
+
+            return 0;
+        else
+            echo "Unable to get the number of cores for this device"; return 1;
+        fi
     fi
 }
 
@@ -374,7 +400,7 @@ function BU.Hardware.Android.CPU.GetCoresNumber()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.GetLogicalCoresNumber()
 {
-    return 0;
+    if [ -r /proc/cpuinfo ] && grep -c "^processor" /proc/cpuinfo; then return 0; else return 1; fi
 }
 
 # ·····································
@@ -386,7 +412,7 @@ function BU.Hardware.Android.CPU.GetLogicalCoresNumber()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.GetPhysicalCoresNumber()
 {
-    return 0;
+    if [ -r /proc/cpuinfo ] && grep -c "^core id" /proc/cpuinfo; then return 0; else return 1; fi
 }
 
 ## ==============================================

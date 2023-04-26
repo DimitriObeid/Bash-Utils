@@ -162,40 +162,24 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHEC
 # Checking if the CPU's architecture is 32 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.Is32Bits()
 {
-    if BU.Main.CMDS.GetCommandPath 'lshw'; then
-        if BU.Main.Checkings.IsRoot; then
-            if [ "$(BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 32 ]; then return 0; fi
-        else
-            if [ "$(BU.Main.Echo.Msg "$(sudo lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 32 ]; then return 0; fi
-        fi;
-    else
-        return 1;
-    fi
+    if BU.Main.CMDS.GetCommandPath 'lscpu' && [ "$(lscpu | grep "CPU op-mode(s)" | awk '{print $3$4}')" == '32-bit' ]; then return 0; else return 1; fi
 }
 
 # ··············································
 # Checking if the CPU's architecture is 64 bits.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.Is64Bits()
 {
-    if BU.Main.CMDS.GetCommandPath 'lshw'; then
-        if BU.Main.Checkings.IsRoot; then
-            if [ "$(BU.Main.Echo.Msg "$(lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 64 ]; then return 0; fi
-        else
-            if [ "$(BU.Main.Echo.Msg "$(sudo lshw -class processor | awk 'FNR == 12 {print $2}')" '-n')" -eq 64 ]; then return 0; fi
-        fi;
-    else
-        return 1;
-    fi
+    if BU.Main.CMDS.GetCommandPath 'lscpu' && [ "$(lscpu | grep "CPU op-mode(s)" | awk '{print $3 $4}')" == '32-bit, 64-bit' ]; then return 0; else return 1; fi
 }
 
 # ····················································
@@ -207,7 +191,21 @@ function BU.Hardware.Linux.CPU.Is64Bits()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchAArch32()
 {
-    return 0;
+    #**** Variables ****
+    local cpuarch;  # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    if BU.Main.CMDS.GetCommandPath 'lscpu'; then
+        cpuarch="$(lscpu | grep "Architecture" | awk '{print $2}')";
+
+        if [ "${cpuarch}" == "armv7l" ] || [ "${cpuarch}" == "armv6l" ]; then
+            return 0;
+        else
+            return 1;
+        fi
+    else
+        return 1;
+    fi
 }
 
 # ····················································
@@ -219,7 +217,15 @@ function BU.Hardware.Linux.CPU.IsArchAArch32()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchAArch64()
 {
-    return 0;
+    if BU.Main.CMDS.GetCommandPath 'lscpu'; then
+        if [ "$(lscpu | grep "Architecture" | awk '{print $2}')" == "aarch64" ]; then
+            return 0;
+        else
+            return 1;
+        fi
+    else
+        return 1;
+    fi
 }
 
 # ··················································
@@ -323,7 +329,7 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETT
 function BU.Hardware.Linux.CPU.GetArch()
 {
     if BU.Main.CMDS.GetCommandPath 'uname'; then
-        BU.Main.Echo.Msg "$(uname -m)" '-n';
+        uname -m;
 
         return 0;
     else
@@ -351,12 +357,28 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_TH
 # Checking if the CPU is mono-core.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsMonocore()
 {
-    return 0;
+    if [ -r /proc/cpuinfo ]; then
+        if [ "$(grep -c 'processor' /proc/cpuinfo)" -eq 1 ]; then
+            return 0;
+        else
+            return 1;
+        fi
+    else
+        if BU.Main.CMDS.GetCommandPath 'nproc'; then
+            if [ "$(nproc)" -eq 1 ]; then
+                return 0;
+            else
+                return 1;
+            fi
+        else
+            echo "Unable to get the number of cores for this computer"; return 1;
+        fi
+    fi
 }
 
 ## ==============================================
@@ -370,17 +392,21 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE
 # Getting the total number of cores (logical AND physical).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   -
+#   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.GetCoresNumber()
 {
-    if BU.Main.CMDS.GetCommandPath 'nproc'; then
-        echo "$(nproc)";
-
+    if [ -r /proc/cpuinfo ] && grep -c 'processor' /proc/cpuinfo; then
         return 0;
     else
-        return 1;
+        if BU.Main.CMDS.GetCommandPath 'nproc'; then
+            nproc;
+
+            return 0;
+        else
+            echo "Unable to get the number of cores for this computer"; return 1;
+        fi
     fi
 }
 
@@ -393,7 +419,7 @@ function BU.Hardware.Linux.CPU.GetCoresNumber()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.GetLogicalCoresNumber()
 {
-    return 0;
+    if [ -r /proc/cpuinfo ] && grep -c "^processor" /proc/cpuinfo; then return 0; else return 1; fi
 }
 
 # ·····································
@@ -405,7 +431,7 @@ function BU.Hardware.Linux.CPU.GetLogicalCoresNumber()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.GetPhysicalCoresNumber()
 {
-    return 0;
+    if [ -r /proc/cpuinfo ] && grep -c "^core id" /proc/cpuinfo; then return 0; else return 1; fi
 }
 
 ## ==============================================
