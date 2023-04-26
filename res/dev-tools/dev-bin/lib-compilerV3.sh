@@ -544,27 +544,35 @@ function BytesToHuman()
     local L_BASE="${3:-1024}";  # ARG TYPE : Int            - REQUIRED | DEFAULT VAL : 1024 - DESC : Base (1000 (metric) or 1024 (binary notation))
     local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code - REQUIRED | DEFAULT VAL : en   - DESC : Language, for localizing the byte count (default language : English).
 
+    #**** Variables ****
+    local BYTESTOHUMAN_RESULT;
+
     #**** Code ****
     if [ "${L_PAD^^}" == 'NULL' ] || [ "${L_PAD^^}" == 'NIL' ]; then L_PAD='no'; fi
 
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
-    local BYTESTOHUMAN_RESULT; BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
+    BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
         # If the desired base format is not the binary prefix, then the base format used will be the metric one.
         if(base!=1024)base=1000
+
         # Setting the prefixes list (K = kilo, M = mega, G = giga, T = tera, P = peta, E = exa, Z = zeta, Y = yotta), and corrected the inversion of the Exa with Peta, and Zeta with Yotta.
         if (lang == "fr") {
             # Condition ternaire : si le format de base utilise le préfixe binaire, cette unité "io" ([préfixe]bioctet) est affichée après la valeur. Sinon, cette unité "o" ([préfixe]octet) est affichée après la valeur.
             basesuf=(base==1024)?"io":"o"
+
             s="oKMGTPEZY"
         } else {
             # Ternary condition : if the base format uses the binary prefix, then the "iB" ([prefix]bibyte) unit is displayed after the value. Else the "[prefix]byte" unit is displayed after the value.
             basesuf=(base==1024)?"iB":"B"
+
             s="BKMGTPEZY"
         }
+
         # While the "x" ("human" function first parameter value) is superior or equal to the "base" (human function third parameter value) AND
         while (x>=base && length(s)>1)
                {x/=base; s=substr(s,2)}
         s=substr(s,1,1)
+
         if (lang == "fr") {
             xf=(pad=="yes") ? ((s=="o")?"%5d   ":"%8.2f") : ((s=="o")?"%d":"%.2f")
             s=(s!="o") ? (s basesuf) : ((pad=="no") ? s : ((basesuf=="io")?(s "  "):(s " ")))
@@ -572,8 +580,10 @@ function BytesToHuman()
             xf=(pad=="yes") ? ((s=="B")?"%5d   ":"%8.2f") : ((s=="B")?"%d":"%.2f")
             s=(s!="B") ? (s basesuf) : ((pad=="no") ? s : ((basesuf=="iB")?(s "  "):(s " ")))
         }
+
         return sprintf( (xf " %s\n"), x, s)
     }
+
     BEGIN{print human(bytes, pad, base, lang)}')
 
     printf "%s" "${BYTESTOHUMAN_RESULT}";

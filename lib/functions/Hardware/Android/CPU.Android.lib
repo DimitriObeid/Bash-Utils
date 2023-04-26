@@ -193,7 +193,7 @@ function BU.Hardware.Android.CPU.Is64Bits()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.IsArchAArch32()
+function BU.Hardware.Android.CPU.IsArchAArch32()
 {
     return 0;
 }
@@ -204,7 +204,7 @@ function BU.Hardware.Linux.CPU.IsArchAArch32()
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.IsArchAArch64()
+function BU.Hardware.Android.CPU.IsArchAArch64()
 {
     return 0;
 }
