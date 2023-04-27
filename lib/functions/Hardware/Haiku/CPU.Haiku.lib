@@ -248,38 +248,74 @@ function BU.Hardware.Haiku.CPU.IsArchi386()
     return 0;
 }
 
-# ··············································
-# Checking if the CPU's architecture is PowerPC.
+# ················································
+# Checking if the CPU's architecture is PowerPC32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Haiku.CPU.IsArchPPC()
+function BU.Hardware.Haiku.CPU.IsArchPPC32()
 {
     return 0;
 }
 
-# ···········································
-# Checking if the CPU's architecture is MIPS.
+# ················································
+# Checking if the CPU's architecture is PowerPC64.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Haiku.CPU.IsArchMIPS()
+function BU.Hardware.Haiku.CPU.IsArchPPC64()
+{
+    return 0;
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS32.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Haiku.CPU.IsArchMIPS32()
+{
+    return 0;
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Haiku.CPU.IsArchMIPS64()
 {
     return 0;
 }
 
 # ···············································
-# Checking if the CPU's architecture is RISC-V.
+# Checking if the CPU's architecture is RISC-V32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Haiku.CPU.IsArchRISCV()
+function BU.Hardware.Haiku.CPU.IsArchRISCV32()
+{
+    return 0;
+}
+
+# ···············································
+# Checking if the CPU's architecture is RISC-V64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Haiku.CPU.IsArchRISCV64()
 {
     return 0;
 }

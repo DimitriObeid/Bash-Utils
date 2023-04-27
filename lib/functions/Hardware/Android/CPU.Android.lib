@@ -180,9 +180,9 @@ function BU.Hardware.Android.CPU.Is32Bits()
 function BU.Hardware.Android.CPU.Is64Bits()
 {
     if [ "$(getprop ro.product.cpu.abilist64)" != "" ] || [ "$(getprop ro.product.cpu.abilist)" == *"arm64-v8a"* ]; then
-        return 0
+        return 0;
     else
-        return 1
+        return 1;
     fi
 }
 
@@ -195,8 +195,19 @@ function BU.Hardware.Android.CPU.Is64Bits()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsArchAArch32()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"armeabi"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
+
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
 
@@ -206,7 +217,17 @@ function BU.Hardware.Android.CPU.IsArchAArch32()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsArchAArch64()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"arm64"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ··················································
@@ -218,7 +239,17 @@ function BU.Hardware.Android.CPU.IsArchAArch64()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsArchARM32()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == "armeabi-v7a" || "${arch}" == "armeabi" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ··················································
@@ -230,8 +261,19 @@ function BU.Hardware.Android.CPU.IsArchARM32()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsArchARM64()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == "arm64-v8a" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
+
 
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
@@ -242,7 +284,17 @@ function BU.Hardware.Android.CPU.IsArchARM64()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsArchAMD64()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == "x86_64" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ···········································
@@ -254,43 +306,149 @@ function BU.Hardware.Android.CPU.IsArchAMD64()
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsArchi386()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == "x86" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
-# ··············································
-# Checking if the CPU's architecture is PowerPC.
+# ················································
+# Checking if the CPU's architecture is PowerPC32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Android.CPU.IsArchPPC()
+function BU.Hardware.Android.CPU.IsArchPPC32()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"ppc"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
-# ···········································
-# Checking if the CPU's architecture is MIPS.
+# ················································
+# Checking if the CPU's architecture is PowerPC64.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Android.CPU.IsArchMIPS()
+function BU.Hardware.Android.CPU.IsArchPPC64()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"ppc"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS32.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Android.CPU.IsArchMIPS32()
+{
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"mips"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Android.CPU.IsArchMIPS64()
+{
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"mips"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ···············································
-# Checking if the CPU's architecture is RISC-V.
+# Checking if the CPU's architecture is RISC-V32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Android.CPU.IsArchRISCV()
+function BU.Hardware.Android.CPU.IsArchRISCV32()
 {
-    return 0;
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"riscv"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+# ···············································
+# Checking if the CPU's architecture is RISC-V64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Android.CPU.IsArchRISCV64()
+{
+    #**** Variables ****
+    local arch;     # VAR TYPE : String     # DESC :
+
+    #**** Code ****
+    arch="$(getprop ro.product.cpu.abi)";
+
+    if [[ "${arch}" == *"riscv"* ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 ## ==============================================

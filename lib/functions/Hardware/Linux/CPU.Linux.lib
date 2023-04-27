@@ -217,14 +217,10 @@ function BU.Hardware.Linux.CPU.IsArchAArch32()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchAArch64()
 {
-    if BU.Main.CMDS.GetCommandPath 'lscpu'; then
-        if [ "$(lscpu | grep "Architecture" | awk '{print $2}')" == "aarch64" ]; then
-            return 0;
-        else
-            return 1;
-        fi
+    if [ "$(uname -m)" == "aarch64" ]; then
+        return 0
     else
-        return 1;
+        return 1
     fi
 }
 
@@ -237,7 +233,11 @@ function BU.Hardware.Linux.CPU.IsArchAArch64()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchARM32()
 {
-    return 0;
+    if [ "$(uname -m)" == "armv7l" ]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ··················································
@@ -249,7 +249,11 @@ function BU.Hardware.Linux.CPU.IsArchARM32()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchARM64()
 {
-    return 0;
+    if [ "$(uname -m)" == "aarch64" ]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ··············································
@@ -261,7 +265,11 @@ function BU.Hardware.Linux.CPU.IsArchARM64()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchAMD64()
 {
-    return 0;
+    if [ "$(uname -m)" == "x86_64" ]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ···········································
@@ -273,43 +281,107 @@ function BU.Hardware.Linux.CPU.IsArchAMD64()
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsArchi386()
 {
-    return 0;
+    if [ "$(uname -m)" == "i386" ]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
-# ··············································
-# Checking if the CPU's architecture is PowerPC.
+# ················································
+# Checking if the CPU's architecture is PowerPC32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.IsArchPPC()
+function BU.Hardware.Linux.CPU.IsArchPPC32()
 {
-    return 0;
+    if [[ "$(uname -m)" == "ppc64" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
-# ···········································
-# Checking if the CPU's architecture is MIPS.
+# ················································
+# Checking if the CPU's architecture is PowerPC64.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.IsArchMIPS()
+function BU.Hardware.Linux.CPU.IsArchPPC64()
 {
-    return 0;
+    if [[ "$(uname -m)" == "ppc64" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS32.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Linux.CPU.IsArchMIPS32()
+{
+    if [[ "$(uname -m)" == "mips" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Linux.CPU.IsArchMIPS64()
+{
+    if [[ "$(uname -m)" == "mips64" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 # ···············································
-# Checking if the CPU's architecture is RISC-V.
+# Checking if the CPU's architecture is RISC-V32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.Linux.CPU.IsArchRISCV()
+function BU.Hardware.Linux.CPU.IsArchRISCV32()
 {
-    return 0;
+    if [[ "$(uname -m)" == "riscv32" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
+# ···············································
+# Checking if the CPU's architecture is RISC-V64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.Linux.CPU.IsArchRISCV64()
+{
+    if [[ "$(uname -m)" == "riscv64" ]]; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 ## ==============================================

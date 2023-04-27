@@ -248,40 +248,76 @@ function BU.Hardware.CPU.IsArchi386()
     BU.Hardware."${}".CPU.IsArchi386 || return "${?}"; return 0;
 }
 
-# ··············································
-# Checking if the CPU's architecture is PowerPC.
+# ················································
+# Checking if the CPU's architecture is PowerPC32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.IsArchPPC()
+function BU.Hardware.CPU.IsArchPPC32()
 {
-    BU.Hardware."${}".CPU.IsArchPPC || return "${?}"; return 0;
+    BU.Hardware."${}".CPU.IsArchPPC32 || return "${?}"; return 0;
 }
 
-# ···········································
-# Checking if the CPU's architecture is MIPS.
+# ················································
+# Checking if the CPU's architecture is PowerPC64.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.IsArchMIPS()
+function BU.Hardware.CPU.IsArchPPC64()
 {
-    BU.Hardware."${}".CPU.IsArchMIPS || return "${?}"; return 0;
+    BU.Hardware."${}".CPU.IsArchPPC64 || return "${?}"; return 0;
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS32.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.CPU.IsArchMIPS32()
+{
+    BU.Hardware."${}".CPU.IsArchMIPS32 || return "${?}"; return 0;
+}
+
+# ·············································
+# Checking if the CPU's architecture is MIPS64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.CPU.IsArchMIPS64()
+{
+    BU.Hardware."${}".CPU.IsArchMIPS64 || return "${?}"; return 0;
 }
 
 # ···············································
-# Checking if the CPU's architecture is RISC-V.
+# Checking if the CPU's architecture is RISC-V32.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
 # shellcheck disable=
-function BU.Hardware.CPU.IsArchRISCV()
+function BU.Hardware.CPU.IsArchRISCV32()
 {
-    BU.Hardware."${}".CPU.IsArchRISCV || return "${?}"; return 0;
+    BU.Hardware."${}".CPU.IsArchRISCV32 || return "${?}"; return 0;
+}
+
+# ···············································
+# Checking if the CPU's architecture is RISC-V64.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Hardware.CPU.IsArchRISCV64()
+{
+    BU.Hardware."${}".CPU.IsArchRISCV64 || return "${?}"; return 0;
 }
 
 ## ==============================================
