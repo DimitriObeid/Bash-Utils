@@ -667,6 +667,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+#   - BU.Main.Errors.Exit()                 -> Main -> Errors.lib
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 
 #   - BU.Main.Filesystem.IsPartitionFull()  -> Main -> Filesystem.lib
@@ -740,7 +741,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.ModuleInit.IsInScript && exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a path in order to check if the target file system is full or not" >&2;
@@ -751,7 +752,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
         fi
 
     # Else, if an invalid directory or file was passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
@@ -770,7 +771,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.ModuleInit.IsInScript && exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a valid path in order to check if the target file system is full or not" >&2;
@@ -781,7 +782,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
         fi
 
     elif [ "${IsPartitionFullReturnCode}" == "${__BU_MAIN_EXIT_NO_SPACE_LEFT}" ]; then local lineno="${LINENO}";
@@ -796,7 +797,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
             BU.Main.Errors.HandleErrors "${IsPartitionFullReturnCode}" \
                 "NO SPACE LEFT ON THE TARGET FILE {SYSTEM} !!!" \
 				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "${p_fileFS}") » partition) before using it, or use another partition to write data in a file${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
-                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -810,7 +811,7 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.ModuleInit.IsInScript && exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
         fi
     fi
 }
@@ -1038,6 +1039,8 @@ function BU.Main.Checkings.CheckProjectLogPath()
 #   - BU.Main.Echo.Newline()                    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                    -> Main -> Echo.lib (NOTE : The "${__BU_MAIN_STAT_ECHO}" global status variable's value is set on 'true' at this point, so this function can safely be used)
 
+#   - BU.Main.Errors.Exit()                     -> Main -> Errors.lib
+
 #   - BU.Main.Status.ChangeSTAT_DECHO()         -> Main -> Status.lib
 #   - BU.Main.Status.ChangeSTAT_ECHO()          -> Main -> Status.lib
 #   - BU.Main.Status.ChangeSTAT_TIME_HEADER()   -> Main -> Status.lib
@@ -1061,7 +1064,7 @@ function BU.Main.Status.CheckProjectLogStatus()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
 	# Checking first if the partition where the log file exists is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "${C}"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}" };
 
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : Any        - REQUIRED | DEFAULT VAL : NULL     - DESC : Text to display.
@@ -1399,6 +1402,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 #   - BU.Main.Echo.Error()                              -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()                            -> Main -> Echo.lib
 
+#   - BU.Main.Errors.Exit()                             -> Main -> Errors.lib
 #   - BU.Main.Errors.HandleSmallErrors()                -> Main -> Errors.lib
 
 #   - BU.Main.TextFormat.SetBGColor()                   -> Main -> TextFormat.lib
@@ -1423,7 +1427,7 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit "${C}"; };
+	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}" };
 
 	if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
         if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "${p_parent}" "${p_child}" "${p_type}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi

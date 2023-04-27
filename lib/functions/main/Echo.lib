@@ -283,6 +283,8 @@ printf "
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib (this file)
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib (this file)
 
+#   - BU.Main.Errors.Exit()                         -> Main -> Errors.lib
+
 #   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
@@ -320,7 +322,7 @@ function BU.Main.Echo.__EchoOutput()
             local v_BU_MAIN_STAT_ECHO_val="${__BU_MAIN_STAT_ECHO}"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "${BASH_SOURCE[0]}" "${LINENO}";
         fi
 
-		BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}" "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}" "f" || { BU.Main.Echo.__EchoCPLS "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Unable to create the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}") debug log file" 'E' "CPLS"; exit 1; }
+		BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}" "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}" "f" || { BU.Main.Echo.__EchoCPLS "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Unable to create the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}") debug log file" 'E' "CPLS"; BU.Main.Errors.Exit 1; return "${?}"; }
 
 		BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
 

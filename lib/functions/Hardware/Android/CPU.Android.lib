@@ -400,7 +400,7 @@ function BU.Hardware.Android.CPU.IsArchMIPS64()
     #**** Code ****
     arch="$(getprop ro.product.cpu.abi)";
 
-    if [[ "${arch}" == *"mips"* ]]; then
+    if [[ "${arch}" == *"mips64"* ]]; then
         return 0;
     else
         return 1;
@@ -422,7 +422,7 @@ function BU.Hardware.Android.CPU.IsArchRISCV32()
     #**** Code ****
     arch="$(getprop ro.product.cpu.abi)";
 
-    if [[ "${arch}" == *"riscv"* ]]; then
+    if [[ "${arch}" == *"riscv32"* ]]; then
         return 0;
     else
         return 1;
@@ -444,7 +444,7 @@ function BU.Hardware.Android.CPU.IsArchRISCV64()
     #**** Code ****
     arch="$(getprop ro.product.cpu.abi)";
 
-    if [[ "${arch}" == *"riscv"* ]]; then
+    if [[ "${arch}" == *"riscv64"* ]]; then
         return 0;
     else
         return 1;

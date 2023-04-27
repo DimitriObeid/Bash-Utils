@@ -219,16 +219,26 @@ function BU.Main.Errors.Exit()
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__EXIT_AND_RETURN_CODES_HANDLING}";
 
     #**** Parameters ****
-    local p_exitcode=${1:-$'\0'};   # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Exit code.
-    local p_behavior=${2:-$'\0'};   # ARG TYPE : Char   - REQUIRED | DEFAULT VAL : NULL     - DESC : Use "exit" or "return" keywords.
+    local p_exitcode=${1:-$'\0'};   # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : NULL     - DESC : Exit code.
+    local p_behavior=${2:-'E'};     # ARG TYPE : Alphachar  - REQUIRED | DEFAULT VAL : E        - DESC : Use "exit" (E) or "return" (R) keywords.
 
     #**** Code ****
+    if [[ "${p_behavior}" == [Ee][Rr][Rr]?([Oo][Rr]) ]];        then p_behavior='E'; fi
+    if [[ "${p_behavior}" == [Rr][Ee][Tt]?([Uu][Rr][Nn]) ]];    then p_behavior='R'; fi
+
     if BU.Main.Checkings.IsPositiveInt "${p_exitcode}"; then
 
         if [ "${p_behavior^^}" == 'E' ] || [ -z "${p_behavior}" ]; then
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; else return "${p_exitcode}"; fi
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; 
+            
+            # If the code is not executed from a file, but the file is directly sourced in a terminal, exiting will close the terminal emulator, so the "return" keyword must be called instead of the "exit" keyword.
+            if BU.ModuleInit.IsInScript; then 
+                exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}";
+            else
+                return "${p_exitcode}";
+            fi
 
-        elif [ "${p_behavior^^}" == 'W' ]; then
+        elif [ "${p_behavior^^}" == 'R' ]; then
             BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${p_exitcode}";
 
         else
@@ -240,15 +250,39 @@ function BU.Main.Errors.Exit()
 
             BU.Main.Echo.Newline 2 >&2;
 
-            BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'W' (warning) expected)";
+            BU.Main.Echo.Error "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : No valid character passed as second argument ('E' (exit) or 'R' (return) expected)";
             BU.Main.Echo.Newline >&2;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; else return "${p_exitcode}"; fi
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            # If the code is not executed from a file, but the file is directly sourced in a terminal, exiting will close the terminal emulator, so the "return" keyword must be called instead of the "exit" keyword.
+            if BU.ModuleInit.IsInScript; then 
+                exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}";
+            else 
+                return "${p_exitcode}"; 
+            fi
         fi
     else
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument";
+        # shellcheck disable=SC2034
+        __BU_MAIN_STAT_DECHO='restrict';
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; if BU.ModuleInit.IsInScript; then exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; else return "${p_exitcode}"; fi
+        # shellcheck disable=SC2034
+        __BU_MAIN_STAT_ECHO='true';
+
+        BU.Main.Echo.Newline 2 >&2;
+
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument (code range : 0 - 255)";
+        BU.Main.Echo.Warning "Aborting the script's execution for safety reasons";
+        BU.Main.Zcho.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+        
+        # If the code is not executed from a file, but the file is directly sourced in a terminal, exiting will close the terminal emulator, so the "return" keyword must be called instead of the "exit" keyword.
+        if BU.ModuleInit.IsInScript; then
+            exit "${p_exitcode}" || kill "${__BU_MODULE_INIT__PROJECT_PID}"; 
+        else 
+            return "${p_exitcode}";
+        fi
     fi
 }
 
@@ -286,6 +320,8 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 #   - BU.Main.Echo.Error()                      -> Main -> Echo.lib
+
+#   - BU.Main.Errors.Exit()                     -> Main -> Errors.lib (this file)
 
 #   - BU.Main.Headers.DrawLine()                -> Main -> Headers.lib
 #   - BU.Main.Headers.Header.Red()              -> Main -> Headers.lib
@@ -458,7 +494,7 @@ function BU.Main.Errors.HandleErrors()
 
                 BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-                exit "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+                BU.Main.Errors.Exit "${__BU_MAIN_EXIT_NOT_PERMITTED}"; return "${?}";
             else
                 if [ "${__BU_MAIN_STAT_ERROR,,}" == 'warning' ]; then
                     # Calling the function that processes the given answer.

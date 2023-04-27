@@ -103,6 +103,8 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 #   - BU.Main.Echo.Error()              -> Main -> Echo.lib
 
+#   - BU.Main.Errors.Exit()             -> Main -> Errors.lib
+
 #   - BU.Main.Files.SourceFile()        -> Main -> Files.lib
 
 #   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
@@ -178,7 +180,11 @@ function BU.Main.Status.ConfEcho()
         fi
     done
 
-    echo >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; exit 1;
+    echo >&2; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; 
+    
+    BU.Main.Errors.Exit 1;
+
+    return "${?}";
 }
 
 ## ==============================================
