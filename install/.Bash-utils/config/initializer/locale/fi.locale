@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-## TIETOA KÄSIKIRJOITUKSESTA :
+# ------------------
+# TIEDOSTON TIEDOT :
 
 # Nimi              : fi.locale
 # Kirjoittaja(t)    : Dimitri OBEID
 # Versio            : 1.0
 
 
-# ------------------
-# TIEDOSTON KUVAUS :
+# -----------------
+# SCRIPTIN KUVAUS :
 
 # Moduulin alustusskriptin suomenkieliset käännösviestit.
+
 
 # ----------------------------
 

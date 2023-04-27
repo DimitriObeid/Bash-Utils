@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# --------------------------
-## INFORMASJON OM SKRIPTET :
+# ----------------------
+# INFORMASJON OM FILEN :
 
 # Navn : nb.locale
 # Forfatter(e) : Dimitri OBEID
 # Versjon : 1.0
 
 
-# ----------------
-# FILBESKRIVELSE :
+# -------------------------
+# BESKRIVELSE AV SKRIPTET :
 
 # Meldinger for Norsk bokmål oversettelse av skript for å initialisere moduler.
+
 
 # ----------------------------
 

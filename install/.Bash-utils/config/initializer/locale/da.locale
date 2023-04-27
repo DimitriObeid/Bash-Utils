@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-## OPLYSNINGER OM PROGRAMMET :
+# ----------------------
+# OPLYSNINGER OM FILEN :
 
 # Navn          : da.locale
 # Forfatter(e)  : Dimitri OBEID
 # Version       : 1.0
 
 
-# ----------------
-# FILBESKRIVELSE :
+# -----------------------
+# SCRIPTETS BESKRIVELSE :
 
 # Danske oversættelsesmeddelelser fra modulets initialiseringsskript.
+
 
 # ----------------------------
 

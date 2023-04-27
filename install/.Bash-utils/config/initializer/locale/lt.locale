@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-## INFORMACIJA APIE PROGRAMĄ :
+# ------------------------
+# INFORMACIJA APIE FAILĄ :
 
 # Pavadinimas       : lt.locale
 # Autorius (-iai)   : Dimitri OBEID
 # Versija           : 1.0
 
 
-# -----------------
-# FAILO APRAŠYMAS :
+# ---------------------
+# PROGRAMOS APRAŠYMAS :
 
 # Modulio iniciacijos scenarijaus vertimo į lietuvių kalbą pranešimai.
+
 
 # ----------------------------
 

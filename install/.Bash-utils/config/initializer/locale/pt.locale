@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# ------------------------------
-## INFORMAÇÃO SOBRE O FICHEIRO :
+# -----------------------------
+# INFORMAÇÃO SOBRE O FICHEIRO :
 
 # Nome          : pt.locale
 # Autor(es)     : Dimitri OBEID
@@ -12,6 +12,7 @@
 # DESCRIÇÃO DO GUIÃO :
 
 # Mensagens de tradução portuguesa do guião de inicialização do módulo.
+
 
 # ----------------------------
 

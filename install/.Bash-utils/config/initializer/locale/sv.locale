@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# --------------------------
-## INFORMATION OM SKRIPTET :
+# ----------------------
+# INFORMATION OM FILEN :
 
 # Namn          : sv.locale
 # Författare(s) : Dimitri OBEID
 # Version       : 1.0
 
 
-# ----------------
-# FILBESKRIVNING :
+# -----------------------
+# SKRIPTETS BESKRIVNING :
 
 # Svenska översättningsmeddelanden från skriptet för modulinitiering.
+
 
 # ----------------------------
 

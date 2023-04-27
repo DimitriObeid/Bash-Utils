@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# -------------------------
-## INFORMASI TENTANG FILE :
+# ------------------------
+# INFORMASI TENTANG FILE :
 
 # Nama          : id.locale
 # Pengarang     : Dimitri OBEID
@@ -12,6 +12,7 @@
 # DESKRIPSI PROGRAM :
 
 # Pesan terjemahan bahasa Indonesia dari skrip inisialisasi modul.
+
 
 # ----------------------------
 

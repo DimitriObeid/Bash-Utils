@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# ----------------------
-## INFORMACE O SKRIPTU :
+# ---------------------
+# INFORMACE O SOUBORU :
 
 # Název         : cs.locale
 # Autor(i)      : Dimitri OBEID
@@ -9,9 +9,10 @@
 
 
 # ---------------
-# POPIS SOUBORU :
+# POPIS SKRIPTU :
 
 # České překladové zprávy z inicializačního skriptu modulu.
+
 
 # ----------------------------
 

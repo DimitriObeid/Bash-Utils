@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# -----------------------
-## INFORMÁCIE O SKRIPTE :
+# ---------------------
+# INFORMÁCIE O SÚBORE :
 
 # Názov         : sk.locale
 # Autor(i)      : Dimitri OBEID
 # Verzia        : 1.0
 
 
-# --------------
-# POPIS SÚBORU :
+# ---------------
+# POPIS SKRIPTU :
 
 # Slovenský preklad správ inicializačného skriptu modulu.
+
 
 # ----------------------------
 

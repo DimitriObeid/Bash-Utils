@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# -----------------------
-# TEAVE KÄSIKIRJA KOHTA :
+# ---------------------
+# FAILI INFORMATSIOON :
 
 # Nimi          : et.locale
 # Autor(id)     : Dimitri OBEID
 # Version       : 1.0
 
 
-# -----------------
-# FAILI KIRJELDUS :
+# -------------------
+# SKRIPTI KIRJELDUS :
 
 # Mooduli initsialiseerimisskripti tõlkimine eesti keelde.
+
 
 # ----------------------------
 

@@ -1,20 +1,18 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-# INFORMATIE OVER HET SCRIPT :
+# -----------------------------
+# INFORMATIE OVER HET BESTAND :
 
 # Naam          : nl.locale
 # Auteur(s)     : Dimitri OBEID
 # Versie        : 1.0
 
 
-# ------------------
-# ------------------
-# ------------------
-# ----------------------
-# BESTANDSBESCHRIJVING :
+# -----------------------------
+# BESCHRIJVING VAN HET SCRIPT :
 
 # Nederlandse vertaalberichten van het module-initialisatiescript.
+
 
 # ----------------------------
 

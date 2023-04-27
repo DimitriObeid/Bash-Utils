@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# --------------------------
-## INFORMĀCIJA PAR SKRIPTU :
+# -----------------------
+# INFORMĀCIJA PAR FAILU :
 
 # Nosaukums     : lv.locale
 # Autors(-i)    : Dimitri OBEID
 # Versija       : 1.0
 
 
-# ----------------
-# FAILA APRAKSTS :
+# ------------------
+# SKRIPTA APRAKSTS :
 
 # Moduļa inicializācijas skripta ziņojumi latviešu valodā.
+
 
 # ----------------------------
 

@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# ----------------------------
-# INFORMAZIONI SUL PROGRAMMA :
+# -----------------------
+# INFORMAZIONI SUL FILE :
 
 # Nome          : it.locale
 # Autore(i)     : Dimitri OBEID
 # Versione      : 1.0
 
 
-# ----------------------
-# DESCRIZIONE DEL FILE :
+# --------------------------
+# DESCRIZIONE DELLO SCRIPT :
 
 # Messaggi di traduzione in italiano dello script di inizializzazione del modulo.
+
 
 # ----------------------------
 

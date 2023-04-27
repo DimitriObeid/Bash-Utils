@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# ---------------------------------------
-## A PROGRAMMAL KAPCSOLATOS INFORMÁCIÓK :
+# ------------------
+# FÁJL INFORMÁCIÓI :
 
 # Név           : hu.locale
 # Szerző(k)     : Dimitri OBEID
 # Verzió        : 1.0
 
 
-# ------------
-# FÁJLLEÍRÁS :
+# ------------------------
+# A FORGATÓKÖNYV LEÍRÁSA :
 
 # A modul inicializáló szkriptjének magyar fordítási üzenetei.
+
 
 # ----------------------------
 

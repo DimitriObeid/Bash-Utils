@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
-# -------------------------
-## INFORMACIJE O PROGRAMU :
+# ------------------------
+# INFORMACIJE O DATOTEKI :
 
 # Ime           : sl.locale
 # Avtor(i)      : Dimitri OBEID
 # Različica     : 1.0
 
 
-# ---------------
-# OPIS DATOTEKE :
+# --------------
+# OPIS SKRIPTA :
 
 # Sporočila slovenskega prevoda scenarija za inicializacijo modula.
+
 
 # ----------------------------
 
