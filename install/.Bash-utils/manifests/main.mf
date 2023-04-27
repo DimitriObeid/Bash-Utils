@@ -1,7 +1,7 @@
 <?xml version = "1.0" encoding="UTF-8" standalone="yes" ?>
 
 <!DOCTYPE BUArchData [
-    <!ELEMENT BUArchData (BUVendor*, BUModule*, BULibrary*, OS*)>
+    <!ELEMENT BUArchData (BUVendor*, BUModule*, BULibrary*, BULanguages*, OS*)>
 
     <!-- BUVendor tag from "BUArchData" -->
     <!ELEMENT BUVendor (Names, Companies, Email)>
@@ -18,6 +18,9 @@
     <!ELEMENT BULibrary (Version, LatestChangelogs)>
     <!ELEMENT Version (#PCDATA)>
     <!ELEMENT LatestChangelogs (#PCDATA)>
+
+    <!-- BULanguages tag from "BUArchData" -->
+    <!Element BULanguages ()>
 
     <!-- OS tag from "BUArchData" -->
     <!ELEMENT OS (Position, AllSupported, Supported?)>
