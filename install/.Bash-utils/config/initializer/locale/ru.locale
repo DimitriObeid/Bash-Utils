@@ -37,6 +37,35 @@ function BU.ModuleInit.SetInitLocale.ru()
 
     ##
 
+    #
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="";
+
+    #
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="";
+
+    #
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="";
+
+    #
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
+
+    #
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="";
+
+    ## ==============================================
+
+
+
+    # /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+    # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+    ########################### PROCESSING THE MODULES INITIALIZATION SCRIPT ##########################
+
+    ####
+
+    ##
+
     return 0;
 }
 
