@@ -38,16 +38,16 @@ function BU.ModuleInit.SetInitLocale.en()
     ## REPEATED MESSAGES
 
     # Writing the file name, function name and the line number where an error occured.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING";
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS WARNING";
 
     # Writing the file name and the line number where an error occured.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="IN « %s », LINE « %s » --> BASH-UTILS WARNING";
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="IN « %s » FILE, ON LINE « %s » --> BASH-UTILS WARNING";
 
     # Writing the file name, function name and the line number where a fatal error occured.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS ERROR";
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS ERROR";
 
     # Writing the file name and the line number where a fatal error occured.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="IN « %s », LINE « %s » --> BASH-UTILS ERROR";
+    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="IN « %s » FILE, ON LINE « %s » --> BASH-UTILS ERROR";
 
     # Writing the beginning of the text of any text that must be printed with the "BU.ModuleInit.PrintLogError()" function.
     __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
