@@ -60,7 +60,7 @@ function BU.ModuleInit.SetInitLocale.tr()
 
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-    ########################### PROCESSING THE MODULES INITIALIZATION SCRIPT ##########################
+    ############################ MODÜL BAŞLATMA KOMUT DOSYASININ IŞLENMESI ############################
 
     ####
 
