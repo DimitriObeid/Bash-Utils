@@ -312,7 +312,9 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
     [ "${v_userLang,,}" == 'es' ] && BU.ModuleInit.MsgLine "$(printf "[ERROR] FICHERO : %s | LÍNEA : %s | CÓDIGO : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     [ "${v_userLang,,}" == 'fr' ] && BU.ModuleInit.MsgLine "$(printf "[ ERREUR ] FICHER : %s | LIGNE : %s | CODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'id' ] && BU.ModuleInit.MsgLine "$(printf "[ KESALAHAN ] FILE : %s | LINE : %s | KODE : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'pt' ] && BU.ModuleInit.MsgLine "$(printf "[ERRO] FICHEIRO : %s | LINHA : %s | CÓDIGO : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
+    
     [ "${v_userLang,,}" == 'ru' ] && BU.ModuleInit.MsgLine "$(printf "[ОШИБКА] ФАЙЛ : %s | ЛИНИЯ : %s | КОД : %s" "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
@@ -358,7 +360,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
     # English
     [ "${v_userLang,,}" == 'en' ] && {
-        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+        printf "IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Function where the « %s() » function was called : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
@@ -377,6 +379,13 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
+    # Bahasa Indonesia | Indonesian
+    [ "${v_userLang,,}" == 'id' ] && {
+        printf "DALAM FILE « %s », PADA « %s » FUNGSI, DI GARIS « %s » --> PERINGATAN BASH-UTILS : TIDAK DAPAT MENEMUKAN JALUR INI --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+
+        printf "(%s) Fungsi di mana fungsi « %s() » dipanggil : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+    }
+
     # Português | Portuguese
     [ "${v_userLang,,}" == 'pt' ] && {
         printf "EM « %s » FICHEIRO, NA FUNÇÃO « %s() », EM LINHA « %s » --> AVISO DE BASH-UTILS : IMPOSSÍVEL DE ENCONTRAR ESTE CAMINHO --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
@@ -393,7 +402,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
     [ "${v_isPrinted}" != 'true' ] && {
-        printf "IN « %s », FUNCTION « %s », LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+        printf "IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS WARNING : UNABLE TO FIND THIS PATH --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Function where the « %s() » function was called : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2;
     };
@@ -431,7 +440,9 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && v_isPrinted='true';
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "Seluruh perpustakaan akan menggunakan bahasa Inggris sebagai bahasa default" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "O resto da biblioteca utilizará o inglês como língua padrão" >&2 && v_isPrinted='true';
+
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "Остальная часть библиотеки будет использовать английский язык в качестве языка по умолчанию" >&2 && v_isPrinted='true';
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
@@ -534,8 +545,18 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo "Arrêt de l'exécution du script" >&2;
                 echo >&2;
 
-                # WARNING : Do not call the "BU.ModuleInit.AskPrintLog()" function here, the current function is defined before the "${__BU_MODULE_INIT_MSG_ARRAY}" array.
+                # AVERTISSEMENT : N'appelez pas la fonction "BU.ModuleInit.AskPrintLog()" ici, la fonction actuelle est définie avant le tableau "${__BU_MODULE_INIT_MSG_ARRAY}".
                 return 1;
+            }
+
+            # Bahasa Indonesia | Indonesian
+            [ "${p_lang_backup,,}" == 'fr' ] && {
+                echo '-----------------------------------------------------------------------' >&2 && echo >&2;
+                echo 'KESALAHAN FATAL: TIDAK DAPAT MENYERTAKAN FILE TERJEMAHAN BAHASA INGGRIS' >&2 && echo >&2;
+
+                echo "Karena pesan-pesan dalam berkas inisialisasi modul disimpan ke dalam variabel, berkas ini bergantung pada berkas terjemahan ini, yang mendefinisikan variabel-variabel ini" >&2;
+                echo "" >&2;
+                echo >&2;
             }
 
             # Português | Portuguese
