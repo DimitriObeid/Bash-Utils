@@ -203,6 +203,8 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
     local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
+    declare -i i;                   # VAR TYPE : Int        - DESC : "For" loop counter.
+
     if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
 	local v_fieldtmp="";            # VAR TYPE : String     - DESC : Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.
@@ -265,6 +267,8 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
     local p_count=${4:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Allow to set a counter of skipped delimiters.
 
     #**** Variables ****
+    declare -i i;                   # VAR TYPE : Int        - DESC : "For" loop counter.
+
     local p_string_tmp;             # VAR TYPE : String     - DESC :
 
     if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
@@ -735,6 +739,8 @@ function BU.Main.Text.GetSubStringBeforeDelim()
     local p_init=${5:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module.
 
     #**** Variables ****
+    declare -i i;                   # VAR TYPE : Int        - DESC : "For" loop counter.
+
     if [ -n "${p_count}" ] && [ "${p_count,,}" == 'count' ]; then local v_count=0; fi
 
 	local v_fieldtmp="";            # VAR TYPE : String     - DESC : Leave this variable empty, it is used to store temporarily the first field cut from the original string at each loop iteration.

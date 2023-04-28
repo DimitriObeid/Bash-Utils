@@ -1472,7 +1472,10 @@ function BU.ModuleInit.MsgLineCount()
     #**** Parameters ****
     local p_number=${1:-$'\0'};     # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Number of times the character has to be display.
     local p_line=${2:-$'\0'};       # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Line character.
-    local p_context=${3:-'echo'};   # ARG TYPE : NULL   - REQUIRED | DEFAULT VAL : NULl     - DESC : Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
+    local p_context=${3:-'echo'};   # ARG TYPE : NULL   - REQUIRED | DEFAULT VAL : NULL     - DESC : Context of the function's call (should the text be processed by the "BU.ModuleInit.Msg" function or with a simple "echo" command ?).
+
+    #**** Variables ****
+    declare -i i;   # VAR TYPE : Int    - DESC : "For" loop counter
 
     #**** Code ****
     if      [ "${p_context,,}" == 'echo' ]; then
@@ -1540,6 +1543,8 @@ function BU.ModuleInit.PrintLog()
     #**** Variables ****
     declare -i v_int_randomizer;    # VAR TYPE : Int        - DESC : This variable stores a random number between 3 and 6 included.
     declare -i v_str_max_size;      # VAR TYPE : Int        - DESC : This variable stores the maximum size of the "${v_str_randomizer}" string.
+
+    declare -i i;                   # VAR TYPE : Int        - DESC : "For" loop counter
 
     local v_str_randomizer;         # VAR TYPE : String     - DESC : This string stores the randomized string which is written in the log file's name.
     local v_str_randomizer_int;     # VAR TYPE : int        - DESC : This variable stores the randomized numer of times another generated md5sum string must be added into the "${v_str_randomizer} variable".

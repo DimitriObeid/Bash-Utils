@@ -1358,6 +1358,9 @@ function BU.Main.Echo.Newline()
     #**** Parameters ****
     local p_number=${1:-1}; # ARG TYPE : Int    - OPTIONAL | DEFAULT VAL : 1    - DESC : Line breaks iterator.
 
+    #**** Variables ****
+    declare -i i;           # VAR TYPE : Int    - DESC : "For" loop counter.
+
     #**** Code ****
     if [ -n "${p_number}" ]; then
         if ! BU.Main.Checkings.IsPositiveInt "${p_number}"; then

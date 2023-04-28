@@ -259,7 +259,7 @@ function BU.Main.Directories.Make()
 
 	#**** Parameters ****
 	local p_parent=${1:-$'\0'}; # ARG TYPE : String	    - REQUIRED | DEFAULT VAL : NULL     - DESC : Emplacement of the currently processed directory's parent folder from the root directory.
-	local p_name=${2:-$'\0'};   # ARG TYPE : String	    - REQUIRED | DEFAULT VAL : NULl     - DESC : Name of the folder to process (into its parent directory).
+	local p_name=${2:-$'\0'};   # ARG TYPE : String	    - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the folder to process (into its parent directory).
 	local p_rm=${3:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Authorization to overwrite the targeted directory.
 
 	#**** Variables ****
@@ -504,6 +504,8 @@ function BU.Main.Directories.GetParentDirectoryName()
     local p_iterations=${2:-1}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Variables ****
+    declare -i i;   # VAR TYPE : Int        - DESC : "For" loop counter.
+
     local result;   # VAR TYPE : String     - DESC :
 
     #**** Code ****
@@ -557,6 +559,8 @@ function BU.Main.Directories.GetParentDirectoryPath()
     local p_iterations=${2:-1}; # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : 1        - DESC : Number of iterations, corresponding to the number of folders to go up in the directory tree.
 
     #**** Variables ****
+    declare -i i;   # VAR TYPE : Int        - DESC : "For" loop counter.
+    
     local result;   # VAR TYPE : String     - DESC :
 
     #**** Code ****
