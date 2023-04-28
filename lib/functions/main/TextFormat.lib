@@ -115,7 +115,7 @@ function BU.Main.TextFormat.CannotCreateRessource()
     echo "Aborting the script's execution" >&2;
     echo >&2;
 
-    BU.Main.Errors.Exit 1; return "${?}"; fi
+    BU.Main.Errors.Exit 1; return "${?}";
 }
 
 # ·································································
@@ -311,7 +311,7 @@ function BU.Main.TextFormat.SetTextColor()
     shopt -s extglob;
 
     # Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
-    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}" }; fi
+    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; }; fi
 
     shopt -u extglob;
 

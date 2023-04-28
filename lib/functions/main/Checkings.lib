@@ -1064,7 +1064,7 @@ function BU.Main.Status.CheckProjectLogStatus()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
 	# Checking first if the partition where the log file exists is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}" };
+	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; };
 
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : Any        - REQUIRED | DEFAULT VAL : NULL     - DESC : Text to display.
@@ -1427,7 +1427,7 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 
 	#**** Code ****
 	# Checking first if the target partition is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}" };
+	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; };
 
 	if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
         if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "${p_parent}" "${p_child}" "${p_type}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
