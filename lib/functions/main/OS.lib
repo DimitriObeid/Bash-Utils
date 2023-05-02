@@ -1508,6 +1508,23 @@ function BU.Main.OS.CheckOSWindowsVersion()
     if [ "${p_versionNumber}" -eq "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then return 0; else return 1; fi
 }
 
+# ·················································
+# Checking if current OS is any version of Windows.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.OS.IsWindows10()  -> Main -> OS.lib (this file)
+#   - BU.Main.OS.IsWindows11()  -> Main -> OS.lib (this file)
+
+# shellcheck disable=
+function BU.Main.OS.IsWindows()
+{
+    if BU.Main.OS.IsWindows11 || BU.Main.OS.IsWindows10; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
 # ·························································
 # Checking if the current Windows' architecture is 32 bits.
 
