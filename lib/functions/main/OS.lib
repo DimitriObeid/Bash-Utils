@@ -398,7 +398,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__CHROME_OS__CHECKING_INFORMATIONS="
 # Checking if current OS is Chrome OS.
 
 # shellcheck disable=
-function BU.Main.OS.IsChromeOS()					{ true; }
+function BU.Main.OS.IsChromeOS()					{ if uname -a | grep -o ChromeOS;                                   then    return 0; else  return 1; fi }
 
 ## ==============================================
 
