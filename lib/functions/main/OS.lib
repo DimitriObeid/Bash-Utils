@@ -369,6 +369,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OPEN_BSD__CHECKING_INFORMATIONS="$
 # ··································
 # Checking if current OS is OpenBSD.
 
+# shellcheck disable=
 function BU.Main.OS.IsOpenBSD()                   	{ if [[ "${OSTYPE}" == 'openbsd'* ]];                               then    return 0; else  return 1; fi }
 
 ## ==============================================
