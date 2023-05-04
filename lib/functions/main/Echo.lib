@@ -266,7 +266,8 @@ printf "
 
 # ·················································································
 # "BU.Echo<...>()" functions debug output for a better view during a debug process.
-# It's better to also execute the project's script with the "$(bash - x "${project_name}")" command, instead of the "./${project_name}" way.
+
+# It's better to also execute the project's script with the "$(bash -x "${project_name}")" command, instead of the "./${project_name}" way.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.PrintFFL()                       -> Main -> Args.lib
@@ -562,9 +563,6 @@ function BU.Main.Echo.Error()
 #   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
 
-#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
-#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
-
 # shellcheck disable=
 function BU.Main.Echo.Msg()
 {
@@ -616,9 +614,6 @@ function BU.Main.Echo.Msg()
 
 #   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
-
-#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
-#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
 # shellcheck disable=
 function BU.Main.Echo.Newstep()
@@ -701,9 +696,6 @@ function BU.Main.Echo.Read()
 
 #   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
-
-#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
-#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
 
 # shellcheck disable=
 function BU.Main.Echo.Success()
