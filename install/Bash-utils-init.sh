@@ -188,14 +188,45 @@ function BU.ModuleInit.IsFrameworkLocalizedCompiled()   { local v_currFile; v_cu
 # shellcheck disable=
 function BU.ModuleInit.IsFrameworkCompiled()            { if BU.ModuleInit.IsFrameworkLocalizedCompiled || BU.ModuleInit.IsFrameworkUnlocalizedCompiled; then return 0; else return 1; fi }
 
-# ································································································································
-# Checking if the function and / or sourced code currently executed is a part of a script file or running in an interactive shell.
+# ··································································································································································································
+# Checking if the function and / or sourced code currently executed is a part of a script file (with the "${BASH_SOURCE}" variable) or running in an interactive shell (with the "${PS1}" variable).
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; local v_5="${0: -5}"; if [ "${0:0:2}" == './' ] || [[ "${v_3,,}" == .sh ]] || [[ "${v_5,,}" == .bash ]]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
+function BU.ModuleInit.IsInScript()
+{
+    #**** Variables ****
+    case "$(uname -s)" in
+        Linux*)     ;;
+        FreeBSD*)   ps_opts="-o ppid= -o comm=" ;;
+        NetBSD*)    ps_opts="-o ppid= -o comm=" ;;
+        OpenBSD*)   ps_opts="-o ppid= -o comm=" ;;
+        Darwin*)    ps_opts="-o ppid= -o comm=" ;;
+        Haiku*)     ps_opts="-o ppid= -o comm=" ;;
+        Android*)   ps_opts="-p -o ppid= -o comm=" ;;
+        *)          ;;
+    esac
+
+    local os=$(uname -s);
+    local ppid=$(ps $ps_opts $$ | awk '{ print $1 }' );
+    local parent_cmd=$(ps $ps_opts "$ppid" | awk '{ print $2 }' );
+
+    #**** Code ****
+    if [ -z "$PS1" ] || [ "$parent_cmd" = "bash" ] || [ "$parent_cmd" = "sh" ] || [ "$parent_cmd" = "dash" ]; then
+        echo "Script running";
+
+        return 0;
+    else
+        echo "Shell interactive";
+
+        return 1;
+    fi
+}
+
+# function BU.ModuleInit.IsInScript()                     { if [[ -n "${BASH_SOURCE}" ]]; then return 0; elif [[ -n "$PS1" ]]; then return 1; fi; }
+# function BU.ModuleInit.IsInScript()                     { local v_3="${0: -3}"; local v_5="${0: -5}"; if [ "${0:0:2}" == './' ] || [[ "${v_3,,}" == .sh ]] || [[ "${v_5,,}" == .bash ]]; then return 0; elif [ "${0}" == 'bash' ]; then return 1; fi }
 
 # ········································
 # Checking if the framework is translated.
