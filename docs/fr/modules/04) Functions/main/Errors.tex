@@ -5,7 +5,7 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
 
-\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{fancyhdr}           % Ajout d'en-têtes et de pieds de page à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}            % Sauts de ligne déterminables entre chaque paragraphe.
 
@@ -24,21 +24,21 @@
 
 % Définition de la couleur       % Normal | Imprimable   - Description
 
-\definecolor{back}{HTML}{000000} % Blanc  - Couleur de fond du document.
-\definecolor{case}{HTML}{fcff00} %        - Couleur des conditions "case".
-\definecolor{cmds}{HTML}{909090} %        - Couleur des noms de commandes du système et de leurs arguments.
-\definecolor{cond}{HTML}{be480a} %        - Couleur des conditions "if".
-\definecolor{func}{HTML}{800080} %        - Couleur des fonctions définies dans chaque module du framework Bash Utils.
+\definecolor{back}{HTML}{000000} % Noir | Blanc  - Couleur de fond du document.
+\definecolor{case}{HTML}{fcff00} % Jaune         - Couleur des conditions "case".
+\definecolor{cmds}{HTML}{909090} % Gris          - Couleur des noms de commandes du système et de leurs arguments.
+\definecolor{cond}{HTML}{be480a} % Brique        - Couleur des conditions "if".
+\definecolor{func}{HTML}{800080} % Mauve         - Couleur des fonctions définies dans chaque module du framework Bash Utils.
 
-\definecolor{loop}{HTML}{00ffff} %        - Couleur des boucles.
-\definecolor{main}{HTML}{8F00FF} %        - Couleur des fonctions du script principal.
-\definecolor{path}{HTML}{bfff00} % vert   - Couleur des chemins de dossiers et de fichiers.
-\definecolor{sec1}{HTML}{ff0000} %        - Couleur des titres principaux et de premier niveau.
-\definecolor{sec2}{HTML}{00ff00} %        - Couleur des titres de deuxième niveau.
+\definecolor{loop}{HTML}{00ffff} % Cyan          - Couleur des boucles.
+\definecolor{main}{HTML}{8F00FF} % Violet        - Couleur des fonctions du script principal.
+\definecolor{path}{HTML}{bfff00} % Citron vert   - Couleur des chemins de dossiers et de fichiers.
+\definecolor{sec1}{HTML}{ff0000} % Rouge         - Couleur des titres principaux et de premier niveau.
+\definecolor{sec2}{HTML}{00ff00} % Vert          - Couleur des titres de deuxième niveau.
 
-\definecolor{sec3}{HTML}{0060ff} %        - Couleur des titres de troisième niveau.
-\definecolor{text}{HTML}{ffffff} %| Noir  - Couleur du texte normal.
-\definecolor{vars}{HTML}{FF7F00} %        - Couleur des noms des paramètres et des variables.
+\definecolor{sec3}{HTML}{0060ff} % Bleu          - Couleur des titres de troisième niveau.
+\definecolor{text}{HTML}{ffffff} % Blanc | Noir  - Couleur du texte normal.
+\definecolor{vars}{HTML}{FF7F00} % Orange        - Couleur des noms des paramètres et des variables.
 
 
 % ------------------------------------------------------------------------
@@ -79,153 +79,150 @@
 % Début du document.
 
 \begin{document}
- \maketitle
- \tableofcontents
- \newpage
+    \maketitle
+    \tableofcontents
+    \newpage
 
-\color{sec1}
-\section{Présentation}\color{text}
+    \color{sec1}
+    \section{Présentation}\color{text}
 
-\color{sec2}
-\subsection{Présentation}\color{text}
+    \color{sec2}
+    \subsection{Présentation}\color{text}
 
-\begin{justify}
-    Ce fichier source inclut des fonctions servant à la gestion d'erreurs.
-\end{justify}
+    \begin{justify}
+        Ce fichier source inclut des fonctions servant à la gestion d'erreurs.
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Définitions des éléments mentionnés}\color{text}
+    \color{sec2}
+    \subsection{Définitions des éléments mentionnés}\color{text}
 
-\color{sec3}
-\subsubsection{Chemins des fichiers}\color{text}
+    \color{sec3}
+    \subsubsection{Chemins des fichiers}\color{text}
 
-\textbf{Nom du fichier : \color{path}}\\[1\baselineskip]
+    \textbf{Nom du fichier : \color{path}}\\[1\baselineskip]
 
-\textbf{Dossier parent : \color{path}}\\[1\baselineskip]
+    \textbf{Dossier parent : \color{path}}\\[1\baselineskip]
 
-\begin{justify}
-    \textbf{*} : Voir la variable \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main} mentionnée dans la sous-sous-catégorie \textbf{\color{sec3}Variables globales externes et / ou variables d'environnement appelées}.
-\end{justify}
-% ------------
+    \begin{justify}
+        \textbf{*} : Voir la variable \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main} mentionnée dans la sous-sous-catégorie \textbf{\color{sec3}Variables globales externes et / ou variables d'environnement appelées}.
+    \end{justify}
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-\color{path}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
-
-
-\color{sec3}
-\subsubsection{Fonctions}\color{text}
-
-\textbf{Fonction : \color{func}}\\[1\baselineskip]
-
-\textbf{Fichier de définition :} \textbf{\color{path}}\\[1\baselineskip]
-% ------------
-
-% ----------------------
-
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
-
-\color{sec3}
-\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
-
-\textbf{Variable : \color{vars}}\\[1\baselineskip]
-
-\textbf{Description :} .\\[1\baselineskip]
-
-\textbf{Fichier de définition : \color{path}}\\[1\baselineskip]
+    \color{path}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
 
-% ------------
+    \color{sec3}
+    \subsubsection{Fonctions}\color{text}
 
-\par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+    \textbf{Fonction : \color{func}}\\[1\baselineskip]
 
-\textbf{Variable : \color{vars}}\\[1\baselineskip]
+    \textbf{Fichier de définition :} \textbf{\color{path}}\\[1\baselineskip]
+    % ------------
 
-\textbf{Description :} .\\[1\baselineskip]
+    % ----------------------
 
-\textbf{Fichier de définition : \color{path}}\\[1\baselineskip]
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ------------
+    \color{sec3}
+    \subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
 
-% ----------------------
+    \textbf{Variable : \color{vars}}\\[1\baselineskip]
 
-% -----------------------------------------------
+    \textbf{Description :} .\\[1\baselineskip]
 
-% /////////////////////////////////////////////////////////////////////////////////////////////// %
-
-\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
-
-\color{sec1}
-\section{Fonctions}\color{text}
-
-\color{sec2}
-\subsection{Sous-section CLASSIC ERRORS HANDLING}\color{text}
-
-\color{sec3}
-\subsubsection{BU.Main.Errors.HandleSmallErrors}\color{text}
-
-\begin{justify}
-    \textbf{Description :}\\
-    Cette fonction affiche un simple message d'avertissement ou d'erreur, selon le contexte choisi, contrairement à la fonction \textbf{\color{func}BU.Main.Errors.HandleErrors}, qui fait un rapport complet de l'erreur, et qui est à priviliégier pour de plus grosses erreurs.
-\end{justify}
-
-\begin{justify}
-    \textbf{Paramètres :}
-
-    \begin{itemize}
-        \item \textbf{\color{vars}p\_type} Ce paramètre attend soit le caractère \textbf{W} (warning), soit le paramètre \textbf{E} (error)\\\mbox{}
-
-        \item \textbf{\color{vars}p\_string} Ce paramètre attend la chaîne de caractère à afficher\\\mbox{}
-
-        \item \textbf{\color{vars}p\_return} Ce paramètre attend les mêmes caractères que le paramètre \textbf{\color{vars}p\_type}\\\mbox{}
-
-        \item \textbf{\color{vars}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS}, pour changer la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}.\\\mbox{}
-
-        \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{func}BU.Main.Status.CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{func}BU.Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
-    \end{itemize}
-\end{justify}
-
-\begin{justify}
-    \textbf{Fonctionnement :}\\
-    Cette fonction vérifie en premier lieu si la valeur \textbf{CPLS} est passée en quatrième argument, pour sauvegarder la valeur actuelle de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, et la mettre à \textbf{true}.
-\end{justify}
-
-\begin{justify}
-    Passer cette valeur à ce paramètre est absolument nécessaire dans les situations où l'appel des fonctions \textbf{\color{func}BU.Echo<...>()} peut provoquer une boucle infinie.
-\end{justify}
-
-\begin{justify}
-    Ensuite, elle vérifie quelle valeur a été passée en premier argument, puis affiche la chaîne de caractères passée en deuxième argument selon la valeur du premier (W = warning, donc appel de la fonction \textbf{\color{func}BU.Main.Echo.Warning}, et E = error, donc appel de la fonction \textbf{\color{func}BU.Main.Echo.Error}).
-\end{justify}
-
-\begin{justify}
-    Si la valeur du premier argument n'est ni renseignée, ni attendue, alors une de ces fonctions est aléatoirement appelée pour afficher cette chaîne de caractères.
-\end{justify}
-
-\begin{justify}
-    Une fois la chaîne de caractère affichée, la fonction vérifie quelle valeur a été passée en troisième argument (\textbf{\color{vars}p\_return}), pour simplement continuer l'exécution de votre script ou pour directement arrêter son exécution.
-\end{justify}
-
-\begin{justify}
-    En cas d'absence de valeur ou de présence d'une valeur inattendue, un message d'avertissement s'affiche sur le terminal, avant que l'exécution du script ne soit définitivement interrompue.
-\end{justify}
-
-\begin{justify}
-    Enfin, si la valeur \textbf{CPLS} a été passée en quatrième argument, l'ancienne valeur est automatiquement réassignée à la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}.
-\end{justify}
-
-\begin{justify}
-    \textbf{Utilisation :}
-\end{justify}
+    \textbf{Fichier de définition : \color{path}}\\[1\baselineskip]
 
 
+    % ------------
 
+    \par\noindent\rule{\textwidth}{0.4pt}\\[1\baselineskip]
+
+    \textbf{Variable : \color{vars}}\\[1\baselineskip]
+
+    \textbf{Description :} .\\[1\baselineskip]
+
+    \textbf{Fichier de définition : \color{path}}\\[1\baselineskip]
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec1}
+    \section{Fonctions}\color{text}
+
+    \color{sec2}
+    \subsection{Sous-section CLASSIC ERRORS HANDLING}\color{text}
+
+    \color{sec3}
+    \subsubsection{BU.Main.Errors.HandleSmallErrors}\color{text}
+
+    \begin{justify}
+        \textbf{Description :}\\
+        Cette fonction affiche un simple message d'avertissement ou d'erreur, selon le contexte choisi, contrairement à la fonction \textbf{\color{func}BU.Main.Errors.HandleErrors}, qui fait un rapport complet de l'erreur, et qui est à priviliégier pour de plus grosses erreurs.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{Paramètres :}
+
+        \begin{itemize}
+            \item \textbf{\color{vars}p\_type} Ce paramètre attend soit le caractère \textbf{W} (warning), soit le paramètre \textbf{E} (error)\\\mbox{}
+
+            \item \textbf{\color{vars}p\_string} Ce paramètre attend la chaîne de caractère à afficher\\\mbox{}
+
+            \item \textbf{\color{vars}p\_return} Ce paramètre attend les mêmes caractères que le paramètre \textbf{\color{vars}p\_type}\\\mbox{}
+
+            \item \textbf{\color{vars}p\_cpls} Ce paramètre attend la chaîne de caractère \textbf{CPLS}, pour changer la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}.\\\mbox{}
+
+            \item \textbf{Note : CPLS} sont les initiales de la fonction \textbf{\color{func}BU.Main.Status.CheckProjectLogStatus}, qui vérifie si et comment un message peut être redirigé vers un fichier de logs, et où un rappel d'une fonction \textbf{\color{func}BU.Echo<...>} avec la valeur de la variable globale de statut mentionnée ci-dessus à \textbf{false} provoquerait une boucle infinie.
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        \textbf{Fonctionnement :}\\
+        Cette fonction vérifie en premier lieu si la valeur \textbf{CPLS} est passée en quatrième argument, pour sauvegarder la valeur actuelle de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}, et la mettre à \textbf{true}.
+    \end{justify}
+
+    \begin{justify}
+        Passer cette valeur à ce paramètre est absolument nécessaire dans les situations où l'appel des fonctions \textbf{\color{func}BU.Echo<...>()} peut provoquer une boucle infinie.
+    \end{justify}
+
+    \begin{justify}
+        Ensuite, elle vérifie quelle valeur a été passée en premier argument, puis affiche la chaîne de caractères passée en deuxième argument selon la valeur du premier (W = warning, donc appel de la fonction \textbf{\color{func}BU.Main.Echo.Warning}, et E = error, donc appel de la fonction \textbf{\color{func}BU.Main.Echo.Error}).
+    \end{justify}
+
+    \begin{justify}
+        Si la valeur du premier argument n'est ni renseignée, ni attendue, alors une de ces fonctions est aléatoirement appelée pour afficher cette chaîne de caractères.
+    \end{justify}
+
+    \begin{justify}
+        Une fois la chaîne de caractère affichée, la fonction vérifie quelle valeur a été passée en troisième argument (\textbf{\color{vars}p\_return}), pour simplement continuer l'exécution de votre script ou pour directement arrêter son exécution.
+    \end{justify}
+
+    \begin{justify}
+        En cas d'absence de valeur ou de présence d'une valeur inattendue, un message d'avertissement s'affiche sur le terminal, avant que l'exécution du script ne soit définitivement interrompue.
+    \end{justify}
+
+    \begin{justify}
+        Enfin, si la valeur \textbf{CPLS} a été passée en quatrième argument, l'ancienne valeur est automatiquement réassignée à la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{Utilisation :}
+    \end{justify}
 \end{document}

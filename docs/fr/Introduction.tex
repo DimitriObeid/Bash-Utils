@@ -5,7 +5,7 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
 
-\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{fancyhdr}           % Ajout d'en-têtes et de pieds de page à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}            % Sauts de ligne déterminables entre chaque paragraphe.
 
@@ -79,513 +79,515 @@
 % Début du document.
 
 \begin{document}
-\maketitle
-\newpage
+    \maketitle
+    \newpage
 
-\hypertarget{contents}{}
-\tableofcontents
-\newpage
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
 
-\color{sec1}
-\section{Introduction à Bash Utils}\color{text}
+    \color{sec1}
+    \section{Introduction à Bash Utils}\color{text}
 
-\color{sec2}
-\subsection{Présentation}\color{text}
+    \color{sec2}
+    \subsection{Présentation}\color{text}
 
-\begin{justify}
-    Bash Utils est une librairie, c'est à dire un ensemble de fonctions utilitaires, regroupées et mises à disposition afin de pouvoir être utilisées sans avoir à les réécrire.
-\end{justify}
+    \begin{justify}
+        Bash Utils est une librairie, c'est à dire un ensemble de fonctions utilitaires, regroupées et mises à disposition afin de pouvoir être utilisées sans avoir à les réécrire.
+    \end{justify}
 
-\begin{justify}
-    Comme son nom le suggère, il s'agit d'une librairie orientée vers le langage Bash, un langage de script permettant une interaction simple avec le shell (interpréteur de commandes) du système d'exploitation, ainsi qu'avec ses différents programmes.
-\end{justify}
+    \begin{justify}
+        Comme son nom le suggère, il s'agit d'une librairie orientée vers le langage Bash, un langage de script permettant une interaction simple avec le shell (interpréteur de commandes) du système d'exploitation, ainsi qu'avec ses différents programmes.
+    \end{justify}
 
-\begin{justify}
-    Bash Utils est divisé en deux parties : la librairie, et les modules, expliqués plus en détails dans le fichier \textbf{\color{path}modules/Fonctionnement.pdf}.
-\end{justify}
+    \begin{justify}
+        Bash Utils est divisé en deux parties : la librairie, et les modules, expliqués plus en détails dans le fichier \textbf{\color{path}modules/Fonctionnement.pdf}.
+    \end{justify}
 
-\begin{justify}
-    Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le monde d'UNIX. Ce choix s'explique non seulement par sa vaste présence, mais aussi par sa très vaste documentation disponible et ses fonctionnalités (notamment les tableaux).
-\end{justify}
+    \begin{justify}
+        Le shell utilisé est le Bash, qui est de loin le shell le plus utilisé dans le monde d'UNIX. Ce choix s'explique non seulement par sa vaste présence, mais aussi par sa très vaste documentation disponible et ses fonctionnalités (notamment les tableaux).
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Utilisation}\color{text}
+    \color{sec2}
+    \subsection{Utilisation}\color{text}
 
-\begin{justify}
-    Pour utiliser cette librairie, il vous suffira de sourcer un seul fichier, qui est installé par défaut dans votre dossier personnel :
+    \begin{justify}
+        Pour utiliser cette librairie, il vous suffira de sourcer un seul fichier, qui est installé par défaut dans votre dossier personnel :
 
-    \begin{itemize}
-        \item \textbf{\color{vars}\$HOME\color{path}/.Bash-utils-init.sh}
-    \end{itemize}
-\end{justify}
+        \begin{itemize}
+            \item \textbf{\color{vars}\$HOME\color{path}/.Bash-utils-init.sh}
+        \end{itemize}
+    \end{justify}
 
-\begin{justify}
-    Ce script initialise tous les modules de la librairie passés en argument lors de l'exécution de ce dernier.
-\end{justify}
+    \begin{justify}
+        Ce script initialise tous les modules de la librairie passés en argument lors de l'exécution de ce dernier.
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Architecture}\color{text}
+    \color{sec2}
+    \subsection{Architecture}\color{text}
 
-\begin{justify}
-    La partie librairie de Bash Utils est un ensemble de fichiers source shell à sourcer dans un script, d'outils de développement ou encore de scripts déjà prêts à l'exécution.
-\end{justify}
+    \begin{justify}
+        La partie librairie de Bash Utils est un ensemble de fichiers source shell à sourcer dans un script, d'outils de développement ou encore de scripts déjà prêts à l'exécution.
+    \end{justify}
 
 
-\textbf{Liste des dossiers :}
+    \textbf{Liste des dossiers :}
 
-\color{sec3}
-\subsubsection{bin}\color{text}
+    \color{sec3}
+    \subsubsection{bin}\color{text}
 
-\begin{justify}
-    Ce lien symbolique (systèmes UNIX seulement) pointe vers le dossier \textbf{\color{path}res/dev-tools/dev-bin}.
-\end{justify}
+    \begin{justify}
+        Ce lien symbolique (systèmes UNIX seulement) pointe vers le dossier \textbf{\color{path}res/dev-tools/dev-bin}.
+    \end{justify}
 
-\begin{justify}
-    Ce dossier contient les fichiers exécutables nécessaires au bon fonctionnement de la librairie.
-\end{justify}
-% ------------
+    \begin{justify}
+        Ce dossier contient les fichiers exécutables nécessaires au bon fonctionnement de la librairie.
+    \end{justify}
 
-% ----------------------
+    % ------------
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ----------------------
 
-\color{sec3}
-\subsubsection{docs}\color{text}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    Ce dossier contient toute la documentation utile aux développeurs et aux utilisateurs.
-\end{justify}
-% ------------
+    \color{sec3}
+    \subsubsection{docs}\color{text}
 
-% ----------------------
+    \begin{justify}
+        Ce dossier contient toute la documentation utile aux développeurs et aux utilisateurs.
+    \end{justify}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec3}
-\subsubsection{install}\color{text}
+    % ----------------------
 
-\begin{justify}
-    Ce dossier contient les fichiers et dossiers nécessaires à l'installation automatique de la librairie.
-\end{justify}
-% ------------
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ----------------------
+    \color{sec3}
+    \subsubsection{install}\color{text}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \begin{justify}
+        Ce dossier contient les fichiers et dossiers nécessaires à l'installation automatique de la librairie.
+    \end{justify}
 
-\color{sec3}
-\subsubsection{lib}\color{text}
+    % ------------
 
-\begin{justify}
-    Ce dossier est le plus important de tous, car il contient tous les fichiers source de la librairie (fonctions et variables).
-\end{justify}
+    % ----------------------
 
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    Il contient les sous-dossiers suivants :
+    \color{sec3}
+    \subsubsection{lib}\color{text}
 
-    \begin{itemize}
-        \item \textbf{\color{path}functions\color{text} :} Ce sous-dossier contient tous les fichiers de fonctions dans différents sous-dossiers.\\\mbox{}
+    \begin{justify}
+        Ce dossier est le plus important de tous, car il contient tous les fichiers source de la librairie (fonctions et variables).
+    \end{justify}
 
-        \item \textbf{\color{path}lang\color{text} :} Ce sous-dossier contient tous les fichiers nécessaires à la traduction des scripts (fonctionnalité future).
-    \end{itemize}
-\end{justify}
 
+    \begin{justify}
+        Il contient les sous-dossiers suivants :
 
-\textbf{Description des sous-dossiers du dossier \textbf{functions}} :
+        \begin{itemize}
+            \item \textbf{\color{path}functions\color{text} :} Ce sous-dossier contient tous les fichiers de fonctions dans différents sous-dossiers.\\\mbox{}
 
-\setcounter{secnumdepth}{4}
+            \item \textbf{\color{path}lang\color{text} :} Ce sous-dossier contient tous les fichiers nécessaires à la traduction des scripts (fonctionnalité future).
+        \end{itemize}
+    \end{justify}
 
-\paragraph{compiled}\mbox{}\\\mbox{}
 
-Ce dossier contient les sous-dossiers suivants :
+    \textbf{Description des sous-dossiers du dossier \textbf{functions}} :
 
-\begin{justify}
-    \begin{itemize}
-        \item \textbf{\color{path}stable} : ce dosssier contient\\\mbox{}
+    \setcounter{secnumdepth}{4}
 
-        \item \textbf{\color{path}unstable} : ce dosssier contient
-    \end{itemize}
-\end{justify}
+    \paragraph{compiled}\mbox{}\\\mbox{}
 
-\begin{justify}
-    Les différences entre les fichiers des deux sous-dossiers mentionnés ci-dessus sont expliquées dans la section \textbf{\color{sec2}Bash-utils-(stable)-lang.sh\color{text}}
-\end{justify}
+    Ce dossier contient les sous-dossiers suivants :
 
-\paragraph{functions}\mbox{}\\\mbox{}
+    \begin{justify}
+        \begin{itemize}
+            \item \textbf{\color{path}stable} : ce dosssier contient\\\mbox{}
 
-Chaque sous-dossier est lié à un module et contient les fichiers source de ce dernier.
+            \item \textbf{\color{path}unstable} : ce dosssier contient
+        \end{itemize}
+    \end{justify}
 
-\begin{justify}
-    Chaque fichier source contient des fonctions qui sont propres au nom du fichier. Par exemple, le fichier \textbf{\color{path}Files.lib} du module \textbf{main} ne contient que des fonctions de traitement de fichiers (création, suppression, archivage, obtention des permissions, etc...).
-\end{justify}
+    \begin{justify}
+        Les différences entre les fichiers des deux sous-dossiers mentionnés ci-dessus sont expliquées dans la section \textbf{\color{sec2}Bash-utils-(stable)-lang.sh\color{text}}
+    \end{justify}
 
+    \paragraph{functions}\mbox{}\\\mbox{}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    Chaque sous-dossier est lié à un module et contient les fichiers source de ce dernier.
 
-\paragraph{lang}\mbox{}\\\mbox{}
+    \begin{justify}
+        Chaque fichier source contient des fonctions qui sont propres au nom du fichier. Par exemple, le fichier \textbf{\color{path}Files.lib} du module \textbf{main} ne contient que des fonctions de traitement de fichiers (création, suppression, archivage, obtention des permissions, etc...).
+    \end{justify}
 
-\textbf{Rappel :} fonctionnalité future, certaines idées peuvent encore changer.
 
-\begin{justify}
-    Le fichier \textbf{\color{path}lang.csv} contient les différentes traductions de la librairie dans un fichier au format CSV. Il sera parsé (analysé) par le script d'initialisation.
-\end{justify}
+    \par\noindent\rule{\textwidth}{0.4pt}
 
+    \paragraph{lang}\mbox{}\\\mbox{}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \textbf{Rappel :} fonctionnalité future, certaines idées peuvent encore changer.
 
-\paragraph{variables}\mbox{}
+    \begin{justify}
+        Le fichier \textbf{\color{path}lang.csv} contient les différentes traductions de la librairie dans un fichier au format CSV. Il sera parsé (analysé) par le script d'initialisation.
+    \end{justify}
 
-\begin{justify}
-    Chaque fichier définit des variables propres aux catégories décrites dans le nom de chaque fichier. Par exemple, les variables définies dans le fichier \textbf{\color{path}colors.var} sont des variables définissant le code de la couleur d'un texte à afficher.
-\end{justify}
 
-% ------------
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-% ----------------------
+    \paragraph{variables}\mbox{}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \begin{justify}
+        Chaque fichier définit des variables propres aux catégories décrites dans le nom de chaque fichier. Par exemple, les variables définies dans le fichier \textbf{\color{path}colors.var} sont des variables définissant le code de la couleur d'un texte à afficher.
+    \end{justify}
 
-\color{sec3}
-\subsubsection{res}\color{text}
+    % ------------
 
-\begin{justify}
-    Ce dossier contient plusieurs sous-dossiers :\\\mbox{}
+    % ----------------------
 
-    \begin{itemize}
-        \item \textbf{\color{path}dev-tools\color{text} :} Ce dossier contient des scripts aidant au développement de la librairie, avec leurs dépendances (fichiers binaires, fichiers raccourcis \textbf{desktop}, icônes et fichiers sources dans le cas où un fichier serait trop long).\\\mbox{}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-        \item \textbf{\color{path}ideas\color{text} :} Ce dossier contient des fichiers où j'écris mes idées de fonctionnalités à implémenter dans la librairie.\\\mbox{}
+    \color{sec3}
+    \subsubsection{res}\color{text}
 
-        \item \textbf{\color{path}src\color{text} :} Ce dossier contient des scripts préparés facilitant l'utilisation d'un système UNIX, en utilisant les fonctionnalités implémentées par la librairie.\\\mbox{}
+    \begin{justify}
+        Ce dossier contient plusieurs sous-dossiers :\\\mbox{}
 
-        \item \textbf{\color{path}tests\color{text} :} Ce dossier contient de nombreux scripts servant ou ayant servi de fichiers de tests pour de nombreuses fonctionnalités, implémentées ou en cours d'implémentation.
-    \end{itemize}
-\end{justify}
-% ------------
+        \begin{itemize}
+            \item \textbf{\color{path}dev-tools\color{text} :} Ce dossier contient des scripts aidant au développement de la librairie, avec leurs dépendances (fichiers binaires, fichiers raccourcis \textbf{desktop}, icônes et fichiers sources dans le cas où un fichier serait trop long).\\\mbox{}
 
-% ----------------------
+            \item \textbf{\color{path}ideas\color{text} :} Ce dossier contient des fichiers où j'écris mes idées de fonctionnalités à implémenter dans la librairie.\\\mbox{}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+            \item \textbf{\color{path}src\color{text} :} Ce dossier contient des scripts préparés facilitant l'utilisation d'un système UNIX, en utilisant les fonctionnalités implémentées par la librairie.\\\mbox{}
 
-\color{sec3}
-\subsubsection{tmp}\color{text}
+            \item \textbf{\color{path}tests\color{text} :} Ce dossier contient de nombreux scripts servant ou ayant servi de fichiers de tests pour de nombreuses fonctionnalités, implémentées ou en cours d'implémentation.
+        \end{itemize}
+    \end{justify}
+    % ------------
 
-\begin{justify}
-    Ce dossier, absent lors du téléchargement de la librairie, est créé par le fichier d'initialisation du module \textbf{main}, et sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs, de traduction, etc...
-\end{justify}
-% ------------
+    % ----------------------
 
-% ----------------------
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec3}
+    \subsubsection{tmp}\color{text}
 
-\color{sec3}
-\subsubsection{win}\color{text}
+    \begin{justify}
+        Ce dossier, absent lors du téléchargement de la librairie, est créé par le fichier d'initialisation du module \textbf{main}, et sert à enregistrer les fichiers temporaires générés par un projet, tels que des fichiers de logs, de traduction, etc...
+    \end{justify}
+    % ------------
 
-\begin{justify}
-    À l'instar du symlink (lien symbolique) \textbf{\color{path}bin}, ce raccourci Windows (pour les utilisateurs de Windows Subsystem for Linux, sachant que les symlinks UNIX ne sont pas nativement reconnus par l'explorateur de fichier de Windows) pointe vers le dossier \textbf{\color{path}res/dev-tools/dev-bin}.
-\end{justify}
+    % ----------------------
 
-% ------------
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ----------------------
+    \color{sec3}
+    \subsubsection{win}\color{text}
 
-% -----------------------------------------------
+    \begin{justify}
+        À l'instar du symlink (lien symbolique) \textbf{\color{path}bin}, ce raccourci Windows (pour les utilisateurs de Windows Subsystem for Linux, sachant que les symlinks UNIX ne sont pas nativement reconnus par l'explorateur de fichier de Windows) pointe vers le dossier \textbf{\color{path}res/dev-tools/dev-bin}.
+    \end{justify}
 
-% /////////////////////////////////////////////////////////////////////////////////////////////// %
+    % ------------
 
-\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ----------------------
 
-\color{sec1}
-\section{Fonctionnement}\color{text}
+    % -----------------------------------------------
 
-\begin{justify}
-    Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des variables, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.
-\end{justify}
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\begin{justify}
-    Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de le modifier dans chaque fichier en cas d'ajout de fonctionnalités ou en cas de bug, et encore plus de répéter toutes ces étapes pour chaque module à ajouter, voire à supprimer au cas où.
-\end{justify}
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    Et tout ceci, sans même parler de l'ajout d'autres modules, où dans certains cas, l'utilisateur voudra que certaines fonctionnalités réagissent différemment dans des situations précises.
-\end{justify}
+    \color{sec1}
+    \section{Fonctionnement}\color{text}
 
-\begin{justify}
-    Fort heureusement, trois scripts shell au choix s'occupent de cette partie : \textbf{\color{path}Bash-utils-init.sh}, situé dans le dossier personnel, \textbf{\color{path}Bash-utils-lang.sh}, situé dans le dossier \textbf{\color{path}.Bash-utils/compiled/unstable} ou \textbf{\color{path}Bash-utils-stable-lang.sh}, situé dans le dossier \textbf{\color{path}.Bash-utils/compiled/stable}.
-\end{justify}
+    \begin{justify}
+        Au vu du nombre de fichiers, il serait très fastidieux de mettre à jour chaque script pour sourcer de nouveaux fichiers, voire même de sourcer manuellement chaque fichier, puis de déclarer des variables, quelques fonctions, de configurer et vérifier chaque étape d'initialisation du script principal.
+    \end{justify}
 
-\begin{justify}
-    La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer l'un des deux fichiers cités ci-dessus. Chacun d'entre eux s'occupera de réaliser toutes les étapes ci-dessous :
-\end{justify}
+    \begin{justify}
+        Il serait même encore plus fastidieux de réécrire tout ce code, ainsi que de le modifier dans chaque fichier en cas d'ajout de fonctionnalités ou en cas de bug, et encore plus de répéter toutes ces étapes pour chaque module à ajouter, voire à supprimer au cas où.
+    \end{justify}
 
-% ------------
+    \begin{justify}
+        Et tout ceci, sans même parler de l'ajout d'autres modules, où dans certains cas, l'utilisateur voudra que certaines fonctionnalités réagissent différemment dans des situations précises.
+    \end{justify}
 
-% ----------------------
+    \begin{justify}
+        Fort heureusement, trois scripts shell au choix s'occupent de cette partie : \textbf{\color{path}Bash-utils-init.sh}, situé dans le dossier personnel, \textbf{\color{path}Bash-utils-lang.sh}, situé dans le dossier \textbf{\color{path}.Bash-utils/compiled/unstable} ou \textbf{\color{path}Bash-utils-stable-lang.sh}, situé dans le dossier \textbf{\color{path}.Bash-utils/compiled/stable}.
+    \end{justify}
 
-% -----------------------------------------------
+    \begin{justify}
+        La seule procédure que vous devez réaliser dans votre script pour utiliser les fonctionnalités proposées par Bash Utils est de sourcer l'un des deux fichiers cités ci-dessus. Chacun d'entre eux s'occupera de réaliser toutes les étapes ci-dessous :
+    \end{justify}
 
-\color{sec2}
-\subsection{Script \color{vars}\$HOME\color{path}/Bash-utils.sh}\color{text}
+    % ------------
 
-\begin{justify}
-    Si vous choisissez d'opter pour l'inclusion de ce fichier,
-\end{justify}
+    % ----------------------
 
-\begin{justify}
-    \begin{itemize}
-        \item Inclure le fichier "Aliases.conf", listant les alias de chaque fonction de librairie du module, si un tel fichier est présent dans le dossier des fichiers de configuration du module.
-    \end{itemize}
-\end{justify}
+    % -----------------------------------------------
 
-\begin{justify}
-    \begin{itemize}
-        \item Inclure le fichier de configuration "Module.conf", qui liste les chemins des autres fichiers de configuration, puis le fichier d'initialisation dudit module.
-    \end{itemize}
-\end{justify}
+    \color{sec2}
+    \subsection{Script \color{vars}\$HOME\color{path}/Bash-utils.sh}\color{text}
 
-\begin{justify}
-    \begin{itemize}
-        \item Inclure le script d'initialisation, qui inclut les fichiers de librairie associés au module, ainsi que les fichiers de configuration listés dans le fichier "Module.conf" mentionné ci-dessus.
-    \end{itemize}
-\end{justify}
+    \begin{justify}
+        Si vous choisissez d'opter pour l'inclusion de ce fichier,
+    \end{justify}
 
-\begin{justify}
-    Les fichiers mentionnés sont décrits plus en détils dans ce fichier :
+    \begin{justify}
+        \begin{itemize}
+            \item Inclure le fichier "Aliases.conf", listant les alias de chaque fonction de librairie du module, si un tel fichier est présent dans le dossier des fichiers de configuration du module.
+        \end{itemize}
+    \end{justify}
 
-    \begin{itemize}
-        \item \textbf{\color{path}Bash-utils/docs/fr/modules/Fonctionnement.pdf}.
-    \end{itemize}
-\end{justify}
+    \begin{justify}
+        \begin{itemize}
+            \item Inclure le fichier de configuration "Module.conf", qui liste les chemins des autres fichiers de configuration, puis le fichier d'initialisation dudit module.
+        \end{itemize}
+    \end{justify}
 
-\begin{justify}
-    Les fonctions utilisées sont documentées dans ce fichier :
+    \begin{justify}
+        \begin{itemize}
+            \item Inclure le script d'initialisation, qui inclut les fichiers de librairie associés au module, ainsi que les fichiers de configuration listés dans le fichier "Module.conf" mentionné ci-dessus.
+        \end{itemize}
+    \end{justify}
 
-    \begin{itemize}
-        \item \textbf{\color{path}}
-    \end{itemize}
+    \begin{justify}
+        Les fichiers mentionnés sont décrits plus en détils dans ce fichier :
 
-\end{justify}
+        \begin{itemize}
+            \item \textbf{\color{path}Bash-utils/docs/fr/modules/Fonctionnement.pdf}.
+        \end{itemize}
+    \end{justify}
 
-% ------------
+    \begin{justify}
+        Les fonctions utilisées sont documentées dans ce fichier :
 
-% ----------------------
+        \begin{itemize}
+            \item \textbf{\color{path}}
+        \end{itemize}
 
-% -----------------------------------------------
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec2}
-\subsection{\color{path}Bash-utils-(stable)-lang.sh}\color{text}
+    % ----------------------
 
-\begin{justify}
-    \textbf{Note :} Rien ne différencie techniquement les fichiers \textbf{\color{path}.Bash-utils/compiled/unstable/Bash-utils-lang.sh} et \textbf{\color{path}.Bash-utils/compiled/stable/Bash-utils-stable-lang.sh}, si ce n'est qu'il est absolument recommandé de ne pas toucher au dernier fichier mentionné, car :\\\mbox{}
-    \begin{itemize}
-        \item il est inclus dans les fichiers exécutables des devtools\\\mbox{}
+    % -----------------------------------------------
 
-        \item il a été débogué avec la commande \textbf{\color{cmds}Shellcheck}, dont le code de retour commande est le code 0, ce qui indique que cet outil n'a détecté aucune erreur de programmation, de style, de frappe, etc...\\\mbox{}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-        \item son code a été testé en profondeur pour garantir une certaine stabilité et une exécution sans bugs majeurs, avant que l'ensemble des fichiers ne soient compilé en un seul fichier
-    \end{itemize}
-\end{justify}
+    \color{sec2}
+    \subsection{\color{path}Bash-utils-(stable)-lang.sh}\color{text}
 
-\begin{justify}
-    \textbf{Fonctionnement} : Étant donné que le code du module principal entier et du script d'initialisation (plus leurs fichiers de configuration) est contenu dans un seul fichier, aucun fichier supplémentaire n'est inclus.
-\end{justify}
+    \begin{justify}
+        \textbf{Note :} Rien ne différencie techniquement les fichiers \textbf{\color{path}.Bash-utils/compiled/unstable/Bash-utils-lang.sh} et \textbf{\color{path}.Bash-utils/compiled/stable/Bash-utils-stable-lang.sh}, si ce n'est qu'il est absolument recommandé de ne pas toucher au dernier fichier mentionné, car :\\\mbox{}
+        \begin{itemize}
+            \item il est inclus dans les fichiers exécutables des devtools\\\mbox{}
 
-\begin{justify}
-    Cependant, chaque étape d'initialisation du framework est exécutée de la même manière que lors de l'inclusion du script \textbf{\color{vars}\$HOME/\color{path}Bash-utils-init.sh}.
-\end{justify}
+            \item il a été débogué avec la commande \textbf{\color{cmds}Shellcheck}, dont le code de retour commande est le code 0, ce qui indique que cet outil n'a détecté aucune erreur de programmation, de style, de frappe, etc...\\\mbox{}
 
-% ------------
+            \item son code a été testé en profondeur pour garantir une certaine stabilité et une exécution sans bugs majeurs, avant que l'ensemble des fichiers ne soient compilé en un seul fichier
+        \end{itemize}
+    \end{justify}
 
-% ----------------------
+    \begin{justify}
+        \textbf{Fonctionnement} : Étant donné que le code du module principal entier et du script d'initialisation (plus leurs fichiers de configuration) est contenu dans un seul fichier, aucun fichier supplémentaire n'est inclus.
+    \end{justify}
 
-% -----------------------------------------------
+    \begin{justify}
+        Cependant, chaque étape d'initialisation du framework est exécutée de la même manière que lors de l'inclusion du script \textbf{\color{vars}\$HOME/\color{path}Bash-utils-init.sh}.
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec2}
-\subsection{Étapes d'initialisation}\color{text}
+    % ----------------------
 
-\color{sec3}
-\subsubsection{Variables de modules}\color{text}
+    % -----------------------------------------------
 
-\begin{justify}
-    En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers du gestionnaire de modules.
-\end{justify}
-% ------------
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ----------------------
+    \color{sec2}
+    \subsection{Étapes d'initialisation}\color{text}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec3}
+    \subsubsection{Variables de modules}\color{text}
 
-\color{sec3}
-\subsubsection{Version de Bash}\color{text}
+    \begin{justify}
+        En premier lieu, le script d'initialisation initialise les variables globales contenant les chemins des multiples dossiers du gestionnaire de modules.
+    \end{justify}
+    % ------------
 
-\begin{justify}
-    En second lieu, le script vérifie que la version minimale de Bash utilisée soit la version 4.0.0.
-\end{justify}
+    % ----------------------
 
-% ------------
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ----------------------
+    \color{sec3}
+    \subsubsection{Version de Bash}\color{text}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \begin{justify}
+        En second lieu, le script vérifie que la version minimale de Bash utilisée soit la version 4.0.0.
+    \end{justify}
 
-\color{sec3}
-\subsubsection{Boucle d'initialisation}\color{text}
+    % ------------
 
-\begin{justify}
-    En troisième lieu, il exécute une boucle pour initialiser chaque module passé en argument lors de l'exécution de ce script d'initialisation.
-\end{justify}
+    % ----------------------
 
-\begin{justify}
-    D'abord, il vérifie que le module existe dans le dossier \textbf{\color{path}\~/.Bash-utils}, puis il source le fichier d'initialisation de variables associé, situé dans le dossier \textbf{\color{path}\~/.Bash-utils/config/modules/\color{vars}\$nom\_du\_module} et nommé \textbf{\color{path}module.conf}, qui doit initialiser d'autres fichiers de configurations à placer de préférence dans ce même dossier.
-\end{justify}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    Ensuite, le script en fait de même pour le fichier d'initialisation des fonctions de librairie associé, situé dans le dossier \textbf{\color{path}\~/.Bash-utils/modules/\$nom\_du\_module}, et nommé \textbf{\color{path}Initializer.sh}, avant de reboucler tant que tous les modules n'ont pas été initialisés.
-\end{justify}
-% ------------
+    \color{sec3}
+    \subsubsection{Boucle d'initialisation}\color{text}
 
-% ----------------------
+    \begin{justify}
+        En troisième lieu, il exécute une boucle pour initialiser chaque module passé en argument lors de l'exécution de ce script d'initialisation.
+    \end{justify}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \begin{justify}
+        D'abord, il vérifie que le module existe dans le dossier \textbf{\color{path}\~/.Bash-utils}, puis il source le fichier d'initialisation de variables associé, situé dans le dossier \textbf{\color{path}\~/.Bash-utils/config/modules/\color{vars}\$nom\_du\_module} et nommé \textbf{\color{path}module.conf}, qui doit initialiser d'autres fichiers de configurations à placer de préférence dans ce même dossier.
+    \end{justify}
 
-\color{sec3}
-\subsubsection{Variables de statut}\color{text}
+    \begin{justify}
+        Ensuite, le script en fait de même pour le fichier d'initialisation des fonctions de librairie associé, situé dans le dossier \textbf{\color{path}\~/.Bash-utils/modules/\$nom\_du\_module}, et nommé \textbf{\color{path}Initializer.sh}, avant de reboucler tant que tous les modules n'ont pas été initialisés.
+    \end{justify}
+    % ------------
 
-\begin{justify}
-    En quatrième et dernier lieu, le script modifie des variables de statut, dont la valeur initialement assignée dans le fichier \textbf{\color{path}\~/.Bash-utils/config/modules/main/Status.conf} servait à initialiser la librairie.
-\end{justify}
+    % ----------------------
 
-% ------------
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ----------------------
+    \color{sec3}
+    \subsubsection{Variables de statut}\color{text}
 
-% -----------------------------------------------
+    \begin{justify}
+        En quatrième et dernier lieu, le script modifie des variables de statut, dont la valeur initialement assignée dans le fichier \textbf{\color{path}\~/.Bash-utils/config/modules/main/Status.conf} servait à initialiser la librairie.
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec2}
-\subsection{Étapes post-inclusion}\color{text}
+    % ----------------------
 
-% ------------
+    % -----------------------------------------------
 
-% ----------------------
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% -----------------------------------------------
+    \color{sec2}
+    \subsection{Étapes post-inclusion}\color{text}
 
-% /////////////////////////////////////////////////////////////////////////////////////////////// %
+    % ------------
 
-\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ----------------------
 
-\color{sec1}
-\section{Documentations des éléments de Bash Utils}\color{text}
+    % -----------------------------------------------
 
-\color{sec2}
-\subsection{Fonctions}\color{text}
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\begin{justify}
-    Tous les fichiers de documentation en français concernant la description des fonctions se situent dans le dossier \textbf{\color{path}docs/fr/Bash/functions}.
-\end{justify}
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ------------
+    \color{sec1}
+    \section{Documentations des éléments de Bash Utils}\color{text}
 
-% ----------------------
+    \color{sec2}
+    \subsection{Fonctions}\color{text}
 
-% -----------------------------------------------
+    \begin{justify}
+        Tous les fichiers de documentation en français concernant la description des fonctions se situent dans le dossier \textbf{\color{path}docs/fr/Bash/functions}.
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec2}
-\subsection{Variables}\color{text}
+    % ----------------------
 
-\begin{justify}
-    Tous les fichiers de documentation en français concernant la description des variables se situent dans le dossier \textbf{\color{path}docs/fr/Bash/variables}.
-\end{justify}
+    % -----------------------------------------------
 
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    Par ailleurs, dans les fichiers de documentation des fonctions, les chemins absolus des dossiers du gestionnaire de module et de la librairie sont, respectivement, représenté ainsi :
+    \color{sec2}
+    \subsection{Variables}\color{text}
 
-    \begin{itemize}
-        \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{text} :} Cette variable globale enregistre le chemin du dossier racine de la librairie Bash Utils, celui qui contient toutes les documentation, les fichiers sources et des fichiers de ressources.\\\mbox{}
+    \begin{justify}
+        Tous les fichiers de documentation en français concernant la description des variables se situent dans le dossier \textbf{\color{path}docs/fr/Bash/variables}.
+    \end{justify}
 
-        \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{text} :} Cette variable globale enregistre le chemin du dossier racine des modules la librairie Bash Utils, celui qui est installé dans le dossier personnel de chaque utilisateur, et qui contient tous les fichiers de configuration et d'initialisation de chaque module.
-    \end{itemize}
-\end{justify}
 
-\begin{justify}
-    La première variable est définie dans le fichier \textbf{\color{vars}\$HOME\color{path}/Bash-utils-init.sh}, tandis que la seconde variable est définie dans le fichier \textbf{\color{vars}\$HOME\color{path}/.Bash-utils/config/modules/main/module.conf}.
-\end{justify}
+    \begin{justify}
+        Par ailleurs, dans les fichiers de documentation des fonctions, les chemins absolus des dossiers du gestionnaire de module et de la librairie sont, respectivement, représenté ainsi :
 
-% ------------
+        \begin{itemize}
+            \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{text} :} Cette variable globale enregistre le chemin du dossier racine de la librairie Bash Utils, celui qui contient toutes les documentation, les fichiers sources et des fichiers de ressources.\\\mbox{}
 
-% ----------------------
+            \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{text} :} Cette variable globale enregistre le chemin du dossier racine des modules la librairie Bash Utils, celui qui est installé dans le dossier personnel de chaque utilisateur, et qui contient tous les fichiers de configuration et d'initialisation de chaque module.
+        \end{itemize}
+    \end{justify}
 
-% -----------------------------------------------
+    \begin{justify}
+        La première variable est définie dans le fichier \textbf{\color{vars}\$HOME\color{path}/Bash-utils-init.sh}, tandis que la seconde variable est définie dans le fichier \textbf{\color{vars}\$HOME\color{path}/.Bash-utils/config/modules/main/module.conf}.
+    \end{justify}
 
-% /////////////////////////////////////////////////////////////////////////////////////////////// %
+    % ------------
 
-\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ----------------------
 
-\color{sec1}
-\section{Installation de Bash Utils}\color{text}
+    % -----------------------------------------------
 
-\color{sec2}
-\subsection{Configurations}\color{text}
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\begin{justify}
-    Pour utiliser les fonctionnalités de la librairie depuis n'importe quel chemin sans avoir à réécrire le chemin du fichier d'initialisation dans une myriade de fichiers éparpillés sur le disque dur, il est fortement recommandé d'installer le gestionnaire de modules de la façon décrite dans le fichier \textbf{\color{path}README INSTALL.md}.
-\end{justify}
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ------------
+    \color{sec1}
+    \section{Installation de Bash Utils}\color{text}
 
-% ----------------------
+    \color{sec2}
+    \subsection{Configurations}\color{text}
 
-% -----------------------------------------------
+    \begin{justify}
+        Pour utiliser les fonctionnalités de la librairie depuis n'importe quel chemin sans avoir à réécrire le chemin du fichier d'initialisation dans une myriade de fichiers éparpillés sur le disque dur, il est fortement recommandé d'installer le gestionnaire de modules de la façon décrite dans le fichier \textbf{\color{path}README INSTALL.md}.
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec2}
-\subsection{Installation}\color{text}
+    % ----------------------
 
-\begin{justify}
+    % -----------------------------------------------
 
-\end{justify}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ------------
+    \color{sec2}
+    \subsection{Installation}\color{text}
 
-% ----------------------
+    \begin{justify}
 
-% -----------------------------------------------
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    % ------------
 
-\color{sec2}
-\subsection{Mise à jour}\color{text}
+    % ----------------------
 
-\begin{justify}
+    % -----------------------------------------------
 
-\end{justify}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
+    \color{sec2}
+    \subsection{Mise à jour}\color{text}
+
+    \begin{justify}
+
+    \end{justify}
 \end{document}

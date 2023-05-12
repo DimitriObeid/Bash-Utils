@@ -5,7 +5,7 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
 
-\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{fancyhdr}           % Ajout d'en-têtes et de pieds de page à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}            % Sauts de ligne déterminables entre chaque paragraphe.
 
@@ -79,44 +79,41 @@
 % Début du document.
 
 \begin{document}
-\maketitle
-\newpage
+    \maketitle
+    \newpage
 
-\hypertarget{contents}{}
-\tableofcontents
-\newpage
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
 
-\color{sec1}
-\section{Présentation}\color{text}
+    \color{sec1}
+    \section{Présentation}\color{text}
 
-\color{sec2}
-\subsection{Description}\color{text}
+    \color{sec2}
+    \subsection{Description}\color{text}
 
-\begin{justify}
-    Ce fichier source inclut des fonctions servant de contrôleurs, servant elles-mêmes à contrôler l'exécution de fonctions via des vérifications :
-    \begin{enumerate}
-        \item de valeurs de \textbf{\color{vars}variables globales},
+    \begin{justify}
+        Ce fichier source inclut des fonctions servant de contrôleurs, servant elles-mêmes à contrôler l'exécution de fonctions via des vérifications :
+        \begin{enumerate}
+            \item de valeurs de \textbf{\color{vars}variables globales},
 
-        \item de présence de \textbf{\color{path}dossiers} et de \textbf{\color{path}fichiers},
+            \item de présence de \textbf{\color{path}dossiers} et de \textbf{\color{path}fichiers},
 
-        \item de la valeur d'UID (\textbf{U}ser \textbf{ID}entifier)
-    \end{enumerate}
-\end{justify}
+            \item de la valeur d'UID (\textbf{U}ser \textbf{ID}entifier)
+        \end{enumerate}
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Définitions des éléments mentionnés}\color{text}
+    \color{sec2}
+    \subsection{Définitions des éléments mentionnés}\color{text}
 
-\color{sec3}
-\subsubsection{Chemins des fichiers}\color{text}
-
-
-
+    \color{sec3}
+    \subsubsection{Chemins des fichiers}\color{text}
 \end{document}

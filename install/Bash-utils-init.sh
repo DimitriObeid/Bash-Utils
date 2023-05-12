@@ -312,7 +312,7 @@ function BU.ModuleInit.DefineTraps()
 # ·····································································································································································································
 # Printing the message called in the "BU.ModuleInit.IsInScript()" function, which tells the user that the Bash Utils framework cannot tell if its code is executed from a file or an interactive shell.
 
-# WARNING : Do not call the "BU.ModuleInit.Msg()" function here, as this function is called into the "BU.ModuleInit.Msg()" function.
+# WARNING : Do not call the "BU.ModuleInit.Msg()" function into this function, as this function is called into the "BU.ModuleInit.Msg()" function via the "BU.ModuleInit.Exit()" function.
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.

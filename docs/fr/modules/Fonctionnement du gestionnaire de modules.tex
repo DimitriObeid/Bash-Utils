@@ -5,7 +5,7 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
 
-\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{fancyhdr}           % Ajout d'en-têtes et de pieds de page à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}            % Sauts de ligne déterminables entre chaque paragraphe.
 
@@ -79,174 +79,173 @@
 % Début du document.
 
 \begin{document}
-\maketitle
-\tableofcontents
-\newpage
+    \maketitle
+    \tableofcontents
+    \newpage
 
-\color{sec1}
-\section{Introduction}\color{text}
+    \color{sec1}
+    \section{Introduction}\color{text}
 
-\begin{justify}
-    \textbf{Note 1 :} La procédure d'initialisation des modules et de la librairie est décrite en détails dans la sous-section \textbf{\color{sec1}Fonctionnement \color{text} / \color{sec2}Étapes d'initialisation} du fichier \textbf{\color{path}Bash-utils/docs/fr/Introduction.pdf}.
-\end{justify}
+    \begin{justify}
+        \textbf{Note 1 :} La procédure d'initialisation des modules et de la librairie est décrite en détails dans la sous-section \textbf{\color{sec1}Fonctionnement \color{text} / \color{sec2}Étapes d'initialisation} du fichier \textbf{\color{path}Bash-utils/docs/fr/Introduction.pdf}.
+    \end{justify}
 
- \begin{justify}
-    \textbf{Note 2 :} La méthode de création de modules est détaillée dans la section \textbf{\color{sec1}Liste des tutoriels \color{text} / \color{sec2}Ajouter un nouveau module} du fichier \textbf{\color{path}Bash-utils/docs/fr/Tutos.pdf}.
- \end{justify}
+    \begin{justify}
+        \textbf{Note 2 :} La méthode de création de modules est détaillée dans la section \textbf{\color{sec1}Liste des tutoriels \color{text} / \color{sec2}Ajouter un nouveau module} du fichier \textbf{\color{path}Bash-utils/docs/fr/Tutos.pdf}.
+    \end{justify}
 
-\color{sec2}
-\subsection{Présentation générale}\color{text}
+    \color{sec2}
+    \subsection{Présentation générale}\color{text}
 
-\begin{justify}
-    Ici, un module est un regroupement de fichiers source et de fichiers de configurations développé pour la librairie Bash Utils, dont le but est de faciliter le développement d'un script Bash selon une certaine catégorie.
-\end{justify}
+    \begin{justify}
+        Ici, un module est un regroupement de fichiers source et de fichiers de configurations développé pour la librairie Bash Utils, dont le but est de faciliter le développement d'un script Bash selon une certaine catégorie.
+    \end{justify}
 
-\begin{justify}
-    Le gestionnaire de modules est un outil permettant d'initialiser chaque module et de sourcer (inclure) chaque fichier associé.
-\end{justify}
+    \begin{justify}
+        Le gestionnaire de modules est un outil permettant d'initialiser chaque module et de sourcer (inclure) chaque fichier associé.
+    \end{justify}
 
-\begin{justify}
-    Pour un fonctionnement optimal, il est fortement recommandé de l'installer dans le dossier personnel de tous les utilisateurs d'un ordinateur susceptibles d'utiliser cette librairie.
-\end{justify}
+    \begin{justify}
+        Pour un fonctionnement optimal, il est fortement recommandé de l'installer dans le dossier personnel de tous les utilisateurs d'un ordinateur susceptibles d'utiliser cette librairie.
+    \end{justify}
 
-\begin{justify}
-    En outre, il est obligatoire de l'installer dans le dossier personnel du super-utilisateur (le dossier \textbf{\color{path}/root}), pour pouvoir exécuter un script utilisant la librairie Bash Utils avec les privilèges du super-utilisateur, ainsi que pour utiliser certaines fonctionnalités ne pouvant être exécutées qu'avec des privilèges du super-utilisateur.
-\end{justify}
+    \begin{justify}
+        En outre, il est obligatoire de l'installer dans le dossier personnel du super-utilisateur (le dossier \textbf{\color{path}/root}), pour pouvoir exécuter un script utilisant la librairie Bash Utils avec les privilèges du super-utilisateur, ainsi que pour utiliser certaines fonctionnalités ne pouvant être exécutées qu'avec des privilèges du super-utilisateur.
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Dossiers}\color{text}
+    \color{sec2}
+    \subsection{Dossiers}\color{text}
 
-\begin{justify}
-    Ce gestionnaire est composé d'un dossier (caché pour ne pas trop encombrer le dossier personnel, où il doit être installé) : \textbf{\color{path}.Bash-utils}
-\end{justify}
+    \begin{justify}
+        Ce gestionnaire est composé d'un dossier (caché pour ne pas trop encombrer le dossier personnel, où il doit être installé) : \textbf{\color{path}.Bash-utils}
+    \end{justify}
 
-\begin{justify}
-    Ce dossier est composé de deux sous-dossiers, comprenant également des sous dossiers : \textbf{\color{path}config} et \textbf{\color{path}modules}.
-\end{justify}
+    \begin{justify}
+        Ce dossier est composé de deux sous-dossiers, comprenant également des sous dossiers : \textbf{\color{path}config} et \textbf{\color{path}modules}.
+    \end{justify}
 
-\begin{justify}
-    Le dossier \textbf{\color{path}config} est constitué du dossier \textbf{\color{path}modules}, qui contient en sous-dossiers des dossiers de modules contenant les fichiers de configuration propres à chaque module.
-\end{justify}
+    \begin{justify}
+        Le dossier \textbf{\color{path}config} est constitué du dossier \textbf{\color{path}modules}, qui contient en sous-dossiers des dossiers de modules contenant les fichiers de configuration propres à chaque module.
+    \end{justify}
 
-\begin{justify}
-    Le dossier \textbf{\color{path}modules} (sous-dossier de \textbf{\color{path}.Bash-utils}) contient en sous-dossier des dossiers de modules contenant les fichiers d'initialisation propres à chaque module.
-\end{justify}
+    \begin{justify}
+        Le dossier \textbf{\color{path}modules} (sous-dossier de \textbf{\color{path}.Bash-utils}) contient en sous-dossier des dossiers de modules contenant les fichiers d'initialisation propres à chaque module.
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Architecture}\color{text}
+    \color{sec2}
+    \subsection{Architecture}\color{text}
 
-\color{sec3}
-\subsubsection{Dossiers}\color{text}
+    \color{sec3}
+    \subsubsection{Dossiers}\color{text}
 
-\begin{justify}
+    \begin{justify}
 
-\end{justify}
-% ------------
+    \end{justify}
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec3}
-\subsubsection{Fichiers}\color{text}
+    \color{sec3}
+    \subsubsection{Fichiers}\color{text}
 
-\begin{justify}
+    \begin{justify}
 
-\end{justify}
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Fichiers}\color{text}
+    \color{sec2}
+    \subsection{Fichiers}\color{text}
 
-\begin{justify}
-    Ce gestionnaire est composé d'un fichier à placer dans le dossier personnel de tous les utilisateurs de la librairie :  \textbf{\color{path}Bash-utils-init.sh}.
-\end{justify}
+    \begin{justify}
+        Ce gestionnaire est composé d'un fichier à placer dans le dossier personnel de tous les utilisateurs de la librairie :  \textbf{\color{path}Bash-utils-init.sh}.
+    \end{justify}
 
-\begin{justify}
-    Parmi les fichiers propres à chaque module, deux d'entre eux doivent obligatoirement être présents :
+    \begin{justify}
+        Parmi les fichiers propres à chaque module, deux d'entre eux doivent obligatoirement être présents :
 
-    \begin{itemize}
-        \item \textbf{\color{path}module.conf\color{text} :} Ce fichier, à placer dans le dossier \textbf{\color{path}.Bash-utils/config/modules/\$nom\_du\_module}, contient chaque variable utile au fichier \textbf{\color{path}Initializer.sh}, présenté ci-dessous.\\\mbox{}
+        \begin{itemize}
+            \item \textbf{\color{path}module.conf\color{text} :} Ce fichier, à placer dans le dossier \textbf{\color{path}.Bash-utils/config/modules/\$nom\_du\_module}, contient chaque variable utile au fichier \textbf{\color{path}Initializer.sh}, présenté ci-dessous.\\\mbox{}
 
-        \item \textbf{\color{path}Initializer.sh\color{text} :} Ce fichier initialise le module et sert de fichier d'inclusion de chaque fichier source dans le dossier de librairie \textbf{\color{path}Bash-utils/lib/\$nom\_du\_module}, ainsi qu'aux autres fichiers de configuration à placer, de préférence, dans le dossier \textbf{\color{path}.Bash-utils/config/modules/}.
-    \end{itemize}
-\end{justify}
+            \item \textbf{\color{path}Initializer.sh\color{text} :} Ce fichier initialise le module et sert de fichier d'inclusion de chaque fichier source dans le dossier de librairie \textbf{\color{path}Bash-utils/lib/\$nom\_du\_module}, ainsi qu'aux autres fichiers de configuration à placer, de préférence, dans le dossier \textbf{\color{path}.Bash-utils/config/modules/}.
+        \end{itemize}
+    \end{justify}
 
-\begin{justify}
-    Outre les fichiers de configuration et les fichiers source de chaque module, plusieurs fichiers sont présents directement dans le dossier \textbf{\color{path}.Bash-utils} :
+    \begin{justify}
+        Outre les fichiers de configuration et les fichiers source de chaque module, plusieurs fichiers sont présents directement dans le dossier \textbf{\color{path}.Bash-utils} :
 
-    \begin{itemize}
-        \item \textbf{\color{path}Bash-utils-root-val.path\color{text} :} Ce fichier contient le chemin du dossier racine de la librairie Bash Utils. Il est lu par le fichier \textbf{\color{path}module.conf}, du module \color{path}\textbf{main}.
-    \end{itemize}
-\end{justify}
+        \begin{itemize}
+            \item \textbf{\color{path}Bash-utils-root-val.path\color{text} :} Ce fichier contient le chemin du dossier racine de la librairie Bash Utils. Il est lu par le fichier \textbf{\color{path}module.conf}, du module \color{path}\textbf{main}.
+        \end{itemize}
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-% /////////////////////////////////////////////////////////////////////////////////////////////// %
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec1}
-\section{Liste des modules officiels}\color{text}
+    \color{sec1}
+    \section{Liste des modules officiels}\color{text}
 
-\color{sec2}
-\subsection{Main}\color{text}
+    \color{sec2}
+    \subsection{Main}\color{text}
 
-\color{sec3}
-\subsubsection{Présentation}\color{text}
+    \color{sec3}
+    \subsubsection{Présentation}\color{text}
 
-\begin{justify}
-    Ce module est le module de base de la librairie. Il contient toutes les configurations et les fonctions de base de cette dernière.
-\end{justify}
-% ------------
+    \begin{justify}
+        Ce module est le module de base de la librairie. Il contient toutes les configurations et les fonctions de base de cette dernière.
+    \end{justify}
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec3}
-\subsubsection{Liste des fonctions}\color{text}
+    \color{sec3}
+    \subsubsection{Liste des fonctions}\color{text}
 
-\begin{justify}
-    Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{path}Bash-utils/docs/fr/modules/main/functions}
-\end{justify}% ------------
+    \begin{justify}
+        Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{path}Bash-utils/docs/fr/modules/main/functions}
+    \end{justify}% ------------
 
-% ----------------------
+    % ----------------------
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec3}
-\subsubsection{Liste des configurations}\color{text}
+    \color{sec3}
+    \subsubsection{Liste des configurations}\color{text}
 
-\begin{justify}
-    Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{path}Bash-utils/docs/fr/modules/main/config}
-\end{justify}
-
+    \begin{justify}
+        Vous pouvez retrouver ces fonctions dans les différents documents présents dans le dossier \textbf{\color{path}Bash-utils/docs/fr/modules/main/config}
+    \end{justify}
 \end{document}

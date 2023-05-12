@@ -5,7 +5,7 @@
 \usepackage[sfdefault]{roboto}  % Police d'écriture utilisée dans le document.
 \usepackage[T1]{fontenc}		% Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
 
-\usepackage{fancyhdr}           % Ajout de headers et footers à chaque page du document.
+\usepackage{fancyhdr}           % Ajout d'en-têtes et de pieds de page à chaque page du document.
 \usepackage{hyperref}           % Création de liens cliquables pointant vers d'autres parties du document.
 \usepackage{parskip}            % Sauts de ligne déterminables entre chaque paragraphe.
 
@@ -79,577 +79,576 @@
 % Début du document.
 
 \begin{document}
-\maketitle
-\newpage
+    \maketitle
+    \newpage
 
-\hypertarget{contents}{}
-\tableofcontents
-\newpage
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
 
-\color{sec1}
-\section{Présentation}\color{text}
+    \color{sec1}
+    \section{Présentation}\color{text}
 
-\color{sec2}
-\subsection{Description}\color{text}
+    \color{sec2}
+    \subsection{Description}\color{text}
 
-\begin{justify}
-    Ce fichier source inclut des fonctions servant à la gestion des valeurs des variables globales de statut : gestions d'erreurs et changement de valeur assité.
-\end{justify}
+    \begin{justify}
+        Ce fichier source inclut des fonctions servant à la gestion des valeurs des variables globales de statut : gestions d'erreurs et changement de valeur assité.
+    \end{justify}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec2}
-\subsection{Définitions des éléments mentionnés}\color{text}
+    \color{sec2}
+    \subsection{Définitions des éléments mentionnés}\color{text}
 
-\color{sec3}
-\subsubsection{Chemins des fichiers}\color{text}
+    \color{sec3}
+    \subsubsection{Chemins des fichiers}\color{text}
 
-\begin{justify}
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{Dossier parent} - \textit{dossier des configurations} & \textbf{Nom du fichier}\\
-        \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Colors.conf}\\
-        \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Status.conf}\\
-        \hline
-        \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Text.conf}\\
-        \hline
-    \end{tabular}
+    \begin{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Dossier parent} - \textit{dossier des configurations} & \textbf{Nom du fichier}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Colors.conf}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Status.conf}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}    & \textbf{\color{path}Text.conf}\\
+            \hline
+        \end{tabular}
 
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{Dossier parent} - \textit{dossier de la librairie} & \textbf{Nom du fichier}\\
-        \hline
-        \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Checkings.lib}\\
-        \hline
-    \end{tabular}
-\end{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Dossier parent} - \textit{dossier de la librairie} & \textbf{Nom du fichier}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main}   & \textbf{\color{path}Checkings.lib}\\
+            \hline
+        \end{tabular}
+    \end{justify}
 
-\setlength{\parskip}{2em}
+    \setlength{\parskip}{2em}
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
 
-\color{sec3}
-\subsubsection{Fonctions externes appelées}\color{text}
+    \color{sec3}
+    \subsubsection{Fonctions externes appelées}\color{text}
 
-\textbf{Fonction : \color{func}BU.Main.Headers.DrawLine}\\[1\baselineskip]
+    \textbf{Fonction : \color{func}BU.Main.Headers.DrawLine}\\[1\baselineskip]
 
-\textbf{Fichier de définition : \color{path}Checkings.lib}\\[1\baselineskip]
+    \textbf{Fichier de définition : \color{path}Checkings.lib}\\[1\baselineskip]
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec3}
-\subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
+    \color{sec3}
+    \subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
 
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_COLOR...}\\[1\baselineskip]
+    \textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_COLOR...}\\[1\baselineskip]
 
-\textbf{Description :}
+    \textbf{Description :}
 
-\begin{justify}
-    Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.
-\end{justify}
+    \begin{justify}
+        Chacune des variables globales commençant par ce nom retourne un code couleu encodé lors de l'appel d'une de ces variables, grâce à l'appel simultané d'une fonction.
+    \end{justify}
 
-\textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
+    \textbf{Fichier de définition : \color{path}Colors.conf}\\[1\baselineskip]
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% ----------------------------------------------
+    % ----------------------------------------------
 
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
+    \color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}\\[1\baselineskip]
+    \textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}\\[1\baselineskip]
 
-\textbf{Description :}
+    \textbf{Description :}
 
-\begin{justify}
-    Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{cmds}true}.
-\end{justify}
+    \begin{justify}
+        Cette variable enregistre le chemin du fichier de logs créé par le script d'initialisation si la valeur de la variable de statut associée est définie à \textbf{\color{cmds}true}.
+    \end{justify}
 
-\textbf{Fichier de définition : \color{path}Project.conf} \\[1\baselineskip]
+    \textbf{Fichier de définition : \color{path}Project.conf} \\[1\baselineskip]
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% ----------------------------------------------
+    % ----------------------------------------------
 
-\color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
+    \color{vars}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\\[1\baselineskip]
 
-\textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
+    \textbf{Variable : \color{vars}\$\_\_BU\_MAIN\_TXT\_CHAR\_HEADER\_LINE}\\[1\baselineskip]
 
-\textbf{Description :}
+    \textbf{Description :}
 
-\begin{justify}
-    Cette variable contient le caractère à afficher en tant que ligne de header.
-\end{justify}
+    \begin{justify}
+        Cette variable contient le caractère à afficher en tant que ligne de header.
+    \end{justify}
 
-\textbf{Fichier de définition : \color{path}Text.conf}\\[1\baselineskip]
+    \textbf{Fichier de définition : \color{path}Text.conf}\\[1\baselineskip]
 
-% ------------
+    % ------------
 
-% ----------------------
+    % ----------------------
 
-% -----------------------------------------------
+    % -----------------------------------------------
 
-% /////////////////////////////////////////////////////////////////////////////////////////////// %
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
-\color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\color{sec1}
-\section{Fonctions}\color{text}
+    \color{sec1}
+    \section{Fonctions}\color{text}
 
-\color{sec2}
-\subsection{Sous-section « CHECKING VALUES »}
+    \color{sec2}
+    \subsection{Sous-section « CHECKING VALUES »}
 
-\color{sec3}
-\subsubsection{BU.Main.Status.ConfEcho}\color{text}
+    \color{sec3}
+    \subsubsection{BU.Main.Status.ConfEcho}\color{text}
 
-\begin{justify}
-\textbf{Description de la fonction :}\\[1\baselineskip]
-    Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une variable de statut.
-\end{justify}
+    \begin{justify}
+    \textbf{Description de la fonction :}\\[1\baselineskip]
+        Cette fonction retourne un message d'erreur en cas de mauvaise valeur définie dans une variable de statut.
+    \end{justify}
 
-\begin{justify}
-   	Ce message est structuré de la manière suivante :
+    \begin{justify}
+        Ce message est structuré de la manière suivante :
 
-   	\begin{itemize}
-   		\item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,\setlength{\parskip}{1em}
+        \begin{itemize}
+            \item Le nom du fichier où s'est produite l'erreur, ainsi que la ligne, suivi de la description de l'erreur renvoyée par la fonction vérifiant la valeur de la variable de statut,\setlength{\parskip}{1em}
 
-   		\item la valeur défectueuse enregistrée,
+            \item la valeur défectueuse enregistrée,
 
-   		\item la liste des valeurs autorisées.
-   	\end{itemize}
-\end{justify}
+            \item la liste des valeurs autorisées.
+        \end{itemize}
+    \end{justify}
 
-% ------------
+    % ------------
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-\begin{justify}
-    \textbf{Paramètres :}
+    \begin{justify}
+        \textbf{Paramètres :}
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{\color{vars}p\_file} & Chemin de fichier (chaîne de caractères)\\
-        \hline
-        \textbf{\color{vars}p\_lineno} & Nombre entier\\
-        \hline
-        \textbf{\color{vars}p\_bad\_value} & Chaîne de caractères\\
-        \hline
-        \textbf{\color{vars}p\_var\_name} & Chaîne de caractères\\
-        \hline
-        \textbf{\color{vars}pa\_correct\_values} & Tableau\\
-        \hline
-    \end{tabular}
-\end{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}p\_file} & Chemin de fichier (chaîne de caractères)\\
+            \hline
+            \textbf{\color{vars}p\_lineno} & Nombre entier\\
+            \hline
+            \textbf{\color{vars}p\_bad\_value} & Chaîne de caractères\\
+            \hline
+            \textbf{\color{vars}p\_var\_name} & Chaîne de caractères\\
+            \hline
+            \textbf{\color{vars}pa\_correct\_values} & Tableau\\
+            \hline
+        \end{tabular}
+    \end{justify}
 
-% ------------
+    % ------------
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-\begin{justify}
-    \textbf{Variables}
+    \begin{justify}
+        \textbf{Variables}
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{\color{vars}\$i} & \\
-        \hline
-    \end{tabular}
-\end{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}\$i} & \\
+            \hline
+        \end{tabular}
+    \end{justify}
 
-\begin{justify}
-    \begin{itemize}
-        \item \textbf{\color{vars}\$p\_file\color{text} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{cmds}basename \color{text}"\color{vars}\$BASH\_SOURCE[0]\color{text}")")}}.\setlength{\parskip}{1em}
+    \begin{justify}
+        \begin{itemize}
+            \item \textbf{\color{vars}\$p\_file\color{text} :} le fichier dans lequel cette fonction est appelée (de préférence avec la commande \textbf{\textbf{"\$(\color{cmds}basename \color{text}"\color{vars}\$BASH\_SOURCE[0]\color{text}")")}}.\setlength{\parskip}{1em}
 
-        \item \textbf{\color{vars}\$p\_lineno\color{text} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{vars}\$LINENO}).
+            \item \textbf{\color{vars}\$p\_lineno\color{text} :} le numéro de ligne où cette fonction est appelée (de préférence avec la variable d'environnement \textbf{\color{vars}\$LINENO}).
 
-        \item \textbf{\color{vars}\$p\_bad\_value\color{text} :} La mauvaise valeur passée en argument\color{text}.
+            \item \textbf{\color{vars}\$p\_bad\_value\color{text} :} La mauvaise valeur passée en argument\color{text}.
 
-        \item \textbf{\color{vars}\$p\_var\_name\color{text} :}  Nom de la variable globale de statut où la mauvaise valeur a été enregistrée.\color{text}
+            \item \textbf{\color{vars}\$p\_var\_name\color{text} :}  Nom de la variable globale de statut où la mauvaise valeur a été enregistrée.\color{text}
 
-        \item \textbf{\color{vars}\$pa\_correctValues\color{text} :} Tableau contenant la liste des valeurs acceptées par la variable globale de statut.
-    \end{itemize}
-\end{justify}
+            \item \textbf{\color{vars}\$pa\_correctValues\color{text} :} Tableau contenant la liste des valeurs acceptées par la variable globale de statut.
+        \end{itemize}
+    \end{justify}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-\begin{justify}
-    \textbf{Fonctionnement :}
+    \begin{justify}
+        \textbf{Fonctionnement :}
 
-    La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
-\end{justify}
+        La variable \textbf{\color{vars}\$i} est crée et sa valeur est assignée à \textbf{0}. Elle servira en tant qu'incrémenteur dans la \textbf{\color{loop}boucle « pour »} située plus loin, qui servira à lister chaque valeur acceptée par la variable globale de statut traitée si la valeur enregistrée n'est pas supportée.
+    \end{justify}
 
-\setlength{\parskip}{2em}
+    \setlength{\parskip}{2em}
 
-\begin{justify}
-    Le fichier de configurations \textbf{\color{path}Status.conf} est resourcé pour réinitialiser la valeur de toutes les variables globales de statut, pour éviter que le moindre bug ne se produise lors de l'exécution de cette fonction si des valeurs non-supportées sont enregistrées dans d'autres variables globales de statut, sachant que cette fonction ne vérifie que la valeur d'une variable à la fois.
-\end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    La variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DECHO} est remise à \textbf{allow} pour afficher les décorations de texte.
-\end{justify}
-
-\setlength{\parskip}{2em}
-
-\begin{justify}
-    \textbf{\color{cond}Si} le \textbf{\color{path}fichier de logs} du projet existe, \textbf{\color{cond}alors} :
+    \begin{justify}
+        Le fichier de configurations \textbf{\color{path}Status.conf} est resourcé pour réinitialiser la valeur de toutes les variables globales de statut, pour éviter que le moindre bug ne se produise lors de l'exécution de cette fonction si des valeurs non-supportées sont enregistrées dans d'autres variables globales de statut, sachant que cette fonction ne vérifie que la valeur d'une variable à la fois.
+    \end{justify}
 
     \setlength{\parskip}{1em}
+
+    \begin{justify}
+        La variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DECHO} est remise à \textbf{allow} pour afficher les décorations de texte.
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+    \begin{justify}
+        \textbf{\color{cond}Si} le \textbf{\color{path}fichier de logs} du projet existe, \textbf{\color{cond}alors} :
+
+        \setlength{\parskip}{1em}
+
+        \begin{itemize}
+            \item
+            {
+                \begin{justify}
+                    La fonction \textbf{\color{func}BU.Main.Headers.DrawLine} est appelée pour afficher une ligne complète sur le terminal, avant d'afficher un message d'erreur concernant le fait qu'une mauvaise valeur a été enregistrée dans la variable globale de statut traitée, affichant également le nom de cette variable, et sa valeur. La même fonction est rappelée pour dessiner la deuxième ligne.
+                \end{justify}
+
+                \setlength{\parskip}{1em}
+
+                \begin{justify}
+                    Tout ce message est redirigé vers le fichier de logs, et affiché à l'écran.
+                \end{justify}
+            }
+        \end{itemize}
+    \end{justify}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        \textbf{\color{cond}Sinon}, le même code est exécuté, mais le texte n'est affiché qu'à l'écran.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{\color{cond}Fin de la condition « si »}.
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+
+    \begin{justify}
+        Sachant qu'il est désormais sûr d'appeler une fonction du fichier \textbf{\color{path}Echo.lib}, car la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, un message d'erreur est affiché par le biais de la fonction \textbf{\color{func}BU.Main.Echo.Error}.
+    \end{justify}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        Ce message d'erreur affiche :
+        \begin{enumerate}
+            \item le \textbf{\color{path}nom du fichier} où l'erreur s'est produite,
+            \item la ligne où l'erreur s'est produite,
+            \item le nom de la \textbf{\color{vars}variable} en faute.
+        \end{enumerate}
+    \end{justify}
+
+
+    \setlength{\parskip}{2em}
+
+    \begin{justify}
+        L'affichage de la valeur actuellement enregistrée dans la variable actuellement traitée est traité via une condition.
+    \end{justify}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        \textbf{\color{cond}Si} aucune valeur n'est enregistrée, \textbf{\color{cond}alors} un message indiquant qu'aucune valeur n'est enregistrée est affiché à l'écran.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{\color{cond}Sinon}, la valeur enregistrée est affichée à l'écran.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{\color{cond} Fin de la condition « si »}.
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+
+    \begin{justify}
+        La liste des valeur acceptées est ensuite parcourue par une \textbf{\color{loop}boucle « pour »}, pour les afficher en liste.
+    \end{justify}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        \textbf{\color{loop}Pour} toute valeur \textbf{\color{vars}val} enregistrée dans le tableau \textbf{\color{vars}pa\_correctValues} :
+    \end{justify}
 
     \begin{itemize}
         \item
         {
             \begin{justify}
-                La fonction \textbf{\color{func}BU.Main.Headers.DrawLine} est appelée pour afficher une ligne complète sur le terminal, avant d'afficher un message d'erreur concernant le fait qu'une mauvaise valeur a été enregistrée dans la variable globale de statut traitée, affichant également le nom de cette variable, et sa valeur. La même fonction est rappelée pour dessiner la deuxième ligne.
+                \textbf{\color{cond}Si} aucune valeur n'est enregistrée à l'index en cours de traitement, \textbf{\color{cond}alors} la chaîne de caractères \textbf{« un argument vide »} est ajoutée à la liste s'affichant à l'écran.
             \end{justify}
 
             \setlength{\parskip}{1em}
 
             \begin{justify}
-                Tout ce message est redirigé vers le fichier de logs, et affiché à l'écran.
+                \textbf{\color{cond}Sinon}, la valeur est ajoutée à la liste s'affichant à l'écran.
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{cond} Fin de la condition « si »}.
             \end{justify}
         }
     \end{itemize}
-\end{justify}
 
-\setlength{\parskip}{1em}
+    \begin{justify}
+        \textbf{\color{loop} Fin de la boucle « pour »}.
+    \end{justify}
 
-\begin{justify}
-    \textbf{\color{cond}Sinon}, le même code est exécuté, mais le texte n'est affiché qu'à l'écran.
-\end{justify}
+    \setlength{\parskip}{2em}
 
-\begin{justify}
-    \textbf{\color{cond}Fin de la condition « si »}.
-\end{justify}
-
-\setlength{\parskip}{2em}
+    \begin{justify}
+        Une fois le tableau parcouru, la commande \textbf{\color{cmds}exit} est appelée pour arrêter l'exécution du script, vu que l'erreur rencontrée en vérifiant la valeur de la variable globale de statut est une erreur fatale.
+    \end{justify}
 
 
-\begin{justify}
-    Sachant qu'il est désormais sûr d'appeler une fonction du fichier \textbf{\color{path}Echo.lib}, car la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO} est fixée à \textbf{true}, un message d'erreur est affiché par le biais de la fonction \textbf{\color{func}BU.Main.Echo.Error}.
-\end{justify}
+    \setlength{\parskip}{1em}
 
-\setlength{\parskip}{1em}
+    % ------------
 
-\begin{justify}
-    Ce message d'erreur affiche :
-    \begin{enumerate}
-        \item le \textbf{\color{path}nom du fichier} où l'erreur s'est produite,
-        \item la ligne où l'erreur s'est produite,
-        \item le nom de la \textbf{\color{vars}variable} en faute.
-    \end{enumerate}
-\end{justify}
+    \par\noindent\rule{\textwidth}{0.4pt}
 
+    \begin{justify}
+        \textbf{Utilisation :}
 
-\setlength{\parskip}{2em}
+        Appelez cette fonction lorsque vous créez une nouvelle fonction de gestion de variables globales de statut (voir la sous-section suivante).
+    \end{justify}
 
-\begin{justify}
-    L'affichage de la valeur actuellement enregistrée dans la variable actuellement traitée est traité via une condition.
-\end{justify}
+    \begin{justify}
+        \textbf{Conseil :} Vous pouvez gagner du temps en copiant-collant l'une des fonctions existantes, et en modifiant simplement le nom de la variable globale, puis les valeurs enregistrées dans le tableau de valeurs supportées \textbf{\color{vars}pa\_extraArgs}.
+    \end{justify}
 
-\setlength{\parskip}{1em}
+    % ------------
 
-\begin{justify}
-    \textbf{\color{cond}Si} aucune valeur n'est enregistrée, \textbf{\color{cond}alors} un message indiquant qu'aucune valeur n'est enregistrée est affiché à l'écran.
-\end{justify}
+    % -----------------------------------------------
 
-\begin{justify}
-    \textbf{\color{cond}Sinon}, la valeur enregistrée est affichée à l'écran.
-\end{justify}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    \textbf{\color{cond} Fin de la condition « si »}.
-\end{justify}
+    \color{sec2}
+    \subsection{Sous-section "CHECKINGS"}\color{text}
 
-\setlength{\parskip}{2em}
+    \begin{justify}
+        Cette section contient toutes les fonctions vérifiant que la variable de statut associée possède une valeur valide.
+    \end{justify}
 
+    \color{sec3}
+    \subsubsection{BU.Main.Status.CheckSTAT\_*}\color{text}
 
-\begin{justify}
-    La liste des valeur acceptées est ensuite parcourue par une \textbf{\color{loop}boucle « pour »}, pour les afficher en liste.
-\end{justify}
+    \begin{justify}
+        \textbf{Description :}\\[1\baselineskip]
+        Chacune de ces fonctions vérifie que la valeur de la variable globale de statut en cours de traitement soit égale à une valeur attendue, sans quoi l'exécution du script s'arrête.
+    \end{justify}
 
-\setlength{\parskip}{1em}
+    \begin{justify}
+        Le document \textbf{\color{path}docs/fr/modules/01) Config/main/Status-conf.pdf} contient la liste de toutes les variables globales de statut, dans la section \textbf{\color{sec1}Liste des variables}.
+    \end{justify}\setlength{\parskip}{1em}
 
-\begin{justify}
-    \textbf{\color{loop}Pour} toute valeur \textbf{\color{vars}val} enregistrée dans le tableau \textbf{\color{vars}pa\_correctValues} :
-\end{justify}
+    % ------------
 
-\begin{itemize}
-    \item
-    {
-        \begin{justify}
-            \textbf{\color{cond}Si} aucune valeur n'est enregistrée à l'index en cours de traitement, \textbf{\color{cond}alors} la chaîne de caractères \textbf{« un argument vide »} est ajoutée à la liste s'affichant à l'écran.
-        \end{justify}
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-        \setlength{\parskip}{1em}
+    \begin{justify}
+        \textbf{Paramètres :}
 
-        \begin{justify}
-            \textbf{\color{cond}Sinon}, la valeur est ajoutée à la liste s'affichant à l'écran.
-        \end{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}p\_file} & Chemin\\
+            \hline
+            \textbf{\color{vars}p\_lineno} & Nombre entier\\
+            \hline
+        \end{tabular}
+    \end{justify}
 
-        \begin{justify}
-            \textbf{\color{cond} Fin de la condition « si »}.
-        \end{justify}
-    }
-\end{itemize}
+    \setlength{\parskip}{2em}
 
-\begin{justify}
-    \textbf{\color{loop} Fin de la boucle « pour »}.
-\end{justify}
+    % ------------
 
-\setlength{\parskip}{2em}
+    \par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
 
-\begin{justify}
-    Une fois le tableau parcouru, la commande \textbf{\color{cmds}exit} est appelée pour arrêter l'exécution du script, vu que l'erreur rencontrée en vérifiant la valeur de la variable globale de statut est une erreur fatale.
-\end{justify}
+    \begin{justify}
+        \textbf{Variables :}
 
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}va\_correctValues} & Tableau\\
+            \hline
+        \end{tabular}
+    \end{justify}\setlength{\parskip}{1em}
 
-\setlength{\parskip}{1em}
+    % ------------
 
-% ------------
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \begin{justify}
+        \textbf{Fonctionnement :}\\[1\baselineskip]
+        Pour chaque fonction, un tableau est d'abord défini (\textbf{\color{vars}va\_correctValues}) pour y enregistrer les valeurs acceptées par la variable globale de statut en cours de traitement.
+    \end{justify}
 
-\begin{justify}
-    \textbf{Utilisation :}
+    \begin{justify}
+        Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{func}BU.Main.Status.ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
 
-    Appelez cette fonction lorsque vous créez une nouvelle fonction de gestion de variables globales de statut (voir la sous-section suivante).
-\end{justify}
+        \begin{enumerate}
+            \item Le fichier dans lequel la valeur de cette variable a été vérifiée,
+            \item La ligne à laquelle l'opération mentionnée ci-dessus a été effectuée,
+            \item La valeur actuelle de la variable globale de statut en cours de traitement,
+            \item Le nom de cette variable,
+            \item Le tableau de valeurs correctes de la variable.
+        \end{enumerate}
+    \end{justify}
 
-\begin{justify}
-    \textbf{Conseil :} Vous pouvez gagner du temps en copiant-collant l'une des fonctions existantes, et en modifiant simplement le nom de la variable globale, puis les valeurs enregistrées dans le tableau de valeurs supportées \textbf{\color{vars}pa\_extraArgs}.
-\end{justify}
+    % ------------
 
-% ------------
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-% -----------------------------------------------
+    \begin{justify}
+        \textbf{Exceptions par fonctions :}
+    \end{justify}
 
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+    \begin{justify}
+        \begin{enumerate}
+            \item
+            {
+                ère exception :
 
-\color{sec2}
-\subsection{Sous-section "CHECKINGS"}\color{text}
+                \begin{justify}
+                    La fonction \textbf{\color{func}BU.Main.Status.CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
+                \end{justify}
 
-\begin{justify}
-    Cette section contient toutes les fonctions vérifiant que la variable de statut associée possède une valeur valide.
-\end{justify}
+                \begin{justify}
+                    \textbf{\color{cond}Si} la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} correspond à la chaîne \textbf{true} \textbf{\color{cond}ET si} le fichier de logs n'existe pas encore (la chaîne de caractères (chemin) enregistrée dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}),
+                \end{justify}
 
-\color{sec3}
-\subsubsection{BU.Main.Status.CheckSTAT\_*}\color{text}
+                \begin{justify}
+                    \textbf{\color{cond} alors} la fonction \textbf{\color{func}BU.Main.Files.CreateProjectLogFile} est appelée pour créer le fichier de logs.
+                \end{justify}
 
-\begin{justify}
-    \textbf{Description :}\\[1\baselineskip]
-    Chacune de ces fonctions vérifie que la valeur de la variable globale de statut en cours de traitement soit égale à une valeur attendue, sans quoi l'exécution du script s'arrête.
-\end{justify}
+                \begin{justify}
+                    \textbf{\color{cond}Fin de la condition « si »}.
+                \end{justify}
+            }
+        \end{enumerate}
+    \end{justify}
 
-\begin{justify}
-     Le document \textbf{\color{path}docs/fr/modules/01) Config/main/Status-conf.pdf} contient la liste de toutes les variables globales de statut, dans la section \textbf{\color{sec1}Liste des variables}.
-\end{justify}\setlength{\parskip}{1em}
+    % ------------
 
-% ------------
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \begin{justify}
+        \textbf{Utilisation :}\\[1\baselineskip]
+        Appelez la fonction dédiée au traitement de la variable globale de statut dont vous souhaitez vérifier si sa valeur est correcte.
+    \end{justify}
 
-\begin{justify}
-    \textbf{Paramètres :}
+    \begin{justify}
+        Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{sec2}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
+    \end{justify}
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{\color{vars}p\_file} & Chemin\\
-        \hline
-        \textbf{\color{vars}p\_lineno} & Nombre entier\\
-        \hline
-    \end{tabular}
-\end{justify}
+    % ------------
 
-\setlength{\parskip}{2em}
+    % ----------------------
 
-% ------------
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\par\noindent\rule{\textwidth}{0.4pt}\setlength{\parskip}{1em}
+    \color{sec3}
+    \subsubsection{BU.Main.Status.CheckProjectStatusVars}\color{text}
 
-\begin{justify}
-    \textbf{Variables :}
+    \begin{justify}
+        \textbf{Description de la fonction :}\\[1\baselineskip]
+        Cette fonction appelle toutes les fonctions précédemment définies pour tester chacune des valeurs des variables globales de statut une par une.
+    \end{justify}
 
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{\color{vars}va\_correctValues} & Tableau\\
-        \hline
-    \end{tabular}
-\end{justify}\setlength{\parskip}{1em}
+    % ------------
 
-% ------------
+    \par\noindent\rule{\textwidth}{0.4pt}
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \begin{justify}
+        \textbf{Paramètres :}\\[1\baselineskip]
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}p\_file} & Chemin\\
+            \hline
+            \textbf{\color{vars}p\_lineno} & Nombre entier\\
+            \hline
+        \end{tabular}
+    \end{justify}
 
-\begin{justify}
-    \textbf{Fonctionnement :}\\[1\baselineskip]
-    Pour chaque fonction, un tableau est d'abord défini (\textbf{\color{vars}va\_correctValues}) pour y enregistrer les valeurs acceptées par la variable globale de statut en cours de traitement.
-\end{justify}
+    \setlength{\parskip}{2em}
 
-\begin{justify}
-    Si aucune valeur correcte n'est enregistrée, alors la fonction \textbf{\color{func}BU.Main.Status.ConfEcho} est appelée, et ces valeurs sont passées, dans l'ordre, en argument :
+    % ------------
 
-    \begin{enumerate}
-        \item Le fichier dans lequel la valeur de cette variable a été vérifiée,
-        \item La ligne à laquelle l'opération mentionnée ci-dessus a été effectuée,
-        \item La valeur actuelle de la variable globale de statut en cours de traitement,
-        \item Le nom de cette variable,
-        \item Le tableau de valeurs correctes de la variable.
-    \end{enumerate}
-\end{justify}
+    % ----------------------
 
-% ------------
+    % -----------------------------------------------
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-\begin{justify}
-    \textbf{Exceptions par fonctions :}
-\end{justify}
+    \color{sec2}
+    \subsection{Sous-section "CHANGING VALUES MORE EASILY"}\color{text}
 
-\begin{justify}
-    \begin{enumerate}
+    \begin{justify}
+        \textbf{Note 1 :} Cette sous-section contient des fonctions appelant l'une des fonctions de la sous-section précédente, pour réduire la charge de travail du développeur lorsqu'il souhaite modifier la valeur d'une variable de statut tout en assurant le fait qu'elle contienne une valeur correcte.
+    \end{justify}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        \textbf{Note 2 :} Chaque fonction définie dans cette sous-section attend les trois mêmes paramètres positionnels, dont les informations sont données en commentaire sous le nom de la sous-section.
+    \end{justify}
+
+    \begin{itemize}
         \item
         {
-            ère exception :
-
             \begin{justify}
-                La fonction \textbf{\color{func}BU.Main.Status.CheckSTAT\_LOG} effectue une nouvelle vérification après la vérification de la valeur actuelle de la variable globale de statut.
+                \textbf{\$1 :} Ce paramètre contient la nouvelle valeur à assigner à la variable globale de statut traitée par la fonction.
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{cond}Si} la valeur enregistrée dans la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG} correspond à la chaîne \textbf{true} \textbf{\color{cond}ET si} le fichier de logs n'existe pas encore (la chaîne de caractères (chemin) enregistrée dans la variable globale de projet \textbf{\color{vars}\$\_\_BU\_MAIN\_PROJECT\_LOG\_FILE\_PATH}),
+                \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{func}CheckSTAT\_} définie dans la sous-section précédente.
             \end{justify}
 
             \begin{justify}
-                \textbf{\color{cond} alors} la fonction \textbf{\color{func}BU.Main.Files.CreateProjectLogFile} est appelée pour créer le fichier de logs.
-            \end{justify}
-
-            \begin{justify}
-                \textbf{\color{cond}Fin de la condition « si »}.
+                \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{func}CheckSTAT\_} définie dans la sous-section précédente.
             \end{justify}
         }
-    \end{enumerate}
-\end{justify}
+    \end{itemize}
 
-% ------------
+    % ------------
 
-\par\noindent\rule{\textwidth}{0.4pt}
+    % ----------------------
 
-\begin{justify}
-    \textbf{Utilisation :}\\[1\baselineskip]
-    Appelez la fonction dédiée au traitement de la variable globale de statut dont vous souhaitez vérifier si sa valeur est correcte.
-\end{justify}
+    % -----------------------------------------------
 
-\begin{justify}
-    Si vous souhaitez en faire ainsi après avoir assigné une nouvelle valeur à la variable, il est recommandé d'appeler sa fonction dédiée, définie dans la sous-catégorie \textbf{\color{sec2}CHANGING VALUES MORE EASILY}, et documentée ci-dessous, dans ce document.
-\end{justify}
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
-% ------------
+    \color{sec2}
+    \subsection{Sous-section "EASIER BOOLEAN VALUES CHECKINGS"}\color{text}
 
-% ----------------------
+    \begin{justify}
+        Ces fonctions servent à vérifier si la valeur d'une des variables globales de statut contienne la valeur \textbf{vrai} ou la valeur \textbf{faux} (variables booléenes uniquement).
+    \end{justify}
 
-\color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
-
-\color{sec3}
-\subsubsection{BU.Main.Status.CheckProjectStatusVars}\color{text}
-
-\begin{justify}
-    \textbf{Description de la fonction :}\\[1\baselineskip]
-    Cette fonction appelle toutes les fonctions précédemment définies pour tester chacune des valeurs des variables globales de statut une par une.
-\end{justify}
-
-% ------------
-
-\par\noindent\rule{\textwidth}{0.4pt}
-
-\begin{justify}
-    \textbf{Paramètres :}\\[1\baselineskip]
-    \begin{tabular}{|l|l|}
-        \hline
-        \textbf{\color{vars}p\_file} & Chemin\\
-        \hline
-        \textbf{\color{vars}p\_lineno} & Nombre entier\\
-        \hline
-    \end{tabular}
-\end{justify}
-
-\setlength{\parskip}{2em}
-
-% ------------
-
-% ----------------------
-
-% -----------------------------------------------
-
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
-
-\color{sec2}
-\subsection{Sous-section "CHANGING VALUES MORE EASILY"}\color{text}
-
-\begin{justify}
-    \textbf{Note 1 :} Cette sous-section contient des fonctions appelant l'une des fonctions de la sous-section précédente, pour réduire la charge de travail du développeur lorsqu'il souhaite modifier la valeur d'une variable de statut tout en assurant le fait qu'elle contienne une valeur correcte.
-\end{justify}
-
-\setlength{\parskip}{1em}
-
-\begin{justify}
-    \textbf{Note 2 :} Chaque fonction définie dans cette sous-section attend les trois mêmes paramètres positionnels, dont les informations sont données en commentaire sous le nom de la sous-section.
-\end{justify}
-
-\begin{itemize}
-    \item
-    {
-        \begin{justify}
-            \textbf{\$1 :} Ce paramètre contient la nouvelle valeur à assigner à la variable globale de statut traitée par la fonction.
-        \end{justify}
-
-        \begin{justify}
-            \item \textbf{\$2 :} Ce paramètre contient le chemin du fichier où le changement de valeur a été effectué. Il s'agit du premier argument de chaque fonction \textbf{\color{func}CheckSTAT\_} définie dans la sous-section précédente.
-        \end{justify}
-
-        \begin{justify}
-            \item \textbf{\$3 :} Ce paramètre contient le numéro de la ligne où le changement de valeur a été effectué. Il s'agit du second argument de chaque fonction \textbf{\color{func}CheckSTAT\_} définie dans la sous-section précédente.
-        \end{justify}
-    }
-\end{itemize}
-
-% ------------
-
-% ----------------------
-
-% -----------------------------------------------
-
-\color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
-
-\color{sec2}
-\subsection{Sous-section "EASIER BOOLEAN VALUES CHECKINGS"}\color{text}
-
-\begin{justify}
-    Ces fonctions servent à vérifier si la valeur d'une des variables globales de statut contienne la valeur \textbf{vrai} ou la valeur \textbf{faux} (variables booléenes uniquement).
-\end{justify}
-
-\begin{justify}
-    Chacune d'entre elles vérifie si la variable traitée contient la valeur \textbf{vrai}, et retourne la valeur 0 (fonction executée comme souhaitée), ou 1 le cas échéant.
-\end{justify}
-
+    \begin{justify}
+        Chacune d'entre elles vérifie si la variable traitée contient la valeur \textbf{vrai}, et retourne la valeur 0 (fonction executée comme souhaitée), ou 1 le cas échéant.
+    \end{justify}
 \end{document}
