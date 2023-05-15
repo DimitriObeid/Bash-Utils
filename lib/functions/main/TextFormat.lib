@@ -112,7 +112,7 @@ function BU.Main.TextFormat.CannotCreateRessource()
     echo "Please check what is preventing this $( [[ "${p_type,,}" == 'dir' ]] && printf 'directory' || printf 'file' ) directory from being created. It may be a directory permission issue." >&2;
     echo >&2;
 
-    echo "Aborting the script's execution" >&2;
+    echo "Terminating the script's execution" >&2;
     echo >&2;
 
     BU.Main.Errors.Exit 1; return "${?}";

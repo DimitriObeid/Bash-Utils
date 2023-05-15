@@ -118,7 +118,7 @@ if ! command -v latexmk; then
     elif    [[ "${LANG,,}" == ru_* ]]; then echo "Команда '${__BU_LATEX_COMPILER__CMD}' не найдена в вашей системе. Остановка работы компилятора" >&2;
     elif    [[ "${LANG,,}" == uk_* ]]; then echo "Команду '${__BU_LATEX_COMPILER__CMD}' не знайдено у вашій системі. Зупинка роботи компілятора" >&2;
 
-    else echo "The '${__BU_LATEX_COMPILER__CMD}' command was not found on your system. Aborting the compiler's execution" >&2;
+    else echo "The '${__BU_LATEX_COMPILER__CMD}' command was not found on your system. Terminating the compiler's execution" >&2;
 
     fi
 

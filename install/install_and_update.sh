@@ -345,7 +345,7 @@ if [ "${EUID}" -ne 0 ]; then
 
     PrintLog "Please install this library whitout these privileges ONLY if you don't have super-user privileges, or if you can't install or use the « su » or « sudo » command, or if you're using an unrooted Android device."; BU.Main.Echo.NewlineF;
 
-    PrintLog "Do you want to continue the installation ? Answer '« es » (case unsensitive) if you want to continue, or type any other answer if you want to abort the installation."; BU.Main.Echo.NewlineF;
+    PrintLog "Do you want to continue the installation ? Answer '« es » (case unsensitive) if you want to continue, or type any other answer if you want to terminate the installation."; BU.Main.Echo.NewlineF;
 
 
     read -rp "Please type your answer : " __ans
@@ -356,7 +356,7 @@ if [ "${EUID}" -ne 0 ]; then
     fi
 
     if [ "${__ans,,}" != 'yes' ]; then
-        PrintLog "Aborting installation"; BU.Main.Echo.NewlineF;
+        PrintLog "Terminating installation"; BU.Main.Echo.NewlineF;
 
         PrintLog "Please check the « ${__F_INSTALL_LOG_FILE_PATH} » log file"; BU.Main.Echo.NewlineF;
 

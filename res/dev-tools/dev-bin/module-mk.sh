@@ -140,7 +140,7 @@ for module_name in "${__ARG_LIST[@]}"; do
 
     if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
         echo "You must run this script from its directory";
-        echo "Aborting module creation";
+        echo "Terminating module creation";
 
         exit 1;
     fi

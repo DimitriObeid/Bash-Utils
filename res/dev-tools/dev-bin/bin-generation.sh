@@ -83,7 +83,7 @@ __ARG_PATH=${1:-$'\0'};
 
 ## MESSAGES
 
-__ABORTING="Aborting the ${0} script execution";
+__TERMINATING="Terminating the ${0} script execution";
 
 ## ==============================================
 
@@ -117,7 +117,7 @@ if [ -z "${__ARG_PATH}" ]; then
     echo "Please provide a valid file path to create" >&2;
     echo >&2;
 
-    echo "${__ABORTING}" >&2;
+    echo "${__TERMINATING}" >&2;
     echo >&2;
 
     exit 1;
@@ -127,7 +127,7 @@ elif [ -f "${__ARG_PATH}" ]; then
     echo "The file will not be overwritten" >&2;
     echo >&2;
 
-    echo "${__ABORTING}" >&2;
+    echo "${__TERMINATING}" >&2;
     echo >&2;
 
     exit 1;
@@ -143,7 +143,7 @@ if [ ! -f "../dev-res/bin-generation.sh.txt" ] || [ ! -f "${__ARG_SRC}" ]; then
         echo "Please provide the path to the resource file" >&2;
         echo >&2;
 
-        echo "${__ABORTING}" >&2;
+        echo "${__TERMINATING}" >&2;
         echo >&2;
 
         exit 1;
@@ -157,7 +157,7 @@ touch "${__ARG_PATH}" || {
     echo "Please check the permissions of the target directory" >&2;
     echo >&2;
 
-    echo "${__ABORTING}" >&2;
+    echo "${__TERMINATING}" >&2;
     echo >&2;
 
     exit 1;
@@ -168,7 +168,7 @@ cat "${__new_file_path}" > "${__ARG_PATH}" || {
     echo "Please check the permissions of the target file or directory" >&2;
     echo >&2;
 
-    echo "${__ABORTING}" >&2;
+    echo "${__TERMINATING}" >&2;
     echo >&2;
 
     exit 1;

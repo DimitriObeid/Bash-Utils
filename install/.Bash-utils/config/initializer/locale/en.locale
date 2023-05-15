@@ -310,15 +310,15 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # --------
 
-    # ·····································
-    # FUNCTION : "BU.ModuleInit.MsgAbort()"
+    # ·········································
+    # FUNCTION : "BU.ModuleInit.MsgTerminate()"
 
-    __BU_MODULE_INIT_MSG__MSG_ABORT__ABORT="Aborting the module initialization script's execution";
+    __BU_MODULE_INIT_MSG__MSG_TERMINATE__TERMINATE="Terminating the module initialization script's execution";
 
     # --------
 
-    # ·····································
-    # FUNCTION : "BU.ModuleInit.MsgAbort()"
+    # ········································
+    # FUNCTION : "BU.ModuleInit.PressAnyKey()"
 
     __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Press any key to";
 

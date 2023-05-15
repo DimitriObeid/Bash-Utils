@@ -93,7 +93,7 @@ fi; echo >&2; exit 1; fi
 #
 # __BU_MAIN_INPUTS_RESUME_EXEC="Resuming the execution of the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}") script.";
 #
-# __BU_MAIN_INPUTS_CANCEL_EXEC="Aborting the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")'s execution.";
+# __BU_MAIN_INPUTS_CANCEL_EXEC="Terminating the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_PROJECT_NAME}")'s execution.";
 
 ## ==============================================
 

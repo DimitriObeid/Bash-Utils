@@ -272,7 +272,7 @@ function BU.Main.Errors.Exit()
         BU.Main.Echo.Newline 2 >&2;
 
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : unexpected exit code passed as argument (code range : 0 - 255)";
-        BU.Main.Echo.Warning "Aborting the script's execution for safety reasons";
+        BU.Main.Echo.Warning "Terminating the script's execution for safety reasons";
         BU.Main.Zcho.Newline;
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";

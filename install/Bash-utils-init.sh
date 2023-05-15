@@ -448,7 +448,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
-    # | Hindi
+    # हिंदी | Hindi
     [ "${v_userLang,,}" == 'hi' ] && {
         printf "" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
@@ -483,15 +483,15 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "(%s) Функция, в которой была вызвана функция « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
-    # | Ukrainian
+    # Українська | Ukrainian
     [ "${v_userLang,,}" == 'uk' ] && {
         printf "У ФАЙЛІ « %s », НА ФУНКЦІЇ « %s », ДО ЛІНІЇ « %s », --> « BASH-UTILS » ПОПЕРЕДЖЕННЯ: НЕ ВДАЛОСЯ ЗНАЙТИ ЦЕЙ ШЛЯХ --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Функція, в якій було викликано функцію « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
-    # | Chinese
-    [ "${v_userlang,,}" == 'ja' ] && {
+    # 简体中文 | Simplified Chinese
+    [ "${v_userlang,,}" == 'zh' ] && {
         printf "" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
@@ -616,7 +616,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
 
                 echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
-                echo "Aborting the script's execution" >&2;
+                echo "Terminating the script's execution" >&2;
                 echo >&2;
             }
 
@@ -640,13 +640,13 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo >&2;
             }
 
-            # | Hindi
+            # हिंदी | Hindi
             [ "${p_lang_backup,,}" == 'hi' ] && {
-                echo '----------------------------' >&2 && echo >&2;
-                echo '' >&2 && echo >&2;
+                echo '--------------------------------------------------------' >&2 && echo >&2;
+                echo 'घातक त्रुटि: अंग्रेजी अनुवाद फ़ाइल शामिल करने में असमर्थ' >&2 && echo >&2;
 
-                echo "" >&2;
-                echo "" >&2;
+                echo "चूंकि संदेशों को मॉड्यूल इनिशियलाइज़ेशन फ़ाइल में वेरिएबल्स में संग्रहीत किया जाता है, इसलिए यह फ़ाइल उन ट्रांसलेशन फ़ाइलों पर निर्भर करती है जो इन वेरिएबल्स को परिभाषित करती हैं।" >&2;
+                echo "अंत स्क्रिप्ट निष्पादन" >&2;
                 echo >&2;
             }
 
@@ -662,11 +662,11 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
 
             # | Japanese
             [ "${p_lang_backup,,}" == 'ja' ] && {
-                echo '----------------------------' >&2 && echo >&2;
-                echo '' >&2 && echo >&2;
+                echo '。。。。。。。。。。。。。。。。。。。。。。。。。。。。。。' >&2 && echo >&2;
+                echo '致命的なエラー: 英語の翻訳ファイルを含めることはできません' >&2 && echo >&2;
 
-                echo "" >&2;
-                echo "" >&2;
+                echo "モジュール初期化ファイル内のメッセージは変数に格納されるため、このファイルは変換ファイルに依存してこれらの変数を生成します。" >&2;
+                echo "スクリプトの実行を停止する" >&2;
                 echo >&2;
             }
 
@@ -690,7 +690,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo >&2;
             }
 
-            # | Ukrainian
+            # Українська | Ukrainian
             [ "${p_lang_backup,,}" == 'uk' ] && {
                 echo '-----------------------------------------------------------------------' >&2 && echo >&2;
                 echo "ФАТАЛЬНА ПОМИЛКА: НЕ ВДАЛОСЯ ВКЛЮЧИТИ ФАЙЛ ПЕРЕКЛАДУ НА АНГЛІЙСЬКУ МОВУ" >&2 && echo >&2;
@@ -700,13 +700,13 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo >&2;
             }
 
-            # | Chinese
+            # 简体中文 | Simplified Chinese
             [ "${p_lang_backup,,}" == 'zh' ] && {
-                echo '-----------------------------' >&2 && echo >&2;
-                echo '' >&2 && echo >&2;
+                echo '。。。。。。。。。。。。。。。' >&2 && echo >&2;
+                echo '致命错误：无法获取英文翻译文件' >&2 && echo >&2;
 
-                echo "" >&2;
-                echo "" >&2;
+                echo "由于模块初始化文件中的消息存储在变量中，该文件依赖于定义这些变量的这些翻译文件" >&2;
+                echo "终止脚本执行" >&2;
                 echo >&2;
             }
 
@@ -716,7 +716,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo "FATAL ERROR : UNABLE TO SOURCE THE ENGLISH TRANSLATION FILE" >&2 && echo >&2;
 
                 echo "Since the messages in the module initialization file are stored into variables, this file relies on these translation files, which define these variables" >&2;
-                echo "Aborting the script's execution" >&2;
+                echo "Terminating the script's execution" >&2;
                 echo >&2;
             }
 
@@ -797,11 +797,21 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         v_isPrinted='true';
     };
 
+    # हिंदी | Hindi
+    [ "${__bu_module_init__user_lang,,}" == 'hi' ] && {
+        printf "« %s » फ़ाइल में, « %s ()» फ़ंक्शन में, ऑनलाइन « %s » --> बैश-यूटिल्स त्रुटि\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
+
+        echo "बैश यूटिल कॉन्फ़िगरेशन रूट फ़ोल्डर « .bash-utils» आपके होम डायरेक्टरी में मौजूद नहीं है" >&2;
+        echo "कृपया इस फ़ोल्डर को अपनी होम निर्देशिका में कॉपी करें। आप इसे «${v_installFile}» फ़ाइल निष्पादित करके स्थापित कर सकते हैं, या आप इसे « Bash-utils/install » निर्देशिका में पा सकते हैं" >&2;
+
+        v_isPrinted='true';
+    }
+
     # Bahasa Indonesia | Indonesian
     [ "${__bu_module_init__user_lang,,}" == 'id' ] && {
         printf "DALAM FILE « %s », PADA « %s » FUNGSI, DI GARIS « %s » --> KESALAHAN FATAL BASH-UTILS\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "Folder akar konfigurasi kerangka kerja Bash Utils ".Bash-utils" tidak ada di direktori beranda Anda" >&2; echo >&2;
+        echo "Folder akar konfigurasi kerangka kerja Bash Utils « .Bash-utils » tidak ada di direktori beranda Anda" >&2; echo >&2;
         echo "Silakan salin folder ini ke direktori beranda Anda. Anda dapat menginstalnya dengan mengeksekusi file « ${v_installFile} », atau Anda dapat menemukannya di direktori « Bash-utils/install »." >&2;
 
         v_isPrinted='true';
@@ -809,10 +819,10 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 
     # | Japanese
     [ "${__bu_module_init__user_lang,,}" == 'ja' ] && {
-        printf "" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
+        printf "« %s » ファイル、AT « %s() » 関数、« %s » 行 --> BASH-UTILS エラー" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "" >&2;
-        echo "" >&2;
+        echo "Bash Utilsの設定ルートフォルダ「.Bash-utils」がホームディレクトリに存在しない。" >&2;
+        echo "このフォルダーをホーム ディレクトリにコピーします。 インストールするには、« ${v_installFile} » ファイルを実行するか、このファイルは « Bash-utils/install » ディレクトリにあります。" >&2;
 
         v_isPrinted='true';
     }
@@ -837,22 +847,22 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         v_isPrinted='true';
     };
 
-    # | Ukrainian
+    # Українська | Ukrainian
     [ "${__bu_module_init__user_lang,,}" == 'uk' ] && {
         printf "У ФАЙЛІ « %s », НА ФУНКЦІЇ « %s », ДО ЛІНІЇ « %s », --> « BASH-UTILS » ФАТАЛЬНА ПОМИЛКА\n" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "Папка кореневої конфігурації фреймворку Bash Utils " .Bash-utils " не існує у вашому домашньому каталозі" >&2; echo >&2;
+        echo "Папка кореневої конфігурації фреймворку Bash Utils « .Bash-utils » не існує у вашому домашньому каталозі" >&2; echo >&2;
         echo "Будь ласка, скопіюйте цю папку до вашої домашньої директорії. Ви можете встановити його, запустивши файл « ${v_installFile} » або знайшовши його в папці « Bash-utils/install »" >&2;
 
         v_isPrinted='true';
     }
 
-    # | Chinese
+    # 简体中文 | Simplified Chinese
     [ "${__bu_module_init__user_lang,,}" == 'zh' ] && {
-        printf "";
+        printf "在文件 « %s » 中，在函数 « %s() » 中，行 « %s » --> BASH-UTILS 错误" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
 
-        echo "";
-        echo "";
+        echo "Bash Utils 配置根文件夹 \".bash-utils\" 在您的主目录中不存在";
+        echo "请将此文件夹复制到您的主目录中。 您可以通过执行 \"${v_installFile}\" 文件来安装它，也可以在 \"Bash-utils/install\" 目录中找到它";
 
         v_isPrinted='true';
     }
@@ -905,30 +915,32 @@ function BU.ModuleInit.GetModuleInitLanguage()
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El idioma seleccionado (${p_lang_ISO_639_1,,}) no está soportado (todavía) por el script de inicialización" >&2 && v_isPrinted='true';
 
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : La langue sélectionnée (${p_lang_ISO_639_1,,}) n'est pas (encore) supportée par le script d'initialisation" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "चेतावनी: आपकी चयनित भाषा (${p_lang_ISO_639_1,,}) प्रारंभिक स्क्रिप्ट द्वारा समर्थित (अभी तक) नहीं है" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "PERINGATAN: Bahasa yang Anda pilih (${p_lang_ISO_639_1,,}) tidak (belum) didukung oleh skrip inisialisasi" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
 
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "警告 選択された言語（${p_lang_ISO_639_1,,}）は、初期化スクリプトでは（まだ）サポートされていません。" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "AVISO : A sua língua seleccionada (${p_lang_ISO_639_1,,}) não é (ainda) suportada pelo guião de inicialização" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Выбранный вами язык (${p_lang_ISO_639_1,,}) не поддерживается (пока) скриптом инициализации" >&2 && v_isPrinted='true';
+
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ: вибрана вами мова (${p_lang_ISO_639_1,,}) ще не підтримується скриптом ініціалізації" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "警告： 您选择的语言（${p_lang_ISO_639_1,,}）还不被初始化脚本支持。" >&2 && v_isPrinted='true';
 
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
-
-            [ "${v_isPrinted}" != 'true' ] && echo echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2;
+            [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2;
         else
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "WARNUNG : Die derzeit von Ihrem Betriebssystem verwendete Sprache (${__BU_MODULE_INIT__USER_LANG,,}) wird (noch) nicht vom Initialisierungsskript unterstützt" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The language currently used by your operating system (${__BU_MODULE_INIT__USER_LANG,,}) is not (yet) supported by the initialisation script" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El idioma utilizado actualmente por su sistema operativo (${__BU_MODULE_INIT__USER_LANG,,}) no es (todavía) soportado por el script de inicialización" >&2 && v_isPrinted='true';
 
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : La langue actuellement utilisée par votre système d'exploitation (${__BU_MODULE_INIT__USER_LANG,,}) n'est pas (encore) supportée par le script d'initialisation" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "चेतावनी: आपकी वर्तमान भाषा (${__BU_MODULE_INIT__USER_LANG,,}) प्रारंभिक स्क्रिप्ट द्वारा समर्थित (अभी तक) नहीं है" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "PERINGATAN: Bahasa yang saat ini digunakan oleh sistem operasi Anda (${__BU_MODULE_INIT__USER_LANG ,,}) tidak (belum) didukung oleh skrip inisialisasi" >&2 && v_isPrinted='true';
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
 
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "警告 オペレーティングシステムが現在使用している言語（${__BU_MODULE_INIT__USER_LANG,,}）は、初期化スクリプトでは（まだ）サポートされていません。" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "AVISO: O idioma actualmente utilizado pelo seu sistema operativo (${__BU_MODULE_INIT__USER_LANG,,}) não é (ainda) suportado pelo script de arranque" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ: Язык, используемый в настоящее время вашей операционной системой (${__BU_MODULE_INIT__USER_LANG,,}), не поддерживается (пока) сценарием загрузки" >&2 && v_isPrinted='true';
+            
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ: Мова, яку наразі використовує ваша операційна система (${__BU_MODULE_INIT__USER_LANG,,}), ще не підтримується скриптом ініціалізації" >&2 && v_isPrinted='true';
-
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
+            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "警告： 您当前的语言（${__BU_MODULE_INIT__USER_LANG,,}）不被初始化脚本所支持。" >&2 && v_isPrinted='true';
 
             [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Your current language (${__BU_MODULE_INIT__USER_LANG,,}) is not (yet) supported by the initialisation script" >&2;
         fi; echo >&2;
@@ -941,14 +953,15 @@ function BU.ModuleInit.GetModuleInitLanguage()
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El script de inicialización utilizará el inglés como idioma por defecto" >&2 && v_isPrinted='true';
 
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le script d'initialisation utilisera l'anglais en tant que langue par défaut" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "प्रारंभिक लिपि अंग्रेजी को डिफ़ॉल्ट भाषा के रूप में उपयोग करेगी।" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "Skrip inisialisasi akan menggunakan bahasa Inggris sebagai bahasa default" >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
-
+        
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "初期化スクリプトでは、デフォルトの言語としてenglishを使用します。" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "O guião de inicialização utilizará o inglês como língua padrão" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "Скрипт инициализации будет использовать английский язык в качестве языка по умолчанию" >&2 && v_isPrinted='true';
+        
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "Скрипт ініціалізації буде використовувати англійську мову як мову за замовчуванням" >&2 && v_isPrinted='true';
-
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "初始化脚本将使用英语作为默认语言。" >&2 && v_isPrinted='true';
 
         [ "${v_isPrinted}" != 'true' ] &&  echo "The initialisation script will use english as default language" >&2;
 
@@ -967,14 +980,15 @@ function BU.ModuleInit.GetModuleInitLanguage()
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : No se especifica ningún idioma como argumento al llamar a la función « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Aucune langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "चेतावनी: फंक्शन « ${FUNCNAME[0]}() » कॉल करते समय तर्क के रूप में कोई भाषा निर्दिष्ट नहीं की गई है" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "PERINGATAN: Tidak ada bahasa yang ditentukan sebagai argumen saat memanggil fungsi « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
 
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "WARNING : 「${FUNCNAME[0]}()」関数の呼び出し時に、引数として指定された言語がありません。" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Nenhuma língua especificada como argumento ao chamar a função « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : При вызове функции « ${FUNCNAME[0]}() » в качестве аргумента не указан язык" >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ : Мова не вказана як аргумент при виклику « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ : Мова не вказана як аргумент при виклику « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "警告： 函数\"${FUNCNAME[0]}() \"的调用没有指定语言作为参数。" >&2 && v_isPrinted='true';
 
         [ "${v_isPrinted}" != 'true' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2;
 
@@ -991,14 +1005,15 @@ function BU.ModuleInit.GetModuleInitLanguage()
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "ADVERTENCIA : El archivo de traducción para el idioma especificado como argumento al llamar a la función « ${FUNCNAME[0]}() » no se encontró en el directorio « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
 
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]}() » n'a pas été trouvé dans le dossier « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "चेतावनी: फ़ंक्शन को कॉल करते समय एक तर्क के रूप में निर्दिष्ट भाषा के लिए अनुवाद फ़ाइल « ${FUNCNAME[0]}() » डायरेक्टरी में नहीं मिली « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "PERINGATAN: File terjemahan untuk bahasa yang ditentukan sebagai argumen saat memanggil fungsi « ${FUNCNAME[0]}() » tidak ditemukan di direktori « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
-
+        
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "警告 : \" ${FUNCNAME[0]}() \" 関数呼び出しで引数として指定された言語の翻訳ファイルが \" ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} \" ディレクトリに見つかりませんでした." >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : O ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]}() » não foi encontrado na pasta « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Файл перевода для языка, указанного в качестве аргумента при вызове функции « ${FUNCNAME[0]}() » не найден в каталоге « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »." >&2 && v_isPrinted='true';
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ: Файл перекладу для мови, вказаної як аргумент під час виклику функції « ${FUNCNAME[0]}() », не знайдено у каталозі « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
 
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ: Файл перекладу для мови, вказаної як аргумент під час виклику функції « ${FUNCNAME[0]}() », не знайдено у каталозі « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} »" >&2 && v_isPrinted='true';
+        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "警告： 在调用\"${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}\"目录中作为参数指定的语言翻译文件在\"${FUNCNAME[0]}() \"函数中没有找到。" >&2 && v_isPrinted='true';
 
         [ "${v_isPrinted}" != 'true' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]}() » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2;
 
@@ -1021,14 +1036,15 @@ function BU.ModuleInit.GetModuleInitLanguage()
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == "es" ] && echo "ADVERTENCIA : No se ha podido obtener el archivo de traducción para el idioma especificado en el argumento al llamar a la función « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "ATTENTION : Impossible de sourcer le fichier de traduction destiné à la langue spécifiée en argument lors de l'appel de la fonction « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "चेतावनी: फंक्शन « ${FUNCNAME[0]}() » कॉल करते समय एक तर्क के रूप में निर्दिष्ट भाषा के लिए अनुवाद फ़ाइल को स्रोत करने में असमर्थ" >&2 && v_isPrinted='true';
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "PERINGATAN: Tidak dapat menemukan file terjemahan untuk bahasa yang ditentukan sebagai argumen saat memanggil fungsi « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
-                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
 
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "WARNING : \"${FUNCNAME[0]}() \"関数呼び出しは、引数で指定された言語の翻訳ファイルをソースにできません。" >&2 && v_isPrinted='true';
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "ATENÇÃO : Não foi possível obter o ficheiro de tradução para a língua especificada como argumento ao chamar a função « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "ВНИМАНИЕ : Невозможно включить файл перевода для языка, указанного в качестве аргумента, при вызове функции « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
-                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ: Не вдалося включити файл перекладу для мови, вказаної як аргумент під час виклику функції « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
 
-                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "ПОПЕРЕДЖЕННЯ: Не вдалося включити файл перекладу для мови, вказаної як аргумент під час виклику функції « ${FUNCNAME[0]}() »" >&2 && v_isPrinted='true';
+                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "警告： 当调用\"${FUNCNAME[0]}() \"函数时，不可能为作为参数指定的语言提供翻译文件源。" >&2 && v_isPrinted='true';
 
                 # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
                 [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2;
@@ -1454,7 +1470,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.AskPrintLog()       -> Modules initializer script (this file)
 #   - BU.ModuleInit.Exit()              -> Modules initializer script (this file)
-#   - BU.ModuleInit.MsgAbort()          -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgTerminate()      -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError()     -> Modules initializer script (this file)
 
 # shellcheck disable=
@@ -1583,14 +1599,12 @@ function BU.ModuleInit.Msg()
 
         echo "${__BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2}" >&2;
 
-        BU.ModuleInit.MsgAbort;
+        BU.ModuleInit.MsgTerminate;
 
         BU.ModuleInit.AskPrintLog >&2 || { BU.ModuleInit.Exit 1; return "${?}"; };
 
         BU.ModuleInit.Exit 1; return "${?}";
     fi
-
-    return 0;
 }
 
 # ···············································
@@ -1680,7 +1694,7 @@ function BU.ModuleInit.MsgTranslate()
 # Displaying a text when the script's execution must be stopped.
 
 # shellcheck disable=
-function BU.ModuleInit.MsgAbort() { echo >&2; echo "${__BU_MODULE_INIT_MSG__MSG_ABORT__ABORT}" >&2; echo >&2; return 0; }
+function BU.ModuleInit.MsgTerminate() { echo >&2; echo "${__BU_MODULE_INIT_MSG__MSG_TERMINATE__TERMINATE}" >&2; echo >&2; return 0; }
 
 # ·················································
 # Pressing any key on the keyboard to do an action.
@@ -2384,7 +2398,7 @@ function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_D
 #   - BU.ModuleInit.Exit()                          -> Modules initializer script (this file)
 #   - BU.ModuleInit.IsFrameworkCompiled()           -> Modules initializer script (this file)
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
-#   - BU.ModuleInit.MsgAbort()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgTerminate()                  -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
 
 # shellcheck disable=SC1090
@@ -2420,7 +2434,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
             echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE}" >&2;
 
-            BU.ModuleInit.MsgAbort;
+            BU.ModuleInit.MsgTerminate;
 
             BU.ModuleInit.AskPrintLog || { BU.ModuleInit.Exit 1; return "${?}"; };
 
@@ -2636,7 +2650,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 							BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
-							BU.ModuleInit.MsgAbort;
+							BU.ModuleInit.MsgTerminate;
 
 							BU.ModuleInit.AskPrintLog >&2 || { v_loop_error='error'; break; }
 
@@ -2701,7 +2715,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
 							BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
-							BU.ModuleInit.MsgAbort;
+							BU.ModuleInit.MsgTerminate;
 
 							BU.ModuleInit.AskPrintLog >&2 || { v_loop_error='error'; break; }
 
@@ -2748,7 +2762,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                     BU.ModuleInit.ProcessFirstModuleParameters.Usage;
 
-                    BU.ModuleInit.MsgAbort;
+                    BU.ModuleInit.MsgTerminate;
 
                     BU.ModuleInit.AskPrintLog >&2 || { v_loop_error='error'; break; };
 
@@ -2836,7 +2850,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 		printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
 		echo >&2; echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE}" >&2;
 
-        BU.ModuleInit.MsgAbort;
+        BU.ModuleInit.MsgTerminate;
 
         BU.ModuleInit.AskPrintLog || { BU.ModuleInit.Exit 1; return "${?}"; };
 
@@ -2863,7 +2877,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
         echo >&2; echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE}" >&2;
 
-        BU.ModuleInit.MsgAbort;
+        BU.ModuleInit.MsgTerminate;
 
         echo >&2; BU.ModuleInit.AskPrintLog || { BU.ModuleInit.Exit 1; return "${?}"; };
 
@@ -2887,7 +2901,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 #   - BU.ModuleInit.IsFrameworkCompiled()           -> Modules initializer script (this file)
 #   - BU.ModuleInit.ListInstalledModules()          -> Modules initializer script (this file)
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
-#   - BU.ModuleInit.MsgAbort()                      -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgTerminate()                  -> Modules initializer script (this file)
 #   - BU.ModuleInit.MsgLine()                       -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
 #   - BU.ModuleInit.ProcessFirstModuleParameters()  -> Modules initializer script (this file)
@@ -3103,7 +3117,7 @@ function BashUtils_InitModules._()
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
 
-                    BU.ModuleInit.MsgAbort;
+                    BU.ModuleInit.MsgTerminate;
 
                     BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
 
@@ -3119,7 +3133,7 @@ function BashUtils_InitModules._()
 
                         BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
-                        BU.ModuleInit.MsgAbort;
+                        BU.ModuleInit.MsgTerminate;
 
                         BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
 
@@ -3154,7 +3168,7 @@ function BashUtils_InitModules._()
                 printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE}"; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'f' >&2;
                 printf '\n\n' >&2;
 
-                BU.ModuleInit.MsgAbort;
+                BU.ModuleInit.MsgTerminate;
 
                 v_loop_error="error"; break;
             else
@@ -3182,7 +3196,7 @@ function BashUtils_InitModules._()
                     # shellcheck disable=SC2059
                     BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
 
-                    BU.ModuleInit.MsgAbort;
+                    BU.ModuleInit.MsgTerminate;
 
                     BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
 
@@ -3198,7 +3212,7 @@ function BashUtils_InitModules._()
 
                         BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
-                        BU.ModuleInit.MsgAbort;
+                        BU.ModuleInit.MsgTerminate;
 
                         BU.ModuleInit.AskPrintLog >&2 || { v_loop_error="error"; break; }
 
@@ -3238,18 +3252,19 @@ function BashUtils_InitModules._()
 # shellcheck disable=SC2009
 if [ -z "${BASH_VERSION}" ]; then
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'de' ] && echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpretor" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpreter" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'es' ] && echo "ERROR BASH-UTILS : Su intérprete de shell actual no es el intérprete « Bash », sino el intérprete « ${SHELL##*/} »";
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'fr' ] && echo "ERREUR DE BASH-UTILS : Votre interpréteur shell actuel n'est pas l'interpréteur « Bash », mais l'interpréteur « ${SHELL##*/} »" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'hi' ] && echo "बैश-बर्तन त्रुटि: आपका वर्तमान शेल दुभाषिया «बैश» दुभाषिया नहीं है, बल्कि «${SHELL##*/}» दुभाषिया है" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'id' ] && echo "BASH-UTILS ERROR: Interpreter shell Anda saat ini bukanlah interpreter « Bash », tetapi interpreter « ${SHELL##*/} »" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ja' ] && echo "" >&2;
 
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ja' ] && echo "BASH-UTILS ERROR : 現在のシェルインタプリタは \" Bash \" インタプリタではなく、 \" ${SHELL##*/} \" インタプリタです。" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'pt' ] && echo "BASH-UTILS ERRO : O seu intérprete shell actual não é o intérprete « Bash », mas o intérprete « ${SHELL##*/} »" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ru' ] && echo "ОШИБКА « BASH-UTILS » : Ваш текущий интерпретатор оболочки - это не интерпретатор « Bash », а интерпретатор « ${SHELL##*/} »" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'uk' ] && echo "ВИНИКЛА ПОМИЛКА BASH-UTILS: Поточний інтерпретатор командного рядка - це не інтерпретатор « Bash », а інтерпретатор « ${SHELL##*/} »" >&2;
 
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'zh' ] && echo "" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'uk' ] && echo "ВИНИКЛА ПОМИЛКА BASH-UTILS: Поточний інтерпретатор командного рядка - це не інтерпретатор « Bash », а інтерпретатор « ${SHELL##*/} »" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'zh' ] && echo "BASH-UTILS错误：你当前的shell解释器不是 \"Bash \"解释器，而是\"${SHELL##*/}\"解释器。" >&2;
 
     echo >&2;
 
@@ -4045,7 +4060,7 @@ function BU.ModuleInit.UnsourceModules()
 #   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
 
 #   - BU.ModuleInit.AskPrintLog()   -> Modules initializer script (this file)
-#   - BU.ModuleInit.MsgAbort()      -> Modules initializer script (this file)
+#   - BU.ModuleInit.MsgTerminate()  -> Modules initializer script (this file)
 
 # shellcheck disable=
 function BU.ModuleInit.HandleErrors()
@@ -4071,7 +4086,7 @@ function BU.ModuleInit.HandleErrors()
 
             echo "Value that caused this error : ${p_badValue}" >&2;
 
-            BU.ModuleInit.MsgAbort;
+            BU.ModuleInit.MsgTerminate;
 
             BU.ModuleInit.AskPrintLog >&2 || return 1;
 

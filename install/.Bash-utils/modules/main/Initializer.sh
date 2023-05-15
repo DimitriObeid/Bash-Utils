@@ -197,7 +197,7 @@ function BU.Main.Initializer.SourceConfig()
 # Sourcing each needed library files stored into the function/main directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array.
 
 # shellcheck disable=SC2059,SC2016
-__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "${__BU_MAIN_MODULE_LIB_MOD_DIR_PATH}" "Text.lib" 'f')" || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgAbort; BU.ModuleInit.AskPrintLog; BU.ModuleInit.IsInScript && exit 1; return 1; };
+__BU_MAIN_INITIALIZER__TEXT_LIB_PATH="$(BU.ModuleInit.FindPath "${__BU_MAIN_MODULE_LIB_MOD_DIR_PATH}" "Text.lib" 'f')" || { printf "${__BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT}" "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" '$__BU_MAIN_INITIALIZER__TEXT_LIB_PATH'; BU.ModuleInit.MsgTerminate; BU.ModuleInit.AskPrintLog; BU.ModuleInit.IsInScript && exit 1; return 1; };
 
 # shellcheck disable=SC1090
 BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" || { BU.ModuleInit.SourcingFailure "${__BU_MAIN_INITIALIZER__TEXT_LIB_PATH}" "${__BU_MODULE_INIT_MODULE_NAME}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; BU.ModuleInit.IsInScript && exit 1; return 1; };
@@ -534,7 +534,7 @@ BU.Main.Initializer.SourceConfig || { if BU.ModuleInit.IsInScript; then exit 1; 
 BU.Main.Directories.MkTmpDir || {
     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${LINENO}" 'E_BUINIT__BU_MAIN_INIT__CANNOT_MK_TMPDIR';
 
-    BU.ModuleInit.MsgAbort;
+    BU.ModuleInit.MsgTerminate;
 
     BU.ModuleInit.AskPrintLog >&2 || { BU.ModuleInit.Exit 1; return "${?}"; };
 
