@@ -272,13 +272,14 @@ function BU.ModuleInit.SIGINT()
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && { echo "La ejecución del script fue interrumpida por el usuario" >&2 && v_isPrinted='true'; };
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && { echo "L'exécution du script a été interrompue par l'utilisateur" >&2 && v_isPrinted='true'; };
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && { echo "" && v_isPrinted='true'; };
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && { echo "Eksekusi skrip diinterupsi oleh pengguna" >&2 && v_isPrinted='true'; }
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && { echo "" >&2 && v_isPrinted='true'; }
 
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && { echo "" >&2 && v_isPrinted='true'; }
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && { echo "A execução do guião foi interrompida pelo utilizador" >&2 && v_isPrinted='true'; };
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && { echo "Выполнение сценария было прервано пользователем" >&2 && v_isPrinted='true'; };
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && { echo "Виконання скрипта було перервано користувачем" >&2 && v_isPrinted='true'; }
 
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && { echo "Виконання скрипта було перервано користувачем" >&2 && v_isPrinted='true'; }
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && { echo "" >&2 && v_isPrinted='true'; }
 
     [ "${v_isPrinted}" != 'true' ] && { echo "The script's execution was interrupted by the user" >&2; };
@@ -337,13 +338,14 @@ function BU.ModuleInit.PrintIsInScriptEnvironmentErrorMessage()
     [ "${v__userLang,,}" == 'es' ] && echo "Por favor, ejecute el código del framework bash-utils desde el archivo fuente bash o compruebe el proceso principal" >&2 && v_isPrinted='true';
 
     [ "${v__userLang,,}" == 'fr' ] && echo "Veuillez exécuter le code du framework Bash Utils à partir d'un fichier source Bash ou vérifier le processus parent" >&2 && v_isPrinted='true';
+    [ "${v__userLang,,}" == 'hi' ] && echo "" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'id' ] && echo "Jalankan kode kerangka kerja Bash-utils dari berkas sumber Bash atau periksa proses utama" >&2 && v_isPrinted='true';
-    [ "${v__userLang,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
 
+    [ "${v__userLang,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'pt' ] && echo "Execute o código da estrutura Bash-utils a partir do ficheiro fonte do Bash ou verifique o processo principal" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'ru' ] && echo "Пожалуйста, запустите код фреймворка « Bash-utils » из исходного файла « Bash » или проверьте родительский процесс" >&2 && v_isPrinted='true';
-    [ "${v__userLang,,}" == 'uk' ] && echo "Будь ласка, запустіть код фреймворку « Bash-utils » з вихідного файлу « Bash » або перевірте батьківський процес" >&2 && v_isPrinted='true';
 
+    [ "${v__userLang,,}" == 'uk' ] && echo "Будь ласка, запустіть код фреймворку « Bash-utils » з вихідного файлу « Bash » або перевірте батьківський процес" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
 
     [ "${v_isPrinted}" != 'true' ] && echo "Please run the Bash-utils framework's code from a Bash source file, or check the parent process" >&2;
@@ -446,6 +448,13 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
+    # | Hindi
+    [ "${v_userLang,,}" == 'hi' ] && {
+        printf "" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+
+        printf "" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+    }
+
     # Bahasa Indonesia | Indonesian
     [ "${v_userLang,,}" == 'id' ] && {
         printf "DALAM FILE « %s », PADA « %s » FUNGSI, DI GARIS « %s » --> PERINGATAN BASH-UTILS : TIDAK DAPAT MENEMUKAN JALUR INI --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
@@ -479,6 +488,13 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "У ФАЙЛІ « %s », НА ФУНКЦІЇ « %s », ДО ЛІНІЇ « %s », --> « BASH-UTILS » ПОПЕРЕДЖЕННЯ: НЕ ВДАЛОСЯ ЗНАЙТИ ЦЕЙ ШЛЯХ --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
         printf "(%s) Функція, в якій було викликано функцію « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+    }
+
+    # | Chinese
+    [ "${v_userlang,,}" == 'ja' ] && {
+        printf "" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+
+        printf "" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
@@ -522,13 +538,14 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'es' ] && echo "El resto de la biblioteca utilizará el inglés como idioma por defecto" >&2 && v_isPrinted='true';
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'fr' ] && echo "Le reste de la librairie utilisera l'anglais en tant que langue par défaut" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'hi' ] && echo "" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "Seluruh perpustakaan akan menggunakan bahasa Inggris sebagai bahasa default" >&2 && v_isPrinted='true';
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
 
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "O resto da biblioteca utilizará o inglês como língua padrão" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "Остальная часть библиотеки будет использовать английский язык в качестве языка по умолчанию" >&2 && v_isPrinted='true';
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "Решта бібліотеки буде використовувати англійську мову за замовчуванням" >&2 && v_isPrinted='true';
 
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "Решта бібліотеки буде використовувати англійську мову за замовчуванням" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "" >&2 && v_isPrinted='true';
 
     # If the language chosen by the user is not (yet) supported directly in this function, the message is displayed in English.
@@ -620,6 +637,16 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
 
                 echo "Comme les messages du fichier d'initialisation du module sont stockés dans des variables, ce fichier s'appuie sur ces fichiers de traduction, qui définissent ces variables" >&2;
                 echo "Arrêt de l'exécution du script" >&2;
+                echo >&2;
+            }
+
+            # | Hindi
+            [ "${p_lang_backup,,}" == 'hi' ] && {
+                echo '----------------------------' >&2 && echo >&2;
+                echo '' >&2 && echo >&2;
+
+                echo "" >&2;
+                echo "" >&2;
                 echo >&2;
             }
 
