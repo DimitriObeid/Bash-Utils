@@ -375,8 +375,8 @@ function BU.Main.Locale.PrintLanguageName()
         # The following commented lines are used as test / debug procedures.
         # Please leave them commented if you are not debugging the code of the "BU.Main.Locale.PrintLanguageName/.Optimize()" and "BUPLNOptimizer()" functions.
 
-        # Testing the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}}" variable with a value,
-        # since the main module's files were not translated with the "lang.csv" file as the date of Feb. 02 of 2023, when this function was coded.
+        # Testing the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}}" variable with a value, since the
+        # main module's files were not translated with the "lang.csv" file as the date of Feb. 02 of 2023, when this function was coded.
 
 #         __BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__FRENCH="FRANÇAISE";
 #
