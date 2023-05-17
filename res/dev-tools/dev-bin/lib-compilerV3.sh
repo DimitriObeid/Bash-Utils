@@ -235,7 +235,14 @@ else __BU_INITIALIZER_SCRIPT_PATH="${__BU_ROOT_PATH}/Bash-utils-init.sh";
 
 fi
 
+# Path to the directory which stores the path to the "compiled" folder.
+__BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/compiled";
+
+# Path to the file which stores the content of the here document used into each of the "WriteCommentCode.Heredoc.${v_curr_locale}()" functions, which is called into the "WriteCommentCode()" function.
 __BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/heredoc";
+
+# Path to the file which stores the Shellchecked files and their MD5 checksum.
+__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST="${__BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH}/shellchecked_files.out";
 
 # Path to the modules initialization script's translations files.
 __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
@@ -1151,7 +1158,7 @@ function CompileInSingleFile()
             local __compiled_stable_file_parent_dir;    # VAR TYPE : Dirpath    - DESC :
             local __compiled_stable_file_path;          # VAR TYPE : Filepath   - DESC :
 
-            __compiled_stable_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/stable";
+            __compiled_stable_file_parent_dir="${__BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH}/stable";
         fi
 
         # If the "${_____value_of__no_shellcheck}" value was passed in the array of optional arguments.
@@ -1163,7 +1170,7 @@ function CompileInSingleFile()
         __locale_file_path="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${v_curr_locale}.locale";
         __locale_file_path_en="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/en.locale";
 
-        __compiled_file_parent_dir="${__BU_ROOT_PATH}/install/.Bash-utils/compiled/unstable";
+        __compiled_file_parent_dir="${__BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH}/unstable";
 
         # Path to the temporary output file (global variable).
         __BU_MAIN_FULL_FILE_PATH="${__compiled_file_parent_dir}/Bash-utils-compilation-output.tmp";
@@ -1383,7 +1390,9 @@ function CompileInSingleFile()
         PrintSuccessLine "$(printf "${__BU_COMPILE__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" "${__BU_MAIN_FULL_FILE_PATH}")" 'LOWER';
 
         # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU_SHELLCHECKED}" variable's value to 'true'.
-        # However, in case a stable version is compiled, it is better to check the files that were not checked. This condition is managed in the "BU.Main.DevTools.ShellcheckVerif()" function.
+        # However, in case a stable version is compiled, it is better to check the files that were not checked.
+
+        # the aforementioned condition is managed into the "BU.Main.DevTools.ShellcheckVerif()" function.
         if [ "${__BU_SHELLCHECKED}" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
 
 
