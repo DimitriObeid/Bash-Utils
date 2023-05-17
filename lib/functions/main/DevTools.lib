@@ -147,10 +147,10 @@ function BU.Main.DevTools.ShellcheckVerif()
                 return 1;
             fi
 
-            printf "%s" "${__BU_COMPILE__SHELLCHECK__SUCCESS_STR}"; echo;
+            printf "%s\n" "${__BU_COMPILE__SHELLCHECK__SUCCESS_STR}";
 
             # shellcheck disable=SC2059
-            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}" "${p_path}"; echo;
+            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}\n" "${p_path}";
 
             # Writing the compiled file's MD5 checksum and path into the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
 
@@ -163,32 +163,36 @@ function BU.Main.DevTools.ShellcheckVerif()
                     
                     print
                 }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" && \
-                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || \
+                    { echo "Unable to "; return 1; };
                 else
                     echo "$(md5sum "${p_path}")" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
                 fi
 
             echo;
         fi
+
+        return 0;
     }
 
     # Checking first if the file was already shellchecked by parsing the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
     if grep -qi "${p_path}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}"; then
 
         # Extracting the current file's corresponding MD5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}".
-        existing_md5=$(grep -i "${p_path}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}')
+        existing_md5=$(grep -i "${p_path}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}');
 
         # Calcualting the MD5 checksum of the current file.
         new_md5="$(md5sum "${p_path}" | awk '{print $1}')";
 
         # Checking if both checksums correspond to each other.
         if [ "${existing_md5}" != "${new_md5}" ]; then
-            BU.Main.DevTools.ShellcheckVerif.Shellcheck;
+            BU.Main.DevTools.ShellcheckVerif.Shellcheck || return 1;
         else
-            printf "The following file was already Shellchecked. Continue the compilation : %s" "${p_path}";
+            # shellcheck disable=SC2059
+            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED}\n" "${p_path}";
         fi
     else
-        BU.Main.DevTools.ShellcheckVerif.Shellcheck;
+        BU.Main.DevTools.ShellcheckVerif.Shellcheck || return 1;
     fi
 
     return 0;
