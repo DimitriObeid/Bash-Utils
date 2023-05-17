@@ -132,7 +132,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
     {
         # shellcheck disable=SC2059
-        if [ "${__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
+        if [[ ("${__BU_SHELLCHECKED}" == 'false') && ("${p_stable}" == 'compile-stable') ]] || [ "${p_stable}" == 'compile-stable' ]; then
             shchkOut="$(shellcheck "${p_path}" 2>&1)";
             shchkOutCode="${?}";
 
