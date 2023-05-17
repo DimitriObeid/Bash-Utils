@@ -154,7 +154,8 @@ function BU.Main.DevTools.ShellcheckVerif()
 
             # Writing the compiled file's MD5 checksum and path into the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
 
-            # Checking first in the "${existing_md5}" variable is empty. If not, the output of the "$(md5sum "${p_path}")" command is written, else the current value is replaced.
+            # Checking in the "${existing_md5}" variable is empty. If not, the output of the 
+            # "$(md5sum "${p_path}")" command is written, else the current value is replaced.
             if [ -n "${existing_md5}" ]; then
                 awk -v path="${p_path}" -v new_md5="${new_md5}" '{
                     if ($2 == path) {
@@ -165,9 +166,9 @@ function BU.Main.DevTools.ShellcheckVerif()
                 }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" && \
                     mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || \
                     { echo "Unable to "; return 1; };
-                else
-                    echo "$(md5sum "${p_path}")" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
-                fi
+            else
+                echo "$(md5sum "${p_path}")" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+            fi
 
             echo;
         fi

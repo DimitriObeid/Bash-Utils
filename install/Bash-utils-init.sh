@@ -267,7 +267,7 @@ function BU.ModuleInit.SIGINT()
     #**** Code ****
     echo >&2;
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && { echo "" >&2 && v_isPrinted='true'; }
+#    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && { echo "" >&2 && v_isPrinted='true'; }
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && { echo "Die Ausführung des Skripts wurde vom Benutzer unterbrochen" >&2 && v_isPrinted='true'; };
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && { echo "The script's execution was interrupted by the user" >&2 && v_isPrinted='true'; };
     
@@ -337,7 +337,7 @@ function BU.ModuleInit.PrintIsInScriptEnvironmentErrorMessage()
     #**** Code ****
     v_userLang="$(echo "${LANG}" | cut -d _ -f1)";
 
-    [ "${v__userLang,,}" == 'ar' ] && echo "يرجى تشغيل كود إطار عمل Bash-utils من ملف Bash المصدر ، أو تحقق من العملية الرئيسية" >&2 && v_isPrinted='true';
+#    [ "${v__userLang,,}" == 'ar' ] && echo "يرجى تشغيل كود إطار عمل Bash-utils من ملف Bash المصدر ، أو تحقق من العملية الرئيسية" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'de' ] && echo "Bitte führen Sie den bash-utils-Framework-Code aus der bash-Quelldatei aus oder überprüfen Sie den Hauptprozess" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'en' ] && echo "Please run the Bash-utils framework's code from a Bash source file, or check the parent process" >&2 && v_isPrinted='true';
 
@@ -380,7 +380,7 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
     #**** Code ****
     v_userLang="$(echo "${LANG}" | cut -d _ -f1)";
 
-    [ "${v_userLang,,}" == 'ar' ] && BU.ModuleInit.MsgLine "$(printf "[خطأ] الملف: ٪s | السطر: ٪s | الكود: ٪s"                         "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' && v_isPrinted='true';
+#    [ "${v_userLang,,}" == 'ar' ] && BU.ModuleInit.MsgLine "$(printf "[خطأ] الملف: ٪s | السطر: ٪s | الكود: ٪s"                         "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' && v_isPrinted='true';
     [ "${v_userLang,,}" == 'de' ] && BU.ModuleInit.MsgLine "$(printf "[ FEHLER ] DATEI : %s | LINIEN : %s | FEHLERCODE : %s"    "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'en' ] && BU.ModuleInit.MsgLine "$(printf "[ ERROR ] FILE : %s | LINE : %s | CODE : %s"              "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
@@ -567,7 +567,7 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     echo '------------------------------------------------------------------------' >&2;
     echo >&2;
 
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "Der Rest der Bibliothek wird Englisch als Standardsprache verwenden" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "The rest of the library will use English as default language" >&2 && v_isPrinted='true';
     
@@ -1035,7 +1035,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
     # If the selected language was not found among the supported languages.
     if [ -z "${v_langMatch}" ] && [ -z "${v_langMatchBeta}" ]; then
         if [ -n "${p_lang_ISO_639_1}" ]; then
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "WARNUNG : Die von Ihnen gewählte Sprache (${p_lang_ISO_639_1,,}) wird (noch) nicht vom Initialisierungsskript unterstützt" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2 && v_isPrinted='true';
             
@@ -1056,7 +1056,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 
             [ "${v_isPrinted}" != 'true' ] && echo "WARNING : Your selected language (${p_lang_ISO_639_1,,}) is not (yet) supported by the initialisation script" >&2;
         else
-            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#            [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "WARNUNG : Die derzeit von Ihrem Betriebssystem verwendete Sprache (${__BU_MODULE_INIT__USER_LANG,,}) wird (noch) nicht vom Initialisierungsskript unterstützt" >&2 && v_isPrinted='true';
             [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The language currently used by your operating system (${__BU_MODULE_INIT__USER_LANG,,}) is not (yet) supported by the initialisation script" >&2 && v_isPrinted='true';
             
@@ -1081,7 +1081,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
         # Setting the value of the "${v_isPrinted}" variable to "false" in order to ensure that the following messages will be printed in English if one of the following messages would be missing.
         v_isPrinted='false';
 
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "Das Initialisierungsskript wird Englisch als Standardsprache verwenden." >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "The initialisation script will use english as default language" >&2 && v_isPrinted='true';
         
@@ -1112,7 +1112,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
     fi
 
 	if [ "${p_lang_ISO_639_1^^}" == 'NULL' ]; then
-        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#        [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Keine Sprache wird als Argument angegeben, wenn die Funktion « ${FUNCNAME[0]}() » aufgerufen wird" >&2 && v_isPrinted='true';
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : No language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2 && v_isPrinted='true';
 		
@@ -1141,7 +1141,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 		BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary || return 1;
 
     elif [ "${p_lang_ISO_639_1^^}" != 'NULL' ] && [ ! -f "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/${p_lang_ISO_639_1}.locale" ]; then
-		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
         [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die Sprache, die beim Aufruf der Funktion « ${FUNCNAME[0]}() » als Argument angegeben wurde, konnte im Ordner « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » nicht gefunden werden" >&2 && v_isPrinted='true';
 		[ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : The translation file for the language specified as an argument when calling the « ${FUNCNAME[0]}() » function was not found in the « ${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH} » directory" >&2 && v_isPrinted='true';
 
@@ -1176,7 +1176,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
         # Sourcing the current language's translations file if the base of the framework is not compiled.
         BU.ModuleInit.IsFrameworkCompiled || {
             source "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH}/${p_lang_ISO_639_1}.locale" || {
-                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+#                [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'de' ] && echo "ACHTUNG : Die Übersetzungsdatei für die als Argument angegebene Sprache konnte beim Aufruf der Funktion « ${FUNCNAME[0]}() » nicht gefunden werden." >&2 && v_isPrinted='true';
                 [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'en' ] && echo "WARNING : Unable to source the translation file for the language specified as argument when calling the « ${FUNCNAME[0]}() » function" >&2 && v_isPrinted='true';
 
@@ -2877,6 +2877,7 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 elif [[ "${module_args,,}" == --include-aliases=* ]]; then
+
                     __BU_MODULES_INIT_INCLUDE_ALIASES='--include-aliases';
 
                     # Getting the modules list.
@@ -3400,7 +3401,7 @@ function BashUtils_InitModules._()
 
 # shellcheck disable=SC2009
 if [ -z "${BASH_VERSION}" ]; then
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ar' ] && echo "" >&2;
+#    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ar' ] && echo "" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'de' ] && echo "BASH-UTILS ERROR : Ihr aktueller Shell-Interpreter ist nicht der « Bash » Interpreter, sondern der « ${SHELL##*/} » Interpreter" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'en' ] && echo "BASH-UTILS ERROR : Your current shell interpreter is not the « Bash » interpretor, but the « ${SHELL##*/} » interpreter" >&2;
 
