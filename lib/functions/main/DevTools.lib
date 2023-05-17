@@ -132,7 +132,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
     {
         # shellcheck disable=SC2059
-        if [[ ("${__BU_SHELLCHECKED}" == 'false') && ("${p_stable}" == 'compile-stable') ]] || [ "${p_stable}" == 'compile-stable' ]; then
+        if [ "${__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
             shchkOut="$(shellcheck "${p_path}" 2>&1)";
             shchkOutCode="${?}";
 
@@ -188,7 +188,7 @@ function BU.Main.DevTools.ShellcheckVerif()
         # Extracting the current file's corresponding MD5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}".
         existing_md5=$(grep -i "${p_path}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}');
 
-        # Calcualting the MD5 checksum of the current file.
+        # Calculating the MD5 checksum of the current file.
         new_md5="$(md5sum "${p_path}" | awk '{print $1}')";
 
         # Checking if both checksums correspond to each other.
