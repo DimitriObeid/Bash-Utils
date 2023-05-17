@@ -1265,10 +1265,10 @@ function CompileInSingleFile()
 
         # If the compiled file must ship multiple languages.
         elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-            #**** Condition variables ****
+            #**** Conditional variables ****
             local translationList;      # VAR TYPE : CMD        - DESC : This variable stores the "for" loop which loops into the "" array in order to print the ISO 639-1 codes of the translation files languages to include into the compiled file.
 
-            #**** Condition code ****
+            #**** Conditional code ****
             translationList="$(for langArr in "${__language_array[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${langArr}" "${__NEWSTEP}"; if [ "${langArr}" != "${__language_array[-1]}" ]; then printf ' | '; fi; done)";
 
             # PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${translationFilePath}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';

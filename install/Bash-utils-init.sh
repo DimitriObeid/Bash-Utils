@@ -434,11 +434,11 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
     v_userLang="$(echo "${LANG}" | cut -d _ -f1)";
 
     # العربية | Arabic
-    [ "${v_userLang,,}" == 'ar' ] && {
-        printf "في الملف «٪ s» ، في الوظيفة «٪ s» ، في السطر «٪ s» --> تحذير BASH-UTILS: تعذر العثور على هذا المسار --> ٪s٪s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
-
-        printf "(٪s هي) الوظيفة التي تم فيها استدعاء الوظيفة «٪s ()» : ٪s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
-    }
+#     [ "${v_userLang,,}" == 'ar' ] && {
+#         printf "في الملف «٪ s» ، في الوظيفة «٪ s» ، في السطر «٪ s» --> تحذير BASH-UTILS: تعذر العثور على هذا المسار --> ٪s٪s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+#
+#         printf "(٪s هي) الوظيفة التي تم فيها استدعاء الوظيفة «٪s ()» : ٪s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+#     }
 
     # Deutch | German
     [ "${v_userLang,,}" == 'de' ] && {
@@ -639,16 +639,33 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
             echo >&2;
 
             # العربية | Arabic
-            [ "${v_userLang,,}" == 'ar' ] && {
-                echo '' >&2;
-                echo '' >&2; 
-
-                echo "" >&2;
-                echo "" >&2;
-                echo >&2;
-
-                v_isPrinted='true';
-            }
+#             [ "${v_userLang,,}" == 'ar' ] && {
+#                 #**** Conditional variables ****
+#                 declare -i i;             # VAR TYPE : Int        # DESC : Number of iteration for the loop which determines the number of characters to display over the fatal error string.
+#                 declare -i x;             # VAR TYPE : Int        # DESC : Number of characters stored into the "${v_ar_fatalErr}" variable;
+#
+#                 local v_ar_fatalErr;      # VAR TYPE : String     # DESC : Storing the Arabic fatal error string in order not to break the line's layout, nor the ">&2" redirection.
+#                 local v_ar_err_expl;      # VAR TYPE : String     # DESC : Storing the Arabic explanation string in order not to break the line's layout, nor the ">&2" redirection.
+#                 local v_ar_err_stop;      # VAR TYPE : String     # DESC : Storing the Arabic termination string in order not to break the line's layout, nor the ">&2" redirection.
+#
+#                 #**** Conditional code ****
+#                 v_ar_fatalErr="خطأ فادح: تعذر تضمين ملف الترجمة باللغة الإنجليزية";
+#                 v_ar_err_expl="نظرًا لأنه يتم تخزين الرسائل في ملف تهيئة الوحدة النمطية في متغيرات ، فإن هذا الملف يعتمد على ملفات الترجمة هذه ، والتي تحدد هذه المتغيرات.";
+#                 v_ar_err_stop="إنهاء تنفيذ النص";
+#
+#                 x="${#v_ar_fatalErr}";
+#
+#                 for ((i=0; i<x; i++)); do
+#                     echo -n '-' >&2;
+#                 done
+#                 echo "${v_ar_fatalErr}" >&2;
+#
+#                 echo "${v_ar_err_expl}" >&2;
+#                 echo "${v_ar_err_stop}" >&2;
+#                 echo >&2;
+#
+#                 v_isPrinted='true';
+#             }
 
             # Deutch | German
             [ "${p_lang_backup,,}" == 'de' ] && {
@@ -725,8 +742,8 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo '。。。。。。。。。。。。。。。。。。。。。。。' >&2 && echo >&2;
                 echo "치명적 오류: 영어 번역 파일을 포함할 수 없습니다." >&2 && echo >&2;
 
-                echo "" >&2;
-                echo "" >&2;
+                echo "모듈 초기화 파일의 메시지는 변수에 저장되므로 이러한 파일은 이러한 변수를 정의하기 위해 이러한 번역 파일에 의존합니다." >&2;
+                echo "스크립트 실행 종료" >&2;
                 echo >&2;
             }
 
@@ -752,11 +769,11 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
 
             # Türkçe | Turkish
             [ "${p_lang_backup,,}" == 'tr' ] && {
-                echo '----------------------------------------------------------------------' >&2 && echo >&2;
-                echo '' >&2 && 
+                echo '--------------------------------------------------' >&2 && echo >&2;
+                echo 'ÖNEMLİ HATA: İNGİLİZCE ÇEVİRİ DOSYASI DAHİL OLAMAZ' >&2 && 
                 
-                echo "" >&2;
-                echo "" >&2;
+                echo "Modül başlatma dosyasındaki mesajlar değişkenlerde saklandığından, bu dosya bu değişkenleri tanımlayan çeviri dosyalarına dayanır." >&2;
+                echo "Komut dosyasının yürütülmesini sonlandırın" >&2;
                 echo >&2;
             }
 
@@ -830,12 +847,22 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
     echo >&2;
 
     # العربية | Arabic
-    [ "${__bu_module_init__user_lang,,}" == 'ar' ] && {
-        printf "" >&2; echo >&2;
-
-        echo "" >&2; echo >&2;
-        echo "" >&2;
-    }
+#     [ "${__bu_module_init__user_lang,,}" == 'ar' ] && {
+#         #**** Conditional variables ****
+#         local v_ar_fatal_error;      # VAR TYPE : String     # DESC : Storing the Arabic fatal error string in order not to break the line's layout, nor the ">&2" redirection.
+#         local v_ar_err_explain;      # VAR TYPE : String     # DESC : Storing the Arabic explanation string in order not to break the line's layout, nor the ">&2" redirection.
+#         local v_ar_err_advices;      # VAR TYPE : String     # DESC : Storing the Arabic advices string in order not to break the line's layout, nor the ">&2" redirection.
+#
+#         #**** Conditonal code ****
+#         v_ar_fatal_error="";
+#         v_ar_err_explain="";
+#         v_ar_err_advices="";
+#
+#         printf "${v_ar_fatal_error}" "${v_file}" "${v_func}" "${v_line}" >&2; echo >&2;
+#
+#         echo "${v_ar_err_explain}" >&2; echo >&2;
+#         echo "${v_ar_err_advices}" >&2;
+#     }
 
     # Deutch | German
     [ "${__bu_module_init__user_lang,,}" == 'de' ] && {
@@ -2632,10 +2659,10 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                 # Else, if the "module" parameter's value is a debug value : '--stat-debug=false', '--stat-debug=true'
                 if [[ "${module_args,,}" == *'--stat-'* ]]; then
-                    #**** Condition variables ****
+                    #**** Conditional variables ****
 					local value;    # VAR TYPE : String     - DESC :
 
-                    #**** Condition code ****
+                    #**** Conditional code ****
                     case "${module_args,,}" in
 
                         # "${__BU_MODULE_INIT_STAT_DEBUG" global status variable.
