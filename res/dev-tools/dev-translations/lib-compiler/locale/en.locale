@@ -220,7 +220,7 @@ __BU_COMPILE__SHELLCHECK__FAIL_STR="${__RESET}Failed ❌";
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}The ${__HIGHLIGHT}%s${__SUCCESS} file does not contain any programming errors${__RESET}";
 __BU_COMPILE__SHELLCHECK__SUCCESS_STR="${__RESET}Success ${__SUCCESS}✓${__RESET}";
 
-__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCCESS}The following file was already Shellchecked, continue the compilation : ${__HIGHLIGHT}%s${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCCESS}The current version of the following file was already Shellchecked, continue the compilation : ${__HIGHLIGHT}%s${__RESET}";
 
 
 # -------------------------------------------------------------------------------

@@ -222,7 +222,7 @@ __BU_COMPILE__SHELLCHECK__FAIL_STR="${__RESET}Échec ❌";
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation${__RESET}";
 __BU_COMPILE__SHELLCHECK__SUCCESS_STR="${__RESET}Succès ${__SUCCESS}✓${__RESET}";
 
-__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCCESS}Le contenu du fichier suivant a déjà été vérifié avec la commande shellcheck, poursuite de la compilation : ${__HIGHLIGHT}%s${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCCESS}La version actuelle du contenu du fichier suivant a déjà été vérifié avec la commande shellcheck, poursuite de la compilation : ${__HIGHLIGHT}%s${__RESET}";
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

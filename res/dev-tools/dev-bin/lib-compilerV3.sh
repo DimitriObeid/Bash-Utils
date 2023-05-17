@@ -242,7 +242,7 @@ __BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH="${__BU_ROOT_PATH}/install/.Bash-
 __BU_LIB_COMPILER_RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compiler/heredoc";
 
 # Path to the file which stores the Shellchecked files and their MD5 checksum.
-__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST="${__BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH}/shellchecked_files.out";
+__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST="${__BU_LIB_COMPILER_RESOURCES__COMPILED_DIR_PATH}/compiled.out.txt";
 
 # Path to the modules initialization script's translations files.
 __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
