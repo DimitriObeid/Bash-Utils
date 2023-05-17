@@ -337,7 +337,7 @@ function BU.ModuleInit.PrintIsInScriptEnvironmentErrorMessage()
     #**** Code ****
     v_userLang="$(echo "${LANG}" | cut -d _ -f1)";
 
-    [ "${v__userLang,,}" == 'ar' ] && echo "" >&2 && v_isPrinted='true';
+    [ "${v__userLang,,}" == 'ar' ] && echo "يرجى تشغيل كود إطار عمل Bash-utils من ملف Bash المصدر ، أو تحقق من العملية الرئيسية" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'de' ] && echo "Bitte führen Sie den bash-utils-Framework-Code aus der bash-Quelldatei aus oder überprüfen Sie den Hauptprozess" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'en' ] && echo "Please run the Bash-utils framework's code from a Bash source file, or check the parent process" >&2 && v_isPrinted='true';
 
@@ -347,11 +347,11 @@ function BU.ModuleInit.PrintIsInScriptEnvironmentErrorMessage()
 
     [ "${v__userLang,,}" == 'id' ] && echo "Jalankan kode kerangka kerja Bash-utils dari berkas sumber Bash atau periksa proses utama" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'ja' ] && echo "Bash ソース ファイルから Bash-utils フレームワーク コードを実行するか、親プロセスを確認します。" >&2 && v_isPrinted='true';
-    [ "${v__userLang,,}" == 'ko' ] && echo "" >&2 && v_isPrinted='true';
+    [ "${v__userLang,,}" == 'ko' ] && echo "Bash 소스 파일에서 Bash-utils 프레임워크 코드를 실행하거나 기본 프로세스를 확인하십시오." >&2 && v_isPrinted='true';
 
     [ "${v__userLang,,}" == 'pt' ] && echo "Execute o código da estrutura Bash-utils a partir do ficheiro fonte do Bash ou verifique o processo principal" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'ru' ] && echo "Пожалуйста, запустите код фреймворка « Bash-utils » из исходного файла « Bash » или проверьте родительский процесс" >&2 && v_isPrinted='true';
-    [ "${v__userLang,,}" == 'tr' ] && echo "" >&2 && v_isPrinted='true';
+    [ "${v__userLang,,}" == 'tr' ] && echo "Lütfen Bash-utils çerçevesinin kodunu bir Bash kaynak dosyasından çalıştırın veya ana işlemi kontrol edin" >&2 && v_isPrinted='true';
 
     [ "${v__userLang,,}" == 'uk' ] && echo "Будь ласка, запустіть код фреймворку « Bash-utils » з вихідного файлу « Bash » або перевірте батьківський процес" >&2 && v_isPrinted='true';
     [ "${v__userLang,,}" == 'zh' ] && echo "请从 Bash 源文件运行 Bash-utils 框架的代码，或者检查父进程" >&2 && v_isPrinted='true';
@@ -380,21 +380,21 @@ function BU.ModuleInit.PrintLogErrorNoTranslationFilesSourced()
     #**** Code ****
     v_userLang="$(echo "${LANG}" | cut -d _ -f1)";
 
-    [ "${v_userLang,,}" == 'ar' ] && BU.ModuleInit.MsgLine "$(printf "")" '-' 'echo' && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'ar' ] && BU.ModuleInit.MsgLine "$(printf "[خطأ] الملف: ٪s | السطر: ٪s | الكود: ٪s"                         "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' && v_isPrinted='true';
     [ "${v_userLang,,}" == 'de' ] && BU.ModuleInit.MsgLine "$(printf "[ FEHLER ] DATEI : %s | LINIEN : %s | FEHLERCODE : %s"    "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'en' ] && BU.ModuleInit.MsgLine "$(printf "[ ERROR ] FILE : %s | LINE : %s | CODE : %s"              "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     [ "${v_userLang,,}" == 'es' ] && BU.ModuleInit.MsgLine "$(printf "[ ERROR ] FICHERO : %s | LÍNEA : %s | CÓDIGO : %s"        "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'fr' ] && BU.ModuleInit.MsgLine "$(printf "[ ERREUR ] FICHER : %s | LIGNE : %s | CODE : %s"          "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
-    [ "${v_userLang,,}" == 'hi' ] && BU.ModuleInit.MsgLine "$(printf "[त्रुटि] फ़ाइल: %s | रेखा: %s | कोड: %s"                         "${p_file}" "${p_lineno}" "${p_errcode}")" >&2 && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'hi' ] && BU.ModuleInit.MsgLine "$(printf "[त्रुटि] फ़ाइल: %s | रेखा: %s | कोड: %s"                         "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     [ "${v_userLang,,}" == 'id' ] && BU.ModuleInit.MsgLine "$(printf "[ KESALAHAN ] FILE : %s | LINE : %s | KODE : %s"          "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'ja' ] && BU.ModuleInit.MsgLine "$(printf "[エラー] ファイル: %s | 行: %s | コード: %s"                  "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
-    [ "${v_userLang,,}" == 'ja' ] && BU.ModuleInit.MsgLine "$(printf "")" '-' 'echo' >&2 && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'ja' ] && BU.ModuleInit.MsgLine "$(printf "[ 오류 ] 파일: %s | 줄: %s | 코드: %s"                        "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
 
     [ "${v_userLang,,}" == 'pt' ] && BU.ModuleInit.MsgLine "$(printf "[ ERRO ] FICHEIRO : %s | LINHA : %s | CÓDIGO : %s"        "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'ru' ] && BU.ModuleInit.MsgLine "$(printf "[ ОШИБКА ] ФАЙЛ : %s | ЛИНИЯ : %s | КОД : %s"             "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
-    [ "${v_userLang,,}" == 'tr' ] && BU.ModuleInit.MsgLine "$(printf "")" '-' 'echo' >&2 && v_isPrinted='true';
+    [ "${v_userLang,,}" == 'tr' ] && BU.ModuleInit.MsgLine "$(printf "[ HATA ] DOSYA : %s | HAT : %s | KOD: %s"                 "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     
     [ "${v_userLang,,}" == 'uk' ] && BU.ModuleInit.MsgLine "$(printf "[ ПОМИЛКА ] ФАЙЛ : %s | ЛІНІЯ : %s | КОД : %s"            "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
     [ "${v_userLang,,}" == 'zh' ] && BU.ModuleInit.MsgLine "$(printf "[错误] 文件：%s | 行：%s | 代码：%s"                          "${p_file}" "${p_lineno}" "${p_errcode}")" '-' 'echo' >&2 && v_isPrinted='true';
@@ -435,16 +435,16 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
 
     # العربية | Arabic
     [ "${v_userLang,,}" == 'ar' ] && {
-        printf "" >&2;
-        
-        printf "" >&2; v_isPrinted='true';
+        printf "في الملف «٪ s» ، في الوظيفة «٪ s» ، في السطر «٪ s» --> تحذير BASH-UTILS: تعذر العثور على هذا المسار --> ٪s٪s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
+
+        printf "(٪s هي) الوظيفة التي تم فيها استدعاء الوظيفة «٪s ()» : ٪s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # Deutch | German
     [ "${v_userLang,,}" == 'de' ] && {
         printf "IN DER DATEI « %s », AN DIE FUNKTION « %s », ZUR LINIE « %s », BASH-UTILS WARNUNG : DIESER PFAD KANN NICHT GEFUNDEN WERDEN --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Funktion, bei der die Funktion « %s() » aufgerufen wurde: %s" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Funktion, bei der die Funktion « %s() » aufgerufen wurde: %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # English
@@ -458,14 +458,14 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
     [ "${v_userLang,,}" == 'es' ] && {
         printf "EN EL FICHERO « %s », A LA FUNCIÓN « %s », A LA LÍNEA « %s » --> ADVERTENCIA DE BASH-UTILS : NO SE ENCUENTRA ESTA RUTA DE ARCHIVO --> %s%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Función en la que se ha llamado a la función « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Función en la que se ha llamado a la función « %s() » : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # Français | French
     [ "${v_userLang,,}" == 'fr' ] && {
         printf "DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS : IMPOSSIBLE DE TROUVER CE CHEMIN --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Fonction où la fonction « %s() » a été appelée : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # हिंदी | Hindi
@@ -479,7 +479,7 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
     [ "${v_userLang,,}" == 'id' ] && {
         printf "DALAM FILE « %s », PADA « %s » FUNGSI, DI GARIS « %s » --> PERINGATAN BASH-UTILS : TIDAK DAPAT MENEMUKAN JALUR INI --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Fungsi di mana fungsi « %s() » dipanggil : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Fungsi di mana fungsi « %s() » dipanggil : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # 日本語 | Japanese
@@ -489,39 +489,39 @@ function BU.ModuleInit.FindPathNoTranslationFilesSourced()
         printf "(%s) « %s() » 関数が呼び出された関数: %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
-    # | Korean
+    # 한국인 | Korean
     [ "${v_userlang,,}" == 'ko' ] && {
-        printf "" >&2;
+        printf "« %s » 파일, « %s » 함수, « %s » 줄 --> BASH-UTILS 경고: 이 경로를 찾을 수 없습니다 --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "" >&2; v_isPrinted='true';
+        printf "(%s) 함수 « %s() »가 여기에서 호출되었습니다: %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # Português | Portuguese
     [ "${v_userLang,,}" == 'pt' ] && {
         printf "EM « %s » FICHEIRO, NA FUNÇÃO « %s() », EM LINHA « %s » --> AVISO DE BASH-UTILS : IMPOSSÍVEL DE ENCONTRAR ESTE CAMINHO --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Função onde a função « %s() » foi chamada : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Função onde a função « %s() » foi chamada : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     };
 
     # Русский | Russian
     [ "${v_userLang,,}" == 'ru' ] && {
         printf "В ФАЙЛЕ « %s », К ФУНКЦИИ « %s », К СТРОКЕ « %s » --> ПРЕДУПРЕЖДЕНИЕ « BASH-UTILS » : НЕВОЗМОЖНО НАЙТИ ЭТУ ПУТЬ --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Функция, в которой была вызвана функция « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Функция, в которой была вызвана функция « %s() » : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
-    # | Turkish
+    # Türkçe | Turkish
     [ "${v_userLang,,}" == 'tr' ] && {
-        printf "" >&2;
+        printf "« %s » DOSYADA, İŞLEV « %s », SATIR « %s » --> BASH-UTILS UYARI: BU YOL BULUNAMAZ --> %s/%s" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "" >&2; v_isPrinted='true';
+        printf "(%is) « %s() » işlevinin çağrıldığı işlev: %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # Українська | Ukrainian
     [ "${v_userLang,,}" == 'uk' ] && {
         printf "У ФАЙЛІ « %s », НА ФУНКЦІЇ « %s », ДО ЛІНІЇ « %s », --> « BASH-UTILS » ПОПЕРЕДЖЕННЯ: НЕ ВДАЛОСЯ ЗНАЙТИ ЦЕЙ ШЛЯХ --> %s/%s\n\n" "${p_file}" "${p_func0}" "${p_lineno}" "${v_parentdir}" "${v_target}" >&2;
 
-        printf "(%s) Функція, в якій було викликано функцію « %s() » : %s()" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
+        printf "(%s) Функція, в якій було викликано функцію « %s() » : %s()\n" "${v_type}" "${p_func0}" "${p_func1}" >&2; v_isPrinted='true';
     }
 
     # 简体中文 | Simplified Chinese
@@ -577,11 +577,11 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'id' ] && echo "Seluruh perpustakaan akan menggunakan bahasa Inggris sebagai bahasa default" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ja' ] && echo "ライブラリの残りの部分では、デフォルト言語として英語が使用されます。" >&2 && v_isPrinted='true';
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ko' ] && echo "" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ko' ] && echo "나머지 라이브러리는 영어를 기본 언어로 사용합니다." >&2 && v_isPrinted='true';
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'pt' ] && echo "O resto da biblioteca utilizará o inglês como língua padrão" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'ru' ] && echo "Остальная часть библиотеки будет использовать английский язык в качестве языка по умолчанию" >&2 && v_isPrinted='true';
-    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'tr' ] && echo "" >&2 && v_isPrinted='true';
+    [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'tr' ] && echo "Kütüphanenin geri kalanı için varsayılan dil olarak İngilizce kullanılacaktır." >&2 && v_isPrinted='true';
 
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'uk' ] && echo "Решта бібліотеки буде використовувати англійську мову за замовчуванням" >&2 && v_isPrinted='true';
     [ "${__BU_MODULE_INIT__USER_LANG,,}" == 'zh' ] && echo "图书馆的其余部分将使用英语作为默认语言" >&2 && v_isPrinted='true';
@@ -720,10 +720,10 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo >&2;
             }
 
-            # | Korean
+            # 한국인 | Korean
             [ "${p_lang_backup,,}" == 'ko' ] && {
-                echo '' >&2 && echo >&2;
-                echo "" >&2 && echo >&2;
+                echo '。。。。。。。。。。。。。。。。。。。。。。。' >&2 && echo >&2;
+                echo "치명적 오류: 영어 번역 파일을 포함할 수 없습니다." >&2 && echo >&2;
 
                 echo "" >&2;
                 echo "" >&2;
@@ -750,7 +750,7 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
                 echo >&2;
             }
 
-            # | Turkish
+            # Türkçe | Turkish
             [ "${p_lang_backup,,}" == 'tr' ] && {
                 echo '----------------------------------------------------------------------' >&2 && echo >&2;
                 echo '' >&2 && 
@@ -905,7 +905,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         v_isPrinted='true';
     }
 
-    # | Korean
+    # 한국인 | Korean
     [ "${__bu_module_init__user_lang,,}" == 'ko' ] && {
         printf "" >&2 && echo >&2;
 
@@ -935,7 +935,7 @@ function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
         v_isPrinted='true';
     };
 
-    # | Turkish
+    # Türkçe | Turkish
     [ "${__bu_module_init__user_lang,,}" == 'tr' ] && {
         printf "" >&2 && echo >&2;
 
