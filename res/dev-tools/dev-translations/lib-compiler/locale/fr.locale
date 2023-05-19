@@ -222,7 +222,7 @@ __BU_COMPILE__SHELLCHECK__FAIL_STR="${__RESET}Échec ❌";
 __BU_COMPILE__SHELLCHECK__SUCCESS="${__SUCCESS}Le fichier ${__HIGHLIGHT}%s${__SUCCESS} ne contient aucune erreur de programmation${__RESET}";
 __BU_COMPILE__SHELLCHECK__SUCCESS_STR="${__RESET}Succès ${__SUCCESS}✓${__RESET}";
 
-__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCCESS}La version actuelle du contenu du fichier suivant a déjà été vérifié avec la commande shellcheck, poursuite de la compilation : ${__HIGHLIGHT}%s${__RESET}";
+__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCCESS}La version actuelle du contenu du fichier suivant a déjà été vérifiée avec la commande shellcheck, poursuite de la compilation : ${__HIGHLIGHT}%s${__RESET}";
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -345,7 +345,7 @@ __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE="COPIE DU FIC
 
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR="ÉCHEC DE LA COPIE DU FICHIER ${__HIGHLIGHT}%s${__ERROR} VERS LE DOSSIER ${__HIGHLIGHT}%s${__ERROR}";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1="${__ERROR}Veuillez vérifier les permissions du dossier cible${__RESET}";
-__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="${__ERROR}Si le fichier que vous essayez de compiler existe déjà EST n'est accessible qu'en lecture seule, veuillez le supprimer manuellement${__RESET}";
+__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2="${__ERROR}Si le fichier que vous essayez de compiler existe déjà ET n'est accessible qu'en lecture seule, veuillez le supprimer manuellement${__RESET}";
 
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER="Entrez votre réponse (1 : oui | 2 : non | autres entrées : non) : ";
 

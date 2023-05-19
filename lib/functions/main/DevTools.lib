@@ -123,12 +123,18 @@ function BU.Main.DevTools.ShellcheckVerif()
     local p_stable=${2:-NULL};  # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "${__BU_SHELLCHECKED}" variable's value.
 
     #**** Variables ****
+    local compiler_env;         # VAR TYPE : Filepath   - DESC : Cutting the path which precedes the "Bash-utils/" sub-string in order to unify the compilation environments by processing the relative path of a file instead of its absolute path (if someone else compiles a version of the framework stored in their home folder, instead of "/usr/local/lib/" for example).
     local existing_md5;         # VAR TYPE : CMD        - DESC : Storing the output of the "$(grep)" command used to get the current file's corresponding md5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
     local new_md5;              # VAR TYPE : CMD        - DESC : Storing the output of the "$(md5sum)" command used to calculate the current file's corresponding md5 checksum.
+    local new_md5_tmp;          # VAR TYPE : CMD        - DESC : Storing the output of the "$(md5sum "${p_path}")" command in order to write only the relative path of the compiled file.
     local shchkOut;             # VAR TYPE : CMD        - DESC : Storing the output message of the "$(shellcheck)" command in order to display the "${__BU_COMPILE__SHELLCHECK__FAIL_STR}" string right after the "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" message located at the same line.
     local shchkOutCode;         # VAR TYPE : Int        - DESC : Getting the output code of the "$(shellcheck)" command stored in the previous variable.
 
     #**** Code ****
+    compiler_env="Bash-utils";
+    compiler_env=${p_path#*"${compiler_env}"};
+    compiler_env="Bash-utils${compiler_env}";
+
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
     {
         # shellcheck disable=SC2059
@@ -136,10 +142,10 @@ function BU.Main.DevTools.ShellcheckVerif()
             shchkOut="$(shellcheck "${p_path}" 2>&1)";
             shchkOutCode="${?}";
 
-            printf "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" "${p_path}";
+            printf "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" "${compiler_env}";
 
             if [ "${shchkOutCode}" -ne 0 ]; then
-                printf "${__BU_COMPILE__SHELLCHECK__FAIL_STR}"; BU.Main.DevTools.ShellcheckVerifFailed "${p_path}";
+                printf "${__BU_COMPILE__SHELLCHECK__FAIL_STR}"; BU.Main.DevTools.ShellcheckVerifFailed "${compiler_env}";
 
                 printf "${shchkOut}\n";
 
@@ -149,17 +155,17 @@ function BU.Main.DevTools.ShellcheckVerif()
             printf "%s\n" "${__BU_COMPILE__SHELLCHECK__SUCCESS_STR}";
 
             # shellcheck disable=SC2059
-            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}\n" "${p_path}";
+            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}\n" "${compiler_env}";
 
             # Writing the compiled file's MD5 checksum and path into the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
 
             # Checking in the "${existing_md5}" variable is empty. If not, the output of the 
-            # "$(md5sum "${p_path}")" command is written, else the current value is replaced.
+            # "$(md5sum "${compiler_env}")" command is written, else the current value is replaced.
             if [ -n "${existing_md5}" ]; then
 
-                # awk_path (not used by Bash in any ways) : Storing the content of the "${p_path}" variable into a variable
+                # awk_path (not used by Bash in any ways) : Storing the content of the "${compiler_env}" variable into a variable
                 # which will be used by the AWK program in order to replace the former MD5 checksum of the currently compiled file.
-                awk -v awk_path="${p_path}" -v new_md5="${new_md5}" '{
+                awk -v awk_path="${compiler_env}" -v new_md5="${new_md5}" '{
                     if ($2 == awk_path) {
                         $1 = new_md5
                     }
@@ -173,7 +179,9 @@ function BU.Main.DevTools.ShellcheckVerif()
                     };
                 };
             else
-                md5sum "${p_path}" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+                new_md5_tmp="$(md5sum "${p_path}")";
+
+                echo "${new_md5_tmp}" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
             fi
 
             echo;
@@ -182,11 +190,16 @@ function BU.Main.DevTools.ShellcheckVerif()
         return 0;
     }
 
+    # Checking if the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" exists or not on the user's hard drive.
+    if [ ! -f "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" ]; then 
+        touch "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+    fi
+
     # Checking first if the file was already shellchecked by parsing the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
-    if grep -qi "${p_path}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}"; then
+    if grep -qi "${compiler_env}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}"; then
 
         # Extracting the current file's corresponding MD5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}".
-        existing_md5=$(grep -i "${p_path}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}');
+        existing_md5=$(grep -i "${compiler_env}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}');
 
         # Calculating the MD5 checksum of the current file.
         new_md5="$(md5sum "${p_path}" | awk '{print $1}')";
@@ -196,7 +209,7 @@ function BU.Main.DevTools.ShellcheckVerif()
             BU.Main.DevTools.ShellcheckVerif.Shellcheck || return 1;
         else
             # shellcheck disable=SC2059
-            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED}\n" "${p_path}";
+            printf "${__BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED}\n" "${compiler_env}";
         fi
     else
         BU.Main.DevTools.ShellcheckVerif.Shellcheck || return 1;
