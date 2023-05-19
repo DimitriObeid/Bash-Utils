@@ -932,6 +932,150 @@ function BU.Main.Files.GetCharactersNumber()
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
 
+# ·······································
+# Getting the target file's MD5 checksum.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Files.GetChecksum.MD5()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+
+    #**** Code ****
+    md5sum "${p_filepath}" | awk '{print $1}';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# ········································
+# Getting the target file's SHA1 checksum.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Files.GetChecksum.SHA1()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+
+    #**** Code ****
+    sha1sum "${p_filepath}" | awk '{print $1}';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# ··········································
+# Getting the target file's SHA224 checksum.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Files.GetChecksum.SHA224()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+
+    #**** Code ****
+    sha224sum "${p_filepath}" | awk '{print $1}';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# ··········································
+# Getting the target file's SHA256 checksum.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Files.GetChecksum.SHA256()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+
+    #**** Code ****
+    sha256sum "${p_filepath}" | awk '{print $1}';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# ··········································
+# Getting the target file's SHA384 checksum.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Files.GetChecksum.SHA384()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+
+    #**** Code ****
+    sha384sum "${p_filepath}" | awk '{print $1}';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# ··········································
+# Getting the target file's SHA512 checksum.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Files.GetChecksum.SHA512()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
+
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
+
+    #**** Code ****
+    sha512sum "${p_filepath}" | awk '{print $1}';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
 # ····································
 # Getting the target file's extension.
 
