@@ -126,13 +126,12 @@ function BU.Main.DevTools.ShellcheckVerif()
     local compiler_env;         # VAR TYPE : Filepath   - DESC : Cutting the path which precedes the "Bash-utils/" sub-string in order to unify the compilation environments by processing the relative path of a file instead of its absolute path (if someone else compiles a version of the framework stored in their home folder, instead of "/usr/local/lib/" for example).
     local existing_md5;         # VAR TYPE : CMD        - DESC : Storing the output of the "$(grep)" command used to get the current file's corresponding md5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
     local new_md5;              # VAR TYPE : CMD        - DESC : Storing the output of the "$(md5sum)" command used to calculate the current file's corresponding md5 checksum.
-    local new_md5_tmp;          # VAR TYPE : CMD        - DESC : Storing the output of the "$(md5sum "${p_path}")" command in order to write only the relative path of the compiled file.
     local shchkOut;             # VAR TYPE : CMD        - DESC : Storing the output message of the "$(shellcheck)" command in order to display the "${__BU_COMPILE__SHELLCHECK__FAIL_STR}" string right after the "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" message located at the same line.
     local shchkOutCode;         # VAR TYPE : Int        - DESC : Getting the output code of the "$(shellcheck)" command stored in the previous variable.
 
     #**** Code ****
-    compiler_env="Bash-utils";
-    compiler_env=${p_path#*"${compiler_env}"};
+    compiler_env='Bash-utils';
+    compiler_env="${p_path#*"${compiler_env}"}";
     compiler_env="Bash-utils${compiler_env}";
 
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
@@ -171,17 +170,29 @@ function BU.Main.DevTools.ShellcheckVerif()
                     }
                     
                     print
-                }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" && {
-                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || {
-                        echo "Unable to update the ${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST} file";
+                }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.1.tmp" && {
+                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.1.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || {
+                        echo "Warning : unable to update the ${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST} file";
 
                         return 1;
                     };
                 };
             else
-                new_md5_tmp="$(md5sum "${p_path}")";
+                md5sum "${p_path}" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
 
-                echo "${new_md5_tmp}" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+                awk -v awk_path="${p_path}" -v compiler_env="${compiler_env}" '{
+                    if ($2 == awk_path) {
+                        $2 = compiler_env
+                    }
+
+                    print
+                }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.2.tmp" && {
+                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.2.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || {
+                        echo "Warning : unable to update the ${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST} file";
+
+                        return 1;
+                    };
+                };
             fi
 
             echo;
