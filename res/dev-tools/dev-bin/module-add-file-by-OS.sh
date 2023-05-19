@@ -277,10 +277,25 @@ elif [[ "${LANG}" == fr_* ]]; then
     echo -e "Ce script shell (${BASH_SOURCE[0]}) n'est pas conçu pour être directement exécuté !" >&2; echo >&2;
     echo -e "Utilisez seulement ce script en l'incluant dans votre projet." >&2;
 
+elif [[ "${LANG}" == hi_* ]]; then
+    echo -e "चेतावनी!" >&2; echo >&2;
+    echo -e "यह शेल स्क्रिप्ट (${BASH_SOURCE[0]}) सीधे निष्पादित करने के लिए नहीं है!" >&2; echo >&2;
+    echo -e "इस स्क्रिप्ट को अपने प्रोजेक्ट स्क्रिप्ट में शामिल करके ही इस्तेमाल करें।" >&2;
+
 elif [[ "${LANG}" == id_* ]]; then
     echo -e "PERINGATAN !" >&2; echo >&2;
     echo -e "Skrip shell ini (${BASH_SOURCE[0]}) tidak dimaksudkan untuk dieksekusi secara langsung !" >&2; echo >&2;
     echo -e "Gunakan skrip ini hanya dengan memasukkannya ke dalam skrip proyek Anda." >&2;
+
+elif [[ "${LANG}" == ja_* ]]; then
+    echo -e "警告 ！" >&2; echo >&2;
+    echo -e "このシェルスクリプト（${BASH_SOURCE[0]}）は、直接実行することはできません！" >&2; echo >&2;
+    echo -e "このスクリプトは、プロジェクトスクリプトに含める必要があり、このスクリプトと一緒にしか使用できません。" >&2;
+
+elif [[ "${LANG}" == ko_* ]]; then
+    echo -e "경고 !" >&2; echo >&2;
+    echo -e "이 셸 스크립트(${BASH_SOURCE[0]})는 직접 실행하도록 설계되지 않았습니다!" >&2; echo >&2;
+    echo -e "프로젝트 스크립트에 포함하여 이 스크립트만 사용하십시오." >&2;
 
 elif [[ "${LANG}" == pt_* ]]; then
     echo -e "ATENÇÃO !" >&2; echo >&2;
@@ -292,10 +307,20 @@ elif [[ "${LANG}" == ru_* ]]; then
     echo -e "Этот сценарий оболочки (${BASH_SOURCE[0]}) не предназначен для непосредственного выполнения !" >&2; echo >&2;
     echo -e "Используйте только этот скрипт, включив его в свой проект." >&2;
 
+elif [[ "${LANG}" == tr_* ]]; then
+    echo -e "UYARI!" >&2; echo >&2;
+    echo -e "Bu kabuk betiği (${BASH_SOURCE[0]}) doğrudan çalıştırılmak üzere tasarlanmamıştır!" >&2; echo >&2;
+    echo -e "Proje kodunuza dahil ederek yalnızca bu kodu kullanın." >&2;
+
 elif [[ "${LANG}" == uk_* ]]; then
     echo -e "УВАГА !" >&2; echo >&2;
     echo -e "Цей скрипт оболонки (${BASH_SOURCE[0]}) не призначений для безпосереднього виконання !" >&2; echo >&2;
     echo -e "Використовуйте тільки цей скрипт, включивши його в скрипт вашого проекту." >&2;
+
+elif [[ "${LANG}" == zh_* ]]; then
+    echo -e "警告 !" >&2; echo >&2;
+    echo -e "这个shell脚本(${BASH_SOURCE[0]})是不能直接执行的!" >&2; echo >&2;
+    echo -e "只使用这个脚本并将其纳入你的项目脚本。" >&2;
 
 else
     echo -e "WARNING !" >&2; echo >&2;

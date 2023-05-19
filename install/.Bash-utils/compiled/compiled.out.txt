@@ -7,7 +7,7 @@ e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializ
 3a91f5d37fcabcaa85eb20137be65713 Bash-utils/lib/functions/main/Checkings.lib
 78b4418203f1544a6f89fecffb745850 Bash-utils/lib/functions/main/CMDS.lib
 449771b34ee3507f7b2b2e23c42fc6b2 Bash-utils/lib/functions/main/Decho.lib
-9f11b6664275ddc50d774f440a6f6d25 Bash-utils/lib/functions/main/DevTools.lib
+5dd12481c6fe601e322fb82f1bfe41af Bash-utils/lib/functions/main/DevTools.lib
 6005b723a8cb8bd16015764b19713bed Bash-utils/lib/functions/main/Directories.lib
 b7dbcdff9bd7f03373408665b13d8f31 Bash-utils/lib/functions/main/Echo.lib
 070e6621aa3d8fdf4d3f92811506e6ac Bash-utils/lib/functions/main/Errors.lib
