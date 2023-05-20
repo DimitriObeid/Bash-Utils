@@ -2757,7 +2757,13 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE";
 
                     # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" "${p_value}" >&2;
+                    printf \
+                        "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE}\n" \
+                        "$(basename "${BASH_SOURCE[0]}")" \
+                        "${FUNCNAME[0]}" \
+                        "$(( LINENO - 3 ))" \
+                        "${p_value}" \
+                    >&2;
 
                     echo >&2; return 1;
                 else
@@ -2765,7 +2771,15 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED";
 
                     # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2; echo >&2;
+                    printf \
+                        "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1}\n" \
+                        "$(basename "${BASH_SOURCE[0]}")" \
+                        "${FUNCNAME[0]}" \
+                        "$(( LINENO - 3 ))" \
+                    >&2;
+
+                    echo >&2;
+
                     echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2}" >&2; echo >&2
 
                     echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO}" >&2; echo >&2;
@@ -2809,9 +2823,15 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							value="${value% *}";
 
                             if      [ "${value,,}" == 'false' ]                                  || [ "${value,,}" == 'true' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG="${value}";                     BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "${__BU_MODULE_INIT_STAT_DEBUG}" 'bool' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL}" "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                                    __BU_MODULE_INIT_STAT_DEBUG="${value}";
+
+                                    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG' "${__BU_MODULE_INIT_STAT_DEBUG}" 'bool' \
+                                    "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG__ARG_HAS_AWAITED_VAL}" \
+                                    "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
+                                    "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
                             else
-                                BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug" "\n    --stat-debug=false\n    --stat-debug=true" || { v_loop_error='error'; break; };
+                                BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues \
+                                    "--stat-debug" "\n    --stat-debug=false\n    --stat-debug=true" || { v_loop_error='error'; break; };
                             fi
                         ;;
 
@@ -2830,13 +2850,25 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 									||  [[ "${value,,}" == s?(ub)?(-)c?(at?(eg?(ory))) ]] \
 									||  [[ "${value,,}" == s?(ub)?(-)?(c?(at?(eg?(orie)))?(s)) ]]; then
 
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";               BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}"            "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX="${value}";
+
+                                    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' \
+                                        "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL}" \
+                                        "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
+                                        "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 elif    [ "${value,,}" == 'void' ]; then
-                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';                       BU.ModuleInit.DisplayInitGlobalVarsInfos  '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID}"      "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                                    __BU_MODULE_INIT_STAT_DEBUG_BASHX='';
+
+                                    BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_STAT_DEBUG_BASHX' "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" 'String' \
+                                        "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__ARG_HAS_AWAITED_VAL__VOID}" \
+                                        "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
+                                        "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 else
-                                    BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues "--stat-debug-bashx" "\n    --stat-debug-bashx=category\n    --stat-debug-bashx=file\n    --stat-debug-bashx=function\n    --stat-debug-bashx=module\n    --stat-debug-bashx=sub-category" || { v_loop_error='error'; break; };
+                                    BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues \
+                                        "--stat-debug-bashx" "\n    --stat-debug-bashx=category\n    --stat-debug-bashx=file\n    --stat-debug-bashx=function\n    --stat-debug-bashx=module\n    --stat-debug-bashx=sub-category" \
+                                            || { v_loop_error='error'; break; };
                                 fi
                             else
                                 BU.ModuleInit.Msg "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__DEBUG_BASHX__STAT_DEBUG_ARG_NOT_TRUE}";
@@ -2853,7 +2885,14 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                             value="${value% *}";
 
                             # shellcheck disable=SC2059
-                            printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${lineno}" "${value}" >&2;
+                            printf \
+                                "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VALS_CHECK_LOOP__STAT__STAT_IS_NOT_SUPPORTED}" \
+                                "${BASH_SOURCE[0]}" \
+                                "${FUNCNAME[0]}" \
+                                "${lineno}" \
+                                "${value}" \
+                            >&2;
+
                             echo >&2;
 
                             return 1;
@@ -2930,7 +2969,15 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL";
 
 							# shellcheck disable=SC2059
-							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))" "${v_unsupported_log_param}" >&2; echo >&2;
+							printf \
+                                "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL}\n" \
+                                "$(basename "${BASH_SOURCE[0]}")" \
+                                "${FUNCNAME[0]}" \
+                                "$(( LINENO - 5 ))" \
+                                "${v_unsupported_log_param}" \
+                            >&2;
+
+                            echo >&2;
 
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
@@ -2995,7 +3042,15 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 							BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL";
 
 							# shellcheck disable=SC2059
-							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_unsupported_log_param}" >&2; echo >&2;
+							printf \
+                                "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL}\n" \
+                                "$(basename "${BASH_SOURCE[0]}")" \
+                                "${FUNCNAME[0]}" \
+                                "${lineno}" \
+                                "${v_unsupported_log_param}" \
+                            >&2;
+
+                            echo >&2;
 
 							# shellcheck disable=SC2059
 							printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
@@ -3043,7 +3098,15 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${lineno}" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_GEN_OPT_UNSUPPORTED_VAL";
 
                     # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_unsupported_log_param}" >&2; echo >&2;
+                    printf \
+                        "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL}\n" \
+                        "$(basename "${BASH_SOURCE[0]}")" \
+                        "${FUNCNAME[0]}" \
+                        "${lineno}" \
+                        "${v_unsupported_log_param}" \
+                    >&2;
+
+                    echo >&2;
 
                     # shellcheck disable=SC2059
                     printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE}\n" "${p_count}" >&2;
@@ -3061,10 +3124,22 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
             if ! BU.ModuleInit.IsFrameworkCompiled && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
                 # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__ERROR}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 2 ))"; echo >&2; return 1;
+                printf \
+                    "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__ERROR}" \
+                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "$(( LINENO - 2 ))";
+
+                echo >&2;
+
+                return 1;
             else
                 # shellcheck disable=SC2059
-                BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__SUCCESS}" "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}")";
+                BU.ModuleInit.Msg \
+                    "$(printf \
+                        "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__SUCCESS}" \
+                        "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}")";
+
                 BU.ModuleInit.Msg;
             fi
 
@@ -3115,7 +3190,14 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING";
 
         # shellcheck disable=SC2059
-        printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2; echo >&2;
+        printf \
+            "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING}\n" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "$(( LINENO - 3 ))" \
+        >&2;
+
+        echo >&2;
 
         # shellcheck disable=SC2059
         printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE}\n" "${v_module_name}" "${FUNCNAME[0]}" >&2;
@@ -3135,8 +3217,16 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 		BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE";
 
 		# shellcheck disable=SC2059
-		printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-		echo >&2; echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE}" >&2;
+		printf \
+            "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE}\n" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "$(( LINENO - 3 ))" \
+        >&2;
+
+		echo >&2;
+
+		echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE}" >&2;
 
         BU.ModuleInit.MsgTerminate;
 
@@ -3162,8 +3252,16 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
         BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__PROCESS_FIRST_MODULE_PARAMETERS__MODULE_AND_MAIN_PARAMS_MISSING";
 
         # shellcheck disable=SC2059
-        printf "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 3 ))" >&2;
-        echo >&2; echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE}" >&2;
+        printf \
+            "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING}\n" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "$(( LINENO - 3 ))" \
+        >&2;
+
+        echo >&2;
+
+        echo "${__BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE}" >&2;
 
         BU.ModuleInit.MsgTerminate;
 
@@ -3258,9 +3356,14 @@ function BashUtils_InitModules._()
             })";
 
             # shellcheck disable=SC2059
-            BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
-                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+            BU.ModuleInit.DisplayInitGlobalVarsInfos \
+                '__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'Dirpath' \
+                "$(printf \
+                    "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI}" \
+                    "${v_module_name}" \
+                    "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}")" \
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
+                "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
 
 
             # Getting the current module's initialization directory, in order to process each directory's files and sub-folders.
@@ -3272,8 +3375,12 @@ function BashUtils_InitModules._()
 
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH' "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'Dirpath' \
-                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+                "$(printf \
+                    "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI}" \
+                    "${v_module_name}" \
+                    "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
+                "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
         fi
 
         # Storing the module's name with it's arguments, in order to transform it in an array of strings to be processed in this loop (for each module, in their "initializer.sh" file).
@@ -3284,8 +3391,13 @@ function BashUtils_InitModules._()
 
             # shellcheck disable=SC2059
             BU.ModuleInit.DisplayInitGlobalVarsInfos '__BU_MODULE_INIT_MODULE_AND_ARGS_STRING' "${__BU_MODULE_INIT_MODULE_AND_ARGS_STRING}" 'String' \
-                "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" "${FUNCNAME[0]}" "${#p_modules_list}" "${module}")" \
-                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
+                "$(printf \
+                    "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS}" \
+                    "${FUNCNAME[0]}" \
+                    "${#p_modules_list}" \
+                    "${module}")" \
+                "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
+                "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "$(( LINENO - 2 ))";
         fi
 
         # Checking for each module's files if the currently processed "BashUtils_InitModules" argument is not "module" (already processed in the "BU.ModuleInit.ProcessFirstModuleParameters()" function).
@@ -3303,10 +3415,19 @@ function BashUtils_InitModules._()
                 printf '\n' >&2;
 
                 # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_module_name}" >&2;
+                printf \
+                    "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND}\n\n" \
+                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "${lineno}" \
+                    "${v_module_name}" \
+                >&2;
 
                 # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE}" >&2; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'f' >&2;
+                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__DIR_NOT_FOUND__ADVICE}" >&2;
+
+                BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" 'f' >&2;
+
                 printf '\n\n';
 
                 # Listing all the installed modules in the user's hard drive.
@@ -3364,7 +3485,9 @@ function BashUtils_InitModules._()
                             if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
 
                             source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_aliases_file_name}" 'f')" || {
-                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                                BU.ModuleInit.SourcingFailure \
+                                    "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_aliases_file_name}" \
+                                    "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 v_loop_error="error";
 
@@ -3379,7 +3502,9 @@ function BashUtils_InitModules._()
                             if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" ]; then false > /dev/null; fi
 
                             source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" || {
-                                BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_os_aliases_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                                BU.ModuleInit.SourcingFailure \
+                                    "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_os_aliases_file_name}" \
+                                    "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                                 v_loop_error="error";
 
@@ -3400,7 +3525,12 @@ function BashUtils_InitModules._()
                 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
                 # shellcheck disable=SC2059
-                BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE_MSG}" "${v_module_name}")" '#' 'msg'; BU.ModuleInit.Msg;
+                BU.ModuleInit.MsgLine \
+                    "$(printf \
+                        "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__SOURCE_MSG}" \
+                        "${v_module_name}")" '#' 'msg';
+
+                BU.ModuleInit.Msg;
 
                 # Thanks to the "BU.ModuleInit.FindPath()" function, the file names are case-insensitive.
                 if  [[ -f "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "Module.${v_module_name}.conf" 'f' 'shut' 'modconffile')" ]] || \
@@ -3434,9 +3564,19 @@ function BashUtils_InitModules._()
                     if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" ]; then
 
                         # shellcheck disable=SC2059
-                        BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_IS_EMPTY}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_IS_EMPTY";
+                        BU.ModuleInit.PrintLogError \
+                            "$(printf \
+                                "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_IS_EMPTY}" \
+                                "${v_module_name}" \
+                                "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" \
+                                "${v_module_config_file_name}")" \
+                            "$(basename "${BASH_SOURCE[0]}")" \
+                            "$(( LINENO - 1 ))" \
+                            "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_IS_EMPTY";
 
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                        BU.ModuleInit.SourcingFailure \
+                            "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" \
+                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                         BU.ModuleInit.MsgTerminate;
 
@@ -3448,7 +3588,13 @@ function BashUtils_InitModules._()
                     fi
 
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" || {
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
+                        BU.ModuleInit.SourcingFailure \
+                            "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" \
+                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                            v_loop_error="error";
+
+                            break;
                     }
                 }
 
@@ -3467,7 +3613,13 @@ function BashUtils_InitModules._()
                 printf '\n' >&2;
 
                 # shellcheck disable=SC2059
-                printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND}\n\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" "${v_module_name}" >&2;
+                printf \
+                    "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND}\n\n" \
+                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "${lineno}" \
+                    "${v_module_name}"
+                >&2;
 
                 # shellcheck disable=SC2059
                 printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__ADVICE}"; BU.ModuleInit.CheckPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" 'f' >&2;
@@ -3475,7 +3627,9 @@ function BashUtils_InitModules._()
 
                 BU.ModuleInit.MsgTerminate;
 
-                v_loop_error="error"; break;
+                v_loop_error="error";
+
+                break;
             else
                 # shellcheck disable=SC2059
                 BU.ModuleInit.MsgLine "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__SOURCE}" "${v_module_name}")" '-' 'msg';
@@ -3499,7 +3653,14 @@ function BashUtils_InitModules._()
                         v_module_init_file_name="$(basename "$(cat "${__BU_MODULE_INIT__TMP_DIR_PATH}/BU_module_init__find_path.modinitfile.tmp")")";
                 else
                     # shellcheck disable=SC2059
-                    BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
+                    BU.ModuleInit.PrintLogError \
+                        "$(printf \
+                            "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" \
+                            "${v_module_name}" \
+                            "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
+                        "$(basename "${BASH_SOURCE[0]}")" \
+                        "$(( LINENO - 1 ))" \
+                        "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
 
                     BU.ModuleInit.MsgTerminate;
 
@@ -3513,9 +3674,19 @@ function BashUtils_InitModules._()
                     if [ ! -s "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" ]; then
 
                         # shellcheck disable=SC2059
-                        BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}")" "$(basename "${BASH_SOURCE[0]}")" "$(( LINENO - 1 ))" "E_BUINIT__INITMODULE__MODULE_INIT_FILE_IS_EMPTY";
+                        BU.ModuleInit.PrintLogError \
+                            "$(printf \
+                                "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY}" \
+                                "${v_module_name}" \
+                                "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" \
+                                "${v_module_init_file_name}")" \
+                            "$(basename "${BASH_SOURCE[0]}")" \
+                            "$(( LINENO - 1 ))" \
+                            "E_BUINIT__INITMODULE__MODULE_INIT_FILE_IS_EMPTY";
 
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                        BU.ModuleInit.SourcingFailure \
+                            "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" \
+                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
 
                         BU.ModuleInit.MsgTerminate;
 
@@ -3527,14 +3698,23 @@ function BashUtils_InitModules._()
                     fi
 
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" || {
-                        BU.ModuleInit.SourcingFailure "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}"; v_loop_error="error"; break;
+                        BU.ModuleInit.SourcingFailure \
+                            "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" \
+                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+
+                        v_loop_error="error";
+
+                        break;
                     }
                 }
 
                 unset v_module_init_file_name;
 
                 # shellcheck disable=SC2059
-                BU.Main.Headers.Header.Green "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT}" "$(BU.Main.Decho.Decho.Highlight "${v_module_name}")")";
+                BU.Main.Headers.Header.Green \
+                    "$(printf \
+                        "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT}" \
+                        "$(BU.Main.Decho.Decho.Highlight "${v_module_name}")")";
             fi
         fi
 
