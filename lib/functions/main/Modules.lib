@@ -168,7 +168,7 @@ function BU.Main.Modules.InitNewModules()
 	#**** Variables (global) ****
 
 	#**** Variables (local) ****
-    local v_index=0;    # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
+    # local v_index=0;    # Index of the currently processed module (incremented at each loop's iteration). ALWAYS BEGIN WITH THE '0' VALUE !!!
     local v_loop_error; # This variable stores the 'error' string if a command or a function call failed during the execution of a loop.
 
 	#**** Code ****
