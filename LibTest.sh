@@ -30,7 +30,7 @@ fi
 
 echo "INIT HARDWARE MODULE : LIBTEST";
 
-BU.ModuleInit.InitNewModule "Hardware";
+BU.Main.Modules.InitNewModule "Hardware";
 
 ## ==============================================
 
