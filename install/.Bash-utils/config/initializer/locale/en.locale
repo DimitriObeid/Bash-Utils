@@ -760,6 +760,8 @@ function BU.ModuleInit.SetInitLocale.en()
 
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleConfigFolderContentOptimize__FNCT="This global variable stores the path of the « %s » configuration file of the « main » module";
 
+    __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleFunctionsPathOptimize__FNCT="This global variable stores the path of the « %s » library file of the « main » module";
+
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleInitializerPath__FNCT__FILE_INITIALIZER_PATH="This global variable stores the path to the initializer script of the « main » module";
 
     # Definition of the global variables.

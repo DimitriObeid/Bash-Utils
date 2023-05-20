@@ -760,6 +760,8 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleConfigFolderContentOptimize__FNCT="Cette variable globale enregistre le chemin du fichier de configuration « %s » du module principal « main »";
 
+    __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleFunctionsPathOptimize__FNCT="Cette variable globale enregistre le chemin du fichier de librairie « %s » du module principal « main »";
+
     __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleInitializerPath__FNCT__FILE_INITIALIZER_PATH="Cette variable globale enregistre le chemin du script d'initialisation du module principal « main »";
 
     # Définition des variables globales.
