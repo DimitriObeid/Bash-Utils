@@ -21,12 +21,14 @@ fi
 
 # Calling the "BashUtils_InitModules()" function.
 if ! BashUtils_InitModules \
-    "module --log-display --mode-log-partial --stat-debug=false --stat-debug-bashx=file --include-aliases=main,hardware" \
+    "module --log-display --mode-log-full --stat-debug=false --stat-debug-bashx=file" \
     "main --stat-debug=true stat-error=fatal --stat-log=true --stat-log-r=tee --stat-time-header=0 --stat-time-newline=0 --stat-time-txt=0 --stat-txt-fmt=true" \
 
     then
 	    echo >&2; echo "In $(basename "${0}"), line $(( LINENO - 1 )) --> Error : something went wrong while calling the « BashUtils_InitModules() » function" >&2; echo >&2; exit 1;
 fi
+
+# "module --log-display --mode-log-full --stat-debug=false --stat-debug-bashx=file --include-aliases=main,hardware" \
 
 echo "INIT HARDWARE MODULE : LIBTEST";
 
