@@ -855,9 +855,9 @@ function BU.ModuleInit.SourceEnglishTranslationFiles()
 function BU.ModuleInit.PrintErrorMissingBashUtilsHomeFolder()
 {
     #**** Parameters ****
-    local v_file=${1:-${BASH_SOURCE[0]}};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : "${BASH_SOURCE[0]}"  - DESC :
-    local v_func=${2:-${FUNCNAME[1]}};      # ARG TYPE : String     - REQUIRED | DEFAULT VAL : "${FUNCNAME[1]}"     - DESC :
-    local v_line=${3:-${LINENO}};           # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : "${LINENO}"          - DESC :
+    local v_file=${1:-${BASH_SOURCE[0]}};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : "${BASH_SOURCE[0]}"  - DESC : File where the error happened.
+    local v_func=${2:-${FUNCNAME[1]}};      # ARG TYPE : String     - REQUIRED | DEFAULT VAL : "${FUNCNAME[1]}"     - DESC : Function where the error happened.
+    local v_line=${3:-${LINENO}};           # ARG TYPE : Int        - REQUIRED | DEFAULT VAL : "${LINENO}"          - DESC : Line where the error happened.
 
     #**** Variables ****
     local __bu_module_init__user_lang;      # VAR TYPE : ISO 639-1 Code     - DESC : Getting the language used / chosen by the user.
@@ -1596,12 +1596,12 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos()
         local pa_var_val_array=("${@}");    # ARG TYPE : Array      - OPTIONAL  | DEFAULT VAL : NULL    - DESC :
 
         #**** Variables ****
-        local v_modl; # VAR TYPE : String   - DESC :
-        local v_file; # VAR TYPE : String   - DESC :
-        local v_func; # VAR TYPE : String   - DESC :
-        local v_line; # VAR TYPE : String   - DESC :
+        local v_modl;   # VAR TYPE : String   - DESC : Name   of the module   where the global variable is declared.
+        local v_file;   # VAR TYPE : String   - DESC : Name   of the file     where the global variable is declared.
+        local v_func;   # VAR TYPE : String   - DESC : Name   of the function where the global variable is declared.
+        local v_line;   # VAR TYPE : String   - DESC : Number of the line     where the global variable is declared.
 
-        local v_type; # VAR TYPE : String   - DESC : Translating and giving more informations about the variable types.
+        local v_type;   # VAR TYPE : String   - DESC : Translating and giving more informations about the variable types.
 
         #**** Code ****
         v_modl="$(if [[ "${p_modl^^}" != 'NULL' ]]; then printf "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL}" "${p_modl}"; else echo "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL_NULL}"; fi)";
@@ -2396,9 +2396,9 @@ function BU.ModuleInit.ListInstalledModules()
     #**** Variables ****
     local v_module_tmp_d;   # VAR TYPE : Dirpath    - DESC : Path to the temporary folder which stores the files created in this function.
 
-    local v_module_conf_f;  # VAR TYPE : Filepath   - DESC :
-    local v_module_diff_f;  # VAR TYPE : Filepath   - DESC :
-    local v_module_init_f;  # VAR TYPE : Filepath   - DESC :
+    local v_module_conf_f;  # VAR TYPE : Filepath   - DESC : Path to the file which stores the configuration folder's content.
+    local v_module_diff_f;  # VAR TYPE : Filepath   - DESC : Path to the file which stores the initializer folder's content.
+    local v_module_init_f;  # VAR TYPE : Filepath   - DESC : Path to the file which stores the differences between the content of both folders.
 
     #**** Code ****
     v_module_tmp_d="${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}";
@@ -2412,7 +2412,15 @@ function BU.ModuleInit.ListInstalledModules()
 		{
             BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMPDIR";
 
-			printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 4 ))" "${__BU_MODULE_INIT__ROOT}" >&2; echo >&2;
+			printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR}\n" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "$(( LINENO - 4 ))" \
+                "${__BU_MODULE_INIT__ROOT}" \
+            >&2;
+
+            echo >&2;
 
 			echo "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE}" >&2; echo >&2;
 
@@ -2425,8 +2433,39 @@ function BU.ModuleInit.ListInstalledModules()
     if [ -d "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" ] && [ -d "${__BU_MODULE_INIT__MODULES_DIR}" ]; then
 
 																		                # In case the "$(ls)" command points towards a bad path because of a bad variable's value.
-        ls -1 "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}"    > "${v_module_conf_f}"  || { echo >&2; printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" >&2; echo >&2; BU.ModuleInit.AskPrintLog >&2 || return 1; return 1; };
-        ls -1 "${__BU_MODULE_INIT__MODULES_DIR}"                > "${v_module_init_f}"  || { echo >&2; printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}" >&2; echo >&2; BU.ModuleInit.AskPrintLog >&2 || return 1; return 1; };
+        ls -1 "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}"    > "${v_module_conf_f}"  || {
+            echo >&2;
+
+            printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "${LINENO}" \
+            >&2;
+
+            echo >&2;
+
+            BU.ModuleInit.AskPrintLog >&2 || return 1;
+
+            return 1;
+        };
+
+        ls -1 "${__BU_MODULE_INIT__MODULES_DIR}"                > "${v_module_init_f}"  || {
+            echo >&2;
+
+            printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH}" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "${LINENO}" \
+            >&2;
+
+            echo >&2;
+
+            BU.ModuleInit.AskPrintLog >&2 || return 1;
+
+            return 1;
+        };
 
         if diff "${v_module_conf_f}" "${v_module_init_f}" > "${v_module_diff_f}"; then
             echo; echo "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST} :"; echo; sleep ".5";
@@ -2436,7 +2475,13 @@ function BU.ModuleInit.ListInstalledModules()
         else
             echo >&2;
 
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING}\n" "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" "${__BU_MODULE_INIT__MODULES_DIR}" >&2; echo >&2;
+            printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING}\n" \
+                "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" \
+                "${__BU_MODULE_INIT__MODULES_DIR}" \
+            >&2;
+
+            echo >&2;
 
             echo "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST} :" >&2; echo >&2;
 
@@ -2456,13 +2501,28 @@ function BU.ModuleInit.ListInstalledModules()
         fi
     else
         if [ ! -d "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" ] && [ ! -d "${__BU_MODULE_INIT__MODULES_DIR}" ]; then
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" >&2;
+            printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING}\n" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "$(( LINENO - 1 ))" \
+            >&2;
 
         elif [ -d "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}" ]; then
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" >&2;
+            printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING}\n" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "$(( LINENO - 1 ))" \
+            >&2;
 
         elif [ -d "${__BU_MODULE_INIT__MODULES_DIR}" ]; then
-            printf "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING}\n" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" >&2;
+            printf \
+                "${__BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING}\n" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "$(( LINENO - 1 ))" \
+            >&2;
         fi
 
 		echo >&2;
@@ -2496,11 +2556,31 @@ function BU.ModuleInit.SourcingFailure()
     #**** Code ****
     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "${LINENO}" 'E_BUINIT__SOUCING_FAILURE';
 
-    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != '--log-shut-display' ]; then local v_msg_arr_mode_backup="${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}"; __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display'; fi
+    if [ "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" != '--log-shut-display' ]; then
 
-    BU.ModuleInit.Msg "$(printf "${__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE}" "${p_file}" "${p_func}" "${p_line}" "${p_module}" "$(BU.ModuleInit.CheckPath "${p_path}" 'f')")" >&2; BU.ModuleInit.Msg >&2;
+        #**** Conditional variables ****
+        local v_msg_arr_mode_backup="${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}";
 
-    if [ -n "${v_msg_arr_mode_backup}" ]; then __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_mode_backup}"; fi
+        #**** Conditional code ****
+        __BU_MODULE_INIT_MSG_ARRAY_PERMISSION='--log-shut-display';
+    fi
+
+    BU.ModuleInit.Msg \
+        "$(printf \
+            "${__BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE}" \
+            "${p_file}" \
+            "${p_func}" \
+            "${p_line}" \
+            "${p_module}" \
+            "$(BU.ModuleInit.CheckPath \
+                "${p_path}" 'f')")" \
+    >&2;
+
+    BU.ModuleInit.Msg >&2;
+
+    if [ -n "${v_msg_arr_mode_backup}" ]; then
+        __BU_MODULE_INIT_MSG_ARRAY_PERMISSION="${v_msg_arr_mode_backup}";
+    fi
 
     BU.ModuleInit.AskPrintLog || { BU.ModuleInit.Exit 1; return "${?}"; };
 
@@ -3520,7 +3600,9 @@ function BashUtils_InitModules._()
                 fi
 
                 # Deleting the "${__BU_MODULES_INIT_INCLUDE_ALIASES}" variable's FIFO.
-                rm "${__BU_MODULE_INIT__TMP_DIR_PATH}/__BU_MODULES_INIT_INCLUDE_ALIASES.fifo";
+                if [ -n "${__BU_MODULE_INIT__TMP_DIR_PATH}/__BU_MODULES_INIT_INCLUDE_ALIASES.fifo" ]; then
+                    rm  "${__BU_MODULE_INIT__TMP_DIR_PATH}/__BU_MODULES_INIT_INCLUDE_ALIASES.fifo";
+                fi
 
                 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 #~ MANDATORY : SOURCING THE MODULE'S CONFIGURATION FILE
