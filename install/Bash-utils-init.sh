@@ -1344,7 +1344,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
     BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR}" '+' 'msg'; BU.ModuleInit.Msg;
 
     BU.ModuleInit.DisplayInitGlobalVarsInfos \
-        '__BU_MODULE_INIT__TMP_DIR_NAME' "${__BU_MODULE_INIT__TMP_DIR_NAME}" 'String' \
+        '__BU_MODULE_INIT__TMP_DIR_NAME' "${__BU_MODULE_INIT__TMP_DIR_NAME}" 'Dir' \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR_NAME}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__tmp_dir_name__lineno}";
@@ -1366,7 +1366,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_dir_parent__lineno}";
 
     BU.ModuleInit.DisplayInitGlobalVarsInfos \
-        "__BU_MODULE_INIT__CONFIG_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_DIR_NAME}" 'Dirpath' \
+        "__BU_MODULE_INIT__CONFIG_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_DIR_NAME}" 'Dir' \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_NAME}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_dir_name__lineno}";
@@ -1386,7 +1386,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir_parent__lineno}";
 
     BU.ModuleInit.DisplayInitGlobalVarsInfos \
-        "__BU_MODULE_INIT__CONFIG_INIT_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_INIT_DIR_NAME}" 'Dirpath' \
+        "__BU_MODULE_INIT__CONFIG_INIT_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_INIT_DIR_NAME}" 'Dir' \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_NAME}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_dir_name__lineno}";
@@ -1406,7 +1406,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_modules_dir_parent__lineno}";
 
     BU.ModuleInit.DisplayInitGlobalVarsInfos \
-        "__BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME}" 'Dirpath' \
+        "__BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME}" 'Dir' \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_NAME}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_modules_dir_name__lineno}";
@@ -1426,7 +1426,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_lang_dir_parent__lineno}";
 
     BU.ModuleInit.DisplayInitGlobalVarsInfos \
-        "__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME}" 'Dirpath' \
+        "__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME" "${__BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME}" 'Dir' \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR_NAME}" \
         "${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE}" \
         "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${__bu_module_init__config_init_lang_dir_name__lineno}";
@@ -3898,22 +3898,22 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     #**** Code ****
 
     # PID
-    declare -g __BU_MODULE_INIT__PROJECT_PID="${$}";
-    declare -g __bu_module_init__project_pid__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__PROJECT_PID="${$}";
+    declare -g -i __bu_module_init__project_pid__lineno="$(( LINENO - 1 ))";
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #~ FINDING THE ".Bash-utils" FOLDER'S PARENT DIRECTORY
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    declare -g __BU_MODULE_INIT__ROOT_HOME="${HOME}";
-    declare -g __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__ROOT_HOME="${HOME}";
+    declare -g -i __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #~ STORING THE NAME OF THE FRAMEWORK'S TEMPORARY DIRECTORY
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    declare -g __BU_MODULE_INIT__TMP_DIR_NAME="tmp";
-    declare -g __bu_module_init__tmp_dir_name__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__TMP_DIR_NAME="tmp";
+    declare -g -i __bu_module_init__tmp_dir_name__lineno="$(( LINENO - 1 ))";
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #~ FINDING THE ".Bash-utils" FOLDER
@@ -3924,7 +3924,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         # If the ".Bash-utils" folder exists in its defined parent directory,
         # then the ".Bash-utils" default parent folder is defined as the user's home directory.
         if [ -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
-            declare -g __bu_module_init__root__lineno="$(( LINENO + 4 ))";
+            declare -g -i __bu_module_init__root__lineno="$(( LINENO + 4 ))";
 
             declare -g \
             __BU_MODULE_INIT__ROOT;
@@ -3965,8 +3965,8 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
         # Checking if the ".Bash-utils" folder exists in the user's home directory.
         if [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}" ]; then
             # Redefining the "${__BU_MODULE_INIT__ROOT_HOME}" global variable.
-            declare -g __BU_MODULE_INIT__ROOT_HOME='/tmp';
-            declare -g __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
+            declare -g    __BU_MODULE_INIT__ROOT_HOME='/tmp';
+            declare -g -i __bu_module_init__root_home__lineno="$(( LINENO - 1 ))";
 
             # Creating the framework's temporary folder to store the temporary files generated by the initializer script.
             mkdir -p "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils/${__BU_MODULE_INIT__TMP_DIR_NAME}" > /dev/null || {
@@ -3978,7 +3978,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
             }
 
             BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" && {
-                declare -g __bu_module_init__root__lineno="$(( LINENO + 4 ))";
+                declare -g -i __bu_module_init__root__lineno="$(( LINENO + 4 ))";
 
                 declare -g \
                 __BU_MODULE_INIT__ROOT;
@@ -3998,7 +3998,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
         else
             BU.ModuleInit.FindPath "${__BU_MODULE_INIT__ROOT_HOME}" ".Bash-utils" && {
-                declare -g __bu_module_init__root__lineno="$(( LINENO + 4 ))";
+                declare -g -i __bu_module_init__root__lineno="$(( LINENO + 4 ))";
 
                 declare -g \
                 __BU_MODULE_INIT__ROOT;
@@ -4024,7 +4024,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}" ]; then mkdir -p "${__BU_MODULE_INIT__ROOT}/${__BU_MODULE_INIT__TMP_DIR_NAME}"; fi
 
-    declare -g __bu_module_init__tmp_dir_path__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__tmp_dir_path__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__TMP_DIR_PATH;
@@ -4041,13 +4041,13 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Configurations directory path
-    declare -g __bu_module_init__config_dir_parent__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_DIR_PARENT="${__BU_MODULE_INIT__ROOT}";
+    declare -g -i __bu_module_init__config_dir_parent__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_DIR_PARENT="${__BU_MODULE_INIT__ROOT}";
 
-    declare -g __bu_module_init__config_dir_name__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_DIR_NAME='config';
+    declare -g -i __bu_module_init__config_dir_name__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_DIR_NAME='config';
 
-    declare -g __bu_module_init__config_dir_path__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__config_dir_path__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__CONFIG_DIR_PATH;
@@ -4060,13 +4060,13 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     };
 
     # Module's initializer script directory path
-    declare -g __bu_module_init__config_init_dir_parent__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
+    declare -g -i __bu_module_init__config_init_dir_parent__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_INIT_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
 
-    declare -g __bu_module_init__config_init_dir_name__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_INIT_DIR_NAME='initializer';
+    declare -g -i __bu_module_init__config_init_dir_name__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_INIT_DIR_NAME='initializer';
 
-    declare -g __bu_module_init__config_init_dir_path__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__config_init_dir_path__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__CONFIG_INIT_DIR_PATH;
@@ -4079,13 +4079,13 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     };
 
     # Modules configurations directory
-    declare -g __bu_module_init__config_modules_dir_parent__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
+    declare -g -i __bu_module_init__config_modules_dir_parent__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_MODULES_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_DIR_PATH}";
 
-    declare -g __bu_module_init__config_modules_dir_name__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME='modules';
+    declare -g -i __bu_module_init__config_modules_dir_name__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_MODULES_DIR_NAME='modules';
 
-    declare -g __bu_module_init__config_modules_dir_path__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__config_modules_dir_path__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH;
@@ -4098,13 +4098,13 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     };
 
     # Translation files for the initializer script + the main module config and init files
-    declare -g __bu_module_init__config_init_lang_dir_parent__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}";
+    declare -g -i __bu_module_init__config_init_lang_dir_parent__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PARENT="${__BU_MODULE_INIT__CONFIG_INIT_DIR_PATH}";
 
-    declare -g __bu_module_init__config_init_lang_dir_name__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME='locale';
+    declare -g -i __bu_module_init__config_init_lang_dir_name__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_NAME='locale';
 
-    declare -g __bu_module_init__config_init_lang_dir_path__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__config_init_lang_dir_path__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__CONFIG_INIT_LANG_DIR_PATH;
@@ -4120,7 +4120,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     #~ INITIALIZER SCRIPT'S CONFIGURATION FILES
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    declare -g __bu_module_init__config_init_dir__status__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__config_init_dir__status__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS;
@@ -4136,7 +4136,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     #~ MODULES DIRECTORIES
     #~ ~~~~~~~~~~~~~~~~~~~
 
-    declare -g __bu_module_init__modules_dir__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__modules_dir__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__MODULES_DIR;
@@ -4152,45 +4152,45 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     #~ MODULES FILES
     #~ ~~~~~~~~~~~~~
 
-    declare -g __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
+    declare -g -i __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
 
     # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES/PATH}" GLOBAL VARIABLES HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
-    declare -g __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES=();
+    declare -g -i __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__NAMES=();
 
-    declare -g __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
+    declare -g -i __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
 
-    declare -g __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="";
+    declare -g    __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="";
 
 
-    declare -g __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
+    declare -g -i __bu_module_init__config_init_dir__aliases_conf__parent__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PARENT="${__BU_MODULE_INIT__CONFIG_MODULES_DIR_PATH}";
 
 
     # DO NOT FILL A VALUE TO THE "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES/PATH}" GLOBAL VARIABLES HERE, IT WILL BE DONE IN THE "BashUtils_InitModules()" FUNCTION.
-    declare -g __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
-    declare -g __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES=();
+    declare -g -i __bu_module_init__config_init_dir__aliases_conf__name__lineno="$(( LINENO + 1 ))";
+    declare -g    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__NAMES=();
 
-    declare -g __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
+    declare -g -i __bu_module_init__config_init_dir__aliases_conf__path__lineno="$(( LINENO + 2 ))";
 
-    declare -g __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH="";
+    declare -g    __BU_MODULE_INIT__MODULES_DIR__ALIASES_OS_CONF__PATH="";
 
     #~ ~~~~~~~~~~~
     #~ OTHER FILES
     #~ ~~~~~~~~~~~
 
     # Creating a global variable for storing the instruction not to stop the script if the "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" is not found, since a super-user privileged version exists.
-    declare -g __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR='no-err';
+    declare -g    __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR='no-err';
 
-    declare -g __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
-    declare -g __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_NAME="Bash-utils-root-val.path";
+    declare -g -i __bu_module_init__lib_root_dir__file_name__lineno="$(( LINENO - 1 ))";
 
-    declare -g __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
-    declare -g __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__LIB_ROOT_DIR_FILE__PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
+    declare -g -i __bu_module_init__lib_root_dir_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
     # Path to the framework's library root directory
-    declare -g __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__lib_root_dir__file_path__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH;
@@ -4205,13 +4205,13 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     unset __BU_MODULE_INIT__TMP_VAR__FIND_PATH_FUNC_NO_ERR;
 
     if [ -z "${__BU_MODULE_INIT__LIB_ROOT_DIR__FILE_PATH}" ]; then
-        declare -g __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
-        declare -g __bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
+        declare -g    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_NAME="Bash-utils-root-val-ROOT.path";
+        declare -g -i __bu_module_init__lib_root_dir_root__file_name__lineno="$(( LINENO - 1 ))";
 
-        declare -g __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
-        declare -g __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
+        declare -g    __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="${__BU_MODULE_INIT__ROOT}";
+        declare -g -i __bu_module_init__lib_root_dir_root_file__parent_dir__lineno="$(( LINENO - 1 ))";
 
-        declare -g __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO + 4 ))";
+        declare -g -i __bu_module_init__lib_root_dir_root__file_path__lineno="$(( LINENO + 4 ))";
 
         declare -g \
         __BU_MODULE_INIT__LIB_ROOT_DIR_ROOT__FILE_PATH;
@@ -4230,13 +4230,13 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
 
     # Storing the "false" value in the variable whose purpose is to check via the "BU.ModuleInit.IsTranslated()"
     # function if the framework's main module is translated thanks to the CSV file parser.
-    declare -g __BU_MODULE_INIT__BU_BASE_IS_TRANSLATED="false";
-    declare -g __bu_module_init__bu_base_is_translated__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__BU_BASE_IS_TRANSLATED="false";
+    declare -g -i __bu_module_init__bu_base_is_translated__lineno="$(( LINENO - 1 ))";
 
-    declare -g __BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
-    declare -g __bu_module_init__csv_translation_file__delim__lineno="$(( LINENO - 1 ))";
+    declare -g    __BU_MODULE_INIT__CSV_TRANSLATION_FILE__DELIM=',';
+    declare -g -i __bu_module_init__csv_translation_file__delim__lineno="$(( LINENO - 1 ))";
 
-    declare -g __bu_module_init__date_log__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__date_log__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__DATE_LOG;
@@ -4244,7 +4244,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__DATE_LOG="[ $(date +"%Y-%m-%d %H:%M:%S") ]";
 
     # If you want to use another language than your system's, please redefine the "${LANG}" environment variable before sourcing this initialization file.
-    declare -g __bu_module_init__user_lang__lineno="$(( LINENO + 4 ))";
+    declare -g -i __bu_module_init__user_lang__lineno="$(( LINENO + 4 ))";
 
     declare -g \
     __BU_MODULE_INIT__USER_LANG;
@@ -4252,7 +4252,7 @@ function BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModule
     __BU_MODULE_INIT__USER_LANG="$(echo "${LANG}" | cut -d _ -f1)";
 
     # Array of allowed values for the "${__BU_MODULE_INIT_STAT_DEBUG_BASHX}" global variable
-    declare -g __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO + 2 ))";
+    declare -g -i __bu_module_init__bashx_debug_vals_array__lineno="$(( LINENO + 2 ))";
 
     declare -g \
     __BU_MODULE_INIT__BASHX_DEBUG_VALS_ARRAY=('C' 'cs' 'cat' 'cats' 'categ' 'categs' 'category' 'categorie' 'categories' \
