@@ -1,14 +1,14 @@
 e32ddcffb213c3dc521a840a36d24b47 Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
 c170aa2238c40c1fe158a46ff5d193e7 Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
-349f019ad3a9dd7a6495027889df2c9f Bash-utils/install/Bash-utils-init.sh
+6a66c2207686018cdc3537631112baf2 Bash-utils/install/Bash-utils-init.sh
 e4fe221eb5357295bdf8dd1f6054ba56 Bash-utils/lib/functions/main/Args.lib
 61e241307d02f4598b41902db8134e2a Bash-utils/lib/functions/main/BasicMaths.lib
 bffbd41016a62a428fb1939ca76cf7fc Bash-utils/lib/functions/main/Checkings.lib
 213ee6611986ff73098557bbeb9129a0 Bash-utils/lib/functions/main/CMDS.lib
 523f194833b6ad73f42811dbd0079763 Bash-utils/lib/functions/main/Decho.lib
 60f24c7947da81746c4e78f52c8e855e Bash-utils/lib/functions/main/DevTools.lib
-4da1de4530a3d957ae97a08edb896e2c Bash-utils/lib/functions/main/Directories.lib
+66f637fd660c2969f61d76a40e00e193 Bash-utils/lib/functions/main/Directories.lib
 2d6ec9dc6a1e18127080f454a70db3b7 Bash-utils/lib/functions/main/Echo.lib
 bfa2b41342070526a8eb030e7fb5a187 Bash-utils/lib/functions/main/Errors.lib
 6aef47fa229575cd148adc67c8391a85 Bash-utils/lib/functions/main/Files.lib
