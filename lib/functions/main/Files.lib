@@ -1123,7 +1123,10 @@ function BU.Main.Files.GetExtension()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    BU.Main.Text.CutLastFieldAfterDelim "${p_filepath}" '.' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's extension";  }
+    BU.Main.Text.CutLastFieldAfterDelim "${p_filepath}" '.' || {
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's extension";
+
+    }
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1149,7 +1152,16 @@ function BU.Main.Files.GetLastAccess()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    stat "${p_filename}" | awk 'FNR == 5 { print $2 " " $3 }' || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    stat "${p_filename}" | awk 'FNR == 5 { print $2 " " $3 }' || {
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last access date from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1175,7 +1187,16 @@ function BU.Main.Files.GetLastModification()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    date -r "${p_filename}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    date -r "${p_filename}" || {
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the last modification date from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1200,7 +1221,14 @@ function BU.Main.Files.GetMIMEType()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    file --mime-type "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";  };
+    file --mime-type "${p_filepath}" || {
+        BU.Main.Echo.Warning \
+            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the MIME type of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1226,7 +1254,17 @@ function BU.Main.Files.GetLinesNumber()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    wc --lines < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --lines < "${p_filepath}" || {
+        BU.Main.Echo.Warning \
+            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of lines in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1252,7 +1290,17 @@ function BU.Main.Files.GetMaxLineLength()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****last access date
-    wc --max-line-length < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --max-line-length < "${p_filepath}" || {
+        BU.Main.Echo.Warning \
+            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the max line length in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1296,7 +1344,17 @@ function BU.Main.Files.GetOwnerName()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    stat -c "%U" "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    stat -c "%U" "${p_filepath}" || {
+        BU.Main.Echo.Warning \
+            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the name of the owner of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1322,7 +1380,17 @@ function BU.Main.Files.GetOwnerGroup()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    stat -c "%G" "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    stat -c "%G" "${p_filepath}" || {
+        BU.Main.Echo.Warning \
+            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the group of the owner of the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1348,7 +1416,17 @@ function BU.Main.Files.GetWordsNumber()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    wc --words < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --words < "${p_filepath}" || {
+        BU.Main.Echo.Warning \
+            "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of words in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1382,7 +1460,15 @@ function BU.Main.File.SetFileLastAccess()
     local p_fakedate=${2:-$'\0'}; # ARG TYPE : Date     - REQUIRED | DEFAULT VAL : NULL     - DESC : New date to set as last access date.
 
     #**** Code ****
-    if ! BU.Main.Args__FilesSetFileLastAccess "${p_filepath}" "${p_fakedate}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__FilesSetFileLastAccess \
+        "${p_filepath}" \
+        "${p_fakedate}" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
+    fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1431,14 +1517,27 @@ function BU.Main.Files.SourceFile()
         else
             local C="${?}";
 
-            BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" "Please verify that the file's path passed as argument exists, and that you have read rights on this file." "${p_filepath}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 5 ))";
+            BU.Main.Errors.HandleErrors \
+                "${__BU_MAIN_EXIT_NOT_PERMITTED}" \
+                "UNABLE TO SOURCE THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" \
+                "Please verify that the file's path passed as argument exists, and that you have read rights on this file." \
+                "${p_filepath}" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "$(( LINENO - 5 ))";
 
 			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
         fi
     else
         local C="${?}";
 
-        BU.Main.Errors.HandleErrors "${__BU_MAIN_EXIT_NOT_PERMITTED}" "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" "Please pass a filepath as argument" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 8 ))";
+        BU.Main.Errors.HandleErrors \
+            "${__BU_MAIN_EXIT_NOT_PERMITTED}" \
+            "UNABLE TO FIND THIS FILE : $(BU.Main.Decho.Decho.Path "${p_filepath}")" \
+            "Please pass a filepath as argument" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "$(( LINENO - 8 ))";
 
 		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}";
     fi
