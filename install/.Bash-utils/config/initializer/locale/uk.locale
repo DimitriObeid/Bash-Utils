@@ -40,19 +40,19 @@ function BU.ModuleInit.SetInitLocale.uk()
     ## НАДЛИШКОВІ ПОВІДОМЛЕННЯ
 
     # Запишіть ім'я файлу, ім'я функції та номер рядка, де виникла помилка.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="";
 
     # Запишіть ім'я файлу та номер рядка, де сталася помилка.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="";
 
     # Запишіть ім'я файлу, ім'я функції та номер рядка, де сталася фатальна помилка.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="";
 
     # Запишіть ім'я файлу та номер рядка, в якому сталася фатальна помилка.
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
 
     #
-    __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="";
 
     ## ==============================================
 
