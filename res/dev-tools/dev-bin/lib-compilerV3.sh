@@ -1565,7 +1565,7 @@ function CompileInSingleFile()
             PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU_COMPILE__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")"
+                    "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL';
 
             QuitErrorMessage.NumberOfFilesCompiled;

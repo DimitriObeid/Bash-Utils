@@ -1514,7 +1514,6 @@ function BU.Main.Files.ChangeExtension()
 
     #**** Variables ****
     local v_newName;
-    local v_textDispCmd;
 
     #**** Code ****
     if      [ -z "${p_tgFile}" ]; then
