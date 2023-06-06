@@ -34,7 +34,7 @@ f537900d8396d344406eeb0903f9ccdb Bash-utils/install/.Bash-utils/config/modules/m
 2172a101d8445dcfd1688ecc647a370c Bash-utils/install/.Bash-utils/config/modules/main/locale.conf
 d6f766c8e7529d8ade1ebb8cb05a6392 Bash-utils/install/.Bash-utils/config/modules/main/module.conf
 64e2a6220ca812dcab2635998dad75d2 Bash-utils/install/.Bash-utils/config/modules/main/OS.conf
-1cafe3417a44a8eeeb42874db65cc3e8 Bash-utils/install/.Bash-utils/config/modules/main/Project.conf
+b922391566c998199a6d305b2351508a Bash-utils/install/.Bash-utils/config/modules/main/Project.conf
 df99f90759084be04ad259ae9d6796c8 Bash-utils/install/.Bash-utils/config/modules/main/Status.conf
 8f42a258c6935e61979421e8f19f55de Bash-utils/install/.Bash-utils/config/modules/main/text.conf
 4cdb33eef4e738764859be5311bbe7bf Bash-utils/install/.Bash-utils/config/modules/main/time.conf
