@@ -82,11 +82,94 @@
     \newpage
 
     \color{sec1}
-    \section{Farben der Dokumentation im "normalen" Format}\color{text}
+    \section{Farben der Dokumentation im ``normalen'' Format}\color{text}
 
     \begin{justify}
         \textbf{\color{case}ACHTUNG :} Es ist nicht ratsam, ein Dokument in diesem Format zu drucken. Dies gilt sowohl für den Toner Ihres Druckers als auch für eine bessere Druckqualität mit dem Farbmodell CJMB (CYMK), das von dem druckbaren Format angeboten wird..
 
         Um auf das druckbare Format umzuschalten, führen Sie das Skript \textbf{\color{cmds}latex-convert-to-printable.sh} aus. Sie befindet sich im Ordner mit den ausführbaren Dateien, ihr Code wurde jedoch noch nicht geschrieben.
+    \end{justify}
+
+    \color{text}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \begin{justify}
+        \textbf{NOTE :} Jedes Mal, wenn Sie den Befehl \textbf{\textbackslash{color}} aufrufen, der im Paket \textbf{xcolor} enthalten ist, rufen Sie bitte den nativen \textbf{\textbackslash{textbf}}-Befehl von \LaTeX \ auf, um die gefärbte Zeichenfolge fett zu markieren, damit sie besser hervorgehoben wird.
+    \end{justify}
+
+    \begin{justify}
+        Gehen Sie dazu wie folgt vor :
+
+        \begin{itemize}
+              \item \textbackslash{textbf\{\textbackslash{color\{Name\_des\_festgelegten\_Farbcodes}\}}\}
+          \end{itemize}
+    \end{justify}
+
+    \color{text}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \begin{justify}
+        Die Liste der Farbcodes für die Druckversion finden Sie unterhalb der folgenden Liste auf der nächsten Seite.
+    \end{justify}
+
+    \begin{justify}
+        \begin{tabular}{lll}
+            \textbf{Farbcode} & \textbf{Farbe}          & \textbf{Beschreibung}\\\\
+
+            \color{text}back  & \color{text}Schwarz     & \color{text}Hintergrundfarbe des Dokuments\\
+            \color{case}case  & \color{case}Gelb        & \color{case}Farbe der \textbf{``case''}-Bedingungen\\
+            \color{cmds}cmds  & \color{cmds}Grau        & \color{cmds}Farbige Darstellung der Namen von Systembefehlen und ihren Argumenten\\\\
+
+            \color{cond}cond  & \color{cond}Ziegelstein & \color{cond}Farbe der \textbf{``if''}-Bedingungen\\
+            \color{func}func  & \color{func}Malve       & \color{func}Farbe der Funktionen, die in jedem Modul des Frameworks BU definiert sind\\
+            \color{loop}loop  & \color{loop}Cyan        & \color{loop}Farbe der Locken\\\\
+
+            \color{main}main  & \color{main}Violett     & \color{main}Farbe der Funktionen des Hauptskripts\\
+            \color{path}path  & \color{path}Limette     & \color{path}Farbe der Pfade zu Ordnern und Dateien\\
+            \color{sec1}sec1  & \color{sec1}Rot         & \color{sec1}Farbe von Haupt- und Toptiteln\\\\
+
+            \color{sec2}sec2  & \color{sec2}Grun        & \color{sec2}Farbe von Titeln der zweiten Ebene\\
+            \color{sec3}sec3  & \color{sec3}Blau        & \color{sec3}Farbe von Titeln der dritten Ebene\\
+            \color{text}text  & \color{text}weiß        & \color{text}Farbe des normalen Textes\\\\
+
+            \color{vars}vars  & \color{vars}Orange      & \color{vars}Farbe der Namen von Parametern und Variablen\\
+        \end{tabular}
+    \end{justify}
+
+    \newpage
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{red}
+    \section{Farben der Dokumentation in druckbarem Format}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{lll}
+            \textbf{Farbcode} & \textbf{Farbe}          & \textbf{Beschreibung}\\\\
+
+            \color{text}back  & \color{text}weiß        & \color{text}Hintergrundfarbe des Dokuments\\
+            \color{case}case  & \color{case}Gelb        & \color{case}Farbe der \textbf{``case''}-Bedingungen\\
+            \color{cmds}cmds  & \color{cmds}Grau        & \color{cmds}Farbige Darstellung der Namen von Systembefehlen und ihren Argumenten\\\\
+
+            \color{cond}cond  & \color{cond}Ziegelstein & \color{cond}Farbe der \textbf{``if''}-Bedingungen\\
+            \color{func}func  & \color{func}Malve       & \color{func}Farbe der Funktionen, die in jedem Modul des Frameworks BU definiert sind\\
+            \color{loop}loop  & \color{loop}Cyan        & \color{loop}Farbe der Locken\\\\
+
+            \color{main}main  & \color{main}Violett     & \color{main}Farbe der Funktionen des Hauptskripts\\
+            \color{path}path  & \color{path}Limette     & \color{path}Farbe der Pfade zu Ordnern und Dateien\\
+            \color{sec1}sec1  & \color{sec1}Rot         & \color{sec1}Farbe von Haupt- und Toptiteln\\\\
+
+            \color{sec2}sec2  & \color{sec2}Grun        & \color{sec2}Farbe von Titeln der zweiten Ebene\\
+            \color{sec3}sec3  & \color{sec3}Blau        & \color{sec3}Farbe von Titeln der dritten Ebene\\
+            \color{text}text  & \color{text}Schwarz     & \color{text}Farbe des normalen Textes\\\\
+
+            \color{vars}vars  & \color{vars}Orange      & \color{vars}Farbe der Namen von Parametern und Variablen\\
+        \end{tabular}
     \end{justify}
 \end{document}
