@@ -1,7 +1,7 @@
 98a68d9ab90838ee445148d4d91e18ff Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
 9f3fe446542baaef53cf74acc5d825bf Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
-6a66c2207686018cdc3537631112baf2 Bash-utils/install/Bash-utils-init.sh
+0d7725acbfeeeab61145de593c2b96f4 Bash-utils/install/Bash-utils-init.sh
 a34584d9607aba9006fbef63542ed441 Bash-utils/lib/functions/main/Args.lib
 61e241307d02f4598b41902db8134e2a Bash-utils/lib/functions/main/BasicMaths.lib
 bffbd41016a62a428fb1939ca76cf7fc Bash-utils/lib/functions/main/Checkings.lib
@@ -16,7 +16,7 @@ bfa2b41342070526a8eb030e7fb5a187 Bash-utils/lib/functions/main/Errors.lib
 2feb4fd3b15e0fd8f5ec66a8620fd751 Bash-utils/lib/functions/main/Headers.lib
 704b0cab14e0d3a10ff92c9543f98541 Bash-utils/lib/functions/main/Inputs.lib
 3515aa185bb91af6f1103fc66afd8633 Bash-utils/lib/functions/main/Locale.lib
-319f817c51403885549906390c0b3a26 Bash-utils/lib/functions/main/OS.lib
+8f7ab7ef46c284a340728e2f92a50148 Bash-utils/lib/functions/main/OS.lib
 b94281dba32428c6c53f82459f893c69 Bash-utils/lib/functions/main/PosixTerm.lib
 c74203f82b89b87f6f3e5b326436a234 Bash-utils/lib/functions/main/Status.lib
 1303204b45733b26b3e5b546a482d00b Bash-utils/lib/functions/main/TextFormat.lib
@@ -32,7 +32,7 @@ de0c3ccd1abfc3e872c86e42438b4e98 Bash-utils/install/.Bash-utils/config/modules/m
 f537900d8396d344406eeb0903f9ccdb Bash-utils/install/.Bash-utils/config/modules/main/Exit.conf
 399437aaa46c253e1972cf9d300072a3 Bash-utils/install/.Bash-utils/config/modules/main/Filesystem.conf
 2172a101d8445dcfd1688ecc647a370c Bash-utils/install/.Bash-utils/config/modules/main/locale.conf
-d6f766c8e7529d8ade1ebb8cb05a6392 Bash-utils/install/.Bash-utils/config/modules/main/module.conf
+f96da2ac4b7fa5875a44b99acf0a77eb Bash-utils/install/.Bash-utils/config/modules/main/module.conf
 64e2a6220ca812dcab2635998dad75d2 Bash-utils/install/.Bash-utils/config/modules/main/OS.conf
 b922391566c998199a6d305b2351508a Bash-utils/install/.Bash-utils/config/modules/main/Project.conf
 df99f90759084be04ad259ae9d6796c8 Bash-utils/install/.Bash-utils/config/modules/main/Status.conf

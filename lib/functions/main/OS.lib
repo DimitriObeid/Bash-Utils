@@ -1534,6 +1534,7 @@ function BU.Main.OS.CheckOSWindowsVersion()
             if command -v powershell.exe > /dev/null; then
                 powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}';
 
+                # Setting a new global variable in order to avoid executing this condition again in non-Windows operating systems.
                 __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER_CHECKED='TRUE';
             fi
         )";
