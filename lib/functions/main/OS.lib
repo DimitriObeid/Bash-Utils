@@ -1529,9 +1529,27 @@ function BU.Main.OS.CheckOSWindowsVersion()
     local p_versionNumber=${1:-NULL};   # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : NULL     - DESC : Microsoft Windows operating system's version number.
 
     #**** Code ****
-    if [ -z "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(if command -v powershell.exe > /dev/null; then powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}'; fi)"; fi
+    if [ -z "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then
+        __BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER="$(
+            if command -v powershell.exe > /dev/null; then
+                powershell.exe '[System.Environment]OSVersion.Version' | awk 'FNR == 4 {print $1}';
+            fi
+        )";
+    fi
 
-    if [ "${p_versionNumber}" -eq "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then return 0; else return 1; fi
+    # Checking if the "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" global variable is not empty and is a number,
+    # in order not to display the "integer expression expected" warning in a non-Windows operating system.
+    if BU.Main.Checkings.IsInt "${p_versionNumber}" && BU.Main.Checkings.IsInt "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}"; then
+
+        # If the expected Windows version matches the current Windows version.
+        if [ "${p_versionNumber}" -eq "${__BU_MAIN_OS_LIB__WINDOWS_MAJOR_VERSION_NUMBER}" ]; then
+            return 0;
+        else
+            return 1;
+        fi
+    else
+        return 1;
+    fi
 }
 
 # ·················································
@@ -1606,7 +1624,7 @@ function BU.Main.OS.IsWindowsLTSC() 					{ if BU.Main.OS.IsWindows10LTSC     || 
 #   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows10()                    	{ if BU.Main.OS.CheckOSWindowsVersion '10';          								        then    return 0; else  return 1; fi; }
+function BU.Main.OS.IsWindows10()                       { if BU.Main.OS.CheckOSWindowsVersion '10';                                                 then    return 0; else  return 1; fi; }
 
 # ···················································································
 # Checking if the currently used version of Windows is the Windows 10 Family version.
@@ -1616,7 +1634,7 @@ function BU.Main.OS.IsWindows10()                    	{ if BU.Main.OS.CheckOSWin
 #   - BU.Main.OS.IsWindowsFamily()                      -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows10Family()					{ if BU.Main.OS.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsFamily;	        then 	return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows10Family()                 { if BU.Main.OS.IsWindowsFamily     && BU.Main.OS.CheckOSWindowsVersion '10';               then    return 0; else 	return 1; fi; }
 
 # ··························································································
 # Checking if the currently used version of Windows is the Windows 10 Professionnal version.
@@ -1626,7 +1644,7 @@ function BU.Main.OS.IsWindows10Family()					{ if BU.Main.OS.CheckOSWindowsVersio
 #   - BU.Main.OS.IsWindowsPro()                         -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows10Pro()					{ if BU.Main.OS.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsPro;		        then 	return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows10Pro()                    { if BU.Main.OS.IsWindowsPro        && BU.Main.OS.CheckOSWindowsVersion '10';               then    return 0; else 	return 1; fi; }
 
 # ·················································································
 # Checking if the currently used version of Windows is the Windows 10 LTSC version.
@@ -1636,7 +1654,7 @@ function BU.Main.OS.IsWindows10Pro()					{ if BU.Main.OS.CheckOSWindowsVersion '
 #   - BU.Main.OS.IsWindowsLTSC()                        -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows10LTSC()					{ if BU.Main.OS.CheckOSWindowsVersion '10' 			&& BU.Main.OS.IsWindowsLTSC;	        then 	return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows10LTSC()                   { if BU.Main.OS.IsWindowsLTSC       && BU.Main.OS.CheckOSWindowsVersion '10';               then    return 0; else 	return 1; fi; }
 
 # ······································································
 # Checking if the currently used version of Windows is the 11th version.
@@ -1645,7 +1663,7 @@ function BU.Main.OS.IsWindows10LTSC()					{ if BU.Main.OS.CheckOSWindowsVersion 
 #   - BU.Main.OS.CheckOSWindowsVersion()                -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows11()                     	{ if BU.Main.OS.CheckOSWindowsVersion '11';          								        then    return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows11()                       { if BU.Main.OS.CheckOSWindowsVersion '11';                                                 then    return 0; else 	return 1; fi; }
 
 # ···················································································
 # Checking if the currently used version of Windows is the Windows 11 Family version.
@@ -1655,7 +1673,7 @@ function BU.Main.OS.IsWindows11()                     	{ if BU.Main.OS.CheckOSWi
 #   - BU.Main.OS.IsWindowsFamily()                      -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows11Family()					{ if BU.Main.OS.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsFamily;	        then 	return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows11Family()                 { if BU.Main.OS.IsWindowsFamily     && BU.Main.OS.CheckOSWindowsVersion '11';               then    return 0; else 	return 1; fi; }
 
 # ··························································································
 # Checking if the currently used version of Windows is the Windows 11 Professionnal version.
@@ -1665,7 +1683,7 @@ function BU.Main.OS.IsWindows11Family()					{ if BU.Main.OS.CheckOSWindowsVersio
 #   - BU.Main.OS.IsWindowsPro()                         -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.OS.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsPro;		        then 	return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows11Pro()                    { if BU.Main.OS.IsWindowsPro        && BU.Main.OS.CheckOSWindowsVersion '11';               then    return 0; else 	return 1; fi; }
 
 # ·················································································
 # Checking if the currently used version of Windows is the Windows 11 LTSC version.
@@ -1675,7 +1693,7 @@ function BU.Main.OS.IsWindows11Pro()					{ if BU.Main.OS.CheckOSWindowsVersion '
 #   - BU.Main.OS.IsWindowsLTSC()                        -> Main -> OS.lib (this file)
 
 # shellcheck disable=
-function BU.Main.OS.IsWindows11LTSC()					{ if BU.Main.OS.CheckOSWindowsVersion '11' 			&& BU.Main.OS.IsWindowsLTSC;	        then 	return 0; else 	return 1; fi; }
+function BU.Main.OS.IsWindows11LTSC()                   { if BU.Main.OS.IsWindowsLTSC       && BU.Main.OS.CheckOSWindowsVersion '11';               then    return 0; else 	return 1; fi; }
 
 # ··············································································································
 # Checking if current OS is a Linux distribution running on Windows Subsystem for Linux, on any Windows version.
