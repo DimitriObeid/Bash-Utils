@@ -11,7 +11,7 @@ bffbd41016a62a428fb1939ca76cf7fc Bash-utils/lib/functions/main/Checkings.lib
 66f637fd660c2969f61d76a40e00e193 Bash-utils/lib/functions/main/Directories.lib
 2d6ec9dc6a1e18127080f454a70db3b7 Bash-utils/lib/functions/main/Echo.lib
 bfa2b41342070526a8eb030e7fb5a187 Bash-utils/lib/functions/main/Errors.lib
-94a65909c6ca869c60aa4873bfbcc42e Bash-utils/lib/functions/main/Files.lib
+36dc4939331153f02eda6b752aebba9a Bash-utils/lib/functions/main/Files.lib
 430688e41763c3d2f5d3af09cf213e01 Bash-utils/lib/functions/main/Filesystem.lib
 2feb4fd3b15e0fd8f5ec66a8620fd751 Bash-utils/lib/functions/main/Headers.lib
 704b0cab14e0d3a10ff92c9543f98541 Bash-utils/lib/functions/main/Inputs.lib

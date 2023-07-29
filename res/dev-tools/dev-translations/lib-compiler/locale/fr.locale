@@ -139,8 +139,9 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE="
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK="
     -s --no-shellcheck                  empêche l'exécution de la commande 'shellcheck' sur chaque fichier traité par le compilateur. Cette option est
-                                        incompatible avec l'option '-C' / '--compile-stable', une message d'erreur sera retourné si les deux options sont
-                                        utilisées ensemble.";
+                                        incompatible avec l'option '-C' / '--compile-stable', un message d'erreur sera retourné si les deux options sont
+                                        utilisées ensemble. Les fichiers n'ayant pas été modifiés depuis la dernière vérification d'erreurs avec cette
+                                        commande ne seront pas traités à nouveau.";
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__REMOVE_SHELLCHECK_DIRECTIVES="
     -S --remove-shellcheck-directives   enlève les directives de Shellcheck du fichier compilé.
