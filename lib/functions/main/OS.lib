@@ -1130,6 +1130,21 @@ function BU.Main.OS.IsLinuxDistroManjaro()              { BU.Main.OS.GetLinuxDis
 
 # --------------------
 
+# ····················································
+# Checking if current Linux distribution is Slackware.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function BU.Main.OS.IsLinuxDistroSlackware()            { BU.Main.OS.GetLinuxDistro ''                                  &&      return 0;       return 1; }
+
+# ·····························································································································································
+# Checking Slackware versions (WARNING : verify that you correctly pass the second mandatory argument, or else the script will be stuck into an infinite loop).
+
+
+# --------------------
+
 # ···············································
 # Checking if current Linux distribution is SUSE.
 
@@ -1228,7 +1243,9 @@ function BU.Main.OS.GetLinuxDistro()
 
     #**** Code ****
     if BU.Main.OS.IsLinux; then
-        if [ -n "${p_distro}" ]; then [ -r /proc/version ] && {
+        if [ -n "${p_distro}" ]; then
+
+            [ -r /proc/version ] && {
                 local X;
 
                 X="$(cat '/proc/version')";

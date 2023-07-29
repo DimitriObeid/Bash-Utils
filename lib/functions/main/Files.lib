@@ -919,7 +919,14 @@ function BU.Main.Files.GetCreationDate()
 
     #**** Code ****
     if ! stat -c %W "${p_filepath}"; then
-        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's creation date"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's creation date";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
 
     elif [ "$(stat -c %W "${p_filepath}")" -eq 0 ]; then
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : This filesystem ($(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_FS_NAME}")) does not stores the files creation dates"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
@@ -952,7 +959,16 @@ function BU.Main.Files.GetCharactersNumber()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
-    wc --chars < "${p_filepath}" || { BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file"; BU.Main.Echo.Warning "Please check the permissions of this file"; BU.Main.Echo.Newline; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${__BU_MAIN_EXIT_NOT_PERMITTED}"; };
+    wc --chars < "${p_filepath}" || {
+        BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the total number of characters in the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+
+        BU.Main.Echo.Warning "Please check the permissions of this file";
+        BU.Main.Echo.Newline;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${__BU_MAIN_EXIT_NOT_PERMITTED}";
+    };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1123,9 +1139,18 @@ function BU.Main.Files.GetExtension()
     local p_filepath=${1:-$'\0'}; # ARG TYPE : String   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to process.
 
     #**** Code ****
+    # Checking first if the file contains an extension.
+    if [ "$(BU.Main.Text.GetCharacterOccurences "${p_filepath}" '.')" -eq 0 ]; then
+        BU.Main.Echo.Warning "This file does not contains an extension";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    fi
+
+    # Getting the last field, which is the file's extension.
     BU.Main.Text.CutLastFieldAfterDelim "${p_filepath}" '.' || {
         BU.Main.Echo.Warning "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") : Unable to get the $(BU.Main.Decho.Decho.Path "${p_filepath}") file's extension";
 
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
     }
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
