@@ -1953,11 +1953,16 @@ function CompileInSingleFile()
 
     # If the framework was compiled in a stable version.
     if [ -n "${__vArrayVal_compile_stable}" ]; then
+
         # If one or more stable files were not successsfully "chmoded".
         if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
+
             # If only one file was not "chmoded".
             if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
-                PrintSuccessLine "$(printf "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ONE_FILE_NOT_CHMODED}" "${__compiled_stable_file_path}")";
+                PrintSuccessLine \
+                    "$(printf \
+                        "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ONE_FILE_NOT_CHMODED}" \
+                        "${__compiled_stable_file_path}")";
 
                 echo "${__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}";
 
