@@ -49,9 +49,15 @@
 
 #### ARRAY OF ARGUMENTS
 
-## SUB-CATEGORY NAME
+## ARRAY OF MODULES TO INSTALL
 
-# Feel free to define an array of arguments here if needed.
+# List of modules to install.
+__ARG_LIST=( "${@}" );
+
+# Checking if the module's name was passed as argument when this script was executed.
+if (( ${#__ARG_LIST[@]} == 0 )); then
+	echo "This script takes at least one mandatory argument : the name of the existing module(s) to pack separately"; exit 1;
+fi
 
 ## ==============================================
 

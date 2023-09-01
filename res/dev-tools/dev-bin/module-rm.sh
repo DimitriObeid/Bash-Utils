@@ -58,7 +58,7 @@ __ARG_LIST=( "${@}" );
 
 # Checking if the module's name was passed as argument when this script was executed.
 if (( ${#__ARG_LIST[@]} == 0 )); then
-    echo "This script takes at least one mandatory argument : the new module's name"; exit 1;
+    echo "This script takes at least one mandatory argument : the name of the existing module(s) to delete"; exit 1;
 fi
 
 ## ==============================================
