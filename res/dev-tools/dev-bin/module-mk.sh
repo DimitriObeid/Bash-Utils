@@ -104,8 +104,8 @@ fi
 
 ## CHECKING FOR FILES PRESENCE
 
-# ·············································································································
-# Check if the required files for the modules initialization exists in their right folder, or else create them.
+# ················································································································
+# Checking if the required files for the modules initialization exists in their right folder, or else create them.
 
 # shellcheck disable=
 function check_mandatory_file_exists()
@@ -115,9 +115,20 @@ function check_mandatory_file_exists()
 
     #**** Code ****
     if [ ! -f "${p_path}" ]; then
-        touch "${p_path}" || { echo "Unable to create this required file ''${p_path}''"; echo; echo "Please create this file manually."; }
+        touch "${p_path}" || {
+            echo "Unable to create this required file ''${p_path}''" >&2;
+            echo >&2;
+
+            echo "Please create this file manually." >&2;
+
+            return 1;
+        }
     fi
+
+    return 0;
 }
+
+## ==============================================
 
 
 
@@ -139,8 +150,10 @@ for module_name in "${__ARG_LIST[@]}"; do
     __D_BU_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
 
     if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
-        echo "You must run this script from its directory";
-        echo "Terminating module creation";
+        echo "You must run this script from its directory" >&2;
+        echo >&2;
+
+        echo "Terminating module creation" >&2;
 
         exit 1;
     fi
@@ -160,30 +173,48 @@ for module_name in "${__ARG_LIST[@]}"; do
     # Checking if the module's configuration path exists, or else creating its directory.
     if [ -d "${__D_BU_INST_MODULE_CONF_PATH}" ]; then
 	    echo "The ${module_name} module's configurations directory already exists : ${__D_BU_INST_MODULE_CONF_PATH}"
+
 	   	check_mandatory_file_exists "${__D_BU_INST_MODULE_CONF_PATH}/module.conf";
     else
 	    mkdir -pv "${__D_BU_INST_MODULE_CONF_PATH}" || { echo "Unable to create the ${__D_BU_INST_MODULE_CONF_PATH} directory"; exit 1; }
+
 	  	check_mandatory_file_exists "${__D_BU_INST_MODULE_CONF_PATH}/module.conf";
     fi
 
     # Checking if the module's initializer path exists, or else creating its directory.
     if [ -d "${__D_BU_INST_MODULE_INIT_PATH}" ]; then
 	    echo "The ${module_name} module's initializer directory already exists : ${__D_BU_INST_MODULE_INIT_PATH}";
+
 	    check_mandatory_file_exists "${__D_BU_INST_MODULE_INIT_PATH}/Initializer.sh";
     else
 	    mkdir -pv "${__D_BU_INST_MODULE_INIT_PATH}" || { echo "Unable to create the ${__D_BU_INST_MODULE_INIT_PATH} directory"; exit 1; }
+
 	    check_mandatory_file_exists "${__D_BU_INST_MODULE_INIT_PATH}/Initializer.sh";
     fi
 
     # Checking if the module's library path exists, or else creating its directory.
     if [ -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
 	    echo "The ${module_name} module's library directory already exists : ${__D_BU_LIB_MODULE_FUNCTS_PATH}";
+
         check_mandatory_file_exists "${__D_BU_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
     else
 	    mkdir -pv "${__D_BU_LIB_MODULE_FUNCTS_PATH}" || { echo "Unable to create the ${__D_BU_LIB_MODULE_FUNCTS_PATH} directory"; exit 1; }
+
         check_mandatory_file_exists "${__D_BU_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
     fi
-
-    echo;
-
 done
+
+# Printing that the targeted modules were successfully created into the Bash Utils framework's data folders.
+if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
+    echo "The ${__ARG_LIST[1]} module was successfully created";
+else
+    echo "The following modules were successfully created :";
+
+    for module in "${__ARG_LIST[@]}"; do
+        echo "    - ${module}";
+    done
+fi
+
+echo;
+
+exit 0;

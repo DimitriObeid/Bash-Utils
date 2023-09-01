@@ -99,12 +99,35 @@ fi
 
 ########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
 
-#### CATEGORY NAME
+#### FILES PROCESSING
 
-## SUB-CATEGORY NAME
+## PATH DELETION
 
-# ·············································
-# Feel free to define functions here if needed.
+# ·································································································
+# Checking if the folders of the targeted module(s) exist in their right folder, and deleting them.
+
+# shellcheck disable=
+function check_folder_exists()
+{
+    #**** Parameters ****
+    local p_path=${1:-$'\0'};
+
+    #**** Code ****
+    if [ -d "${p_path}" ]; then
+        rm -rf "${p_path}" || {
+            echo "Unable to delete this folder ''${p_path}''" >&2;
+            echo >&2;
+
+            echo "Please delete this folder manually." >&2;
+
+            return 1;
+        }
+    fi
+
+    return 0;
+}
+
+## ==============================================
 
 
 
@@ -113,3 +136,69 @@ fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
+
+# Checking if the script is executed in its directory.
+for module_name in "${__ARG_LIST[@]}"; do
+    # Bash Utils library root path from this script's path.
+    __D_BU_LIB_ROOT_PATH="../../..";
+
+    __D_BU_INST_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+
+    __D_BU_INST_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+
+    __D_BU_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+
+    if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
+        echo "You must run this script from its directory" >&2;
+        echo >&2;
+
+        echo "Terminating module creation" >&2;
+
+        exit 1;
+    fi
+
+    # Checking if the whole module exists.
+    if [ ! -d "${__D_BU_INST_MODULE_CONF_PATH}" ] && [ ! -d "${__D_BU_INST_MODULE_INIT_PATH}" ] && [ ! -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
+	    echo "The ${module_name} module does not exists anymore in the framework's data folders";
+
+	    exit 0;
+    fi
+
+    # Checking if the module's configuration path exists, and then deleting its directory.
+    if [ -d "${__D_BU_INST_MODULE_CONF_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's configurations directory : ${__D_BU_INST_MODULE_CONF_PATH}";
+
+	   	check_folder_exists "${__D_BU_INST_MODULE_CONF_PATH}";
+    fi
+
+    # Checking if the module's initializer path exists, and then deleting its directory.
+    if [ -d "${__D_BU_INST_MODULE_INIT_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's initializer directory    : ${__D_BU_INST_MODULE_INIT_PATH}";
+
+	    check_folder_exists "${__D_BU_INST_MODULE_INIT_PATH}";
+    fi
+
+    # Checking if the module's library path exists, and then deleting its directory.
+    if [ -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's library directory        : ${__D_BU_LIB_MODULE_FUNCTS_PATH}";
+
+        check_folder_exists "${__D_BU_LIB_MODULE_FUNCTS_PATH}";
+    fi
+
+    echo;
+done
+
+# Printing that the targeted modules were successfully removed from the Bash Utils framework's data folders.
+if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
+    echo "The ${__ARG_LIST[0]} module was successfully removed";
+else
+    echo "The following modules were successfully removed :";
+
+    for module in "${__ARG_LIST[@]}"; do
+        echo "    - ${module}";
+    done
+fi
+
+echo;
+
+exit 0;
