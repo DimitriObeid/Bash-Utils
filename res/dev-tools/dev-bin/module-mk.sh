@@ -160,9 +160,11 @@ for module_name in "${__ARG_LIST[@]}"; do
 
     # Checking if the whole module exists.
     if [ -d "${__D_BU_INST_MODULE_CONF_PATH}" ] && [ -d "${__D_BU_INST_MODULE_INIT_PATH}" ] && [ -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
-	    echo "The ${module_name} module's directories already exist"; exit 0;
+	    echo "The ${module_name} module's directories already exist";
+        
+        exit 0;
 
-	    # Checking if the mandatory files exist.
+	    # WIP : Checking if the mandatory files exist.
 	    check_mandatory_file_exists="${__D_BU_INST_MODULE_CONF_PATH}/module.conf";
 	    check_mandatory_file_exists="${__D_BU_INST_MODULE_INIT_PATH}/Initializer.sh";
 
@@ -202,11 +204,13 @@ for module_name in "${__ARG_LIST[@]}"; do
 
         check_mandatory_file_exists "${__D_BU_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
     fi
+
+    echo;
 done
 
 # Printing that the targeted modules were successfully created into the Bash Utils framework's data folders.
 if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
-    echo "The ${__ARG_LIST[1]} module was successfully created";
+    echo "The ${__ARG_LIST[0]} module was successfully created";
 else
     echo "The following modules were successfully created :";
 

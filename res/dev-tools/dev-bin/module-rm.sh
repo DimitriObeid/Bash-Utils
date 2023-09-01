@@ -142,9 +142,9 @@ for module_name in "${__ARG_LIST[@]}"; do
     # Bash Utils library root path from this script's path.
     __D_BU_LIB_ROOT_PATH="../../..";
 
-    __D_BU_INST_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+    __D_BU_DEL_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
 
-    __D_BU_INST_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+    __D_BU_DEL_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
 
     __D_BU_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
 
@@ -158,24 +158,24 @@ for module_name in "${__ARG_LIST[@]}"; do
     fi
 
     # Checking if the whole module exists.
-    if [ ! -d "${__D_BU_INST_MODULE_CONF_PATH}" ] && [ ! -d "${__D_BU_INST_MODULE_INIT_PATH}" ] && [ ! -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
+    if [ ! -d "${__D_BU_DEL_MODULE_CONF_PATH}" ] && [ ! -d "${__D_BU_DEL_MODULE_INIT_PATH}" ] && [ ! -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
 	    echo "The ${module_name} module does not exists anymore in the framework's data folders";
 
 	    exit 0;
     fi
 
     # Checking if the module's configuration path exists, and then deleting its directory.
-    if [ -d "${__D_BU_INST_MODULE_CONF_PATH}" ]; then
-	    echo "Deleting the ${module_name} module's configurations directory : ${__D_BU_INST_MODULE_CONF_PATH}";
+    if [ -d "${__D_BU_DEL_MODULE_CONF_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's configurations directory : ${__D_BU_DEL_MODULE_CONF_PATH}";
 
-	   	check_folder_exists "${__D_BU_INST_MODULE_CONF_PATH}";
+	   	check_folder_exists "${__D_BU_DEL_MODULE_CONF_PATH}";
     fi
 
     # Checking if the module's initializer path exists, and then deleting its directory.
-    if [ -d "${__D_BU_INST_MODULE_INIT_PATH}" ]; then
-	    echo "Deleting the ${module_name} module's initializer directory    : ${__D_BU_INST_MODULE_INIT_PATH}";
+    if [ -d "${__D_BU_DEL_MODULE_INIT_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's initializer directory    : ${__D_BU_DEL_MODULE_INIT_PATH}";
 
-	    check_folder_exists "${__D_BU_INST_MODULE_INIT_PATH}";
+	    check_folder_exists "${__D_BU_DEL_MODULE_INIT_PATH}";
     fi
 
     # Checking if the module's library path exists, and then deleting its directory.
