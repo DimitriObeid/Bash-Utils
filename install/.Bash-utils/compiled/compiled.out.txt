@@ -16,14 +16,14 @@ bfa2b41342070526a8eb030e7fb5a187 Bash-utils/lib/functions/main/Errors.lib
 2feb4fd3b15e0fd8f5ec66a8620fd751 Bash-utils/lib/functions/main/Headers.lib
 704b0cab14e0d3a10ff92c9543f98541 Bash-utils/lib/functions/main/Inputs.lib
 3515aa185bb91af6f1103fc66afd8633 Bash-utils/lib/functions/main/Locale.lib
-8f7ab7ef46c284a340728e2f92a50148 Bash-utils/lib/functions/main/OS.lib
+ce290d6950c18c17ac66d4dd106a5e69 Bash-utils/lib/functions/main/OS.lib
 b94281dba32428c6c53f82459f893c69 Bash-utils/lib/functions/main/PosixTerm.lib
 c74203f82b89b87f6f3e5b326436a234 Bash-utils/lib/functions/main/Status.lib
 1303204b45733b26b3e5b546a482d00b Bash-utils/lib/functions/main/TextFormat.lib
 424dca2bdaf545309d1365ff399d8c13 Bash-utils/lib/functions/main/Text.lib
 e6ca6ba6223a6b97f513ce24cbd4020b Bash-utils/lib/functions/main/Time.lib
 d98257b9ed87b0cdbecc82418688fc78 Bash-utils/lib/functions/main/Usage.lib
-5215e5de133780bcb14f594182cda6e6 Bash-utils/install/.Bash-utils/config/modules/main/Aliases.conf
+08a7326382857595e6ac1c017d1abd06 Bash-utils/install/.Bash-utils/config/modules/main/Aliases.conf
 e3cfb7adaca4c3a35da56337a8e55c4a Bash-utils/install/.Bash-utils/config/modules/main/args.conf
 c3a2d7143fea3158cba954562556b619 Bash-utils/install/.Bash-utils/config/modules/main/ColorsBG.conf
 9bca59ee7192f5e58d0f1b421f489ce3 Bash-utils/install/.Bash-utils/config/modules/main/colors.conf
