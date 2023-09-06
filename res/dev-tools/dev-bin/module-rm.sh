@@ -146,7 +146,7 @@ for module_name in "${__ARG_LIST[@]}"; do
 
     __D_BU_DEL_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
 
-    __D_BU_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+    __D_BU_DEL_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
 
     if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
         echo "You must run this script from its directory" >&2;
@@ -158,7 +158,7 @@ for module_name in "${__ARG_LIST[@]}"; do
     fi
 
     # Checking if the whole module exists.
-    if [ ! -d "${__D_BU_DEL_MODULE_CONF_PATH}" ] && [ ! -d "${__D_BU_DEL_MODULE_INIT_PATH}" ] && [ ! -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
+    if [ ! -d "${__D_BU_DEL_MODULE_CONF_PATH}" ] && [ ! -d "${__D_BU_DEL_MODULE_INIT_PATH}" ] && [ ! -d "${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}" ]; then
 	    echo "The ${module_name} module does not exists anymore in the framework's data folders";
 
 	    exit 0;
@@ -179,10 +179,10 @@ for module_name in "${__ARG_LIST[@]}"; do
     fi
 
     # Checking if the module's library path exists, and then deleting its directory.
-    if [ -d "${__D_BU_LIB_MODULE_FUNCTS_PATH}" ]; then
-	    echo "Deleting the ${module_name} module's library directory        : ${__D_BU_LIB_MODULE_FUNCTS_PATH}";
+    if [ -d "${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's library directory        : ${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}";
 
-        check_folder_exists "${__D_BU_LIB_MODULE_FUNCTS_PATH}";
+        check_folder_exists "${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}";
     fi
 
     echo;

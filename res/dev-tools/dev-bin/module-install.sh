@@ -113,3 +113,46 @@ fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
+
+# Checking if the script is executed in its directory.
+for module_name in "${__ARG_LIST[@]}"; do
+    # Bash Utils library root path from this script's path.
+    __D_BU_LIB_ROOT_PATH="../../..";
+
+    __D_BU_INST_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+
+    __D_BU_INST_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+
+    __D_BU_INST_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+
+    if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
+        echo "You must run this script from its directory" >&2;
+        echo >&2;
+
+        echo "Terminating module creation" >&2;
+
+        exit 1;
+    fi
+
+    # Checking if the whole module exists.
+    if [ -d "${__D_BU_INST_MODULE_CONF_PATH}" ] && [ -d "${__D_BU_INST_MODULE_INIT_PATH}" ] && [ -d "${__D_BU_INST_LIB_MODULE_FUNCTS_PATH}" ]; then
+	    echo "The ${module_name} module's directories already exist";
+
+        exit 0;
+    fi
+done
+
+# Printing that the targeted modules were successfully installed into the Bash Utils framework's data folders.
+if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
+    echo "The ${__ARG_LIST[0]} module was successfully installed";
+else
+    echo "The following modules were successfully installed :";
+
+    for module in "${__ARG_LIST[@]}"; do
+        echo "    - ${module}";
+    done
+fi
+
+echo;
+
+exit 0;

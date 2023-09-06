@@ -111,3 +111,53 @@ fi
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
+
+# Checking if the script is executed in its directory.
+for module_name in "${__ARG_LIST[@]}"; do
+    # Bash Utils library root path from this script's path.
+    __D_BU_LIB_ROOT_PATH="../../..";
+
+    __D_BU_PACK_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+
+    __D_BU_PACK_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+
+    __D_BU_PACK_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+
+    if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
+        echo "You must run this script from its directory" >&2;
+        echo >&2;
+
+        echo "Terminating module creation" >&2;
+
+        exit 1;
+    fi
+
+    # Checking if the whole module exists.
+    if [ ! -d "${__D_BU_PACK_MODULE_CONF_PATH}" ] || [ ! -d "${__D_BU_PACK_MODULE_INIT_PATH}" ] || [ ! -d "${__D_BU_PACK_MODULE_FUNCTS_PATH}" ]; then
+	    echo "ERROR : At least one of the following ${module_name} module's directories are missing :" >&2;
+	    echo "    -${__D_BU_PACK_MODULE_CONF_PATH}" >&2;
+	    echo "    -${__D_BU_PACK_MODULE_INIT_PATH}" >&2;
+	    echo "    -${__D_BU_PACK_MODULE_FUNCTS_PATH}" >&2;
+	    echo >&2;
+
+	    echo "Please check the existence of these directories" >&2;
+	    echo >&2;
+
+        exit 1;
+    fi
+done
+
+# Printing that the targeted modules were successfully packed from the Bash Utils framework's data folders.
+if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
+    echo "The ${__ARG_LIST[0]} module was successfully packed";
+else
+    echo "The following modules were successfully packed :";
+
+    for module in "${__ARG_LIST[@]}"; do
+        echo "    - ${module}";
+    done
+fi
+
+echo;
+
+exit 0;
