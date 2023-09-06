@@ -163,13 +163,6 @@ for module_name in "${__ARG_LIST[@]}"; do
 	    echo "The ${module_name} module's directories already exist";
         
         exit 0;
-
-	    # WIP : Checking if the mandatory files exist.
-	    check_mandatory_file_exists="${__D_BU_INST_MODULE_CONF_PATH}/module.conf";
-	    check_mandatory_file_exists="${__D_BU_INST_MODULE_INIT_PATH}/Initializer.sh";
-
-        echo "The ${module_name} module already exists"; echo;
-
     fi
 
     # Checking if the module's configuration path exists, or else creating its directory.
