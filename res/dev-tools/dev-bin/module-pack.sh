@@ -83,9 +83,17 @@ fi
 
 #### VARIABLES DEFINITIONS
 
-## SUB-CATEGORY NAME
+## PATHS
 
-# Feel free to define variables here if needed.
+# Default output directory for each module's root folder (default value : "${HOME}/.Bash-utils/module_pack_sh_output").
+__D_BU_PACk__DEFAULT_OUTPUT_DIR="${HOME}/.Bash-utils/module_pack_sh_output";
+
+## ==============================================
+
+## ARCHIVE FORMAT
+
+# Default archive format for storing each module's root folder (default value : zip | supported : 7z, rar (WSL ONLY !!!)).
+__D_BU_PACK__DEFAULT_COMPRESSION_FORMAT='zip';
 
 ## ==============================================
 
@@ -112,6 +120,10 @@ fi
 
 ######################################################### CODE ########################################################
 
+if [ ! -d "${__D_BU_PACK__DEFAULT_OUTPUT_DIR}" ] then
+	mkdir -pv "${__D_BU_PACK__DEFAULT_OUTPUT_DIR}" || exit 1;
+fi
+
 # Checking if the script is executed in its directory.
 for module_name in "${__ARG_LIST[@]}"; do
     # Bash Utils library root path from this script's path.
@@ -120,6 +132,8 @@ for module_name in "${__ARG_LIST[@]}"; do
     __D_BU_PACK_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
 
     __D_BU_PACK_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+
+    __D_BU_PACK_MODULE_MANIFS_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/manifests/";
 
     __D_BU_PACK_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
 

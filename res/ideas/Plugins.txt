@@ -1,0 +1,3 @@
+Les plugins sont des fichiers de code Bash pouvant servir de librairie pour plusieurs.
+
+Contrairement aux modules, les plugins n'ont pas besoin de configurations complexes, ne rajoutent pas de fonctions complexes demandant des centaines de lignes de code et une gestion d'appel de commandes pouvant différer selon les systèmes d'exploitation supportés par chaque module, et doivent se baser exclusivement sur des fonctions existantes ajoutées par au moins un des modules installés.
