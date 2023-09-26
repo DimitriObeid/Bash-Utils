@@ -614,7 +614,7 @@ function BytesToHuman()
     local BYTESTOHUMAN_RESULT;
 
     #**** Code ****
-    if [ "${L_PAD^^}" == 'NULL' ] || [ "${L_PAD^^}" == 'NIL' ]; then L_PAD='no'; fi
+    if [[ "${L_PAD^^}" == N?(I|U)L?(L) ]]; then L_PAD='no'; fi
 
     # Creating a command substitution to calculate the byte count according to the values passed as arguments, with an AWK script.
     BYTESTOHUMAN_RESULT=$(awk -v bytes="${L_BYTES}" -v pad="${L_PAD}" -v base="${L_BASE}" -v lang="${V_LANG}" 'function human(x, pad, base, lang) {
