@@ -60,7 +60,7 @@ function BU.ModuleInit.SetInitLocale.sv()
 
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
-    ########################### PROCESSING THE MODULES INITIALIZATION SCRIPT ##########################
+    ######################## BEARBETNING AV SKRIPTET FÖR INITIERING AV MODULEN ########################
 
     ####
 
