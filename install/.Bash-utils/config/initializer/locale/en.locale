@@ -37,10 +37,10 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## REPEATED MESSAGES
 
-    # Writing the file name, function name and the line number where an error occured.
+    # Writing the file name, function name and the line number where a non-fatal error occured.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS WARNING";
 
-    # Writing the file name and the line number where an error occured.
+    # Writing the file name and the line number where a non-fatal error occured.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="IN « %s » FILE, ON LINE « %s » --> BASH-UTILS WARNING";
 
     # Writing the file name, function name and the line number where a fatal error occured.

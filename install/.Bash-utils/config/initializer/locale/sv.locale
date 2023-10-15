@@ -33,24 +33,24 @@ function BU.ModuleInit.SetInitLocale.sv()
 
     ############################### DEFINITION AV ÖVERSÄTTNINGSRESURSER ###############################
 
-    ####
+    #### DEFINITION AV ANVÄNDBARA VARIABLER
 
-    ##
+    ## ÖVERFLÖDIGA MEDDELANDEN
 
-    #
+    # Skriv namnet på filen, namnet på funktionen och radnumret där ett icke-fatalt fel inträffade.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="";
 
-    #
+    # Skriv filnamnet och radnumret där ett icke dödligt fel inträffade.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="";
 
-    #
+    # Skriv namnet på filen, namnet på funktionen och radnumret där ett fatalt fel inträffade.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="";
 
-    #
+    # Skriv filnamnet och radnumret där ett allvarligt fel inträffade.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
 
-    #
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="";
+    # Skriv början på den text som ska skrivas ut med hjälp av funktionen "BU.ModuleInit.PrintLogError()".
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
     ## ==============================================
 

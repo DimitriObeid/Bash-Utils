@@ -37,10 +37,10 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## MESSAGES REDONDANTS
 
-    # Écriture du nom du fichier fichier, du nom de la fonction et du numéro de ligne où une erreur s'est produite.
+    # Écriture du nom du fichier, du nom de la fonction et du numéro de ligne où une erreur non-fatale s'est produite.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
 
-    # Écriture du nom du fichier et du numéro de ligne où une erreur s'est produite.
+    # Écriture du nom du fichier et du numéro de ligne où une erreur non-fatale s'est produite.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="DANS LE FICHIER « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
 
     # Écriture du nom du fichier, du nom de la fonction et du numéro de ligne où une erreur fatale s'est produite.
