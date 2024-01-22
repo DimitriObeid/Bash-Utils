@@ -651,6 +651,50 @@ function BU.Main.Files.DeleteFile()
 
 ## ==============================================
 
+## FILE EDITION FUNCTIONS
+## DEBUG ID : "file-edition-functions"
+
+declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_EDITION_FUNCTIONS="${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}::file-edition-functions";
+
+# ·····························
+# Mass files renaming function.
+
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Files.RenameFilesByDeletingPattern()    -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                                  -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                               -> Main -> Echo.lib
+
+function BU.Main.Files.RenameFilesByDeletingPattern()
+{
+    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+        "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS}";
+
+    #**** Parameters ****
+    local p_directories=${1:-$'\0'};    # ARG TYPE : Dirpath    - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the directory / directories where the files to rename are located.
+    local p_pattern=${2:-$'\0'};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Pattern to delete from each files' name.
+
+    #**** Code ****
+    if ! BU.Main.Args__Files.RenameFilesByDeletingPattern "${p_directories}" "${p_pattern}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+
+    # Checking if all the directories paths given in the "${p_directories}" argument exist and are not read-only.
+#     for dirs in "${p_directories[@]}"; do
+#
+#         # Getting each directory path by delimiter.
+#
+#
+#         true;
+#     done
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
+
+## ==============================================
+
 ## CHECKING FILE INFORMATIONS
 ## DEBUG ID : "checking-file-informations"
 

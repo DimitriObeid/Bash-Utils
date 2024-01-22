@@ -1967,7 +1967,7 @@ function CompileInSingleFile()
                 echo "${__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}";
 
                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
-                    echo "    - ${files}"
+                    echo "    - ${files}";
                 done
 
                 echo >&2; printf "${__BU_COMPILE__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE}\n" "${__compiled_stable_file_path}" >&2;

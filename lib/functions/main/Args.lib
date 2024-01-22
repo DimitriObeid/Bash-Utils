@@ -128,6 +128,14 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK
 # ·································································································································································
 # Printing a message without the need to write the whole "BU.Main.Errors.HandleErrors()" function's second argument, and according to the test option which failed.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - declare
+#   - echo
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.Argc()               -> Main -> Args.lib (this file)
 #   - BU.Main.Args.GetFileName()        -> Main -> Args.lib (this file)
@@ -143,6 +151,7 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK
 #   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
+
 
 # shellcheck disable=
 function BU.Main.Args.PrintBadOption()
@@ -422,6 +431,11 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUM
 # ·······························································
 # Checking the values stored in the argument array of a function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Function              -> Main -> Decho.lib
 
@@ -435,6 +449,7 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUM
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
 
 #   - BU.ModuleInit.CheckIsDebugging()          -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Args.GetFuncArgsArrayValues()
@@ -493,11 +508,17 @@ function BU.Main.Args.GetFuncArgsArrayValues()
 # ··········································
 # Checking a file's name passed as argument.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Path()    -> Main -> Decho.lib
 
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Args.GetFileName()
@@ -525,11 +546,13 @@ function BU.Main.Args.GetFileName()
 # ···········································
 # Checking a function's name passed argument.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Function()    -> Main -> Decho.lib
 
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Args.GetFunctionName()
@@ -557,11 +580,13 @@ function BU.Main.Args.GetFunctionName()
 # ··········································
 # Checking a file's name passed as argument.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Highlight()   -> Main -> Decho.lib
 
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Args.GetLineNumber()
@@ -589,6 +614,7 @@ function BU.Main.Args.GetLineNumber()
 # ··············································
 # Getting the three informations simultaneously.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.PrintFFL()               -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib (this file)
@@ -597,6 +623,7 @@ function BU.Main.Args.GetLineNumber()
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
+
 
 # shellcheck disable=
 function BU.Main.Args.GetFFL()
@@ -698,6 +725,7 @@ function BU.Main.Args.GetFFL()
 
 # This function is called in the "BU.Main.Args.Argc()" and "BU.Main.Echo.__EchoOutput()" functions, for example.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFileName()        -> Main -> Args.lib (this file)
 #   - BU.Main.Args.GetFunctionName()    -> Main -> Args.lib (this file)
@@ -705,6 +733,7 @@ function BU.Main.Args.GetFFL()
 
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Args.PrintFFL()

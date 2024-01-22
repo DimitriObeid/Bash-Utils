@@ -724,7 +724,7 @@ function BU.Main.Text.GetSubStringAfterDelim()
         if ! BU.Main.Args__Text.GetSubStringAfterDelim "${p_string}" "${p_delim}" "${p_iterations}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     fi
 
-    # WARNING ! DO NOT put double quotes between the "$(seq "${p_iterations}")", or else it will not word split, and the loop will only run once !
+    # WARNING ! DO NOT put double quotes between the >>  $(seq "${p_iterations}")  <<, or else it will not word split, and the loop will only run once !
     for i in $(seq "${p_iterations}"); do
         p_string="${p_string#*"${p_delim}"}";
 
@@ -911,6 +911,11 @@ function BU.Main.Text.GetStringCharactersNumber()
 # ········································
 # Getting the number of words in a string.
 
+# Featured shell commands and their option(s) :
+#   - basename
+#   - echo      (-n -e)
+#   - wc        (--words)
+
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
@@ -939,6 +944,11 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTI
 
 # ···········································
 # Getting every characters present in a file.
+
+# Featured shell commands and their option(s) :
+#   - basename
+#   - fold      (-w1)
+#   - sort      (-u)
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -970,6 +980,11 @@ function BU.Main.Text.ListCharactersFromFile() {
 
 # ······································
 # Getting every words present in a file.
+
+# Featured shell commands and their option(s) :
+#   - basename
+#   - sed       (-e)
+#   - sort      (-u | -f)
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -1008,6 +1023,9 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINT
 
 # ················································
 # Printing a single character or a string X times.
+
+# Featured shell commands and their option(s) :
+#   - printf
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -1050,6 +1068,9 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVER
 # animal | big | car | donut    --> donut | car | big | animal
 # /home/user/Documents          --> Documents/user/home
 
+# Featured shell commands and their option(s) :
+#   - basename
+
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()  -> Main -> Args.lib
 
@@ -1068,7 +1089,7 @@ function BU.Main.Text.ReverseStringWordsOrder()
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
     local p_delim=${2:-$'\0'};	    # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Delimiter
     local p_keepd=${3:-$'\0'};      # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : Keep or remove first or last delimiters, or both together, if they are the first and / or the last character of the string.
-    local p_init=${4:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function that calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
+    local p_init=${4:-$'\0'};       # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the call of any function which calls translated text for the main module (this function is called by the "BU.Main.Text.GetSubStringAfterDelim()" function, which is called in the "BU.ModuleInit.ParseCSVLang()" function).
 
 
     #**** Variables ****
@@ -1078,7 +1099,20 @@ function BU.Main.Text.ReverseStringWordsOrder()
 
     #**** Code ****
     if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
-        if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+        if ! \
+            BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims \
+            "${p_string}" \
+            "${p_delim}" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "${LINENO}";
+        then
+            local C="${?}";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return "${C}";
+        fi
     fi
 
     # shellcheck disable=SC2219
@@ -1090,8 +1124,13 @@ function BU.Main.Text.ReverseStringWordsOrder()
         (( x-- ));
     done
 
+    # Keeping the delimiter at the begining of the now-reversed string.
     if     [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst) ]];              then reversed="${p_delim}${reversed}";
+
+    # Keeping the delimiter at the end of the now-reversed string.
     elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))l?(ast) ]];               then reversed="${reversed}${p_delim}";
+
+    # Keeping the delimiter at the begining and the end of the now-reversed string.
     elif   [[ "${p_keepd,,}" == k?(eep)?([[:space:]])?(-?(-))f?(irst)?(-)l?(ast) ]];   then reversed="${p_delim}${reversed}${p_delim}"; fi
 
     echo -e "${reversed}";
@@ -1101,6 +1140,9 @@ function BU.Main.Text.ReverseStringWordsOrder()
 
 # ············································
 # Reverse the order of characters in a string.
+
+# Featured shell commands and their option(s) :
+#   - rev
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
@@ -1136,6 +1178,10 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLIT
 # String to words array.
 
 # Pass a string as argument, and after calling this function, copy the content of the generated array into another array, like this : your_array_name=("${__BU_MAIN_TEXT_LIB__STR_TO_WORD_ARR[@]}")
+
+# Featured shell commands and their option(s) :
+#   - basename
+#   - eval
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Text.StrToWordArray()   -> Main -> Args.lib
@@ -1176,6 +1222,9 @@ function BU.Main.Text.StrToWordArray()
 
 # ······················
 # Words array to string.
+
+# Featured shell commands and their option(s) :
+#   - basename
 
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib

@@ -3634,7 +3634,10 @@ function BashUtils_InitModules._()
                     BU.ModuleInit.PrintLogError "${BASH_SOURCE[0]}" "$(( LINENO - 2 ))" "E_BUINIT__INITMODULE__MODULE_CONFIG_FILE_NOT_FOUND";
 
                     # shellcheck disable=SC2059
-                    printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND}" "${v_module_name}" "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
+                    printf \
+                        "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_CONF_DIRS__MODULE_CONF_FILE_NOT_FOUND}" \
+                        "${v_module_name}" \
+                        "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}";
 
                     BU.ModuleInit.MsgTerminate;
 
@@ -3692,7 +3695,13 @@ function BashUtils_InitModules._()
             # Checking if the module's initialization directory exists (by removing its optionnaly passed configurations arguments).
             if ! ls --directory "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}"; then local lineno="${LINENO}";
                 # shellcheck disable=SC2059
-                BU.ModuleInit.PrintLogError "$(printf "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" "${v_module_name}")" "$(basename "${BASH_SOURCE[0]}")" "${lineno}" "E_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
+                BU.ModuleInit.PrintLogError \
+                    "$(printf \
+                        "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" \
+                        "${v_module_name}")" \
+                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "${lineno}" \
+                    "E_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
 
                 printf '\n' >&2;
 
