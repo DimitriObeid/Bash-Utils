@@ -77,7 +77,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : BEGIN INITIALIZATION PROCESS
+    #### SECTION : BEGINNING OF THE INITIALIZATION PROCESS
 
     ## SUB-SECTION : DEFINING GLOBAL VARIABLES
 

@@ -3826,7 +3826,7 @@ function BashUtils_InitModules._()
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-#### BEGIN INITIALIZATION PROCESS
+#### BEGINNING OF THE INITIALIZATION PROCESS
 
 ## CHECKING IF THE CURRENT SHELL IS BASH
 

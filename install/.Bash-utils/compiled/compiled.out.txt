@@ -1,7 +1,7 @@
-0ab57049ca2c964a94e95a035e29e920 Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
-c5fd7619c4a07f52ede5adbbbf46ac39 Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
+586deec746c6e3ad4980de955d027963 Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
+6cd0c5ccc159b651f6fd4a3d8304111a Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
-95650f1e255f65f31997bca38caa468e Bash-utils/install/Bash-utils-init.sh
+6276be3cb5854e4e6199c61059272baa Bash-utils/install/Bash-utils-init.sh
 bab593c91b8927e9355f2bb526ebcf39 Bash-utils/lib/functions/main/Args.lib
 61e241307d02f4598b41902db8134e2a Bash-utils/lib/functions/main/BasicMaths.lib
 bffbd41016a62a428fb1939ca76cf7fc Bash-utils/lib/functions/main/Checkings.lib

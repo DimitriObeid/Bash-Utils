@@ -62,9 +62,9 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ######################## TRAITEMENT DU SCRIPT D'INITIALISATION DES MODULES ########################
 
-    #### MESSAGES HORS FONCTION
+    #### MESSAGES HORS FONCTION [-----] OUT OF FUNCTION MESSAGES
 
-    ## DOSSIER RACINE DES CONFIGURATIONS DE BASH UTILS MANQUANT
+    ## DOSSIER RACINE DES CONFIGURATIONS DE BASH UTILS MANQUANT [-----] MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
         declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="Le dossier racine des configurations Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel";
@@ -77,7 +77,7 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : DÉBUT DU PROCESSUS D'INITIALISATION [-----] BEGIN INITIALIZATION PROCESS
+    #### SECTION : DÉBUT DU PROCESSUS D'INITIALISATION [-----] BEGINNING OF THE INITIALIZATION PROCESS
 
     ## SOUS-SECTION : DÉFINITION DES VARIABLES GLOBALES [-----] DEFINING GLOBAL VARIABLES
 
