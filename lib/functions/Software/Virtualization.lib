@@ -133,6 +133,7 @@ fi; echo >&2; exit 1; fi
 # ·························
 # Installing Qemu on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -148,6 +149,7 @@ function BU.Software.Linux.Virtualization.InstallQemu()
 # ·······································
 # Installing VMware Workstation on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -163,6 +165,7 @@ function BU.Software.Linux.Virtualization.InstallVMwareWorkstation()
 # ······················
 # Installing Virtualbox.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -182,6 +185,7 @@ function BU.Software.Linux.Virtualization.InstallVirtualbox()
 # ························
 # Installing Qemu for OSX.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -197,6 +201,7 @@ function BU.Software.OSX.Virtualization.InstallQemu()
 # ·············································
 # Installing VMware Fusion (OSX software only).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -212,6 +217,7 @@ function BU.Software.Virtualization.InstallVMwareFusion()
 # ······························
 # Installing Virtualbox for OSX.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -232,6 +238,7 @@ function BU.Software.OSX.Virtualization.InstallVirtualbox()
 # ····························
 # Installing Qemu for Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -247,6 +254,7 @@ function BU.Software.Windows.Virtualization.InstallQemu()
 # ··································
 # Installing Virtualbox for Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -262,6 +270,7 @@ function BU.Software.Windows.Virtualization.InstallVirtualbox()
 # ··········································
 # Installing VMware Workstation for Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -282,6 +291,7 @@ function BU.Software.Windows.Virtualization.InstallVMwareWorkstation()
 # ················
 # Installing Qemu.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -299,6 +309,7 @@ function BU.Software.Virtualization.InstallQemu()
 # ······················
 # Installing Virtualbox.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -316,6 +327,7 @@ function BU.Software.Virtualization.InstallVirtualbox()
 # ··················
 # Installing VMware.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

@@ -117,6 +117,7 @@ declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__OPTI
 # ··································································
 # Checking if the language's code matches to a valid ISO 639-1 code.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
@@ -135,6 +136,7 @@ function BU.Main.Locale.CheckISO_639_1_ValidCode()
 # ·······························································································································································································································
 # Handling the parameters errors for the "BU.Main.Locale.PrintLanguageName.Optimize()" function, only if the main script is the 3rd version of the library compiler, which does not heavily depends on the framework's resources.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Locale.CheckISO_639_1_ValidCode()     -> Main -> Locale.lib (this file)
 
@@ -165,6 +167,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompi
 # ····················································································································································································
 # Optimizing the "BU.Main.Locale.PrintLanguageName()" function's code, in order to avoid to modify manually the code and the rendered layout for each of the 200+ supported languages.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Locale.PrintLanguageName.Optimize()                             -> Main -> Args.lib
 
@@ -175,7 +178,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompi
 function BU.Main.Locale.PrintLanguageName.Optimize()
 {
 	if ! BU.ModuleInit.IsCompiler; then
-		# This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+		# This function call makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command. the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
 		BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
 			"${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}" \
 			"${__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__OPTIMIZATION_FUNCTIONS}";
@@ -357,6 +360,7 @@ declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRIN
 # Temporary : since the compiled file doesn't exists yet AND does not uses the main module's translation files,
 # it is necessary to prevent Shellcheck to flag the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__*}" global variables as "referenced but not assigned".
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BUPLNOptimizer()  -> Main -> Locale.lib (defined into this function, this file)
 
@@ -364,7 +368,7 @@ declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRIN
 function BU.Main.Locale.PrintLanguageName()
 ({
 	if ! BU.ModuleInit.IsCompiler; then
-		# This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+		# This function call makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command. the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
 		BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
 			"${__BU_MAIN_LOCALE_LIB__CAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS}" \
 			"${__BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRINTING_LOCALE}";

@@ -151,6 +151,7 @@ declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGR
 # ········································
 # Installing DirectX on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -166,6 +167,7 @@ function BU.Software.Windows.Libraries.DirectX.Install()
 # ······································
 # Updating DirectX on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -181,6 +183,7 @@ function BU.Software.Windows.Libraries.DirectX.Update()
 # ··········································
 # Uninstalling DirectX on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -203,6 +206,7 @@ declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGR
 # ·······································
 # Installing OpenGL on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -218,6 +222,7 @@ function BU.Software.Windows.Libraries.OpenGL.Install()
 # ·····································
 # Updating OpenGL on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -233,6 +238,7 @@ function BU.Software.Windows.Libraries.OpenGL.Update()
 # ·········································
 # Uninstalling OpenGL on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -255,6 +261,7 @@ declare -r __BU_SOFTWARE_WINDOWS_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGR
 # ····································
 # Installing SDL on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -270,6 +277,7 @@ function BU.Software.Windows.Libraries.SDL.Install()
 # ··································
 # Updating SDL on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -285,6 +293,7 @@ function BU.Software.Windows.Libraries.SDL.Update()
 # ······································
 # Uninstalling SDL on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

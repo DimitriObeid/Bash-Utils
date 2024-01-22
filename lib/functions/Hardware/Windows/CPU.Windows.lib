@@ -128,6 +128,7 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMAT
 # ··········································································
 # Getting every informations about the PC's CPU-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.Windows.CPU.
 #   - BU.Hardware.Windows.CPU.
@@ -166,6 +167,7 @@ function BU.Hardware.Windows.CPU.GetHardwareInfos()
 # ··············································
 # Getting the summary of the CPU's informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -178,6 +180,7 @@ function BU.Hardware.Windows.CPU.GetInfos()
 # ·························
 # Getting the CPU's vendor.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -206,6 +209,7 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CH
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -218,6 +222,7 @@ function BU.Hardware.Windows.CPU.Is32Bits()
 # ··············································
 # Checking if the CPU's architecture is 64 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -230,6 +235,7 @@ function BU.Hardware.Windows.CPU.Is64Bits()
 # ····················································
 # Checking if the CPU's architecture is AArch 32 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -242,6 +248,7 @@ function BU.Hardware.Windows.CPU.IsArchAArch32()
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -254,6 +261,7 @@ function BU.Hardware.Windows.CPU.IsArchAArch64()
 # ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -266,6 +274,7 @@ function BU.Hardware.Windows.CPU.IsArchARM32()
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -278,6 +287,7 @@ function BU.Hardware.Windows.CPU.IsArchARM64()
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -290,6 +300,7 @@ function BU.Hardware.Windows.CPU.IsArchAMD64()
 # ···········································
 # Checking if the CPU's architecture is i386.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -302,6 +313,7 @@ function BU.Hardware.Windows.CPU.IsArchi386()
 # ················································
 # Checking if the CPU's architecture is PowerPC32.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -314,6 +326,7 @@ function BU.Hardware.Windows.CPU.IsArchPPC32()
 # ················································
 # Checking if the CPU's architecture is PowerPC64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -326,6 +339,7 @@ function BU.Hardware.Windows.CPU.IsArchPPC64()
 # ·············································
 # Checking if the CPU's architecture is MIPS32.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -338,6 +352,7 @@ function BU.Hardware.Windows.CPU.IsArchMIPS32()
 # ·············································
 # Checking if the CPU's architecture is MIPS64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -350,6 +365,7 @@ function BU.Hardware.Windows.CPU.IsArchMIPS64()
 # ···············································
 # Checking if the CPU's architecture is RISC-V32.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -362,6 +378,7 @@ function BU.Hardware.Windows.CPU.IsArchRISCV32()
 # ···············································
 # Checking if the CPU's architecture is RISC-V64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -381,6 +398,7 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GE
 # ·······························
 # Getting the CPU's architecture.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -409,6 +427,7 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_
 # ·································
 # Checking if the CPU is mono-core.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -428,6 +447,7 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_T
 # ·························································
 # Getting the total number of cores (logical AND physical).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -440,6 +460,7 @@ function BU.Hardware.Windows.CPU.GetCoresNumber()
 # ····································
 # Getting the number of logical cores.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -452,6 +473,7 @@ function BU.Hardware.Windows.CPU.GetLogicalCoresNumber()
 # ·····································
 # Getting the number of physical cores.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -489,6 +511,7 @@ declare -r __BU_HARDWARE_WINDOWS_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CLOCK__GETTING_T
 # ····························
 # Getting the clock frequency.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -520,6 +543,7 @@ function BU.Hardware.Windows.CPU.GetClockFrequency()
 # ································
 # Getting the CPU's address sizes.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -532,6 +556,7 @@ function BU.Hardware.Windows.CPU.GetAdressSizes()
 # ······························
 # Getting the number of sockets.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

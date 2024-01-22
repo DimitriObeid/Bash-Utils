@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ····························································
 # Getting every informations about the computer's motherboard.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -127,6 +128,7 @@ function BU.Hardware.Haiku.Motherboard.GetHardwareInfos()
 # ···········································
 # Getting the motherboard's firmware version.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ···············································
 # Getting every computer's hardware informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.OSX.Audio.GetHardwareInfos()          -> Hardware -> OSX -> Audio.OSX.lib
 #   - BU.Hardware.OSX.Battery.GetHardwareInfos()        -> Hardware -> OSX -> Battery.OSX.lib
@@ -175,6 +176,7 @@ function BU.Hardware.OSX.General.GetAllHardwareInfos()
 # ················································································
 # Getting every general hardware components (like the computer's chassis, etc...).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.OSX.General.GetChassis()      -> Hardware -> OSX -> General.OSX.lib (this file)
 #   - BU.Hardware.OSX.General.GetChassisType()  -> Hardware -> OSX -> General.OSX.lib (this file)
@@ -207,6 +209,7 @@ function BU.Hardware.OSX.General.GetHardwareInfos()
 # ·······························
 # Getting the computer's chassis.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +222,7 @@ function BU.Hardware.OSX.General.GetChassis()
 # ····································
 # Getting the computer's chassis type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -231,6 +235,7 @@ function BU.Hardware.OSX.General.GetChassisType()
 # ·························
 # Getting the machine's ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -243,6 +248,7 @@ function BU.Hardware.OSX.General.GetMachineID()
 # ····················
 # Getting the boot ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

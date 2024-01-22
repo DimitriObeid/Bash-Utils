@@ -133,6 +133,7 @@ declare -r __BU_SOFTWARE_GAMES_LIB__SUBCAT_DEBUG_ID__STEAM_GAMES__CLI_DEPENDENCI
 # ························································
 # Installing SteamCMD on each supported operating systems.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -145,6 +146,7 @@ function BU.Software.Games.SteamCMD.Install()
 # ··································
 # Checking if SteamCMD is installed.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -157,6 +159,7 @@ function BU.Software.Games.SteamCMD.IsInstalled()
 # ··················
 # Updating SteamCMD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -169,6 +172,7 @@ function BU.Software.Games.SteamCMD.Update()
 # ······················
 # Uninstalling SteamCMD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -188,6 +192,7 @@ declare -r __BU_SOFTWARE_GAMES_LIB__SUBCAT_DEBUG_ID__STEAM_GAMES__STEAMCMD="${__
 # ····························
 # Login to your Steam account.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -205,6 +210,7 @@ function BU.Software.Games.SteamCMD.Login()
 # ···················
 # Downloading a game.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -222,6 +228,7 @@ function BU.Software.Games.SteamCMD.DownloadGame()
 # ····························································································································
 # Validating the downloaded files, in order to check their integrity, in case a file is corrupted, was modified or is missing.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -239,6 +246,7 @@ function BU.Software.Games.SteamCMD.ValidateFiles()
 # ·······························
 # Adding a product key to a game.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -256,6 +264,7 @@ function BU.Software.Games.SteamCMD.AddProductKey()
 # ····················
 # Uninstalling a game.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

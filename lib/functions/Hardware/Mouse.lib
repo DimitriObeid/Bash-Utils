@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ·································
 # Checking if a mouse is plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -132,6 +133,7 @@ function BU.Hardware.Mouse.IsMousePlugged()
 # ··················································································
 # Getting every informations about the computer's mouse-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

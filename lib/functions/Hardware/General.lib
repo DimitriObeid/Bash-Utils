@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ···············································
 # Getting every computer's hardware informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware."${}".General.GetAllHardwareInfos()   -> Hardware -> General."${}".lib
 
@@ -154,6 +155,7 @@ function BU.Hardware.General.GetHardwareInfos()
 # ·······························
 # Getting the computer's chassis.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -166,6 +168,7 @@ function BU.Hardware.General.GetChassis()
 # ····································
 # Getting the computer's chassis type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -178,6 +181,7 @@ function BU.Hardware.General.GetChassisType()
 # ·························
 # Getting the machine's ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -190,6 +194,7 @@ function BU.Hardware.General.GetMachineID()
 # ····················
 # Getting the boot ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

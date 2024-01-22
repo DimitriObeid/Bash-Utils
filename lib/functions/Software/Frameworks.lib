@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAMEWORKS__B
 # ·······················································
 # Installing Bootstrap on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -146,6 +147,7 @@ function BU.Software.Frameworks.Bootstrap.Install()
 # ·····················································
 # Updating Bootstrap on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -158,6 +160,7 @@ function BU.Software.Frameworks.Bootstrap.Update()
 # ·························································
 # Uninstalling Bootstrap on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -186,6 +189,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVA_FRAMEWORKS__SPRIN
 # ····················································
 # Installing Spring on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -198,6 +202,7 @@ function BU.Software.Frameworks.Spring.Install()
 # ··················································
 # Updating Spring on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -210,6 +215,7 @@ function BU.Software.Frameworks.Spring.Update()
 # ······················································
 # Uninstalling Spring on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -238,6 +244,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS_
 # ·······················································
 # Installing AngularJS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -250,6 +257,7 @@ function BU.Software.Frameworks.AngularJS.Install()
 # ·····················································
 # Updating AngularJS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -262,6 +270,7 @@ function BU.Software.Frameworks.AngularJS.Update()
 # ·························································
 # Uninstalling AngularJS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -281,6 +290,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS_
 # ······················································
 # Installing React JS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -293,6 +303,7 @@ function BU.Software.Frameworks.ReactJS.Install()
 # ····················································
 # Updating React JS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -305,6 +316,7 @@ function BU.Software.Frameworks.ReactJS.Update()
 # ························································
 # Uninstalling React JS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -324,6 +336,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWORKS_
 # ····················································
 # Installing Vue.JS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -336,6 +349,7 @@ function BU.Software.Frameworks.VueJS.Install()
 # ··················································
 # Updating Vue.JS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -348,6 +362,7 @@ function BU.Software.Frameworks.VueJS.Update()
 # ······················································
 # Uninstalling Vue.JS on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -376,6 +391,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__CAKE_P
 # ·····················································
 # Installing CakePHP on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -388,6 +404,7 @@ function BU.Software.Frameworks.CakePHP.Install()
 # ···················································
 # Updating CakePHP on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -400,6 +417,7 @@ function BU.Software.Frameworks.CakePHP.Update()
 # ·······················································
 # Uninstalling CakePHP on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -419,6 +437,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__LARAVE
 # ·····················································
 # Installing Laravel on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -431,6 +450,7 @@ function BU.Software.Frameworks.Laravel.Install()
 # ···················································
 # Updating Laravel on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -443,6 +463,7 @@ function BU.Software.Frameworks.Laravel.Update()
 # ··························································
 # Uninstalling of Laravel on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -462,6 +483,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__="${__
 # ·······················································
 # Installation Symfony on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -474,6 +496,7 @@ function BU.Software.Frameworks.Symfony.Install()
 # ···················································
 # Updating Symfony on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -486,6 +509,7 @@ function BU.Software.Frameworks.Symfony.Update()
 # ·······················································
 # Uninstalling Symfony on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -514,6 +538,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__DJA
 # ···························
 # Installing Django on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -526,6 +551,7 @@ function BU.Software.Frameworks.Django.Install()
 # ··················································
 # Updating Django on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -538,6 +564,7 @@ function BU.Software.Frameworks.Django.Update()
 # ······················································
 # Uninstalling Django on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -557,6 +584,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__FLA
 # ···················································
 # Installing Flask on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -569,6 +597,7 @@ function BU.Software.Frameworks.Flask.Install()
 # ·················································
 # Updating Flask on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -581,6 +610,7 @@ function BU.Software.Frameworks.Flask.Update()
 # ·····················································
 # Uninstalling Flask on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -600,6 +630,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS__WEB
 # ····················································
 # Installing Web2py on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -612,6 +643,7 @@ function BU.Software.Frameworks.Web2py.Install()
 # ··················································
 # Updating Web2py on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -624,6 +656,7 @@ function BU.Software.Frameworks.Web2py.Update()
 # ······················································
 # Uninstalling Web2py on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -652,6 +685,7 @@ declare -r __BU_SOFTWARE_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__RUBY_FRAMEWORKS__RUBY_
 # ···························································
 # Installing Ruby on Rails on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -664,6 +698,7 @@ function BU.Software.Frameworks.RubyOnRails.Install()
 # ·························································
 # Updating Ruby on Rails on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -676,6 +711,7 @@ function BU.Software.Frameworks.RubyOnRails.Update()
 # ·····························································
 # Uninstalling Ruby on Rails on any supported operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

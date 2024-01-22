@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAMEWO
 # ······························
 # Installing Bootstrap on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +150,7 @@ function BU.Software.Linux.Frameworks.Bootstrap.Install()
 # ····························
 # Updating Bootstrap on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -164,6 +166,7 @@ function BU.Software.Linux.Frameworks.Bootstrap.Update()
 # ································
 # Uninstalling Bootstrap on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -195,6 +198,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVA_FRAMEWORKS_
 # ···························
 # Installing Spring on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -207,6 +211,7 @@ function BU.Software.Linux.Frameworks.Spring.Install()
 # ·························
 # Updating Spring on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +224,7 @@ function BU.Software.Linux.Frameworks.Spring.Update()
 # ·····························
 # Uninstalling Spring on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -247,6 +253,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAME
 # ······························
 # Installing AngularJS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -262,6 +269,7 @@ function BU.Software.Linux.Frameworks.AngularJS.Install()
 # ····························
 # Updating AngularJS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -277,6 +285,7 @@ function BU.Software.Linux.Frameworks.AngularJS.Update()
 # ································
 # Uninstalling AngularJS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -299,6 +308,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAME
 # ·····························
 # Installing React JS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -314,6 +324,7 @@ function BU.Software.Linux.Frameworks.ReactJS.Install()
 # ···························
 # Updating React JS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -329,6 +340,7 @@ function BU.Software.Linux.Frameworks.ReactJS.Update()
 # ·······························
 # Uninstalling React JS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -351,6 +363,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAME
 # ···························
 # Installing Vue.JS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -366,6 +379,7 @@ function BU.Software.Linux.Frameworks.VueJS.Install()
 # ·························
 # Updating Vue.JS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -381,6 +395,7 @@ function BU.Software.Linux.Frameworks.VueJS.Update()
 # ·····························
 # Uninstalling Vue.JS on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -412,6 +427,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__
 # ····························
 # Installing CakePHP on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -427,6 +443,7 @@ function BU.Software.Linux.Frameworks.CakePHP.Install()
 # ··························
 # Updating CakePHP on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -442,6 +459,7 @@ function BU.Software.Linux.Frameworks.CakePHP.Update()
 # ······························
 # Uninstalling CakePHP on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -464,6 +482,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__
 # ····························
 # Installing Laravel on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -479,6 +498,7 @@ function BU.Software.Linux.Frameworks.Laravel.Install()
 # ··························
 # Updating Laravel on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -494,6 +514,7 @@ function BU.Software.Linux.Frameworks.Laravel.Update()
 # ·································
 # Uninstalling of Laravel on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -516,6 +537,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__
 # ······························
 # Installation Symfony on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -531,6 +553,7 @@ function BU.Software.Linux.Frameworks.Symfony.Install()
 # ··························
 # Updating Symfony on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -546,6 +569,7 @@ function BU.Software.Linux.Frameworks.Symfony.Update()
 # ······························
 # Uninstalling Symfony on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -577,6 +601,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORK
 # ···························
 # Installing Django on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -592,6 +617,7 @@ function BU.Software.Linux.Frameworks.Django.Install()
 # ·························
 # Updating Django on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -607,6 +633,7 @@ function BU.Software.Linux.Frameworks.Django.Update()
 # ·····························
 # Uninstalling Django on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -629,6 +656,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORK
 # ··························
 # Installing Flask on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -644,6 +672,7 @@ function BU.Software.Linux.Frameworks.Flask.Install()
 # ························
 # Updating Flask on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -659,6 +688,7 @@ function BU.Software.Linux.Frameworks.Flask.Update()
 # ····························
 # Uninstalling Flask on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -681,6 +711,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORK
 # ···························
 # Installing Web2py on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -696,6 +727,7 @@ function BU.Software.Linux.Frameworks.Web2py.Install()
 # ·························
 # Updating Web2py on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -711,6 +743,7 @@ function BU.Software.Linux.Frameworks.Web2py.Update()
 # ·····························
 # Uninstalling Web2py on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -742,6 +775,7 @@ declare -r __BU_SOFTWARE_LINUX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__RUBY_FRAMEWORKS_
 # ··································
 # Installing Ruby on Rails on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -757,6 +791,7 @@ function BU.Software.Linux.Frameworks.RubyOnRails.Install()
 # ································
 # Updating Ruby on Rails on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -772,6 +807,7 @@ function BU.Software.Linux.Frameworks.RubyOnRails.Update()
 # ····································
 # Uninstalling Ruby on Rails on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

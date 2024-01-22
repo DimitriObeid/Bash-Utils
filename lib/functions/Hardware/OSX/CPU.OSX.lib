@@ -128,6 +128,7 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_GENERAL_INFORMATIONS
 # ···········································································
 # Getting every informations about the Mac's CPU-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -140,6 +141,7 @@ function BU.Hardware.OSX.CPU.GetHardwareInfos()
 # ··············································
 # Getting the summary of the CPU's informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -152,6 +154,7 @@ function BU.Hardware.OSX.CPU.GetInfos()
 # ·························
 # Getting the CPU's vendor.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -180,6 +183,7 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHECKI
 # ··············································
 # Checking if the CPU's architecture is 32 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -192,6 +196,7 @@ function BU.Hardware.OSX.CPU.Is32Bits()
 # ··············································
 # Checking if the CPU's architecture is 64 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -204,6 +209,7 @@ function BU.Hardware.OSX.CPU.Is64Bits()
 # ····················································
 # Checking if the CPU's architecture is AArch 32 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -216,6 +222,7 @@ function BU.Hardware.OSX.CPU.IsArchAArch32()
 # ····················································
 # Checking if the CPU's architecture is AArch 64 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -228,6 +235,7 @@ function BU.Hardware.OSX.CPU.IsArchAArch64()
 # ··················································
 # Checking if the CPU's architecture is ARM 32 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -240,6 +248,7 @@ function BU.Hardware.OSX.CPU.IsArchARM32()
 # ··················································
 # Checking if the CPU's architecture is ARM 64 bits.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -252,6 +261,7 @@ function BU.Hardware.OSX.CPU.IsArchARM64()
 # ··············································
 # Checking if the CPU's architecture is is AMD64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -264,6 +274,7 @@ function BU.Hardware.OSX.CPU.IsArchAMD64()
 # ···········································
 # Checking if the CPU's architecture is i386.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -276,6 +287,7 @@ function BU.Hardware.OSX.CPU.IsArchi386()
 # ················································
 # Checking if the CPU's architecture is PowerPC32.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -288,6 +300,7 @@ function BU.Hardware.OSX.CPU.IsArchPPC32()
 # ················································
 # Checking if the CPU's architecture is PowerPC64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -300,6 +313,7 @@ function BU.Hardware.OSX.CPU.IsArchPPC64()
 # ·············································
 # Checking if the CPU's architecture is MIPS32.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -312,6 +326,7 @@ function BU.Hardware.OSX.CPU.IsArchMIPS32()
 # ·············································
 # Checking if the CPU's architecture is MIPS64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -324,6 +339,7 @@ function BU.Hardware.OSX.CPU.IsArchMIPS64()
 # ···············································
 # Checking if the CPU's architecture is RISC-V32.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -336,6 +352,7 @@ function BU.Hardware.OSX.CPU.IsArchRISCV32()
 # ···············································
 # Checking if the CPU's architecture is RISC-V64.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -355,6 +372,7 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__GETTIN
 # ·······························
 # Getting the CPU's architecture.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -383,6 +401,7 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_THE_
 # ·································
 # Checking if the CPU is mono-core.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -402,6 +421,7 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE_C
 # ·························································
 # Getting the total number of cores (logical AND physical).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -414,6 +434,7 @@ function BU.Hardware.OSX.CPU.GetCoresNumber()
 # ····································
 # Getting the number of logical cores.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -426,6 +447,7 @@ function BU.Hardware.OSX.CPU.GetLogicalCoresNumber()
 # ·····································
 # Getting the number of physical cores.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -463,6 +485,7 @@ declare -r __BU_HARDWARE_OSX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CLOCK__GETTING_THE_C
 # ····························
 # Getting the clock frequency.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -494,6 +517,7 @@ function BU.Hardware.OSX.CPU.GetClockFrequency()
 # ································
 # Getting the CPU's address sizes.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -506,6 +530,7 @@ function BU.Hardware.OSX.CPU.GetAdressSizes()
 # ······························
 # Getting the number of sockets.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

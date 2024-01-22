@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_
 # ··········································································
 # Installing the Node JS packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +150,7 @@ function BU.Software.Linux.PackageManagers.NPM.Install()
 # ························································································
 # Checking if the Node JS packages manager is installed on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -164,6 +166,7 @@ function BU.Software.Linux.PackageManagers.NPM.IsInstalled()
 # ········································································
 # Updating the Node JS packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -179,6 +182,7 @@ function BU.Software.Linux.PackageManagers.NPM.Update()
 # ·····················································································
 # Updating the cache of the Node JS packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -194,6 +198,7 @@ function BU.Software.Linux.PackageManagers.NPM.UpdateCache()
 # ···········································································
 # Downgrading the Node JS packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -209,6 +214,7 @@ function BU.Software.Linux.PackageManagers.NPM.Downgrade()
 # ··············································································
 # Uninstalling the Node JS packages manager from a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -226,6 +232,7 @@ function BU.Software.Linux.PackageManagers.NPM.Uninstall()
 # ·················································································
 # Checking the availability of a package in the Node JS package manager's database.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -241,6 +248,7 @@ function BU.Software.Linux.PackageManagers.NPM.CheckPackageFromDatabase()
 # ························································································
 # Installing a package on a Linux-based operating system with the Node JS package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -256,6 +264,7 @@ function BU.Software.Linux.PackageManagers.NPM.DownloadPackage()
 # ·······························································································
 # Updating a specific package on a Linux-based operating system with the Node JS package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -271,6 +280,7 @@ function BU.Software.Linux.PackageManagers.NPM.UpgradePackage()
 # ···························································································
 # Updating every packages on a Linux-based operating system with the Node JS package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -286,6 +296,7 @@ function BU.Software.Linux.PackageManagers.NPM.UpgradePackages()
 # ··································································································
 # Downgrading a specific package on a Linux-based operating system with the Node JS package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -301,6 +312,7 @@ function BU.Software.Linux.PackageManagers.NPM.DowngradePackage()
 # ····························································································
 # Uninstalling a package from a Linux-based operating system with the Node JS package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -316,6 +328,7 @@ function BU.Software.Linux.PackageManagers.NPM.RemovePackage()
 # ····································································································
 # Uninstalling leftover packages from a Linux-based operating system with the Node JS package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -347,6 +360,7 @@ declare -r __BU_SOFTWARE_LINUX_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__SYSTEM_PACK
 # ·······································································
 # Installing the Snap packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -362,6 +376,7 @@ function BU.Software.Linux.PackageManagers.Snap.Install()
 # ·····················································································
 # Checking if the Snap packages manager is installed on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -377,6 +392,7 @@ function BU.Software.Linux.PackageManagers.Snap.IsInstalled()
 # ·····································································
 # Updating the Snap packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -392,6 +408,7 @@ function BU.Software.Linux.PackageManagers.Snap.Update()
 # ··················································································
 # Updating the cache of the Snap packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -407,6 +424,7 @@ function BU.Software.Linux.PackageManagers.Snap.UpdateCache()
 # ········································································
 # Downgrading the Snap packages manager on a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -422,6 +440,7 @@ function BU.Software.Linux.PackageManagers.Snap.Downgrade()
 # ···········································································
 # Uninstalling the Snap packages manager from a Linux-based operating system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -451,6 +470,7 @@ function BU.Software.Linux.PackageManagers.Snap.CheckPackageFromDatabase()
 # ·····················································································
 # Installing a package on a Linux-based operating system with the Snap package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -466,6 +486,7 @@ function BU.Software.Linux.PackageManagers.Snap.DownloadPackage()
 # ····························································································
 # Updating a specific package on a Linux-based operating system with the Snap package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -481,6 +502,7 @@ function BU.Software.Linux.PackageManagers.Snap.UpgradePackage()
 # ························································································
 # Updating every packages on a Linux-based operating system with the Snap package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -496,6 +518,7 @@ function BU.Software.Linux.PackageManagers.Snap.UpgradePackages()
 # ·······························································································
 # Downgrading a specific package on a Linux-based operating system with the Snap package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -511,6 +534,7 @@ function BU.Software.Linux.PackageManagers.Snap.DowngradePackage()
 # ·························································································
 # Uninstalling a package from a Linux-based operating system with the Snap package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -526,6 +550,7 @@ function BU.Software.Linux.PackageManagers.Snap.RemovePackage()
 # ·································································································
 # Uninstalling leftover packages from a Linux-based operating system with the Snap package manager.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

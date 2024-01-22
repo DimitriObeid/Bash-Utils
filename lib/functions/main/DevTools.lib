@@ -118,6 +118,7 @@ declare -r __BU_MAIN_DEVTOOLS_LIB__SUBCAT_DEBUG_ID__DEBUG_FUNCTIONS__SHELLCHECK=
 # ······························································
 # Writing the error message if a Shellcheck verification failed.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
@@ -137,6 +138,7 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 # ·························································································
 # Verifying for any programming errors in a Bash script file with the "shellcheck" command.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.DevTools.ShellcheckVerifFailed()  -> Main -> DevTools.lib (this file)
 

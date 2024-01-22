@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ···············································
 # Getting every computer's hardware informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.Linux.Audio.GetHardwareInfos()        -> Hardware -> Linux -> Audio.Linux.lib
 #   - BU.Hardware.Linux.Battery.GetHardwareInfos()      -> Hardware -> Linux -> Battery.Linux.lib
@@ -175,6 +176,7 @@ function BU.Hardware.Linux.General.GetAllHardwareInfos()
 # ················································································
 # Getting every general hardware components (like the computer's chassis, etc...).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.Linux.General.GetChassis()        -> Hardware -> Linux -> General.Linux.lib (this file)
 #   - BU.Hardware.Linux.General.GetChassisType()    -> Hardware -> Linux -> General.Linux.lib (this file)
@@ -207,6 +209,7 @@ function BU.Hardware.Linux.General.GetHardwareInfos()
 # ·······························
 # Getting the computer's chassis.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -216,6 +219,7 @@ function BU.Hardware.Linux.General.GetChassis()        { if BU.Main.CMDS.GetComm
 # ····································
 # Getting the computer's chassis type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -238,6 +242,7 @@ function BU.Hardware.Linux.General.GetChassisType()
 # ·························
 # Getting the machine's ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -247,6 +252,7 @@ function BU.Hardware.Linux.General.GetMachineID()      { if BU.Main.CMDS.GetComm
 # ····················
 # Getting the boot ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

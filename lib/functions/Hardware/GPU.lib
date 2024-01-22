@@ -113,6 +113,7 @@ fi; echo >&2; exit 1; fi
 # ·································
 # Checking if the GPU is a AMD GPU.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -125,6 +126,7 @@ function BU.Hardware.GPU.IsAMD()
 # ····································
 # Checking if the GPU is a Nvidia GPU.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -137,6 +139,7 @@ function BU.Hardware.GPU.IsNvidia()
 # ········································
 # Checking if the GPU is a Nvidia GTX GPU.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +152,7 @@ function BU.Hardware.GPU.IsNvidiaGTX()
 # ········································
 # Checking if the GPU is a Nvidia RTX GPU.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -161,6 +165,7 @@ function BU.Hardware.GPU.IsNvidiaRTX()
 # ····················································
 # Checking if the GPU has a VGA-compatible controller.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -178,6 +183,7 @@ function BU.Hardware.GPU.IsVGACompatible()
 # ················································································
 # Getting every informations about the computer's GPU-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -195,6 +201,7 @@ function BU.Hardware.Drive.GetHardwareInfos()
 # ··································
 # Getting the CPU's bus information.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -207,6 +214,7 @@ function BU.Hardware.GPU.GetBusInfo()
 # ·······························
 # Getting the CPU's capabilities.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +227,7 @@ function BU.Hardware.GPU.GetCapabilities()
 # ··································
 # Getting the CPU's clock frequency.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -231,6 +240,7 @@ function BU.Hardware.GPU.GetClockFrequency()
 # ································
 # Getting the CPU's configuration.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -243,6 +253,7 @@ function BU.Hardware.GPU.GetConfiguration()
 # ······························
 # Getting the CPU's description.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -255,6 +266,7 @@ function BU.Hardware.GPU.GetDescription()
 # ·······························
 # Getting the CPU's logical name.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -267,6 +279,7 @@ function BU.Hardware.GPU.GetLogicalName()
 # ······························
 # Getting the CPU's physical ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -279,6 +292,7 @@ function BU.Hardware.GPU.GetPhysicalID()
 # ·······························
 # Getting the CPU's product type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -291,6 +305,7 @@ function BU.Hardware.GPU.GetProductType()
 # ····························
 # Getting the CPU's resources.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -303,6 +318,7 @@ function BU.Hardware.GPU.GetResources()
 # ·························
 # Getting the CPU's vendor.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -315,6 +331,7 @@ function BU.Hardware.GPU.GetVendor()
 # ·······································
 # Getting the CPU's width (32 / 64 bits).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

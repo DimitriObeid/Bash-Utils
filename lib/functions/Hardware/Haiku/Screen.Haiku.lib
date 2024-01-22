@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ·································
 # Checking if a monitor is plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -127,6 +128,7 @@ function BU.Hardware.Haiku.Screen.IsMonitorPlugged()
 # ········································
 # Checking if an extra monitor is plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -147,6 +149,7 @@ function BU.Hardware.Haiku.Screen.IsExtraMonitorPlugged()
 # ···················································································
 # Getting every informations about the computer's screen-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -159,6 +162,7 @@ function BU.Hardware.Haiku.Screen.GetHardwareInfos()
 # ······························
 # Getting the screen resolution.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

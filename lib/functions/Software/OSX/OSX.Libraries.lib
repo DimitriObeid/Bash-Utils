@@ -151,6 +151,7 @@ declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMI
 # ························
 # Installing Metal on OSX.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -166,6 +167,7 @@ function BU.Software.OSX.Libraries.Metal.Install()
 # ······················
 # Updating Metal on OSX.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -181,6 +183,7 @@ function BU.Software.OSX.Libraries.Metal.Update()
 # ··························
 # Uninstalling Metal on OSX.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -203,6 +206,7 @@ declare -r __BU_SOFTWARE_OSXX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMM
 # ···························
 # Installing OpenGL on MacOS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -218,6 +222,7 @@ function BU.Software.OSX.Libraries.OpenGL.Install()
 # ·························
 # Updating OpenGL on MacOS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -233,6 +238,7 @@ function BU.Software.OSX.Libraries.OpenGL.Update()
 # ·····························
 # Uninstalling OpenGL on MacOS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -255,6 +261,7 @@ declare -r __BU_SOFTWARE_OSX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAMMI
 # ························
 # Installing SDL on MacOS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -270,6 +277,7 @@ function BU.Software.OSX.Libraries.SDL.Install()
 # ······················
 # Updating SDL on MacOS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -285,6 +293,7 @@ function BU.Software.OSX.Libraries.SDL.Update()
 # ··························
 # Uninstalling SDL on MacOS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

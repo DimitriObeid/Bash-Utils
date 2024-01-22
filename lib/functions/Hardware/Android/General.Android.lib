@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ···············································
 # Getting every computer's hardware informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.Android.Audio.GetHardwareInfos()          -> Hardware -> Android -> Audio.Android.lib
 #   - BU.Hardware.Android.Battery.GetHardwareInfos()        -> Hardware -> Android -> Battery.Android.lib
@@ -175,6 +176,7 @@ function BU.Hardware.Android.General.GetAllHardwareInfos()
 # ················································································
 # Getting every general hardware components (like the computer's chassis, etc...).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.Android.General.GetChassis()      -> Hardware -> Android -> General.Android.lib (this file)
 #   - BU.Hardware.Android.General.GetChassisType()  -> Hardware -> Android -> General.Android.lib (this file)
@@ -207,6 +209,7 @@ function BU.Hardware.Android.General.GetHardwareInfos()
 # ·······························
 # Getting the computer's chassis.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +222,7 @@ function BU.Hardware.Android.General.GetChassis()
 # ····································
 # Getting the computer's chassis type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -231,6 +235,7 @@ function BU.Hardware.Android.General.GetChassisType()
 # ·························
 # Getting the machine's ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -243,6 +248,7 @@ function BU.Hardware.Android.General.GetMachineID()
 # ····················
 # Getting the boot ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

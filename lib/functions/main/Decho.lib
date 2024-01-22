@@ -117,6 +117,7 @@ declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FOR
 # ···························································································································································
 # Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
@@ -124,7 +125,8 @@ declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FOR
 # shellcheck disable=
 function BU.Main.Decho.__Decho()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
         "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS}";
@@ -143,6 +145,7 @@ function BU.Main.Decho.__Decho()
 # ···································································
 # Text's inside decoration / formatting procssing (complete version).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Decho.Decho()           -> Main -> Args.lib
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
@@ -162,7 +165,8 @@ function BU.Main.Decho.__Decho()
 # shellcheck disable=
 function BU.Main.Decho.Decho()
 {
-    # This function makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command.
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
         "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS}";
@@ -363,6 +367,7 @@ declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FOR
 # ························································
 # Easy "BU.Main.Decho.Decho()" function calls with colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
 
@@ -402,6 +407,7 @@ function BU.Main.Decho.Decho.Yellow                 { local v_str=${1:-$'\0'}; l
 # ··············································································
 # Easy "BU.Main.Decho.Decho()" function calls with specific text display colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
 
@@ -425,6 +431,7 @@ function BU.Main.Decho.Decho.Warning                { local v_str=${1:-$'\0'}; l
 # ··········································································
 # Easy "BU.Main.Decho.Decho()" function calls with background color display.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
 
@@ -435,6 +442,7 @@ function BU.Main.Decho.BGColor                      { local v_str=${1:-$'\0'}; l
 # ··························································
 # Easy "BU.Main.Decho.__Decho()" function calls with colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.__Decho() -> Main -> Decho.lib (this file)
 
@@ -472,6 +480,7 @@ function BU.Main.Decho.__Decho.Yellow               { BU.Main.Decho.__Decho "${1
 # ················································································
 # Easy "BU.Main.Decho.__Decho()" function calls with specific text display colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.__Decho() -> Main -> Decho.lib (this file)
 
@@ -500,6 +509,7 @@ function BU.Main.Decho.__Decho.Warning              { BU.Main.Decho.__Decho "${1
 # ·················
 # Blink formatting.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
 
@@ -539,6 +549,7 @@ function BU.Main.Decho.Decho.FMT_BlinkU             { BU.Main.Decho.Decho "${1}"
 # ···············
 # Bold formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
 
@@ -562,6 +573,7 @@ function BU.Main.Decho.Decho.FMT_BoldU          { BU.Main.Decho.Decho "${1}" "${
 # ··············
 # Dim formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
 
@@ -577,6 +589,7 @@ function BU.Main.Decho.Decho.FMT_DU         { BU.Main.Decho.Decho "${1}" "${2}" 
 # ·················
 # Italic formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
 
@@ -588,6 +601,7 @@ function BU.Main.Decho.Decho.FMT_IU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 # ························
 # Strikethrough formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
 
@@ -597,6 +611,7 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 # ····················
 # Underline formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
 

@@ -113,6 +113,7 @@ fi; echo >&2; exit 1; fi
 # ································································
 # Checking if the type of the currently used memory stick is DDR3.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -125,6 +126,7 @@ function BU.Hardware.Memory.IsMemoryDDR3()
 # ································································
 # Checking if the type of the currently used memory stick is DDR4.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -141,6 +143,7 @@ function BU.Hardware.Memory.IsMemoryDDR4()
 # ···················································································
 # Getting every informations about the computer's memory-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -153,6 +156,7 @@ function BU.Hardware.Memory.GetHardwareInfos()
 # ·······································
 # Getting the number of RAM slots in use.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -165,6 +169,7 @@ function BU.Hardware.OSX.Memory.GetUsedRAMSlotsNumber()
 # ················································
 # Getting the number of RAM slots available.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -177,6 +182,7 @@ function BU.Hardware.OSX.Memory.GetAvailableRamSlotsNumber()
 # ····························
 # Getting memory max capacity.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -189,6 +195,7 @@ function BU.Hardware.OSX.Memory.GetMaxMemoryCapacity()
 # ····················
 # Getting memory type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

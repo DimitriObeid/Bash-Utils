@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ···············································
 # Getting every computer's hardware informations.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.BSD.Audio.GetHardwareInfos()          -> Hardware -> BSD -> Audio.BSD.lib
 #   - BU.Hardware.BSD.Battery.GetHardwareInfos()        -> Hardware -> BSD -> Battery.BSD.lib
@@ -175,6 +176,7 @@ function BU.Hardware.BSD.General.GetAllHardwareInfos()
 # ················································································
 # Getting every general hardware components (like the computer's chassis, etc...).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware.BSD.General.GetChassis()      -> Hardware -> BSD -> General.BSD.lib (this file)
 #   - BU.Hardware.BSD.General.GetChassisType()  -> Hardware -> BSD -> General.BSD.lib (this file)
@@ -207,6 +209,7 @@ function BU.Hardware.BSD.General.GetHardwareInfos()
 # ·······························
 # Getting the computer's chassis.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +222,7 @@ function BU.Hardware.BSD.General.GetChassis()
 # ····································
 # Getting the computer's chassis type.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -231,6 +235,7 @@ function BU.Hardware.BSD.General.GetChassisType()
 # ·························
 # Getting the machine's ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -243,6 +248,7 @@ function BU.Hardware.BSD.General.GetMachineID()
 # ····················
 # Getting the boot ID.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

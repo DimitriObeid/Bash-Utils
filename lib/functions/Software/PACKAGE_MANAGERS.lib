@@ -128,6 +128,7 @@ fi; echo >&2; exit 1; fi
 # ··························································
 # Quick writing if the target operating system is not found.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -156,6 +157,7 @@ declare -r __BU_SOFTWARE_PACKAGEMANAGERS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_PACKAG
 # ····································································
 # Installing the Node JS packages manager on each supported platforms.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -173,6 +175,7 @@ function BU.Software.PackageManagers.NPM.Install()
 # ··································································
 # Updating the Node JS packages manager on each supported platforms.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

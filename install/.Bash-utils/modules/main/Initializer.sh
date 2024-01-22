@@ -124,6 +124,7 @@ fi; echo >&2; exit 1; fi
 # ···········································································································································································································
 # Sourcing each library file stored into the "functions/main" directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array defined in the "~/.Bash-utils/config/modules/main/module.conf" file.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.CheckIsDebugging()      -> Modules initializer script
 #   - BU.ModuleInit.Exit()                  -> Modules initializer script
@@ -165,6 +166,7 @@ function BU.Main.Initializer.SourceLibrary()
 # ································································································································································
 # Sourcing each file listed into the "${__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array defined in the "~/.Bash-utils/config/modules/main/module.conf" file.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Exit()                  -> Modules initializer script
 #   - BU.ModuleInit.IsFrameworkCompiled()   -> Modules initializer script
@@ -250,6 +252,7 @@ BU.ModuleInit.IsFrameworkCompiled || source "${__BU_MAIN_MODULE_CONF_FILE_INIT_P
 # ···············
 # Usage function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
@@ -286,6 +289,7 @@ function BU.Main.Initializer.Usage()
 # ·········································································································
 # Creating a function to print the correct values for the current option in different languages structures.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Msg() -> Modules initializer script
 

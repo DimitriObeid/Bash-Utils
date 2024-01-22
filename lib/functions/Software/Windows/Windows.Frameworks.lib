@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAME
 # ································
 # Installing Bootstrap on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +150,7 @@ function BU.Software.Windows.Frameworks.Bootstrap.Install()
 # ······························
 # Updating Bootstrap on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -164,6 +166,7 @@ function BU.Software.Windows.Frameworks.Bootstrap.Update()
 # ··································
 # Uninstalling Bootstrap on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -195,6 +198,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVA_FRAMEWORK
 # ·······································
 # Installing Spring on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -207,6 +211,7 @@ function BU.Software.Windows.Frameworks.Spring.Install()
 # ·····································
 # Updating Spring on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +224,7 @@ function BU.Software.Windows.Frameworks.Spring.Update()
 # ·········································
 # Uninstalling Spring on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -247,6 +253,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRA
 # ··········································
 # Installing AngularJS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -262,6 +269,7 @@ function BU.Software.Windows.Frameworks.AngularJS.Install()
 # ········································
 # Updating AngularJS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -277,6 +285,7 @@ function BU.Software.Windows.Frameworks.AngularJS.Update()
 # ············································
 # Uninstalling AngularJS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -299,6 +308,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRA
 # ·········································
 # Installing React JS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -314,6 +324,7 @@ function BU.Software.Windows.Frameworks.ReactJS.Install()
 # ·······································
 # Updating React JS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -329,6 +340,7 @@ function BU.Software.Windows.Frameworks.ReactJS.Update()
 # ···········································
 # Uninstalling React JS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -351,6 +363,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRA
 # ·······································
 # Installing Vue.JS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -366,6 +379,7 @@ function BU.Software.Windows.Frameworks.VueJS.Install()
 # ·····································
 # Updating Vue.JS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -381,6 +395,7 @@ function BU.Software.Windows.Frameworks.VueJS.Update()
 # ·········································
 # Uninstalling Vue.JS on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -412,6 +427,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS
 # ········································
 # Installing CakePHP on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -427,6 +443,7 @@ function BU.Software.Windows.Frameworks.CakePHP.Install()
 # ······································
 # Updating CakePHP on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -442,6 +459,7 @@ function BU.Software.Windows.Frameworks.CakePHP.Update()
 # ··········································
 # Uninstalling CakePHP on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -464,6 +482,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS
 # ········································
 # Installing Laravel on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -479,6 +498,7 @@ function BU.Software.Windows.Frameworks.Laravel.Install()
 # ······································
 # Updating Laravel on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -494,6 +514,7 @@ function BU.Software.Windows.Frameworks.Laravel.Update()
 # ··········································
 # Uninstalling Laravel on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -516,6 +537,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS
 # ··········································
 # Installation Symfony on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -531,6 +553,7 @@ function BU.Software.Windows.Frameworks.Symfony.Install()
 # ······································
 # Updating Symfony on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -546,6 +569,7 @@ function BU.Software.Windows.Frameworks.Symfony.Update()
 # ··········································
 # Uninstalling Symfony on Microsoft Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -577,6 +601,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWO
 # ·····························
 # Installing Django on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -592,6 +617,7 @@ function BU.Software.Windows.Frameworks.Django.Install()
 # ···························
 # Updating Django on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -607,6 +633,7 @@ function BU.Software.Windows.Frameworks.Django.Update()
 # ·······························
 # Uninstalling Django on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -629,6 +656,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWO
 # ····························
 # Installing Flask on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -644,6 +672,7 @@ function BU.Software.Windows.Frameworks.Flask.Install()
 # ··························
 # Updating Flask on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -659,6 +688,7 @@ function BU.Software.Windows.Frameworks.Flask.Update()
 # ······························
 # Uninstalling Flask on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -681,6 +711,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWO
 # ·····························
 # Installing Web2py on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -696,6 +727,7 @@ function BU.Software.Windows.Frameworks.Web2py.Install()
 # ···························
 # Updating Web2py on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -711,6 +743,7 @@ function BU.Software.Windows.Frameworks.Web2py.Update()
 # ·······························
 # Uninstalling Web2py on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -742,6 +775,7 @@ declare -r __BU_SOFTWARE_WINDOWS_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__RUBY_FRAMEWORK
 # ····································
 # Installing Ruby on Rails on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -757,6 +791,7 @@ function BU.Software.Windows.Frameworks.RubyOnRails.Install()
 # ··································
 # Updating Ruby on Rails on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -772,6 +807,7 @@ function BU.Software.Windows.Frameworks.RubyOnRails.Update()
 # ······································
 # Uninstalling Ruby on Rails on Windows.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

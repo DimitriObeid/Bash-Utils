@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ·············································
 # Checking if the targeted hard drive is a HDD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -127,6 +128,7 @@ function BU.Hardware.Linux.Drive.IsHDD()
 # ·············································
 # Checking if the targeted hard drive is a SDD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -139,6 +141,7 @@ function BU.Hardware.Linux.Drive.IsSSD()
 # ··········································
 # Checking how many hard drives are plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -151,6 +154,7 @@ function BU.Hardware.Linux.Drive.CountPluggedDrives()
 # ··························································
 # Counting the number of HDDs among the plugged hard drives.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -163,6 +167,7 @@ function BU.Hardware.Linux.Drive.CountHDD()
 # ··························································
 # Counting the number of SSDs among the plugged hard drives.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -175,6 +180,7 @@ function BU.Hardware.Linux.Drive.CountSSD()
 # ···································································
 # Counting the number of HDDs and SSDs among the plugged hard drives.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -192,6 +198,7 @@ function BU.Hardware.Linux.Drive.CountHDD+SSD()
 # ·······················································································
 # Getting every informations about the computer's hard drive-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -204,6 +211,7 @@ function BU.Hardware.Linux.Drive.GetHardwareInfos()
 # ·································
 # Getting the size of a hard drive.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -216,6 +224,7 @@ function BU.Hardware.Linux.Drive.GetDriveSize()
 # ······································································
 # Getting the total size by adding up several or every hard drives size.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -228,6 +237,7 @@ function BU.Hardware.Linux.Drive.AddUpDrivesSizes()
 # ····································
 # Getting the rotation speed of a HDD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -240,6 +250,7 @@ function BU.Hardware.Linux.Drive.GetRotationSpeed()
 # ·····································
 # Getting the vendor of the hard drive.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -252,6 +263,7 @@ function BU.Hardware.Linux.Drive.GetVendor()
 # ····································
 # Getting the disk's firmware version.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -264,6 +276,7 @@ function BU.Hardware.Linux.Drive.GetFirmwareVersion()
 # ··················································································································
 # Creating a new partition (WARNING ! BE SURE YOU KNOW EXACTLY WHAT YOU ARE DOING WHEN CALLING THIS FUNCTION !!!!!).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -276,6 +289,7 @@ function BU.Hardware.Linux.Drive.CreateNewPartition()
 # ··············································································································
 # Deleting a partition (WARNING ! BE SURE YOU KNOW EXACTLY WHAT YOU ARE DOING WHEN CALLING THIS FUNCTION !!!!!).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -288,6 +302,7 @@ function BU.Hardware.Linux.Drive.DeletePartition()
 # ··········································
 # Getting the number of existing partitions.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -300,6 +315,7 @@ function BU.Hardware.Linux.Drive.GetPartitionsNumber()
 # ·····················································································
 # Getting the number of existing partitions by size (more or less than a defined size).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -312,6 +328,7 @@ function BU.Hardware.Linux.Drive.GetPartitionsNumberBySize()
 # ·········································································
 # Getting the number of existing partitions according to their file system.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -324,6 +341,7 @@ function BU.Hardware.Linux.Drive.GetPartitionsNumberByFS()
 # ································
 # Getting the size of a partition.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -346,6 +364,7 @@ function BU.Hardware.Linux.Drive.GetPartitionSize()
 # ·············································
 # Checking if the targeted hard drive is a HDD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -358,6 +377,7 @@ function BU.Hardware.Linux.Drive.IsHDD()
 # ·············································
 # Checking if the targeted hard drive is a SDD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -370,6 +390,7 @@ function BU.Hardware.Linux.Drive.IsSSD()
 # ········································
 # Checking how many hard drives are plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -382,6 +403,7 @@ function BU.Hardware.Linux.Drive.CountPluggedDrives()
 # ··························································
 # Counting the number of HDDs among the plugged hard drives.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -394,6 +416,7 @@ function BU.Hardware.Linux.Drive.CountHDD()
 # ··························································
 # Counting the number of SSDs among the plugged hard drives.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -406,6 +429,7 @@ function BU.Hardware.Linux.Drive.CountSSD()
 # ···································································
 # Counting the number of HDDs and SSDs among the plugged hard drives.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -422,6 +446,7 @@ function BU.Hardware.Linux.Drive.CountHDD+SSD()
 # ····································
 # Getting the rotation speed of a HDD.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -434,6 +459,7 @@ function BU.Hardware.Linux.Drive.GetRotationSpeed()
 # ·····································
 # Getting the vendor of the hard drive.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -446,6 +472,7 @@ function BU.Hardware.Linux.Drive.GetVendor()
 # ····································
 # Getting the disk's firmware version.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

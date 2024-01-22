@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_OSX_GAMES_LIB__SUBCAT_DEBUG_ID__STEAM_GAMES__CLI_DEPEND
 # ······························
 # Installing SteamCMD on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +150,7 @@ function BU.Software.OSX.Games.SteamCMD.Install()
 # ····························
 # Updating SteamCMD on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -164,6 +166,7 @@ function BU.Software.OSX.Games.SteamCMD.Update()
 # ································
 # Uninstalling SteamCMD on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

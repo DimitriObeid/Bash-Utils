@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ···········································
 # Checking if the computer is not AC powered.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -127,6 +128,7 @@ function BU.Hardware.BSD.Battery.IsNotOnAC()
 # ·······································
 # Checking if the computer is AC powered.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -139,6 +141,7 @@ function BU.Hardware.BSD.Battery.IsOnAC()
 # ····································
 # Checking if the battery has history.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -151,6 +154,7 @@ function BU.Hardware.BSD.Battery.HasHistory()
 # ··········································
 # Checking if the computer has power supply.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -163,6 +167,7 @@ function BU.Hardware.BSD.Battery.HasPowerSupply()
 # ·······································
 # Checking if the battery has statistics.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -175,6 +180,7 @@ function BU.Hardware.BSD.Battery.HasStatistics()
 # ···································
 # Checking if the battery is present.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -187,6 +193,7 @@ function BU.Hardware.BSD.Battery.IsPresent()
 # ·········································
 # Checking if the computer is rechargeable.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -203,6 +210,7 @@ function BU.Hardware.BSD.Battery.IsRechargeable()
 # ····················································································
 # Getting every informations about the computer's battery-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -215,6 +223,7 @@ function BU.Hardware.BSD.Battery.GetHardwareInfos()
 # ····································
 # Getting the battery's serial number.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -227,6 +236,7 @@ function BU.Hardware.BSD.Battery.GetCapacity()
 # ···························
 # Getting the battery's
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -239,6 +249,7 @@ function BU.Hardware.BSD.Battery.GetEnergy()
 # ························
 # Getting the battery's
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -251,6 +262,7 @@ function BU.Hardware.BSD.Battery.GetEnergyEmpty()
 # ························
 # Getting the battery's
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -263,6 +275,7 @@ function BU.Hardware.BSD.Battery.GetEnergyFull()
 # ························
 # Getting the battery's
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -275,6 +288,7 @@ function BU.Hardware.BSD.Battery.GetEnergyFullDesign()
 # ··································
 # Getting the battery's energy rate.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -287,6 +301,7 @@ function BU.Hardware.BSD.Battery.GetEnergyRate()
 # ····························
 # Getting the battery's model.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -308,6 +323,7 @@ function BU.Hardware.BSD.Battery.GetNativePath()
 # ·································
 # Getting the battery's percentage.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -320,6 +336,7 @@ function BU.Hardware.BSD.Battery.GetPercentage()
 # ····································
 # Getting the battery's serial number.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -332,6 +349,7 @@ function BU.Hardware.BSD.Battery.GetSerialNumber()
 # ····························
 # Getting the battery's state.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -344,6 +362,7 @@ function BU.Hardware.BSD.Battery.GetState()
 # ·································
 # Getting the battery's technology.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -356,6 +375,7 @@ function BU.Hardware.BSD.Battery.GetTechnology()
 # ·················································
 # Getting the time remaining until the full charge.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -368,6 +388,7 @@ function BU.Hardware.BSD.Battery.GetTimeBeforeFullCharge()
 # ·····························
 # Getting the battery's vendor.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -380,6 +401,7 @@ function BU.Hardware.BSD.Battery.GetVendor()
 # ··································
 # Getting the battery serial number.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -392,6 +414,7 @@ function BU.Hardware.BSD.Battery.GetVoltage()
 # ··································
 # Getting the battery warning level.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

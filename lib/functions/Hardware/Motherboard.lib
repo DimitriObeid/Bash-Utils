@@ -113,6 +113,7 @@ fi; echo >&2; exit 1; fi
 # ······························
 # Checking if ACPI is supported.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -125,6 +126,7 @@ function BU.Hardware.Motherboard.IsACPISupported()
 # ····································
 # Checking if the BIOS is upgradeable.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -137,6 +139,7 @@ function BU.Hardware.Motherboard.IsBIOSUpgradeable()
 # ············································
 # Checking if the BIOS shadowing is supported.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +152,7 @@ function BU.Hardware.Motherboard.IsBIOSShadowingSupported()
 # ·····························
 # Checking if PCI is supported.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -161,6 +165,7 @@ function BU.Hardware.Motherboard.IsPCISupported()
 # ····································
 # Checking if USB legacy is supported.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -177,6 +182,7 @@ function BU.Hardware.Motherboard.IsUSBLegacySupported()
 # ····························································
 # Getting every informations about the computer's motherboard.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -189,6 +195,7 @@ function BU.Hardware.Motherboard.GetHardwareInfos()
 # ················································
 # Getting the motherboard's firmware release date.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -201,6 +208,7 @@ function BU.Hardware.Motherboard.GetFirmwareReleaseDate()
 # ···········································
 # Getting the motherboard's firmware version.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -213,6 +221,7 @@ function BU.Hardware.Motherboard.GetFirmwareVersion()
 # ···································
 # Getting the motherboard's ROM size.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -225,6 +234,7 @@ function BU.Hardware.Motherboard.GetROMSize()
 # ·······································
 # Getting the motherboard's runtime size.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -237,6 +247,7 @@ function BU.Hardware.Motherboard.GetRuntimeSize()
 # ·································
 # Getting the motherboard's vendor.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -253,6 +264,7 @@ function BU.Hardware.Motherboard.GetVendor()
 # ········································
 # Getting the language description format.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -265,6 +277,7 @@ function BU.Hardware.Motherboard.GetLanguageDescriptionFormat()
 # ············································
 # Getting the number of installable languages.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -277,6 +290,7 @@ function BU.Hardware.Motherboard.GetInstallableLanguagesNumber()
 # ··········································
 # Getting the list of installable languages.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -289,6 +303,7 @@ function BU.Hardware.Motherboard.GetInstallableLanguagesList()
 # ·········································
 # Getting the currently installed language.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

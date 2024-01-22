@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__HTML_CSS_FRAMEWORK
 # ·······························
 # Installing Bootstrap on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -149,6 +150,7 @@ function BU.Software.OSX.Frameworks.Bootstrap.Install()
 # ·····························
 # Updating Bootstrap on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -164,6 +166,7 @@ function BU.Software.OSX.Frameworks.Bootstrap.Update()
 # ·································
 # Uninstalling Bootstrap on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -195,6 +198,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVA_FRAMEWORKS__S
 # ····························
 # Installing Spring on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -207,6 +211,7 @@ function BU.Software.OSX.Frameworks.Spring.Install()
 # ··························
 # Updating Spring on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -219,6 +224,7 @@ function BU.Software.OSX.Frameworks.Spring.Update()
 # ······························
 # Uninstalling Spring on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -247,6 +253,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWO
 # ·····························
 # Installing Angular on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -262,6 +269,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Install()
 # ·····························
 # Updating AngularJS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -277,6 +285,7 @@ function BU.Software.OSX.Frameworks.AngularJS.Update()
 # ·································
 # Uninstalling AngularJS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -299,6 +308,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWO
 # ······························
 # Installing React JS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -314,6 +324,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Install()
 # ····························
 # Updating React JS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -329,6 +340,7 @@ function BU.Software.OSX.Frameworks.ReactJS.Update()
 # ································
 # Uninstalling React JS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -351,6 +363,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__JAVASCRIPT_FRAMEWO
 # ····························
 # Installing Vue.JS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -366,6 +379,7 @@ function BU.Software.OSX.Frameworks.VueJS.Install()
 # ··························
 # Updating Vue.JS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -381,6 +395,7 @@ function BU.Software.OSX.Frameworks.VueJS.Update()
 # ······························
 # Uninstalling Vue.JS on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -412,6 +427,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__CA
 # ·····························
 # Installing CakePHP on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -427,6 +443,7 @@ function BU.Software.OSX.Frameworks.CakePHP.Install()
 # ····························
 # Updating Cake PHP on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -442,6 +459,7 @@ function BU.Software.OSX.Frameworks.CakePHP.Update()
 # ································
 # Uninstalling Cake PHP on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -464,6 +482,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__LA
 # ·····························
 # Installing Laravel on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -479,6 +498,7 @@ function BU.Software.OSX.Frameworks.Laravel.Install()
 # ···························
 # Updating Laravel on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -494,6 +514,7 @@ function BU.Software.OSX.Frameworks.Laravel.Update()
 # ··································
 # Uninstalling of Laravel on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -516,6 +537,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PHP_FRAMEWORKS__="
 # ·······························
 # Installation Symfony on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -531,6 +553,7 @@ function BU.Software.OSX.Frameworks.Symfony.Install()
 # ···························
 # Updating Symfony on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -546,6 +569,7 @@ function BU.Software.OSX.Frameworks.Symfony.Update()
 # ·······························
 # Uninstalling Symfony on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -577,6 +601,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS_
 # ····························
 # Installing Django on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -592,6 +617,7 @@ function BU.Software.OSX.Frameworks.Django.Install()
 # ··························
 # Updating Django on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -607,6 +633,7 @@ function BU.Software.OSX.Frameworks.Django.Update()
 # ······························
 # Uninstalling Django on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -629,6 +656,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS_
 # ···························
 # Installing Flask on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -644,6 +672,7 @@ function BU.Software.OSX.Frameworks.Flask.Install()
 # ·························
 # Updating Flask on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -659,6 +688,7 @@ function BU.Software.OSX.Frameworks.Flask.Update()
 # ·····························
 # Uninstalling Flask on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -681,6 +711,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__PYTHON_FRAMEWORKS_
 # ····························
 # Installing Web2py on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -696,6 +727,7 @@ function BU.Software.OSX.Frameworks.Web2py.Install()
 # ··························
 # Updating Web2py on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -711,6 +743,7 @@ function BU.Software.OSX.Frameworks.Web2py.Update()
 # ······························
 # Uninstalling Web2py on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -742,6 +775,7 @@ declare -r __BU_SOFTWARE_OSX_FRAMEWORKS_LIB__SUBCAT_DEBUG_ID__RUBY_FRAMEWORKS__R
 # ···································
 # Installing Ruby on Rails on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -757,6 +791,7 @@ function BU.Software.OSX.Frameworks.RubyOnRails.Install()
 # ·································
 # Updating Ruby on Rails on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -772,6 +807,7 @@ function BU.Software.OSX.Frameworks.RubyOnRails.Update()
 # ·····································
 # Uninstalling Ruby on Rails on Mac OS.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

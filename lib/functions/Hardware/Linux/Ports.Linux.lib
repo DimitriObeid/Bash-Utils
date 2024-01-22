@@ -115,6 +115,7 @@ fi; echo >&2; exit 1; fi
 # ··················································································
 # Getting every informations about the computer's ports-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -127,6 +128,7 @@ function BU.Hardware.Linux.Ports.GetHardwareInfos()
 # ······································
 # Getting the total number of USB ports.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -139,6 +141,7 @@ function BU.Hardware.Linux.Ports.GetUSBPortsNumber()
 # ··········································
 # Getting the number of available USB ports.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -151,6 +154,7 @@ function BU.Hardware.Linux.Ports.GetAvailableUSBPortsNumber()
 # ·····································
 # Getting the number of used USB ports.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -163,6 +167,7 @@ function BU.Hardware.Linux.Ports.GetUsedUSBPortsNumber()
 # ·············································
 # Checking if an optical disc drive is mounted.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -175,6 +180,7 @@ function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveExists()
 # ·································································
 # Checking if an optical disc drive is mounted, and if no disc is .
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -189,6 +195,7 @@ function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveIsEmpty()
 # ·············································
 # Checking if an optical disc drive is mounted.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -203,6 +210,7 @@ function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveTrayIsClosed()
 # ·············································
 # Checking if an optical disc drive is mounted.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -217,6 +225,7 @@ function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveTrayIsOpen()
 # ·············································
 # Checking if an optical disc drive is mounted.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -231,6 +240,7 @@ function BU.Hardware.Linux.Ports.CheckIfOpticalDiscDriveContainsdisc()
 # ·······································
 # Checking if an SD card port is mounted.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -243,6 +253,7 @@ function BU.Hardware.Linux.Ports.CheckIfSDCardReaderIsMounted()
 # ······························
 # Checking if a VGA port exists.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -255,6 +266,7 @@ function BU.Hardware.Linux.Ports.CheckIfVGAPortExists()
 # ···············································
 # Checking if the existing VGA port is available.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -267,6 +279,7 @@ function BU.Hardware.Linux.Ports.CheckIfVGAPortAvailable()
 # ································
 # Checking if an HDMI port exists.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -279,6 +292,7 @@ function BU.Hardware.Linux.Ports.CheckIfHDMIPortExists()
 # ················································
 # Checking if the existing HDMI port is available.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -291,6 +305,7 @@ function BU.Hardware.Linux.Ports.CheckIfHDMIPortAvailable()
 # ··································
 # Checking if a joystick is plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

@@ -124,6 +124,7 @@ fi; echo >&2; exit 1; fi
 # ·················································································································································································································
 # Sourcing each library file stored into the "function/Hardware" directory, from the "${__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY}" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.CheckIsDebugging()      -> Modules initializer script
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
@@ -162,6 +163,7 @@ function BU.Hardware.Initializer.SourceLibrary()
 # ·······································································································································································
 # Sourcing each file listed into the "${__BU_HARDWARE_MODULE_LIST_CONFIG_FILES_PATH_ARRAY}" array defined in the "/.Bash-utils/config/modules/Hardware/module.conf" file.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
@@ -196,6 +198,7 @@ function BU.Hardware.Initializer.SourceConfig()
 # ···············
 # Usage function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 

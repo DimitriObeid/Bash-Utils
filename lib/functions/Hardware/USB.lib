@@ -117,6 +117,7 @@ declare -r __BU_HARDWARE_USB_LIB__CAT_DEBUG_ID__GENERAL='usb::general-usb-functi
 # ················································································
 # Getting every informations about the computer's USB-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

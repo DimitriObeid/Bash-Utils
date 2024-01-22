@@ -119,6 +119,7 @@ declare -r __BU_MODULENAME_FILENAME_LIB__SUBCAT_DEBUG_ID__CATEGORY_1__SUB_CATEGO
 # ·······················
 # Function's description.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -144,6 +145,7 @@ function FunctionName1()
 # ·······················
 # Function's description.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

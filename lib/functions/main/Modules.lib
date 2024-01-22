@@ -120,6 +120,7 @@ declare -r __BU_MAIN_MODULES_LIB__SUBCAT_DEBUG_ID__MODULES_FILES_="${__BU_MAIN_M
 # ···························································································································································································································
 # Initializing a single new module after the successful initialization of the main module, in case another module must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
 
@@ -149,6 +150,7 @@ function BU.Main.Modules.InitNewModule()
 # ································································································································································································································
 # Initializing more than one new modules after the successful initialization of the main module, in case other modules must be added later in the project's script, after the execution of the "BashUtils_InitModules()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.Exit()                     -> Main -> Errors.lib
 #   - BU.Main.Errors.HandleErrors()             -> Main -> Errors.lib
@@ -199,6 +201,7 @@ function BU.Main.Modules.InitNewModules()
 # ···················································
 # Sourcing a single aliases file for a single module.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -211,6 +214,7 @@ function BU.ModuleInit.SourceAliasesFile()
 # ················································
 # Sourcing multiple aliases files for each module.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.SourceAliasFile() -> Modules initializer script (this file)
 
@@ -223,6 +227,7 @@ function BU.ModuleInit.SourceAliasesFiles()
 # ·························
 # Unsource a single module.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Newline()
 
@@ -308,6 +313,7 @@ function BU.ModuleInit.UnsourceModule()
 # ·····················································
 # Unsourcing multiple modules at once from the project.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.HandleErrors()             -> Main -> Errors.lib
 
@@ -360,6 +366,7 @@ function BU.ModuleInit.UnsourceModules()
 
 # If the framework is not into its initialization process, then the classic "BU.Main.Errors.HandleErrors()" function is called.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
 
@@ -412,6 +419,7 @@ function BU.ModuleInit.HandleErrors()
 # functions in the main module's initialization file, in the "STEP FOUR" sub-section, in order to get the main module's functions and
 # to translate the global variables descriptions written with the "BU.ModuleInit.DisplayInitGlobalVarsInfos()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Headers.Header.Blue()                     -> Main -> Headers.lib
 

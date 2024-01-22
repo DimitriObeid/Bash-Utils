@@ -113,6 +113,7 @@ fi; echo >&2; exit 1; fi
 # ·································
 # Checking if a monitor is plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -125,6 +126,7 @@ function BU.Hardware.Screen.IsMonitorPlugged()
 # ··································
 # Checking if the monitor is active.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -137,6 +139,7 @@ function BU.Hardware.Screen.IsMonitorActive()
 # ········································
 # Checking if an extra monitor is plugged.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -153,6 +156,7 @@ function BU.Hardware.Screen.IsExtraMonitorPlugged()
 # ···················································································
 # Getting every informations about the computer's screen-related hardware components.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -166,6 +170,7 @@ function BU.Hardware.Screen.GetHardwareInfos()
 # ······························
 # Getting the screen resolution.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -178,6 +183,7 @@ function BU.Hardware.Screen.GetResolution()
 # ···································
 # Getting the monitor's manufacturer.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -190,6 +196,7 @@ function BU.Hardware.Screen.GetMonitorManufacturer()
 # ····································
 # Getting the monitor's serial number.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -202,6 +209,7 @@ function BU.Hardware.Screen.GetMonitorSerialNumber()
 # ··········································
 # Getting the monitor's year of manufacture.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 

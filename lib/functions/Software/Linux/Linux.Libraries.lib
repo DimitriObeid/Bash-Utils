@@ -134,6 +134,7 @@ declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__COMPATIBILITY_LAY
 # ·························
 # Installing Wine on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -147,6 +148,7 @@ function BU.Software.Linux.Libraries.Wine.Install()
 # ·······················
 # Updating Wine on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -159,6 +161,7 @@ function BU.Software.Linux.Libraries.Wine.Update()
 # ···························
 # Uninstalling Wine on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -187,6 +190,7 @@ declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAM
 # ············································
 # Installing DirectX on Linux (Wine required).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -205,6 +209,7 @@ function BU.Software.Linux.Libraries.DirectX.Install()
 # ··········································
 # Updating DirectX on Linux (Wine required).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -223,6 +228,7 @@ function BU.Software.Linux.Libraries.DirectX.Update()
 # ··············································
 # Uninstalling DirectX on Linux (Wine required).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -248,6 +254,7 @@ declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAM
 # ···························
 # Installing OpenGL on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -263,6 +270,7 @@ function BU.Software.Linux.Libraries.OpenGL.Install()
 # ·························
 # Updating OpenGL on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -278,6 +286,7 @@ function BU.Software.Linux.Libraries.OpenGL.Update()
 # ·····························
 # Uninstalling OpenGL on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -300,6 +309,7 @@ declare -r __BU_SOFTWARE_LINUX_LIBRARIES_LIB__SUBCAT_DEBUG_ID__GRAPHICAL_PROGRAM
 # ························
 # Installing SDL on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -315,6 +325,7 @@ function BU.Software.Linux.Libraries.SDL.Install()
 # ······················
 # Updating SDL on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
@@ -330,6 +341,7 @@ function BU.Software.Linux.Libraries.SDL.Update()
 # ··························
 # Uninstalling SDL on Linux.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   -
 
