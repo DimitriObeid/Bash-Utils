@@ -121,6 +121,14 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVE
 # Initial source of this AWK script (since it's not mine, plus I added more informations as comments, as well as the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - awk       (-v)
+#   - basename
+#   - local
+#   - printf
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
@@ -193,6 +201,12 @@ function BU.Main.BasicMaths.BytesToHuman()
 # ·································································
 # Negative number (float or int) to positive number (float or int).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - echo
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
@@ -211,6 +225,12 @@ function BU.Main.BasicMaths.NegativeToPositive()
 # ·································································
 # Positive number (float or int) to negative number (float or int).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - echo
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 

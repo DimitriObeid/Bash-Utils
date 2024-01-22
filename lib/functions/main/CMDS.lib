@@ -119,6 +119,13 @@ declare -r __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND
 # ····················································
 # Getting the target command's executable file's path.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+#   - command   (-v)
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__CMDS.GetCommandPath()   -> Main -> Args.lib
 
@@ -151,6 +158,13 @@ function BU.Main.CMDS.GetCommandPath()
 # ································
 # Get the command's return output.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - eval
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib

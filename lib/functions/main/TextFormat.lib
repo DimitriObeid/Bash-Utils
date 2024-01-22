@@ -118,6 +118,13 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_CO
 # ················································
 # Writing the error messages in a single location.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - echo
+#   - local
+#   - printf
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.Exit()         -> Main -> Errors.lib
 
@@ -146,6 +153,15 @@ function BU.Main.TextFormat.CannotCreateRessource()
 # ·································································
 # Getting the current background color from a command substitution.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - cat
+#   - local
+#   - mkdir     (-p)
+#   - touch
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
 
@@ -188,6 +204,15 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
 # ···························································
 # Getting the current text color from a command substitution.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - cat
+#   - local
+#   - mkdir     (-p)
+#   - touch
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.TextFormat.CannotCreateRessource()    -> Main -> TextFormat.lib (this file)
 
@@ -242,6 +267,17 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODE
 #   - BU.Main.Errors.HandleSmallErrors()
 #   - BU.Main.Errors.HandleErrors()
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - command   (-v)
+#   - echo      (-e | -n)
+#   - local
+#   - mkdir     (-p)
+#   - touch
+#   - tput      (setab)
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
@@ -310,6 +346,16 @@ function BU.Main.TextFormat.SetBGColor()
 #   - BU.Main.Errors.HandleSmallErrors
 #   - BU.Main.Errors.HandleErrors
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - echo      (-e | -p)
+#   - local
+#   - mkdir     (-p)
+#   - touch
+#   - shopt     (-s extglob | -u extglob)
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
@@ -384,6 +430,11 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTION
 # ······················································
 # Conversion of color name (string) to color code (int).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
@@ -448,6 +499,11 @@ function BU.Main.TextFormat.Atoi()
 # ······················································
 # Conversion of color code (int) to color code (string).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Text.ToUppercase()    -> Main -> Text.lib
 
