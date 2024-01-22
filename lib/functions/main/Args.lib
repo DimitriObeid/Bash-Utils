@@ -1119,6 +1119,12 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 # ·········································
 # "BU.Main.CMDS.GetCommandPath()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1172,6 +1178,13 @@ function BU.Main.Args__CMDS.GetCommandPath()
 # ·································
 # "BU.Main.Decho.Decho()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+#   - printf
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()    -> Main -> Args.lib (this file)
 
@@ -1257,6 +1270,12 @@ function BU.Main.Args__Decho.Decho()
 # ···································
 # "BU.Main.ProcessingDir()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1330,6 +1349,12 @@ function BU.Main.Args__Directories.ProcessingDir()
 # ··············································
 # "BU.Main.Directories.OverwriteDir()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1386,6 +1411,12 @@ function BU.Main.Args__Directories.OverwriteDir()
 # ······································
 # "BU.Main.Directories.Make()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1456,6 +1487,12 @@ function BU.Main.Args__Directories.Make()
 # ··········································
 # "BU.Main.Directories.MakePath()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1517,6 +1554,12 @@ function BU.Main.Args__Directories.MakePath()
 # ··················································
 # "BU.Main.Directories.GetDirectoryName()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1559,6 +1602,12 @@ function BU.Main.Args__Directories.GetDirectoryName()
 # ··················································
 # "BU.Main.Directories.GetDirectoryPath()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1601,6 +1650,12 @@ function BU.Main.Args__Directories.GetDirectoryPath()
 # ························································
 # "BU.Main.Directories.GetParentDirectoryName()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1645,6 +1700,12 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
 # ························································
 # "BU.Main.Directories.GetParentDirectoryPath()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1725,6 +1786,12 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 # ··········································
 # "BU.Main.Files.ProcessingFile()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1767,6 +1834,12 @@ function BU.Main.Args__Files.ProcessingFile()
 # ·········································
 # "BU.Main.Files.OverwriteFile()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1837,6 +1910,14 @@ function BU.Main.Args__Files.OverwriteFile()
 # ············································
 # "BU.Main.Files.Make()" function's arguments.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - echo
+#   - local
+#   - wc        (--bytes)
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1923,6 +2004,12 @@ function BU.Main.Args__Files.Make()
 # ····································
 # "BU.Main.Files.MakePath()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -1971,6 +2058,12 @@ function BU.Main.Args__Files.MakePath()
 # ········································
 # "BU.Main.FilesSetLastAccess()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2043,6 +2136,13 @@ function BU.Main.Args__Files.SetLastAccess()
 # ·······································
 # "BU.Main.Files.CompressCMD()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - command   (-v)
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2112,6 +2212,12 @@ function BU.Main.Args__Files.CompressCMD()
 # ··········································
 # "BU.Main.Files.CompressFormat()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2168,6 +2274,12 @@ function BU.Main.Args__Files.CompressFormat()
 # ···········································
 # "BU.Main.Files.SearchInArchive()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2224,6 +2336,13 @@ function BU.Main.Args__Files.SearchInArchive()
 # ·········································
 # "BU.Main.Files.UncompressCMD()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - command   (-v)
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2293,6 +2412,12 @@ function BU.Main.Args__Files.UncompressCMD()
 # ············································
 # "BU.Main.Files.UncompressFormat()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2360,6 +2485,12 @@ function BU.Main.Args__Files.UncompressFormat()
 # ················································
 # "BU.Main.Filesystem.IsPartitionFull()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2419,6 +2550,12 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
 # ············································
 # "BU.Main.Filesystem.GetFS<...>()" functions.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2478,6 +2615,12 @@ function BU.Main.Args__Filesystem.GetFSInfos()
 # ······································
 # "BU.Main.Filesystem.Chown()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2563,6 +2706,12 @@ function BU.Main.Args__Filesystem.Chown()
 # ·········································
 # "BU.Main.Filesystem.ChownRec()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2653,6 +2802,12 @@ function BU.Main.Args__Filesystem.ChownRec()
 # ·······················································
 # "BU.Main.Locale.PrintLanguageName.Optimize()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2762,6 +2917,12 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 #	- BU.Main.Text.GetLastFieldAfterDelim()
 #   - BU.Main.Text.ReverseStringWordsOrder()
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2822,6 +2983,12 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 # ····················································
 # "BU.Main.Text.CutSubStringAfterNthDelim()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2890,6 +3057,12 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
 # ·····················································
 # "BU.Main.Text.CutSubStringBeforeNthDelim()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -2960,6 +3133,12 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
 # ················································
 # "BU.Main.Text.DeleteLettersInString()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -3008,6 +3187,12 @@ function BU.Main.Args__Text.DeleteLettersInString()
 # ·················································
 # "BU.Main.Text.GetCharacterOccurences()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -3075,6 +3260,12 @@ function BU.Main.Args__Text.GetCharacterOccurences()
 # ···················································································
 # "BU.Main.Text.GetFirstCharacter()" and "BU.Main.Text.GetLastCharacter()" functions.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -3117,6 +3308,12 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
 # ·······················································
 # "BU.Main.Args__Text.GetSubStringAfterDelim()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -3187,6 +3384,12 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
 # ··················································
 # "BU.Main.Text.GetSubStringBeforeDelim()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -3257,6 +3460,12 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
 # ·················································
 # "BU.Main.Text.GetSubStringOccurences()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
@@ -3317,6 +3526,12 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 # ·········································
 # "BU.Main.Text.StrToWordArray()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
