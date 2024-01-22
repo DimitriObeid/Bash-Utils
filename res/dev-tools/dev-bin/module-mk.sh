@@ -57,9 +57,9 @@
 # List of modules to create.
 __ARG_LIST=( "${@}" );
 
-# Checking if the module's name was passed as argument when this script was executed.
+# Checking if any module's name was passed as argument when this script was executed.
 if (( ${#__ARG_LIST[@]} == 0 )); then
-	echo "This script takes at least one mandatory argument : the name of the new module(s) to create"; exit 1;
+	echo "This script takes at least one mandatory argument : the name(s) of the new module(s) to create"; exit 1;
 fi
 
 ## ==============================================
@@ -138,10 +138,10 @@ function check_mandatory_file_exists()
 
 ######################################################### CODE ########################################################
 
-# Checking if the script is executed in its directory.
+# Bash Utils library root path from this script's path.
+__D_BU_LIB_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+
 for module_name in "${__ARG_LIST[@]}"; do
-    # Bash Utils library root path from this script's path.
-    __D_BU_LIB_ROOT_PATH="../../..";
 
     __D_BU_MAKE_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
 
@@ -149,7 +149,7 @@ for module_name in "${__ARG_LIST[@]}"; do
 
     __D_BU_MAKE_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
 
-    if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
+    if [ ! -d "${__D_BU_LIB_ROOT_PATH}/install" ] || [ ! -d "${__D_BU_LIB_ROOT_PATH}/lib" ]; then
         echo "You must run this script from its directory" >&2;
         echo >&2;
 

@@ -124,10 +124,10 @@ if [ ! -d "${__D_BU_PACK__DEFAULT_OUTPUT_DIR}" ] then
 	mkdir -pv "${__D_BU_PACK__DEFAULT_OUTPUT_DIR}" || exit 1;
 fi
 
-# Checking if the script is executed in its directory.
+# Bash Utils library root path from this script's path.
+__D_BU_LIB_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+
 for module_name in "${__ARG_LIST[@]}"; do
-    # Bash Utils library root path from this script's path.
-    __D_BU_LIB_ROOT_PATH="../../..";
 
     __D_BU_PACK_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
 
@@ -137,7 +137,7 @@ for module_name in "${__ARG_LIST[@]}"; do
 
     __D_BU_PACK_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
 
-    if [ ! -d "../../../install" ] || [ ! -d "../../../lib" ]; then
+    if [ ! -d "${__D_BU_LIB_ROOT_PATH}/install" ] || [ ! -d "${__D_BU_LIB_ROOT_PATH}/lib" ]; then
         echo "You must run this script from its directory" >&2;
         echo >&2;
 

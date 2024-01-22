@@ -3,7 +3,7 @@
 # ----------------------------------------
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
-# Name          : module-install.sh
+# Name          : init-locale-file-rm.sh
 # Author(s)     : Dimitri OBEID
 # Version       : 1.0
 
@@ -11,7 +11,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-# Installing the targeted module's files into their dedicated folders in the Bash Utils framework's architecture.
+# This script deletes one or more locale file(s) used for the modules initialization process script.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -37,7 +37,7 @@
 
 #### POSITIONAL ARGUMENTS
 
-## SUB-CATEGORY NAME
+##
 
 # Feel free to define positional arguments here.
 
@@ -49,14 +49,14 @@
 
 #### ARRAY OF ARGUMENTS
 
-## ARRAY OF MODULES TO INSTALL
+## ARRAY OF FILES TO CREATE
 
-# List of modules to install.
-__ARG_LIST=( "${@}" );
+# List of ISO 639-1 codes.
+__ARG_LIST=( "$@" );
 
-# Checking if the module's name was passed as argument when this script was executed.
+# Checking if a value was passed as argument in the ISO 639-1 codes list when this script was executed.
 if (( ${#__ARG_LIST[@]} == 0 )); then
-	echo "This script takes at least one mandatory argument : the name of the existing module(s) to pack separately"; exit 1;
+	echo "This script takes at least one mandatory argument : the name(s) of the old locale file(s) to delete from the hard drive"; exit 1;
 fi
 
 ## ==============================================
@@ -71,7 +71,7 @@ fi
 
 #### ARRAYS DEFINITIONS
 
-## SUB-CATEGORY NAME
+##
 
 # Feel free to define arrays here if needed.
 
@@ -83,7 +83,7 @@ fi
 
 #### VARIABLES DEFINITIONS
 
-## SUB-CATEGORY NAME
+##
 
 # Feel free to define variables here if needed.
 
@@ -97,14 +97,12 @@ fi
 
 ########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
 
-#### CATEGORY NAME
+#### FUNCTIONS DEFINITION
 
-## SUB-CATEGORY NAME
+##
 
 # ·············································
 # Feel free to define functions here if needed.
-
-## ==============================================
 
 
 
@@ -117,41 +115,24 @@ fi
 # Bash Utils library root path from this script's path.
 __D_BU_LIB_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
 
-for module_name in "${__ARG_LIST[@]}"; do
-    __D_BU_INST_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+__D_BU_MAKE_INIT_LOCALE_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/initializer/locale";
 
-    __D_BU_INST_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+for locale_file in "${__ARG_LIST[@]}"; do
+    __F_BU_MAKE_INIT_LOCALE_PATH="${__D_BU_MAKE_INIT_LOCALE_PATH}/${locale_file}.locale";
 
-    __D_BU_INST_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+    printf "Deleting the %s file... " "${__F_BU_MAKE_INIT_LOCALE_PATH}";
 
-    if [ ! -d "${__D_BU_LIB_ROOT_PATH}/install" ] || [ ! -d "${__D_BU_LIB_ROOT_PATH}/lib" ]; then
-        echo "You must run this script from its directory" >&2;
+    rm "${__F_BU_MAKE_INIT_LOCALE_PATH}" || {
+        printf "Failed %s❌%s\n\n" "$(tput setaf 9)" "$(tput sgr0)" >&2;
+
+        echo "ERROR : FAILED TO DELETE THE ${__F_BU_MAKE_INIT_LOCALE_PATH} FILE" >&2;
         echo >&2;
 
-        echo "Terminating module creation" >&2;
+        echo "" >&2
+        echo >&2;
 
         exit 1;
-    fi
+    }
 
-    # Checking if the whole module exists.
-    if [ -d "${__D_BU_INST_MODULE_CONF_PATH}" ] && [ -d "${__D_BU_INST_MODULE_INIT_PATH}" ] && [ -d "${__D_BU_INST_LIB_MODULE_FUNCTS_PATH}" ]; then
-	    echo "The ${module_name} module's directories already exist";
-
-        exit 0;
-    fi
+    printf "Success %s✓%s\n" "$(tput setaf 2)" "$(tput sgr0)";
 done
-
-# Printing that the targeted modules were successfully installed into the Bash Utils framework's data folders.
-if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
-    echo "The ${__ARG_LIST[0]} module was successfully installed";
-else
-    echo "The following modules were successfully installed :";
-
-    for module in "${__ARG_LIST[@]}"; do
-        echo "    - ${module}";
-    done
-fi
-
-echo;
-
-exit 0;
