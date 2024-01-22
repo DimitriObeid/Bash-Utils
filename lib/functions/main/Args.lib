@@ -434,6 +434,8 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUM
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename
+#   - local
+#   - shift
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -511,6 +513,8 @@ function BU.Main.Args.GetFuncArgsArrayValues()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename
+#   - local
+#   - printf
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -580,6 +584,12 @@ function BU.Main.Args.GetFunctionName()
 # ··········································
 # Checking a file's name passed as argument.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+#   - printf
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Highlight()   -> Main -> Decho.lib
@@ -613,6 +623,11 @@ function BU.Main.Args.GetLineNumber()
 
 # ··············································
 # Getting the three informations simultaneously.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -725,6 +740,12 @@ function BU.Main.Args.GetFFL()
 
 # This function is called in the "BU.Main.Args.Argc()" and "BU.Main.Echo.__EchoOutput()" functions, for example.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - echo
+#   - local
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFileName()        -> Main -> Args.lib (this file)
@@ -764,6 +785,13 @@ function BU.Main.Args.PrintFFL()
 
 # Please call this function after the advice given as second argument for the "BU.Main.Args.PrintBadOption()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - echo
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFileName()        -> Main -> Args.lib (this file)
 #   - BU.Main.Args.GetFunctionName()    -> Main -> Args.lib (this file)
@@ -819,6 +847,13 @@ function BU.Main.Args.PrintFFLErrorOccured()
 
 # This function is called in the "BU.Main.Args.PrintBadOption()" function, DO NOT call the "BU.Main.Args.PrintBadOption()" function here.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+#   - printf
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.PrintFFLErrorOccured()   -> Main -> Args.lib (this file)
 
@@ -939,6 +974,11 @@ function BU.Main.Args.Argc()
 # Checking if any mandatory arguments are provided for any function AND the file, function and line number
 # informations simultaneously, by calling both the "BU.Main.Args.Argc(" and "BU.Main.Args.GetFFL()" functions.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.Argc()       -> Main -> Args.lib
 #   - BU.Main.Args.GetFFL()     -> Main -> Args.lib
@@ -982,6 +1022,12 @@ function BU.Main.Args.GetArgc-FFL()
 # ·······················································
 # "BU.Main.Checkings.CheckProjectRelatedFile()" function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetArgc-FFL()            -> Main -> Args.lib (this file)
 #   - BU.Main.Args.PrintBadOption()         -> Main -> Args.lib (this file)
