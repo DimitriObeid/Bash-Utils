@@ -215,6 +215,11 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PRO
 # ·····························
 # Getting the file system path.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename
+#   - local
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Filesystem.GetFSInfos()         -> Main -> Args.lib
