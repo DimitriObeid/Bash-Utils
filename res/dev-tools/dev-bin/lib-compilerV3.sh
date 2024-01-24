@@ -716,10 +716,22 @@ function CheckLangArgDelim()
 # ·······································································································································
 # Checking if the script file which runs the Bash code is the "lib-compilerV3.sh" file, which only contains very basic sourced resources.
 
+# It also checks if the script file which runs the Bash code is the "lib-compiler-for-all-supported-versions.sh" file.
+
 # This function is imported from the "Bash-utils-init.sh" file, and serves in the "Locale.lib" file from the main module.
 
 # shellcheck disable=
-function BU.ModuleInit.IsCompiler() { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsCompiler()
+{
+     if \
+        [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]] || \
+        [[ "${0##*/}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; 
+    then 
+        return 0; 
+    else
+        return 1; 
+    fi 
+}
 
 ## ==============================================
 
@@ -2037,11 +2049,10 @@ function CompileInSingleFile()
 # Support of the arguments when this script is executed with the two awaited arguments.
 if      [ -n "${__BU_ARG_LANG}" ]; then CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
 
-# If no options are passed, instead of throwing an error, the "CompileInSingleFile()" function will be called multiple times with its mandatory argument
-# in order to create every types of needed compiled files : a copy for each supported language, and a copy with every supported languages shipped in.
+# If no options are passed, instead of throwing an error, the "CompileInSingleFile()" function will be called with the supported languages argument.
 else
     CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
-    CompileInSingleFile --lang-include=supported || { exit 1; };
 fi
 
-exit 0;
+# If the compiler was executed from the "lib-compiler-for-all-supported-versions.sh" script,
+if [ -z "${__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__NO_EXIT}" ]; then exit 0; fi
