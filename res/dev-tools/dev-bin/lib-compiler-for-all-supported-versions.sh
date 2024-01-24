@@ -87,9 +87,6 @@ declare __BU_ARGS_ARRAY=( "${@}" );
 # Absolute path to the "Bash-utils" directory, where the "lib" and the "res" folders are located.
 declare -r __PATH_TO_BU="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || { echo "Unable to get the \"Bash-utils/bin\" folder location" >&2; exit 1; })";
 
-# Avoiding exiting the current script when the "lib-compilerV3.sh" file has done the execution.
-declare -r __LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__NO_EXIT='true';
-
 ## ==============================================
 
 
@@ -115,17 +112,10 @@ declare -r __LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__NO_EXIT='true';
 
 ######################################################### CODE ########################################################
 
-# Including the "lib-compilerV3.sh" file in order to avoid exiting the current script when the "exit 0" from the included script is reached,
-# by using the "${__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__NO_EXIT}" global variable at this moment into a condition.
-source "${__PATH_TO_BU}/bin/lib-compilerV3.sh" --lang=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
+source "${__PATH_TO_BU}/bin/lib-compilerV3.sh";
 
-# Because if the "lib-compiler.sh" script is not sourced, the "${__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__NO_EXIT}" global variable's value
-# is not recognized (anymore) by the compiler's script after its execution, so the "$(source)" command must be called once again in case the 
-# compiler must be executed another time after this line.
+exec "${__PATH_TO_BU}/bin/lib-compilerV3.sh" --lang=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
 
-# You can replace the "$(source)" command by the "$(exec)" command if you don't need to compile another version of the Bash-utils framework, 
-# since the compiler will only be executed once, so you would not need to include the compiler's code again into this file's code.
-
-source "${__PATH_TO_BU}/bin/lib-compilerV3.sh" --lang-include=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
+exec "${__PATH_TO_BU}/bin/lib-compilerV3.sh" --lang-include=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
 
 exit 0;

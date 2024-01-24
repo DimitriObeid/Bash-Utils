@@ -2054,5 +2054,5 @@ else
     CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
 fi
 
-# If the compiler was executed from the "lib-compiler-for-all-supported-versions.sh" script,
-if [ -z "${__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__NO_EXIT}" ]; then exit 0; fi
+# If the compiler was not executed from the "lib-compiler-for-all-supported-versions.sh" script, then this script can be exited.
+if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then exit 0; fi
