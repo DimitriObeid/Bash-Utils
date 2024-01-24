@@ -716,10 +716,22 @@ function CheckLangArgDelim()
 # ·······································································································································
 # Checking if the script file which runs the Bash code is the "lib-compilerV3.sh" file, which only contains very basic sourced resources.
 
+# It also checks if the script file which runs the Bash code is the "lib-compiler-for-all-supported-versions.sh" file.
+
 # This function is imported from the "Bash-utils-init.sh" file, and serves in the "Locale.lib" file from the main module.
 
 # shellcheck disable=
-function BU.ModuleInit.IsCompiler() { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsCompiler()
+{
+     if \
+        [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]] || \
+        [[ "${0##*/}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; 
+    then 
+        return 0; 
+    else
+        return 1; 
+    fi 
+}
 
 ## ==============================================
 
@@ -766,7 +778,7 @@ function HandleIncompatibleOptionalArgs()
 # Usage function.
 
 # shellcheck disable=
-function CompilerUsage()
+function LibCompiler.Functions.CompilerUsage()
 {
     #**** Parameters ****
     local p_exit=${1:-true};
@@ -828,7 +840,7 @@ function CompilerUsage()
 # Quit error messages.
 
 # shellcheck disable=SC2059
-function QuitErrorMessage.NumberOfFilesCompiled()
+function LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled()
 {
     # If the '--lang=' value was passed as mandatory argument.
     if [ -n "${__vMandatoryArgLang}" ]; then
@@ -921,7 +933,7 @@ for arg in "${__BU_ARGS_ARRAY[@]}"; do
 
     # Else, if the user decides to get a quick help about the compiler.
     elif [ "${arg}" == '-h' ] || [ "${arg,,}" == "${_____value_of__help}" ]; then
-        CompilerUsage;
+        LibCompiler.Functions.CompilerUsage;
 
 
     # Else, if the user decides to remove the comments from the compiled file
@@ -1004,7 +1016,7 @@ if [[ (-n "${__vArrayVal_compile_stable}") && (-n "${__vArrayVal_no_shellcheck}"
 
     echo >&2; echo >&2;
 
-    CompilerUsage 'false';
+    LibCompiler.Functions.CompilerUsage 'false';
 
     PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
@@ -1081,7 +1093,7 @@ function CompileInSingleFile()
 
     # If the '-h' or the '--help' values were passed as the very first parameter.
     if [[ "${p_locale,,}" == ?(-?(-))h?(elp) ]]; then
-        CompilerUsage;
+        LibCompiler.Functions.CompilerUsage;
 
     # Converting the "${p_locale}" string into an array of ISO 639-1 codes.
     elif [[ "${p_locale,,}" == ?(-?(-))lang?(-include)=* ]]; then
@@ -1319,7 +1331,7 @@ function CompileInSingleFile()
                         "${__BU_MAIN_FULL_FILE_PATH}")" \
                     'FULL';
 
-                QuitErrorMessage.NumberOfFilesCompiled;
+                LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                 ____loop_error='error';
 
@@ -1338,7 +1350,7 @@ function CompileInSingleFile()
                         "${__BU_MAIN_FULL_FILE_PATH}")" \
                     'FULL';
 
-                QuitErrorMessage.NumberOfFilesCompiled;
+                LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                 ____loop_error='error';
 
@@ -1380,7 +1392,7 @@ function CompileInSingleFile()
                         "${__BU_MAIN_FULL_FILE_PATH}")" \
                     'FULL';
 
-                QuitErrorMessage.NumberOfFilesCompiled;
+                LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                 ____loop_error='error';
 
@@ -1400,7 +1412,7 @@ function CompileInSingleFile()
                         "${__BU_MAIN_FULL_FILE_PATH}")" \
                     'FULL';
 
-                QuitErrorMessage.NumberOfFilesCompiled;
+                LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                 ____loop_error='error';
 
@@ -1459,7 +1471,7 @@ function CompileInSingleFile()
                             "${translationFilePath}")" \
                         'FULL';
 
-                    QuitErrorMessage.NumberOfFilesCompiled;
+                    LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                     ____loop_error='error';
 
@@ -1479,7 +1491,7 @@ function CompileInSingleFile()
                             "${__BU_MAIN_FULL_FILE_PATH}")" \
                         'FULL';
 
-                    QuitErrorMessage.NumberOfFilesCompiled;
+                    LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                     ____loop_error='error';
 
@@ -1518,7 +1530,7 @@ function CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL';
 
-            QuitErrorMessage.NumberOfFilesCompiled;
+            LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
             ____loop_error='error';
 
@@ -1548,7 +1560,7 @@ function CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL';
 
-            QuitErrorMessage.NumberOfFilesCompiled;
+            LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
             ____loop_error='error';
 
@@ -1567,7 +1579,7 @@ function CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL'; \
 
-            QuitErrorMessage.NumberOfFilesCompiled;
+            LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
             ____loop_error='error';
 
@@ -1603,7 +1615,7 @@ function CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL';
 
-            QuitErrorMessage.NumberOfFilesCompiled;
+            LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
             ____loop_error='error';
 
@@ -1639,7 +1651,7 @@ function CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL';
 
-            QuitErrorMessage.NumberOfFilesCompiled;
+            LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
             ____loop_error='error';
 
@@ -1675,7 +1687,7 @@ function CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'FULL';
 
-            QuitErrorMessage.NumberOfFilesCompiled;
+            LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
             ____loop_error='error';
 
@@ -1714,7 +1726,7 @@ function CompileInSingleFile()
                     "${__compiled_file_path}")" \
                 'FULL';
 
-                QuitErrorMessage.NumberOfFilesCompiled;
+                LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                 ____loop_error='error';
 
@@ -1859,7 +1871,7 @@ function CompileInSingleFile()
                 echo "${__BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2}" >&2;
                 echo >&2;
 
-                QuitErrorMessage.NumberOfFilesCompiled;
+                LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                 ____loop_error='error';
 
@@ -1904,7 +1916,7 @@ function CompileInSingleFile()
                             fi
                         fi
 
-                        QuitErrorMessage.NumberOfFilesCompiled;
+                        LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
                         ____loop_error='error';
 
@@ -2042,4 +2054,5 @@ else
     CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
 fi
 
-exit 0;
+# If the compiler was not executed from the "lib-compiler-for-all-supported-versions.sh" script, then this script can be exited.
+if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then exit 0; fi
