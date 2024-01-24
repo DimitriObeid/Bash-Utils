@@ -112,10 +112,10 @@ declare -r __PATH_TO_BU="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" ||
 
 ######################################################### CODE ########################################################
 
-source "${__PATH_TO_BU}/bin/lib-compilerV3.sh";
+source "${__PATH_TO_BU}/bin/lib-compilerV4.sh";
 
-exec "${__PATH_TO_BU}/bin/lib-compilerV3.sh" --lang=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
+exec "${__PATH_TO_BU}/bin/lib-compilerV4.sh" --lang=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
 
-exec "${__PATH_TO_BU}/bin/lib-compilerV3.sh" --lang-include=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
+exec "${__PATH_TO_BU}/bin/lib-compilerV4.sh" --lang-include=supported "${__BU_ARGS_ARRAY[@]}" || { exit 1; };
 
 exit 0;

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC2154
-function WriteCommentCode.Heredoc.en()
+function LibCompilerV4.Functions.WriteCommentCode.Heredoc.en()
 {
 cat <<-EOF > "${v_filename_tmp}"
 #!/usr/bin/env bash

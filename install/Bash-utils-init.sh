@@ -193,7 +193,7 @@ function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; 
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsCompiler()                     { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsCompiler()                     { if [[ "${0##*/}" == lib-compilerV?(3|4).?(ba)sh ]] || [[ "${0##*/}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ······················································································
 # Checking if the framework is being installed thanks to the installation script (TODO).

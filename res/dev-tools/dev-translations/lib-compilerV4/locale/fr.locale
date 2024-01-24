@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # ----------------------------------------------------------------------------------------------------------
-# Fonction "LibCompiler.Functions.CompilerUsage()" [-----] "LibCompiler.Functions.CompilerUsage()" function.
+# Fonction "LibCompilerV4.Functions.CompilerUsage()" [-----] "LibCompilerV4.Functions.CompilerUsage()" function.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compilerV3.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
 __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers de base et du module principal du framework Bash Utils dans un seul fichier.";
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
-# Fonction "LibCompiler.Functions.CompilerUsage()" : argument obligatoire [-----] "LibCompiler.Functions.CompilerUsage()" function : mandatory argument.
+# Fonction "LibCompilerV4.Functions.CompilerUsage()" : argument obligatoire [-----] "LibCompilerV4.Functions.CompilerUsage()" function : mandatory argument.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire (n'utilisez QU'UN SEUL d'entre eux) :";
 
@@ -69,7 +69,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
                                         du compilateur.";
 
 # -----------------------------------------------------------------------------------------------------------------------------------------------------
-# Fonction "LibCompiler.Functions.CompilerUsage()" : arguments optionels [-----] "LibCompiler.Functions.CompilerUsage()" function : optional arguments.
+# Fonction "LibCompilerV4.Functions.CompilerUsage()" : arguments optionels [-----] "LibCompilerV4.Functions.CompilerUsage()" function : optional arguments.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Arguments optionnels (ATTENTION : certaines options sont incompatibles entre elles, veuillez lire attentivement ce guide) :";
 
@@ -150,8 +150,8 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__REMOVE_SHELLCHECK_DIRECTIVES="
                                         le fichier compilé, ce qui fait que cette option est donc incompatible avec l'option '--compile-stable'.";
 
 
-# ------------------------------------------------------------------------------------------------
-# Fonction "HandleIncompatibleOptionalArgs()" [-----] "HandleIncompatibleOptionalArgs()" function.
+# ------------------------------------------------------------------------------------------------------------------------------------------------
+# Fonction "LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()" [-----] "LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()" function.
 
 __BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE="${__WARNING}L'option ${__HIGHLIGHT}%s${__WARNING} est incompatible avec cette option : ${__HIGHLIGHT}%s${__RESET}";
 
@@ -159,7 +159,7 @@ __BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE="${__WARNING}
 
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Fonction "LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled()" [-----] "LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled()" function.
+# Fonction "LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()" [-----] "LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()" function.
 
 __BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED="${__ERROR}Aucun fichier n'a été compilé${__RESET}";
 
@@ -238,8 +238,8 @@ __BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}Un code de langue ISO 639-1 non-sup
 __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="DÉBUT DE LA COMPILATION DU FRAMEWORK BASH UTILS DANS LE FICHIER ${__HIGHLIGHT}%s${__RESET}";
 
 
-# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-# (Fonction "WriteBU()") Écriture du contenu du fichier cible dans le fichier à générer [-----] "(WriteBU()" function) Writing the target file's content into the file to generate.
+# ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# (Fonction "LibCompilerV4.Functions.WriteBU()") Écriture du contenu du fichier cible dans le fichier à générer [-----] "(LibCompilerV4.Functions.WriteBU()" function) Writing the target file's content into the file to generate.
 
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="IMPOSSIBLE D'ÉCRIRE LE CONTENU DU FICHIER DANS LE FICHIER À GÉNÉRER!";
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Veuillez vérifier son chemin, ses droits et s'il existe.";

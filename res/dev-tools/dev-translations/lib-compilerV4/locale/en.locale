@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # -------------------------------------------------
-# "LibCompiler.Functions.CompilerUsage()" function.
+# "LibCompilerV4.Functions.CompilerUsage()" function.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__USAGE="Usage : ./path/to/lib-compilerV3.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
 __BU_COMPILE__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compiles the content of the Bash Utils framework's basic files and its main module into a single file.";
 
 # ----------------------------------------------------------------------
-# "LibCompiler.Functions.CompilerUsage()" function : mandatory argument.
+# "LibCompilerV4.Functions.CompilerUsage()" function : mandatory argument.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument (use ONLY one of them) :";
 
@@ -67,7 +67,7 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
                                         instructions.";
 
 # ----------------------------------------------------------------------
-# "LibCompiler.Functions.CompilerUsage()" function : optional arguments.
+# "LibCompilerV4.Functions.CompilerUsage()" function : optional arguments.
 
 __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Optional arguments (WARNING : some options are incompatible between each other, please read carefully this help guide) :";
 
@@ -148,8 +148,8 @@ __BU_COMPILE__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__REMOVE_SHELLCHECK_DIRECTIVES="
                                         compiled file, so this option is incompatible with the '--compile-stable' option.";
 
 
-# --------------------------------------------
-# "HandleIncompatibleOptionalArgs()" function.
+# --------------------------------------------------------------------
+# "LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()" function.
 
 __BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE="${__WARNING}The ${__HIGHLIGHT}%s${__WARNING} option is incompatible with this option : ${__HIGHLIGHT}%s${__RESET}";
 
@@ -157,7 +157,7 @@ __BU_COMPILE__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE="${__WARNING}
 
 
 # --------------------------------------------------------------------------
-# "LibCompiler.Functions.QuitErrorMessage_NumberOfFilesCompiled()" function.
+# "LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()" function.
 
 __BU_COMPILE__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED="${__ERROR}No files were compiled${__RESET}";
 
@@ -236,8 +236,8 @@ __BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}An unsupported language ISO 639-1 c
 __BU_COMPILE__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE${__RESET}";
 
 
-# ---------------------------------------------------------------------------------
-# ("WriteBU" function) Writing the target file's content into the file to generate.
+# ---------------------------------------------------------------------------------------------------------
+# ("LibCompilerV4.Functions.WriteBU" function) Writing the target file's content into the file to generate.
 
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !";
 __BU_COMPILE__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Please check its path, its rights and if it exists.";
