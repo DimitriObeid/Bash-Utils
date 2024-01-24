@@ -3,10 +3,10 @@
 # ----------------------------------------
 # DEV-TOOLS EXECUTABLE FILE INFORMATIONS :
 
-# Name          : lib-compilerV3.sh
+# Name          : lib-compilerV4.sh
 # Author(s)     : Dimitri OBEID
-# Version       : 2.0
-# Beta version  : 3.0
+# Version       : Beta 3.0
+# Beta version  : 4.0
 
 
 # ----------------------
@@ -1232,16 +1232,22 @@ function CompileInSingleFile()
         else
             LibCompilerV4.Functions.PrintErrorLine "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ERROR_MSG}" 'FULL';
             echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_1}" >&2;
+            echo >&2;
+
+            echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2}" >&2;
             echo "'lang=en fr uk sv tk kl'" >&2;
             echo >&2;
 
-            echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_2} ${__HIGHLIGHT},;|~_.:!§${__RESET}" >&2;
+            echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3} ${__HIGHLIGHT},;|~_.:!§${__RESET}" >&2;
             echo >&2;
 
-            echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_3}" >&2;
+            echo "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__ADVICE_4}" >&2;
             echo >&2; echo >&2;
 
             printf "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP}\n" '-h' '--help' >&2;
+
+            # Uncomment this line if you need to check the arguments list in case of a problem with them while executing the compiler.
+            printf "\n\n"; echo "${__BU_ARG_LANG}"; for argslist in "${__BU_ARGS_ARRAY[@]}"; do echo "${argslist}"; done;
 
             LibCompilerV4.Functions.PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 

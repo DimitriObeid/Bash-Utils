@@ -181,8 +181,8 @@ printf "
 # shellcheck disable=
 function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; BU.ModuleInit.IsInScript && exit "${p_code}"; return "${p_code}"; }
 
-# ·······································································································································
-# Checking if the script file which runs the Bash code is the "lib-compilerV3.sh" file, which only contains very basic sourced resources.
+# ···············································································································································································
+# Checking if the script file which runs the Bash code are either the "lib-compilerV3.sh" file or the "lib-compilerV4.sh" file, which only contain very basic included resources.
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :

@@ -10,7 +10,7 @@
 # ----------------------
 # SCRIPT'S DESCRIPTION :
 
-# This script calls the "lib-compilerV3.sh" script (which compiles the needed framework ressources and the main module in a single file)
+# This script calls the "lib-compilerV4.sh" script (which compiles the needed framework ressources and the main module in a single file)
 # for every types of needed compiled files : a copy for each supported language, and a copy with every supported languages shipped in.
 
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
@@ -55,7 +55,7 @@
 # REQUIRED
 # DEFAULT VAL : NULL
 
-# DESC : This array of argument stores the list of the supported optional arguments for the "lib-compilerV3.sh" script, the mandatory ones are already managed by this script.
+# DESC : This array of argument stores the list of the supported optional arguments for the "lib-compilerV4.sh" script, the mandatory ones are already managed by this script.
 declare __BU_ARGS_ARRAY=( "${@}" );
 
 ## ==============================================
