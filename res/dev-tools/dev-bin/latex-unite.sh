@@ -85,9 +85,9 @@ __BU_ARGS=("${@}");
 
 ## PATHS
 
-__BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+declare -r __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
 
-__BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.tex";
+declare -r __BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.tex";
 
 ## ==============================================
 
