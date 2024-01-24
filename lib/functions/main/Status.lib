@@ -118,6 +118,14 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 # ···························
 # Easy writing text function.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - echo      |
+#   - local     |
+#   - shift     |
+#   - tee       | (-a)
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho.Highlight()   -> Main -> Decho.lib
@@ -224,6 +232,11 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 # ···································································
 # Check the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -260,6 +273,11 @@ function BU.Main.Status.CheckSTAT_DECHO()
 
 # ··································································
 # Check the "${__BU_MAIN_STAT_ECHO}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -298,6 +316,11 @@ function BU.Main.Status.CheckSTAT_ECHO()
 # ······································································
 # Checking the "${__BU_MAIN_STAT_ERROR}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -335,6 +358,11 @@ function BU.Main.Status.CheckSTAT_ERROR()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_INITIALIZING}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -371,6 +399,11 @@ function BU.Main.Status.CheckSTAT_INITIALIZING()
 
 # ····································································
 # Checking the "${__BU_MAIN_STAT_LOG}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -414,6 +447,11 @@ function BU.Main.Status.CheckSTAT_LOG()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_LOG_REDIRECT}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -451,6 +489,11 @@ function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_OPERATE_ROOT}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -487,6 +530,11 @@ function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
 
 # ············································································
 # Checking the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -528,6 +576,11 @@ function BU.Main.Status.CheckSTAT_TIME_HEADER()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsFloat()   -> Main -> Checkings.lib
@@ -567,6 +620,11 @@ function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
 
 # ·········································································
 # Checking the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -608,6 +666,11 @@ function BU.Main.Status.CheckSTAT_TIME_TXT()
 # ········································································
 # Checking the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -646,6 +709,11 @@ function BU.Main.Status.CheckSTAT_TXT_FMT()
 # Checking the "${__BU_MAIN_STAT_USER_OS}" global status variable's value.
 # This function is empty now, as the OS handling is still in work.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - local     |
+#   - shift     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
@@ -669,6 +737,11 @@ function BU.Main.Status.CheckSTAT_USER_OS()
 
 # ························································································
 # Checking all the project's status variables values if multiple values had been modified.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -724,6 +797,11 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 
 # Changing the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
@@ -732,12 +810,43 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 #   - BU.Main.Status.CheckSTAT_DECHO()  -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_DECHO() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}"; __BU_MAIN_STAT_DECHO="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_DECHO "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_DECHO()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHECKINGS}";
+
+    #**** Parameters ****
+    __BU_MAIN_STAT_DECHO="${1:-$'\0'}";
+
+    #**** Code ****
+    BU.Main.Status.CheckSTAT_DECHO "${2}" "${3}" "${4}" || {
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ············································································································
 # Changing the "${__BU_MAIN_STAT_ECHO}" global status variable's value, and provide a log redirection support.
 
 ## VERY IMPORTANT : DO NOT CALL ANY "BU.Main.Decho.Decho<...>()" FUNCTION HERE (THE COMPLETE ONE), OR ELSE THE SCRIPT WILL BE STUCK IN AN INFINITE LOOP !!!!!!!!!!!!!!!
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - declare   |
+#   - echo      |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -760,7 +869,10 @@ function BU.Main.Status.ChangeSTAT_ECHO()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
         "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
 
@@ -867,6 +979,11 @@ function BU.Main.Status.ChangeSTAT_ERROR()
 # Changing the "${__BU_MAIN_STAT_INITIALIZING}" global status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
@@ -877,19 +994,38 @@ function BU.Main.Status.ChangeSTAT_ERROR()
 
 # shellcheck disable=
 function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
 
 	if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ] && [ 'true' == "${1}" ]; then
-		BU.Main.Echo.Warning "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_STAT_INITIALIZING}") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.Warning \
+            "WARNING : It's strongly discouraged to change the $(BU.Main.Decho.Decho.Highlight "${__BU_MAIN_STAT_INITIALIZING}") value from $(BU.Main.Decho.Decho.Var 'false') to $(BU.Main.Decho.Decho.Var 'true')";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
 	else
 		__BU_MAIN_STAT_INITIALIZING=${1:-$'\0'};
 
 		BU.Main.Status.CheckSTAT_INITIALIZING "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	fi;
+
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+	return 0;
 }
 
 # ··································································
 # Changing the "${__BU_MAIN_STAT_LOG}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -899,10 +1035,37 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
 #   - BU.Main.Status.CheckSTAT_LOG()    -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_LOG="${1:-$'\0'}";          BU.Main.Status.CheckSTAT_LOG            "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_LOG()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_LOG="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_LOG "${2}" "${3}" "${4}" || {
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ·············································································
 # Changing the "${__BU_MAIN_STAT_LOG_REDIRECT}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -912,10 +1075,37 @@ function BU.Main.Status.ChangeSTAT_LOG()             { BU.Main.Echo.Debug "main"
 #   - BU.Main.Status.CheckSTAT_LOG_REDIRECT()   -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_LOG_REDIRECT="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_LOG_REDIRECT   "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_LOG_REDIRECT="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_LOG_REDIRECT "${2}" "${3}" "${4}" || {
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ·············································································
 # Changing the "${__BU_MAIN_STAT_OPERATE_ROOT}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -925,7 +1115,30 @@ function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()    { BU.Main.Echo.Debug "main"
 #   - BU.Main.Status.CheckSTAT_OPERATE_ROOT()   -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_OPERATE_ROOT="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_OPERATE_ROOT   "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_OPERATE_ROOT="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_OPERATE_ROOT "${2}" "${3}" "${4}" || {
+
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ············································································
 # Changing the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable's value.
@@ -938,10 +1151,37 @@ function BU.Main.Status.ChangeSTAT_OPERATE_ROOT()    { BU.Main.Echo.Debug "main"
 #   - BU.Main.Status.CheckSTAT_TIME_HEADER()    -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_TIME_HEADER()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TIME_HEADER="${1:-$'\0'}";  BU.Main.Status.CheckSTAT_TIME_HEADER    "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_HEADER()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_TIME_HEADER="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_TIME_HEADER "${2}" "${3}" "${4}" || {
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ············································································
 # Changing the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -951,10 +1191,37 @@ function BU.Main.Status.ChangeSTAT_TIME_HEADER()     { BU.Main.Echo.Debug "main"
 #   - BU.Main.Status.CheckSTAT_TIME_NEWLINE()   -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()    { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TIME_NEWLINE="${1:-$'\0'}"; BU.Main.Status.CheckSTAT_TIME_NEWLINE   "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_TIME_NEWLINE="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_TIME_NEWLINE "${2}" "${3}" "${4}" || {
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ·········································································
 # Changing the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -964,10 +1231,37 @@ function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()    { BU.Main.Echo.Debug "main"
 #   - BU.Main.Status.CheckSTAT_TIME_TXT()       -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TIME_TXT="${1:-$'\0'}";     BU.Main.Status.CheckSTAT_TIME_TXT       "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TIME_TXT()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_TIME_TXT="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_TIME_TXT "${2}" "${3}" "${4}" || {
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 # ········································································
 # Changing the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -977,7 +1271,31 @@ function BU.Main.Status.ChangeSTAT_TIME_TXT()        { BU.Main.Echo.Debug "main"
 #   - BU.Main.Status.CheckSTAT_TXT_FMT()        -> Main -> Status.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Status.ChangeSTAT_TXT_FMT()         { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}"; __BU_MAIN_STAT_TXT_FMT="${1:-$'\0'}";      BU.Main.Status.CheckSTAT_TXT_FMT        "${2}" "${3}" "${4}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Status.ChangeSTAT_TXT_FMT()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CHANGING_VALUES_MORE_EASILY}";
+
+    __BU_MAIN_STAT_TXT_FMT="${1:-$'\0'}";
+
+    BU.Main.Status.CheckSTAT_TXT_FMT "${2}" "${3}" "${4}" || {
+
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+
+    };
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+}
 
 ## ==============================================
 
@@ -989,57 +1307,177 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EA
 # ·············································································································································
 # Checking if the "BU.Echo<...>()" functions can call the "BU.Main.Status.CheckProjectLogStatus()" function without provoking an infinite loop.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 # shellcheck disable=
-function BU.Main.Status.CheckStatIsBackupEchoing() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_ECHO,,}"           == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsBackupEchoing()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}";
+
+    if [ "${__BU_MAIN_STAT_ECHO,,}" == 'true' ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    fi;
+}
 
 # ····························································································
 # Checking if the library is into its initialization process (${__BU_MAIN_STAT_INITIALIZING}).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 # shellcheck disable=
-function BU.Main.Status.CheckStatIsInitializing()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_INITIALIZING,,}"   == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsInitializing()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}";
+
+    if [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'true' ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    fi;
+}
 
 # ···············································
 # Checking if the log redirection mode is active.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 # shellcheck disable=
-function BU.Main.Status.CheckStatIsLogging()       { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_LOG,,}"            == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsLogging()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}";
+
+    if [ "${__BU_MAIN_STAT_LOG,,}" == 'true' ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    fi;
+}
 
 # ···································································
 # Checking if the initialization logs can be printed on the terminal.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 # shellcheck disable=
-function BU.Main.Status.CheckStatIsPrintingInit()  { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatIsPrintingInit()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}";
+
+    if [ "${__BU_MAIN_STAT_PRINT_INIT_LOG,,}" == 'true' ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    fi;
+}
 
 # ···········································
 # Checking if the text formatting is allowed.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
 # shellcheck disable=
-function BU.Main.Status.CheckStatAllowFormatting() { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}"; if [ "${__BU_MAIN_STAT_TXT_FMT,,}"        == 'true' ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; fi; }
+function BU.Main.Status.CheckStatAllowFormatting()
+{
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_STATUS_LIB__CAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS}" \
+        "${__BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EASIER_BOOLEAN_VALUES_CHECKINGS}";
+
+    if [ "${__BU_MAIN_STAT_TXT_FMT,,}" == 'true' ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    fi;
+}
 
 ## ==============================================
 

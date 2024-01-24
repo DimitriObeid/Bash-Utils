@@ -120,9 +120,9 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_CO
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - echo
-#   - local
-#   - printf
+#   - echo      |
+#   - local     |
+#   - printf    |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -155,11 +155,11 @@ function BU.Main.TextFormat.CannotCreateRessource()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - cat
-#   - local
-#   - mkdir     (-p)
-#   - touch
+#   - basename  |
+#   - cat       |
+#   - local     |
+#   - mkdir     | (-p)
+#   - touch     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -206,11 +206,11 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - cat
-#   - local
-#   - mkdir     (-p)
-#   - touch
+#   - basename  |
+#   - cat       |
+#   - local     |
+#   - mkdir     | (-p)
+#   - touch     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -269,13 +269,13 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODE
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - command   (-v)
-#   - echo      (-e | -n)
-#   - local
-#   - mkdir     (-p)
-#   - touch
-#   - tput      (setab)
+#   - basename  |
+#   - command   | (-v)
+#   - echo      | (-e | -n)
+#   - local     |
+#   - mkdir     | (-p)
+#   - touch     |
+#   - tput      | (setab)
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -349,12 +349,12 @@ function BU.Main.TextFormat.SetBGColor()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - echo      (-e | -p)
-#   - local
-#   - mkdir     (-p)
-#   - touch
-#   - shopt     (-s extglob | -u extglob)
+#   - basename  |
+#   - echo      | (-e | -p)
+#   - local     |
+#   - mkdir     | (-p)
+#   - touch     |
+#   - shopt     | (-s extglob | -u extglob)
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

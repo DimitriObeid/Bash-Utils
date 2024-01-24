@@ -121,11 +121,11 @@ declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - echo      (-e | -n)
-#   - eval
-#   - local
-#   - test
+#   - basename  |
+#   - echo      | (-e | -n)
+#   - eval      |
+#   - local     |
+#   - test      |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -239,9 +239,9 @@ function BU.Main.Headers.DrawLine()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - echo
-#   - local
+#   - basename  |
+#   - echo      |
+#   - local     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -279,10 +279,10 @@ function BU.Main.Headers.Light()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - echo
-#   - local
-#   - printf
+#   - basename  |
+#   - echo      |
+#   - local     |
+#   - printf    |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -323,10 +323,10 @@ function BU.Main.Headers.LightDeco()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - basename
-#   - local
-#   - read      (-a | -r)
-#   - sleep
+#   - basename  |
+#   - local     |
+#   - read      | (-a | -r)
+#   - sleep     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
