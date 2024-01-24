@@ -77,9 +77,9 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : DÉBUT DU PROCESSUS D'INITIALISATION [-----] BEGINNING OF THE INITIALIZATION PROCESS
+    #### SECTION : DÉBUT DU PROCESSUS D'INITIALISATION [-----] SECTION : BEGINNING OF THE INITIALIZATION PROCESS
 
-    ## SOUS-SECTION : DÉFINITION DES VARIABLES GLOBALES [-----] DEFINING GLOBAL VARIABLES
+    ## SOUS-SECTION : DÉFINITION DES VARIABLES GLOBALES [-----] SUB-SECTION : DEFINING GLOBAL VARIABLES
 
     # ·······················································································
     # FONCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
@@ -91,7 +91,7 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## ==============================================
 
-    ## SOUS-SECTION : APPEL DES AUTRES FONCTIONS POUR L'INITIALISATION [-----] CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
+    ## SOUS-SECTION : APPEL DES AUTRES FONCTIONS POUR L'INITIALISATION [-----] SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
     declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISATION DES MODULES";
 
@@ -101,9 +101,9 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : RESSOUCES D'INITIALISATION - FONCTIONS [-----] INITIALIZER RESOURCES - FUNCTIONS
+    #### SECTION : RESSOUCES D'INITIALISATION - FONCTIONS [-----] SECTION : INITIALIZER RESOURCES - FUNCTIONS
 
-    ## SOUS-SECTION : FONCTIONS ET RESSOURCES NÉCESSAIRES POUR LE PIÉGEAGE DES SIGNAUX [-----] FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
+    ## SOUS-SECTION : FONCTIONS ET RESSOURCES NÉCESSAIRES POUR LE PIÉGEAGE DES SIGNAUX [-----] SUB-SECTION : FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
     # ········································
     # FONCTION : "BU.ModuleInit.DefineTraps()"
@@ -114,7 +114,7 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## ==============================================
 
-    ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION [-----] FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
+    ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'AFFICHAGE DES MESSAGES D'INITIALISATION [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
     # ········································
     # FONCTION : "BU.ModuleInit.AskPrintLog()"
@@ -359,7 +359,7 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## ----------------------------------------------
 
-    ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
+    ## SOUS-SECTION : FONCTIONS NÉCESSAIRES POUR L'INITIALISATION DES MODULES [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
     # ······································
     # FONCTION : "BU.ModuleInit.CheckPath()"
@@ -427,7 +427,7 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ## ----------------------------------------------
 
-    ## SOUS-SECTION : FONCTIONS NÉCESSAIRES AU TRAITEMENT DES MODULES [-----] FUNCTIONS NEEDED FOR THE MODULES PROCESSING
+    ## SOUS-SECTION : FONCTIONS NÉCESSAIRES AU TRAITEMENT DES MODULES [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
     # ··································
     # FONCTION : "BU.ModuleInit.Usage()"
@@ -570,9 +570,9 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : INCLUSION DES MODULES [-----] SOURCING THE MODULES
+    #### SECTION : INCLUSION DES MODULES [-----] SECTION : SOURCING THE MODULES
 
-    ## SOUS-SECTION : INCLUSION DES FICHIERS DE LA LIBRAIRIE SELON LE MODULE INCLUS [-----] INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
+    ## SOUS-SECTION : INCLUSION DES FICHIERS DE LA LIBRAIRIE SELON LE MODULE INCLUS [-----] SUB-SECTION : INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
     # ····································
     # FONCTION : "BashUtils_InitModules()"

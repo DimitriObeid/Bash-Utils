@@ -2036,8 +2036,12 @@ function CompileInSingleFile()
 
 # Support of the arguments when this script is executed with the two awaited arguments.
 if      [ -n "${__BU_ARG_LANG}" ]; then CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
+
+# If no options are passed, instead of throwing an error, the "CompileInSingleFile()" function will be called multiple times with its mandatory argument
+# in order to create every types of needed compiled files : a copy for each supported language, and a copy with every supported languages shipped in.
 else
     CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
+    CompileInSingleFile --lang-include=supported || { exit 1; };
 fi
 
 exit 0;

@@ -27,7 +27,7 @@
 ## MAIN FUNCTION
 
 # shellcheck disable=
-function BU.ModuleInit.SetInitLocale.en()
+function BU.ModuleInit.SetInitLocale.()
 {
     # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
@@ -37,19 +37,19 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## REPEATED MESSAGES
 
-    # Writing the file name, function name and the line number where a non-fatal error occured.
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS WARNING";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="";
 
-    # Writing the file name and the line number where a non-fatal error occured.
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="IN « %s » FILE, ON LINE « %s » --> BASH-UTILS WARNING";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT="";
 
-    # Writing the file name, function name and the line number where a fatal error occured.
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="IN « %s » FILE, AT « %s » FUNCTION, ON LINE « %s » --> BASH-UTILS ERROR";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR="";
 
-    # Writing the file name and the line number where a fatal error occured.
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="IN « %s » FILE, ON LINE « %s » --> BASH-UTILS ERROR";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
 
-    # Writing the beginning of the text of any text that must be printed with the "BU.ModuleInit.PrintLogError()" function.
+    #
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
     ## ==============================================
@@ -62,13 +62,13 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ########################### PROCESSING THE MODULES INITIALIZATION SCRIPT ##########################
 
-    #### OUT OF FUNCTION MESSAGES
+    #### : [-----] SECTION : OUT OF FUNCTION MESSAGES
 
-    ## MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
+    ## : [-----] SUB-SECTION : MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
-        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="The Bash Utils configurations root folder « .Bash-utils » doesn't exists in your home directory";
-        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Please copy this folder in your home directory. You can install it by executing the « install_and_update.sh » file, or you can find it in the « Bash-utils/install » directory";
+        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="";
+        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="";
     fi
 
     ## ==============================================
@@ -77,23 +77,23 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : BEGINNING OF THE INITIALIZATION PROCESS
+    ####  : [-----] SECTION : BEGINNING OF THE INITIALIZATION PROCESS
 
-    ## SUB-SECTION : DEFINING GLOBAL VARIABLES
+    ##  : [-----] SUB-SECTION : DEFINING GLOBAL VARIABLES
 
     # ·······················································································
-    # FUNCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
+    #  : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
-    # Note: This variable is also used in the main module configuration files.
-    declare -g __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : Unable to define the path to store in the « %s » global variable\n";
+    #
+    declare -g __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : \n";
 
     # --------
 
     ## ==============================================
 
-    ## SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
+    ##  : [-----] CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
-    declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALIZING THE MODULES";
+    declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="";
 
     ## ==============================================
 
@@ -101,9 +101,9 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : INITIALIZER RESOURCES - FUNCTIONS
+    ####  : INITIALIZER RESOURCES - FUNCTIONS
 
-    ## SUB-SECTION : FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
+    ##  : FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
     # ········································
     # FUNCTION : "BU.ModuleInit.DefineTraps()"
@@ -114,7 +114,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## ==============================================
 
-    ## SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
+    ## : [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
     # ········································
     # FUNCTION : "BU.ModuleInit.AskPrintLog()"
@@ -359,7 +359,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## ==============================================
 
-    ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
+    ## : [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
     # ······································
     # FUNCTION : "BU.ModuleInit.CheckPath()"
@@ -427,7 +427,7 @@ function BU.ModuleInit.SetInitLocale.en()
 
     ## ==============================================
 
-    ## SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
+    ## : [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
     # ··································
     # FUNCTION : "BU.ModuleInit.Usage()"
@@ -570,9 +570,9 @@ function BU.ModuleInit.SetInitLocale.en()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### SECTION : SOURCING THE MODULES
+    #### : [-----] SECTION : SOURCING THE MODULES
 
-    ## SUB-SECTION : INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
+    ## : [-----] SUB-SECTION : INCLUSION OF LIBRARY FILES ACCORDING TO THE INCLUDED MODULE
 
     # ····································
     # FUNCTION : "BashUtils_InitModules()"
