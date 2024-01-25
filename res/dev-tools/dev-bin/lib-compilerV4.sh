@@ -770,6 +770,27 @@ function LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()
     exit 1;
 }
 
+# ···················
+# Debugging function.
+
+# shellcheck disable=
+function LibCompilerV4.Functions.Debug()
+{
+    #**** Variables ****
+    local i=0;      # ARG TYPE : Int    - DESC : Arguments loop iterator.
+
+    #**** Code ****
+    printf "\n\n";
+
+    echo "ARG [0] : ${__BU_ARG_LANG}";
+
+    for argslist in "${__BU_ARGS_ARRAY[@]}"; do
+        i=$(( i + 1 ));
+
+        echo "ARG [${i}] : ${argslist}";
+    done;
+}
+
 ## ==============================================
 
 ## HELP
@@ -1246,8 +1267,8 @@ function CompileInSingleFile()
 
             printf "${__BU_COMPILE__BAD_LANG_ARRAY_PASSED__HELP}\n" '-h' '--help' >&2;
 
-            # Uncomment this line if you need to check the arguments list in case of a problem with them while executing the compiler.
-            printf "\n\n"; echo "${__BU_ARG_LANG}"; for argslist in "${__BU_ARGS_ARRAY[@]}"; do echo "${argslist}"; done;
+            # Uncomment the following line if you need to check the arguments list in case of a problem with them while executing the compiler.
+            LibCompilerV4.Functions.Debug;
 
             LibCompilerV4.Functions.PrintErrorLine "${__BU_COMPILE__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
@@ -1317,7 +1338,7 @@ function CompileInSingleFile()
             __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')] ]";
 
         elif [ "${#__language_array[@]}" -gt 1 ]; then
-            __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG ]";
+            __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG$(if [ -n "${__vMandatoryArgLang}" ]; then printf " | CURR -> %s" "${v_curr_locale}"; fi)]";
         fi
 
         __locale_print_code__error="${__locale_print_code}${__ERROR}";
@@ -1364,7 +1385,7 @@ function CompileInSingleFile()
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         # Checking the mandatory first argument's value in order to include the English translation file into each non-english compiled files if the '--no-english-include' parameter was not passed.
-        if [ -z "${__vArrayVal_no_english_include}" ] && [[ ! ${__language_array[*]} =~ en ]]; then local ____no_english_included='true'; fi
+        if [[ ( -z "${__vArrayVal_no_english_include}" ) && ! "${__language_array[*]}" =~ en ]] || [ "${v_curr_locale,,}" != 'en' ]; then local ____no_english_included='true'; fi
 
         if [ "${____no_english_included,,}" == 'true' ]; then
             LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
@@ -2092,18 +2113,22 @@ function CompileInSingleFile()
 
     LibCompilerV4.Functions.PrintSuccessLine "${__BU_COMPILE__END_OF_FRAMEWORK_COMPILATION}" 'FULL';
 
-    return 0;
+    if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; fi
 }
 
-# Support of the arguments when this script is executed with the two awaited arguments.
-if      [ -n "${__BU_ARG_LANG}" ]; then CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
+# Debug
+# echo "${0##*/}"
 
-# If no options are passed, instead of throwing an error, the "CompileInSingleFile()" function will be called with the supported languages argument.
-else
-    CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
+if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then
+    # Support of the arguments when this script is executed with the two awaited arguments.
+    if [ -n "${__BU_ARG_LANG}" ]; then 
+        CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
+
+    # If no options are passed, instead of throwing an error, the "CompileInSingleFile()" function will be called with the supported languages argument.
+    else
+        CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
+    fi
+
+    # If the compiler was not executed from the "lib-compiler-for-all-supported-versions.sh" script, then this script can be exited.
+    exit 0;
 fi
-
-echo "${0##*/}";
-
-# If the compiler was not executed from the "lib-compiler-for-all-supported-versions.sh" script, then this script can be exited.
-if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then exit 0; fi
