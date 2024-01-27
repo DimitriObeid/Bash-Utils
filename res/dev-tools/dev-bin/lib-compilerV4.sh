@@ -1124,7 +1124,7 @@ function LibCompilerV4.PreCompilationFunctions.CheckForAnyIncompatibleOptionalAr
 # Main function of the compiler.
 
 # shellcheck disable=SC2059
-function CompileInSingleFile()
+function LibCompilerV4.CompileInSingleFile()
 {
     #**** Parameters ****
     local p_locale=${1:-NULL};  # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Language in which the file must be translated.
@@ -1296,7 +1296,7 @@ function CompileInSingleFile()
         local __compiled_file_parent_dir;   # VAR TYPE : Dirpath    - DESC : Path to the
         local __compiled_file_path;         # VAR TYPE : Filepath   - DESC : Path to the
 
-        local __locale_print_code;          # VAR TYPE : String     - DESC : Printing the current language's name
+        local __locale_print_code;          # VAR TYPE : String     - DESC : Printing the current language's name.
 
         local __locale_print_code__error;   # VAR TYPE : String     - DESC : Printing the current language's name and coloring the concatened text with the error messages color code.
         local __locale_print_code__newstep; # VAR TYPE : String     - DESC : Printing the current language's name and coloring the concatened text with the newstep messages color code.
@@ -2122,11 +2122,11 @@ function CompileInSingleFile()
 if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then
     # Support of the arguments when this script is executed with the two awaited arguments.
     if [ -n "${__BU_ARG_LANG}" ]; then 
-        CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
+        LibCompilerV4.CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
 
-    # If no options are passed, instead of throwing an error, the "CompileInSingleFile()" function will be called with the supported languages argument.
+    # If no options are passed, instead of throwing an error, the "LibCompilerV4.CompileInSingleFile()" function will be called with the supported languages argument.
     else
-        CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
+        LibCompilerV4.CompileInSingleFile "lang=en,fr" "${@}" || { exit 1; };
     fi
 
     # If the compiler was not executed from the "lib-compiler-for-all-supported-versions.sh" script, then this script can be exited.

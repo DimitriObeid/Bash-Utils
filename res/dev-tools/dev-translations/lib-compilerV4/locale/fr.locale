@@ -230,7 +230,7 @@ declare -g __BU_COMPILE__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED="${__SUCC
 # ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Vérification de la validité du code ISO 639-1 enregistré dans la variable "${v_curr_locale}" [-----] Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code.
 
-declare -g __BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__HIGHLIGHT}CompileInSingleFile()${__ERROR} !${__RESET}";
+declare -g __BU_COMPILE__BAD_LANGUAGE_PASSED="${__ERROR}Un code de langue ISO 639-1 non-supporté a été passé en premier argument de la fonction ${__HIGHLIGHT}LibCompilerV4.CompileInSingleFile()${__ERROR} !${__RESET}";
 
 
 # -----------------------------------------------------------------------------------------
