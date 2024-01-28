@@ -221,7 +221,7 @@ function BU.ModuleInit.SetInitLocale.en()
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E="Value : The « %s » global variable's value is a command substition";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F="Value : %s";
 
-    # Translation of each type of variables
+    # Translation of each type of variables.
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR="(alphabetic character)";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING="(alphabetic string)";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL="(boolean variable)";
@@ -292,7 +292,7 @@ function BU.ModuleInit.SetInitLocale.en()
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E \
-        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F
+        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F;
 
 
     # These variables define a message to display instead of a module name, if the variable is defined in one of the provided initializer scripts.
@@ -433,15 +433,15 @@ function BU.ModuleInit.SetInitLocale.en()
     # FUNCTION : "BU.ModuleInit.Usage()"
 
     # List of different messages, used to better measure the space between the text and the colon.
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                  : the four following parameters are incompatible with each other, they will overwrite each other :";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : do not display the initialization messages on the screen, but log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : do not display the initialization messages on the screen OR log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                   : the four following parameters are incompatible with each other, they will overwrite each other :";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display             : display the initialization messages on the screen as they are logged in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display          : do not display the initialization messages on the screen, but log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut                : do not display the initialization messages on the screen OR log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display        : display the initialization messages on the screen without logging them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
 
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array EVERY informations about the initialization process";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array the essential informations only";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING                   : the two following parameters are incompatible with each other, they will overwrite each other :";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full           : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array EVERY informations about the initialization process";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial        : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array the essential informations only";
 
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            OR --stat-debug=true";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   OR--stat-debug-bashx=file   OR --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
@@ -466,7 +466,7 @@ function BU.ModuleInit.SetInitLocale.en()
     declare -g __BU_MODULE_INIT_MSG__USAGE__DEBUG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX}";
 
-    # Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
+    # Deletion of the values stored in the variables constituting the list of the various messages (used to better measure the space between the text and the colon), in order to free up memory.
     unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0 \
             __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
             __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2 \
@@ -483,10 +483,10 @@ function BU.ModuleInit.SetInitLocale.en()
     # ······················································································
     # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
-    # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable when calling the « BashUtils_InitModules » function"
+    # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules()" function.
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable when calling the « BashUtils_InitModules() » function"
 
-    # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules" function.
+    # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules()" function.
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="the « module » value's parameters '--log-display' 'log-no-display', '--log-shut' and '--log-shut-display' are incompatible with each other";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Please choose only one of these parameter values";
 
@@ -507,7 +507,7 @@ function BU.ModuleInit.SetInitLocale.en()
     # ·························································
     # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
 
-    # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
+    # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules()" function.
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
 
@@ -534,15 +534,15 @@ function BU.ModuleInit.SetInitLocale.en()
     #~ End of the execution of the arguments verification loop
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--log-*" option passed.
+    # One or more arguments were given to the "BashUtils_InitModules()" function as "module" parameter's value(s) : unsupported "--log-*" option passed.
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » VALUE'S LOG PERMISSION OPTION « %s » IS NOT SUPPORTED";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_LOG_OPT_UNSUPPORTED_VAL__ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
-    # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported "--mode-log-*" option passed.
+    # One or more arguments were given to the "BashUtils_InitModules()" function as "module" parameter's value(s) : unsupported "--mode-log-*" option passed.
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » PARAMETER'S LOG MODE MODE OPTION « %s » IS NOT SUPPORTED";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_MODE_LOG_OPT_UNSUPPORTED_VAL__ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
-    # One or more arguments were given to the "BashUtils_InitModules" function as "module" parameter's value(s) : unsupported general option passed.
+    # One or more arguments were given to the "BashUtils_InitModules()" function as "module" parameter's value(s) : unsupported general option passed.
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » PARAMETER'S GENERAL OPTION « %s » IS NOT SUPPORTED";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_GEN_OPT_UNSUPPORTED_VAL__ADVICE="Please modify or remove this value, called at the index « %s » of the « module » parameter";
 
@@ -550,16 +550,16 @@ function BU.ModuleInit.SetInitLocale.en()
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__ERROR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR} : UNABLE TO SOURCE THE « %s » FILE";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE__SOURCE_STATUS_CONF_FILE__SUCCESS="The « %s » file was successfully sourced";
 
-    # "module" parameter passed in argument, during the call of the « BashUtils_InitModules » function, but the main module is missing.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MAIN MODULE WAS NOT PASSED AFTER THE « MODULE » PARAMETER DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
+    # "module" parameter passed in argument, during the call of the « BashUtils_InitModules() » function, but the main module is missing.
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MAIN MODULE WAS NOT PASSED AFTER THE « MODULE » PARAMETER DURING THE CALL OF the « BashUtils_InitModules() » function";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_MAIN_MODULE_MISSING__ADVICE="Please do so by setting the « %s » module's argument (with or without its parameters) in second position when you call the « %s » function in your script";
 
-    # "module" parameter passed in argument AFTER the call of the main module, during the call of the « BashUtils_InitModules » function.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MAIN MODULE WAS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » PARAMETER DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
+    # "module" parameter passed in argument AFTER the call of the main module, during the call of the « BashUtils_InitModules() » function.
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MAIN MODULE WAS PASSED AS FIRST ARGUMENT, BUT BEFORE THE « module -- » PARAMETER DURING THE CALL OF the « BashUtils_InitModules() » function";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_PARAM_PASSED_AFTER_MAIN_MODULE__ADVICE="Please reverse this order, call the « module » with its arguments BEFORE the main module";
 
-    # No "module" parameter passed in argument, nor main module, during the call of the « BashUtils_InitModules » function.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : NO « MODULE » PARAMETER AND NO « MAIN » MODULE PASSED AS FIRST, THEN SECOND ARGUMENTS DURING THE CALL OF THE « BashUtils_InitModules » FUNCTION";
+    # No "module" parameter passed in argument, nor main module, during the call of the « BashUtils_InitModules() » function.
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : NO « MODULE » PARAMETER AND NO « MAIN » MODULE PASSED AS FIRST, THEN SECOND ARGUMENTS DURING THE CALL OF the « BashUtils_InitModules() » function";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_AND_MAIN_PARAMS_MISSING__ADVICE="Please do so by modifying the main module's argument position in your script, and optionally adding the « module » parameter with the needed mandatory arguments";
 
     # --------
@@ -590,7 +590,7 @@ function BU.ModuleInit.SetInitLocale.en()
     #~ The main loop is running now
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    # Definition of the information about the global variables that are defined in the "BashUtils_InitModules" function.
+    # Definition of the information about the global variables that are defined in the "BashUtils_InitModules()" function.
     declare -g __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__CONF_PATH__DIGVI="This global variable stores the path of the currently processed module's configurations directory (current : %s | path : %s)";
     declare -g __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INIT_PATH__DIGVI="This global variable stores the path of the currently processed module's initialization directory (current : %s | path : %s";
     declare -g __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__NAME_WITH_ARGS="This global variable stores the current value passed as argument when calling the « %s » function (current index : %s | value : %s)";

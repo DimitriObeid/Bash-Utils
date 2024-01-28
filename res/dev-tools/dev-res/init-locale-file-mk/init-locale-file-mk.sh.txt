@@ -206,78 +206,78 @@ function BU.ModuleInit.SetInitLocale.()
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3="Func  : %s";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4="Line  : %s";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Modl  : unknown";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="File  : unknown";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Func  : none";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Line  : unknown";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Modl  : ";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="File  : ";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Func  : ";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Line  : ";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9="Declared global array : %s";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A="Declared global variable : %s";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B="Description :";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9=" : %s";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A=" : %s";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B=" :";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C="Type  : Array";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D="Type  : %s %s";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C=" : ";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D=" : %s %s";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E="Value : The « %s » global variable's value is a command substition";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F="Value : %s";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E=" :  « %s »";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F=" : %s";
 
-    # Translation of each type of variables
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR="(alphabetic character)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING="(alphabetic string)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL="(boolean variable)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CMD="(command substitution)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CHAR="((alphanumeric) character)";
+    #
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ASTRING="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__BOOL="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CMD="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__CHAR="(() )";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIR="(directory)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIRPATH="(path to a directory)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILE="(file)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILEPATH="(path to a file)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT="(floating number)";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIR="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__DIRPATH="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILE="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FILEPATH="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOAT="()";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATNEG="(negative floating number)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATPOS="(positive floating number)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INT="(integer)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTNEG="(negative integer)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTPOS="(positive integer)";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATNEG="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__FLOATPOS="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INT="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTNEG="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__INTPOS="()";
 
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__PATH="(path to a directory or a file)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__STRING="(string)";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__PATH="()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__STRING="()";
 
-    # Known files, functions and line numbers.
+    #
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4}";
 
-    # Unknown files, functions and line numbers.
+    #
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__MODL_NULL="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FILE_NULL="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__FUNC_NULL="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__LINE_NULL="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8}";
 
-    # Variables types checkings.
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN="No variable type given";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN="Unknown variable type";
+    #
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__NO_VAR_TYPE_GIVEN="";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__UNKNOWN_VAR_TYPE_GIVEN="";
 
-    # Array checkings.
+    #
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_ARRAY="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__CHECK_IS_NOT_ARRAY="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A}";
 
-    # Description.
+    #
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DESCRIPTION="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B}";
 
-    # Array processer.
+    #
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_TYPE="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C}";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE="Value";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_EMPTY="The array is empty";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_VALUE="";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__ARR_PROC_ARR_EMPTY="";
 
-    # Other value processer (not arrays).
+    #
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_TYPE="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_CMD="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E}";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_NOT_CMD="${__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F}";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="No value is stored in this global variable";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__VAL_IS_EMPTY="";
 
-    # Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
+    #
     unset __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1 \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2 \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3 \
@@ -292,68 +292,68 @@ function BU.ModuleInit.SetInitLocale.()
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D \
         __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E \
-        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F
+        __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F;
 
 
-    # These variables define a message to display instead of a module name, if the variable is defined in one of the provided initializer scripts.
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE="Main initializer script";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF="Main (configuration files)";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_INIT="Main (module's initializer script)";
+    #
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_FILE="";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_CONF=" ()";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__IS_VAR_DEF_IN_INITIALIZER__MAIN_MODULE_INIT=" ()";
 
     # --------
 
     # ································
-    # FUNCTION : "BU.ModuleInit.Msg()"
+    #  : "BU.ModuleInit.Msg()"
 
-    declare -g __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » GLOBAL VARIABLE'S VALUE '%s' IS NOT SUPPORTED\n";
-    declare -g __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2="Please change its value by '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' or an empty value where you (re)defined the value.";
+    declare -g __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_1="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} »  '%s' \n";
+    declare -g __BU_MODULE_INIT_MSG__MSG__BAD_PERMISSION_2=" '--log-display', '--log-no-display', '--log-shut', '--log-shut-display' .";
 
     # --------
 
     # ·········································
-    # FUNCTION : "BU.ModuleInit.MsgTerminate()"
+    #  : "BU.ModuleInit.MsgTerminate()"
 
-    declare -g __BU_MODULE_INIT_MSG__MSG_TERMINATE__TERMINATE="Terminating the module initialization script's execution";
+    declare -g __BU_MODULE_INIT_MSG__MSG_TERMINATE__TERMINATE="";
 
     # --------
 
     # ········································
-    # FUNCTION : "BU.ModuleInit.PressAnyKey()"
+    #  : "BU.ModuleInit.PressAnyKey()"
 
-    declare -g __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="Press any key to";
+    declare -g __BU_MODULE_INIT_MSG__PRESS_ANY_KEY__PRESS="";
 
     # --------
 
     # ·····································
-    # FUNCTION : "BU.ModuleInit.PrintLog()"
+    #  : "BU.ModuleInit.PrintLog()"
 
-    # Title.
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="INITIALIZATION LOGS";
+    #
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__INITLOGS="";
 
-    # Display initialization log informations.
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__HERE="Here are the initialization logs";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE="Logging mode : full";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE__PARAM="Logging mode : full (parameter « --mode-log-full » passed during the call of the module 0 « module »)";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE="Logging mode : partial";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE__PARAM="Logging mode : partial (parameter « --mode-log-partial » passed during the call of the module 0 « module »)";
+    #
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__HERE="";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE=" : ";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__FULL_MODE__PARAM=" ( « --mode-log-full »  « module »)";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE=" : ";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__PARTIAL_MODE__PARAM=" :  ( « --mode-log-partial »  « module »)";
 
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE="DISPLAYING THE INITIALIZATION LOGS WITH THE « less » COMMAND";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED="If nothing is displayed on the screen after a few seconds, please stop the script's execution by pressing CTRL + C";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT="display the initialization logs with the « less » command";
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q="Don't press the « Q » button, or else you will close this file and you will have to execute again the script";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_TITLE=" « less » ";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_ADVICE_IF_NO_LOGS_ARE_DISPLAYED=",  CTRL + C";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CALL_PRESS_ANY_KEY_FNCT=" « less » ";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DONT_PRESS_Q=" « Q » ";
 
-    # Cannot create the temporary file.
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE="Unable to create the temporary file to store the logs";
+    #
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__DISPLAY_LOGS_CANNOT_CREATE_TMP_FILE="";
 
-    # Post-display instructions.
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="END OF THE INITIALIZATION LOG DISPLAY";
+    #
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG__POST_DISPLAY_TEXT="";
 
     # --------
 
     # ··········································
-    # FUNCTION : "BU.ModuleInit.PrintLogError()"
+    #  : "BU.ModuleInit.PrintLogError()"
 
-    declare -g __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[ ERROR ] FILE : %s | LINE : %s | CODE : %s";
+    declare -g __BU_MODULE_INIT_MSG__PRINTLOG_ERROR__PRINT_ERROR="[  ]  : %s |  : %s |  : %s";
 
     # --------
 
@@ -362,36 +362,36 @@ function BU.ModuleInit.SetInitLocale.()
     ## : [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES INITIALIZATION
 
     # ······································
-    # FUNCTION : "BU.ModuleInit.CheckPath()"
+    #  : "BU.ModuleInit.CheckPath()"
 
-    # Missing file path.
-    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="No file path";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__NO_FILE_PATH="";
 
-    # No target specified.
-    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : NO SPECIFICATION GIVEN ABOUT THE TARGET !!!";
-    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION="Please specify if the target is a file or a folder by passing the 'f' (file) or the 'd' (directory) value as second argument when you call the « %s » function.";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__NO_TARGET_SPECIFICATION="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  !!!";
+    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__PLEASE_SPECIFY_TARGET_SPECIFICATION=" 'f' (file)  'd' (directory)  « %s » .";
 
-    # Target specified, but not found.
-    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__DIR_NOT_FOUND="(bad directory path : not found)";
-    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND="(bad file path : not found)";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__DIR_NOT_FOUND="( : )";
+    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__FILE_NOT_FOUND="( : )";
 
-    # Target specified, but the type is unknown.
-    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « p_target » PARAMETER'S CURRENT VALUE IS « %s », NOT THE EXPECTED 'D', 'd', 'F' OR 'f'";
+    #
+    declare -g __BU_MODULE_INIT_MSG__CHECKPATH__UNKNOWN_TARGET="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  « p_target »  « %s »,  'D', 'd', 'F' OR 'f'";
 
     # --------
 
     # ·····································
-    # FUNCTION : "BU.ModuleInit.FindPath()"
+    #  : "BU.ModuleInit.FindPath()"
 
-    declare -g __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : WARNING : UNABLE TO FIND THIS PATH";
-    declare -g __BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION="Function where the « %s() » function was called : %s()";
+    declare -g __BU_MODULE_INIT_MSG__FIND_PATH__PATH_NOT_FOUND="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : ";
+    declare -g __BU_MODULE_INIT_MSG__FIND_PATH__TOP_LEVEL_FUNCTION=" « %s() »  : %s()";
 
     # --------
 
     # ··········································
-    # FUNCTION : "BU.ModuleInit.GetModuleName()"
+    #  : "BU.ModuleInit.GetModuleName()"
 
-    declare -g __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : Unable to get the module's name from the parent directory name";
+    declare -g __BU_MODULE_INIT_MSG__GET_MODULE_NAME__UNABLE_TO_GET="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : ";
 
     # --------
 
@@ -399,29 +399,29 @@ function BU.ModuleInit.SetInitLocale.()
     # FUNCTION : "BU.ModuleInit.ListInstalledModules()"
 
     # Unable to create the temporary directory.
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : Unable to create the initialization logs temporary directory « tmp » in the « %s/ » directory";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE="If the problem persists, please create this folder manually";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  « tmp »  « %s/ » ";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNABLE_TO_CREATE_TMP_DIR__ADVICE="";
 
-    # Listing the installed modules.
+    #
     declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INSTALLED_MODULES_LIST="INSTALLED MODULES LIST";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING="WARNING ! A MODULE OR MORE ARE MISSING IN THE « %s » OR IN THE « %s » FOLDERS";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST="INSTALLED MODULES CONFIGURATION FOLDERS LIST";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_INITIALIZATION_FOLDER_LIST="INSTALLED MODULES INITIALIZATION FOLDERS LIST";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__LISTED_MODULES_DIFFERENCES_BELOW="THE DIFFERENCES BETWEEN THESE TWO FILES ARE LISTED BELOW";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__ONE_OR_MORE_MODULES_MISSING=" !  « %s »  « %s » ";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_CONFIGURATION_FOLDER_LIST="";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__MODULES_INITIALIZATION_FOLDER_LIST="";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__LISTED_MODULES_DIFFERENCES_BELOW="";
 
-    # Missing modules or modules not found.
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : The « ls -l » command pointed towards an unexistent path";
+    #
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__UNEXISTENT_PATH="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : ";
 
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MODULES CONFIGURATION FOLDER AND THE MODULES INITIALIZATION FOLDER ARE MISSING !";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MODULES CONFIGURATION FOLDER IS MISSING !";
-    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE MODULES INITIALIZATION FOLDER IS MISSING !";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__BOTH_CONF_AND_INIT_FOLDER_ARE_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  !";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__CONF_FOLDER_IS_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  !";
+    declare -g __BU_MODULE_INIT_MSG__LIST_INSTALLED_MODULES__INIT_FOLDER_IS_MISSING="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  !";
 
     # --------
 
     # ············································
-    # FUNCTION : "BU.ModuleInit.SourcingFailure()"
+    #  : "BU.ModuleInit.SourcingFailure()"
 
-    declare -g __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : UNABLE TO SOURCE THIS « %s » MODULE'S FILE --> %s";
+    declare -g __BU_MODULE_INIT_MSG__SOURCING_FAILURE__UNABLE_TO_SOURCE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  « %s »  --> %s";
 
     # --------
 
@@ -430,43 +430,43 @@ function BU.ModuleInit.SetInitLocale.()
     ## : [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE MODULES PROCESSING
 
     # ··································
-    # FUNCTION : "BU.ModuleInit.Usage()"
+    #  : "BU.ModuleInit.Usage()"
 
     # List of different messages, used to better measure the space between the text and the colon.
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="WARNING                  : the four following parameters are incompatible with each other, they will overwrite each other :";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display            : display the initialization messages on the screen as they are logged in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display         : do not display the initialization messages on the screen, but log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut               : do not display the initialization messages on the screen OR log them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display       : display the initialization messages on the screen without logging them in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="                          :  :";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display             :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display          :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut                :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display        :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
 
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING : the two following parameters are incompatible with each other, they will overwrite each other :";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full          : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array EVERY informations about the initialization process";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial       : display on the screen and / or log in the « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » array the essential informations only";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING                   :  :";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full           :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial        :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
 
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            OR --stat-debug=true";
-    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   OR--stat-debug-bashx=file   OR --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            --stat-debug=true";
+    declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   --stat-debug-bashx=file    --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
 
-    # Display of the values supported by the "module" option.
-    declare -g __BU_MODULE_INIT_MSG__USAGE__SUPVALS="The supported values are :";
+    #
+    declare -g __BU_MODULE_INIT_MSG__USAGE__SUPVALS=" :";
 
-    # Display of the supported values for the log redirection parameter.
+    #
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_NO_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_LOG_SHUT_DISPLAY="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4}";
 
-    # Display of the supported values for the logging parameter.
+    #
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_FULL="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_LOG_PARTIAL="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2}";
 
-    # Global status variables.
+    #
     declare -g __BU_MODULE_INIT_MSG__USAGE__DEBUG_VALUES_LIST="GLOBAL STATUS VARIABLES - DEBUG VALUES :";
     declare -g __BU_MODULE_INIT_MSG__USAGE__DEBUG="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG}";
     declare -g __BU_MODULE_INIT_MSG__USAGE__DEBUG_BASHX="${__BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX}";
 
-    # Deletion of the values stored in the variables constituting the list of the various messages, used to better measure the space between the text and the colon, in order to free up memory.
+    #
     unset   __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0 \
             __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1 \
             __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2 \
@@ -481,35 +481,35 @@ function BU.ModuleInit.SetInitLocale.()
     # --------
 
     # ······················································································
-    # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
+    #  : "BU.ModuleInit.ProcessFirstModuleParameters.LogPermissionWarningOptimize()"
 
-    # Same value for the "--log-*" option was passed twice or more as argument when calling the "BashUtils_InitModules" function.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : you already passed the « %s » value as « module » value's argument for the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable when calling the « BashUtils_InitModules » function"
+    #
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__SAME_MSG_ARRAY_PERM_PASSED_TWICE="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » "
 
     # Different values for the "--log-*" option were simultaneously passed as arguments when calling the "BashUtils_InitModules" function.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1="the « module » value's parameters '--log-display' 'log-no-display', '--log-shut' and '--log-shut-display' are incompatible with each other";
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="Please choose only one of these parameter values";
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_1=" « module »  '--log-display' 'log-no-display', '--log-shut'  '--log-shut-display' ";
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED__ADVICE_2="";
 
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO="The new value will be assignated to the « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » global variable";
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_EXTRA_INFO=" « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » ";
 
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL="Current value stored in the permission variable : %s";
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_CURRENT_VAL=" : %s";
     declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__LPWO__DIFF_MSG_ARRAY_PERM_PASSED_NEW_VAL="New value : %s";
 
     # --------
 
     # ······················································································
-    # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
+    #  : "BU.ModuleInit.ProcessFirstModuleParameters.ProcessBadStatusOptionValues()"
 
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG="Warning : the supported values for the « %s » option are : %s";
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__PBSOV__MSG=" :  « %s »  : %s";
 
     # --------
 
     # ·························································
-    # FUNCTION : "BU.ModuleInit.ProcessFirstModuleParameters()"
+    #  : "BU.ModuleInit.ProcessFirstModuleParameters()"
 
-    # No arguments were given to the "module" value if this value was called as argument 1 during the call of the "BashUtils_InitModules" function.
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : THE « module » VALUE WAS PASSED WITHOUT ARGUMENT(S)";
-    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE="Please pass at least a valid argument between the double quotes where you pass the « module » value";
+    #
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} :  « module » ";
+    declare -g __BU_MODULE_INIT_MSG__PROCESS_FIRST_MODULE_PARAMS__MODULE_VAL_NO_OPTS__ADVICE=" « module » ";
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #~ The arguments checking loop is running now
