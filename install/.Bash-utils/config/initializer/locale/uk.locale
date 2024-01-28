@@ -52,7 +52,7 @@ function BU.ModuleInit.SetInitLocale.uk()
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
 
     #
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
     ## ==============================================
 

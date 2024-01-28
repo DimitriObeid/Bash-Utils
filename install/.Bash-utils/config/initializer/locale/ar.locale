@@ -48,7 +48,7 @@ function BU.ModuleInit.SetInitLocale.ar()
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT="";
 
     # اكتب بداية أي نص تريد طباعته باستخدام الدالة "BU.ModuleInit.PrintLogError()".
-    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="";
+    declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__PLE="%s";
 
     ## ==============================================
 

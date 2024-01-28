@@ -1,5 +1,5 @@
-403a86e06109f45845fd05e1ba3e2145 Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
-735b03f9e37b93f8319dfdcec24949ab Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
+a9df98a2743c0d0cfff6a56d8915ac15 Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
+8bdfd695de5988c559eb8d564fe5dd54 Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
 ded22012df9d4e4f874a34b63919324d Bash-utils/install/Bash-utils-init.sh
 665e43c62d4e634abbce29b8f7e88ebc Bash-utils/lib/functions/main/Args.lib

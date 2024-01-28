@@ -33,9 +33,9 @@ function BU.ModuleInit.SetInitLocale.fr()
 
     ############################# DÉFINITION DES RESSOURCES DE TRADUCTION #############################
 
-    #### DÉFINITION DE VARIABLES UTILES
+    #### DÉFINITION DE VARIABLES UTILES [-----] DEFINING USEFUL VARIABLES
 
-    ## MESSAGES REDONDANTS
+    ## MESSAGES REDONDANTS [-----] REPEATED MESSAGES
 
     # Écriture du nom du fichier, du nom de la fonction et du numéro de ligne où une erreur non-fatale s'est produite.
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="DANS LE FICHIER « %s », À LA FONCTION « %s », À LA LIGNE « %s » --> AVERTISSEMENT DE BASH-UTILS";
@@ -615,14 +615,14 @@ function BU.ModuleInit.SetInitLocale.fr()
     declare -g __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_IS_EMPTY="Le fichier d'initialisation du module « %s », « %s/%s », est vide";
 
     # Fin de l'initialisation du module actuel.
-    declare -g __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT="FIN DE LA PROCÉDURE D'INITIALISATION DU MODULE %s!";
+    declare -g __BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__END_OF_MODULE_INIT="FIN DE LA PROCÉDURE D'INITIALISATION DU MODULE « %s » !";
 
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     #~ Fin de l'exécution de la boucle principale
     #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     # Fin du processus d'initialisation du framework.
-    declare -g __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALISATION DU FRAMEWORK ! DÉBUT DU TRAITEMENT DU PROJET %s VIA LE SCRIPT PRINCIPAL %s !";
+    declare -g __BU_MODULE_INIT_MSG__BU_IM__END_OF_FRAMEWORK_INIT="FIN DU PROCESSUS D'INITIALISATION DU FRAMEWORK ! DÉBUT DU TRAITEMENT DU PROJET « %s » VIA LE SCRIPT PRINCIPAL « %s » !";
 
     # --------
 
