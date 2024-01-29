@@ -15,7 +15,7 @@ bf714346ca44787f2a983ee8b2976744 Bash-utils/lib/functions/main/Errors.lib
 a272935fbb5ea189fbcfdf403b24c331 Bash-utils/lib/functions/main/Filesystem.lib
 939d01f3873ef851349c98a59765d1c4 Bash-utils/lib/functions/main/Headers.lib
 df2097c10f2fdb777c4585b3aa292383 Bash-utils/lib/functions/main/Inputs.lib
-39848ba0a961027c4bc2cc385ad309c1 Bash-utils/lib/functions/main/Locale.lib
+72ab509ef455e80717212c699d92b79f Bash-utils/lib/functions/main/Locale.lib
 50a7c55389cddf4ca4acecd7fc54921c Bash-utils/lib/functions/main/OS.lib
 42d76965bba7b32f964c952de7235491 Bash-utils/lib/functions/main/PosixTerm.lib
 2154efb5e28f18c4382676b36bcf6241 Bash-utils/lib/functions/main/Status.lib

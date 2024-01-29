@@ -1338,7 +1338,11 @@ function LibCompilerV4.CompileInSingleFile()
             __locale_print_code="${__HIGHLIGHT}[ LOCALE : ${v_curr_locale} [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')] ]";
 
         elif [ "${#__language_array[@]}" -gt 1 ]; then
-            __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG$(if [ -n "${__vMandatoryArgLang}" ]; then printf " | CURR -> %s" "${v_curr_locale}"; fi)]";
+            if [ -n "${__vMandatoryArgLang}" ]; then 
+                __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG MULTI FILES | CURR -> [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')] ]";
+            else
+                __locale_print_code="${__HIGHLIGHT}[ LOCALE : MULTILANG SINGLE FILE | CURR -> [$(BU.Main.Locale.PrintLanguageName "${v_curr_locale^^}" 'cod,eng,usr,ori' 'no' 'false' 'false' 'true')] ]";
+            fi
         fi
 
         __locale_print_code__error="${__locale_print_code}${__ERROR}";

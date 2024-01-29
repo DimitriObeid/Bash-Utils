@@ -342,6 +342,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	# Printing the final form of the string to display
 	echo "${output}";
 
+	# Calling the "BU.Main.Echo.DebugEnd()" function if the current script is not the compiler or any other file which directly includes its code.
 	! BU.ModuleInit.IsCompiler && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 	return 0;
