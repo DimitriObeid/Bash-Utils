@@ -732,7 +732,7 @@ function BU.ModuleInit.SetInitLocale.()
     #
     declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__PrintFSLengthDescription_FNCT="";
 
-    # Definition of the global variables.
+    #
     declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__UNSUPPORTED_FILESYSTEM="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT} : ";
     declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__FILESYSTEM__SET_GENERAL_SPECIFICATION__FILENAME_LENGTH="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT} : ";
 
@@ -741,134 +741,134 @@ function BU.ModuleInit.SetInitLocale.()
     ## : [-----] FILE : "Module.conf"
 
     #
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__BIN="This global variable stores the path of the framework's binaries directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__CONFIG="This global variable stores the path of the « main » module's configurations directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__DOCS="This global variable stores the path of the whole framework's documentation directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__LIB="This global variable stores the path of the framework « lib » library directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__RES="This global variable stores the path of the framework « res » resources directory";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__BIN="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__CONFIG="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__DOCS="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__LIB="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUSubFoldersPaths__FNCT__RES="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS="This global variable stores the path of the development tools root directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_BIN="This global variable stores the path of the development tools binaries folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_DSK="This global variable stores the path of the development tools desktop files folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_IMG="This global variable stores the path of the development tools icons folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_SRC="This global variable stores the path of the development tools source files folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_TRA="This global variable stores the path of the development tools translation files folder";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_BIN="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_DSK="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_IMG="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_SRC="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BUDevToolsPaths__FNCT__DEVTOOLS_TRA="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_FUNCTS_DIR_PATH="This global variable stores the path of the « functions » folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_MOD_DIR_PATH="This global variable stores the path of the « main » module's functions folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_LANG_DIR_PATH="This global variable stores the path of the modules « lib » translation files directory";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_FUNCTS_DIR_PATH="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_MOD_DIR_PATH="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BULibFolderContent__FNCT__LIB_LANG_DIR_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleConfigFolderContentOptimize__FNCT="This global variable stores the path of the « %s » configuration file of the « main » module";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleConfigFolderContentOptimize__FNCT="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleFunctionsPathOptimize__FNCT="This global variable stores the path of the « %s » library file of the « main » module";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleFunctionsPathOptimize__FNCT="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleInitializerPath__FNCT__FILE_INITIALIZER_PATH="This global variable stores the path to the initializer script of the « main » module";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__MainModuleInitializerPath__FNCT__FILE_INITIALIZER_PATH="";
 
     #
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH_STORAGE_FILE_PATH="This global variable stores the path to the file which contains the path to the Bash Utils framework's library root directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH_STORAGE_FILE_PATH__ROOT="This global variable stores the path to the file which contains the path to the Bash Utils framework's library root directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH="This global variable stores the path to Bash Utils framework's library root directory, which is written in the « %s » file";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH_STORAGE_FILE_PATH="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH_STORAGE_FILE_PATH__ROOT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_ROOT_DIR_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : THE PATH TO THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER WRITTEN IN THE « %s » FILE WAS NOT FOUND IN YOUR HARD DRIVE";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__INFO="Path currently written in this file : %s";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__ADVICE="Please check the path recorded in this file for typos if you typed it by yourself, or verify where you've stored this root folder";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : ";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__INFO="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__INVALID_ROOT_DIR_PATH__ADVICE="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__EMPTY_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT} : THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER'S PATH STORAGE FILE « %s » EXISTS, BUT IS EMPTY";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__EMPTY_ROOT_DIR_PATH__ADVICE="Please write the path to Bash Utils framework's library root directory inside this file, manually or with the installer file";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__EMPTY_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING__NO_FNCT} : ";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__EMPTY_ROOT_DIR_PATH__ADVICE="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : YOU DON'T HAVE THE RIGHT TO READ THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER'S PATH STORAGE FILE « %s »";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__INFO="It means that you have created this file with the super-user privileges, by hand or with the installation script (in this case, something may have be wrong)";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ADVICE_1="Please execute this script with root user privilieges, or change the ownership of the « %s » file, or create a new file, and rename the file to find in the « %s » file";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ADVICE_2="If you opt for the last solution, please find the line containing the string « __BU_MODULES_UTILS_LIB_ROOT_DIR_FILE_NAME= » in the « DEFINING GLOBAL VARIABLES » subsection";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : ";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__INFO="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ADVICE_1="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__CANNOT_READ_ROOT_DIR_PATH__ADVICE_2="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__ABSENT_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : THE BASH UTILS FRAMEWORK'S LIBRARY ROOT FOLDER'S PATH STORAGE FILE « %s » DOESN'T EXISTS";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__ABSENT_ROOT_DIR_PATH__ADVICE="Please create this file and write the path to Bash Utils framework's library root directory inside this file, manually or with the installer file";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__ABSENT_ROOT_DIR_PATH__ERR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} :";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__ABSENT_ROOT_DIR_PATH__ADVICE="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY="This array stores the path of each « .lib » library file in the functions folder of the « Hardware » module TO SOURCE (NOT SOURCED YET)";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY="This array (MUST BE EMPTY BY DEFAULT) stores the global status variables values modified by the user during the inclusion of arguments for the « main » module's initialization";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY="This array (MUST BE EMPTY BY DEFAULT) stores the path of each SOURCED « main » module's library files";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY="This array (MUST BE EMPTY BY DEFAULT) stores the path of each SOURCED « main » module's configuration files";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY="This array stores the path of each « main » module's configuration files TO SOURCE (NOT SOURCED YET)";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_FUNCTIONS_FILES_PATH_ARRAY="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_MODIFIED_STATUS_VARS_ARRAY="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_LIB_FILES_PATH_ARRAY="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_CONFIG_FILES_PATH_ARRAY="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__MODULE__BU_MAIN_MODULE_LIST_CONFIG_FILES_PATH_ARRAY="";
 
     # --------
 
     ## : [-----] FILE : "Project.conf"
 
     #
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__GetProjectFilePath__UNABLE_TO_GET_THE_PARENT_DIR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR} : UNABLE TO GET THE PARENT DIRECTORY OF THE CURRENT PROJECT'S MAIN SCRIPT";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__GetProjectFilePath__UNABLE_TO_GET_THE_PARENT_DIR="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR} : ";
 
     # Definition of the global variables.
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_NAME__VAR="This global variable stores the name of the project's main script (the one executed right now), with its file extension";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_NAME__VAR="This global variable stores the name of the project's main script (the one executed right now), without its file extension";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_NAME__VAR="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_NAME__VAR="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="This global variable stores the name of the project's temporary folder's parent directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="This global variable stores the path to the project's temporary folder's parent directory";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PARENT_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__VAR="This global variable stores the path to the project's temporary folder";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__ROOT_VAR="This global variable stores the path to the project's temporary folder (with super-user's privileges)";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__VAR="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_TMP_DIR_PATH__ROOT_VAR="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_PATH__VAR="This global variable stores the path to the main script of the current project";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_FILE_PATH__VAR="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="This global variable stores the path to the aliases configurations file's parent directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME="This global variable stores the name of the aliases configurations file";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH="This global variable stores the path to the aliases configurations file";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ALIAS_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file saving the ANSI color code of the background color before a color change";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="This global variable stores the name of the file saving the ANSI code of the background color before a color change";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="This global variable stores the path to the file saving the ANSI code of the background color before a color change";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file containing the raw ANSI color code of the current background coloring retrieved by the « BU.Main.TextFormat.GetBGColorFromCMD() » function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="This global variable stores the name of the file containing the raw ANSI color code of the current background coloring retrieved by the « BU.Main.TextFormat.GetBGColorFromCMD() » function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="This global variable stores the path to the file containing the raw ANSI color code of the current background coloring retrieved by the « BU.Main.TextFormat.GetBGColorFromCMD() » function";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file saving the ANSI color code of the text color preceding a color change";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="This global variable stores the name of the file saving the ANSI code of the text color preceding a color change";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="This global variable stores the path to the file saving the ANSI code of the text color preceding a color change";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="This global variable stores the path to the parent directory of the file containing the raw ANSI color code of the current text coloring retrieved by the « BU.Main.TextFormat.GetTextColorFromCMD() » function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="This global variable stores the name of the file containing the raw ANSI color code of the current text coloring retrieved by the « BU.Main.TextFormat.GetTextColorFromCMD() » function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="This global variable stores the path to the file containing the raw ANSI color code of the current text coloring retrieved by the « BU.Main.TextFormat.GetTextColorFromCMD() » function";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="This global variable stores the path to the parent directory of the log file of the « BU.Main.Echo.__EchoVoid() » function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="This global variable stores the name of the log file of the « BU.Main.Echo.__EchoVoid() » function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="This global variable stores the path to the log file of the « BU.Main.Echo.__EchoVoid() » function";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="This global variable stores the path to the parent directory of the folder containing the project's log file";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="This global variable stores the name of the parent directory of the folder containing the project's log file";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="This global variable stores the path to the parent directory of the folder containing the project's log file";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_DIR_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT="This global variable stores the path to the project's log file's parent directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME="This global variable stores the name of the project's log file";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PATH="This global variable stores the path to the project's log path";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LOG_FILE_PATH="";
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="This global variable stores the path to the CSV translations parser script's parent directory";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="This global variable stores the name of the CSV translations parser script";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="This global variable stores the path to the CSV translations parser script";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PARENT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_NAME="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__PROJECT__BU_MAIN_PROJECT_LANG_CSV_PARSER_SCRIPT_PATH="";
 
     # --------
 
     ## : [-----] FILE : "Text.conf"
 
     #
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintTextModeCmdSubs__FNCT="This command substitution executes the « tput %s » OR the « stty size » commands in order to get the total number of « %s » on the current text mode";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintFormatCmdSubs__FNCT="This command substitution executes the « BU.Main.TextFormat.SetTextFormat() » function in order to format the text with the defined « %s » text formatting";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintResetCmdSubs__FNCT="This command substitution executes the « BU.Main.TextFormat.SetTextFormat() » function in order to reset the text from the « %s » text formatting";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintAllResetCmdSubs__FNCT="This command substitution executes the « BU.Main.TextFormat.SetTextFormat() » function in order to reset the text from every text formatting";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintVariableNameFailedToInitialize__FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : The « %s » text global variable cannot be initialized because of a problem happening during the call of the associated command substitution";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintTextModeCmdSubs__FNCT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintFormatCmdSubs__FNCT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintResetCmdSubs__FNCT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintAllResetCmdSubs__FNCT="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__PrintVariableNameFailedToInitialize__FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : ";
 
     # Definition of the global variables.
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_CHAR_HEADER_LINE__VAR="This global variable stores the default character that composes each lines drawn by the %s function";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_PRINT_TAB__VAR="This global variable stores the string which better showcases a string";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_LINE__VAR="This global variable stores a string extracted from a line in a file";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_ECHO_TRUE_MESSAGES_ARRAY__ARRAY="This array stores each error message displayed when the %s global status variable's value is set to %s";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR="This global variable stores a string which serves as a delimiter for separating a string into substrings";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_CHAR_HEADER_LINE__VAR="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_PRINT_TAB__VAR="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_LINE__VAR="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_STORE_ECHO_TRUE_MESSAGES_ARRAY__ARRAY="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TEXT__BU_MAIN_TXT_ERR_SUBSTR_DELIM__VAR="";
 
     # --------
 
     ## : [-----] FILE : "Time.conf"
 
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE="This command substitution executes the « date » command, and passes arguments in order to print the date at the « YYYY-MM-DD hh-mm-ss » format";
-    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE_DISPLAY="This command substitution prints the output of the « \$__BU_MAIN_TIME_DATE » command substitution with more decoration, in order to display the date in an easily and colored readable log format : [ YYYY-MM-DD hh-mm-ss ]";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE="";
+    declare -g __BU_MODULE_INIT_MSG__BU_MAIN_MODCONFIG__TIME__BU_MAIN_TIME_DATE_DISPLAY=" : [ YYYY-MM-DD hh-mm-ss ]";
 
     # --------
 
@@ -882,93 +882,93 @@ function BU.ModuleInit.SetInitLocale.()
 
     ######################## PROCESSING THE MAIN MODULE'S INITIALIZATION SCRIPT #######################
 
-    #### [-----] INITIALIZING THE MAIN MODULE - PROCESSING THE INITIALIZER FILE
+    #### - [-----] INITIALIZING THE MAIN MODULE - PROCESSING THE INITIALIZER FILE
 
-    ## [-----] STEP ONE : DEFINING THE NEEDED RESOURCES
+    ## : [-----] STEP ONE : DEFINING THE NEEDED RESOURCES
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY="Successfully sourced this library file : %s";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="Successfully sourced this configuration file : %s":
-
-    ## ==============================================
-
-    ## STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
-
-    # No text to display in this section for now.
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_LIBRARY="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_ONE__SOURCE_CONFIG="":
 
     ## ==============================================
 
-    ## STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
+    ## : [-----] STEP TWO : MINIMAL INCLUSION OF FILES IN ORDER TO USE THEIR RESOURCES DURING THE TRANSLATION PART
 
     #
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS="The supported arguments for the main module are :":
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______DECHO="--stat-decho=authorize         OR --stat-decho=forbid          OR --stat-decho=resctrict";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE________ECHO="--stat-echo=false              OR --stat-echo=true";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______ERROR="--stat-error=fatal             OR --stat-error=void			OR --stat-error=warning";
+    ## ==============================================
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_________LOG="--stat-log=false               OR --stat-log=true";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______LOG_R="--stat-log-r=log               OR --stat-log-r=tee             OR --stat-log-r=void";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____OP_ROOT="--stat-op-root=authorized      OR --stat-op-root=forbidden     OR --stat-op-root=restricted";
+    ## : [-----] STEP THREE : PROCESSING THE MAIN MODULE'S PARAMETERS
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_H="--stat-time-header=float,      where « float » is a floating point number";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_N="--stat-time-newline=float,     where « float » is a floating point number";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_T="--stat-time-txt=float,         where « float » is a floating point number";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE__SUPPORTED_ARGS="":
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____TXT_FMT="--stat-txt-fmt=false           OR --stat-txt-fmt=true";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______DECHO="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE________ECHO="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______ERROR="";
 
-    # An incorrect value was given to the "--stat-*" option.
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : the '--stat-*' option's « %s » value is incorrect.";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE="Try only one of these accepted values for this global status variable : ";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_________LOG="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_______LOG_R="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____OP_ROOT="";
 
-    # Processing each main module's status global variable's value description : writing redundant sentences.
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="This main module's status global variable stores a boolean value, which is used to";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="This main module's status global variable stores a floatig number, which is used to";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="This main module's status global variable stores a string, which is used to";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_H="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_N="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE______TIME_T="";
 
-    # Processing each main module's status global variable's value description.
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING} determine the level of text decoration";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL} avoid causing an infinite loop while calling a text writing function in case these functions must be called to provide the same features than usual";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING} determine if the script's execution must be stopped in case of an error";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__USAGE_____TXT_FMT="";
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL} determine if any text must be redirected towards a log file or not";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING} determine if the text must be redirected to the log file only, to the screen only, or both at the same time";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING} determine if the script can edit files or folders located directly in the system's root folder, or in one of it's direct sub-folders";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING} : ";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE=" : ";
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT} determine the script's pause time after displaying a header";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT} determine the script's pause time after displaying a line break";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT} determine the script's pause time after displaying any text";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="";
 
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL} determine if the script has the permission to display any text decoration";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING}";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ECHO="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL}";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_ERROR="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING}";
 
-    # Unsetting the redundant sentences.
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL}";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_LOG_R="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING}";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_OP_ROOT="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING}";
+
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_H="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT}";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_N="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT}";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TIME_T="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT}";
+
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_TXT_FMT="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL}";
+
+    #
     unset __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL \
         __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT \
-        __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING
+        __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING;
 
     ## ==============================================
 
-    ## STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
+    ## : [-----] STEP FOUR : INCLUSION OF THE REST OF THE LIBRARY AND CONFIGURATION FILES
 
-    # No text to display in this section for now.
+    #
 
     ## ==============================================
 
-    ## STEP FIVE : PROCESSING PROJECT'S RESOURCES
+    ## : [-----] STEP FIVE : PROCESSING PROJECT'S RESOURCES
 
-    # Creation of the text color code file.
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="UNABLE TO CREATE THE %s TEXT COLOR CODE FILE IN THE %s DIRECTORY";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="The %s text color code file was successfully created in the %s directory";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__EXISTS="The file containing the current foreground color code already exists : %s";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__ERROR="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__SUCCESS="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_TXT_COL_FILE__EXISTS="";
 
-    # Creation of the background color code file.
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="Unable to create the %s background color file in the %s directory";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS="The %s background color code file was successfully created in the %s directory";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS="The file containing the current background color code already exists : %s";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__ERROR="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__SUCCESS="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_BG_COL_FILE__EXISTS="";
 
-    # Creation of the project's log file.
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="UNABLE TO CREATE THE %s LOG FILE FOR THE %s PROJECT";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="The %s log file was successfully created in the %s directory";
-    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS="The %s log file already exists in the %s directory";
+    #
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__ERROR="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__SUCCESS="";
+    declare -g __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_FIVE__CREATE_LOG_FILE__EXISTS="";
 
     return 0;
 }
