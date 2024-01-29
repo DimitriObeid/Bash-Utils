@@ -84,7 +84,7 @@ function BU.ModuleInit.SetInitLocale.en()
     # ·······················································································
     # FUNCTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
-    # Note: This variable is also used in the main module configuration files.
+    # Note: This variable is also used in the main module's configuration files.
     declare -g __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : Unable to define the path to store in the « %s » global variable\n";
 
     # --------

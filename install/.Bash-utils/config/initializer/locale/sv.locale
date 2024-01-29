@@ -67,8 +67,8 @@ function BU.ModuleInit.SetInitLocale.sv()
     ## OM BASH UTILS-KONFIGURATIONENS ROTMAPP SAKNAS [-----] MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
-        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="Le dossier racine des configurations Bash Utils « .Bash-utils » n'existe pas dans votre répertoire personnel";
-        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Veuillez copier ce dossier dans votre répertoire personnel. Vous pouvez l'installer en exécutant le fichier « install_and_update.sh », ou vous pouvez le trouver dans le dossier « Bash-utils/install ».";
+        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="Rotmappen för Bash Utils-konfigurationerna « .Bash-utils » finns inte i din personliga mapp.";
+        declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER__ADVICE="Kopiera denna mapp till din personliga mapp. Du kan installera den genom att köra filen « install_and_update.sh », eller så kan du hitta den i mappen « Bash-utils/install ».";
     fi
 
     ## ==============================================
@@ -77,23 +77,23 @@ function BU.ModuleInit.SetInitLocale.sv()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### AVSNITT : [-----] SECTION : BEGINNING OF THE INITIALIZATION PROCESS
+    #### AVSNITT : THE BEGINNING OF THE INITIALIZATION PROCESS [-----] SECTION : BEGINNING OF THE INITIALIZATION PROCESS
 
-    ## UNDER AVSNITT : [-----] SUB-SECTION : DEFINING GLOBAL VARIABLES
+    ## UNDER AVSNITT : DEFINIERA GLOBALA VARIABLER [-----] SUB-SECTION : DEFINING GLOBAL VARIABLES
 
     # ·······················································································
     # FUNKTION : "BU.ModuleInit.DefineBashUtilsGlobalVariablesBeforeInitializingTheModules()"
 
-    #
-    declare -g __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : \n";
+    # Anm: Denna variabel används också i huvudmodulens konfigurationsfiler.
+    declare -g __BU_MODULE_INIT_MSG__PRINT_MISSING_PATH_FOR_DEFINED_GLOBAL_VARIABLE__NO_FNCT="${__BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_ERROR__NO_FNCT} : Omöjligt att definiera sökvägen som ska lagras i den globala variabeln « %s »\n";
 
     # --------
 
     ## ==============================================
 
-    ## UNDER AVSNITT : [-----] SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
+    ## UNDER AVSNITT : ANROPA DE ANDRA FUNKTIONERNA FÖR INITIALISERING [-----] SUB-SECTION : CALLING THE OTHER FUNCTIONS FOR INITIALIZATION
 
-    declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="";
+    declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MSG_INITIALIZING_THE_MODULES="INITIALISERING AV MODULERNA";
 
     ## ==============================================
 
@@ -101,43 +101,43 @@ function BU.ModuleInit.SetInitLocale.sv()
 
     # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
-    #### AVSNITT : [-----] SECTION : INITIALIZER RESOURCES - FUNCTIONS
+    #### AVSNITT : INITIALISERING RESURSER - FUNKTIONER [-----] SECTION : INITIALIZER RESOURCES - FUNCTIONS
 
-    ## UNDER AVSNITT : [-----] SUB-SECTION : FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
+    ## UNDER AVSNITT : FUNKTIONER OCH RESURSER SOM BEHÖVS FÖR FÅNGSTSIGNALER [-----] SUB-SECTION : FUNCTIONS AND RESOURCES NEEDED FOR TRAPPING SIGNALS
 
     # ········································
     # FUNKTION : "BU.ModuleInit.DefineTraps()"
 
-    declare -g __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="";
+    declare -g __BU_MODULE_INIT_MSG__DEFINE_TRAPS__EXITING_SCRIPT="Avsluta skript";
 
     # --------
 
     ## ==============================================
 
-    ## UNDER AVSNITT : [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
+    ## UNDER AVSNITT : FUNKTIONER SOM BEHÖVS FÖR VISNING AV INITIERINGSMEDDELANDEN [-----] SUB-SECTION : FUNCTIONS NEEDED FOR THE DISPLAYING OF THE INITIALIZATION MESSAGES
 
     # ········································
     # FUNKTION : "BU.ModuleInit.AskPrintLog()"
 
-    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="";
-    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="";
-    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="";
-    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="";
-    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="";
+    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_LOG_TO_DISPLAY="Inga loggar att visa";
+    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__ASK_DISPLAY="Vill du visa initialiseringsloggar (lagrade i « \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]} » array) ? (Ja / Nej)";
+    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_ENGLISH="För att visa innehållet i \${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION[@]}-arrayen, Vänligen skriv « Yes » eller « Y » (ingen skiftlägeskänslighet).";
+    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__ENTER_ANS="Ange ditt svar : ";
+    declare -g __BU_MODULE_INIT_MSG__ASKPRINTLOG__NO_DISPLAY="Innehållet i loggfilen för initialiseringsskriptet kommer inte att visas på skärmen.";
 
     # --------
 
     # ······························································
     # FUNKTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
-    #
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="";
+    # Initialiseringsmeddelande.
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISERING AV DE GLOBALA VARIABLERNA";
 
-    #
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="";
-    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="";
+    # Process-ID.
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="Initialisering av skriptets information";
+    declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="Denna globala variabel lagrar PID för det aktuella programmet.";
 
-    #
+    # Sökvägar som används av modulhanteraren.
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="";
     declare -g __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="";

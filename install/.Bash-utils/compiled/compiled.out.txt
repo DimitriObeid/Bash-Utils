@@ -1,4 +1,4 @@
-a9df98a2743c0d0cfff6a56d8915ac15 Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
+8716e5795cc1c477f41157d7b4fde3ea Bash-utils/install/.Bash-utils/config/initializer/locale/en.locale
 8bdfd695de5988c559eb8d564fe5dd54 Bash-utils/install/.Bash-utils/config/initializer/locale/fr.locale
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
 ded22012df9d4e4f874a34b63919324d Bash-utils/install/Bash-utils-init.sh
