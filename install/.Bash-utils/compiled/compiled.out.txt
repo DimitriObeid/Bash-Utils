@@ -15,7 +15,7 @@ bf714346ca44787f2a983ee8b2976744 Bash-utils/lib/functions/main/Errors.lib
 a272935fbb5ea189fbcfdf403b24c331 Bash-utils/lib/functions/main/Filesystem.lib
 939d01f3873ef851349c98a59765d1c4 Bash-utils/lib/functions/main/Headers.lib
 df2097c10f2fdb777c4585b3aa292383 Bash-utils/lib/functions/main/Inputs.lib
-72ab509ef455e80717212c699d92b79f Bash-utils/lib/functions/main/Locale.lib
+62417ac02ff79b9153aaf202d2dea366 Bash-utils/lib/functions/main/Locale.lib
 50a7c55389cddf4ca4acecd7fc54921c Bash-utils/lib/functions/main/OS.lib
 42d76965bba7b32f964c952de7235491 Bash-utils/lib/functions/main/PosixTerm.lib
 2154efb5e28f18c4382676b36bcf6241 Bash-utils/lib/functions/main/Status.lib
@@ -40,3 +40,4 @@ bc67b9e526d284bcb7d3a3f37b3d2105 Bash-utils/install/.Bash-utils/config/modules/m
 4cdb33eef4e738764859be5311bbe7bf Bash-utils/install/.Bash-utils/config/modules/main/time.conf
 eb10a2de5c399f4781b1b8e52f0aff0d Bash-utils/install/.Bash-utils/modules/main/Initializer.sh
 41cb9557b5e3ced71b22aad409da16e1 Bash-utils/lib/functions/main/Modules.lib
+77b62453b6eb562b672d5ca7ccf10519 Bash-utils/install/.Bash-utils/config/initializer/locale/sv.locale
