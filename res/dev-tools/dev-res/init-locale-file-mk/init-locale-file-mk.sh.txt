@@ -33,9 +33,9 @@ function BU.ModuleInit.SetInitLocale.()
 
     ############################### DEFINING THE TRANSLATIONS RESOURCES ###############################
 
-    #### DEFINING USEFUL VARIABLES
+    ####  [-----] DEFINING USEFUL VARIABLES
 
-    ## REPEATED MESSAGES
+    ##  [-----] REPEATED MESSAGES
 
     #
     declare -g __BU_MODULE_INIT_MSG__CURRENT_LOCALE_FILE__BU_WARNING="« %s », « %s », « %s » -->";
@@ -62,9 +62,9 @@ function BU.ModuleInit.SetInitLocale.()
 
     ########################### PROCESSING THE MODULES INITIALIZATION SCRIPT ##########################
 
-    #### : [-----] SECTION : OUT OF FUNCTION MESSAGES
+    #### : [-----] OUT OF FUNCTION MESSAGES
 
-    ## : [-----] SUB-SECTION : MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
+    ## : [-----] MISSING BASH UTILS CONFIGURATIONS ROOT FOLDER
 
     if [ ! -d "${__BU_MODULE_INIT__ROOT_HOME}/.Bash-utils" ]; then
         declare -g __BU_MODULE_INIT_MSG__OUT_OF_FNCT__MISSING_BASH_UTILS_HOME_FOLDER="";
