@@ -450,7 +450,9 @@ function WriteCommentCode()
     #**** Code ****
     # shellcheck disable=SC1090
     source "${v_filename}" || {
-        printf "${__ERROR}FAILED TO SOURCE THE ${__HIGHLIGHT}%s${__ERROR} FILE${__RESET}" >&2;
+        echo >&2;
+
+        printf "${__ERROR}FAILED TO SOURCE THE ${__HIGHLIGHT}%s${__ERROR} FILE${__RESET}" "${v_filename}" >&2;
         echo "" >&2;
 
         exit 1;
