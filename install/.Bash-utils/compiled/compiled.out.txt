@@ -10,12 +10,12 @@ bc49170ef95bc187802773b327eaa74d Bash-utils/lib/functions/main/BasicMaths.lib
 a87d2a4b356062d12c71a70d4ee55b02 Bash-utils/lib/functions/main/DevTools.lib
 4e25b1da05c560ba60b03f334f41ae6a Bash-utils/lib/functions/main/Directories.lib
 d2fcff1567bc854c490d6877e66c1656 Bash-utils/lib/functions/main/Echo.lib
-bf714346ca44787f2a983ee8b2976744 Bash-utils/lib/functions/main/Errors.lib
+e8f803789fb545253768db98aa5f21e3 Bash-utils/lib/functions/main/Errors.lib
 54dcbf61ab49856b691c6bada9f25040 Bash-utils/lib/functions/main/Files.lib
 a272935fbb5ea189fbcfdf403b24c331 Bash-utils/lib/functions/main/Filesystem.lib
 939d01f3873ef851349c98a59765d1c4 Bash-utils/lib/functions/main/Headers.lib
 df2097c10f2fdb777c4585b3aa292383 Bash-utils/lib/functions/main/Inputs.lib
-c94333c0281f74fbe33f8ad237bd4f0c Bash-utils/lib/functions/main/Locale.lib
+577099e045c43c348bcfaafe0b87123c Bash-utils/lib/functions/main/Locale.lib
 50a7c55389cddf4ca4acecd7fc54921c Bash-utils/lib/functions/main/OS.lib
 42d76965bba7b32f964c952de7235491 Bash-utils/lib/functions/main/PosixTerm.lib
 2154efb5e28f18c4382676b36bcf6241 Bash-utils/lib/functions/main/Status.lib

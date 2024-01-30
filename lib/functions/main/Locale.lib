@@ -405,7 +405,12 @@ function BU.Main.Locale.PrintLanguageName()
 
 	# ···············································································
     # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-    #   - BU.Main.Locale.PrintLanguageName.Optimize()   -> Main -> Locale (this file)
+    #   - BU.Main.Locale.PrintLanguageName.Optimize()   -> Main -> Locale.lib (this file)
+
+    #	- BU.Main.Text.GetSubStringOccurences()			-> Main -> Text.lib
+    #	- BU.Main.Text.ReplaceLettersInString()			-> Main -> Text.lib
+
+    # shellcheck disable=
     function BUPLNOptimizer()
     {
         #**** Parameters ****
