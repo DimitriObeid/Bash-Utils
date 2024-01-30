@@ -427,7 +427,7 @@ function BU.Main.Locale.PrintLanguageName()
 		# "__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__NORTHERN SAMI", the "BU.Main.Text.ReplaceLettersInString()"
 		# function is called in order to replace every blank spaces between each word with an underscore.
 		if [ "$(BU.Main.Text.GetSubStringOccurences "${v_varNameFull}" " ")" -ge 1 ]; then
-			v_varNameFull="$(BU.Main.Text.ReplaceLettersInString "${v_varNameFull}" " " "all" "_")"
+			v_varNameFull="$(BU.Main.Text.ReplaceLettersInString "${v_varNameFull}" " " "all" "_")";
 		fi
 
 
