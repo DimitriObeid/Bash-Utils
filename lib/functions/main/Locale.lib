@@ -438,6 +438,8 @@ function BU.Main.Locale.PrintLanguageName()
         # Testing the "${__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}}" variable with a value, since the
         # main module's files were not translated with the "lang.csv" file as the date of Feb. 02 of 2023, when this function was coded.
 
+
+		# Testing variable name, in the final version of the Bash Utils framework, this variable will be created from the parsing of the main module's CSV translation file.
 #         __BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__FRENCH="FRANÇAISE";
 #
 #         echo; echo;
@@ -460,6 +462,8 @@ function BU.Main.Locale.PrintLanguageName()
 #
 #         echo "Salut depuis la fonction ${FUNCNAME[0]}(), située dans la fonction ${FUNCNAME[1]}";
 #         echo;
+
+		# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
         BU.Main.Locale.PrintLanguageName.Optimize "${p_code}" \
         "${p_dispOrder}" \
