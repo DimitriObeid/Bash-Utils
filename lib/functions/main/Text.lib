@@ -418,7 +418,9 @@ function BU.Main.Text.DeleteLettersInString()
     local p_replacement=${4:-' '};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : ' '      - DESC : Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
 
     #**** Code ****
-    if ! BU.Main.Args__Text.DeleteLettersInString "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+    if ! BU.ModuleInit.IsCompiler; then
+        if ! BU.Main.Args__Text.DeleteLettersInString "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+    fi
 
     BU.Main.Text.ReplaceLettersInString "${p_string}" "${p_chars}" "$([ "${p_replacement}" == '' ] && printf '' || printf ' ')" || {
         local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}";
@@ -438,11 +440,13 @@ function BU.Main.Text.DeleteLettersInString()
 # shellcheck disable=
 function BU.Main.Text.ReplaceLettersInString()
 {
-    # This function call makes it easier for the user to find the current function and its executed
-    # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+    if ! BU.ModuleInit.IsCompiler; then
+        # This function call makes it easier for the user to find the current function and its executed
+        # content if it is called during the execution of the main script with the "$(bash -x)" command.
+        BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+            "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+            "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+    fi
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -452,12 +456,16 @@ function BU.Main.Text.ReplaceLettersInString()
 
     #**** Code ****
     if [ "${p_occurences,,}" == 'all' ]; then
-        echo "${p_string//${p_replacement}/"${p_delim}"}";
+        echo "${p_string//${p_delim}/"${p_replacement}"}";
     else
-        echo "${p_string/${p_replacement}/"${p_delim}"}";
+        echo "${p_string/${p_delim}/"${p_replacement}"}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    if ! BU.ModuleInit.IsCompiler; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    fi
+
+    return 0;
 }
 
 ## ==============================================
@@ -865,11 +873,13 @@ function BU.Main.Text.GetSubStringBeforeDelim()
 # shellcheck disable=
 function BU.Main.Text.GetSubStringOccurences()
 {
-    # This function call makes it easier for the user to find the current function and its executed
-    # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+    if ! BU.ModuleInit.IsCompiler; then
+        # This function call makes it easier for the user to find the current function and its executed
+        # content if it is called during the execution of the main script with the "$(bash -x)" command.
+        BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+            "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+            "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+    fi
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};  # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -881,7 +891,7 @@ function BU.Main.Text.GetSubStringOccurences()
 	local count;    # VAR TYPE :
 
     #**** Code ****
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]]; then
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]] && ! BU.ModuleInit.IsCompiler; then
         if ! BU.Main.Args__Text.GetSubStringOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
     fi
 
@@ -900,7 +910,11 @@ function BU.Main.Text.GetSubStringOccurences()
 
 	echo -e "${count}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    if ! BU.ModuleInit.IsCompiler; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    fi
+
+    return 0;
 }
 
 # ·····································

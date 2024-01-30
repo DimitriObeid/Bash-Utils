@@ -413,6 +413,9 @@ function BU.Main.Locale.PrintLanguageName()
         local p_langNameOrig="${2:-NULL}";
 
         #**** Variables ****
+        local v_varNameFull="__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}";
+
+        #**** Code ****
 		# The "${v_varNameFull}" dynamically generates the name of the global variable to dynamically call. Each of these global variables
 		# store the targeted language in the user's system language, according to the value of the "${p_langNameEngl^^} argument's value".
 
@@ -421,11 +424,14 @@ function BU.Main.Locale.PrintLanguageName()
 		# X - 1 words, and the remaining words are treated as arguments.
 
 		# In order to avoid this and write "__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__NORTHERN_SAMI" instead of
-		# "__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__NORTHERN SAMI", the "TODO : BU.Main.()" function is called in order
-		# to replace every blank spaces between each word with an underscore.
-        local v_varNameFull="__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__${p_langNameEngl^^}";
+		# "__BU_MAIN_LOCALE_LIB__MSG__PrintLanguageName__CURR_LANG__NORTHERN SAMI", the "BU.Main.Text.ReplaceLettersInString()"
+		# function is called in order to replace every blank spaces between each word with an underscore.
+		if [ "$(BU.Main.Text.GetSubStringOccurences "${v_varNameFull}" " ")" -ge 1 ]; then
+			v_varNameFull="$(BU.Main.Text.ReplaceLettersInString "${v_varNameFull}" " " "all" "_")"
+		fi
 
-        #**** Code ****
+
+		# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
         # The following commented lines are used as test / debug procedures.
         # Please leave them commented if you are not debugging the code of the "BU.Main.Locale.PrintLanguageName/.Optimize()" and "BUPLNOptimizer()" functions.
 

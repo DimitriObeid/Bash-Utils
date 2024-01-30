@@ -258,6 +258,11 @@ source "${__BU_ROOT_PATH}/lib/functions/main/DevTools.lib";
 # shellcheck disable=SC1091
 source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 
+# Sourcing the "Text.lib" file in order to use the "BU.Main.Text.GetSubStringOccurences()" and the
+# "BU.Main.Text.ReplaceLettersInString()" functions in the BU.Main.Locale.PrintLanguageName() function.
+# shellcheck disable=SC1091
+source "${__BU_ROOT_PATH}/lib/functions/main/Text.lib";
+
 ## ==============================================
 
 
@@ -1459,14 +1464,16 @@ function LibCompilerV4.CompileInSingleFile()
                     "${__BU_MAIN_FULL_FILE_PATH}")" \
                 'UPPER';
 
-            if  [ ! -f "${__locale_file_path}" ];
-                then LibCompilerV4.Functions.PrintErrorLine \
+            if  [ ! -f "${__locale_file_path}" ]; then
+                LibCompilerV4.Functions.PrintErrorLine \
                     "$(printf \
                         "${__locale_print_code__error} ${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path}" \
                         "${__BU_MAIN_FULL_FILE_PATH}")" \
                     'FULL';
+
+                printf "${__BU_COMPILE__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR__NON_EXISTENT_FILE}\n\n" "${__locale_file_path}";
 
                 LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
@@ -2126,7 +2133,8 @@ function LibCompilerV4.CompileInSingleFile()
 # echo "${0##*/}"
 
 if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then
-    # Support of the arguments when this script is executed with the two awaited arguments.
+
+    # Support of the arguments when this script is executed with the mandatory argument and the optional ones.
     if [ -n "${__BU_ARG_LANG}" ]; then 
         LibCompilerV4.CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
 
