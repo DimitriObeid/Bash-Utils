@@ -1,0 +1,197 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+This file was generated with the "./docs_filename_hash.py" command with the "--remove-relative-path" argument
+
+It contains the list of every English documentation files with the five first characters of the hash of their name
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+[
+    {
+        "file_path": "Color code.tex",
+        "tex_title": "Color code.tex",
+        "hex__code": "920C8"
+    },
+    {
+        "file_path": "Functions.tex",
+        "tex_title": "Functions.tex",
+        "hex__code": "0F10C"
+    },
+    {
+        "file_path": "Error codes.tex",
+        "tex_title": "Error codes.tex",
+        "hex__code": "45589"
+    },
+    {
+        "file_path": "Initializer.tex",
+        "tex_title": "Sotware - Initializer.tex",
+        "hex__code": "D228C"
+    },
+    {
+        "file_path": "Initializer.tex",
+        "tex_title": "Main - Initializer.tex",
+        "hex__code": "F5DC4"
+    },
+    {
+        "file_path": "Initializer.tex",
+        "tex_title": "Hardware - Initializer.tex",
+        "hex__code": "43EBE"
+    },
+    {
+        "file_path": "Module-conf.tex",
+        "tex_title": "Module-conf.tex",
+        "hex__code": "CA1A0"
+    },
+    {
+        "file_path": "Filesystem-conf.tex",
+        "tex_title": "Filesystem-conf.tex",
+        "hex__code": "D27B4"
+    },
+    {
+        "file_path": "Status-conf.tex",
+        "tex_title": "Status-conf.tex",
+        "hex__code": "DF7E3"
+    },
+    {
+        "file_path": "Colors-conf.tex",
+        "tex_title": "Colors-conf.tex",
+        "hex__code": "FAEC3"
+    },
+    {
+        "file_path": "Exit-conf.tex",
+        "tex_title": "Exit-conf.tex",
+        "hex__code": "FD0EA"
+    },
+    {
+        "file_path": "Locale-conf.tex",
+        "tex_title": "Locale-conf.tex",
+        "hex__code": "ECF5D"
+    },
+    {
+        "file_path": "ColorsBG-conf.tex",
+        "tex_title": "ColorsBG-conf.tex",
+        "hex__code": "04FD8"
+    },
+    {
+        "file_path": "ColorsText-conf.tex",
+        "tex_title": "ColorsText-conf.tex",
+        "hex__code": "7FF95"
+    },
+    {
+        "file_path": "Project-conf.tex",
+        "tex_title": "Project-conf.tex",
+        "hex__code": "9D284"
+    },
+    {
+        "file_path": "Time-conf.tex",
+        "tex_title": "Time-conf.tex",
+        "hex__code": "1F02E"
+    },
+    {
+        "file_path": "Aliases-conf.tex",
+        "tex_title": "Aliases-conf.tex",
+        "hex__code": "6A5E6"
+    },
+    {
+        "file_path": "Text-conf.tex",
+        "tex_title": "Text-conf.tex",
+        "hex__code": "093F3"
+    },
+    {
+        "file_path": "Text.tex",
+        "tex_title": "Text.tex",
+        "hex__code": "6B689"
+    },
+    {
+        "file_path": "Time.tex",
+        "tex_title": "Time.tex",
+        "hex__code": "C8B71"
+    },
+    {
+        "file_path": "Headers.tex",
+        "tex_title": "Headers.tex",
+        "hex__code": "BA27F"
+    },
+    {
+        "file_path": "Decho.tex",
+        "tex_title": "Decho.tex",
+        "hex__code": "E4F20"
+    },
+    {
+        "file_path": "Errors.tex",
+        "tex_title": "Errors.tex",
+        "hex__code": "6B744"
+    },
+    {
+        "file_path": "Checkings.tex",
+        "tex_title": "Checkings.tex",
+        "hex__code": "BBA79"
+    },
+    {
+        "file_path": "TextFormat.tex",
+        "tex_title": "TextFormat.tex",
+        "hex__code": "314D3"
+    },
+    {
+        "file_path": "PosixTerm.tex",
+        "tex_title": "PosixTerm.tex",
+        "hex__code": "5CF53"
+    },
+    {
+        "file_path": "Status.tex",
+        "tex_title": "Status.tex",
+        "hex__code": "95B5C"
+    },
+    {
+        "file_path": "BasicMaths.tex",
+        "tex_title": "BasicMaths.tex",
+        "hex__code": "2C54C"
+    },
+    {
+        "file_path": "Directories.tex",
+        "tex_title": "Directories.tex",
+        "hex__code": "1E422"
+    },
+    {
+        "file_path": "Inputs.tex",
+        "tex_title": "Inputs.tex",
+        "hex__code": "14099"
+    },
+    {
+        "file_path": "Filesystem.tex",
+        "tex_title": "Filesystem.tex",
+        "hex__code": "8B621"
+    },
+    {
+        "file_path": "Locale.tex",
+        "tex_title": "Locale.tex",
+        "hex__code": "40B6C"
+    },
+    {
+        "file_path": "OS.tex",
+        "tex_title": "OS.tex",
+        "hex__code": "A9F75"
+    },
+    {
+        "file_path": "Files.tex",
+        "tex_title": "Files.tex",
+        "hex__code": "283AC"
+    },
+    {
+        "file_path": "Args.tex",
+        "tex_title": "Args.tex",
+        "hex__code": "3A1F8"
+    },
+    {
+        "file_path": "Echo.tex",
+        "tex_title": "Echo.tex",
+        "hex__code": "747DE"
+    },
+    {
+        "file_path": "DevTools.tex",
+        "tex_title": "DevTools.tex",
+        "hex__code": "DC329"
+    },
+    {
+        "file_path": "CMDS.tex",
+        "tex_title": "CMDS.tex",
+        "hex__code": "CC718"
+    }
+]

@@ -2,16 +2,28 @@
 
 import os
 import hashlib
+import re
 import argparse
+import json
+import sys
 
-# Function to generate a short code from the filename in English
-def generate_short_code(filename):
+# Function to extract the content of the \pdfinfo{...} /Title tag in a .tex file
+def extract_pdfinfo_title(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        content = file.read()
 
-    # Convert the filename to lowercase to avoid case sensitivity
-    filename_lower = filename.lower()
+        # Using a regular expression to extract the content of the title for hashing
+        match = re.search(r'% Title for hashing : (.+\.tex)', content)
 
-    # Use the SHA-256 hashing algorithm to generate the hash
-    sha256_hash = hashlib.sha256(filename_lower.encode()).hexdigest()
+        if match:
+            return match.group(1).strip()
+        else:
+            return None
+
+# Function to generate a short code from a string
+def generate_short_code(string):
+    # Using the SHA-256 hashing algorithm to generate the hash
+    sha256_hash = hashlib.sha256(string.encode()).hexdigest()
 
     # Convert the hash to uppercase
     sha256_hash_upper = sha256_hash.upper()
@@ -20,131 +32,66 @@ def generate_short_code(filename):
     return sha256_hash_upper[:5]
 
 # Define command-line arguments
-parser = argparse.ArgumentParser(description='Generate short code for .tex files.')
-parser.add_argument('--keep-path', action='store_true', help='Keep the file path in output')
+parser = argparse.ArgumentParser(description='Generate short code based on the PDF Title from .tex files.')
+parser.add_argument('--remove-relative-path', action='store_true', help='Removes the relative path of the file in output')
 
 # Parse command-line arguments
 args = parser.parse_args()
 
-# Root folder containing the files
-root_folder = 'en'
+# Folder containing the files in English
+folder_en = 'en'
 
-prev_folder = None
+# List to store the information of each file
+file_info_list = []
 
-print("This file was generated with the \"./docs_filename_hash.py --keep-path | tee -a FILES_HASH_CODES.TXT\" command\n")
-print("It contains the list of every English documentation files with the five first characters of the hash of their name\n")
+# Redirecting stdout to both terminal and file
+original_stdout = sys.stdout
 
-# Recursively traverse files in the root folder and its subfolders
-for foldername, subfolders, filenames in os.walk(root_folder):
-    for filename in filenames:
+output_file_name = 'FILES_HASH_CODES.JSON'
 
-        # Check if the file has the .tex extension
-        if filename.endswith('.tex'):
+print("Generating the", output_file_name, "file data\n")
 
-            # Complete path of the file
-            file_path = os.path.join(foldername, filename)
+# Open the output file for writing
+with open(output_file_name, 'w') as file:
+    sys.stdout = file
 
-            # If the previous folder is different from the current folder, skip a line
-            if prev_folder != foldername:
-                print()
+    if args.remove_relative_path:
+        print("/////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+        print("This file was generated with the \"./docs_filename_hash.py\" command with the \"--remove-relative-path\" argument\n")
+    else:
+        print("//////////////////////////////////////////////////////////////////")
+        print("This file was generated with the \"./docs_filename_hash.py\" command\n")
 
-            # Generate the short code for the file while keeping or not the relative path
-            short_code = generate_short_code(file_path)
+    print("It contains the list of every English documentation files with the five first characters of the hash of their name")
+    print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
 
-            # Display the relative path or not based on the argument
-            print("Short Code for", file_path if args.keep_path else filename, ":", short_code)
+    # Traverse files in the "en" folder
+    for foldername, subfolders, filenames in os.walk(folder_en):
+        for filename in filenames:
+            if filename.endswith('.tex'):
+                file_path = os.path.join(foldername, filename)
 
-            # Update the previous folder
-            prev_folder = foldername
+                # Extract the content of \pdfinfo{...} /Title
+                title_content = extract_pdfinfo_title(file_path)
 
+                if title_content:
+                    # Generate the short code from the extracted content
+                    short_code = generate_short_code(title_content)
 
+                    # Build a dictionary with the file information
+                    file_info = {
+                        "file_path": filename if args.remove_relative_path else file_path,
+                        "tex_title": title_content,
+                        "hex__code": short_code
+                    }
 
+                    # Add the dictionary to the list of information
+                    file_info_list.append(file_info)
 
+    # Print the list of information outside of the loop
+    print(json.dumps(file_info_list, indent=4))
 
+# Restore original stdout
+sys.stdout = original_stdout
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# V2
-
-#!/usr/bin/python3
-
-import os
-import hashlib
-import argparse
-
-# Function to generate a short code from the filename in English
-def generate_short_code(filename):
-
-    # Convert the filename to lowercase to avoid case sensitivity
-    filename_lower = filename.lower()
-
-    # Check if the filename contains the pattern " - ABCDE.tex" just before the extension
-    if " - " in filename_lower:
-        filename_parts = filename_lower.rsplit('.tex', 1)
-        if len(filename_parts) == 2:
-            filename_lower = filename_parts[0] + '.tex'  # Include the .tex extension
-
-    # Use the SHA-256 hashing algorithm to generate the hash
-    sha256_hash = hashlib.sha256(filename_lower.encode()).hexdigest()
-
-    # Convert the hash to uppercase
-    sha256_hash_upper = sha256_hash.upper()
-
-    # Return the first 5 characters of the uppercase hash
-    return sha256_hash_upper[:5]
-
-# Define command-line arguments
-parser = argparse.ArgumentParser(description='Generate short code for .tex files.')
-parser.add_argument('--keep-path', action='store_true', help='Keep the file path in output')
-
-# Parse command-line arguments
-args = parser.parse_args()
-
-# Root folder containing the files
-root_folder = 'en'
-
-prev_folder = None
-
-if args.keep_path:
-    print("# This file was generated with the \"./docs_filename_hash.py --keep-path | tee -a FILES_HASH_CODES.TXT\" command\n")
-else:
-    print("# This file was generated with the \"./docs_filename_hash.py\" command\n")
-
-print("# It contains the list of every English documentation files with the five first characters of the hash of their name")
-print("# //////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
-
-# Recursively traverse files in the root folder and its subfolders
-for foldername, subfolders, filenames in os.walk(root_folder):
-    for filename in filenames:
-
-        # Check if the file has the .tex extension
-        if filename.endswith('.tex'):
-
-            # Complete path of the file
-            file_path = os.path.join(foldername, filename)
-
-            # If the previous folder is different from the current folder, skip a line
-            if prev_folder != foldername:
-                print()
-
-            # Generate the short code for the file while keeping or not the relative path
-            short_code = generate_short_code(filename)
-
-            # Display the relative path or not based on the argument
-            print("Short Code for", file_path if args.keep_path else filename, ":", short_code)
-
-            # Update the previous folder
-            prev_folder = foldername
+print("The", output_file_name, "file was successfully created and / or written !")
