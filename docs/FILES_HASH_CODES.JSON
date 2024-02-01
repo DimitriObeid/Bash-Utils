@@ -13,104 +13,94 @@ JSON infos :
 JSON DATA :
 [
     {
-        "file_path": "en/Color code - C30C1.tex",
+        "file_path": "en/Color code - DF331.tex",
         "tex_title": "Bash-utils/docs/en/Color code.tex",
         "hex__code": "DF331"
     },
     {
-        "file_path": "en/modules/01) InitScript/Functions - 4F2DF.tex",
-        "tex_title": "Bash-utils/docs/en/modules/01) InitScript/Functions.tex",
-        "hex__code": "4EEA3"
-    },
-    {
-        "file_path": "en/modules/01) InitScript/Error codes - 92A48.tex",
+        "file_path": "en/modules/01) InitScript/Error codes - 35109.tex",
         "tex_title": "Bash-utils/docs/en/modules/01) InitScript/Error codes.tex",
         "hex__code": "35109"
     },
     {
-        "file_path": "en/modules/03) InitModule/Software/Initializer - 0A4CB.tex",
+        "file_path": "en/modules/01) InitScript/Functions - 4EEA3.tex",
+        "tex_title": "Bash-utils/docs/en/modules/01) InitScript/Functions.tex",
+        "hex__code": "4EEA3"
+    },
+    {
+        "file_path": "en/modules/03) InitModule/Software/Initializer - 87AF1.tex",
         "tex_title": "Bash-utils/docs/en/modules/03) InitModule/Software/Sotware - Initializer.tex",
         "hex__code": "87AF1"
     },
     {
-        "file_path": "en/modules/03) InitModule/main/Initializer - CBD24.tex",
+        "file_path": "en/modules/03) InitModule/main/Initializer - E8A6E.tex",
         "tex_title": "Bash-utils/docs/en/modules/03) InitModule/main/Main - Initializer.tex",
         "hex__code": "E8A6E"
     },
     {
-        "file_path": "en/modules/03) InitModule/Hardware/Initializer - 1958D.tex",
+        "file_path": "en/modules/03) InitModule/Hardware/Initializer - 3E1BE.tex",
         "tex_title": "Bash-utils/docs/en/modules/03) InitModule/Hardware/Hardware - Initializer.tex",
         "hex__code": "3E1BE"
     },
     {
-        "file_path": "en/modules/02) Config/main/Filesystem-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Filesystem-conf.tex",
-        "hex__code": "A6E02"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Status-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Status-conf.tex",
-        "hex__code": "D0455"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Colors-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Colors-conf.tex",
-        "hex__code": "2FCE1"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Module-conf - A6462.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Module-conf.tex",
-        "hex__code": "B5F99"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Exit-conf.tex",
+        "file_path": "en/modules/02) Config/main/Exit-conf - 04B46.tex",
         "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Exit-conf.tex",
         "hex__code": "04B46"
     },
     {
-        "file_path": "en/modules/02) Config/main/Locale-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Locale-conf.tex",
-        "hex__code": "FE235"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/ColorsBG-conf.tex",
+        "file_path": "en/modules/02) Config/main/ColorsBG-conf - 5A7C3.tex",
         "tex_title": "Bash-utils/docs/en/modules/02) Config/main/ColorsBG-conf.tex",
         "hex__code": "5A7C3"
     },
     {
-        "file_path": "en/modules/02) Config/main/ColorsText-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/ColorsText-conf.tex",
-        "hex__code": "16019"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Project-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Project-conf.tex",
-        "hex__code": "1B4DC"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Time-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Time-conf.tex",
-        "hex__code": "7F305"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Aliases-conf.tex",
-        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Aliases-conf.tex",
-        "hex__code": "D4B3F"
-    },
-    {
-        "file_path": "en/modules/02) Config/main/Text-conf.tex",
+        "file_path": "en/modules/02) Config/main/Text-conf - BEEA4.tex",
         "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Text-conf.tex",
         "hex__code": "BEEA4"
     },
     {
-        "file_path": "en/modules/04) Functions/main/Text.tex",
-        "tex_title": "Bash-utils/docs/en/modules/04) Functions/main/Text.tex",
-        "hex__code": "D1630"
+        "file_path": "en/modules/02) Config/main/Locale-conf - FE235.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Locale-conf.tex",
+        "hex__code": "FE235"
     },
     {
-        "file_path": "en/modules/04) Functions/main/Time.tex",
-        "tex_title": "Bash-utils/docs/en/modules/04) Functions/main/Time.tex",
-        "hex__code": "50974"
+        "file_path": "en/modules/02) Config/main/Time-conf - 7F305.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Time-conf.tex",
+        "hex__code": "7F305"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/Module-conf - B5F99.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Module-conf.tex",
+        "hex__code": "B5F99"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/Status-conf - D0455.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Status-conf.tex",
+        "hex__code": "D0455"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/ColorsText-conf - 16019.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/ColorsText-conf.tex",
+        "hex__code": "16019"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/Filesystem-conf - A6E02.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Filesystem-conf.tex",
+        "hex__code": "A6E02"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/Aliases-conf - D4B3F.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Aliases-conf.tex",
+        "hex__code": "D4B3F"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/Colors-conf - 2FCE1.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Colors-conf.tex",
+        "hex__code": "2FCE1"
+    },
+    {
+        "file_path": "en/modules/02) Config/main/Project-conf - 1B4DC.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Project-conf.tex",
+        "hex__code": "1B4DC"
     },
     {
         "file_path": "en/modules/04) Functions/main/Headers.tex",
@@ -126,6 +116,11 @@ JSON DATA :
         "file_path": "en/modules/04) Functions/main/Errors.tex",
         "tex_title": "Bash-utils/docs/en/modules/04) Functions/main/Errors.tex",
         "hex__code": "5B55D"
+    },
+    {
+        "file_path": "en/modules/04) Functions/main/Text - D1630.tex",
+        "tex_title": "Bash-utils/docs/en/modules/04) Functions/main/Text.tex",
+        "hex__code": "D1630"
     },
     {
         "file_path": "en/modules/04) Functions/main/Checkings.tex",
@@ -156,6 +151,11 @@ JSON DATA :
         "file_path": "en/modules/04) Functions/main/Directories.tex",
         "tex_title": "Bash-utils/docs/en/modules/04) Functions/main/Directories.tex",
         "hex__code": "C4375"
+    },
+    {
+        "file_path": "en/modules/04) Functions/main/Time - 50974.tex",
+        "tex_title": "Bash-utils/docs/en/modules/04) Functions/main/Time.tex",
+        "hex__code": "50974"
     },
     {
         "file_path": "en/modules/04) Functions/main/Inputs.tex",
