@@ -16,12 +16,23 @@ def extract_pdfinfo_title(file_path):
         match = re.search(r'% Title for hashing : (.+\.tex)', content)
 
         if match:
-            return match.group(1).strip()
+            title_content = match.group(1).strip()
+
+            if title_content.startswith('"'):
+                # Removes the first double quote
+                title_content = title_content[1:]
+
+            return title_content
+
         else:
             return None
 
+
 # Function to generate a short code from a string
 def generate_short_code(string):
+    # Converting the filepath string to uppercase in order to make sure that, if the case of any directory is modified, the generated code will always be the same.
+    string = string.upper()
+
     # Using the SHA-256 hashing algorithm to generate the hash
     sha256_hash = hashlib.sha256(string.encode()).hexdigest()
 
@@ -63,7 +74,14 @@ with open(output_file_name, 'w') as file:
         print("This file was generated with the \"./docs_filename_hash.py\" command\n")
 
     print("It contains the list of every English documentation files with the five first characters of the hash of their name")
-    print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////")
+    print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n")
+
+    print("JSON infos :")
+    print(" - file_path : Path to the file from the folder where this script is located (ALWAYS IN THE \"Bash-utils/docs\" DIRECTORY)")
+    print(" - tex_title : Value parsed from the targeted LaTeX file, in order to generate a hex code per document")
+    print(" - hex__code : Generated hexadecimal code, which is used into the name of every LaTeX and PDF files\n\n")
+
+    print("JSON DATA :")
 
     # Traverse files in the "en" folder
     for foldername, subfolders, filenames in os.walk(folder_en):
@@ -94,4 +112,4 @@ with open(output_file_name, 'w') as file:
 # Restore original stdout
 sys.stdout = original_stdout
 
-print("The", output_file_name, "file was successfully created and / or written !")
+print("The", output_file_name, "file's data was successfully created and / or written !")
