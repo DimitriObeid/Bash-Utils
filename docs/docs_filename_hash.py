@@ -7,6 +7,10 @@ import argparse
 import json
 import sys
 
+# /////////
+# FUNCTIONS
+# /////////
+
 # Function to extract the content of the \pdfinfo{...} /Title tag in a .tex file
 def extract_pdfinfo_title(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -28,6 +32,7 @@ def extract_pdfinfo_title(file_path):
             return None
 
 
+# ///////////////////////////////////////////////
 # Function to generate a short code from a string
 def generate_short_code(string):
     # Converting the filepath string to uppercase in order to make sure that, if the case of any directory is modified, the generated code will always be the same.
@@ -41,6 +46,12 @@ def generate_short_code(string):
 
     # Return the first 5 characters of the uppercase hash
     return sha256_hash_upper[:5]
+
+
+
+# /////////////
+# MAIN PROGRAM
+# /////////////
 
 # Define command-line arguments
 parser = argparse.ArgumentParser(description='Generate short code based on the PDF Title from .tex files.')
@@ -96,11 +107,24 @@ with open(output_file_name, 'w') as file:
                     # Generate the short code from the extracted content
                     short_code = generate_short_code(title_content)
 
+                    # Extract the existing hex code from the filename if it exists
+                    filename_base = os.path.basename(os.path.splitext(filename)[0])
+
+                    # Extract the hex code by splitting the filename_base using " - " as delimiter
+                    hex_code = filename_base.split(" - ")[-1]
+
+                    # Check if the extracted hex code from the content matches the generated one
+                    if short_code == hex_code:
+                        code_stat = "Unchanged hex code"
+                    else:
+                        code_stat = "Warning : the hex code has changed from {} to {}".format(hex_code, short_code)
+
                     # Build a dictionary with the file information
                     file_info = {
                         "file_path": filename if args.remove_relative_path else file_path,
                         "tex_title": title_content,
-                        "hex__code": short_code
+                        "hex__code": short_code,
+                        "code_stat": code_stat
                     }
 
                     # Add the dictionary to the list of information
