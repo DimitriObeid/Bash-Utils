@@ -19,16 +19,22 @@ JSON DATA :
         "code_stat": "Unchanged hex code"
     },
     {
+        "file_path": "en/Tutorials - 26C06.tex",
+        "tex_title": "Bash-utils/docs/en/Tutorials.tex",
+        "hex__code": "26C06",
+        "code_stat": "Unchanged hex code"
+    },
+    {
         "file_path": "en/Color code - DF331.tex",
         "tex_title": "Bash-utils/docs/en/Color code.tex",
         "hex__code": "DF331",
         "code_stat": "Unchanged hex code"
     },
     {
-        "file_path": "en/Tutorials.tex",
-        "tex_title": "Bash-utils/docs/en/Tutorials.tex",
-        "hex__code": "26C06",
-        "code_stat": "Warning : the hex code has changed from Tutorials to 26C06"
+        "file_path": "en/modules/Functioning of the modules manager.tex",
+        "tex_title": "Bash-utils/docs/en/Functioning of the modules manager.tex",
+        "hex__code": "250CD",
+        "code_stat": "Warning : the hex code has changed from Functioning of the modules manager to 250CD"
     },
     {
         "file_path": "en/modules/01) InitScript/Error codes - 35109.tex",
