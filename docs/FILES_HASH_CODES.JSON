@@ -25,6 +25,12 @@ JSON DATA :
         "code_stat": "Unchanged hex code"
     },
     {
+        "file_path": "en/Tutorials.tex",
+        "tex_title": "Bash-utils/docs/en/Tutorials.tex",
+        "hex__code": "26C06",
+        "code_stat": "Warning : the hex code has changed from Tutorials to 26C06"
+    },
+    {
         "file_path": "en/modules/01) InitScript/Error codes - 35109.tex",
         "tex_title": "Bash-utils/docs/en/modules/01) InitScript/Error codes.tex",
         "hex__code": "35109",
