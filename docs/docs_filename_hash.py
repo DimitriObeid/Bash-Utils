@@ -87,6 +87,8 @@ with open(output_file_name, 'w') as file:
     print("It contains the list of every English documentation files with the five first characters of the hash of their name")
     print("//////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n")
 
+    print("NOTE : Any file which is named after the file they are based on (like \"Args.tex\") must not figure into this file\n)
+
     print("JSON infos :")
     print(" - file_path : Path to the file from the folder where this script is located (ALWAYS IN THE \"Bash-utils/docs\" DIRECTORY)")
     print(" - tex_title : Value parsed from the targeted LaTeX file, in order to generate a hex code per document")

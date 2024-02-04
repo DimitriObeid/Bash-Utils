@@ -1,0 +1,41 @@
+//////////////////////////////////////////////////////////////////
+This file was generated with the "./docs_filename_hash.py" command
+
+It contains the list of every English documentation files with the five first characters of the hash of their name
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+NOTE : Any file which is named after the file they are based on (like "Args.tex") must not figure into this file
+
+JSON infos :
+ - file_path : Path to the file from the folder where this script is located (ALWAYS IN THE "Bash-utils/docs" DIRECTORY)
+ - tex_title : Value parsed from the targeted LaTeX file, in order to generate a hex code per document
+ - hex__code : Generated hexadecimal code, which is used into the name of every LaTeX and PDF files
+
+
+JSON DATA :
+[
+    {
+        "file_path": "en/Introduction - BD545.tex",
+        "tex_title": "Bash-utils/docs/en/Introduction to Bash Utils.tex",
+        "hex__code": "BD545",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/Tutorials - 26C06.tex",
+        "tex_title": "Bash-utils/docs/en/Tutorials.tex",
+        "hex__code": "26C06",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/Color code - DF331.tex",
+        "tex_title": "Bash-utils/docs/en/Color code.tex",
+        "hex__code": "DF331",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/modules/Functioning of the modules manager - 250CD.tex",
+        "tex_title": "Bash-utils/docs/en/Functioning of the modules manager.tex",
+        "hex__code": "250CD",
+        "code_stat": "Unchanged hex code"
+    }
+]
