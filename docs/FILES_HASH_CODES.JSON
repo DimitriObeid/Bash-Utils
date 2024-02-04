@@ -31,100 +31,100 @@ JSON DATA :
         "code_stat": "Unchanged hex code"
     },
     {
-        "file_path": "en/devtools/lib-install.tex",
+        "file_path": "en/devtools/lib-install - 422D6.tex",
         "tex_title": "Bash-utils/docs/en/devtools/lib-install.tex",
         "hex__code": "422D6",
-        "code_stat": "Warning : the hex code has changed from lib-install to 422D6"
+        "code_stat": "Unchanged hex code"
     },
     {
-        "file_path": "en/devtools/latex-compiler.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/latex-compiler.tex",
-        "hex__code": "47A6B",
-        "code_stat": "Warning : the hex code has changed from latex-compiler to 47A6B"
-    },
-    {
-        "file_path": "en/devtools/latex-unite.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/latex-unite.tex",
-        "hex__code": "6EF2C",
-        "code_stat": "Warning : the hex code has changed from latex-unite to 6EF2C"
-    },
-    {
-        "file_path": "en/devtools/latex-create-document.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/latex-create-document.tex",
-        "hex__code": "F1E94",
-        "code_stat": "Warning : the hex code has changed from latex-create-document to F1E94"
-    },
-    {
-        "file_path": "en/devtools/module-rm.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/module-rm.tex",
-        "hex__code": "2BC53",
-        "code_stat": "Warning : the hex code has changed from module-rm to 2BC53"
-    },
-    {
-        "file_path": "en/devtools/latex-convert-to-printable.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/latex-convert-to-printable.tex",
-        "hex__code": "50DF3",
-        "code_stat": "Warning : the hex code has changed from latex-convert-to-printable to 50DF3"
-    },
-    {
-        "file_path": "en/devtools/install-dev-env.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/install-dev-env.tex",
-        "hex__code": "D9BDA",
-        "code_stat": "Warning : the hex code has changed from install-dev-env to D9BDA"
-    },
-    {
-        "file_path": "en/devtools/lib-generator.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/lib-generator.tex",
-        "hex__code": "E3E01",
-        "code_stat": "Warning : the hex code has changed from lib-generator to E3E01"
-    },
-    {
-        "file_path": "en/devtools/desktop.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/desktop.tex",
-        "hex__code": "039A0",
-        "code_stat": "Warning : the hex code has changed from desktop to 039A0"
-    },
-    {
-        "file_path": "en/devtools/bin-generation.tex",
+        "file_path": "en/devtools/bin-generation - 70FB9.tex",
         "tex_title": "Bash-utils/docs/en/devtools/bin-generation.tex",
         "hex__code": "70FB9",
-        "code_stat": "Warning : the hex code has changed from bin-generation to 70FB9"
+        "code_stat": "Unchanged hex code"
     },
     {
-        "file_path": "en/devtools/latex-clean.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/latex-clean.tex",
-        "hex__code": "7373B",
-        "code_stat": "Warning : the hex code has changed from latex-clean to 7373B"
-    },
-    {
-        "file_path": "en/devtools/module-mk.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/module-mk.tex",
-        "hex__code": "E9FF4",
-        "code_stat": "Warning : the hex code has changed from module-mk to E9FF4"
-    },
-    {
-        "file_path": "en/devtools/lib-unite.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/lib-unite.tex",
-        "hex__code": "F0BE8",
-        "code_stat": "Warning : the hex code has changed from lib-unite to F0BE8"
-    },
-    {
-        "file_path": "en/devtools/256-color-palette.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/256-color-palette.tex",
-        "hex__code": "FD502",
-        "code_stat": "Warning : the hex code has changed from 256-color-palette to FD502"
-    },
-    {
-        "file_path": "en/devtools/lib-compilerV3.tex",
-        "tex_title": "Bash-utils/docs/en/devtools/lib-compilerV3.tex",
-        "hex__code": "B2212",
-        "code_stat": "Warning : the hex code has changed from lib-compilerV3 to B2212"
-    },
-    {
-        "file_path": "en/devtools/mr-clean.tex",
+        "file_path": "en/devtools/mr-clean - 4E11C.tex",
         "tex_title": "Bash-utils/docs/en/devtools/mr-clean.tex",
         "hex__code": "4E11C",
-        "code_stat": "Warning : the hex code has changed from mr-clean to 4E11C"
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/latex-create-document - F1E94.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/latex-create-document.tex",
+        "hex__code": "F1E94",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/latex-unite - 6EF2C.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/latex-unite.tex",
+        "hex__code": "6EF2C",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/module-mk - E9FF4.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/module-mk.tex",
+        "hex__code": "E9FF4",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/module-rm - 2BC53.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/module-rm.tex",
+        "hex__code": "2BC53",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/256-color-palette - FD502.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/256-color-palette.tex",
+        "hex__code": "FD502",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/lib-compilerV3 - B2212.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/lib-compilerV3.tex",
+        "hex__code": "B2212",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/lib-generator - E3E01.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/lib-generator.tex",
+        "hex__code": "E3E01",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/latex-clean - 7373B.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/latex-clean.tex",
+        "hex__code": "7373B",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/desktop - 039A0.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/desktop.tex",
+        "hex__code": "039A0",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/install-dev-env - D9BDA.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/install-dev-env.tex",
+        "hex__code": "D9BDA",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/latex-convert-to-printable - 50DF3.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/latex-convert-to-printable.tex",
+        "hex__code": "50DF3",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/latex-compiler - 47A6B.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/latex-compiler.tex",
+        "hex__code": "47A6B",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/devtools/lib-unite - F0BE8.tex",
+        "tex_title": "Bash-utils/docs/en/devtools/lib-unite.tex",
+        "hex__code": "F0BE8",
+        "code_stat": "Unchanged hex code"
     },
     {
         "file_path": "en/modules/Functioning of the modules manager - 250CD.tex",
