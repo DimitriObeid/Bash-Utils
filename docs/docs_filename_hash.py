@@ -1,5 +1,10 @@
 #!/usr/bin/python3
 
+# TODO :
+#   - Boucler uniquement sur les fichiers d'un dossier spécifique, au lieu de le faire récursivement
+#   -
+#   -
+
 import os
 import hashlib
 import re

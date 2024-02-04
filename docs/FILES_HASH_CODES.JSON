@@ -67,6 +67,12 @@ JSON DATA :
         "code_stat": "Unchanged hex code"
     },
     {
+        "file_path": "en/modules/02) Config/Software/Module-conf - 1B2DF.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/Software/Module-conf.tex",
+        "hex__code": "1B2DF",
+        "code_stat": "Unchanged hex code"
+    },
+    {
         "file_path": "en/modules/02) Config/main/Exit-conf - 04B46.tex",
         "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Exit-conf.tex",
         "hex__code": "04B46",
@@ -136,6 +142,12 @@ JSON DATA :
         "file_path": "en/modules/02) Config/main/Project-conf - 1B4DC.tex",
         "tex_title": "Bash-utils/docs/en/modules/02) Config/main/Project-conf.tex",
         "hex__code": "1B4DC",
+        "code_stat": "Unchanged hex code"
+    },
+    {
+        "file_path": "en/modules/02) Config/Hardware/Module-conf - D8C8E.tex",
+        "tex_title": "Bash-utils/docs/en/modules/02) Config/Hardware/Module-conf.tex",
+        "hex__code": "D8C8E",
         "code_stat": "Unchanged hex code"
     },
     {
