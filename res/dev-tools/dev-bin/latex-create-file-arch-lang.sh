@@ -211,19 +211,24 @@ function BU.LCFAL.Function.CreateLangDirectory()
     if [ ! -d "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" ]; then
         echo "CREATION OF THE \"${p_lang}\" DIRECTORY";
 
-        echo -n "The \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" directory does not exists. ";
+        echo -en "\nThe \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" directory does not exists. ";
 
-        read -r -p "Do you want to create it (type 'Y' ONLY if you are sure that you didn't made a typo error) ? (Y/N)" __read_val;
+        read -r -p "Do you want to create it (type 'Y' ONLY if you are sure that you didn't made a typo error) ? (Y/N) " __read_val;
         echo "${__read_val}" >> /dev/null;
 
         case "${__read_val}" in
             'Y'|'y')
-                mkdir -pv "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" || {
+                echo;
+
+                mkdir -p "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" || {
                     echo "Unable to create the \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" folder" >&2;
                     echo "End of the exection" >&2;
 
                     return 1;
-                };;
+                }
+
+                printf "%s✓%s The following folder was successfully created : %s\n" "$(tput setaf 2)" "$(tput sgr0)" "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}";
+                ;;
             'N'|'n'|*)
                 false;;
         esac
@@ -250,13 +255,15 @@ function BU.LCFAL.Function.CheckOrCreateSubFolders()
         return 1;
     else
         if [ ! -d "${p_dirpath}" ]; then
-            mkdir -pv "${p_dirpath}" || {
+            mkdir -p "${p_dirpath}" || {
                 echo "Unable to create the \"${p_dirpath}\" folder" >&2;
 
                 return 1;
             };
+
+            printf "%s✓%s The following folder was successfully created : %s\n" "$(tput setaf 2)" "$(tput sgr0)" "${p_dirpath}";
         else
-            printf "The \"%s\" folder already exists %s✓%s\n" "${p_dirpath}" "$(tput setaf 2)" "$(tput sgr0)";
+            printf "%s✓%s The following folder already exists : %s\n" "$(tput setaf 2)" "$(tput sgr0)" "${p_dirpath}";
 
             return 0;
         fi
@@ -319,11 +326,11 @@ for __lang in "${__BU__LCFAL__ARGS__LANG_ARRAY[@]}"; do
 
     echo -e "\n";
 
-    echo '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
+    # Verifying if every required sub-folder exists in the "Bash-utils/docs/${__lang}" directory.
+    echo '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\';
     echo "CHECKING THE EXISTENCE OF THE REQUIRED SUB-FOLDERS, OR CREATING THEM IF THEY DO NOT EXIST";
     echo;
 
-    # Verifying if every required sub-folder exists in the "Bash-utils/docs/${__lang}" directory.
 
     # Since the "$(mkdir -p)" command is used in the "BU.LCFAL.Function.CheckOrCreateSubFolders()" function, it is possible to directly create the last sub-directories.
     BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/devtools"                         || exit 1;
@@ -336,7 +343,26 @@ for __lang in "${__BU__LCFAL__ARGS__LANG_ARRAY[@]}"; do
     BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Software"  || exit 1;
     BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/04) Functions/main"       || exit 1;
 
-     for file in "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}"; do echo "${file}"; done
+    # Creating each LaTeX file into their right sub-folder.
+    echo -e "\n";
+
+    echo '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\';
+    echo "CHECKING THE EXISTENCE OF THE LATEX FILES, OR CREATING THEM IF THEY DO NOT EXIST";
+
+    for file in "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}"; do
+        if [ ! -f "${file}" ]; then
+            touch "${file}" || {
+                echo "Unable to create the \"${file}\" file" >&2;
+                echo "End of the exection" >&2;
+
+                exit 1;
+            }
+
+            printf "%s✓%s The following file was successfully created : %s\n" "$(tput setaf 2)" "$(tput sgr0)" "${file}";
+        else
+            printf "%s✓%s The following path already exists : %s\n" "$(tput setaf 2)" "$(tput sgr0)" "${file}";
+        fi
+    done
 
 
     # Emptying the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}" array in case the loop has to be iterated another time.
