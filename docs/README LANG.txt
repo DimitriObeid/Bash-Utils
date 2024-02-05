@@ -1,3 +1,15 @@
+00 DATA :
+---------
+
+This folder stores data used into the LaTex files, like images.
+
+Here's its data structure :
+
+00 DATA
+    |_ img
+        |_ *.png *.jpg * .jpeg
+
+
 Available languages     | Langues disponibles :
 -----------------------------------------------
 
