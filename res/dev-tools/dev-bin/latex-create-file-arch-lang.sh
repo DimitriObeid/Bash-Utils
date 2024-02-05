@@ -144,7 +144,7 @@ declare -a __BU__LCFAL__PATHS__LATEX_FILES_ARCH=(
     "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/module-delete-file-by-OS.tex"
     "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/module-install.tex"
     "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/module-mk.tex"
-    "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/module-rm.tex"
+    "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/module-pack.tex"
     "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/module-rm.tex"
     "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__DEVTOOLS__DIR}/mr-clean.tex"
     "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__EN__MODULES__02_CONFIG__DIR}/Hardware/module-conf.tex"
