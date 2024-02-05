@@ -198,6 +198,42 @@ declare -a __BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG=();
 
 ## FOLDERS
 
+# ······································
+# Creation of the "${__lang}" directory.
+
+# shellcheck disable=
+function BU.LCFAL.Function.CreateLangDirectory()
+{
+    #**** Parameters ****
+    p_lang=${1:-$'\0'};    # ARG TYPE : String  # REQUIRED | DEFAULT VAL : NULL     - DESC : ISO 639-1 language code of the folder to create.
+
+    #**** Code ****
+    if [ ! -d "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" ]; then
+        echo "CREATION OF THE \"${p_lang}\" DIRECTORY";
+
+        echo -n "The \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" directory does not exists. ";
+
+        read -r -p "Do you want to create it (type 'Y' ONLY if you are sure that you didn't made a typo error) ? (Y/N)" __read_val;
+        echo "${__read_val}" >> /dev/null;
+
+        case "${__read_val}" in
+            'Y'|'y')
+                mkdir -pv "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" || {
+                    echo "Unable to create the \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" folder" >&2;
+                    echo "End of the exection" >&2;
+
+                    return 1;
+                };;
+            'N'|'n'|*)
+                false;;
+        esac
+
+        return 0;
+    else
+        return 0;
+    fi
+}
+
 # ···········································
 # Sub-folders checking and creation function.
 
@@ -214,14 +250,16 @@ function BU.LCFAL.Function.CheckOrCreateSubFolders()
         return 1;
     else
         if [ ! -d "${p_dirpath}" ]; then
-            mkdir -pv "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" || {
-                echo "Unable to create the \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" folder" >&2;
+            mkdir -pv "${p_dirpath}" || {
+                echo "Unable to create the \"${p_dirpath}\" folder" >&2;
+
+                return 1;
             };
         else
             printf "The \"%s\" folder already exists %s✓%s\n" "${p_dirpath}" "$(tput setaf 2)" "$(tput sgr0)";
-        fi
 
-        return 0;
+            return 0;
+        fi
     fi
 }
 
@@ -264,48 +302,43 @@ for __lang in "${__BU__LCFAL__ARGS__LANG_ARRAY[@]}"; do
     #**** Code ****
 
     # Verifying if the language folder exists in the "Bash-utils/docs" directory.
-    if [ ! -d "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" ]; then
-        echo -n "The \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" directory does not exists. ";
+    BU.LCFAL.Function.CreateLangDirectory "${__lang}" || exit 1;
 
-        read -r -p "Do you want to create it (type 'Y' ONLY if you are sure that you didn't made a typo error) ? (Y/N)" __read_val;
+    # Assigning the the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH[@]}" array's indexes to the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}" array.
+    __BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG+=("${__BU__LCFAL__PATHS__LATEX_FILES_ARCH[@]}");
 
-        case "${__read_val}" in
-            'Y'|'y')
-                mkdir -pv "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}" || {
-                    echo "Unable to create the \"${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}\" folder" >&2;
-                    echo "End of the exection" >&2;
+    # Replacing every "Bash-utils/docs/en/" occurences by "Bash-utils/docs/${__lang}/"
+    for ((i=0; i<"${#__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}"; i++)); do
+        __BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG["${i}"]="$(BU.Main.Text.ReplaceLettersInString \
+                                                                "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[${i}]}" \
+                                                                "Bash-utils/docs/en/" \
+                                                                "all" \
+                                                                "Bash-utils/docs/${__lang}/" \
+                                                                )";
+    done
 
-                    exit 1;
-                };;
-            'N'|'n'|*)
-                false;;
-        esac
-    else
-        # Assigning the the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH[@]}" array's indexes to the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}" array.
-        __BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG+=("${__BU__LCFAL__PATHS__LATEX_FILES_ARCH[@]}");
+    echo -e "\n";
 
-        # Replacing every "Bash-utils/docs/en/" occurences by "Bash-utils/docs/${__lang}/"
-        for file in "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}"; do
-            BU.Main.Text.ReplaceLettersInString "${file}" "Bash-utils/docs/en/" "all" "Bash-utils/docs/${__lang}/";
-        done
+    echo '\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
+    echo "CHECKING THE EXISTENCE OF THE REQUIRED SUB-FOLDERS, OR CREATING THEM IF THEY DO NOT EXIST";
+    echo;
 
-        echo;
+    # Verifying if every required sub-folder exists in the "Bash-utils/docs/${__lang}" directory.
 
-        # Verifying if every required sub-folder exists in the "Bash-utils/docs/${__lang}" directory.
+    # Since the "$(mkdir -p)" command is used in the "BU.LCFAL.Function.CheckOrCreateSubFolders()" function, it is possible to directly create the last sub-directories.
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/devtools"                         || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/01) InitScript"           || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Hardware"      || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/main"          || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Software"      || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Hardware"  || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/main"      || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Software"  || exit 1;
+    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/04) Functions/main"       || exit 1;
 
-        # Since the "$(mkdir -p)" command is used in the "BU.LCFAL.Function.CheckOrCreateSubFolders()" function, it is possible to directly create the last sub-directories.
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/devtools"                         || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/01) InitScript"           || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Hardware"      || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/main"          || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Software"      || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Hardware"  || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/main"      || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Software"  || exit 1;
-        BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/04) Functions/main"       || exit 1;
+     for file in "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}"; do echo "${file}"; done
 
 
-        # Emptying the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}" array in case the loop has to be iterated another time.
-        unset __BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG;
-    fi
+    # Emptying the "${__BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}" array in case the loop has to be iterated another time.
+    unset __BU__LCFAL__PATHS__LATEX_FILES_ARCH__LANG;
 done
