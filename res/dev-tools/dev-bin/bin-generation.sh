@@ -153,7 +153,7 @@ else
 fi
 
 touch "${__ARG_PATH}" || {
-    echo "WARNING !! THE $0 SCRIPT WAS UNABLE TO CREATE THE ${__ARG_PATH} FILE" >&2;
+    echo "WARNING !! THE ${0} SCRIPT WAS UNABLE TO CREATE THE ${__ARG_PATH} FILE" >&2;
     echo "Please check the permissions of the target directory" >&2;
     echo >&2;
 
@@ -164,7 +164,7 @@ touch "${__ARG_PATH}" || {
 }
 
 cat "${__new_file_path}" > "${__ARG_PATH}" || {
-    echo "WARNING !! THE $0 SCRIPT WAS UNABLE TO WRITE INTO THE ${__ARG_PATH} FILE" >&2;
+    echo "WARNING !! THE ${0} SCRIPT WAS UNABLE TO WRITE INTO THE ${__ARG_PATH} FILE" >&2;
     echo "Please check the permissions of the target file or directory" >&2;
     echo >&2;
 

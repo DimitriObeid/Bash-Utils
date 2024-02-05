@@ -181,6 +181,20 @@ printf "
 # shellcheck disable=
 function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; BU.ModuleInit.IsInScript && exit "${p_code}"; return "${p_code}"; }
 
+# ··········································································································
+# Checking if the script file which runs the Bash code is the "latex-create-file-arch-lang.sh" shell script.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
+# shellcheck disable=
+function BU.LCFAL.Function.IsShellScriptLCFAL()         { if [[ "${0##*/}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi }
+
 # ···············································································································································································
 # Checking if the script file which runs the Bash code are either the "lib-compilerV3.sh" file or the "lib-compilerV4.sh" file, which only contain very basic included resources.
 

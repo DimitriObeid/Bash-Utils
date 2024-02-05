@@ -440,7 +440,7 @@ function BU.Main.Text.DeleteLettersInString()
 # shellcheck disable=
 function BU.Main.Text.ReplaceLettersInString()
 {
-    if ! BU.ModuleInit.IsCompiler; then
+    if ! BU.ModuleInit.IsCompiler && ! BU.LCFAL.Function.IsShellScriptLCFAL; then
         # This function call makes it easier for the user to find the current function and its executed
         # content if it is called during the execution of the main script with the "$(bash -x)" command.
         BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
@@ -461,7 +461,7 @@ function BU.Main.Text.ReplaceLettersInString()
         echo "${p_string/${p_delim}/"${p_replacement}"}";
     fi
 
-    if ! BU.ModuleInit.IsCompiler; then
+    if ! BU.ModuleInit.IsCompiler && ! BU.LCFAL.Function.IsShellScriptLCFAL; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
     fi
 
