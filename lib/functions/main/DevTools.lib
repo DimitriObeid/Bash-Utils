@@ -168,7 +168,7 @@ function BU.Main.DevTools.ShellcheckVerif()
 
     #**** Variables ****
     local compiler_env;         # VAR TYPE : Filepath   - DESC : Cutting the path which precedes the "Bash-utils/" sub-string in order to unify the compilation environments by processing the relative path of a file instead of its absolute path (if someone else compiles a version of the framework stored in their home folder, instead of "/usr/local/lib/" for example).
-    local existing_md5;         # VAR TYPE : CMD        - DESC : Storing the output of the "$(grep)" command used to get the current file's corresponding md5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
+    local existing_md5;         # VAR TYPE : CMD        - DESC : Storing the output of the "$(grep)" command used to get the current file's corresponding md5 checksum from the "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" file.
     local new_md5;              # VAR TYPE : CMD        - DESC : Storing the output of the "$(md5sum)" command used to calculate the current file's corresponding md5 checksum.
     local shchkOut;             # VAR TYPE : CMD        - DESC : Storing the output message of the "$(shellcheck)" command in order to display the "${__BU_COMPILE__SHELLCHECK__FAIL_STR}" string right after the "${__BU_COMPILE__SHELLCHECK__VERIFICATION}" message located at the same line.
     local shchkOutCode;         # VAR TYPE : Int        - DESC : Getting the output code of the "$(shellcheck)" command stored in the previous variable.
@@ -178,6 +178,14 @@ function BU.Main.DevTools.ShellcheckVerif()
     compiler_env="${p_path#*"${compiler_env}"}";
     compiler_env="Bash-utils${compiler_env}";
 
+    # Support for the legacy "lib-compilerV3.sh" script and the future versions of the compiler.
+    function BU.Main.DevTools.ShellcheckVerif.SupportLegacyVersions()
+    {
+        # TODO : Write the code of this function.
+        return 0;
+    }
+
+    # Shellchecking the processed file.
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
     {
         # shellcheck disable=SC2059
@@ -200,7 +208,7 @@ function BU.Main.DevTools.ShellcheckVerif()
             # shellcheck disable=SC2059
             printf "${__BU_COMPILE__SHELLCHECK__SUCCESS}\n" "${compiler_env}";
 
-            # Writing the compiled file's MD5 checksum and path into the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
+            # Writing the compiled file's MD5 checksum and path into the "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" file.
 
             # Checking in the "${existing_md5}" variable is empty. If not, the output of the 
             # "$(md5sum "${compiler_env}")" command is written, else the current value is replaced.
@@ -214,15 +222,15 @@ function BU.Main.DevTools.ShellcheckVerif()
                     }
                     
                     print
-                }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.1.tmp" && {
-                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.1.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || {
-                        echo "Warning : unable to update the ${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST} file";
+                }' "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}.1.tmp" && {
+                    mv "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}.1.tmp" "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" || {
+                        echo "Warning : unable to update the ${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST} file";
 
                         return 1;
                     };
                 };
             else
-                md5sum "${p_path}" >> "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+                md5sum "${p_path}" >> "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}";
 
                 awk -v awk_path="${p_path}" -v compiler_env="${compiler_env}" '{
                     if ($2 == awk_path) {
@@ -230,9 +238,9 @@ function BU.Main.DevTools.ShellcheckVerif()
                     }
 
                     print
-                }' "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.2.tmp" && {
-                    mv "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}.2.tmp" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" || {
-                        echo "Warning : unable to update the ${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST} file";
+                }' "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" > "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}.2.tmp" && {
+                    mv "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}.2.tmp" "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" || {
+                        echo "Warning : unable to update the ${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST} file";
 
                         return 1;
                     };
@@ -245,16 +253,16 @@ function BU.Main.DevTools.ShellcheckVerif()
         return 0;
     }
 
-    # Checking if the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" exists or not on the user's hard drive.
-    if [ ! -f "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" ]; then 
-        touch "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}";
+    # Checking if the "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" exists or not on the user's hard drive.
+    if [ ! -f "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" ]; then 
+        touch "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}";
     fi
 
-    # Checking first if the file was already shellchecked by parsing the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" file.
-    if grep -qi "${compiler_env}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}"; then
+    # Checking first if the file was already shellchecked by parsing the "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" file.
+    if grep -qi "${compiler_env}" "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}"; then
 
-        # Extracting the current file's corresponding MD5 checksum from the "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}".
-        existing_md5=$(grep -i "${compiler_env}" "${__BU_LIB_COMPILER_RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}');
+        # Extracting the current file's corresponding MD5 checksum from the "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}".
+        existing_md5=$(grep -i "${compiler_env}" "${__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" | awk '{print $1}');
 
         # Calculating the MD5 checksum of the current file.
         new_md5="$(md5sum "${p_path}" | awk '{print $1}')";
