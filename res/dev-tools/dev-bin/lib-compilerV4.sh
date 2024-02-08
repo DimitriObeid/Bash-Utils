@@ -77,7 +77,7 @@ fi
 # DEFAULT VAL : NULL
 
 # DESC : Fitting the arguments following the "${__BU_ARG_LANG}" parameter in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
-__BU_ARGS_ARRAY=("${@}");
+__BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY=("${@}");
 
 ## ==============================================
 
@@ -236,19 +236,19 @@ else __BU_INITIALIZER_SCRIPT_PATH="${__BU_ROOT_PATH}/Bash-utils-init.sh";
 fi
 
 # Path to the directory which stores the path to the "compiled" folder.
-__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/compiled";
+declare -rg __BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/compiled";
 
 # Path to the file which stores the content of the here document used into each of the "LibCompilerV4.Functions.WriteCommentCode.Heredoc.${v_curr_locale}()" functions, which is called into the "LibCompilerV4.Functions.WriteCommentCode()" function.
-__BU__LIB_COMPILER_V4__RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compilerV4/heredoc";
+declare -rg __BU__LIB_COMPILER_V4__RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compilerV4/heredoc";
 
 # Path to the file which stores the Shellchecked files and their MD5 checksum.
-__BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST="${__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/compiled.out.txt";
+declare -rg __BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST="${__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/compiled.out.txt";
 
 # Path to the modules initialization script's translations files.
-__BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
+declare -rg __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
 
 # Path to the modules initialization script's translations files.
-__BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
+declare -rg __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
 # Sourcing the "DevTools.lib" file in order to use the "BU.Main.DevTools.ShellcheckVerif()" function.
 # shellcheck disable=SC1091
@@ -577,17 +577,17 @@ function LibCompilerV4.Functions.EraseComments()
 function LibCompilerV4.Functions.WriteBU()
 {
     #**** Parameters ****
-    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written into the "${__BU_MAIN_FULL_FILE_PATH}" file.
+    local p_filepath=${1:-\$'0'}	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file whose content should be written into the "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" file.
     local p_display=${2:-no};   	# ARG TYPE : String     - REQUIRED | DEFAULT VAL : no       - DESC : Display the content of each file when it is read and written into the file to generate.
 
 	#**** Variables ****
-	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write into the "${__BU_MAIN_FULL_FILE_PATH}" file.
+	local v_content;				# VAR TYPE : String     - DESC : Content of the "${p_filepath}" file to write into the "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" file.
 
     #**** Code ****
     v_content="$(cat "${p_filepath}")";
 
-    if      [ "${p_display,,}" == "${_____value_of__display}" ]; then   echo "${v_content}" | tee -a    "${__BU_MAIN_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
-    else                                                                echo "${v_content}" >>          "${__BU_MAIN_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    if      [ "${p_display,,}" == "${_____value_of__display}" ]; then   echo "${v_content}" | tee -a    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    else                                                                echo "${v_content}" >>          "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
     fi
 }
 
@@ -791,7 +791,7 @@ function LibCompilerV4.Functions.Debug()
 
     echo "ARG [0] : ${__BU_ARG_LANG}";
 
-    for argslist in "${__BU_ARGS_ARRAY[@]}"; do
+    for argslist in "${__BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY[@]}"; do
         i=$(( i + 1 ));
 
         echo "ARG [${i}] : ${argslist}";
@@ -888,7 +888,7 @@ function LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()
 
     # Else, if the '--lang-include=' value was passed as mandatory argument.
     elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-        printf "${__BU__LIB_COMPILER_V4__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LANG_INCLUDE_HANDLING}\n" "${__BU_MAIN_FULL_FILE_PATH}" >&2;
+        printf "${__BU__LIB_COMPILER_V4__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LANG_INCLUDE_HANDLING}\n" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" >&2;
     fi
 }
 
@@ -938,7 +938,7 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
     # If the '--keep-comments' or the '--keep-raw-document-layout' value is passed as optional argument, this parameter will not be processed.
     local _____value_of__remove_shellcheck_directives='--remove-shellcheck-directives';
 
-    for arg in "${__BU_ARGS_ARRAY[@]}"; do
+    for arg in "${__BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY[@]}"; do
         # If the user decided to create a stable version of the compiled framework.
         if [ "${arg}" == '-C' ] || [ "${arg,,}" == "${_____value_of__compile_stable}" ]; then
             # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
@@ -1047,13 +1047,13 @@ function LibCompilerV4.PreCompilationFunctions.ManageShellcheck()
 
         sleep 1;
 
-        __BU_SHELLCHECKED='true';
+        __BU__LIB_COMPILER_V4__BU_SHELLCHECKED='true';
     else
         # Checking first if the "$(shellcheck)" command is installed in order to check for code errors.
         if ! command -v shellcheck; then LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__SHELLCHECK__MISSING}" 'FULL'; exit 1; fi
 
         # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
-        __BU_SHELLCHECKED='false';
+        __BU__LIB_COMPILER_V4__BU_SHELLCHECKED='false';
     fi
 }
 
@@ -1297,7 +1297,7 @@ function LibCompilerV4.CompileInSingleFile()
         local __locale_file_path;           # VAR TYPE : Filepath   - DESC : Path to the current locale's translation file of the framework's initialization script.
         local __locale_file_path_en;        # VAR TYPE : Filepath   - DESC : Path to the English translation file of the framework's initialization script.
 
-        # __BU_MAIN_FULL_FILE_PATH;         # VAR TYPE : Filepath   - DESC : Path to the temporary file which stores the output of each file.
+        # __BU__LIB_COMPILER_V4_FULL_FILE_PATH;         # VAR TYPE : Filepath   - DESC : Path to the temporary file which stores the output of each file.
 
         # Compiled file's informations.
         local __compiled_file_parent_dir;   # VAR TYPE : Dirpath    - DESC : Path to the
@@ -1330,7 +1330,7 @@ function LibCompilerV4.CompileInSingleFile()
         __compiled_file_parent_dir="${__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/unstable";
 
         # Path to the temporary output file (global variable).
-        __BU_MAIN_FULL_FILE_PATH="${__compiled_file_parent_dir}/Bash-utils-compilation-output.tmp";
+        __BU__LIB_COMPILER_V4_FULL_FILE_PATH="${__compiled_file_parent_dir}/Bash-utils-compilation-output.tmp";
 
         if [ -n "${__vMandatoryArgLang}" ]; then
             __compiled_file_name="Bash-utils-${v_curr_locale}.sh";
@@ -1370,8 +1370,8 @@ function LibCompilerV4.CompileInSingleFile()
             };
         fi
 
-        # Deleting the existing "${__BU_MAIN_FULL_FILE_PATH}" file.
-        if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ] && [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then true > "${__BU_MAIN_FULL_FILE_PATH}"; fi
+        # Deleting the existing "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" file.
+        if [ -f "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" ] && [ -s "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" ]; then true > "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}"; fi
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ Checking if the "${v_curr_locale}" variable is a valid ISO 639-1 language code
@@ -1389,7 +1389,7 @@ function LibCompilerV4.CompileInSingleFile()
         #~ Framework compilation process startup message
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU__LIB_COMPILER_V4__BEGIN_FRAMEWORK_COMPILATION}" "${__BU_MAIN_FULL_FILE_PATH}")" 'FULL';
+        LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU__LIB_COMPILER_V4__BEGIN_FRAMEWORK_COMPILATION}" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" 'FULL';
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language along French)
@@ -1399,7 +1399,7 @@ function LibCompilerV4.CompileInSingleFile()
         if [[ ( -z "${__vArrayVal_no_english_include}" ) && ! "${__language_array[*]}" =~ en ]] || [ "${v_curr_locale,,}" != 'en' ]; then local ____no_english_included='true'; fi
 
         if [ "${____no_english_included,,}" == 'true' ]; then
-            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU_MAIN_FULL_FILE_PATH}")" 'UPPER';
+            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" 'UPPER';
 
             echo "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN}"; echo;
 
@@ -1409,7 +1409,7 @@ function LibCompilerV4.CompileInSingleFile()
                         "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path_en}" \
-                        "${__BU_MAIN_FULL_FILE_PATH}")" \
+                        "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                     'FULL';
 
                 LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1428,7 +1428,7 @@ function LibCompilerV4.CompileInSingleFile()
                     "$(printf "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path_en}" \
-                        "${__BU_MAIN_FULL_FILE_PATH}")" \
+                        "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                     'FULL';
 
                 LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1443,7 +1443,7 @@ function LibCompilerV4.CompileInSingleFile()
                     "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS}" \
                     "${v_curr_locale}" \
                     "${__locale_file_path_en}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'LOWER';
 
             # Setting the value of the "${____no_english_included}" variable to "false", since the English translation file was included into the compiled file.
@@ -1461,7 +1461,7 @@ function LibCompilerV4.CompileInSingleFile()
                     "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" \
                     "${v_curr_locale}" \
                     "${__locale_file_path}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'UPPER';
 
             if  [ ! -f "${__locale_file_path}" ]; then
@@ -1470,7 +1470,7 @@ function LibCompilerV4.CompileInSingleFile()
                         "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path}" \
-                        "${__BU_MAIN_FULL_FILE_PATH}")" \
+                        "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                     'FULL';
 
                 printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR__NON_EXISTENT_FILE}\n\n" "${__locale_file_path}";
@@ -1492,7 +1492,7 @@ function LibCompilerV4.CompileInSingleFile()
                         "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path}" \
-                        "${__BU_MAIN_FULL_FILE_PATH}")" \
+                        "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                     'FULL';
 
                 LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1507,7 +1507,7 @@ function LibCompilerV4.CompileInSingleFile()
                     "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" \
                     "${v_curr_locale}" \
                     "${__locale_file_path}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'LOWER';
 
         # If the compiled file must ship multiple languages.
@@ -1529,13 +1529,13 @@ function LibCompilerV4.CompileInSingleFile()
 #                 "$(printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" \
 #                     "${v_curr_locale}" \
 #                     "${translationFilePath}" \
-#                     "${__BU_MAIN_FULL_FILE_PATH}")" \
+#                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
 #                 'UPPER';
 
             LibCompilerV4.Functions.PrintNewstepLine \
                 "$(printf \
                     "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                     "${translationList}")" \
                 'UPPER';
 
@@ -1571,7 +1571,7 @@ function LibCompilerV4.CompileInSingleFile()
                             "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                             "${v_curr_locale}" \
                             "${translationFilePath}" \
-                            "${__BU_MAIN_FULL_FILE_PATH}")" \
+                            "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                         'FULL';
 
                     LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1585,7 +1585,7 @@ function LibCompilerV4.CompileInSingleFile()
             LibCompilerV4.Functions.PrintSuccessLine \
                 "$(printf \
                     "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP__SUCCESS}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                     "${translationList}")" \
                 'LOWER';
         fi
@@ -1597,7 +1597,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
         for i in "${__BU_MODULE_INIT_CONFIGS_PATH}/"*.conf; do
@@ -1610,7 +1610,7 @@ function LibCompilerV4.CompileInSingleFile()
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
             LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1623,7 +1623,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1633,14 +1633,14 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
         if [ ! -f "${__BU_INITIALIZER_SCRIPT_PATH}" ]; then
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
             LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1659,7 +1659,7 @@ function LibCompilerV4.CompileInSingleFile()
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL'; \
 
             LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1672,7 +1672,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1682,7 +1682,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_LIB_FILES_CONTENT}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
         for i in "${__BU_ROOT_PATH}/lib/functions/main/"*.lib; do
@@ -1695,7 +1695,7 @@ function LibCompilerV4.CompileInSingleFile()
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
             LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1708,7 +1708,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1718,7 +1718,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
         for i in "${__BU_ROOT_PATH}/install/.Bash-utils/config/modules/main/"*.conf; do
@@ -1731,7 +1731,7 @@ function LibCompilerV4.CompileInSingleFile()
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
             LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1744,7 +1744,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1754,7 +1754,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
         for i in "${__BU_ROOT_PATH}/install/.Bash-utils/modules/main/"*; do
@@ -1767,7 +1767,7 @@ function LibCompilerV4.CompileInSingleFile()
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}")" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
             LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1780,14 +1780,14 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" \
-                "${__BU_MAIN_FULL_FILE_PATH}")" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
-        # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU_SHELLCHECKED}" variable's value to 'true'.
+        # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU__LIB_COMPILER_V4__BU_SHELLCHECKED}" variable's value to 'true'.
         # However, in case a stable version is compiled, it is better to check the files that were not checked.
 
         # the aforementioned condition is managed into the "BU.Main.DevTools.ShellcheckVerif()" function.
-        if [ "${__BU_SHELLCHECKED}" == 'false' ]; then __BU_SHELLCHECKED='true'; fi
+        if [ "${__BU__LIB_COMPILER_V4__BU_SHELLCHECKED}" == 'false' ]; then __BU__LIB_COMPILER_V4__BU_SHELLCHECKED='true'; fi
 
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1797,15 +1797,15 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__COPY_FILE_CONTENT_IN_LANG_FILE}" \
-                "${__BU_MAIN_FULL_FILE_PATH}" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                 "${__compiled_file_path}")" \
             'UPPER';
 
-        cp "${__BU_MAIN_FULL_FILE_PATH}" "${__compiled_file_path}" || {
+        cp "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" "${__compiled_file_path}" || {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
                     "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR}" \
-                    "${__BU_MAIN_FULL_FILE_PATH}" \
+                    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                     "${__compiled_file_path}")" \
                 'FULL';
 
@@ -1819,7 +1819,7 @@ function LibCompilerV4.CompileInSingleFile()
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
                 "${__BU__LIB_COMPILER_V4__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" \
-                "${__BU_MAIN_FULL_FILE_PATH}" \
+                "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                 "${__compiled_file_path}")" \
             'LOWER';
 
