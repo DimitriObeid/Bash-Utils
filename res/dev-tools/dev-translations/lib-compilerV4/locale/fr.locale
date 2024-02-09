@@ -3,15 +3,15 @@
 # ----------------------------------------------------------------------------------------------------------
 # Fonction "LibCompilerV4.Functions.CompilerUsage()" [-----] "LibCompilerV4.Functions.CompilerUsage()" function.
 
-declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compilerV4.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
-declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers de base et du module principal du framework Bash Utils dans un seul fichier.";
+declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__USAGE="Usage : ./chemin/vers/le/fichier/lib-compilerV4.sh [ARG OBLIGATOIRE] [ARGS OPTIONNELS]...";
+declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compile le contenu des fichiers de base et du module principal du framework Bash Utils dans un seul fichier.";
 
 # ------------------------------------------------------------------------------------------------------------------------------------------------------
 # Fonction "LibCompilerV4.Functions.CompilerUsage()" : argument obligatoire [-----] "LibCompilerV4.Functions.CompilerUsage()" function : mandatory argument.
 
-declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire (n'utilisez QU'UN SEUL d'entre eux) :";
+declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MANDATORY_ARG="Argument obligatoire (n'utilisez QU'UN SEUL d'entre eux) :";
 
-declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
+declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG="
     --lang=[ARRAY]                      tableau de codes de langues au format ISO 639-1. Cette option crée un fichier compilé par langue.
 
                                         Chaque valeur représente le code ISO 639-1 de la langue dans laquelle les messages et les commentaires au niveau
@@ -39,7 +39,7 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MAND
                                         langues, incluant les langues non-supportés par le compilateur et / ou dont le fichier de traduction associé
                                         est incomplet et / ou obsolète.";
 
-declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
+declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE="
     --lang-include=[ARRAY]              tableau de codes de langues au format ISO 639-1. Cette option crée un fichier compilé embarquant le contenu
                                         linguistique de chaque fichier de traduction utilisé pendant le processus d'initialisation du framework Bash
                                         Utils.
@@ -64,7 +64,7 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MAND
                                         fichier compilé, y compris les fichiers des langues non-supportés par le compilateur et / ou dont la traduction
                                         est incomplète ou obsolète.";
 
-declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
+declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP="
     -h --help                           remplacement de l'option '--lang='. Affiche à l'écran les messages d'aide et les instructions d'utilisation
                                         du compilateur.";
 
