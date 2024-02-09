@@ -48,21 +48,21 @@
 # DEFAULT VAL : NULL
 
 # DESC : Authorization to delete the generated file.
-__BU_ARG_RM="${1:-$'\0'}";
+declare -gr __BU__BIN__LIB_UNITE__ARGS__STABLE_FILES_HOME_DIR_ARG_RM="${1:-$'\0'}";
 
 # ARG TYPE : String
 # OPTIONAL
 # DEFAULT VAL : NULL
 
 # DESC : Delete empty lines.
-__BU_ARG_DEL_EMPTY_LINES="${2:-$'\0'}";
+declare -gr __BU__BIN__LIB_UNITE__ARGS__DEL_EMPTY_LINES="${2:-$'\0'}";
 
 # ARG TYPE : String
 # OPTIONAL
 # DEFAULT VAL : NULL
 
 # DESC : Delete comments that are not on the same line as a piece of code.
-__BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
+declare -gr __BU__BIN__LIB_UNITE__ARGS__BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 
 ## ==============================================
 
@@ -103,28 +103,41 @@ __BU_ARG_DEL_LINE_COMMENTS="${3:-$'\0'}";
 ## PATHS
 
 # Getting the path of the library's root path from the path file.
-if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-utils';
+if [ -d '/usr/local/lib/Bash-utils' ]; then 
+    declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR='/usr/local/lib/Bash-utils';
 
-elif [ -d "${HOME}/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="${HOME}/.Bash-utils/Bash-utils";
+elif [ -d "${HOME}/.Bash-utils/Bash-utils" ]; then 
+    declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="${HOME}/.Bash-utils/Bash-utils";
 
-else __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+else 
+    declare -g      __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+                    __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+        readonly    __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
 
+    if [ ! -d "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}" ]; then
+        # shellcheck disable=SC2059
+        printf "ERROR : THE %s FOLDER DOESN'T EXISTS !!!\n" "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}" >&2;
+        echo "Please check the existence of the root directory of the Bash Utils library." >&2;
+        echo >&2;
+
+        exit 1;
+    fi
 fi
 
 # Path of the modules initializer file.
-__BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.sh";
+declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE="${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/Bash-utils.sh";
 
-__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES="${__BU_ROOT_PATH}/Bash-utils-nolines.sh";
+declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES="${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/Bash-utils-nolines.sh";
 
-__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE="${__BU_ROOT_PATH}/Bash-utils-no-line-comments--base.sh";
+declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE="${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/Bash-utils-no-line-comments--base.sh";
 
-__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES="${__BU_ROOT_PATH}/Bash-utils-no-line-comments--no-lines.sh";
-
-# Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
+declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES="${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/Bash-utils-no-line-comments--no-lines.sh";
 
 # Path of the modules initialization script's translations files.
-__BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
+declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__CONFIGS_PATH="${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/initializer";
+
+# Path of the modules initialization script's translations files.
+declare -gr __BU__BIN__LIB_UNITE__GLOBVARS__PATHS__TRANSLATIONS_PATH="${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__CONFIGS_PATH}/locale";
 
 ## ==============================================
 
@@ -214,9 +227,9 @@ function BytesToHuman()
 
 ## PRINTING FILE'S CONTENT
 
-# function BU.Main.Echo.Newline { local iterations="${1}"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU_MAIN_FULL_FILE_PATH}"; done; }
-function CatBU { cat "${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO DISPLAY THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
-function EchoBU { echo -e "# ${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO WRITE THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+# function BU.Main.Echo.Newline { local iterations="${1}"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}"; done; }
+function CatBU { cat "${1}" | tee -a "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" || { echo "UNABLE TO DISPLAY THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+function EchoBU { echo -e "# ${1}" | tee -a "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" || { echo "UNABLE TO WRITE THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 
 
 
@@ -224,18 +237,18 @@ function EchoBU { echo -e "# ${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { e
 
 ######################################################### CODE ########################################################
 
-# Checking if the "${__BU_MAIN_FULL_FILE_PATH}" file exists or not. The file is created if not.
-if [ ! -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-	touch "${__BU_MAIN_FULL_FILE_PATH}";
+# Checking if the "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" file exists or not. The file is created if not.
+if [ ! -f "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" ]; then
+	touch "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}";
 fi
 
-# Checking if the "${__BU_MAIN_FULL_FILE_PATH}" file is empty or not. The file is emptied if not.
-if [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-	true > "${__BU_MAIN_FULL_FILE_PATH}";
+# Checking if the "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" file is empty or not. The file is emptied if not.
+if [ -s "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" ]; then
+	true > "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}";
 fi
 
 # Path of the modules initialization script's configuration files.
-for i in "${__BU_MODULE_INIT_CONFIGS_PATH}/"*.conf; do
+for i in "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__CONFIGS_PATH}/"*.conf; do
     # BU.Main.Echo.Newline '2';
     EchoBU "${i^^}";
 
@@ -244,7 +257,7 @@ for i in "${__BU_MODULE_INIT_CONFIGS_PATH}/"*.conf; do
 done
 
 # Path of the modules initialization script's translations files.
-for i in "${__BU_MODULE_INIT_TRANSLATIONS_PATH}/"*.locale; do
+for i in "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__TRANSLATIONS_PATH}/"*.locale; do
     # BU.Main.Echo.Newline '2';
     EchoBU "${i^^}";
 
@@ -257,7 +270,7 @@ EchoBU "${HOME}/Bash-utils-init.sh"; # BU.Main.Echo.Newline '1';
 CatBU "${HOME}/Bash-utils-init.sh";
 
 # Processing the function files.
-for i in "${__BU_ROOT_PATH}/lib/functions/main/"*.lib; do
+for i in "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/"*.lib; do
 	# BU.Main.Echo.Newline '2';
     EchoBU "${i^^}";
 
@@ -290,96 +303,96 @@ PrintLine;
 
 echo "Library statistics :"; echo;
 
-echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU_MAIN_FULL_FILE_PATH}")" '' 1000)";
-echo "Number of characters    : $(wc -m < "${__BU_MAIN_FULL_FILE_PATH}") characters";
-echo "Number of lines         : $(wc -l < "${__BU_MAIN_FULL_FILE_PATH}") lines";
-echo "Maximum display width   : $(wc -L < "${__BU_MAIN_FULL_FILE_PATH}") columns";
-echo "Number of words         : $(wc -w < "${__BU_MAIN_FULL_FILE_PATH}") words";
+echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}")" '' 1000)";
+echo "Number of characters    : $(wc -m < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}") characters";
+echo "Number of lines         : $(wc -l < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}") lines";
+echo "Maximum display width   : $(wc -L < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}") columns";
+echo "Number of words         : $(wc -w < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}") words";
 
 # Deleting the empty lines if the awaited value is passed as script's second argument.
-if [ "${__BU_ARG_DEL_EMPTY_LINES,,}" == 'rmlines' ]; then
+if [ "${__BU__BIN__LIB_UNITE__ARGS__DEL_EMPTY_LINES,,}" == 'rmlines' ]; then
     echo;
 
-    cat "${__BU_MAIN_FULL_FILE_PATH}" | sed '/^[[:space:]]*$/d' > "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}";
+    cat "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" | sed '/^[[:space:]]*$/d' > "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}";
 
     PrintLine;
 
     echo "Library statistics (without newlines) :"; echo;
 
-    echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}")" '' 1000)";
-    echo "Number of characters    : $(wc -m < "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}") characters";
-    echo "Number of lines         : $(wc -l < "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}") lines";
-    echo "Maximum display width   : $(wc -L < "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}") columns";
-    echo "Number of words         : $(wc -w < "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}") words";
+    echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}")" '' 1000)";
+    echo "Number of characters    : $(wc -m < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}") characters";
+    echo "Number of lines         : $(wc -l < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}") lines";
+    echo "Maximum display width   : $(wc -L < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}") columns";
+    echo "Number of words         : $(wc -w < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}") words";
 fi
 
-# Deleting the comments in the "${__BU_MAIN_FULL_FILE_PATH}" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
-if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-base' ]; then
+# Deleting the comments in the "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
+if [ "${__BU__BIN__LIB_UNITE__ARGS__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-base' ]; then
     echo;
 
-    if [ -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-        cat "${__BU_MAIN_FULL_FILE_PATH}" | awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}";
+    if [ -f "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" ]; then
+        cat "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" | awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" > "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}";
 
-        rm "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}";
+        rm "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}";
 
         PrintLine;
 
         echo "Library statistics (with empty lines and without line comments) :"; echo;
 
-        echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}")" '' 1000)";
-        echo "Number of characters    : $(wc -m < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}") characters";
-        echo "Number of lines         : $(wc -l < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}") lines";
-        echo "Maximum display width   : $(wc -L < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}") columns";
-        echo "Number of words         : $(wc -w < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}") words";
+        echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}")" '' 1000)";
+        echo "Number of characters    : $(wc -m < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}") characters";
+        echo "Number of lines         : $(wc -l < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}") lines";
+        echo "Maximum display width   : $(wc -L < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}") columns";
+        echo "Number of words         : $(wc -w < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}") words";
     fi
 fi
 
-# Deleting the comments in the "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
-if [ "${__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-lines' ]; then
+# Deleting the comments in the "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}" file that are not on the same line as a piece of code, if the awaited value is passed as script's third argument.
+if [ "${__BU__BIN__LIB_UNITE__ARGS__BU_ARG_DEL_LINE_COMMENTS,,}" == 'rmcomments-lines' ]; then
     echo;
 
-    if [ -f "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" ]; then
-        cat "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" | awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__BU_MAIN_FULL_FILE_PATH}" > "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}";
+    if [ -f "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}" ]; then
+        cat "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}" | awk '!/^[[:blank:]]*#.*shellcheck/ && /^[[:blank:]]*#/ {next} {print}' "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}" > "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}";
 
-        rm "${__BU_MAIN_FULL_FILE_PATH}";
+        rm "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}";
 
         PrintLine;
 
         echo "Library statistics (without empty lines and line comments) :"; echo;
 
-        echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}")" '' 1000)";
-        echo "Number of characters    : $(wc -m < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}") characters";
-        echo "Number of lines         : $(wc -l < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}") lines";
-        echo "Maximum display width   : $(wc -L < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}") columns";
-        echo "Number of words         : $(wc -w < "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}") words";
+        echo "Size in bytes           : $(BytesToHuman "$(wc -c < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}")" '' 1000)";
+        echo "Number of characters    : $(wc -m < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}") characters";
+        echo "Number of lines         : $(wc -l < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}") lines";
+        echo "Maximum display width   : $(wc -L < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}") columns";
+        echo "Number of words         : $(wc -w < "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}") words";
     fi
 
 fi
 
 # Deleting the generated file if the awaited value is passed as script's first argument.
-if [ "${__BU_ARG_RM,,}" == 'rm' ]; then
-    if rm "${__BU_MAIN_FULL_FILE_PATH}"; then
-        echo ; echo "The generated « ${__BU_MAIN_FULL_FILE_PATH} » file was successfully deleted";
+if [ "${__BU__BIN__LIB_UNITE__ARGS__STABLE_FILES_HOME_DIR_ARG_RM,,}" == 'rm' ]; then
+    if rm "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE}"; then
+        echo ; echo "The generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE} » file was successfully deleted";
     else
-        echo >&2; echo "Unable to delete the generated « ${__BU_MAIN_FULL_FILE_PATH} » file" >&2; exit 1;
+        echo >&2; echo "Unable to delete the generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE} » file" >&2; exit 1;
     fi
 
-    if [ -f "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}" ]; then if rm "${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES}"; then
-        echo; echo "The generated « ${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES} » file was successfully deleted";
+    if [ -f "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}" ]; then if rm "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES}"; then
+        echo; echo "The generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES} » file was successfully deleted";
     else
-        echo >&2; echo "Unable to delete the generated « ${__BU_MAIN_FULL_FILE_PATH_NO_EMPTYLINES} » file" >&2; exit 1;
+        echo >&2; echo "Unable to delete the generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_EMPTYLINES} » file" >&2; exit 1;
     fi; fi
 
-    if [ -f "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}" ]; then if rm "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE}"; then
-        echo; echo "The generated « ${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE} » file was successfully deleted";
+    if [ -f "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}" ]; then if rm "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE}"; then
+        echo; echo "The generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE} » file was successfully deleted";
     else
-        echo >&2; echo "Unable to delete the generated « ${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__BASE} » file" >&2; exit 1;
+        echo >&2; echo "Unable to delete the generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__BASE} » file" >&2; exit 1;
     fi; fi
 
-    if [ -f "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}" ]; then if rm "${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES}"; then
-        echo; echo "The generated « ${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES} » file was successfully deleted";
+    if [ -f "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}" ]; then if rm "${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES}"; then
+        echo; echo "The generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES} » file was successfully deleted";
     else
-        echo >&2; echo "Unable to delete the generated « ${__BU_MAIN_FULL_FILE_PATH_NO_LINE_COMMENTS__NO_LINES} » file" >&2; exit 1;
+        echo >&2; echo "Unable to delete the generated « ${__BU__BIN__LIB_UNITE__GLOBVARS__PATHS__FULL_LIB_FILE_NO_LINE_COMMENTS__NO_LINES} » file" >&2; exit 1;
     fi; fi
 fi
 

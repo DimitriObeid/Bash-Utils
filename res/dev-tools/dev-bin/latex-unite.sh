@@ -85,9 +85,11 @@ __BU_ARGS=("${@}");
 
 ## PATHS
 
-declare -r __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+declare -g      __BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+                __BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+    readonly    __BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
 
-declare -r __BU_MAIN_FULL_FILE_PATH="${__BU_ROOT_PATH}/Bash-utils.tex";
+declare -gr __BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE="${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/Bash-utils.tex";
 
 ## ==============================================
 
@@ -116,17 +118,17 @@ function PrintLine()
     done; printf "\n";
 }
 
-# function BU.Main.Echo.Newline { local iterations="${1}"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU_MAIN_FULL_FILE_PATH}"; done; }
-function CatBU { cat "${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO DISPLAY THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
-function EchoBU { echo -e "# ${1}" | tee -a "${__BU_MAIN_FULL_FILE_PATH}" || { echo "UNABLE TO WRITE THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+# function BU.Main.Echo.Newline { local iterations="${1}"; for ((i=0; i<iterations; i++)); do echo -e "" | tee -a "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}"; done; }
+function CatBU { cat "${1}" | tee -a "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}" || { echo "UNABLE TO DISPLAY THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
+function EchoBU { echo -e "# ${1}" | tee -a "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}" || { echo "UNABLE TO WRITE THE ${1} FILE'S CONTENT ! Please check its path and if it exists."; exit 1; }; }
 
 
-if [ ! -f "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-        touch "${__BU_MAIN_FULL_FILE_PATH}";
+if [ ! -f "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}" ]; then
+        touch "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}";
 fi
 
-if [ -s "${__BU_MAIN_FULL_FILE_PATH}" ]; then
-        true > "${__BU_MAIN_FULL_FILE_PATH}";
+if [ -s "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}" ]; then
+        true > "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__FULL_LATEX_FILE}";
 fi
 
 ## ==============================================
@@ -145,3 +147,5 @@ fi
 
 # ·····································
 # Processing the English documentation.
+
+exit 0;

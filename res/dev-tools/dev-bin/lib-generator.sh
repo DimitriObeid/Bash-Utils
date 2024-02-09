@@ -45,7 +45,7 @@
 
 # DESC : Name of the module where the library file to create belongs.
 
-__ARG_MODL=${1:-$'\0'};
+__BU__BIN__LIB_GENERATOR__ARGS__MODL=${1:-$'\0'};
 
 ## ==============================================
 
@@ -57,7 +57,7 @@ __ARG_MODL=${1:-$'\0'};
 
 # DESC : Name of the author of the library file to create.
 
-__ARG_AUTH=${2:-$'\0'};
+__BU__BIN__LIB_GENERATOR__ARGS__AUTH=${2:-$'\0'};
 
 ## ==============================================
 
@@ -69,7 +69,7 @@ __ARG_AUTH=${2:-$'\0'};
 
 # DESC : Version number of the library file (can be a float (1.0), or a string (beta / beta 1.0)).
 
-__ARG_VERS=${3:-$'\0'};
+__BU__BIN__LIB_GENERATOR_ARGS__VERS=${3:-$'\0'};
 
 ## ==============================================
 
@@ -81,7 +81,7 @@ __ARG_VERS=${3:-$'\0'};
 
 # DESC : Description of the library file's content.
 
-__ARG_DESC=${4:-$'\0'};
+__BU__BIN__LIB_GENERATOR__ARGS_DESC=${4:-$'\0'};
 
 ## ==============================================
 
@@ -151,13 +151,13 @@ __ARG_DESC=${4:-$'\0'};
 ######################################################### CODE ########################################################
 
 # Checking if the two mandatory arguments are missing.
-if [ -z "${__ARG_MODL}" ]; then
+if [ -z "${__BU__BIN__LIB_GENERATOR__ARGS__MODL}" ]; then
     echo >&2;
 
     exit 1;
 fi
 
-if [ -z "${ARG_AUTH}" ]; then
+if [ -z "${__BU__BIN__LIB_GENERATOR__ARGS__AUTH}" ]; then
     echo >&2;
 
     exit 1;

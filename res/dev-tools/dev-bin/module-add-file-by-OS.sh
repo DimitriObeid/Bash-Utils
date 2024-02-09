@@ -61,45 +61,50 @@ fi
 # ARG TYPE : String
 # REQUIRED
 # DEFAULT VAL : NULL
+
 # DESC : Target module's name.
 
-__BU_MOD_ADD__ARG_MODULE_NAME=${1:-$'\0'};
+declare -gr __BU__BIN__MAFB_OS__ARGS__MODULE_NAME=${1:-$'\0'};
 
 # ARG TYPE : String
 # REQUIRED
 # DEFAULT VAL : NULL
+
 # DESC : Name of the library file to create.
 
-__BU_MOD_ADD__ARG_FILE_NAME=${2:-$'\0'};
+declare -gr __BU__BIN__MAFB_OS__ARGS__FILE_NAME=${2:-$'\0'};
 
 # ARG TYPE : String
 # REQUIRED
 # DEFAULT VAL : NULL
+
 # DESC : Name of the author of the library file to create.
 
-__BU_MOD_ADD__ARG_AUTHOR_NAME=${3:-$'\0'};
+declare -gr __BU__BIN__MAFB_OS__ARGS__AUTHOR_NAME=${3:-$'\0'};
 
 # ARG TYPE : String
 # OPTIONAL
 # DEFAULT VAL : NULL
+
 # DESC : Version of the library file to create.
 
-__BU_MOD_ADD__ARG_FILE_VERSION=${4:-$'\0'};
+declare -gr __BU__BIN__MAFB_OS__ARGS__FILE_VERSION=${4:-$'\0'};
 
 # ARG TYPE : String
 # OPTIONAL
 # DEFAULT VAL : NULL
-# DESC : Setting the OS name at the left or the right of the "${__BU_MOD_ADD__ARG_FILE_NAME}" string in the name of the file to create.
 
-__BU_MOD_ADD__ARG_FILE_OS_POSITION=${5:-$'\0'};
+# DESC : Setting the OS name at the left or the right of the "${__BU__BIN__MAFB_OS__ARGS__FILE_NAME}" string in the name of the file to create.
 
-[[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 6;
+declare -gr __BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION=${5:-$'\0'};
 
-[[ -n "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] || \
+[[ -n "${__BU__BIN__MAFB_OS__ARGS__FILE_VERSION}" ]] && [[ -n "${__BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION}" ]] && shift 6;
 
-[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -n "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 5;
+[[ -n "${__BU__BIN__MAFB_OS__ARGS__FILE_VERSION}" ]] && [[ -z "${__BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION}" ]] || \
 
-[[ -z "${__BU_MOD_ADD__ARG_FILE_VERSION}" ]] && [[ -z "${__BU_MOD_ADD__ARG_FILE_OS_POSITION}" ]] && shift 4;
+[[ -z "${__BU__BIN__MAFB_OS__ARGS__FILE_VERSION}" ]] && [[ -n "${__BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION}" ]] && shift 5;
+
+[[ -z "${__BU__BIN__MAFB_OS__ARGS__FILE_VERSION}" ]] && [[ -z "${__BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION}" ]] && shift 4;
 
 ## ==============================================
 
@@ -115,7 +120,7 @@ __BU_MOD_ADD__ARG_FILE_OS_POSITION=${5:-$'\0'};
 # REQUIRED
 # DEFAULT VAL : NULL
 # DESC : Array of operating systems names.
-__BU_MOD_ADD__ARGS_OS_ARRAY=("${@}");
+declare -agr __BU__BIN__MAFB_OS__ARGS__OS_ARRAY=("${@}");
 
 ## ==============================================
 
@@ -144,12 +149,12 @@ __BU_MOD_ADD__ARGS_OS_ARRAY=("${@}");
 ## SUB-CATEGORY NAME
 
 # Path to the current module's directory.
-__BU_MOD_ADD__GLOBVAR_MODULE_DIR="lib/functions/${__BU_MOD_ADD__ARG_MODULE_NAME}";
+declare -gr __BU__BIN__MAFB_OS__GLOBVARS__PATHS__MODULE_DIR="lib/functions/${__BU__BIN__MAFB_OS__ARGS__MODULE_NAME}";
 
 # Name of the current OS, respecting the case of the modules' OS folders names.
 
 # Do not set a value now, it will be done in the program's main loop.
-declare __BU_MOD_ADD__GLOBVAR_OS_NAME;
+declare -g __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME;
 
 ## ==============================================
 
@@ -186,9 +191,9 @@ cat <<-EOF >> "${p_filepath}"
 # FILE'S INFORMATIONS :
 
 # Name          : ${p_filename}
-# Module        : ${__BU_MOD_ADD__ARG_MODULE_NAME}
-# Author(s)     : ${__BU_MOD_ADD__ARG_AUTHOR_NAME}
-# Version       : ${__BU_MOD_ADD__ARG_FILE_VERSION}
+# Module        : ${__BU__BIN__MAFB_OS__ARGS__MODULE_NAME}
+# Author(s)     : ${__BU__BIN__MAFB_OS__ARGS__AUTHOR_NAME}
+# Version       : ${__BU__BIN__MAFB_OS__ARGS__FILE_VERSION}
 
 
 EOF
@@ -209,13 +214,13 @@ function WriteScriptDescription()
 
     function WriteScriptDescription.OS()
     {
-        [ -z "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" ]             && echo -n "# Functions used to process data and parameters about [ INSERT ${p_filepath} INFO ] with the help of the system commands on any supported operating system.";
-        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Android' ]   && echo -n "# Functions used to process data and parameters about the device's [ INSERT ${p_filepath} INFO ] with the help of the system commands on an Android-based operating system.";
-        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'BSD' ]       && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a BSD-based operating system.";
-        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Haiku' ]     && echo -n "# This script manages the [ INSERT ${p_filepath} INFO ]-related hardware functionalities of the Haiku operating system.";
-        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Linux' ]     && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a Linux-based operating system.";
-        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'OSX' ]       && echo -n "# Functions used to process data and parameters about the Mac's [ INSERT ${p_filepath} INFO ] with the help of the OSX system's commands.";
-        [ "${__BU_MOD_ADD__GLOBVAR_OS_NAME}" == 'Windows' ]   && echo -n "# Functions used to process data and parameters about the PC's [ INSERT ${p_filepath} INFO ] with the help of the WSL / Windows system's commands.";
+        [ -z "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" ]             && echo -n "# Functions used to process data and parameters about [ INSERT ${p_filepath} INFO ] with the help of the system commands on any supported operating system.";
+        [ "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" == 'Android' ]   && echo -n "# Functions used to process data and parameters about the device's [ INSERT ${p_filepath} INFO ] with the help of the system commands on an Android-based operating system.";
+        [ "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" == 'BSD' ]       && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a BSD-based operating system.";
+        [ "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" == 'Haiku' ]     && echo -n "# This script manages the [ INSERT ${p_filepath} INFO ]-related hardware functionalities of the Haiku operating system.";
+        [ "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" == 'Linux' ]     && echo -n "# Functions used to process data and parameters about the computer's [ INSERT ${p_filepath} INFO ] with the help of the system commands on a Linux-based operating system.";
+        [ "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" == 'OSX' ]       && echo -n "# Functions used to process data and parameters about the Mac's [ INSERT ${p_filepath} INFO ] with the help of the OSX system's commands.";
+        [ "${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" == 'Windows' ]   && echo -n "# Functions used to process data and parameters about the PC's [ INSERT ${p_filepath} INFO ] with the help of the WSL / Windows system's commands.";
     }
 
 cat <<-EOF >> "${p_filepath}"
@@ -362,20 +367,20 @@ EOF
 
 ## OPERATING SYSTEM-INDEPENDENT FILE
 
-if [ -z "${__BU_MOD_ADD__ARG_MODULE_NAME}" ];   then echo "No specified module" >&2;    echo >&2; exit 1; fi
+if [ -z "${__BU__BIN__MAFB_OS__ARGS__MODULE_NAME}" ];   then echo "No specified module" >&2;    echo >&2; exit 1; fi
 
-if [ -z "${__BU_MOD_ADD__ARG_FILE_NAME}" ];     then echo "No specified file" >&2;      echo >&2; exit 1; fi
+if [ -z "${__BU__BIN__MAFB_OS__ARGS__FILE_NAME}" ];     then echo "No specified file" >&2;      echo >&2; exit 1; fi
 
-if [ "${#__BU_MOD_ADD__ARGS_OS_ARRAY[@]}" -eq 0 ]; then __BU_MOD_ADD__ARGS_OS_ARRAY=("Android" "BSD" "Haiku" "Linux" "OSX" "Windows"); fi
+if [ "${#__BU__BIN__MAFB_OS__ARGS__OS_ARRAY[@]}" -eq 0 ]; then __BU__BIN__MAFB_OS__ARGS__OS_ARRAY=("Android" "BSD" "Haiku" "Linux" "OSX" "Windows"); fi
 
-__FILE_NAME_LIB_NO_OS="${__BU_MOD_ADD__ARG_FILE_NAME}.lib";
-__FILE_PATH_LIB_NO_OS="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__FILE_NAME_LIB_NO_OS}";
+declare -gr __BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_NAME_LIB_NO_OS="${__BU__BIN__MAFB_OS__ARGS__FILE_NAME}.lib";
+declare -gr __BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS="${__BU__BIN__MAFB_OS__GLOBVARS__PATHS__MODULE_DIR}/${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_NAME_LIB_NO_OS}";
 
 # Creating the library file into the module's root directory.
-if [ ! -f "${__FILE_PATH_LIB_NO_OS}" ]; then
-    touch "${__FILE_PATH_LIB_NO_OS}";
+if [ ! -f "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS}" ]; then
+    touch "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS}";
 else
-    echo "The ${__FILE_PATH_LIB_NO_OS} file already exists";
+    echo "The ${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS} file already exists";
     echo;
 fi
 
@@ -383,31 +388,38 @@ fi
 #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteFileInformations "${__FILE_NAME_LIB_NO_OS}" "${__FILE_PATH_LIB_NO_OS}" || exit 1;
+WriteFileInformations \
+    "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_NAME_LIB_NO_OS}" \
+    "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS}" \
+    || exit 1;
 
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteScriptDescription "${__FILE_PATH_LIB_NO_OS}" || exit 1;
+WriteScriptDescription \
+    "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS}" \
+    || exit 1;
 
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #~ STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__FILE_PATH_LIB_NO_OS}" || exit 1;
+WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode \
+    "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_NO_OS}" \
+    || exit 1;
 
 ## ==============================================
 
 # Main loop.
-for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
+for operating_system in "${__BU__BIN__MAFB_OS__ARGS__OS_ARRAY[@]}"; do
     # Setting a variable for the current operating system, as the input specified by the user may not respect the case of the OS folders names.
-    if      [ "${operating_system,,}" == 'android' ];   then __BU_MOD_ADD__GLOBVAR_OS_NAME='Android';
-    elif    [ "${operating_system^^}" == 'BSD' ];       then __BU_MOD_ADD__GLOBVAR_OS_NAME='BSD';
-    elif    [ "${operating_system,,}" == 'haiku' ];     then __BU_MOD_ADD__GLOBVAR_OS_NAME='Haiku';
-    elif    [ "${operating_system,,}" == 'linux' ];     then __BU_MOD_ADD__GLOBVAR_OS_NAME='Linux';
-    elif    [ "${operating_system^^}" == 'OSX' ];       then __BU_MOD_ADD__GLOBVAR_OS_NAME='OSX';
-    elif    [ "${operating_system,,}" == 'windows' ];   then __BU_MOD_ADD__GLOBVAR_OS_NAME='Windows';
+    if      [ "${operating_system,,}" == 'android' ];   then __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME='Android';
+    elif    [ "${operating_system^^}" == 'BSD' ];       then __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME='BSD';
+    elif    [ "${operating_system,,}" == 'haiku' ];     then __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME='Haiku';
+    elif    [ "${operating_system,,}" == 'linux' ];     then __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME='Linux';
+    elif    [ "${operating_system^^}" == 'OSX' ];       then __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME='OSX';
+    elif    [ "${operating_system,,}" == 'windows' ];   then __BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME='Windows';
     else
         echo "The ${operating_system} operating system is not supported" >&2;
         echo >&2;
@@ -415,20 +427,20 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
         __ERR='error'; break 1;
     fi
 
-    [ "${__BU_MOD_ADD__ARG_FILE_OS_POSITION,,}" == 'left' ]     && __os_pos_l="${__BU_MOD_ADD__GLOBVAR_OS_NAME}.";
-    [ "${__BU_MOD_ADD__ARG_FILE_OS_POSITION,,}" == 'right' ]    && __os_pos_r=".${__BU_MOD_ADD__GLOBVAR_OS_NAME}";
+    [ "${__BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION,,}" == 'left' ]     && __os_pos_l="${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}.";
+    [ "${__BU__BIN__MAFB_OS__ARGS__FILE_OS_POSITION,,}" == 'right' ]    && __os_pos_r=".${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}";
 
     # If the OS directory is found in the module's folder.
-    if [ -d "${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}" ]; then
+    if [ -d "${__BU__BIN__MAFB_OS__GLOBVARS__PATHS__MODULE_DIR}/${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}" ]; then
 
-        __FILE_NAME_LIB_OS_DEPENDENT="${__os_pos_l}${__BU_MOD_ADD__ARG_FILE_NAME}${__os_pos_r}.lib";
-        __FILE_PATH_LIB_OS_DEPENDENT="${__BU_MOD_ADD__GLOBVAR_MODULE_DIR}/${__BU_MOD_ADD__GLOBVAR_OS_NAME}/${__FILE_NAME_LIB_OS_DEPENDENT}";
+        __BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_NAME_LIB_OS_DEPENDENT="${__os_pos_l}${__BU__BIN__MAFB_OS__ARGS__FILE_NAME}${__os_pos_r}.lib";
+        __BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT="${__BU__BIN__MAFB_OS__GLOBVARS__PATHS__MODULE_DIR}/${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME}/${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_NAME_LIB_OS_DEPENDENT}";
 
         # Creating the library file into the module's OS directory where it belongs.
-        if [ ! -f "${__FILE_PATH_LIB_OS_DEPENDENT}" ]; then
-            touch "${__FILE_PATH_LIB_OS_DEPENDENT}";
+        if [ ! -f "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT}" ]; then
+            touch "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT}";
         else
-            echo "The ${__FILE_PATH_LIB_OS_DEPENDENT} file already exists" >&2;
+            echo "The ${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT} file already exists" >&2;
             echo >&2;
 
             #__ERR='error'; break 1;
@@ -438,21 +450,28 @@ for operating_system in "${__BU_MOD_ADD__ARGS_OS_ARRAY[@]}"; do
         #~ STEP ONE : Writing the "FILE'S INFORMATIONS :" section into each new files with a here document
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteFileInformations "${__FILE_NAME_LIB_OS_DEPENDENT}" "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
+        WriteFileInformations \
+            "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_NAME_LIB_OS_DEPENDENT}" \
+            "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT}" \
+            || { declare -r __ERR='error'; break 1; };
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ STEP TWO : Writing the "SCRIPT'S DESCRIPTION :" section into each new files with a here document
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteScriptDescription "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
+        WriteScriptDescription \
+            "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT}" \
+            || { declare -r __ERR='error'; break 1; };
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ STEP THREE : Writing the "SHELLCHECK GLOBAL DISABLER :" section and the code which prevent the direct execution of its host file
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode "${__FILE_PATH_LIB_OS_DEPENDENT}" || { __ERR='error'; break 1; };
+        WriteShellcheckGlobalDisablerAndDirectExecutionPreventionCode \
+            "${__BU__BIN__MAFB_OS__GLOBVARS__FILES__FILE_PATH_LIB_OS_DEPENDENT}" \
+            || { __ERR='error'; break 1; };
     else
-        echo "The folder for the ${__BU_MOD_ADD__GLOBVAR_OS_NAME} operating system was not found in the ${__BU_MOD_ADD__ARG_MODULE_NAME} module's folder" >&2;
+        echo "The folder for the ${__BU__BIN__MAFB_OS__GLOBVARS__OS__OS_NAME} operating system was not found in the ${__BU__BIN__MAFB_OS__ARGS__MODULE_NAME} module's folder" >&2;
         echo >&2;
 
         false;

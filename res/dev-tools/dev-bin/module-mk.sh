@@ -55,10 +55,10 @@
 ## ARRAY OF MODULES TO CREATE
 
 # List of modules to create.
-__ARG_LIST=( "${@}" );
+declare -agr __BU__BIN__MODULE_MK__ARGS__ARG_LIST=( "${@}" );
 
 # Checking if any module's name was passed as argument when this script was executed.
-if (( ${#__ARG_LIST[@]} == 0 )); then
+if (( ${#__BU__BIN__MODULE_MK__ARGS__ARG_LIST[@]} == 0 )); then
 	echo "This script takes at least one mandatory argument : the name(s) of the new module(s) to create"; exit 1;
 fi
 
@@ -139,17 +139,19 @@ function check_mandatory_file_exists()
 ######################################################### CODE ########################################################
 
 # Bash Utils library root path from this script's path.
-__D_BU_LIB_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+declare -g      __BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR
+                __BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+    readonly    __BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
 
-for module_name in "${__ARG_LIST[@]}"; do
+for module_name in "${__BU__BIN__MODULE_MK__ARGS__ARG_LIST[@]}"; do
 
-    __D_BU_MAKE_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+    declare -gr __BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH="${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/modules/${module_name}";
 
-    __D_BU_MAKE_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+    declare -gr __BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH="${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/modules/${module_name}";
 
-    __D_BU_MAKE_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+    declare -gr __BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH="${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/${module_name}";
 
-    if [ ! -d "${__D_BU_LIB_ROOT_PATH}/install" ] || [ ! -d "${__D_BU_LIB_ROOT_PATH}/lib" ]; then
+    if [ ! -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install" ] || [ ! -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib" ]; then
         echo "You must run this script from its directory" >&2;
         echo >&2;
 
@@ -159,55 +161,55 @@ for module_name in "${__ARG_LIST[@]}"; do
     fi
 
     # Checking if the whole module exists.
-    if [ -d "${__D_BU_MAKE_MODULE_CONF_PATH}" ] && [ -d "${__D_BU_MAKE_MODULE_INIT_PATH}" ] && [ -d "${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH}" ]; then
+    if [ -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH}" ] && [ -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH}" ] && [ -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH}" ]; then
 	    echo "The ${module_name} module's directories already exist";
         
         exit 0;
     fi
 
     # Checking if the module's configuration path exists, or else creating its directory.
-    if [ -d "${__D_BU_MAKE_MODULE_CONF_PATH}" ]; then
-	    echo "The ${module_name} module's configurations directory already exists : ${__D_BU_MAKE_MODULE_CONF_PATH}"
+    if [ -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH}" ]; then
+	    echo "The ${module_name} module's configurations directory already exists : ${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH}"
 
-	   	check_mandatory_file_exists "${__D_BU_MAKE_MODULE_CONF_PATH}/module.conf";
+	   	check_mandatory_file_exists "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH}/module.conf";
     else
-	    mkdir -pv "${__D_BU_MAKE_MODULE_CONF_PATH}" || { echo "Unable to create the ${__D_BU_MAKE_MODULE_CONF_PATH} directory"; exit 1; }
+	    mkdir -pv "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH}" || { echo "Unable to create the ${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH} directory"; exit 1; }
 
-	  	check_mandatory_file_exists "${__D_BU_MAKE_MODULE_CONF_PATH}/module.conf";
+	  	check_mandatory_file_exists "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_CONF_PATH}/module.conf";
     fi
 
     # Checking if the module's initializer path exists, or else creating its directory.
-    if [ -d "${__D_BU_MAKE_MODULE_INIT_PATH}" ]; then
-	    echo "The ${module_name} module's initializer directory already exists : ${__D_BU_MAKE_MODULE_INIT_PATH}";
+    if [ -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH}" ]; then
+	    echo "The ${module_name} module's initializer directory already exists : ${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH}";
 
-	    check_mandatory_file_exists "${__D_BU_MAKE_MODULE_INIT_PATH}/Initializer.sh";
+	    check_mandatory_file_exists "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH}/Initializer.sh";
     else
-	    mkdir -pv "${__D_BU_MAKE_MODULE_INIT_PATH}" || { echo "Unable to create the ${__D_BU_MAKE_MODULE_INIT_PATH} directory"; exit 1; }
+	    mkdir -pv "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH}" || { echo "Unable to create the ${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH} directory"; exit 1; }
 
-	    check_mandatory_file_exists "${__D_BU_MAKE_MODULE_INIT_PATH}/Initializer.sh";
+	    check_mandatory_file_exists "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_MODULE_INIT_PATH}/Initializer.sh";
     fi
 
     # Checking if the module's library path exists, or else creating its directory.
-    if [ -d "${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH}" ]; then
-	    echo "The ${module_name} module's library directory already exists : ${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH}";
+    if [ -d "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH}" ]; then
+	    echo "The ${module_name} module's library directory already exists : ${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH}";
 
-        check_mandatory_file_exists "${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
+        check_mandatory_file_exists "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
     else
-	    mkdir -pv "${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH}" || { echo "Unable to create the ${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH} directory"; exit 1; }
+	    mkdir -pv "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH}" || { echo "Unable to create the ${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH} directory"; exit 1; }
 
-        check_mandatory_file_exists "${__D_BU_MAKE_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
+        check_mandatory_file_exists "${__BU__BIN__MODULE_MK__GLOBVARS__PATHS__MAKE_LIB_MODULE_FUNCTS_PATH}/${module_name}.lib";
     fi
 
     echo;
 done
 
 # Printing that the targeted modules were successfully created into the Bash Utils framework's data folders.
-if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
-    echo "The ${__ARG_LIST[0]} module was successfully created";
+if [ "${#__BU__BIN__MODULE_MK__ARGS__ARG_LIST[@]}" -lt 2 ]; then
+    echo "The ${__BU__BIN__MODULE_MK__ARGS__ARG_LIST[0]} module was successfully created";
 else
     echo "The following modules were successfully created :";
 
-    for module in "${__ARG_LIST[@]}"; do
+    for module in "${__BU__BIN__MODULE_MK__ARGS__ARG_LIST[@]}"; do
         echo "    - ${module}";
     done
 fi

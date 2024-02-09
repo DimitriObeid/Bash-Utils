@@ -125,6 +125,9 @@ declare -ag ___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 
                                         'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' \
                                         'yo' 'za' 'zu')
 
+# Since the previous array's values are well align with the 4 spaces tabulation, it is visually better to make this array readonly here, although it is possible to do so when declaring this array.
+readonly ___BU_COMPILER__LANG_ARRAY;
+
 # List of the currently supported languages in the framework (in the far future, the 'all' argument will be replaced to support the previous array).
 declare -ag __BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
 
@@ -139,6 +142,8 @@ declare -ag __BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
 ## COLORS
 
 # Defining some colors for the text decoration.
+
+# The variables name convention doesn't applies here, otherwise, the raw strings of each translated message would be too long for nothing.
 declare -g __CYAN;
                 __CYAN="$(tput setaf 51)";
     readonly    __CYAN;
@@ -193,12 +198,13 @@ elif [ -d "${HOME}/.Bash-utils/Bash-utils" ]; then
     declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="${HOME}/.Bash-utils/Bash-utils";
 
 else 
-    declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
-        __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+    declare -g      __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+                    __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+        readonly    __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
         
     if [ ! -d "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}" ]; then
         # shellcheck disable=SC2059
-        printf "${__ERROR}ERROR : THE ${__HIGHLIGHT}%s${__ERROR} FOLDER DOESN'T EXISTS !!!${__RESET}\n"  >&2;
+        printf "%sERROR : THE %s%s%s FOLDER DOESN'T EXISTS !!!%s\n" "${__ERROR}" "${__HIGHLIGHT}" "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}" "${__ERROR}" "${__RESET}" >&2;
         echo "Please check the existence of the root directory of the Bash Utils library." >&2;
         echo >&2; echo >&2;
 

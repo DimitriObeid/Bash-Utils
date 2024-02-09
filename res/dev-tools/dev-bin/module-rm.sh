@@ -54,10 +54,10 @@
 ## AARRAY OF MODULES TO DELETE
 
 # List of modules to delete from the user's hard drive.
-__ARG_LIST=( "${@}" );
+declare -agr __BU__BIN__MODULE_RM__ARGS__ARG_LIST=( "${@}" );
 
 # Checking if the module's name was passed as argument when this script was executed.
-if (( ${#__ARG_LIST[@]} == 0 )); then
+if (( ${#__BU__BIN__MODULE_RM__ARGS__ARG_LIST[@]} == 0 )); then
     echo "This script takes at least one mandatory argument : the name of the existing module(s) to delete"; exit 1;
 fi
 
@@ -138,16 +138,18 @@ function check_folder_exists()
 ######################################################### CODE ########################################################
 
 # Bash Utils library root path from this script's path.
-__D_BU_LIB_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+declare -g      __BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR
+                __BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+    readonly    __BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
 
-for module_name in "${__ARG_LIST[@]}"; do
-    __D_BU_DEL_MODULE_CONF_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/modules/${module_name}";
+for module_name in "${__BU__BIN__MODULE_RM__ARGS__ARG_LIST[@]}"; do
+    declare -gr __BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_CONF_PATH="${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/modules/${module_name}";
 
-    __D_BU_DEL_MODULE_INIT_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/modules/${module_name}";
+    declare -gr __BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_INIT_PATH="${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/modules/${module_name}";
 
-    __D_BU_DEL_LIB_MODULE_FUNCTS_PATH="${__D_BU_LIB_ROOT_PATH}/lib/functions/${module_name}";
+    declare -gr __BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_LIB_MODULE_FUNCTS_PATH="${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/${module_name}";
 
-    if [ ! -d "${__D_BU_LIB_ROOT_PATH}/install" ] || [ ! -d "${__D_BU_LIB_ROOT_PATH}/lib" ]; then
+    if [ ! -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install" ] || [ ! -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib" ]; then
         echo "You must run this script from its directory" >&2;
         echo >&2;
 
@@ -157,43 +159,43 @@ for module_name in "${__ARG_LIST[@]}"; do
     fi
 
     # Checking if the whole module exists.
-    if [ ! -d "${__D_BU_DEL_MODULE_CONF_PATH}" ] && [ ! -d "${__D_BU_DEL_MODULE_INIT_PATH}" ] && [ ! -d "${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}" ]; then
+    if [ ! -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_CONF_PATH}" ] && [ ! -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_INIT_PATH}" ] && [ ! -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_LIB_MODULE_FUNCTS_PATH}" ]; then
 	    echo "The ${module_name} module does not exists anymore in the framework's data folders";
 
 	    exit 0;
     fi
 
     # Checking if the module's configuration path exists, and then deleting its directory.
-    if [ -d "${__D_BU_DEL_MODULE_CONF_PATH}" ]; then
-	    echo "Deleting the ${module_name} module's configurations directory : ${__D_BU_DEL_MODULE_CONF_PATH}";
+    if [ -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_CONF_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's configurations directory : ${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_CONF_PATH}";
 
-	   	check_folder_exists "${__D_BU_DEL_MODULE_CONF_PATH}";
+	   	check_folder_exists "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_CONF_PATH}";
     fi
 
     # Checking if the module's initializer path exists, and then deleting its directory.
-    if [ -d "${__D_BU_DEL_MODULE_INIT_PATH}" ]; then
-	    echo "Deleting the ${module_name} module's initializer directory    : ${__D_BU_DEL_MODULE_INIT_PATH}";
+    if [ -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_INIT_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's initializer directory    : ${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_INIT_PATH}";
 
-	    check_folder_exists "${__D_BU_DEL_MODULE_INIT_PATH}";
+	    check_folder_exists "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_MODULE_INIT_PATH}";
     fi
 
     # Checking if the module's library path exists, and then deleting its directory.
-    if [ -d "${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}" ]; then
-	    echo "Deleting the ${module_name} module's library directory        : ${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}";
+    if [ -d "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_LIB_MODULE_FUNCTS_PATH}" ]; then
+	    echo "Deleting the ${module_name} module's library directory        : ${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_LIB_MODULE_FUNCTS_PATH}";
 
-        check_folder_exists "${__D_BU_DEL_LIB_MODULE_FUNCTS_PATH}";
+        check_folder_exists "${__BU__BIN__MODULE_RM__GLOBVARS__PATHS__DEL_LIB_MODULE_FUNCTS_PATH}";
     fi
 
     echo;
 done
 
 # Printing that the targeted modules were successfully removed from the Bash Utils framework's data folders.
-if [ "${#__ARG_LIST[@]}" -lt 2 ]; then
-    echo "The ${__ARG_LIST[0]} module was successfully removed";
+if [ "${#__BU__BIN__MODULE_RM__ARGS__ARG_LIST[@]}" -lt 2 ]; then
+    echo "The ${__BU__BIN__MODULE_RM__ARGS__ARG_LIST[0]} module was successfully removed";
 else
     echo "The following modules were successfully removed :";
 
-    for module in "${__ARG_LIST[@]}"; do
+    for module in "${__BU__BIN__MODULE_RM__ARGS__ARG_LIST[@]}"; do
         echo "    - ${module}";
     done
 fi

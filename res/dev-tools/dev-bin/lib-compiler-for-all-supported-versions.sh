@@ -56,7 +56,7 @@
 # DEFAULT VAL : NULL
 
 # DESC : This array of argument stores the list of the supported optional arguments for the "lib-compilerV4.sh" script, the mandatory ones are already managed by this script.
-declare -rg __BU__BIN__LIB_COMPILER_V4__ARGS__LANG_ARRAY_FOR_THE_COMPILER=( "${@}" );
+declare -rg __BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER=( "${@}" );
 
 ## ==============================================
 
@@ -85,8 +85,9 @@ declare -rg __BU__BIN__LIB_COMPILER_V4__ARGS__LANG_ARRAY_FOR_THE_COMPILER=( "${@
 ## PATHS
 
 # Absolute path to the "Bash-utils" directory, where the "lib" and the "res" folders are located.
-declare -rg __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATH_TO_BU;
-    __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATH_TO_BU="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || { echo "Unable to get the \"Bash-utils/bin\" folder location" >&2; exit 1; })";
+declare -g      __BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+                __BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || { echo "Unable to get the \"Bash-utils/bin\" folder location" >&2; exit 1; })";
+    readonly    __BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
 
 ## ==============================================
 
@@ -114,13 +115,22 @@ declare -rg __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATH_TO_BU;
 ######################################################### CODE ########################################################
 
 # Debug
-# for argg in "${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}"; do echo "${argg}"; done
+# for argg in "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}"; do echo "${argg}"; done
 
-# source "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATH_TO_BU}/bin/lib-compilerV4.sh";
+# source "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/bin/lib-compilerV4.sh";
 
-# For a COMPLETELY UNKONWN reason, if the "| tee -a "/dev/null"" redirection is removed, the script stops after the second compilation, thus the second "exec" command is not called.
-exec "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATH_TO_BU}/bin/lib-compilerV4.sh" --lang=supported "${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}" | tee -a "/dev/null" || { exit 1; };
+# For a COMPLETELY UNKONWN reason, if the " | tee -a "/dev/null" " redirection is removed, then the script stops after the second compilation, thus the second "$(exec)" command is not called anymore.
+exec \
+    "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/bin/lib-compilerV4.sh" \
+    --lang=supported \
+    "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}" \
+    | tee -a "/dev/null" || { exit 1; };
 
-exec "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATH_TO_BU}/bin/lib-compilerV4.sh" --lang-include=supported --keep-raw-document-layout "${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}" || { exit 1; };
+exec \
+    "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/bin/lib-compilerV4.sh" \
+    --lang-include=supported \
+    --keep-raw-document-layout \
+    "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}" \
+    || { exit 1; };
 
 exit 0;

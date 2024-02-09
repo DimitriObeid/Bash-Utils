@@ -80,10 +80,10 @@
 ## PATHS
 
 # Path to the directory containing the compiled stable files in the project's folder.
-declare -r __LIB_INSTALL_STABLE_FILES_PROJECT_DIR='install/.Bash-utils/compiled/stable';
+declare -r __BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR='install/.Bash-utils/compiled/stable';
 
 # Path to the directory containing the compiled stable files in the user's home directory.
-declare -r __LIB_INSTALL_STABLE_FILES_HOME_DIR="${HOME}/.Bash-utils/compiled/stable";
+declare -r __BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR="${HOME}/.Bash-utils/compiled/stable";
 
 ## ==============================================
 
@@ -123,10 +123,10 @@ echo "Successfully copied the initializer script in the ${HOME} directory";
 echo;
 
 # If one or more stable files are found in the "install/.Bash-utils/compiled/stable" directory.
-if [ -d "${__LIB_INSTALL_STABLE_FILES_PROJECT_DIR}" ] && [ -n "$(ls "${__LIB_INSTALL_STABLE_FILES_PROJECT_DIR}")" ]; then
+if [ -d "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}" ] && [ -n "$(ls "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}")" ]; then
 
     # As it is impossible to copy the read-only files in another directory, those files' read-only mode is unset.
-    for file in "${__LIB_INSTALL_STABLE_FILES_PROJECT_DIR}/"*.sh; do
+    for file in "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}/"*.sh; do
         printf "Changing the %s%s%s file right from read-only to rwx... " "$(tput setaf 6)" "${file}" "$(tput sgr0)";
 
         chmod +wr "${file}" > /dev/null 2>&1 || {
@@ -148,10 +148,10 @@ echo "Successfully copied the Bash Utils modules directory in the ${HOME} direct
 echo;
 
 # If one or more stable files are found in the "${HOME}/.Bash-utils/compiled/stable" directory.
-if [ -n "${__LIB_INSTALL_STABLE_FILES_HOME_DIR}" ] && [ -n "$(ls "${__LIB_INSTALL_STABLE_FILES_HOME_DIR}")" ]; then
+if [ -n "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}" ] && [ -n "$(ls "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}")" ]; then
 
     # Resetting the files in their original read-only mode.
-    for file in "${__LIB_INSTALL_STABLE_FILES_HOME_DIR}"*.sh; do
+    for file in "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}"*.sh; do
         printf "Resetting the read-only mode for this file : %s..." "${file}";
 
         chmod -wx+r "${file}" > /dev/null 2>&1 || {
@@ -167,3 +167,5 @@ if [ -n "${__LIB_INSTALL_STABLE_FILES_HOME_DIR}" ] && [ -n "$(ls "${__LIB_INSTAL
 
     echo;
 fi
+
+exit 0;
