@@ -258,6 +258,11 @@ source "${__BU_ROOT_PATH}/lib/functions/main/DevTools.lib";
 # shellcheck disable=SC1091
 source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
 
+# Sourcing the "Text.lib" file in order to use the "BU.Main.Text.GetSubStringOccurences()" and the
+# "BU.Main.Text.ReplaceLettersInString()" functions in the BU.Main.Locale.PrintLanguageName() function.
+# shellcheck disable=SC1091
+source "${__BU_ROOT_PATH}/lib/functions/main/Text.lib";
+
 ## ==============================================
 
 

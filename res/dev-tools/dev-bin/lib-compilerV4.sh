@@ -55,7 +55,7 @@
 
 # DESC 1 : String containing the list of languages to select as translation for each compiled scripts.
 # DESC 2 : This argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
-__BU_ARG_LANG=${1:-$'\0'};
+declare -gr __BU__BIN__LIB_COMPILER_V4__ARGS__LANG_LIST_STR_TO_ARRAY=${1:-$'\0'};
 
 shift 1;
 
@@ -76,8 +76,8 @@ fi
 # OPTIONAL
 # DEFAULT VAL : NULL
 
-# DESC : Fitting the arguments following the "${__BU_ARG_LANG}" parameter in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
-__BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY=("${@}");
+# DESC : Fitting the arguments following the "${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_LIST_STR_TO_ARRAY}" parameter in an array, in order to fit more arguments and prevent incompatible arguments to be put together (optional arguments).
+declare -agr __BU__BIN__LIB_COMPILER_V4__ARGS__OPTIONS_ARRAY=("${@}");
 
 ## ==============================================
 
@@ -94,13 +94,13 @@ __BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY=("${@}");
 ## FILES ARRAYS
 
 # Storing each stable file that cannot be set into read-only mode.
-__BU_ARRAY__READ_ONLY_FAILED_FILES=();
+declare -ag __BU_ARRAY__READ_ONLY_FAILED_FILES=();
 
 # Storing each compiled files path.
-__BU_ARRAY__COMPILED_FILES_LIST=();
+declare -ag __BU_ARRAY__COMPILED_FILES_LIST=();
 
 # Storing each compiled stable files path.
-__BU_ARRAY__COMPILED_STABLE_FILES_LIST=();
+declare -ag __BU_ARRAY__COMPILED_STABLE_FILES_LIST=();
 
 ## ==============================================
 
@@ -108,16 +108,25 @@ __BU_ARRAY__COMPILED_STABLE_FILES_LIST=();
 
 # List of every ISO 639-1 language codes.
 # In the far future, when every languages will be used in the Framework, the 'all' argument will be used to compile the Framework in a single file for each of the following languages,
-___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' 'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' 'ca' 'ch' \
-                            'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' 'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' 'fy' 'ff' 'gd' 'gl' \
-                            'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' 'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' 'iu' 'ik' 'ga' 'it' 'ja' 'jv' \
-                            'kn' 'kr' 'ks' 'kk' 'km' 'ki' 'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' 'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' \
-                            'gv' 'mi' 'mr' 'mh' 'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' 'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' \
-                            'qu' 'ro' 'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' 'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
-                            'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' 'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' 'yo' 'za' 'zu')
+declare -ag ___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' \
+                                        'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' \
+                                        'ca' 'ch' 'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' \
+                                        'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' \
+                                        'fy' 'ff' 'gd' 'gl' 'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' \
+                                        'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' \
+                                        'iu' 'ik' 'ga' 'it' 'ja' 'jv' 'kn' 'kr' 'ks' 'kk' 'km' 'ki' \
+                                        'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' \
+                                        'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' 'gv' 'mi' 'mr' 'mh' \
+                                        'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' \
+                                        'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' 'qu' 'ro' \
+                                        'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' \
+                                        'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
+                                        'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' \
+                                        'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' \
+                                        'yo' 'za' 'zu')
 
 # List of the currently supported languages in the framework (in the far future, the 'all' argument will be replaced to support the previous array).
-__BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
+declare -ag __BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
 
 ## ==============================================
 
@@ -130,32 +139,46 @@ __BU_COMPILER__SUPPORTED_LANG_ARRAY=('en' 'fr');
 ## COLORS
 
 # Defining some colors for the text decoration.
-__CYAN="$(tput setaf 51)";
+declare -g __CYAN;
+                __CYAN="$(tput setaf 51)";
+    readonly    __CYAN;
 
-__GREEN="$(tput setaf 2)";
+declare -g      __GREEN;
+                __GREEN="$(tput setaf 2)";
+    readonly    __GREEN;
 
-__GREY="$(tput setaf 249)";
+declare -g      __GREY;
+                __GREY="$(tput setaf 249)";
+    readonly    __GREY;
 
-__ORANGE="$(tput setaf 166)";
+declare -g      __ORANGE;
+                __ORANGE="$(tput setaf 166)";
+    readonly    __ORANGE;
 
-__RED="$(tput setaf 9)";
+declare -g      __RED;
+                __RED="$(tput setaf 9)";
+    readonly    __RED
 
-__RESET="$(tput sgr0)";
+declare -g      __RESET;
+                __RESET="$(tput sgr0)";
+    readonly    __RESET;
 
-__YELLOW="$(tput setaf 11)";
+declare -g      __YELLOW;
+                __YELLOW="$(tput setaf 11)";
+    readonly    __YELLOW;
 
 # Defining some colors for specific text decoration.
-__CMDS="${__GREY}"
+declare -gr __CMDS="${__GREY}"
 
-__ERROR="${__RED}";
+declare -gr __ERROR="${__RED}";
 
-__HIGHLIGHT="${__CYAN}";
+declare -gr __HIGHLIGHT="${__CYAN}";
 
-__NEWSTEP="${__ORANGE}";
+declare -gr __NEWSTEP="${__ORANGE}";
 
-__SUCCESS="${__GREEN}";
+declare -gr __SUCCESS="${__GREEN}";
 
-__WARNING="${__YELLOW}";
+declare -gr __WARNING="${__YELLOW}";
 
 ## ==============================================
 
@@ -163,11 +186,17 @@ __WARNING="${__YELLOW}";
 
 # Getting the path to the library's root directory from the path file.
 
-if [ -d '/usr/local/lib/Bash-utils' ]; then __BU_ROOT_PATH='/usr/local/lib/Bash-utils';
+if [ -d '/usr/local/lib/Bash-utils' ]; then 
+    declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR='/usr/local/lib/Bash-utils';
 
-elif [ -d "${HOME}/.Bash-utils/Bash-utils" ]; then __BU_ROOT_PATH="${HOME}/.Bash-utils/Bash-utils";
+elif [ -d "${HOME}/.Bash-utils/Bash-utils" ]; then 
+    declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="${HOME}/.Bash-utils/Bash-utils";
 
-else __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")"; if [ ! -d "${__BU_ROOT_PATH}" ]; then
+else 
+    declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+        __BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+        
+    if [ ! -d "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}" ]; then
         # shellcheck disable=SC2059
         printf "${__ERROR}ERROR : THE ${__HIGHLIGHT}%s${__ERROR} FOLDER DOESN'T EXISTS !!!${__RESET}\n"  >&2;
         echo "Please check the existence of the root directory of the Bash Utils library." >&2;
@@ -181,7 +210,7 @@ else __BU_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")"; if 
 fi
 
 # Path to the locale files.
-__BU__LIB_COMPILER_V4__RESOURCES__MSG_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compilerV4/locale";
+declare -gr __BU__BIN__LIB_COMPILER_V4__RESOURCES__MSG_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/res/dev-tools/dev-translations/lib-compilerV4/locale";
 
 ## ==============================================
 
@@ -190,14 +219,14 @@ __BU__LIB_COMPILER_V4__RESOURCES__MSG_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-
 # FRENCH - FRANÇAIS
 if [[ "${LANG}" == fr_* ]]; then
     # shellcheck disable=SC1091
-    if ! source "${__BU__LIB_COMPILER_V4__RESOURCES__MSG_PATH}/fr.locale"; then
+    if ! source "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__MSG_PATH}/fr.locale"; then
         echo "${__WARNING}IMPOSSIBLE D'INCLURE LE FICHIER DE TRADUCTIONS EN FRANÇAIS !!!!!${__RESET}" >&2; echo >&2;
         echo "${__WARNING}Le compilateur utilisera les ressources de traduction pour la langue anglaise${__RESET}" >&2;
         echo >&2;
 
-        ____unable_to_include_lang='true';
+        declare -g ____unable_to_include_lang='true';
     else
-        ____lang_included='true';
+        declare -g ____lang_included='true';
     fi
 fi
 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -206,7 +235,7 @@ fi
 
 if [ -n "${____unable_to_include_lang}" ] || [ -z "${____lang_included}" ]; then
     # shellcheck disable=SC1091
-    source "${__BU__LIB_COMPILER_V4__RESOURCES__MSG_PATH}/en.locale" || {
+    source "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__MSG_PATH}/en.locale" || {
         echo >&2; echo >&2;
 
         echo "${__ERROR}UNABLE TO INCLUDE THE ENGLISH TRANSLATION FILES !!!!!${__RESET}" >&2; echo >&2;
@@ -220,7 +249,7 @@ if [ -n "${____unable_to_include_lang}" ] || [ -z "${____lang_included}" ]; then
     };
 fi
 
-# Unsetting the "${____unable_to_include_lang}" and the "${____lang_included}" variables.
+# Unsetting the "${____unable_to_include_lang}" and the "${____lang_included}" variables, since they aren't needed anymore.
 [ -n "${____unable_to_include_lang}" ]  && unset ____unable_to_include_lang;
 [ -n "${____lang_included}" ]           && unset ____lang_included;
 
@@ -229,39 +258,39 @@ fi
 ## LOW PRIORTITY PATHS DEFINITION
 
 # Informations of the file which temporary stores each file's data.
-if [ -f "${__BU_ROOT_PATH}/install/Bash-utils-init.sh" ]; then __BU_INITIALIZER_SCRIPT_PATH="${__BU_ROOT_PATH}/install/Bash-utils-init.sh";
-
-else __BU_INITIALIZER_SCRIPT_PATH="${__BU_ROOT_PATH}/Bash-utils-init.sh";
-
+if [ -f "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/Bash-utils-init.sh" ]; then 
+    declare -gr __BU_INITIALIZER_SCRIPT_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/Bash-utils-init.sh";
+else 
+    declare -gr __BU_INITIALIZER_SCRIPT_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/Bash-utils-init.sh";
 fi
 
 # Path to the directory which stores the path to the "compiled" folder.
-declare -rg __BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/compiled";
+declare -gr __BU__BIN__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/compiled";
 
 # Path to the file which stores the content of the here document used into each of the "LibCompilerV4.Functions.WriteCommentCode.Heredoc.${v_curr_locale}()" functions, which is called into the "LibCompilerV4.Functions.WriteCommentCode()" function.
-declare -rg __BU__LIB_COMPILER_V4__RESOURCES__HEREDOC_PATH="${__BU_ROOT_PATH}/res/dev-tools/dev-translations/lib-compilerV4/heredoc";
+declare -gr __BU__BIN__LIB_COMPILER_V4__RESOURCES__HEREDOC_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/res/dev-tools/dev-translations/lib-compilerV4/heredoc";
 
 # Path to the file which stores the Shellchecked files and their MD5 checksum.
-declare -rg __BU__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST="${__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/compiled.out.txt";
+declare -gr __BU__BIN__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST="${__BU__BIN__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/compiled.out.txt";
 
 # Path to the modules initialization script's translations files.
-declare -rg __BU_MODULE_INIT_CONFIGS_PATH="${__BU_ROOT_PATH}/install/.Bash-utils/config/initializer";
+declare -gr __BU_MODULE_INIT_CONFIGS_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/initializer";
 
 # Path to the modules initialization script's translations files.
-declare -rg __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
+declare -gr __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
 # Sourcing the "DevTools.lib" file in order to use the "BU.Main.DevTools.ShellcheckVerif()" function.
 # shellcheck disable=SC1091
-source "${__BU_ROOT_PATH}/lib/functions/main/DevTools.lib";
+source "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/DevTools.lib";
 
 # Sourcing the "Locale.lib" file in order to use the "BU.Main.Locale.PrintLanguageName()" function.
 # shellcheck disable=SC1091
-source "${__BU_ROOT_PATH}/lib/functions/main/Locale.lib";
+source "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/Locale.lib";
 
 # Sourcing the "Text.lib" file in order to use the "BU.Main.Text.GetSubStringOccurences()" and the
 # "BU.Main.Text.ReplaceLettersInString()" functions in the BU.Main.Locale.PrintLanguageName() function.
 # shellcheck disable=SC1091
-source "${__BU_ROOT_PATH}/lib/functions/main/Text.lib";
+source "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/Text.lib";
 
 ## ==============================================
 
@@ -406,7 +435,7 @@ function LibCompilerV4.Functions.PrintFilesWhichWereNotChmoded()
     local __compiled_stable_file_parent_dir=${1:-$'\0'}; # ARG TYPE : Dirpath   - REQUIRED | DEFAULT VAL : NULL     - DESC :
 
     #**** Code ****
-    printf "${__BU__LIB_COMPILER_V4__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}\n" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" >&2;
+    printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}\n" "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" >&2;
 
     for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
         v_file_line=$(( v_index + 1 ));
@@ -422,7 +451,7 @@ function LibCompilerV4.Functions.PrintFilesWhichWereNotChmoded()
 
     echo >&2;
 
-    printf "${__BU__LIB_COMPILER_V4__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP}\n" "${__compiled_stable_file_parent_dir}/" >&2;
+    printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__END_OF_COMPILATION__LIST_OF_FILES_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__TIP}\n" "${__compiled_stable_file_parent_dir}/" >&2;
 }
 
 ## ==============================================
@@ -449,7 +478,7 @@ function LibCompilerV4.Functions.EraseSafeguardExecLines()
 function LibCompilerV4.Functions.WriteCommentCode()
 {
     #**** Variables ****
-    local v_filename="${__BU__LIB_COMPILER_V4__RESOURCES__HEREDOC_PATH}/${v_curr_locale}.sh";
+    local v_filename="${__BU__BIN__LIB_COMPILER_V4__RESOURCES__HEREDOC_PATH}/${v_curr_locale}.sh";
     local v_filename_tmp="${v_filename}.tmp";
 
     #**** Code ****
@@ -586,8 +615,8 @@ function LibCompilerV4.Functions.WriteBU()
     #**** Code ****
     v_content="$(cat "${p_filepath}")";
 
-    if      [ "${p_display,,}" == "${_____value_of__display}" ]; then   echo "${v_content}" | tee -a    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
-    else                                                                echo "${v_content}" >>          "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__LIB_COMPILER_V4__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    if      [ "${p_display,,}" == "${_____value_of__display}" ]; then   echo "${v_content}" | tee -a    "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
+    else                                                                echo "${v_content}" >>          "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" || { LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE}"; echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE}" >&2; return 1; };
     fi
 }
 
@@ -767,12 +796,12 @@ function LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()
     echo >&2;
 
     if [ "${#p_keep_opts[@]}" -lt 2 ]; then
-        printf "${__BU__LIB_COMPILER_V4__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE}\n" "${__vArrayVal_keep_raw_document_layout}" "${v_keep_opts}" >&2;
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE}\n" "${__vArrayVal_keep_raw_document_layout}" "${v_keep_opts}" >&2;
     else
-        printf "${__BU__LIB_COMPILER_V4__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE}\n" "${__vArrayVal_keep_raw_document_layout}" "${v_keep_opts}" >&2;
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE}\n" "${__vArrayVal_keep_raw_document_layout}" "${v_keep_opts}" >&2;
     fi
 
-    LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+    LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
     exit 1;
 }
@@ -789,9 +818,9 @@ function LibCompilerV4.Functions.Debug()
     #**** Code ****
     printf "\n\n";
 
-    echo "ARG [0] : ${__BU_ARG_LANG}";
+    echo "ARG [0] : ${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_LIST_STR_TO_ARRAY}";
 
-    for argslist in "${__BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY[@]}"; do
+    for argslist in "${__BU__BIN__LIB_COMPILER_V4__ARGS__OPTIONS_ARRAY[@]}"; do
         i=$(( i + 1 ));
 
         echo "ARG [${i}] : ${argslist}";
@@ -812,50 +841,50 @@ function LibCompilerV4.Functions.CompilerUsage()
     local p_exit=${1:-true};
 
     #**** Code ****
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__USAGE}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__USAGE}";
     echo;
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__PROGRAM_DESC}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__PROGRAM_DESC}";
     echo;
 
     # Mandatory argument.
-    echo -n "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG}";
+    echo -n "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG__LANG_INCLUDE}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG__COMPILER_USAGE_FNCT__MANDATORY_ARG__HELP}";
     echo;
 
     # Optional options.
-    echo -n "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}"
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS}";
+    echo -n "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}"
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_STABLE}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_UNSTABLE}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILE_UNSTABLE}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__DISPLAY}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__DISPLAY}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__HELP}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__HELP}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_COMMENTS}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_EXEC_SAFEGUARDS}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_INFOS}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_INFOS}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_PVC_INFOS}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_FUNCTIONS_PVC_INFOS}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__KEEP_RAW_DOCUMENT_LAYOUT}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIASES_INCLUDE}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ALIASES_INCLUDE}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_ENGLISH_INCLUDE}";
 
-    echo "${__BU__LIB_COMPILER_V4__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK}";
+    echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__NO_SHELLCHECK}";
 
     if [ "${p_exit,,}" == 'true' ]; then exit 0; else return 0; fi
 }
@@ -873,11 +902,11 @@ function LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()
     # If the '--lang=' value was passed as mandatory argument.
     if [ -n "${__vMandatoryArgLang}" ]; then
         if [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -eq 0 ]; then
-            echo "${__BU__LIB_COMPILER_V4__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED}" >&2;
         else
-            printf "${__BU__LIB_COMPILER_V4__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NUMBER_OF_COMPILED_FILES}\n\n" "${#__BU_ARRAY__COMPILED_FILES_LIST}" >&2;
+            printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NUMBER_OF_COMPILED_FILES}\n\n" "${#__BU_ARRAY__COMPILED_FILES_LIST}" >&2;
 
-            echo "${__BU__LIB_COMPILER_V4__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LIST_OF_COMPILED_FILES}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LIST_OF_COMPILED_FILES}" >&2;
 
             for file in "${__BU_ARRAY__COMPILED_FILES_LIST[@]}"; do
                 echo "    - ${__HIGHLIGHT}${file}${__RESET}" >&2;
@@ -888,7 +917,7 @@ function LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()
 
     # Else, if the '--lang-include=' value was passed as mandatory argument.
     elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-        printf "${__BU__LIB_COMPILER_V4__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LANG_INCLUDE_HANDLING}\n" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" >&2;
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__LANG_INCLUDE_HANDLING}\n" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" >&2;
     fi
 }
 
@@ -938,7 +967,7 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
     # If the '--keep-comments' or the '--keep-raw-document-layout' value is passed as optional argument, this parameter will not be processed.
     local _____value_of__remove_shellcheck_directives='--remove-shellcheck-directives';
 
-    for arg in "${__BU__LIB_COMPILER_V4__ARGS__LANG_ARRAY[@]}"; do
+    for arg in "${__BU__BIN__LIB_COMPILER_V4__ARGS__OPTIONS_ARRAY[@]}"; do
         # If the user decided to create a stable version of the compiled framework.
         if [ "${arg}" == '-C' ] || [ "${arg,,}" == "${_____value_of__compile_stable}" ]; then
             # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
@@ -1019,13 +1048,13 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         else
-            LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY}" 'FULL';
+            LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY}" 'FULL';
 
             # shellcheck disable=SC2059
-            printf "${__BU__LIB_COMPILER_V4__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE}\n" "${arg}" >&2;
+            printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNSUPPORTED_ARGUMENT_PASSED_IN_OPTIONAL_ARGS_ARRAY__ADVICE}\n" "${arg}" >&2;
             echo >&2;
 
-            LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+            LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
             exit 1;
         fi
@@ -1043,17 +1072,21 @@ function LibCompilerV4.PreCompilationFunctions.ManageShellcheck()
     # At this point, declaring this condition is safe, since the verification of the presence 
     # of the "${_____value_of__compile_stable}" argument value was done before.
     if [[ (-n "${__vArrayVal_no_shellcheck}") && (-n "${__vArrayVal_no_shellcheck}") ]]; then
-        LibCompilerV4.Functions.PrintWarningLine "${__BU__LIB_COMPILER_V4__SHELLCHECK__DISABLED}" 'FULL';
+        LibCompilerV4.Functions.PrintWarningLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__SHELLCHECK__DISABLED}" 'FULL';
 
         sleep 1;
 
-        __BU__LIB_COMPILER_V4__BU_SHELLCHECKED='true';
+        __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED='true';
     else
         # Checking first if the "$(shellcheck)" command is installed in order to check for code errors.
-        if ! command -v shellcheck; then LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__SHELLCHECK__MISSING}" 'FULL'; exit 1; fi
+        if ! command -v shellcheck; then 
+            LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__SHELLCHECK__MISSING}" 'FULL'; 
+            
+            exit 1;
+        fi
 
         # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
-        __BU__LIB_COMPILER_V4__BU_SHELLCHECKED='false';
+        __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED='false';
     fi
 }
 
@@ -1079,18 +1112,18 @@ function LibCompilerV4.PreCompilationFunctions.CheckForAnyIncompatibleOptionalAr
         # shellcheck disable=SC2059
         LibCompilerV4.Functions.PrintWarningLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER}\n\n" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__NO_SHELLCHECK_AND_COMPILE_STABLE_WERE_PASSED_TOGETHER}\n\n" \
                 "${__vArrayVal_compile_stable}" \
                 "${__vArrayVal_no_shellcheck}")" \
             'FULL' >&2;
 
-        echo "${__BU__LIB_COMPILER_V4__NO_SHELLCHECK__AND__COMPILE_STABLE__WERE_PASSED_TOGETHER__ADVICE}" >&2;
+        echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__NO_SHELLCHECK_AND_COMPILE_STABLE_WERE_PASSED_TOGETHER__ADVICE}" >&2;
 
         echo >&2; echo >&2;
 
         LibCompilerV4.Functions.CompilerUsage 'false';
 
-        LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+        LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
         exit 1;
     fi
@@ -1222,13 +1255,13 @@ function LibCompilerV4.CompileInSingleFile()
             __vMandatoryArgLangInclude='--lang-include';
 
         else
-            echo "${__BU__LIB_COMPILER_V4__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_1}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_1}" >&2;
             echo >&2;
 
-            echo "${__BU__LIB_COMPILER_V4__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_2}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__MSG_2}" >&2;
             echo >&2;
 
-            echo "${__BU__LIB_COMPILER_V4__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__USER_INPUT}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COMPILER_UNABLE_TO_DETERMINE_FIRST_ARG__USER_INPUT}" >&2;
             echo >&2;
 
             read -r -n 1 key;
@@ -1258,26 +1291,26 @@ function LibCompilerV4.CompileInSingleFile()
             for langs in "${__BU_COMPILER__SUPPORTED_LANG_ARRAY[@]}"; do __language_array+=("${langs}"); done;
 
         else
-            LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__BAD_LANG_ARRAY_PASSED__ERROR_MSG}" 'FULL';
-            echo "${__BU__LIB_COMPILER_V4__BAD_LANG_ARRAY_PASSED__ADVICE_1}" >&2;
+            LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__BAD_LANG_ARRAY_PASSED__ERROR_MSG}" 'FULL';
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__BAD_LANG_ARRAY_PASSED__ADVICE_1}" >&2;
             echo >&2;
 
-            echo "${__BU__LIB_COMPILER_V4__BAD_LANG_ARRAY_PASSED__ADVICE_2}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__BAD_LANG_ARRAY_PASSED__ADVICE_2}" >&2;
             echo "'lang=en fr uk sv tk kl'" >&2;
             echo >&2;
 
-            echo "${__BU__LIB_COMPILER_V4__BAD_LANG_ARRAY_PASSED__ADVICE_3} ${__HIGHLIGHT},;|~_.:!§${__RESET}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__BAD_LANG_ARRAY_PASSED__ADVICE_3} ${__HIGHLIGHT},;|~_.:!§${__RESET}" >&2;
             echo >&2;
 
-            echo "${__BU__LIB_COMPILER_V4__BAD_LANG_ARRAY_PASSED__ADVICE_4}" >&2;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__BAD_LANG_ARRAY_PASSED__ADVICE_4}" >&2;
             echo >&2; echo >&2;
 
-            printf "${__BU__LIB_COMPILER_V4__BAD_LANG_ARRAY_PASSED__HELP}\n" '-h' '--help' >&2;
+            printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__BAD_LANG_ARRAY_PASSED__HELP}\n" '-h' '--help' >&2;
 
             # Uncomment the following line if you need to check the arguments list in case of a problem with them while executing the compiler.
             LibCompilerV4.Functions.Debug;
 
-            LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+            LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
             return 1;
         fi
@@ -1315,7 +1348,7 @@ function LibCompilerV4.CompileInSingleFile()
             local __compiled_stable_file_parent_dir;    # VAR TYPE : Dirpath    - DESC :
             local __compiled_stable_file_path;          # VAR TYPE : Filepath   - DESC :
 
-            __compiled_stable_file_parent_dir="${__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/stable";
+            __compiled_stable_file_parent_dir="${__BU__BIN__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/stable";
         fi
 
         # If the "${_____value_of__no_shellcheck}" value was passed in the array of optional arguments.
@@ -1327,7 +1360,7 @@ function LibCompilerV4.CompileInSingleFile()
         __locale_file_path="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/${v_curr_locale}.locale";
         __locale_file_path_en="${__BU_MODULE_INIT_TRANSLATIONS_PATH}/en.locale";
 
-        __compiled_file_parent_dir="${__BU__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/unstable";
+        __compiled_file_parent_dir="${__BU__BIN__LIB_COMPILER_V4__RESOURCES__COMPILED_DIR_PATH}/unstable";
 
         # Path to the temporary output file (global variable).
         __BU__LIB_COMPILER_V4_FULL_FILE_PATH="${__compiled_file_parent_dir}/Bash-utils-compilation-output.tmp";
@@ -1364,7 +1397,7 @@ function LibCompilerV4.CompileInSingleFile()
                 echo "${__ERROR}Please check the ${__RESET}" >&2;
                 echo >&2;
 
-                LibCompilerV4.Functions.PrintErrorLine "${__BU__LIB_COMPILER_V4__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
+                LibCompilerV4.Functions.PrintErrorLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__PRINT_NO_FILES_WERE_COMPILED_ERROR_MSG}" 'FULL';
 
                 exit 1;
             };
@@ -1378,7 +1411,7 @@ function LibCompilerV4.CompileInSingleFile()
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
         if ! LibCompilerV4.Functions.CheckISO639_1_LangCode "${v_curr_locale}"; then
-            LibCompilerV4.Functions.PrintErrorLine "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__BAD_LANGUAGE_PASSED}" 'FULL';
+            LibCompilerV4.Functions.PrintErrorLine "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__BAD_LANGUAGE_PASSED}" 'FULL';
 
             ____loop_error='error';
 
@@ -1389,7 +1422,7 @@ function LibCompilerV4.CompileInSingleFile()
         #~ Framework compilation process startup message
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU__LIB_COMPILER_V4__BEGIN_FRAMEWORK_COMPILATION}" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" 'FULL';
+        LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__locale_print_code__newstep} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__BEGIN_FRAMEWORK_COMPILATION}" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" 'FULL';
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ Writing the initializer script's english translations files content first into the file to generate (safeguard, as the english translation is the main supported language along French)
@@ -1399,14 +1432,14 @@ function LibCompilerV4.CompileInSingleFile()
         if [[ ( -z "${__vArrayVal_no_english_include}" ) && ! "${__language_array[*]}" =~ en ]] || [ "${v_curr_locale,,}" != 'en' ]; then local ____no_english_included='true'; fi
 
         if [ "${____no_english_included,,}" == 'true' ]; then
-            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" 'UPPER';
+            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT}" "${v_curr_locale}" "${__locale_file_path_en}" "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" 'UPPER';
 
-            echo "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN}"; echo;
+            echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__EXPLAIN}"; echo;
 
             if [ ! -f "${__locale_file_path_en}" ]; then
                 LibCompilerV4.Functions.PrintErrorLine \
                     "$(printf \
-                        "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" \
+                        "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path_en}" \
                         "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1425,7 +1458,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             [ -n "${__err}" ] || [ -n "${____err}" ] && {
                 LibCompilerV4.Functions.PrintErrorLine \
-                    "$(printf "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" \
+                    "$(printf "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path_en}" \
                         "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1440,7 +1473,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             LibCompilerV4.Functions.PrintSuccessLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS}" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_INIT_SCRIPT_ENGLISH_TRANSLATION_FILES_CONTENT__SUCCESS}" \
                     "${v_curr_locale}" \
                     "${__locale_file_path_en}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1458,7 +1491,7 @@ function LibCompilerV4.CompileInSingleFile()
         if [ -n "${__vMandatoryArgLang}" ]; then
             LibCompilerV4.Functions.PrintNewstepLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" \
                     "${v_curr_locale}" \
                     "${__locale_file_path}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1467,13 +1500,13 @@ function LibCompilerV4.CompileInSingleFile()
             if  [ ! -f "${__locale_file_path}" ]; then
                 LibCompilerV4.Functions.PrintErrorLine \
                     "$(printf \
-                        "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
+                        "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path}" \
                         "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                     'FULL';
 
-                printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR__NON_EXISTENT_FILE}\n\n" "${__locale_file_path}";
+                printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR__NON_EXISTENT_FILE}\n\n" "${__locale_file_path}";
 
                 LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
 
@@ -1489,7 +1522,7 @@ function LibCompilerV4.CompileInSingleFile()
             [ -n "${__err}" ] || [ -n "${____err}" ] && {
                 LibCompilerV4.Functions.PrintErrorLine \
                     "$(printf \
-                        "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
+                        "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                         "${v_curr_locale}" \
                         "${__locale_file_path}" \
                         "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1504,7 +1537,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             LibCompilerV4.Functions.PrintSuccessLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__SUCCESS}" \
                     "${v_curr_locale}" \
                     "${__locale_file_path}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1526,7 +1559,7 @@ function LibCompilerV4.CompileInSingleFile()
                 done)";
 
 #             LibCompilerV4.Functions.PrintNewstepLine \
-#                 "$(printf "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" \
+#                 "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT}" \
 #                     "${v_curr_locale}" \
 #                     "${translationFilePath}" \
 #                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1534,7 +1567,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             LibCompilerV4.Functions.PrintNewstepLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP}" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                     "${translationList}")" \
                 'UPPER';
@@ -1568,7 +1601,7 @@ function LibCompilerV4.CompileInSingleFile()
                 [ -n "${__err}" ] || [ -n "${____err}" ] && {
                     LibCompilerV4.Functions.PrintErrorLine \
                         "$(printf \
-                            "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
+                            "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__ERROR}" \
                             "${v_curr_locale}" \
                             "${translationFilePath}" \
                             "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
@@ -1584,7 +1617,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             LibCompilerV4.Functions.PrintSuccessLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP__SUCCESS}" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_INIT_SCRIPT_TRANSLATION_FILES_CONTENT__LOOP__SUCCESS}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                     "${translationList}")" \
                 'LOWER';
@@ -1596,7 +1629,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
@@ -1609,7 +1642,7 @@ function LibCompilerV4.CompileInSingleFile()
         [ -n "${__err}" ] || [ -n "${____err}" ] && {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
@@ -1622,7 +1655,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_INIT_SCRIPT_CONFIG_FILES_CONTENT__SUCCESS}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
@@ -1632,14 +1665,14 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_INIT_SCRIPT_FILE_CONTENT}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
         if [ ! -f "${__BU_INITIALIZER_SCRIPT_PATH}" ]; then
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
@@ -1658,7 +1691,7 @@ function LibCompilerV4.CompileInSingleFile()
         [ -n "${__err}" ] || [ -n "${____err}" ] && {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL'; \
 
@@ -1671,7 +1704,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
@@ -1681,11 +1714,11 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_LIB_FILES_CONTENT}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_MAIN_MODULE_LIB_FILES_CONTENT}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
-        for i in "${__BU_ROOT_PATH}/lib/functions/main/"*.lib; do
+        for i in "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/"*.lib; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             LibCompilerV4.Functions.WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
@@ -1694,7 +1727,7 @@ function LibCompilerV4.CompileInSingleFile()
         [ -n "${__err}" ] || [ -n "${____err}" ] && {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
@@ -1707,7 +1740,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_MAIN_MODULE_LIB_FILES_CONTENT__SUCCESS}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
@@ -1717,11 +1750,11 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
-        for i in "${__BU_ROOT_PATH}/install/.Bash-utils/config/modules/main/"*.conf; do
+        for i in "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/modules/main/"*.conf; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             LibCompilerV4.Functions.WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
@@ -1730,7 +1763,7 @@ function LibCompilerV4.CompileInSingleFile()
         [ -n "${__err}" ] || [ -n "${____err}" ] && {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
@@ -1743,7 +1776,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_MAIN_MODULE_CONFIG_FILES_CONTENT__SUCCESS}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
@@ -1753,11 +1786,11 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'UPPER';
 
-        for i in "${__BU_ROOT_PATH}/install/.Bash-utils/modules/main/"*; do
+        for i in "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/modules/main/"*; do
             BU.Main.DevTools.ShellcheckVerif "${i}" || { local __err="error"; break; };
 
             LibCompilerV4.Functions.WriteBU "${i}" "${__vArrayVal_display}" || { local ____err="error"; break; };
@@ -1766,7 +1799,7 @@ function LibCompilerV4.CompileInSingleFile()
         [ -n "${__err}" ] || [ -n "${____err}" ] && {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
                 'FULL';
 
@@ -1779,15 +1812,15 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__WRITE_MAIN_MODULE_INIT_SCRIPT_FILE_CONTENT__SUCCESS}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
-        # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU__LIB_COMPILER_V4__BU_SHELLCHECKED}" variable's value to 'true'.
+        # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED}" variable's value to 'true'.
         # However, in case a stable version is compiled, it is better to check the files that were not checked.
 
         # the aforementioned condition is managed into the "BU.Main.DevTools.ShellcheckVerif()" function.
-        if [ "${__BU__LIB_COMPILER_V4__BU_SHELLCHECKED}" == 'false' ]; then __BU__LIB_COMPILER_V4__BU_SHELLCHECKED='true'; fi
+        if [ "${__BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED}" == 'false' ]; then __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED='true'; fi
 
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1796,7 +1829,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintNewstepLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__COPY_FILE_CONTENT_IN_LANG_FILE}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__COPY_FILE_CONTENT_IN_LANG_FILE}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                 "${__compiled_file_path}")" \
             'UPPER';
@@ -1804,7 +1837,7 @@ function LibCompilerV4.CompileInSingleFile()
         cp "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" "${__compiled_file_path}" || {
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__COPY_FILE_CONTENT_IN_LANG_FILE__ERROR}" \
                     "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                     "${__compiled_file_path}")" \
                 'FULL';
@@ -1818,7 +1851,7 @@ function LibCompilerV4.CompileInSingleFile()
 
         LibCompilerV4.Functions.PrintSuccessLine \
             "$(printf \
-                "${__BU__LIB_COMPILER_V4__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" \
+                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_FILE_CONTENT_IN_LANG_FILE__SUCCESS}" \
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}" \
                 "${__compiled_file_path}")" \
             'LOWER';
@@ -1827,13 +1860,13 @@ function LibCompilerV4.CompileInSingleFile()
             if [ -n "${__vArrayVal_compile_stable}" ]; then
                 LibCompilerV4.Functions.PrintSuccessLine \
                     "$(printf \
-                        "${__locale_print_code__success} ${__BU__LIB_COMPILER_V4__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" \
+                        "${__locale_print_code__success} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" \
                         "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" \
                     'FULL';
             else
                 LibCompilerV4.Functions.PrintSuccessLine \
                     "$(printf \
-                        "${__locale_print_code__success} ${__BU__LIB_COMPILER_V4__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" \
+                        "${__locale_print_code__success} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__CUSTOM_LANGUAGE_COMPILATION_SUCCESS}" \
                         "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" \
                     'FULL';
             fi
@@ -1841,13 +1874,13 @@ function LibCompilerV4.CompileInSingleFile()
             if [ -n "${__vArrayVal_compile_stable}" ]; then
                 LibCompilerV4.Functions.PrintSuccessLine \
                     "$(printf \
-                        "${__locale_print_code__success} ${__BU__LIB_COMPILER_V4__MULTI_LANGUAGES_COMPILATION_SUCCESS}" \
+                        "${__locale_print_code__success} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__MULTI_LANGUAGES_COMPILATION_SUCCESS}" \
                         "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" \
                     'FULL';
             else
                 LibCompilerV4.Functions.PrintSuccessLine \
                     "$(printf \
-                        "${__locale_print_code__success} ${__BU__LIB_COMPILER_V4__MULTI_LANGUAGES_COMPILATION_SUCCESS}" \
+                        "${__locale_print_code__success} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__MULTI_LANGUAGES_COMPILATION_SUCCESS}" \
                         "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" \
                     'FULL';
             fi
@@ -1871,13 +1904,13 @@ function LibCompilerV4.CompileInSingleFile()
         #~ Printing the statistics of the newly generated localized file
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-        printf "${__BU__LIB_COMPILER_V4__LOCALIZED_FILE__STATS}\n" "${__compiled_file_path}"; echo;
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__STATS}\n" "${__compiled_file_path}"; echo;
 
-        printf "${__BU__LIB_COMPILER_V4__LOCALIZED_FILE__BYTES}\n" "$(LibCompilerV4.Functions.BytesToHuman "$(wc -c < "${__compiled_file_path}")" 'NULL' 1000 "${____sys_lang}")";
-        printf "${__BU__LIB_COMPILER_V4__LOCALIZED_FILE__CHARS}\n" "$(wc -m < "${__compiled_file_path}")";
-        printf "${__BU__LIB_COMPILER_V4__LOCALIZED_FILE__LINES}\n" "$(wc -l < "${__compiled_file_path}")";
-        printf "${__BU__LIB_COMPILER_V4__LOCALIZED_FILE__WIDTH}\n" "$(wc -L < "${__compiled_file_path}")";
-        printf "${__BU__LIB_COMPILER_V4__LOCALIZED_FILE__WORDS}\n" "$(wc -w < "${__compiled_file_path}")";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__BYTES}\n" "$(LibCompilerV4.Functions.BytesToHuman "$(wc -c < "${__compiled_file_path}")" 'NULL' 1000 "${____sys_lang}")";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__CHARS}\n" "$(wc -m < "${__compiled_file_path}")";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__LINES}\n" "$(wc -l < "${__compiled_file_path}")";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__WIDTH}\n" "$(wc -L < "${__compiled_file_path}")";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__WORDS}\n" "$(wc -w < "${__compiled_file_path}")";
 
         # Exiting the script's loop after the compilation of the multi-language file.
         if [ -n "${__vMandatoryArgLangInclude}" ] && [ -z "${__vArrayVal_compile_stable}" ]; then break; fi
@@ -1910,13 +1943,13 @@ function LibCompilerV4.CompileInSingleFile()
             #~ STABLE FILE COMPILATION ONLY : Checking for any programming error in the compiled file
             #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS}" "${__compiled_file_path}")" 'UPPER';
+            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS}" "${__compiled_file_path}")" 'UPPER';
 
             # Since the compiled file must be as bugless as possible, it is mandatory to check this file for any programming error with the "$(shellcheck)" command.
             if ! BU.Main.DevTools.ShellcheckVerif "${__compiled_file_path}" "${__vArrayVal_compile_stable}"; then
                 LibCompilerV4.Functions.PrintErrorLine \
                     "$(printf \
-                        "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR}" \
+                        "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__ERROR}" \
                         "${__compiled_file_path}")" \
                     'FULL';
 
@@ -1925,7 +1958,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             LibCompilerV4.Functions.PrintSuccessLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS}\n\n" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHECKING_ERRORS__SUCCESS}\n\n" \
                     "${__compiled_file_path}")" \
                 'LOWER';
 
@@ -1935,7 +1968,7 @@ function LibCompilerV4.CompileInSingleFile()
 
             LibCompilerV4.Functions.PrintNewstepLine \
                 "$(printf \
-                    "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE}" \
+                    "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE}" \
                     "${__compiled_file_path}" \
                     "${__compiled_stable_file_parent_dir}")" \
                 'UPPER';
@@ -1943,15 +1976,15 @@ function LibCompilerV4.CompileInSingleFile()
             if ! cp --verbose "${__compiled_file_path}" "${__compiled_stable_file_path}" ; then
                 LibCompilerV4.Functions.PrintErrorLine \
                     "$(printf \
-                        "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR}" \
+                        "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR}" \
                         "${__compiled_file_path}" \
                         "${__compiled_stable_file_parent_dir}")" \
                     'FULL';
 
-                echo "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1}" >&2;
+                echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_1}" >&2;
                 echo >&2;
 
-                echo "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2}" >&2;
+                echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ADVICE_2}" >&2;
                 echo >&2;
 
                 LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled;
@@ -1962,7 +1995,7 @@ function LibCompilerV4.CompileInSingleFile()
             else
                 LibCompilerV4.Functions.PrintSuccessLine \
                     "$(printf \
-                        "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS}" \
+                        "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS}" \
                         "${__compiled_file_path}" \
                         "${__compiled_stable_file_parent_dir}")" \
                     'LOWER';
@@ -1972,24 +2005,24 @@ function LibCompilerV4.CompileInSingleFile()
             #~ STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "$(chmod)" command
             #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD}" "${__compiled_file_path}")" 'UPPER';
+            LibCompilerV4.Functions.PrintNewstepLine "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD}" "${__compiled_file_path}")" 'UPPER';
 
             if ! chmod --verbose -xw "${__compiled_stable_file_path}"; then
-                LibCompilerV4.Functions.PrintWarningLine "$(printf "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING}" "${__compiled_stable_file_path}")";
+                LibCompilerV4.Functions.PrintWarningLine "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING}" "${__compiled_stable_file_path}")";
 
-                printf "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK}\n\n" "${__compiled_stable_file_path}" >&2;
-                read -rp "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER}" __answer_copy_compiled_file_in_stable_dir;
+                printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK}\n\n" "${__compiled_stable_file_path}" >&2;
+                read -rp "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__ERROR_ENTER_YOUR_ANSWER}" __answer_copy_compiled_file_in_stable_dir;
                 echo;
 
                 case "${__answer_copy_compiled_file_in_stable_dir,,}" in
-                    '1') echo "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1}";;
+                    '1') echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_1}";;
                     '2' | *)
-                        echo "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ANS_2}" >&2; echo >&2;
+                        echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ASK_2}" >&2; echo >&2;
 
                         # If other files were successfully compiled, but failed to be "chmoded".
                         if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -gt 0 ]; then
                             if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
-                                echo "${__BU__LIB_COMPILER_V4__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}" >&2;
+                                echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}" >&2;
 
                                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                                     echo "    - ${files}";
@@ -2009,12 +2042,12 @@ function LibCompilerV4.CompileInSingleFile()
                 # Adding the failed file into the array of failed files.
                 [ -n "${__vMandatoryArgLang}" ] && __BU_ARRAY__READ_ONLY_FAILED_FILES+=("${__compiled_stable_file_path}");
 
-                LibCompilerV4.Functions.PrintWarningLine "$(printf "${__BU__LIB_COMPILER_V4__COMPILED_STABLE_FILE_WAS_NOT_SET_IN_READ_ONLY_MODE}" "${__compiled_stable_file_path}")" 'LOWER';
+                LibCompilerV4.Functions.PrintWarningLine "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COMPILED_STABLE_FILE_WAS_NOT_SET_IN_READ_ONLY_MODE}" "${__compiled_stable_file_path}")" 'LOWER';
             else
-                LibCompilerV4.Functions.PrintSuccessLine "$(printf "${__BU__LIB_COMPILER_V4__COMPILED_STABLE_FILE_WAS_SUCCESSFULLY_SET_IN_READ_ONLY_MODE}" "${__compiled_stable_file_path}")" 'LOWER';
+                LibCompilerV4.Functions.PrintSuccessLine "$(printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COMPILED_STABLE_FILE_WAS_SUCCESSFULLY_SET_IN_READ_ONLY_MODE}" "${__compiled_stable_file_path}")" 'LOWER';
             fi
 
-            LibCompilerV4.Functions.PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU__LIB_COMPILER_V4__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED}" "${__compiled_stable_file_path}")" 'FULL';
+            LibCompilerV4.Functions.PrintSuccessLine "$(printf "${__locale_print_code__success} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__STABLE_COMPILED_FILE_IS_READY_TO_BE_USED}" "${__compiled_stable_file_path}")" 'FULL';
 
             # Adding the newly compiled stable file in the compiled stable files list.
             [ -n "${__vMandatoryArgLang}" ] && __BU_ARRAY__COMPILED_STABLE_FILES_LIST+=("${__compiled_stable_file_path}");
@@ -2029,7 +2062,7 @@ function LibCompilerV4.CompileInSingleFile()
         if [ -n "${__vMandatoryArgLang}" ]; then
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__CUSTOM_LANGUAGE_COMPILATION_FAILED}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__CUSTOM_LANGUAGE_COMPILATION_FAILED}" \
                     "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" \
                 'FULL';
 
@@ -2038,7 +2071,7 @@ function LibCompilerV4.CompileInSingleFile()
         elif [ -n "${__vMandatoryArgLangInclude}" ]; then
             LibCompilerV4.Functions.PrintErrorLine \
                 "$(printf \
-                    "${__locale_print_code__error} ${__BU__LIB_COMPILER_V4__MULTI_LANGUAGES_COMPILATION_FAILED}" \
+                    "${__locale_print_code__error} ${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__MULTI_LANGUAGES_COMPILATION_FAILED}" \
                     "${v_curr_locale} ($(BU.Main.Locale.PrintLanguageName "${v_curr_locale}" 'cod,eng,usr,ori' 'no' 'false' 'true' 'true'))")" \
                 'FULL';
 
@@ -2056,16 +2089,16 @@ function LibCompilerV4.CompileInSingleFile()
             if [ "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" -eq 1 ]; then
                 LibCompilerV4.Functions.PrintSuccessLine \
                     "$(printf \
-                        "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ONE_FILE_NOT_CHMODED}" \
+                        "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__ONE_FILE_NOT_CHMODED}" \
                         "${__compiled_stable_file_path}")";
 
-                echo "${__BU__LIB_COMPILER_V4__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}";
+                echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED}";
 
                 for files in "${__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"; do
                     echo "    - ${files}";
                 done
 
-                echo >&2; printf "${__BU__LIB_COMPILER_V4__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE}\n" "${__compiled_stable_file_path}" >&2;
+                echo >&2; printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__END_OF_COMPILATION__FILE_WHOSE_RIGHTS_HAVE_NOT_BEEN_MODIFIED__ADVICE}\n" "${__compiled_stable_file_path}" >&2;
 
                 # Else, if more than one file were not successfully "chmoded".
             else
@@ -2078,12 +2111,12 @@ function LibCompilerV4.CompileInSingleFile()
                     if [ "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}" == "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" ]; then
                         LibCompilerV4.Functions.PrintWarningLine \
                             "$(printf \
-                                "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED}" \
+                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED}" \
                                 "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")";
                     else
                         LibCompilerV4.Functions.PrintWarningLine \
                             "$(printf \
-                                "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED}" \
+                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED}" \
                                 "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" \
                                 "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")";
                     fi
@@ -2091,13 +2124,13 @@ function LibCompilerV4.CompileInSingleFile()
                     if [ "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}" == "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" ]; then
                         LibCompilerV4.Functions.PrintWarningLine \
                             "$(printf \
-                                "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED}"
+                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED}"
                                 "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")"
                             'FULL';
                     else
                         LibCompilerV4.Functions.PrintWarningLine \
                             "$(printf \
-                                "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED}"
+                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED}"
                                 "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"
                                 "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")"
                             'FULL';
@@ -2112,19 +2145,19 @@ function LibCompilerV4.CompileInSingleFile()
             if      [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -eq 1 ]; then
                     LibCompilerV4.Functions.PrintSuccessLine \
                         "$(printf \
-                            "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_EQ_1}" \
+                            "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_EQ_1}" \
                             "${#__BU_ARRAY__COMPILED_FILES_LIST[@]}")";
 
             elif    [ "${#__BU_ARRAY__COMPILED_FILES_LIST}" -gt 1 ]; then
                     LibCompilerV4.Functions.PrintSuccessLine \
                         "$(printf \
-                            "${__BU__LIB_COMPILER_V4__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_GT_1}" \
+                            "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__SUCCESS_GT_1}" \
                             "${#__BU_ARRAY__COMPILED_FILES_LIST[@]}")";
             fi
         fi
     fi
 
-    LibCompilerV4.Functions.PrintSuccessLine "${__BU__LIB_COMPILER_V4__END_OF_FRAMEWORK_COMPILATION}" 'FULL';
+    LibCompilerV4.Functions.PrintSuccessLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__END_OF_FRAMEWORK_COMPILATION}" 'FULL';
 
     if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; fi
 }
@@ -2135,8 +2168,8 @@ function LibCompilerV4.CompileInSingleFile()
 if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then
 
     # Support of the arguments when this script is executed with the mandatory argument and the optional ones.
-    if [ -n "${__BU_ARG_LANG}" ]; then 
-        LibCompilerV4.CompileInSingleFile "${__BU_ARG_LANG}" "${@}" || { exit 1; };
+    if [ -n "${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_LIST_STR_TO_ARRAY}" ]; then 
+        LibCompilerV4.CompileInSingleFile "${__BU__BIN__LIB_COMPILER_V4__ARGS__LANG_LIST_STR_TO_ARRAY}" "${@}" || { exit 1; };
 
     # If no options are passed, instead of throwing an error, the "LibCompilerV4.CompileInSingleFile()" function will be called with the supported languages argument.
     else

@@ -7,7 +7,7 @@ bc49170ef95bc187802773b327eaa74d Bash-utils/lib/functions/main/BasicMaths.lib
 7c104ab9890489d8c5b57c87f5e972c0 Bash-utils/lib/functions/main/Checkings.lib
 87c70b44ee9b5b22600727fb4e6f4cf7 Bash-utils/lib/functions/main/CMDS.lib
 058751b9a6b27ac68a7b3d2b56e3d8b1 Bash-utils/lib/functions/main/Decho.lib
-47c1cb33520386ab65d43c9b6608d86b Bash-utils/lib/functions/main/DevTools.lib
+c69bcd3839f452598d4042a778c7f6e2 Bash-utils/lib/functions/main/DevTools.lib
 4e25b1da05c560ba60b03f334f41ae6a Bash-utils/lib/functions/main/Directories.lib
 d2fcff1567bc854c490d6877e66c1656 Bash-utils/lib/functions/main/Echo.lib
 e8f803789fb545253768db98aa5f21e3 Bash-utils/lib/functions/main/Errors.lib
@@ -50,7 +50,7 @@ bc49170ef95bc187802773b327eaa74d Bash-utils/lib/functions/main/BasicMaths.lib
 7c104ab9890489d8c5b57c87f5e972c0 Bash-utils/lib/functions/main/Checkings.lib
 87c70b44ee9b5b22600727fb4e6f4cf7 Bash-utils/lib/functions/main/CMDS.lib
 058751b9a6b27ac68a7b3d2b56e3d8b1 Bash-utils/lib/functions/main/Decho.lib
-47c1cb33520386ab65d43c9b6608d86b Bash-utils/lib/functions/main/DevTools.lib
+c69bcd3839f452598d4042a778c7f6e2 Bash-utils/lib/functions/main/DevTools.lib
 4e25b1da05c560ba60b03f334f41ae6a Bash-utils/lib/functions/main/Directories.lib
 d2fcff1567bc854c490d6877e66c1656 Bash-utils/lib/functions/main/Echo.lib
 e8f803789fb545253768db98aa5f21e3 Bash-utils/lib/functions/main/Errors.lib
