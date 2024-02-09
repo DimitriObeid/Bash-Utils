@@ -962,7 +962,10 @@ function BU.Main.Checkings.CheckRootEUID()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS}";
 
@@ -1180,7 +1183,10 @@ function BU.Main.Checkings.CheckDirPathExists()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS}";
 
@@ -1214,7 +1220,10 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIES_PATHS_CHECKINGS}";
 
@@ -1251,7 +1260,10 @@ function BU.Main.Checkings.CheckFilePathExists()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
@@ -1287,7 +1299,10 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
@@ -1331,7 +1346,10 @@ function BU.Main.Checkings.CheckProjectLogPath()
 
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
@@ -1404,7 +1422,10 @@ function BU.Main.Status.CheckProjectLogStatus()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
@@ -1759,7 +1780,10 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
@@ -1904,7 +1928,10 @@ function BU.Main.Checkings.CheckDecho()
     #**** Code ****
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__TEXT_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_CHECKINGS}";
 

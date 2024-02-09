@@ -763,7 +763,7 @@ function LibCompilerV4.Functions.CheckLangArgDelim()
 # This function is imported from the "Bash-utils-init.sh" file, and serves in the "Locale.lib" file from the main module.
 
 # shellcheck disable=
-function BU.ModuleInit.IsCompiler()
+function BU.DevBin.LibCompiler.Function.IsCompiler()
 {
      if \
         [[ "${0##*/}" == lib-compilerV?(3|4).?(ba)sh ]] || \

@@ -141,7 +141,10 @@ function BU.Main.Directories.ProcessingDir()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PROCESSING_FUNCTIONS}";
 
@@ -208,7 +211,10 @@ function BU.Main.Directories.OverwriteDir()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
@@ -284,7 +290,10 @@ function BU.Main.Directories.Make()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
@@ -358,7 +367,10 @@ function BU.Main.Directories.MakePath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
@@ -400,7 +412,10 @@ function BU.Main.Directories.MkTmpDir()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FOLDER_CREATION_FUNCTIONS}";
 
@@ -448,7 +463,10 @@ function BU.Main.Directories.GetDirectoryName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
@@ -497,7 +515,10 @@ function BU.Main.Directories.GetDirectoryPath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
@@ -536,7 +557,10 @@ function BU.Main.Directories.GetParentDirectoryName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
@@ -593,7 +617,10 @@ function BU.Main.Directories.GetParentDirectoryPath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 
@@ -686,7 +713,10 @@ function BU.Main.Directories.TriggerRootDirWarning()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DIRECTORIES_LIB__CAT_DEBUG_ID__DIRECTORIES_FUNCTIONS}" \
         "${__BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PATH_PROCESSING}";
 

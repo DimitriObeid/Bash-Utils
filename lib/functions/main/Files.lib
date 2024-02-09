@@ -131,7 +131,10 @@ function BU.Main.Files.__ProcessingFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS}";
 
@@ -187,7 +190,10 @@ function BU.Main.Files.ProcessingFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PROCESSING_FUNCTIONS}";
 
@@ -259,7 +265,10 @@ function BU.Main.Files.OverwriteFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
@@ -323,7 +332,10 @@ function BU.Main.Files.Make()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
@@ -403,7 +415,10 @@ function BU.Main.Files.MakePath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
@@ -442,7 +457,10 @@ function BU.Main.Files.MakeFileInMemory()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
@@ -491,7 +509,10 @@ function BU.Main.Files.CreateProjectLogFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_CREATION_FUNCTIONS}";
 
@@ -647,7 +668,10 @@ function BU.Main.Files.DeleteFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS}";
 
@@ -686,7 +710,10 @@ function BU.Main.Files.RenameFilesByDeletingPattern()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_DELETION_FUNCTIONS}";
 
@@ -731,7 +758,10 @@ function BU.Main.Files.IsReadOnly()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -759,7 +789,10 @@ function BU.Main.Files.IsRW()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -787,7 +820,10 @@ function BU.Main.Files.IsRWX()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -815,7 +851,10 @@ function BU.Main.Files.IsRX()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -843,7 +882,10 @@ function BU.Main.Files.IsWriteOnly()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -871,7 +913,10 @@ function BU.Main.Files.IsWX()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -899,7 +944,10 @@ function BU.Main.Files.IsExecutableOnly()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHECKING_FILE_INFORMATIONS}";
 
@@ -940,7 +988,10 @@ function BU.Main.Files.GetByteSize()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -990,7 +1041,10 @@ function BU.Main.Files.GetCreationDate()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1033,7 +1087,10 @@ function BU.Main.Files.GetCharactersNumber()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1068,7 +1125,10 @@ function BU.Main.Files.GetChecksum.MD5()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1094,7 +1154,10 @@ function BU.Main.Files.GetChecksum.SHA1()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1120,7 +1183,10 @@ function BU.Main.Files.GetChecksum.SHA224()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1146,7 +1212,10 @@ function BU.Main.Files.GetChecksum.SHA256()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1172,7 +1241,10 @@ function BU.Main.Files.GetChecksum.SHA384()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1198,7 +1270,10 @@ function BU.Main.Files.GetChecksum.SHA512()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1227,7 +1302,10 @@ function BU.Main.Files.GetExtension()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1267,7 +1345,10 @@ function BU.Main.Files.GetLastAccess()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1304,7 +1385,10 @@ function BU.Main.Files.GetLastModification()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1340,7 +1424,10 @@ function BU.Main.Files.GetMIMEType()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1375,7 +1462,10 @@ function BU.Main.Files.GetLinesNumber()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1413,7 +1503,10 @@ function BU.Main.Files.GetMaxLineLength()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1470,7 +1563,10 @@ function BU.Main.Files.GetOwnerName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1508,7 +1604,10 @@ function BU.Main.Files.GetOwnerGroup()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1546,7 +1645,10 @@ function BU.Main.Files.GetWordsNumber()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GETTING_FILE_INFORMATIONS}";
 
@@ -1591,7 +1693,10 @@ function BU.Main.File.SetFileLastAccess()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SETTING_FILE_INFORMATIONS}";
 
@@ -1638,7 +1743,10 @@ function BU.Main.Files.SourceFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FILE_SOURCING}";
 
@@ -1705,7 +1813,10 @@ function BU.Main.Files.GetLineFromTextFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEXT_FILE_PARSING}";
 
@@ -1834,7 +1945,10 @@ function BU.Main.Files.AddToArchive()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
@@ -1886,7 +2000,10 @@ function BU.Main.Files.CompressCMD()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
@@ -1923,7 +2040,10 @@ function BU.Main.Files.CompressFormat()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
@@ -2017,7 +2137,10 @@ function BU.Main.Files.DeleteInArchive()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
@@ -2052,7 +2175,10 @@ function BU.Main.Files.SearchInArchive()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 #   - BU.Main.Checkings.IsArrayEmpty()  -> Main -> Checkings.lib
@@ -2089,7 +2215,10 @@ function BU.Main.Files.UncompressCMD()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 
@@ -2156,7 +2285,10 @@ function BU.Main.Files.UncompressFormat()
 ({
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_FILES_LIB__CAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__UN_COMPRESSION_FUNCTIONS}";
 

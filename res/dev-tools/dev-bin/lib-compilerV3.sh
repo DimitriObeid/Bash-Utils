@@ -728,6 +728,9 @@ function CheckLangArgDelim()
 # shellcheck disable=
 function BU.ModuleInit.IsCompiler() { if [[ "${0##*/}" == lib-compilerV3.?(ba)sh ]]; then return 0; else return 1; fi }
 
+# Adding an alias in order to make this file compatible with the newer versions of the Bash Utils framework's files and the naming conventions of the "dev-bin" scripts.
+alias BU.DevBin.LibCompiler.Function.IsCompiler='BU.ModuleInit.IsCompiler';
+
 ## ==============================================
 
 ## ERRORS HANDLING

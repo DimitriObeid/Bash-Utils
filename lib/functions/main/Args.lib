@@ -158,7 +158,10 @@ function BU.Main.Args.PrintBadOption()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK_MESSAGE_PRINTING}";
 
@@ -459,7 +462,10 @@ function BU.Main.Args.GetFuncArgsArrayValues()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -531,7 +537,10 @@ function BU.Main.Args.GetFileName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -572,7 +581,10 @@ function BU.Main.Args.GetFunctionName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -613,7 +625,10 @@ function BU.Main.Args.GetLineNumber()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -656,7 +671,10 @@ function BU.Main.Args.GetFFL()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -773,7 +791,10 @@ function BU.Main.Args.PrintFFL()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -818,7 +839,10 @@ function BU.Main.Args.PrintFFLErrorOccured()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -886,7 +910,10 @@ function BU.Main.Args.Argc()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -1007,7 +1034,10 @@ function BU.Main.Args.GetArgc-FFL()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ARGS_LIB__CAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS}" \
         "${__BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUMENT_PRESENCE_CHECKING}";
 
@@ -1058,7 +1088,12 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
 	#**** Parameters ****
     local p_parent=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the folder to process (into its parent directory).
@@ -1156,7 +1191,12 @@ function BU.Main.Args__CMDS.GetCommandPath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_cmd=${1:-$'\0'};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Command's name.
@@ -1217,7 +1257,12 @@ function BU.Main.Args__Decho.Decho()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
 	#**** Parameters ****
     local p_string=${1:-$'\0'};         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL	    - DESC : String to display.
@@ -1309,7 +1354,12 @@ function BU.Main.Args__Directories.ProcessingDir()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_function=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Name of the function to process.
@@ -1389,7 +1439,12 @@ function BU.Main.Args__Directories.OverwriteDir()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to overwrite.
@@ -1452,7 +1507,12 @@ function BU.Main.Args__Directories.Make()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_parent=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Parent folder's path.
@@ -1529,7 +1589,12 @@ function BU.Main.Args__Directories.MakePath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Full path of the directory to create.
@@ -1597,7 +1662,12 @@ function BU.Main.Args__Directories.GetDirectoryName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to process.
@@ -1646,7 +1716,12 @@ function BU.Main.Args__Directories.GetDirectoryPath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to process.
@@ -1695,7 +1770,12 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to process.
@@ -1746,7 +1826,12 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the directory to process.
@@ -1833,7 +1918,12 @@ function BU.Main.Args__Files.ProcessingFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_function=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Function to process.
@@ -1882,7 +1972,12 @@ function BU.Main.Args__Files.OverwriteFile()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #***** Parameters ****
     local p_path=${1:-$'\0'}            # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to overwrite.
@@ -1963,7 +2058,12 @@ function BU.Main.Args__Files.Make()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_parent=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Parent folder path of the file to create.
@@ -2054,7 +2154,12 @@ function BU.Main.Args__Files.MakePath()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Full path of the file to create.
@@ -2109,7 +2214,12 @@ function BU.Main.Args__Files.SetLastAccess()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_filepath=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to check its last access.
@@ -2189,7 +2299,12 @@ function BU.Main.Args__Files.CompressCMD()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_cmd=${1:-$'\0'}         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
@@ -2265,7 +2380,12 @@ function BU.Main.Args__Files.CompressFormat()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_cmd=${1:-$'\0'}         # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Compression command.
@@ -2328,7 +2448,12 @@ function BU.Main.Args__Files.SearchInArchive()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_arch=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the target archive.
@@ -2392,7 +2517,12 @@ function BU.Main.Args__Files.UncompressCMD()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_cmd=${1:-$'\0'};        # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Archive format.
@@ -2468,7 +2598,12 @@ function BU.Main.Args__Files.UncompressFormat()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_form=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Archive format.
@@ -2542,7 +2677,12 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_fileFS=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file or folder's file system host.
@@ -2608,7 +2748,12 @@ function BU.Main.Args__Filesystem.GetFSInfos()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_path=${1:-$'\0'};       # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file or folder's file system host.
@@ -2674,7 +2819,12 @@ function BU.Main.Args__Filesystem.Chown()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_currentOwner=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Former owner of the directory or the file (this parameter is used in the translated / log messages, stored into their own variables).
@@ -2766,7 +2916,12 @@ function BU.Main.Args__Filesystem.ChownRec()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_currentOwner=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Former owner of the directory (this parameter is used in the translated / log messages, stored into their own variables).
@@ -2863,7 +3018,12 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
 	local p_code=${1:-NULL};            # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : NULL		- DESC : ISO 639-1 code of the language in which the file must be translated.
@@ -2979,7 +3139,12 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3046,7 +3211,12 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3123,7 +3293,12 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3198,7 +3373,12 @@ function BU.Main.Args__Text.DeleteLettersInString()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3253,7 +3433,12 @@ function BU.Main.Args__Text.GetCharacterOccurences()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3327,7 +3512,12 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3378,7 +3568,12 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3455,7 +3650,12 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3530,7 +3730,12 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
@@ -3597,7 +3802,12 @@ function BU.Main.Args__Text.StrToWordArray()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "" "";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "" \
+        "";
 
     #**** Parameters ****
     local p_string=${1:-$'\0'};     # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to convert in an array of words.

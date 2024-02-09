@@ -557,7 +557,8 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMA
 # shellcheck disable=
 function BU.Main.OS.GetCurrentOS()
 {
-    # This function call makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command. the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
 
     #**** Code ****
@@ -605,7 +606,8 @@ function BU.Main.OS.GetCurrentOS()
 
 function BU.Main.OS.PrintCurrentOS()
 {
-    # This function call makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command. the current function and its executed content if it is called during the execution of the Fedoramain script with the "$(bash -x)" command.
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
 
     #**** Code ****

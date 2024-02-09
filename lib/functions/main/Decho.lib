@@ -127,7 +127,10 @@ function BU.Main.Decho.__Decho()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
         "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS}";
 
@@ -167,7 +170,10 @@ function BU.Main.Decho.Decho()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_DECHO_LIB__CAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING}" \
         "${__BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FORMATTING__WRITING_DIFFERENTLY_COLORED_FORMATTED_TEXT_BETWEEN_TEXT__BASIS}";
 

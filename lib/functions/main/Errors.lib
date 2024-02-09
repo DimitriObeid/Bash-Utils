@@ -147,7 +147,10 @@ function BU.Main.Errors.HandleSmallErrors()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}" \
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLASSIC_ERRORS_HANDLING}";
 
@@ -252,7 +255,10 @@ function BU.Main.Errors.Exit()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}" \
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__EXIT_AND_RETURN_CODES_HANDLING}";
 
@@ -378,7 +384,10 @@ function BU.Main.Errors.HandleErrors()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_ERRORS_LIB__CAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS}" \
         "${__BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCRIPT_ERRORS_HANDLING}";
 

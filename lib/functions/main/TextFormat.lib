@@ -293,7 +293,10 @@ function BU.Main.TextFormat.SetBGColor()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}" \
         "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES}";
 
@@ -372,7 +375,10 @@ function BU.Main.TextFormat.SetTextColor()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}" \
         "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES}";
 
@@ -607,8 +613,12 @@ function BU.Main.TextFormat.SetTextFormat()
     #   ${2}    -> Corresponding ANSI escape sequence (useful if the "$(tput)" command is not detected or unavailable).
 
     #**** Code ****
-    # This function call makes it easier for the user to find the current function and its executed content if it is called during the execution of the main script with the "$(bash -x)" command. the current function and its executed content if it is called during the execution of the main script with the command "$(bash -x)".
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__TEXT}" \
         "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT}";
 

@@ -212,7 +212,7 @@ declare -ag __BU__BIN__LCFAL__PATHS__LATEX_FILES_ARCH__LANG=();
 # Creation of the "${__lang}" directory.
 
 # shellcheck disable=
-function BU.LCFAL.Function.CreateLangDirectory()
+function BU.DevBin.LCFAL.Function.CreateLangDirectory()
 {
     #**** Parameters ****
     p_lang=${1:-$'\0'};    # ARG TYPE : String  # REQUIRED | DEFAULT VAL : NULL     - DESC : ISO 639-1 language code of the folder to create.
@@ -253,7 +253,7 @@ function BU.LCFAL.Function.CreateLangDirectory()
 # Sub-folders checking and creation function.
 
 # shellcheck disable=
-function BU.LCFAL.Function.CheckOrCreateSubFolders()
+function BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders()
 {
     #**** Parameters ****
     local p_dirpath=${1:-$'\0'};    # ARG TYPE : Dirpath    # REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the sub-folder to check its existence and / or to create.
@@ -288,18 +288,19 @@ function BU.LCFAL.Function.CheckOrCreateSubFolders()
 # Checking if the script file which runs the Bash code is the "latex-create-file-arch-lang.sh" shell script.
 
 # shellcheck disable=
-function BU.LCFAL.Function.IsShellScriptLCFAL()
+function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()
 {
     if [[ "${0##*/}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi
 }
 
-# ·······························································································································································
-# Bypassing the "command not found" error from the absence of the "BU.ModuleInit.IsCompiler()" function into the "BU.Main.Text.ReplaceLettersInString()" function
-# from the "Text.lib" file by simply returning 0, since, in the "BU.Main.Text.ReplaceLettersInString()" function, the functions from the "Echo.lib" file won't be
-# called if the "BU.ModuleInit.IsCompiler()" function return 0.
+# ······················································································································
+# Bypassing the "command not found" error from the absence of the "BU.DevBin.LibCompiler.Function.IsCompiler()" function
+# into the "BU.Main.Text.ReplaceLettersInString()" function from the "Text.lib" file by only returning the '0' value, as
+# in the "BU.Main.Text.ReplaceLettersInString()" function, the functions from the "Echo.lib" file won't be called if the 
+# "BU.DevBin.LibCompiler.Function.IsCompiler()" function return 0.
 
 # shellcheck disable=
-function BU.ModuleInit.IsCompiler() { return 0; }
+function BU.DevBin.LibCompiler.Function.IsCompiler() { return 0; }
 
 ## ==============================================
 
@@ -319,7 +320,7 @@ for __lang in "${__BU__BIN__LCFAL__ARGS__LANG_ARRAY[@]}"; do
     #**** Code ****
 
     # Verifying if the language folder exists in the "Bash-utils/docs" directory.
-    BU.LCFAL.Function.CreateLangDirectory "${__lang}" || exit 1;
+    BU.DevBin.LCFAL.Function.CreateLangDirectory "${__lang}" || exit 1;
 
     # Assigning the the "${__BU__BIN__LCFAL__PATHS__LATEX_FILES_ARCH[@]}" array's indexes to the "${__BU__BIN__LCFAL__PATHS__LATEX_FILES_ARCH__LANG[@]}" array.
     __BU__BIN__LCFAL__PATHS__LATEX_FILES_ARCH__LANG+=("${__BU__BIN__LCFAL__PATHS__LATEX_FILES_ARCH[@]}");
@@ -344,16 +345,16 @@ for __lang in "${__BU__BIN__LCFAL__ARGS__LANG_ARRAY[@]}"; do
     echo;
 
 
-    # Since the "$(mkdir -p)" command is used in the "BU.LCFAL.Function.CheckOrCreateSubFolders()" function, it is possible to directly create the last sub-directories.
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/devtools"                         || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/01) InitScript"           || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Hardware"      || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/main"          || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Software"      || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Hardware"  || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/main"      || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Software"  || exit 1;
-    BU.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/04) Functions/main"       || exit 1;
+    # Since the "$(mkdir -p)" command is used in the "BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders()" function, it is possible to directly create the last sub-directories.
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/devtools"                         || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/01) InitScript"           || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Hardware"      || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/main"          || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/02) Config/Software"      || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Hardware"  || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/main"      || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/03) InitModule/Software"  || exit 1;
+    BU.DevBin.LCFAL.Function.CheckOrCreateSubFolders "${__BU__BIN__LCFAL__PATHS__BASH_UTILS__DOCS__CURRLANG__DIR}/modules/04) Functions/main"       || exit 1;
 
     # Creating each LaTeX file into their right sub-folder.
     echo -e "\n";

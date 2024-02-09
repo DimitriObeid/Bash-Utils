@@ -133,7 +133,10 @@ function BU.Main.PosixTerm.DisplayCountdown()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}" \
         "${__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG}";
 
@@ -157,7 +160,10 @@ function BU.Main.PosixTerm.DisplayProgressBar()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}" \
         "${__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG}";
 
@@ -184,7 +190,10 @@ function BU.Main.PosixTerm.DisplaySpinner()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" \
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
         "${__BU_MAIN_POSIXTERM_LIB__CAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS}" \
         "${__BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTIONS__DISPLAYING_TEXT_AND_MORE_WHILE_A_TASK_IS_ONGOIG}";
 

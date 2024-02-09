@@ -193,7 +193,7 @@ function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; 
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.LCFAL.Function.IsShellScriptLCFAL()         { if [[ "${0##*/}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()  { local f="${0##*/}"; if [[ "${f,,}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ···············································································································································································
 # Checking if the script file which runs the Bash code are either the "lib-compilerV3.sh" file or the "lib-compilerV4.sh" file, which only contain very basic included resources.
@@ -207,7 +207,7 @@ function BU.LCFAL.Function.IsShellScriptLCFAL()         { if [[ "${0##*/}" == la
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsCompiler()                     { if [[ "${0##*/}" == lib-compilerV?(3|4).?(ba)sh ]] || [[ "${0##*/}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.DevBin.LibCompiler.Function.IsCompiler()    { local f=${0##*/} ;if [[ "${f,,}" == lib-compilerV?(3|4).?(ba)sh ]] || [[ "${f,,}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ······················································································
 # Checking if the framework is being installed thanks to the installation script (TODO).
