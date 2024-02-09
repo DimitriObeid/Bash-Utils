@@ -170,7 +170,7 @@ function BU.Main.DevTools.ShellcheckVerif()
 ({
     #**** Parameters ****
     local p_path=${1:-\$'0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Path of the file to verify.
-    local p_stable=${2:-NULL};  # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "${__BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED}" variable's value.
+    local p_stable=${2:-NULL};  # ARG TYPE : String     - CCONTEXT | DEFAULT VAL : NULL     - DESC : If the file to be compiled is a stable version, the target file will be shellchecked, overriding the code's behavior about the "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED}" variable's value.
 
     #**** Variables ****
     local compiler_env;         # VAR TYPE : Filepath   - DESC : Cutting the path which precedes the "Bash-utils/" sub-string in order to unify the compilation environments by processing the relative path of a file instead of its absolute path (if someone else compiles a version of the framework stored in their home folder, instead of "/usr/local/lib/" for example).
@@ -188,7 +188,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     function BU.Main.DevTools.ShellcheckVerif.SupportLegacyVersions()
     {
         # Each of the original variables values are assigned to the ones whose name respect the naming conventions of the newer versions of the compiler.
-        declare -g __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED="${__BU_SHELLCHECKED}";
+        declare -g __BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED="${__BU_SHELLCHECKED}";
         declare -g __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__SHELLCHECK__VERIFICATION="${__BU_COMPILE__SHELLCHECK__VERIFICATION}";
 
         declare -g __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__SHELLCHECK__FAIL="${__BU_COMPILE__SHELLCHECK__FAIL}";
@@ -208,7 +208,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
     {
         # shellcheck disable=SC2059
-        if [ "${__BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
+        if [ "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED}" == 'false' ] || [ "${p_stable}" == 'compile-stable' ]; then
             shchkOut="$(shellcheck "${p_path}" 2>&1)";
 
             shchkOutCode="${?}";

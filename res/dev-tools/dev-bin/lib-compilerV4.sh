@@ -971,7 +971,7 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
         # If the user decided to create a stable version of the compiled framework.
         if [ "${arg}" == '-C' ] || [ "${arg,,}" == "${_____value_of__compile_stable}" ]; then
             # Declaring a variable to tell to the next program's instructions that this value was passed as argument.
-            __vArrayVal_compile_stable="${_____value_of__compile_stable}";
+            declare -g __vArrayVal_compile_stable="${_____value_of__compile_stable}";
 
         # Else, if the user passes the 'compile-unstable' value to compile an unstable version of the framework.
         elif [ "${arg}" == '-c' ] || [ "${arg,,}" == "${_____value_of__compile_unstable}" ]; then
@@ -981,16 +981,16 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
 
         # Else, if the author(s) of the compilation give their name(s).
         elif [ "${arg}" == '-A' ] || [[ "${arg,,}" == "${_____value_of__compilation_authors}"=* ]]; then
-            __vArrayVal_compilation_authors="${_____value_of__compilation_authors}";
+            declare -g __vArrayVal_compilation_authors="${_____value_of__compilation_authors}";
 
         # Else, if the user decides to give a version number to the compiled file.
         elif [ "${arg}" == '-V' ] || [ "${arg,,}" == "${_____value_of__compilation_version}" ]; then
-            __vArrayVal_compilation_version="${_____value_of__compilation_version}";
+            declare -g __vArrayVal_compilation_version="${_____value_of__compilation_version}";
 
 
         # Else, if the user decides to display the content of each compiled file as they are processed by the compiler.
         elif [ "${arg}" == '-d' ] || [ "${arg,,}" == "${_____value_of__display}" ]; then
-            __vArrayVal_display="${_____value_of__display}";
+            declare -g __vArrayVal_display="${_____value_of__display}";
 
 
         # Else, if the user decides to get a quick help about the compiler.
@@ -1001,39 +1001,39 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
         # Else, if the user decides to remove the comments from the compiled file
         # This option will not remove the file's top shebang, nor its informations commented at its top or the shellcheck directives.
         elif [ "${arg}" == '-k' ] || [ "${arg,,}" == "${_____value_of__keep_comments}" ]; then
-            __vArrayVal_keep_comments="${_____value_of__keep_comments}";
+            declare -g __vArrayVal_keep_comments="${_____value_of__keep_comments}";
 
         # Else, if the user decides to keep every pieces of code which prevent the direct execution of their host files.
         elif [ "${arg}" == '-E' ] || [ "${arg,,}" == "${_____value_of__keep_exec_safeguards}" ]; then
-            __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
+            declare -g __vArrayVal_keep_exec_safeguards="${_____value_of__keep_exec_safeguards}";
 
         # Else, if the user decides to keep the description of each function.
         elif [ "${arg}" == '-i' ] || [ "${arg,,}" == "${_____value_of__keep_functions_infos}" ]; then
-            __vArrayVal_keep_functions_infos="${_____value_of__keep_functions_infos}";
+            declare -g __vArrayVal_keep_functions_infos="${_____value_of__keep_functions_infos}";
 
         # Else, if the user decides to keep the "#**** Parameters ****", "#**** Variables ****" and "#**** Code ****" comments into the functions.
         elif [ "${arg}" == '-p' ] || [ "${arg,,}" == "${_____value_of__keep_functions_pvc_infos}" ]; then
-            __vArrayVal_keep_functions_pvc_infos="${_____value_of__keep_functions_pvc_infos}";
+            declare -g __vArrayVal_keep_functions_pvc_infos="${_____value_of__keep_functions_pvc_infos}";
 
         # Else, if the user decides to keep the raw layout of the compiled file.
         elif [ "${arg}" == '-r' ] || [ "${arg,,}" == "${_____value_of__keep_raw_document_layout}" ]; then
-            __vArrayVal_keep_raw_document_layout="${_____value_of__keep_raw_document_layout}";
+            declare -g __vArrayVal_keep_raw_document_layout="${_____value_of__keep_raw_document_layout}";
 
 
         # Else, if the user decides not to include the aliases file into the compiled file.
         elif [ "${arg}" == '-a' ] || [ "${arg,,}" == "${_____value_of__no_aliases_include}" ]; then
-            __vArrayVal_no_alias_include="${_____value_of__no_aliases_include}";
+            declare -g __vArrayVal_no_alias_include="${_____value_of__no_aliases_include}";
 
         # Else, if the user decides not to include the English translation resources into a non-english file to be compiled.
         elif [ "${arg}" == '-e' ] || [ "${arg,,}" == "${_____value_of__no_english_include}" ]; then
-            __vArrayVal_no_english_include="${_____value_of__no_english_include}";
+            declare -g __vArrayVal_no_english_include="${_____value_of__no_english_include}";
 
         # Else, if the user decides to prevent the execution of the "$(shellcheck)" command.
         # WARNING : The compiler will not check for programming errors in the files to compile, the call of this option is not recommended, unless you know what you are doing.
 
         # This option is not compatible with the "${__vArrayVal_compile_stable}" option.
         elif [ "${arg}" == '-s' ] || [ "${arg,,}" == "${_____value_of__no_shellcheck}" ]; then
-            __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
+            declare -g __vArrayVal_no_shellcheck="${_____value_of__no_shellcheck}";
 
 
         # Else, if the user decides to remove the Shellcheck directives from the compiled file.
@@ -1041,7 +1041,7 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
 
         # This option is not compatible with the "${__vArrayVal_compile_stable}" option.
         elif [ "${arg}" == '-S' ] || [ "${arg,,}" == "${_____value_of__remove_shellcheck_directives}" ]; then
-            __vArrayVal_remove_shellcheck_directives="${_____value_of__remove_shellcheck_directives}";
+            declare -g __vArrayVal_remove_shellcheck_directives="${_____value_of__remove_shellcheck_directives}";
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #~ Else, if an unsupported argument is passed into the array of optional arguments
@@ -1069,14 +1069,14 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
 # shellchek disable=
 function LibCompilerV4.PreCompilationFunctions.ManageShellcheck()
 {
-    # At this point, declaring this condition is safe, since the verification of the presence 
+    # At this point, declaring this condition is safe, since the verification of the presence
     # of the "${_____value_of__compile_stable}" argument value was done before.
     if [[ (-n "${__vArrayVal_no_shellcheck}") && (-n "${__vArrayVal_no_shellcheck}") ]]; then
         LibCompilerV4.Functions.PrintWarningLine "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__SHELLCHECK__DISABLED}" 'FULL';
 
         sleep 1;
 
-        __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED='true';
+        declare -g __BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED='true';
     else
         # Checking first if the "$(shellcheck)" command is installed in order to check for code errors.
         if ! command -v shellcheck; then 
@@ -1086,7 +1086,7 @@ function LibCompilerV4.PreCompilationFunctions.ManageShellcheck()
         fi
 
         # To avoid launching Shellcheck each time another file is generated in another language, it's necessary to check if the files were checked.
-        __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED='false';
+        declare -g __BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED='false';
     fi
 }
 
@@ -1816,11 +1816,11 @@ function LibCompilerV4.CompileInSingleFile()
                 "${__BU__LIB_COMPILER_V4_FULL_FILE_PATH}")" \
             'LOWER';
 
-        # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED}" variable's value to 'true'.
+        # Now that the files were checked by Shellcheck, it's necessary to set the "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED}" variable's value to 'true'.
         # However, in case a stable version is compiled, it is better to check the files that were not checked.
 
         # the aforementioned condition is managed into the "BU.Main.DevTools.ShellcheckVerif()" function.
-        if [ "${__BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED}" == 'false' ]; then __BU__BIN__LIB_COMPILER_V4__BU_SHELLCHECKED='true'; fi
+        if [ "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED}" == 'false' ]; then __BU__BIN__LIB_COMPILER_V4__GLOBVARS__BOOL__BU_SHELLCHECKED='true'; fi
 
 
         #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
