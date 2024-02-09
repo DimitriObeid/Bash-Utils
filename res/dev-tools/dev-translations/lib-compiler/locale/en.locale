@@ -352,7 +352,7 @@ __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUC
 
 
 # ------------------------------------------------------------------------------------------------------
-# STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "cmhod" command.
+# STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "$(chmod)" command.
 
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} STABLE FILE IN READ-ONLY MODE FOR SAFETY REASONS";
 __BU_COMPILE__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE CANNOT BE SET IN READ ONLY MODE";

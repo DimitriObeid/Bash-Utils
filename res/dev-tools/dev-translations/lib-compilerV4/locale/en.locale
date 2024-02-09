@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# -------------------------------------------------
+# ---------------------------------------------------
 # "LibCompilerV4.Functions.CompilerUsage()" function.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__USAGE="Usage : ./path/to/lib-compilerV4.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compiles the content of the Bash Utils framework's basic files and its main module into a single file.";
 
-# ----------------------------------------------------------------------
+# ------------------------------------------------------------------------
 # "LibCompilerV4.Functions.CompilerUsage()" function : mandatory argument.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument (use ONLY one of them) :";
@@ -66,7 +66,7 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MA
     -h --help                           replacement of the '--lang=' option. Displays on the screen the help messages and the compiler's usage
                                         instructions.";
 
-# ----------------------------------------------------------------------
+# ------------------------------------------------------------------------
 # "LibCompilerV4.Functions.CompilerUsage()" function : optional arguments.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Optional arguments (WARNING : some options are incompatible between each other, please read carefully this help guide) :";
@@ -354,8 +354,8 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COPY_COMPILED_FILE_IN_S
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__COPYING_FILE__SUCCESS="SUCCESSFULLY COPIED THE COMPILED ${__HIGHLIGHT}%s${__SUCCESS} FILE TO THE ${__HIGHLIGHT}%s${__SUCCESS} DIRECTORY";
 
 
-# ------------------------------------------------------------------------------------------------------
-# STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "cmhod" command.
+# --------------------------------------------------------------------------------------------------------
+# STABLE FILE COMPILATION ONLY : Setting the compiled file into read-only mode with the "$(chmod)" command.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD="SETTING THE COMPILED ${__HIGHLIGHT}%s${__NEWSTEP} STABLE FILE IN READ-ONLY MODE FOR SAFETY REASONS";
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING="WARNING : THE COMPILED ${__HIGHLIGHT}%s${__WARNING} STABLE FILE CANNOT BE SET IN READ ONLY MODE";
