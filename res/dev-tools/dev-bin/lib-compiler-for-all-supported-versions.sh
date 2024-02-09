@@ -115,7 +115,7 @@ declare -g      __BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PA
 ######################################################### CODE ########################################################
 
 # Debug
-# for argg in "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}"; do echo "${argg}"; done
+# for args in "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}"; do echo "${args}"; done
 
 # source "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/bin/lib-compilerV4.sh";
 
@@ -129,8 +129,14 @@ exec \
 exec \
     "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/bin/lib-compilerV4.sh" \
     --lang-include=supported \
-    --keep-raw-document-layout \
     "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}" \
+    || { exit 1; };
+
+# exec \
+#     "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/bin/lib-compilerV4.sh" \
+#     --lang-include=supported \
+#     --keep-raw-document-layout \
+#     "${__BU__BIN__LIB_COMPILER_FOR_ALL_SUPPORTED_VERSIONS__ARGS__LANG_ARRAY_FOR_THE_COMPILER[@]}" \
     || { exit 1; };
 
 exit 0;

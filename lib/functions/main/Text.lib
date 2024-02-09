@@ -1404,9 +1404,9 @@ function BU.Main.Text.WordArrayToStr()
 #     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
 #     BU.Main.Echo.Debug \
-        "main" \
-        "$(basename "${BASH_SOURCE[0]}")" \
-        "${FUNCNAME[0]}" \
+#        "main" \
+#        "$(basename "${BASH_SOURCE[0]}")" \
+#        "${FUNCNAME[0]}" \
 #         "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
 #         "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLITTING_TEXT}";
 #
