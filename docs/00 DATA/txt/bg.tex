@@ -1,0 +1,116 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Кодиране на текста (знаци с ударение).
+\usepackage[bulgarian]{babel}           % Език на документа.
+\usepackage[sfdefault]{roboto}          % Шрифт, използван в документа.
+\usepackage[T1]{fontenc}                % Правило за дефис за знаци с ударение (за компилатора на LaTeX).
+
+\usepackage{fancyhdr}                   % Добавете заглавия и подзаглавия на всяка страница на документа.
+\usepackage{graphicx}                   % Добавяне на изображения към документа.
+\usepackage{hyperref}                   % Създаване на връзки с възможност за кликване, които сочат към други части на документа.
+\usepackage{parskip}                    % Дефинирани прекъсвания на редовете между параграфите.
+
+% Не забравяйте да промените опцията "svgnames" (RGB-дефинирани цветове, по-добри
+% за цифров дисплей) на опцията "dvipsnames" (CMYK-базирани, по-добри за печат) в
+% скрипта, който конвертира всеки LaTeX документ във формат за печат.
+
+\usepackage[usenames,svgnames]{xcolor}  % Оцветяване на текста.
+\usepackage{verbatim}                   % Оформление на параграфите.
+
+\usepackage[document]{ragged2e}                           % Обосновка на текста.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry} % Формиране на документа.
+
+
+% ----------------------------------------------------------------------------------------
+% За повече информация и документация за тези пакети LaTeX, моля, вижте връзките по-долу :
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% -----------------------------------------------------------------------------------------------------
+% Списък с конкретни цветове (за оформлението и за промяна на темата за отпечатване на документацията).
+
+% Определяне на цвета            % Нормален | За печат      - Description
+
+\definecolor{back}{HTML}{000000} % Черно    | Бял         	- Цвят на фона на документа.
+\definecolor{case}{HTML}{fcff00} % Жълт                   	- Цвят на условията "случай".
+\definecolor{cmds}{HTML}{909090} % Сив                     	- Оцветяване на имената на системните команди с техните аргументи.
+\definecolor{cond}{HTML}{be480a} % Тухла                    - Цвят на условията "if".
+\definecolor{func}{HTML}{800080} % мавруд                   - Цветът на функциите, дефинирани във всеки модул от рамката Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff} % Синя                     - Цвят на примките.
+\definecolor{main}{HTML}{8F00FF} % Виолетово                - Цвят на функциите от основния скрипт.
+\definecolor{path}{HTML}{bfff00} % Лайм                     - Цвят на пътищата към файловете и папките.
+\definecolor{sec1}{HTML}{ff0000} % Червено                  - Цвят на заглавията на основното и първото ниво.
+\definecolor{sec2}{HTML}{00ff00} % Зелен                    - Цвят на заглавията от второ ниво.
+
+\definecolor{sec3}{HTML}{0060ff} % Син                      - Цвят на заглавията от трето ниво.
+\definecolor{text}{HTML}{ffffff} % Бял    	| Черно         - Цвят на нормалния текст.
+\definecolor{vars}{HTML}{FF7F00} % Оранжев                  - Цвят на имената на параметрите и променливите.
+
+
+% --------------------------------------------------
+% Определяне на шрифта и цвета на фона на документа.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ---------------------------------------
+% Определяне на информацията в документа.
+
+\title{\color{red}Bash Utils...}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Bash Utils...)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Bash Utils...)
+  /Keywords ()
+}
+
+
+% -----------------
+% Paragraph layout.
+
+\setlength{\parskip}{1em}
+
+
+% --------------------------
+% Beginning of the document.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\end{document}
