@@ -148,3 +148,5 @@ else
 	BU.Main.Echo.Error "An error occured during the $(BU.Main.Decho.echoE "${__P_DESKTOP_PATH}") file creation.";
 	BU.Main.Echo.Newline; exit 1;
 fi
+
+exit 0;

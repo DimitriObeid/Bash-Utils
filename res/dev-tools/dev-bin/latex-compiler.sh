@@ -80,7 +80,7 @@
 ## COMMANDS
 
 # Storing the name of the "$(latexmk)" command.
-__BU_LATEX_COMPILER__CMD='latexmk';
+__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD='latexmk';
 
 ## ==============================================
 
@@ -109,17 +109,17 @@ __BU_LATEX_COMPILER__CMD='latexmk';
 
 
 
-if ! command -v latexmk; then
-    if      [[ "${LANG,,}" == de_* ]]; then echo "Der Befehl '${__BU_LATEX_COMPILER__CMD}' wurde auf Ihrem System nicht gefunden. Ausführung des Compilers gestoppt" >&2;
-    elif    [[ "${LANG,,}" == es_* ]]; then echo "El comando '${__BU_LATEX_COMPILER__CMD}' no fue encontrado en su sistema. Detener la ejecución del compilador" >&2;
-    elif    [[ "${LANG,,}" == fr_* ]]; then echo "La commande '${__BU_LATEX_COMPILER__CMD}' n'a pas été trouvée sur votre système. Arrêt de l'exécution du compilateur" >&2;
+if ! command -v "${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}"; then
+    if      [[ "${LANG,,}" == de_* ]]; then echo "Der Befehl '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' wurde auf Ihrem System nicht gefunden. Ausführung des Compilers gestoppt" >&2;
+    elif    [[ "${LANG,,}" == es_* ]]; then echo "El comando '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' no fue encontrado en su sistema. Detener la ejecución del compilador" >&2;
+    elif    [[ "${LANG,,}" == fr_* ]]; then echo "La commande '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' n'a pas été trouvée sur votre système. Arrêt de l'exécution du compilateur" >&2;
 
-    elif    [[ "${LANG,,}" == pt_* ]]; then echo "O comando '${__BU_LATEX_COMPILER__CMD}' não foi encontrado no seu sistema. Impedir o compilador de funcionar" >&2;
-    elif    [[ "${LANG,,}" == ru_* ]]; then echo "Команда '${__BU_LATEX_COMPILER__CMD}' не найдена в вашей системе. Остановка работы компилятора" >&2;
-    elif    [[ "${LANG,,}" == uk_* ]]; then echo "Команду '${__BU_LATEX_COMPILER__CMD}' не знайдено у вашій системі. Зупинка роботи компілятора" >&2;
+    elif    [[ "${LANG,,}" == pt_* ]]; then echo "O comando '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' não foi encontrado no seu sistema. Impedir o compilador de funcionar" >&2;
+    elif    [[ "${LANG,,}" == ru_* ]]; then echo "Команда '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' не найдена в вашей системе. Остановка работы компилятора" >&2;
+    elif    [[ "${LANG,,}" == uk_* ]]; then echo "Команду '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' не знайдено у вашій системі. Зупинка роботи компілятора" >&2;
 
-    else echo "The '${__BU_LATEX_COMPILER__CMD}' command was not found on your system. Terminating the compiler's execution" >&2;
-
+    else 
+        echo "The '${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}' command was not found on your system. Terminating the compiler's execution" >&2;
     fi
 
     echo >&2; exit 1;

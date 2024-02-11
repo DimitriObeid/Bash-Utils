@@ -559,7 +559,12 @@ function BU.Main.OS.GetCurrentOS()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" \
+        "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
 
     #**** Code ****
     BU.Main.OS.IsAndroidTermux        	&& { BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
@@ -608,7 +613,12 @@ function BU.Main.OS.PrintCurrentOS()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__GENERAL_OS_FNCT}" \
+        "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__GENERAL_OS_FNCT__GATHERING_INFORMATIONS}";
 
     #**** Code ****
     BU.Main.OS.IsAndroidTermux          && { BU.Main.Echo.Msg 'Android';                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; };
@@ -1579,7 +1589,12 @@ function BU.Main.OS.CheckOSXVersion()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}" "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS}";
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_OS_LIB__CAT_DEBUG_ID__OSX}" \
+        "${__BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS}";
 
 	#**** Parameters ****
     local p_version=${1:-$'\0'}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : OS X version (can be an integer or a string (like 'Yosemite' for Mac OS X 10.10)).

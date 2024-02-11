@@ -129,7 +129,23 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTI
 #   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';  BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Text.CutLogDateFromString()
+{
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';
+    
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    
+    return 0;
+}
 
 # ·······································································
 # Cutting the dash written before a command option call (to be improved).
@@ -142,7 +158,23 @@ function BU.Main.Text.CutLogDateFromString()     { BU.Main.Echo.Debug "main" "$(
 #   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
 
 # shellcheck disable=
-function BU.Main.Text.CutDashFromOption()        { BU.Main.Echo.Debug "main" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}"; BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';   BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; }
+function BU.Main.Text.CutDashFromOption()
+{
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
+    BU.Main.Text.CutSubStringAfterNthDelim "${1}" '-';
+    
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    
+    return 0;
+}
 
 # ··················································································
 # Cutting the first character from a string, and getting every following characters.
@@ -642,6 +674,52 @@ function BU.Main.Text.GetCharacterOccurences()
     echo -ne "${#v_occurences}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+}
+
+# ·····································································
+# Getting the occurences of a string pattern in the values of an array.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args__Text.GetCharacterOccurences()   -> Main -> Args.lib
+
+#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+
+# shellcheck disable=
+function BU.Main.Text.GetCharacterOccurencesFromArray()
+{
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+
+    #**** Parameters ****
+    local p_array=${1:-$'\0'};      # ARG TYPE : Array  - REQUIRED | DEFAULT VAL : NULL     - DESC : Array to process.
+    local p_target=${2:-$'\0'};     # ARG TYPE : Char   - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
+    local p_valToDisplay=${3:-2};   # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : 2        - Desc : Printing the number of indexes only where an occurence was found (0), the number of occurences only (1), or both (2).
+
+    #**** Code ****
+    if ! BU.Main.Args__Text.GetCharacterOccurencesFromArray \
+        "${p_array}" \
+        "${p_target}" \
+        "${p_valToDisplay}" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        local C="${?}";
+        
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+        
+        return "${?}";
+    fi
+
+    return 0;
 }
 
 # ·························································································

@@ -130,7 +130,7 @@ if [ -d "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}" ]
         printf "Changing the %s%s%s file right from read-only to rwx... " "$(tput setaf 6)" "${file}" "$(tput sgr0)";
 
         chmod +wr "${file}" > /dev/null 2>&1 || {
-            printf "Failed %s❌%s\n\n" "$(tput setaf 9)" "$(tput sgr0)"
+            printf "Failed %s❌%s\n\n" "$(tput setaf 9)" "$(tput sgr0)";
 
             echo "Unable to unset the read-only mode from the ${file} file";
 
@@ -155,7 +155,7 @@ if [ -n "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}" ] &&
         printf "Resetting the read-only mode for this file : %s..." "${file}";
 
         chmod -wx+r "${file}" > /dev/null 2>&1 || {
-            printf "Failed %s❌%s\n\n" "$(tput setaf 9)" "$(tput sgr0)"
+            printf "Failed %s❌%s\n\n" "$(tput setaf 9)" "$(tput sgr0)";
 
             echo "Unable to reset the read-only mode for this file : ${file}";
 

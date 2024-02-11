@@ -85,6 +85,23 @@ fi
 
 ## PATHS
 
+# Bash Utils library root path from this script's path.
+declare -g      __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR
+                __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+    readonly    __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+
+# Path to the
+declare -g __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_CONF_PATH;
+
+# Path to the
+declare -g __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_INIT_PATH;
+
+# Path to the
+declare -g __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_MANIFS_PATH;
+
+# Path to the
+declare -g __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_FUNCTS_PATH;
+
 # Default output directory for each module's root folder (default value : "${HOME}/.Bash-utils/module_pack_sh_output").
 __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__DEFAULT_OUTPUT_DIR="${HOME}/.Bash-utils/module_pack_sh_output";
 
@@ -124,20 +141,15 @@ if [ ! -d "${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__DEFAULT_OUTPUT_DIR}" ] the
 	mkdir -pv "${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__DEFAULT_OUTPUT_DIR}" || exit 1;
 fi
 
-# Bash Utils library root path from this script's path.
-declare -g      __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR
-                __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
-    readonly    __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
-
 for module_name in "${__BU__BIN__MODULE_PACK__ARGS__ARG_LIST[@]}"; do
 
-    declare -gr __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_CONF_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/modules/${module_name}";
+    __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_CONF_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/modules/${module_name}";
 
-    declare -gr __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_INIT_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/modules/${module_name}";
+    __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_INIT_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/modules/${module_name}";
 
-    declare -gr __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_MANIFS_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/manifests/";
+    __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_MANIFS_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/manifests/";
 
-    declare -gr __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_FUNCTS_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/${module_name}";
+    __BU__BIN__MODULE_PACK__GLOBVARS__PATHS__PACK_MODULE_FUNCTS_PATH="${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/${module_name}";
 
     if [ ! -d "${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install" ] || [ ! -d "${__BU__BIN__MODULE_PACK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib" ]; then
         echo "You must run this script from its directory" >&2;

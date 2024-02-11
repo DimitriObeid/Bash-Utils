@@ -52,10 +52,10 @@
 ## ARRAY OF FILES TO CREATE
 
 # List of ISO 639-1 codes.
-__ARG_LIST=( "$@" );
+__BU__BIN__INIT_LOCALE_FILE_RM__ARGS__ARG_LIST=( "$@" );
 
 # Checking if a value was passed as argument in the ISO 639-1 codes list when this script was executed.
-if (( ${#__ARG_LIST[@]} == 0 )); then
+if (( ${#__BU__BIN__INIT_LOCALE_FILE_RM__ARGS__ARG_LIST[@]} == 0 )); then
 	echo "This script takes at least one mandatory argument : the name(s) of the new locale file(s) to create"; exit 1;
 fi
 
@@ -83,9 +83,18 @@ fi
 
 #### VARIABLES DEFINITIONS
 
-##
+## PATHS
 
-# Feel free to define variables here if needed.
+# Bash Utils library root path from this script's path.
+declare -g      __BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+                __BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+    readonly    __BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR;
+
+# Path to the directory which stores the initalizer script's locale files.
+declare -gr __BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_DIR_PATH="${__BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/install/.Bash-utils/config/initializer/locale";
+
+# Path to the locale file to create.
+declare -g __BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_FILE_PATH;
 
 ## ==============================================
 
@@ -112,21 +121,16 @@ fi
 
 ######################################################### CODE ########################################################
 
-# Bash Utils library root path from this script's path.
-__D_BU_LIB_ROOT_PATH="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")";
+for locale_file in "${__BU__BIN__INIT_LOCALE_FILE_RM__ARGS__ARG_LIST[@]}"; do
+    __BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_FILE_PATH="${__BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_DIR_PATH}/${locale_file}.locale";
 
-__D_BU_MAKE_INIT_LOCALE_PATH="${__D_BU_LIB_ROOT_PATH}/install/.Bash-utils/config/initializer/locale";
+    printf "Creating the %s file... " "${__BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_FILE_PATH}";
 
-for locale_file in "${__ARG_LIST[@]}"; do
-    __F_BU_MAKE_INIT_LOCALE_PATH="${__D_BU_MAKE_INIT_LOCALE_PATH}/${locale_file}.locale";
-
-    printf "Creating the %s file... " "${__F_BU_MAKE_INIT_LOCALE_PATH}";
-
-    if [ ! -f "${__F_BU_MAKE_INIT_LOCALE_PATH}" ]; then
-        touch "${__F_BU_MAKE_INIT_LOCALE_PATH}" || {
+    if [ ! -f "${__BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_FILE_PATH}" ]; then
+        touch "${__BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_FILE_PATH}" || {
             printf "Failed %s❌%s\n\n" "$(tput setaf 9)" "$(tput sgr0)" >&2;
 
-            echo "ERROR : FAILED TO CREATE THE ${__F_BU_MAKE_INIT_LOCALE_PATH} FILE" >&2;
+            echo "ERROR : FAILED TO CREATE THE ${__BU__BIN__INIT_LOCALE_FILE_MK__GLOBVARS__PATHS__MAKE_INIT_LOCALE_FILE_PATH} FILE" >&2;
             echo >&2;
 
             echo "Ending the script's execution" >&2;
