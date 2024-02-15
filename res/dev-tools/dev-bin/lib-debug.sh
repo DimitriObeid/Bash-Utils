@@ -100,7 +100,9 @@ declare -gr __BU__BIN__BIN_GENERATION__GLOBVARS__MSG_E__TERMINATING="Terminating
 ## PATHS
 
 # Path to the "Bash-utils" root folder.
-declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || { echo "Missing path file"; exit 1; })";
+declare -g 		__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR;
+				__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || { echo "Missing path file"; exit 1; })";
+	readonly	__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR;
 
 # Path to the "${HOME}/.Bash-utils/config/modules/" folder.
 declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR="${HOME}/.Bash-utils/config/modules";
@@ -160,7 +162,7 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 
 				return 1;
 			else
-				if [ "${p_action,,}" != 'comment' ] || [ "${p_action,,}" != 'uncomment' ]; then
+				if [ "${p_action,,}" != 'comment' ] && [ "${p_action,,}" != 'uncomment' ]; then
 					echo "ERROR : Bad action passed to the ${FUNCNAME[0]}() function as second argument" >&2;
 					echo >&2;
 
@@ -191,21 +193,16 @@ function BU.DevBin.LibDebug.Function.GetDirectoriesPaths()
 	#**** Parameters ****
 	local p_dirpath=${1:-$'\0'};	# ARG TYPE : Dirpath	# REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the directories containing module folders.
 
-	#**** Variables ****
-	local v_modDir;					# VAR TYPE : Dirpath	# DESC : This variable stores the path to the folder of the processed module.
-
 	#**** Code ****
 	find "${p_dirpath}" -mindepth 1 -maxdepth 1 -type d | while read -r subfolder; do
-		v_modDir="${subfolder}";
 
-		[ -z "${__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS}" ] && declare -ga __BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS;
+		[ -z "${__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS[*]}" ] && declare -ga __BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS;
 
 		while IFS= read -r file; do
 			__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS+=("${subfolder}/${file}");
-		done < <(ls -p "${v_modDir}" | grep -v '/');
+		done < <(ls -p "${subfolder}" | grep -v '/');
 
 		for file in "${__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS[@]}"; do
-			echo "FILE : ${file}"
 			BU.DevBin.LibDebug.Function.CommentOrUncomment "${file}" "${__BU__BIN__LIB_DEBUG__ARGS__ACTION}" || { __BU__BIN__LIB_DEBUG__GLOBVARS__ERROR='error'; break 2; };
 		done
 
