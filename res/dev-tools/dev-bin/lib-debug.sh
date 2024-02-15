@@ -224,11 +224,15 @@ function BU.DevBin.LibDebug.Function.GetDirectoriesPaths()
 
 ######################################################### CODE ########################################################
 
+# TESTING PURPOSES ONLY !! Please leave this line commented if you are not planning to add and test new features in the "BU.DevBin.LibDebug.Function.CommentOrUncomment()" function.
+BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug" || shift && exit 1;
+
+
 # Comment or uncomment the "BU.Main.Echo.Debug/End()" functions in the "${HOME}/.Bash-utils/config/modules/" folder.
-BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR}" || echo Ldezfzqefzqfger && exit 1;
+BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR}" || shift && exit 1;
 
 # Comment or uncomment the "BU.Main.Echo.Debug/End()" functions in the "Bash-utils/lib/functions/${module_name}" folder.
-BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR}" || exit 1;
+BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR}" || shift && exit 1;
 
 exit 0;
 
