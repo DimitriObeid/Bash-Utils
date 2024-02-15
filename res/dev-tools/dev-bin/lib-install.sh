@@ -37,9 +37,14 @@
 
 #### POSITIONAL ARGUMENTS
 
-## SUB-CATEGORY NAME
+## ACTIONS
 
-# Feel free to define positional arguments here.
+# ARG TYPE : STRING
+# REQUIRED
+# DEFAULT VAL : NULL
+
+# DESC : Stores the user's authorization to copy the read-only compiled files in the "${HOME/.Bash-utils".
+__BU__BIN__LIB_INSTALL__ARGS__ACTION=${1:-$'\0'};
 
 ## ==============================================
 
@@ -123,8 +128,10 @@ echo "Successfully copied the initializer script in the ${HOME} directory";
 echo;
 
 # If one or more stable files are found in the "install/.Bash-utils/compiled/stable" directory.
-if [ -d "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}" ] && [ -n "$(ls "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}")" ]; then
-
+if [ -d "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}" ] \
+    && [ -n "$(ls "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}")" ] \
+    && [[ "${__BU__BIN__LIB_INSTALL__ARGS__ACTION,,}" == -?(-)i?(nclude-ro-files) ]];
+then
     # As it is impossible to copy the read-only files in another directory, those files' read-only mode is unset.
     for file in "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_PROJECT_DIR}/"*.sh; do
         printf "Changing the %s%s%s file right from read-only to rwx... " "$(tput setaf 6)" "${file}" "$(tput sgr0)";
@@ -148,8 +155,10 @@ echo "Successfully copied the Bash Utils modules directory in the ${HOME} direct
 echo;
 
 # If one or more stable files are found in the "${HOME}/.Bash-utils/compiled/stable" directory.
-if [ -n "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}" ] && [ -n "$(ls "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}")" ]; then
-
+if [ -n "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}" ] \
+    && [ -n "$(ls "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}")" ] \
+    && [[ "${__BU__BIN__LIB_INSTALL__ARGS__ACTION,,}" == -?(-)i?(nclude-ro-files) ]];
+then
     # Resetting the files in their original read-only mode.
     for file in "${__BU__BIN__LATEX_UNITE__GLOBVARS__PATHS__STABLE_FILES_HOME_DIR}"*.sh; do
         printf "Resetting the read-only mode for this file : %s..." "${file}";
