@@ -71,9 +71,10 @@ declare -gr __BU__BIN__LIB_DEBUG__ARGS__ACTION=${1:-$'\0'};
 
 #### ARRAYS DEFINITIONS
 
-##
+## FILES PATH BY DIRECTORY
 
-# Feel free to define arrays here if needed.
+# Storing the paths to each files of a processed directory.
+declare -ag __BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS=();
 
 ## ==============================================
 
@@ -82,6 +83,13 @@ declare -gr __BU__BIN__LIB_DEBUG__ARGS__ACTION=${1:-$'\0'};
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### VARIABLES DEFINITIONS
+
+## ERRORS MANAGERS
+
+#
+declare -g __BU__BIN__LIB_DEBUG__GLOBVARS__ERROR;
+
+## ==============================================
 
 ## MESSAGES
 
@@ -97,14 +105,8 @@ declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR="$(cat "${HOME}
 # Path to the "${HOME}/.Bash-utils/config/modules/" folder.
 declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR="${HOME}/.Bash-utils/config/modules";
 
-# Path to the "${HOME}/.Bash-utils/config/modules/${module_name}" folder.
-declare -g __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_CURRMODULE_DIR;
-
 # Path to the "Bash-utils/lib/functions" folder.
 declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/lib/functions";
-
-# Path to the "Bash-utils/lib/functions/${module_name}" folder.
-declare -g __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_CURRMODULE_DIR;
 
 ## ==============================================
 
@@ -120,58 +122,97 @@ declare -g __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_CURRMO
 
 ## FILE EDITION
 
-# ·············································
+# ·············································································································
 # Comment or uncomment the "BU.Main.Echo.Debug/End()" functions in the file currently processed by this script.
 
 # shellcheck disable=
 function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 {
 	#**** Parameters ****
-	local file=${1:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the file to process.
-	local action=${2:-$'\0'};   # ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
+	local p_file=${1:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the file to process.
+	local p_action=${2:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
 
 	#**** Code ****
-	if [ -z "${file}" ]; then
+	if [ -z "${p_file}" ]; then
 		echo "ERROR : Missing file path for the ${FUNCNAME[0]}() function's first argument" >&2;
 		echo >&2;
 
 		echo "${__BU__BIN__BIN_GENERATION__GLOBVARS__MSG_E__TERMINATING}" >&2;
 		echo >&2;
 
-		exit 1;
+		return 1;
 	else
-		if [ ! -f "${file}" ]; then
+		if [ ! -f "${p_file}" ]; then
 			echo "ERROR : Unexistent file path passed to the ${FUNCNAME[0]}() function as first argument" >&2;
 			echo >&2;
 
 			echo "${__BU__BIN__BIN_GENERATION__GLOBVARS__MSG_E__TERMINATING}" >&2;
 			echo >&2;
 
-			exit 1;
+			return 1;
 		else
-			if [ -z "${action}" ]; then
+			if [ -z "${p_action}" ]; then
 				echo "ERROR : No action passed to the ${FUNCNAME[0]}() function as second argument" >&2;
 				echo >&2;
 
 				echo "${__BU__BIN__BIN_GENERATION__GLOBVARS__MSG_E__TERMINATING}" >&2;
 				echo >&2;
 
-				exit 1;
+				return 1;
 			else
-				if		[ "${action,,}" != 'comment' ] || [ "${action,,}" != 'uncomment' ]; then
+				if [ "${p_action,,}" != 'comment' ] || [ "${p_action,,}" != 'uncomment' ]; then
 					echo "ERROR : Bad action passed to the ${FUNCNAME[0]}() function as second argument" >&2;
 					echo >&2;
 
 					echo "${__BU__BIN__BIN_GENERATION__GLOBVARS__MSG_E__TERMINATING}" >&2;
 					echo >&2;
 
-					exit 1;
+					return 1;
 				else
+					echo "Hello from \"${FUNCNAME[0]}()\"";
 
+					return 0;
 				fi
 			fi
 		fi
 	fi
+}
+
+## ==============================================
+
+## FILES PATH
+
+# ········································································································
+# Processing the listing of every directories, then their modules-specific subfolders and their own files.
+
+# shellcheck disable=
+function BU.DevBin.LibDebug.Function.GetDirectoriesPaths()
+{
+	#**** Parameters ****
+	local p_dirpath=${1:-$'\0'};	# ARG TYPE : Dirpath	# REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the directories containing module folders.
+
+	#**** Variables ****
+	local v_modDir;					# VAR TYPE : Dirpath	# DESC : This variable stores the path to the folder of the processed module.
+
+	#**** Code ****
+	find "${p_dirpath}" -mindepth 1 -maxdepth 1 -type d | while read -r subfolder; do
+		v_modDir="${subfolder}";
+
+		[ -z "${__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS}" ] && declare -ga __BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS;
+
+		while IFS= read -r file; do
+			__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS+=("${subfolder}/${file}");
+		done < <(ls -p "${v_modDir}" | grep -v '/');
+
+		for file in "${__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS[@]}"; do
+			echo "FILE : ${file}"
+			BU.DevBin.LibDebug.Function.CommentOrUncomment "${file}" "${__BU__BIN__LIB_DEBUG__ARGS__ACTION}" || { __BU__BIN__LIB_DEBUG__GLOBVARS__ERROR='error'; break 2; };
+		done
+
+		unset __BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS;
+	done
+
+	if [ -n "${__BU__BIN__LIB_DEBUG__GLOBVARS__ERROR}" ]; then return 1; fi
 
 	return 0;
 }
@@ -187,22 +228,35 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 ######################################################### CODE ########################################################
 
 # Comment or uncomment the "BU.Main.Echo.Debug/End()" functions in the "${HOME}/.Bash-utils/config/modules/" folder.
-find "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR}" -mindepth 1 -maxdepth 1 -type d | while read -r subfolder; do
-	__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_CURRMODULE_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR}/${subfolder}";
-
-	for file in ""; do
-		BU.DevBin.LibDebug.Function.CommentOrUncomment "${file}" "${__BU__BIN__LIB_DEBUG__ARGS__ACTION}"
-	done
-done
+BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODULES_DIR}" || echo Ldezfzqefzqfger && exit 1;
 
 # Comment or uncomment the "BU.Main.Echo.Debug/End()" functions in the "Bash-utils/lib/functions/${module_name}" folder.
-find "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_CURRMODULE_DIR}" -mindepth 1 -maxdepth 1 -type d | while read -r subfolder; do
-
-done
+BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR}" || exit 1;
 
 exit 0;
 
-# ARCHIVING OLD / LEGACY CODE, WHICH MAY HELP IN THE FUTURE FOR A DIFFERENT APPROACH, PLEASE DO NOT DELETE THE ABOVE "exit 0" INSTRUCTION !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
+
+################################################ ARCHIVING LEGACY CODE ################################################
+
+# ARCHIVING OLD / LEGACY CODE, WHICH MAY HELP IN THE FUTURE FOR A DIFFERENT APPROACH IN THIS FILE OR IN OTHER FILES, PLEASE DO NOT DELETE THE ABOVE "exit 0" INSTRUCTION !
 
 debug_tmp_f="tmp/debug.tmp";
 debug_log="tmp/final_debug_file.dbg";
