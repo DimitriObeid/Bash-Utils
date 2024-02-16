@@ -110,6 +110,10 @@ declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__HOME_DOTBASHUTILS_CONFIG_MODU
 # Path to the "Bash-utils/lib/functions" folder.
 declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/lib/functions";
 
+# Path to the "Bash-utils/res/devtools/dev-res/lib-debug" folder, which contains the strings to search (no regexes were finally used, since they are a real
+# pain in the ass to correctly implement with these strings (look at the commits from Feb. 15/16 2024 to understand how much I sweated blood to implement them)).
+declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug";
+
 ## ==============================================
 
 
@@ -135,10 +139,6 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 	local p_action=${2:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
 
 	#**** Variables ****
-	local v_com_pattern_1;			# VAR TYPE : String		- DESC : Pattern of the commented string (4 spaces, or 1 tabulation between the beginning of the line and the function call).
-	local v_com_pattern_2;			# VAR TYPE : String		- DESC : Pattern of the commented string (8 spaces, or 2 tabulations between the beginning of the line and the function call).
-	local v_unc_pattern_1;			# VAR TYPE : String		- DESC : Pattern of the uncommented string (4 spaces, or 1 tabulation between the beginning of the line and the function call).
-	local v_unc_pattern_2;			# VAR TYPE : String		- DESC : Pattern of the uncommented string (8 spaces, or Z tabulations between the beginning of the line and the function call).
 
 	#**** Code ****
 	# Helping the user by writing the regexes' debugging code in a single function which must be commented if no regex are being tested.
@@ -146,33 +146,29 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 	{
 		echo "Hello from \"${FUNCNAME[0]}()\" comment";
 
-		if grep -P \
-			"${v_unc_pattern_1}" "${p_file}" && \
-			"${v_unc_pattern_1}" "${p_file}" && \
-			"${v_unc_pattern_1}" "${p_file}" && \
-			"${v_unc_pattern_1}" "${p_file}" && \
-			"${v_unc_pattern_1}" "${p_file}"; then
+		if grep -F "$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug/main/TEST.TXT")" "${p_file}"; then
 			echo TRUE;
+
+			return 0;
 		else
 			echo FALSE;
+
+			return 1;
 		fi
 	}
 
 	# Separating the file parsing code in an other function in order to help with the regex debugging procedure by avoiding commenting the following lines.
 	function BU.DevBin.LibDebug.Function.CommentOrUncomment.ParseAndEditFile()
 	{
+		#**** Parameters ****
+		local p_=;
+
+		#**** Code ****
+
 		return 0;
 	}
 
-	# Writing the [[:space:]] pattern a certain number of times in the regex's raw string.
-	function SS() { local p_i=${1:-0}; for ((i=0; i<p_i;i++)); do printf "[[:space:]]"; done; }
-
-	OLD__v_unc_pattern_1="^$(SS 4)*BU\.Main\.Echo\.Debug[[:space:]]*\\$'\n'$(SS 8)\"(?i)Main\"[[:space:]]*\\$'\n'$(SS 8)\$\(\s*basename\s*\"\${BASH_SOURCE\[0\]}\"\s*\)[[:space:]]*\\$'\n'$(SS 8)\"\${FUNCNAME\[0\]}\"[[:space:]]*\\$'\n'$(SS 8)\"\${__BU_[^}]+}\"[[:space:]]*\\$'\n'$(SS 8)\"\${__BU_[^}]+}\"";
-
-	v_unc_pattern_1="^$(SS 4)";
-	v_unc_pattern_1+='*BU\.Main\.Echo\.Debug[[:space:]]*\\';
-
-	echo "REGEX :"; echo "${v_unc_pattern_1}"; echo; echo;
+	# echo "REGEX :"; echo "${v_unc_pattern_1}"; echo; echo;
 
 	if [ -z "${p_file}" ]; then
 		echo "ERROR : Missing file path for the ${FUNCNAME[0]}() function's first argument" >&2;
