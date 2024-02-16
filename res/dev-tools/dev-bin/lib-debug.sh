@@ -129,12 +129,56 @@ declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR="
 
 # shellcheck disable=
 function BU.DevBin.LibDebug.Function.CommentOrUncomment()
-{
+({
 	#**** Parameters ****
 	local p_file=${1:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the file to process.
 	local p_action=${2:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
 
+	#**** Variables ****
+	local v_com_pattern_1;			# VAR TYPE : String		- DESC : Pattern of the commented string (4 spaces, or 1 tabulation between the beginning of the line and the function call).
+	local v_com_pattern_2;			# VAR TYPE : String		- DESC : Pattern of the commented string (8 spaces, or 2 tabulations between the beginning of the line and the function call).
+	local v_unc_pattern_1;			# VAR TYPE : String		- DESC : Pattern of the uncommented string (4 spaces, or 1 tabulation between the beginning of the line and the function call).
+	local v_unc_pattern_2;			# VAR TYPE : String		- DESC : Pattern of the uncommented string (8 spaces, or Z tabulations between the beginning of the line and the function call).
+
 	#**** Code ****
+
+# Logique de la regex enregistrée dans la variable "${v_unc_pattern_1}" :
+
+# ^                                     # Correspond au début de la ligne.
+# $(SS 4)*                              # Appel à la fonction SS avec 4 comme paramètre pour générer un certain nombre d'espaces, répété 0 ou plusieurs fois.
+# BU\.Main\.Echo\.Debug                 # Chaîne littérale 'BU.Main.Echo.Debug'.
+# [[:space:]]*                          # Zéro ou plusieurs espaces.
+
+# \\^$(SS 8)\"                          # Échappe le caractère '^' suivi de 8 espaces et d'une guillemet double.
+# (?i)Main                              # Correspond à la chaîne 'Main' en ignorant la casse.
+# [[:space:]]*                          # Zéro ou plusieurs espaces.
+
+# \\^$(SS 8)\"                                      # Échappe le caractère '^' suivi de 8 espaces et d'une guillemet double.
+# \$\(\s*basename\s*\"\$\{BASH_SOURCE\[0\]\}\"\s*\) # Expression régulière pour le sous-shell de basename BASH_SOURCE[0].
+# [[:space:]]*                          			# Zéro ou plusieurs espaces.
+
+# \\^$(SS 8)\"                          # Échappe le caractère '^' suivi de 8 espaces et d'une guillemet double.
+# \"\$\{FUNCNAME\[0\]\}\"               # Expression régulière pour le sous-shell de FUNCNAME[0].
+# [[:space:]]*                          # Zéro ou plusieurs espaces.
+
+# \\^$(SS 8)\"                          # Échappe le caractère '^' suivi de 8 espaces et d'une guillemet double.
+# \"\$\{__BU_[^}]+\}\"                  # Expression régulière pour le sous-shell de __BU_ contenant des caractères qui ne sont pas '}'.
+# [[:space:]]*                          # Zéro ou plusieurs espaces.
+
+# \\^$(SS 8)\"                          # Échappe le caractère '^' suivi de 8 espaces et d'une guillemet double.
+# \"\$\{__BU_[^}]+\}\"                  # Expression régulière pour le sous-shell de __BU_ contenant des caractères qui ne sont pas '}'.
+
+# Merci ChatGPT !
+
+
+
+	# Writing the [[:space:]] pattern a certain number of times in the regex's raw string.
+	function SS() { local p_i=${1:-0}; for ((i=0; i<p_i;i++)); do printf "[[:space:]]"; done; }
+
+	v_unc_pattern_1="^$(SS 4)*BU\.Main\.Echo\.Debug[[:space:]]*\\^$(SS 8)\"(?i)Main\"[[:space:]]*\\^$(SS 8)\$\(\s*basename\s*\"\$\{BASH_SOURCE\[0\]\}\"\s*\)[[:space:]]*\\^$(SS 8)\"\$\{FUNCNAME\[0\]\}\"[[:space:]]*\\^$(SS 8)\"\$\{__BU_[^}]+\}\"[[:space:]]*\\^$(SS 8)\"\$\{__BU_[^}]+\}\"";
+
+	echo "REGEX :"; echo "${v_unc_pattern_1}"; echo; echo;
+
 	if [ -z "${p_file}" ]; then
 		echo "ERROR : Missing file path for the ${FUNCNAME[0]}() function's first argument" >&2;
 		echo >&2;
@@ -171,14 +215,23 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 
 					return 1;
 				else
-					echo "Hello from \"${FUNCNAME[0]}()\"";
+					if		[ "${p_action,,}" == 'comment' ]; then
+						echo "Hello from \"${FUNCNAME[0]}()\" comment";
+
+						grep -E -i "${v_unc_pattern_1}" "${p_file}";
+
+						# sed -i -E "/${v_unc_pattern}/ s/^[[:space:]]/#^[[:space:]]/" "${p_file}";
+
+					elif	[ "${p_action,,}" == 'uncomment' ]; then
+						echo "Hello from \"${FUNCNAME[0]}()\" uncomment";
+					fi
 
 					return 0;
 				fi
 			fi
 		fi
 	fi
-}
+})
 
 ## ==============================================
 
