@@ -175,7 +175,7 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 	# Writing the [[:space:]] pattern a certain number of times in the regex's raw string.
 	function SS() { local p_i=${1:-0}; for ((i=0; i<p_i;i++)); do printf "[[:space:]]"; done; }
 
-	OLD__v_unc_pattern_1="^$(SS 4)*BU\.Main\.Echo\.Debug[[:space:]]*\\^$(SS 8)\"(?i)Main\"[[:space:]]*\\^$(SS 8)\$\(\s*basename\s*\"\${BASH_SOURCE\[0\]}\"\s*\)[[:space:]]*\\^$(SS 8)\"\${FUNCNAME\[0\]}\"[[:space:]]*\\^$(SS 8)\"\${__BU_[^}]+}\"[[:space:]]*\\^$(SS 8)\"\${__BU_[^}]+}\"";
+	OLD__v_unc_pattern_1="^$(SS 4)*BU\.Main\.Echo\.Debug[[:space:]]*\\$'\n'$(SS 8)\"(?i)Main\"[[:space:]]*\\$'\n'$(SS 8)\$\(\s*basename\s*\"\${BASH_SOURCE\[0\]}\"\s*\)[[:space:]]*\\$'\n'$(SS 8)\"\${FUNCNAME\[0\]}\"[[:space:]]*\\$'\n'$(SS 8)\"\${__BU_[^}]+}\"[[:space:]]*\\$'\n'$(SS 8)\"\${__BU_[^}]+}\"";
 
 	v_unc_pattern_1="";
 
