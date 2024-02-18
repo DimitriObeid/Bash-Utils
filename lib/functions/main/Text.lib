@@ -842,21 +842,42 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug \
-        "main" \
-        "$(basename "${BASH_SOURCE[0]}")" \
-        "${FUNCNAME[0]}" \
-        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+    if ! BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug; then
+        BU.Main.Echo.Debug \
+            "main" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+            "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+    fi
 
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
-    local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
+    local p_delim=${2:-$'\0'};  # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
 
     #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+	if  ! BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug &&\
+        ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims \
+            "${p_string}" \
+            "${p_delim}" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "${LINENO}";
+    then
+        local C="${?}";
 
-	echo "${p_string##*"${p_delim}"}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    fi
+
+	echo "${p_string##*"${p_delim}"}";
+
+	if ! BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    fi
+
+	return 0;
 }
 
 # ······················································································

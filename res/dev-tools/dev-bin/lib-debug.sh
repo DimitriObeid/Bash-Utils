@@ -22,7 +22,8 @@
 
 ## BASH UTILS
 
-# Feel free to source any dependencies here if needed.
+# Including the "Bash-utils/lib/functions/main/Text.lib" file's code in order to use the "()" function.
+source "$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path")/lib/functions/main/Text.lib" || exit 1;
 
 ## ==============================================
 
@@ -112,7 +113,10 @@ declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_LIB_FUNCTIONS_DIR="
 
 # Path to the "Bash-utils/res/devtools/dev-res/lib-debug" folder, which contains the strings to search (no regexes were finally used, since they are a real
 # pain in the ass to correctly implement with these strings (look at the commits from Feb. 15/16 2024 to understand how much I sweated blood to implement them)).
-declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug";
+declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/dev-tools/dev-res/lib-debug";
+
+# Path to the "Bash-utils/res/devtools/dev-res/lib-debug/${current_module}" folder (only used for specific modules).
+declare -g __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_CURRMODULE_DIR;
 
 ## ==============================================
 
@@ -125,6 +129,19 @@ declare -gr __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES
 ########################################### PROJECT'S FUNCTIONS DEFINITIONS ###########################################
 
 #### FUNCTIONS DEFINITION
+
+## ERRORS MANAGERS
+
+# ·····················································································
+# Checking if the script file which runs the Bash code is the "lib-debug" shell script.
+
+# shellcheck disable=
+function BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug()
+{
+	if [[ "${0##*/}" == lib-debug.?(ba)sh ]]; then return 0; else return 1; fi
+}
+
+## ==============================================
 
 ## FILE EDITION
 
@@ -139,22 +156,24 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 	local p_action=${2:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
 
 	#**** Variables ****
+	local v_4_commented_spaces;
+	local v_8_commented_spaces;
+	local v_4_uncommented_spaces;
+	local v_8_uncommented_spaces;
 
 	#**** Code ****
+	v_4_commented_spaces="$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR}/commented/4.txt")";
+	v_8_commented_spaces="$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR}/commented/8.txt")";
+	v_4_uncommented_spaces="$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR}/uncommented/4.txt")";
+	v_8_uncommented_spaces="$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR}/uncommented/8.txt")";
+
 	# Helping the user by writing the regexes' debugging code in a single function which must be commented if no regex are being tested.
 	function TestRegex()
 	{
-		echo "Hello from \"${FUNCNAME[0]}()\" comment";
-
-		if grep -F "$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug/main/TEST.TXT")" "${p_file}"; then
-			echo TRUE;
-
-			return 0;
-		else
-			echo FALSE;
-
-			return 1;
-		fi
+		echo "${v_4_commented_spaces}";
+		echo "${v_4_commented_spaces}";
+		echo "${v_8_uncommented_spaces}";
+		echo "${v_8_uncommented_spaces}";
 	}
 
 	# Separating the file parsing code in an other function in order to help with the regex debugging procedure by avoiding commenting the following lines.
@@ -164,11 +183,12 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 		local p_=;
 
 		#**** Code ****
+# 		if [ "${p_action,,}" == 'comment' ]; then
+# 			if grep -F "${}" ""
+# 		fi
 
 		return 0;
 	}
-
-	# echo "REGEX :"; echo "${v_unc_pattern_1}"; echo; echo;
 
 	if [ -z "${p_file}" ]; then
 		echo "ERROR : Missing file path for the ${FUNCNAME[0]}() function's first argument" >&2;
@@ -241,6 +261,8 @@ function BU.DevBin.LibDebug.Function.GetDirectoriesPaths()
 	find "${p_dirpath}" -mindepth 1 -maxdepth 1 -type d | while read -r subfolder; do
 
 		[ -z "${__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS[*]}" ] && declare -ga __BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS;
+
+		__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_CURRMODULE_DIR="${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR}/$(BU.Main.Text.GetLastFieldAfterDelim "${subfolder}" '/')";
 
 		while IFS= read -r file; do
 			__BU__BIN__LIB_DEBUG__GLOBARRAYS__PATHS__FILES_PATHS+=("${subfolder}/${file}");

@@ -193,7 +193,21 @@ function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; 
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()  { local f="${0##*/}"; if [[ "${f,,}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()          { local f="${0##*/}"; if [[ "${f,,}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi }
+
+# ·····················································································
+# Checking if the script file which runs the Bash code is the "lib-debug" shell script.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - Feel free to call a function if it is needed for your contribution.
+
+# shellcheck disable=
+function BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug()  { local f="${0##*/}"; if [[ "${f,,}" == lib-debug.?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ···············································································································································································
 # Checking if the script file which runs the Bash code are either the "lib-compilerV3.sh" file or the "lib-compilerV4.sh" file, which only contain very basic included resources.
@@ -207,7 +221,7 @@ function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()  { local f="${0##*/}"; if
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.DevBin.LibCompiler.Function.IsCompiler()    { local f=${0##*/} ;if [[ "${f,,}" == lib-compilerV?(3|4).?(ba)sh ]] || [[ "${f,,}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.DevBin.LibCompiler.Function.IsCompiler()            { local f=${0##*/}; if [[ "${f,,}" == lib-compilerV?(3|4).?(ba)sh ]] || [[ "${f,,}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ······················································································
 # Checking if the framework is being installed thanks to the installation script (TODO).
