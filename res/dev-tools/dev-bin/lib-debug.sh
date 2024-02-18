@@ -136,7 +136,7 @@ declare -g __BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_
 # Checking if the script file which runs the Bash code is the "lib-debug" shell script.
 
 # shellcheck disable=
-function BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug()
+function BU.DevBin.LibDebug.Function.IsShellScriptLibDebug()
 {
 	if [[ "${0##*/}" == lib-debug.?(ba)sh ]]; then return 0; else return 1; fi
 }
@@ -152,14 +152,24 @@ function BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug()
 function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 ({
 	#**** Parameters ****
-	local p_file=${1:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the file to process.
-	local p_action=${2:-$'\0'};   	# ARG TYPE : String     # REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
+	local p_file=${1:-$'\0'};   		# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the file to process.
+	local p_action=${2:-$'\0'};   		# ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the name of the action to do.
 
 	#**** Variables ****
-	local v_4_commented_spaces;
-	local v_8_commented_spaces;
-	local v_4_uncommented_spaces;
-	local v_8_uncommented_spaces;
+	local v_4_commented_spaces;			# VAR TYPE : String		- DESC : The commented 4 spaced call of the "BU.Main.Echo.Debug()" function.
+	local v_8_commented_spaces;			# VAR TYPE : String		- DESC : The commented 8 spaced call of the "BU.Main.Echo.Debug()" function.
+	local v_4_uncommented_spaces;		# VAR TYPE : String		- DESC : The uncommented 4 spaced call of the "BU.Main.Echo.Debug()" function.
+	local v_8_uncommented_spaces;		# VAR TYPE : String		- DESC : The uncommented 8 spaced call of the "BU.Main.Echo.Debug()" function.
+
+	local v_has_4_commented_spaces;		# VAR TYPE : String		- DESC :
+	local v_has_8_commented_spaces;		# VAR TYPE : String		- DESC :
+	local v_has_4_uncommented_spaces;	# VAR TYPE : String		- DESC :
+	local v_has_8_uncommented_spaces;	# VAR TYPE : String		- DESC :
+
+	local v_has_4_commented_spaces_oc;	# VAR TYPE : String		- DESC : Number of occurences of the call of a commented "BU.Main.Echo.Debug()" function.
+	local v_has_8_commented_spaces_oc;	# VAR TYPE : String		- DESC : Number of occurences of the call of a commented "BU.Main.Echo.Debug()" function.
+	local v_has_4_uncommented_spaces_oc;# VAR TYPE : String		- DESC : Number of occurences of the call of an uncommented "BU.Main.Echo.Debug()" function.
+	local v_has_8_uncommented_spaces_oc;# VAR TYPE : String		- DESC : Number of occurences of the call of an uncommented "BU.Main.Echo.Debug()" function.
 
 	#**** Code ****
 	v_4_commented_spaces="$(cat "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_RES_DEVTOOLS_DEVRES_DIR}/commented/4.txt")";
@@ -176,16 +186,35 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 		echo "${v_8_uncommented_spaces}";
 	}
 
+	# Writing the [[:space:]] pattern a certain number of times in a regex's raw string.
+	function S() { local p_i=${1:-0}; for ((i=0; i<p_i;i++)); do printf "[[:space:]]"; done; }
+
 	# Separating the file parsing code in an other function in order to help with the regex debugging procedure by avoiding commenting the following lines.
 	function BU.DevBin.LibDebug.Function.CommentOrUncomment.ParseAndEditFile()
 	{
-		#**** Parameters ****
-		local p_=;
-
 		#**** Code ****
-# 		if [ "${p_action,,}" == 'comment' ]; then
-# 			if grep -F "${}" ""
-# 		fi
+ 		if		[ "${p_action,,}" == 'comment' ]; then
+ 			if grep -F "${v_4_uncommented_spaces}" "${p_file}" > /dev/null; then
+				v_has_4_uncommented_spaces='true';
+
+				# Getting the number of occurences of
+				v_has_4_commented_spaces_oc="$(grep -c '^[[:space:]][[:space:]][[:space:]][[:space:]]BU\.Main\.Echo\.Debug[[:space:]]*\\' "${p_file}" | wc -l)";
+				echo "${v_has_4_commented_spaces_oc}"
+			fi
+
+#  			if grep -Eo "${v_8_uncommented_spaces}" "${p_file}" | wc -l; then
+# 				v_has_8_uncommented_spaces='true';
+#  			fi
+
+ 		elif	[ "${p_action,,}" == 'uncomment' ]; then
+			if grep -Fo "${v_4_commented_spaces}" "${p_file}" | wc -l; then
+				v_has_4_commented_spaces='true';
+ 			fi
+
+ 			if grep -Fo "${v_4_commented_spaces}" "${p_file}" | wc -l; then
+				v_has_4_commented_spaces='true';
+ 			fi
+ 		fi
 
 		return 0;
 	}
@@ -227,7 +256,7 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 					return 1;
 				else
 					if		[ "${p_action,,}" == 'comment' ]; then
-						TestRegex;
+						# TestRegex;
 
 						BU.DevBin.LibDebug.Function.CommentOrUncomment.ParseAndEditFile || return 1;
 
@@ -255,7 +284,7 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 function BU.DevBin.LibDebug.Function.GetDirectoriesPaths()
 {
 	#**** Parameters ****
-	local p_dirpath=${1:-$'\0'};	# ARG TYPE : Dirpath	# REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the directories containing module folders.
+	local p_dirpath=${1:-$'\0'};	# ARG TYPE : Dirpath	- REQUIRED | DEFAULT VAL : NULL     - DESC : This variable stores the path to the directories containing module folders.
 
 	#**** Code ****
 	find "${p_dirpath}" -mindepth 1 -maxdepth 1 -type d | while read -r subfolder; do
@@ -291,7 +320,7 @@ function BU.DevBin.LibDebug.Function.GetDirectoriesPaths()
 ######################################################### CODE ########################################################
 
 # TESTING PURPOSES ONLY !! Please leave this line commented if you are not planning to add and test new features in the "BU.DevBin.LibDebug.Function.CommentOrUncomment()" function.
-BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug" || shift && exit 1;
+BU.DevBin.LibDebug.Function.GetDirectoriesPaths "${__BU__BIN__LIB_DEBUG__GLOBVARS__PATHS__BASHUTILS_DIR}/res/tests/lib-debug" || shift && exit 1; exit 0;
 
 
 # Comment or uncomment the "BU.Main.Echo.Debug/End()" functions in the "${HOME}/.Bash-utils/config/modules/" folder.

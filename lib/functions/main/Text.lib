@@ -842,7 +842,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 {
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    if ! BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug; then
+    if ! BU.DevBin.LibDebug.Function.IsShellScriptLibDebug; then
         BU.Main.Echo.Debug \
             "main" \
             "$(basename "${BASH_SOURCE[0]}")" \
@@ -856,7 +856,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
     local p_delim=${2:-$'\0'};  # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
 
     #**** Code ****
-	if  ! BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug &&\
+	if  ! BU.DevBin.LibDebug.Function.IsShellScriptLibDebug &&\
         ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims \
             "${p_string}" \
             "${p_delim}" \
@@ -873,7 +873,7 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 
 	echo "${p_string##*"${p_delim}"}";
 
-	if ! BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug; then
+	if ! BU.DevBin.LibDebug.Function.IsShellScriptLibDebug; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
     fi
 

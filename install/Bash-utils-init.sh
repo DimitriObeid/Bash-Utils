@@ -207,7 +207,7 @@ function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()          { local f="${0##
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.DevBin.LibDebug.Function.IsIsShellScriptLibDebug()  { local f="${0##*/}"; if [[ "${f,,}" == lib-debug.?(ba)sh ]]; then return 0; else return 1; fi }
+function BU.DevBin.LibDebug.Function.IsShellScriptLibDebug()  { local f="${0##*/}"; if [[ "${f,,}" == lib-debug.?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ···············································································································································································
 # Checking if the script file which runs the Bash code are either the "lib-compilerV3.sh" file or the "lib-compilerV4.sh" file, which only contain very basic included resources.
