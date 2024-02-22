@@ -77,9 +77,15 @@
 
 #### VARIABLES DEFINITIONS
 
-## SUB-CATEGORY NAME
+## PATHS
 
-# Feel free to define variables here if needed.
+# Path to the "Bash-utils" directory.
+declare -g      __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR;
+                __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || echo "Unable to get the path to the \"Bash-utils\" folder" >&2; exit 1)";
+    readonly    __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR;
+
+# Path to the destination folder.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR}/docs/01 PRINTABLE"
 
 ## ==============================================
 
@@ -105,3 +111,5 @@
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 ######################################################### CODE ########################################################
+
+

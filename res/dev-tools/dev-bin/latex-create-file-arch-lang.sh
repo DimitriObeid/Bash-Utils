@@ -90,7 +90,7 @@ declare -g __BU__BIN__LCFAL__GLOBVARS__ERR__LOOP_ERROR;
 # Path to the "Bash-utils" directory.
 declare -g      __BU__BIN__LCFAL__GLOBVARS__PATHS__BASH_UTILS__DIR;
                 __BU__BIN__LCFAL__GLOBVARS__PATHS__BASH_UTILS__DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || echo "Unable to get the path to the \"Bash-utils\" folder" >&2; exit 1)";
-    readonly    __BU__BIN__LCFAL__GLOBVARS__PATHS__BASH_UTILS__DIR
+    readonly    __BU__BIN__LCFAL__GLOBVARS__PATHS__BASH_UTILS__DIR;
 
 # Path to the "Bash-utils/docs" directory.
 declare -gr __BU__BIN__LCFAL__GLOBVARS__PATHS__BASHUTILS_DOCS_DIR="${__BU__BIN__LCFAL__GLOBVARS__PATHS__BASH_UTILS__DIR}/docs";
