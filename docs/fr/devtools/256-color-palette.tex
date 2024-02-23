@@ -114,7 +114,7 @@
     \subsection{Description du script}\color{text}
 
     \begin{justify}
-        Ce script affiche sur le terminal chaque code couleur d'une table de palette XTERM dans un tableau 6 * 40, avec la couleur correspondante de chaque code imprimée en arrière-plan.
+        Ce script affiche chaque code de couleur de la table de la palette XTERM sur l'arrière-plan du terminal dans un tableau 6 * 40, avec le code correspondant à chaque couleur écrit en trois chiffres au premier plan.
     \end{justify}
 
     % ------------
@@ -131,21 +131,59 @@
     \end{justify}
 
     \begin{justify}
+        Ce message s'affichera dans les langues suivantes selon la configuration de la variable d'environnement \textbf{\color{vars}\$LANG}. Il s'affichera en anglais si cette même variable ne stocke pas le code ISO 639-1 relatif à l'une de ces langues :
+    \end{justify}
+
+    \begin{justify}
+        \begin{itemize}
+            \item Allemand, anglais, espagnol, français, indonésien, portuguais, russe, ukrainien et chinois.
+        \end{itemize}
+
+    \end{justify}
+
+
+    \begin{justify}
     	Algorithme de la boucle \textbf{\color{loop}for} :
 
     	\textbf{\color{loop}Tant que} la valeur de la variable \textbf{\color{vars}\$i}, initialisée à 16 (valeur correspondant au numéro de début de la plage des codes couleurs non-systèmes allant jusqu'au numéro 255 dans la table de couleurs XTERM) est strictement inférieure à 256, \textbf{\color{loop}alors} :
 
-    	\begin{itemize}
-    	    \item On affiche la
+        \begin{enumerate}
+    	    \item La couleur de l'arrière plan du texte est modifiée selon le code couleur correspondant à la valeur de la variable \textbf{\color{vars}\$i}, puis le numéro à trois chiffres correspondant à cette même valeur est affiché.
 
-    	    \item On affiche la
+    	    \setlength{\parskip}{1em}
 
-    	    \item \textbf{\color{cond}Si}
-    	\end{itemize}
+    	    Voici comment cela fonctionne :
+
+    	    \begin{itemize}
+                \setlength{\parskip}{1em}
+
+    	        \item \verb+'\e'+ : Il s'agit du caractère d'échappement (code ASCII 27), qui indique le début d'une séquence d'échappement ANSI.
+
+    	        \item \textbf{48}: Il s'agit du code demandant à l'interpréteur Shell de modifier la couleur de l'arrière-plan du texte.
+
+    	        \item \textbf{5}: Il s'agit du code indiquant que l'on utilise un index de couleur personnalisé.
+
+    	        \item \textbf{\color{vars}\${i}}: La valeur de cette variable est utilisée pour définir le numéro de la table des couleurs XTERM de la couleur spécifique à afficher.
+
+    	        \item \textbf{m}: Il s'agit du code de fin de la séquence de contrôle ANSI.
+            \end{itemize}
+
+    	    \setlength{\parskip}{1em}
+
+    	    \item La mise en forme du texte est supprimée par le biais de la commande \textbf{\color{cmds}printf} \verb|'\e[0m'|
+
+    	    \item
+    	    {
+                \textbf{\color{cond}Si} l'indice de couleur actuel n'est pas le sixième de la rangée actuelle, \textbf{\color{cond}alors} un espace est affiché pour préparer la prochaine itération de la boucle \textbf{\color{loop}for}, par le biais de la commande \textbf{\color{cmds}printf} \verb|'\n'|.
+
+                \textbf{\color{cond}Sinon}, un saut de ligne est effectué par le biais de la commande \textbf{\color{cmds}printf ' '} pour préparer une nouvelle rangée de six colonnes.
+            }
+
+    	    \item \textbf{\color{cond}Fin de la condition « si »}
+    	\end{enumerate}
 
     	\textbf{\color{loop}Fin de la boucle « pour »}
     \end{justify}
-
 
     % ------------
 
@@ -156,11 +194,18 @@
     \newpage
 
     \color{sec2}
-    \subsection{Affichage de la table de palette XTERM}\color{text}
+    \subsection{Affichage de la table de palette XTERM sur le terminal}\color{text}
 
     \begin{justify}
     	\includegraphics[scale=0.5884]{../../00 DATA/img/XTERM palette table.png}
     \end{justify}
 
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
 
 \end{document}
