@@ -65,9 +65,25 @@
 
 #### ARRAYS DEFINITIONS
 
-## SUB-CATEGORY NAME
+## ISO 639-1 CODES
 
-# Feel free to define arrays here if needed.
+# Array of ISO 639-1 codes.
+declare -ag ___BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' \
+                                                                            'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' \
+                                                                            'ca' 'ch' 'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' \
+                                                                            'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' \
+                                                                            'fy' 'ff' 'gd' 'gl' 'lg' 'ka' 'de' 'el' 'kl' 'gn' 'gu' 'ht' \
+                                                                            'ha' 'he' 'hz' 'hi' 'ho' 'hu' 'is' 'io' 'ig' 'id' 'ia' 'ie' \
+                                                                            'iu' 'ik' 'ga' 'it' 'ja' 'jv' 'kn' 'kr' 'ks' 'kk' 'km' 'ki' \
+                                                                            'rw' 'ky' 'kv' 'kg' 'ko' 'kj' 'ku' 'lo' 'la' 'lv' 'li' 'ln' \
+                                                                            'lt' 'lu' 'lb' 'mk' 'mg' 'ms' 'ml' 'mt' 'gv' 'mi' 'mr' 'mh' \
+                                                                            'mn' 'na' 'nv' 'nd' 'nr' 'ng' 'ne' 'no' 'nb' 'nn' 'ii' 'oc' \
+                                                                            'oj' 'or' 'om' 'os' 'pi' 'ps' 'fa' 'pl' 'pt' 'pa' 'qu' 'ro' \
+                                                                            'rm' 'rn' 'ru' 'se' 'sm' 'sg' 'sa' 'sc' 'sr' 'sn' 'sd' 'si' \
+                                                                            'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
+                                                                            'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' \
+                                                                            'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' \
+                                                                            'yo' 'za' 'zu');
 
 ## ==============================================
 
@@ -77,15 +93,35 @@
 
 #### VARIABLES DEFINITIONS
 
+## COUNTERS
+
+# Counting the number of folders copied into the "Bash-utils/docs/01 PRINTABLE" directory.
+declare -gi __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__COPIED_FOLDERS_INTO_PRINTABLE_DIR=0;
+
+## ==============================================
+
 ## PATHS
 
-# Path to the "Bash-utils" directory.
-declare -g      __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR;
-                __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || echo "Unable to get the path to the \"Bash-utils\" folder" >&2; exit 1)";
-    readonly    __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR;
+# Path to the "Bash-utils/" directory.
+declare -g      __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DIR;
+                __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || echo "Unable to get the path to the \"Bash-utils\" folder" >&2; exit 1)";
+    readonly    __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DIR;
 
-# Path to the destination folder.
-declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS__DIR}/docs/01 PRINTABLE"
+# Path to the "Bash-utils/docs/" folder.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DIR}/docs";
+
+# Path to the destination folder, located in "Bash-utils/docs/".
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR}/docs/01 PRINTABLE";
+
+## ==============================================
+
+## RANDOM DATA PROCESSING
+
+# Storing the name of the currently processed folder.
+declare -g __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_NAME;
+
+# Authorization to copy the currently processed folder into the "01 PRINTABLE" directory.
+declare -g __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH;
 
 ## ==============================================
 
@@ -112,4 +148,34 @@ declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR="${
 
 ######################################################### CODE ########################################################
 
+if [ ! -d "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR}" ]; then
+    mkdir -p -v "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR}" || exit 1;
+fi
 
+# Copying every documentation folders by languages into the "01 PRINTABLE" folder.
+for ISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR[@]}"; do
+    __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_NAME="$(basename "${ISOFolder}")";
+
+    __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH=false;
+
+    # Checking if the currently processed directory has a valid ISO 639-1 code as a name.
+    for validISOFolder in "${___BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY[@]}"; do
+        if [ "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_NAME,,}" == "${validISOFolder,,}" ]; then
+            __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH=true;
+
+            break;
+        fi
+    done
+
+    # Copying the currently processed directory into the "Bash-utils/docs/01 PRINTABLE" directory.
+    if [ "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH,,}" == true ]; then
+        cp -r "${ISOFolder}" "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR}" || exit 1;
+
+        # Incremeting the counter of copied folders by 1.
+        (( __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__COPIED_FOLDERS_INTO_PRINTABLE_DIR++ ));
+    fi
+done
+
+# Rewriting every strings which have to be modified, like the RGB to CMYK, the path to the "00 DATA" folder, and so on.
+
+exit 0;

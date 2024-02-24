@@ -123,7 +123,7 @@ declare -ag ___BU_COMPILER__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 
                                         'sk' 'sl' 'so' 'st' 'es' 'su' 'sw' 'ss' 'sv' 'tl' 'ty' 'tg' \
                                         'ta' 'tt' 'te' 'th' 'bo' 'ti' 'to' 'ts' 'tn' 'tr' 'tk' 'tw' \
                                         'ug' 'uk' 'ur' 'uz' 've' 'vi' 'vo' 'wa' 'cy' 'wo' 'xh' 'yi' \
-                                        'yo' 'za' 'zu')
+                                        'yo' 'za' 'zu');
 
 # Since the previous array's values are well align with the 4 spaces tabulation, it is visually better to make this array readonly here, although it is possible to do so when declaring this array.
 readonly ___BU_COMPILER__LANG_ARRAY;
