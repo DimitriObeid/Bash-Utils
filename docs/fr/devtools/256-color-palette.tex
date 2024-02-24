@@ -129,11 +129,11 @@
     \subsection{Fonctionnement du script}\color{text}
 
     \begin{justify}
-        \textbf{\color{cond}Si} la valeur "-h" ou "--help" est passé en premier argument lors de l'exécution du script, \textbf{\color{cond}alors} un simple message résumant de manière très simple le but du script s'affiche sur le terminal, sans que son code principal, écrit dans la boucle \textbf{\color{loop}for}, elle-même écrite dans la condition alternative ne s'exécute.
+        \textbf{\color{cond}Si} la valeur "-h" ou "--help" est passé en premier argument lors de l'exécution du script, \textbf{\color{cond}alors} un simple message résumant de manière très simple le but du script s'affiche sur le terminal, sans que son code principal, écrit dans la boucle \textbf{\color{loop}for}, elle-même écrite dans la condition alternative, ne s'exécute.
     \end{justify}
 
     \begin{justify}
-        Ce message s'affichera dans les langues suivantes selon la configuration de la variable d'environnement \textbf{\color{vars}\$LANG}. Il s'affichera en anglais si cette même variable ne stocke pas le code ISO 639-1 relatif à l'une de ces langues :
+        Ce message s'affichera dans les langues suivantes selon la configuration de la variable d'environnement \textbf{\color{vars}\$\{LANG\}}. Il s'affichera en anglais si cette même variable ne stocke pas le code ISO 639-1 relatif à l'une de ces langues :
     \end{justify}
 
     \begin{justify}
@@ -148,10 +148,10 @@
     	\setlength{\parskip}{.3em}
 
     	\begin{enumerate}
-    	    \item \textbf{\color{loop}Tant que} la valeur de la variable \textbf{\color{vars}\$i}, initialisée à 16 (valeur correspondant au numéro de début de la plage des codes couleurs non-systèmes allant jusqu'au numéro 255 dans la table de couleurs XTERM) est strictement inférieure à 256, \textbf{\color{loop}alors} :
+    	    \item \textbf{\color{loop}Tant que} la valeur de la variable \textbf{\color{vars}\$\{i\}}, initialisée à 16 (valeur correspondant au numéro de début de la plage des codes couleurs non-systèmes allant jusqu'au numéro 255 dans la table de couleurs XTERM) est strictement inférieure à 256, \textbf{\color{loop}alors} :
 
             \begin{enumerate}
-                \item La couleur de l'arrière plan du texte est modifiée selon le code couleur correspondant à la valeur de la variable \textbf{\color{vars}\$i}, puis le numéro à trois chiffres correspondant à cette même valeur est affiché.
+                \item La couleur de l'arrière plan du texte est modifiée selon le code couleur correspondant à la valeur de la variable \textbf{\color{vars}\$\{i\}}, puis le numéro à trois chiffres correspondant à cette même valeur est affiché.
 
                 \setlength{\parskip}{1em}
 
@@ -160,24 +160,24 @@
                 \begin{itemize}
                     \setlength{\parskip}{1em}
 
-                    \item \verb+'\e'+ : Il s'agit du caractère d'échappement (code ASCII 27), qui indique le début d'une séquence d'échappement ANSI.
+                    \item \textbf{\textbackslash{e}} : Il s'agit du caractère d'échappement (code ASCII 27), qui indique le début d'une séquence d'échappement ANSI.
 
                     \item \textbf{48}: Il s'agit du code demandant à l'interpréteur Shell de modifier la couleur de l'arrière-plan du texte.
 
                     \item \textbf{5}: Il s'agit du code indiquant que l'on utilise un index de couleur personnalisé.
 
-                    \item \textbf{\color{vars}\${i}}: La valeur de cette variable est utilisée pour définir le numéro de la table des couleurs XTERM de la couleur spécifique à afficher.
+                    \item \textbf{\color{vars}\$\{i\}}: La valeur de cette variable est utilisée pour définir le numéro de la table des couleurs XTERM de la couleur spécifique à afficher.
 
                     \item \textbf{m}: Il s'agit du code de fin de la séquence de contrôle ANSI.
                 \end{itemize}
 
                 \setlength{\parskip}{1em}
 
-                \item La mise en forme du texte est supprimée par le biais de la commande \textbf{\color{cmds}printf} \verb|'\e[0m'|
+                \item La mise en forme du texte est supprimée par le biais de la commande \textbf{\color{cmds}printf '\textbackslash{e}[0m'}.
 
                 \item
                 {
-                    \textbf{\color{cond}Si} l'indice de couleur actuel n'est pas le sixième de la rangée actuelle, \textbf{\color{cond}alors} un espace est affiché pour préparer la prochaine itération de la boucle \textbf{\color{loop}for}, par le biais de la commande \textbf{\color{cmds}printf} \verb|'\n'|.
+                    \textbf{\color{cond}Si} l'indice de couleur actuel n'est pas le sixième de la rangée actuelle, \textbf{\color{cond}alors} un espace est écrit pour préparer la prochaine itération de la boucle \textbf{\color{loop}for}, par le biais de la commande \textbf{\color{cmds}printf '\textbackslash{n}'}.
 
                     \textbf{\color{cond}Sinon}, un saut de ligne est effectué par le biais de la commande \textbf{\color{cmds}printf ' '} pour préparer une nouvelle rangée de six colonnes.
                 }

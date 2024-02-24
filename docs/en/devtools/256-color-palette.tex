@@ -131,65 +131,70 @@
 
     % -----------------------------------------------
 
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
     \color{sec2}
     \subsection{How the script works}\color{text}
 
     \begin{justify}
-        If the value "-h" or "--help" is passed as the first argument, a simple message summarizing the purpose of the script is displayed on the terminal, without its main code, written in the \textbf{\color{loop}for} loop, being executed.
+        \textbf{\color{cond}If} the "-h" or "--help" value is passed as the first argument during the script's execution, \textbf{\color{cond}then} a simple message summarizing the purpose of the script is displayed on the terminal, without its main code, written in the \textbf{\color{loop}for} loop, in the alternative condition, being executed.
     \end{justify}
 
     \begin{justify}
-        This message will be displayed in the following languages, depending on the \textbf{\color{vars}\$LANG} environment variable. It will be displayed in English if the same variable does not contain the ISO 639-1 code for one of these languages:
+        This message will be displayed in the following languages, depending on the \textbf{\color{vars}\$\{LANG\}} environment variable. It will be displayed in English if the same variable does not contain the ISO 639-1 code for one of these languages:
     \end{justify}
 
     \begin{justify}
         \begin{itemize}
             \item German, English, Spanish, French, Indonesian, Portuguese, Russian, Swedish, Turkish, Ukrainian and Chinese.
         \end{itemize}
-
     \end{justify}
 
-
     \begin{justify}
-    	\textbf{\color{loop}for} loop algorithm:
+    	\textbf{\color{cond}Else}, the following \textbf{\color{loop}for} loop is executed:
 
-    	\textbf{\color{loop}While} the value of the \textbf{\color{vars}\$i} variable, initialized at 16 (value corresponding to the start number of the non-system color code range up to number 255 in the XTERM color table) is strictly less than 256, \textbf{\color{loop}then} :
+    	\begin{enumerate}
+    	    \item \textbf{\color{loop}While} the value of the \textbf{\color{vars}\$\{i\}} variable, initialized at 16 (value corresponding to the start number of the non-system color code range up to number 255 in the XTERM color table) is strictly less than 256, \textbf{\color{loop}then} :
 
-        \begin{enumerate}
-    	    \item The text background color is modified according to the color code corresponding to the value of the variable \textbf{\color{vars}\$i}, then the three-digit number corresponding to this same value is displayed.
+            \begin{enumerate}
+                \item The text background color is modified according to the color code corresponding to the value of the variable \textbf{\color{vars}\$\{i\}}, then the three-digit number corresponding to this same value is displayed.
 
-    	    \setlength{\parskip}{1em}
-
-    	    Here's how it works:
-
-    	    \begin{itemize}
                 \setlength{\parskip}{1em}
 
-    	        \item \verb+'\e'+ : This is the escape character (ASCII code 27), which marks the beginning of any ANSI escape sequence.
-    	        \item \textbf{48}: This is the code telling the Shell interpreter to change the text background color.
+                Here's how it works:
 
-    	        \item \textbf{5}: This is the code indicating the use of a custom color index.
+                \begin{itemize}
+                    \setlength{\parskip}{1em}
 
-    	        \item \textbf{\color{vars}\${i}}: The value of this variable is used to define the XTERM color table number of the specific color to be displayed.
+                    \item \textbf{\textbackslash{e}} : This is the escape character (ASCII code 27), which marks the beginning of any ANSI escape sequence.
+                    \item \textbf{48}: This is the code telling the Shell interpreter to change the text background color.
 
-    	        \item \textbf{m}: This is the end code of the ANSI control sequence.
-            \end{itemize}
+                    \item \textbf{5}: This is the code indicating the use of a custom color index.
 
-    	    \setlength{\parskip}{1em}
+                    \item \textbf{\color{vars}\$\{i\}}: The value of this variable is used to define the XTERM color table number of the specific color to be displayed.
 
-    	    \item Text formatting is removed using the \textbf{\color{cmds}printf} \verb|'\e[0m'| command.
+                    \item \textbf{m}: This is the end code of the ANSI control sequence.
+                \end{itemize}
 
-    	    \item
-    	    {
-                \textbf{\color{cond}If} the current color index is not the sixth of the current row, \textbf{\color{cond}then} a space is displayed to prepare the next iteration of the \textbf{\color{loop}for} loop via the \textbf{\color{cmds}printf} \verb|'\n'| command.
+                \setlength{\parskip}{1em}
 
-                \textbf{\color{cond}Else} a line break is made via the \textbf{\color{cmds}printf ' '} command to prepare a new row of six columns.
-            }
+                \item Text formatting is removed using the \textbf{\color{cmds}printf '\textbackslash{e}[0m'} command.
 
-    	    \item \textbf{\color{cond}End of the « if » condition}
+                \item
+                {
+                    \textbf{\color{cond}If} the current color index is not the sixth of the current row, \textbf{\color{cond}then} a space is displayed to prepare the next iteration of the \textbf{\color{loop}for} loop via the \textbf{\color{cmds}printf '\textbackslash{n}'} command.
+
+                    \textbf{\color{cond}Else} a line break is made via the \textbf{\color{cmds}printf ' '} command to prepare a new row of six columns.
+                }
+
+                \item \textbf{\color{cond}End of the « if » condition}
+            \end{enumerate}
+
+            \item \textbf{\color{loop}End of the « for » loop}
     	\end{enumerate}
 
-    	\textbf{\color{loop}End of the « for » loop}
+
+
     \end{justify}
 
     % ------------
@@ -199,6 +204,8 @@
     % -----------------------------------------------
 
     \newpage
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
 
     \color{sec2}
     \subsection{Displaying the XTERM palette table on the terminal}\color{text}
