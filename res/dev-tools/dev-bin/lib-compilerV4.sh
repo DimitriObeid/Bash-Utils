@@ -808,6 +808,7 @@ function LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()
         if [[ "${p_keep_opts[$i]}" == "" ]]; then unset "p_keep_opts[$i]"; fi
     done
 
+    #
     v_keep_opts="$(for opts in "${p_keep_opts[@]}"; do printf "%s%s%s" "${__HIGHLIGHT}" "${opts}" "${__WARNING}"; if [ "${opts}" != "${p_keep_opts[-1]}" ] && [ -n "${opts}" ]; then printf ' | '; fi; done)";
 
     echo >&2;

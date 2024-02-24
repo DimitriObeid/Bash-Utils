@@ -29,6 +29,9 @@ if [ "${0,,}" == '-h' ] || [ "${0,,}" == '--help' ]; then
         pt_*)   echo "Visualização da tabela de códigos de cores da sequência de fuga ANSI, com renderização de fundo";;
 
         ru_*)   echo "Визуализация таблицы цветовых кодов ANSI управляющих последовательностей с отрисовкой фона";;
+        sv_*)   echo "Visar tabellen med färgkoder för ANSI-sekvenser, med deras rendering i bakgrunden.";;
+        tr_*)   echo "Arka plan görüntüleri içeren ANSI dizileri için renk kodları tablosunu görüntüler.";;
+
         uk_*)   echo "Візуалізація таблиці кольорових кодів ANSI послідовностей керування з відображенням фону";;
         zh_*)   echo "带背景显示的控制序列 ANSI 颜色代码表可视化";;
 
