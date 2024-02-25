@@ -55,7 +55,7 @@
 # REQUIRED
 # DEFAULT VAL : .
 
-# DESC :
+# DESC : This array contains all the paths to the LaTeX files to be compiled into a PDF file.
 declare -agr __BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS=();
 
 ## ==============================================
@@ -99,10 +99,70 @@ __BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD='latexmk';
 
 #### FUNCTIONS DEFINITION
 
-## SUB-CATEGORY NAME
+## COMPILATION PROCESS
 
-# ·············································
-# Feel free to define functions here if needed.
+# ··································
+# LaTeX to PDF compilation function.
+
+# shellcheck disable=
+function BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF()
+{
+    #**** Parameters ****
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to compile.
+
+    #**** Code ****
+    if [ -z "${p_filepath}" ]; then
+        BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_MISSING_FILEPATH'; return "${?}";
+    
+    elif [ ! -f "${p_filepath}" ]; then
+        BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_INCORRECT_FILE_PATH'; return "${?}";
+    fi
+
+    latexmk -pdf "${p_filepath}" || { 
+        BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_COMPILATION_FAILED'; return "${?}"; 
+    }:
+
+    return 0;
+}
+
+## ==============================================
+
+## ERRORS MANAGER
+
+# ··············································································
+# Handling the eventual errors which could occur during the compilation process.
+
+# shellcheck disable=
+function BU.DevBin.LatexCompiler.Functions.HandleErrorInput()
+{
+    #**** Parameters ****
+    local p_code=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : Error string.
+
+    #**** Code ****
+    if [ "${p_code^^}" == 'E_MISSING_FILEPATH' ]; then
+        echo "ERROR : MISSING FILE PATH PASSED INTO THE ${FUNCNAME[1]}() FUNCTION !" >&2;
+
+    elif [ "${p_code^^}" == 'E_INCORRECT_FILE_PATH' ]; then
+        echo "ERROR : INCORRECT FILE PATH PASSED INTO THE ${FUNCNAME[1]}() FUNCTION !" >&2;
+    
+    elif [ "${p_code^^}" == 'E_COMPILATION_FAILED' ]; then
+        echo "ERROR : AN ERROR OCCURED DURING THE COMPILATION OF THE PREVIOUS FILE !" >&2;
+        echo "Please correct this / these error(s) with the help of your LaTeX editor";
+    fi
+
+    echo >&2;
+
+    read -pr "Do you want to continue the compiler's execution ? (Y/N)" __read_handle_error_input;
+
+    case "${__read_handle_error_input^^}" in
+        Y?(E?(S))|YS)   return 0;;
+        *)              return 1;;
+    esac
+
+    return 0;
+}
+
+## ==============================================
 
 
 
@@ -135,4 +195,19 @@ if ! command -v "${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}"; then
     echo >&2; exit 1;
 fi
 
-find . -name '*.tex' -execdir latexmk -pdf {} \;
+# If a single file path was passed as argument.
+if [ "${#__BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS[@]}" -eq 1 ]; then
+    BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF "${__BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS[0]}" || exit 1;
+
+# Else, if multiple file paths were passed as argument
+elif [ "${#__BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS[@]}" -gt 1 ]; then
+    for file in "${__BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS[@]}"; do
+        BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF "${file}" || exit 1;
+    done
+
+# Else, if no file path was passed as argument.
+else
+    find . -name '*.tex' -execdir latexmk -pdf {} \;
+fi
+
+exit 0;
