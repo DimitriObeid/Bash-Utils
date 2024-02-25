@@ -111,7 +111,7 @@ declare -g      __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTI
 declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DIR}/docs";
 
 # Path to the destination folder, located in "Bash-utils/docs/".
-declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR}/docs/01 PRINTABLE";
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR="${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR}/01 PRINTABLE";
 
 ## ==============================================
 
@@ -140,6 +140,8 @@ declare -g __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER
 # ·············································
 # Feel free to define functions here if needed.
 
+## ==============================================
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -153,7 +155,7 @@ if [ ! -d "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR}" 
 fi
 
 # Copying every documentation folders by languages into the "01 PRINTABLE" folder.
-for ISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR[@]}"; do
+for ISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH_UTILS_DOCS_DIR}"/*/; do
     __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_NAME="$(basename "${ISOFolder}")";
 
     __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH=false;
@@ -175,6 +177,8 @@ for ISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH
         (( __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__COPIED_FOLDERS_INTO_PRINTABLE_DIR++ ));
     fi
 done
+
+echo "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__COPIED_FOLDERS_INTO_PRINTABLE_DIR}"
 
 # Rewriting every strings which have to be modified, like the RGB to CMYK, the path to the "00 DATA" folder, and so on.
 

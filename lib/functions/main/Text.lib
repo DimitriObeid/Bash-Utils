@@ -851,42 +851,64 @@ function BU.Main.Text.GetLastCharacter()
 # shellcheck disable=
 function BU.Main.Text.GetLastFieldAfterDelim()
 {
-    # This function call makes it easier for the user to find the current function and its executed
-    # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    if ! BU.DevBin.LibDebug.Function.IsShellScriptLibDebug; then
-        BU.Main.Echo.Debug \
-            "main" \
-            "$(basename "${BASH_SOURCE[0]}")" \
-            "${FUNCNAME[0]}" \
-            "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
-            "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
-    fi
+    local __v_functions=('BU.DevBin.LibDebug.Function.IsShellScriptLibDebug');
+
+    # This method, which uses the previously defined array, allows to avoid the call of too many functions while checking if a condition is valid or not.
+    for func in "${__v_functions[@]}"; do
+        if declare -F "${func}" &>/dev/null; then
+            if ! "${func}"; then
+                # This function call makes it easier for the user to find the current function and its executed
+                # content if it is called during the execution of the main script with the "$(bash -x)" command.
+                BU.Main.Echo.Debug \
+                    "main" \
+                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+                    "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
+            fi
+        fi
+    done
 
     #**** Parameters ****
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
     local p_delim=${2:-$'\0'};  # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
 
+    #**** Variables ****
+    local v_functions0=();      # VAR TYPE : Array      - DESC : Array of functions to call while checking the validity of a condition.
+
     #**** Code ****
-	if  ! BU.DevBin.LibDebug.Function.IsShellScriptLibDebug &&\
-        ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims \
-            "${p_string}" \
-            "${p_delim}" \
-            "$(basename "${BASH_SOURCE[0]}")" \
-            "${FUNCNAME[0]}" \
-            "${LINENO}";
-    then
-        local C="${?}";
+    v_functions0+=("${__v_functions[@]}");
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    unset __v_functions;
 
-        return "${C}";
-    fi
+    for func in "${__v_functions0[@]}"; do
+        if declare -F "${func}" &>/dev/null; then
+            if  ! "${func}" && \
+                ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims \
+                    "${p_string}" \
+                    "${p_delim}" \
+                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "${LINENO}";
+            then
+                local C="${?}";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return "${C}";
+            fi
+        fi
+    done
 
 	echo "${p_string##*"${p_delim}"}";
 
-	if ! BU.DevBin.LibDebug.Function.IsShellScriptLibDebug; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
-    fi
+    for func in "${__v_functions[@]}"; do
+        if declare -F "${func}" &>/dev/null; then
+            if ! "${func}"; then
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+            fi
+        fi
+    done
 
 	return 0;
 }
