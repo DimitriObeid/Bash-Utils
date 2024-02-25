@@ -131,6 +131,34 @@ declare -g __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER
 
 ## ==============================================
 
+## STRINGS TO PROCESS IN THE PRINTABLE LATEX FILES
+
+# Storing the original value of the "xcolor" LaTeX package's option.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_XCOLOR_OPT='\\usepackage\[usenames,svgnames\]{xcolor}                      %';
+
+# Storing the original value of the document background color value.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_DOC_BKG_COL_VAL='\\definecolor{back}{HTML}{000000}';
+
+# Storing the original value of the document text color value.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_DOC_TXT_COL_VAL='\\definecolor{text}{HTML}{ffffff}';
+
+# Storing the original relative path to the "00 DATA" data directory.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_00DATA_PATH_VAL
+
+# Storing the new value of the "xcolor" LaTeX package's option.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_XCOLOR_OPT='\\usepackage[usenames,dvipsnames]{xcolor}                    %';
+
+# Storing the new value of the document background color value.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_DOC_BKG_COL_VAL='\\definecolor{back}{HTML}{ffffff}';
+
+# Storing the new value of the document text color value.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_DOC_TXT_COL_VAL='\\definecolor{text}{HTML}{000000}';
+
+# Storing the new relative path to the "00 DATA" data directory.
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_00DATA_PATH_VAL='';
+
+## ==============================================
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -192,15 +220,26 @@ for filepath in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS[@]}"; do
     (( __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR++ ));
 
     # Modifying the line where the "xcolor" package is called, in order to use the CYMK model, which is better for the impression.
-    sed -i 's/\\usepackage\[usenames,svgnames\]{xcolor}                    %/\\usepackage[usenames,dvipsnames]{xcolor}                    %/g' "${filepath}";
+    sed -i \
+        "s/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_XCOLOR_OPT}/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_XCOLOR_OPT}/g" \
+        "${filepath}";
 
     # Modifying the "back" color code.
-    sed -i 's/\\definecolor{back}{HTML}{000000}/\\definecolor{back}{HTML}{ffffff}/g' "${filepath}";
+    sed -i \
+        "s/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_DOC_BKG_COL_VAL}/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_DOC_BKG_COL_VAL}/g" \
+        "${filepath}";
 
     # Modifying the "text" color code.
-    sed -i 's/\\definecolor{text}{HTML}{ffffff}/\\definecolor{text}{HTML}{000000}/g' "${filepath}";
+    sed -i \
+        "s/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_DOC_TXT_COL_VAL}/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_DOC_TXT_COL_VAL}/g" \
+        "${filepath}";
 
     # Modifying the relative path to the "00 DATA" folder.
+    sed -E -i "s/\\includegraphics\[scale=[0-9]+\.[0-9]\{4\}\]\{\.\.\/\.\.\/00[[:space:]]DATA\//\\includegraphics\[scale=[0-9]+\.[0-9]\{4\}\]\{\.\.\/\.\.\/\.\.\/00[[:space:]]DATA\//g" "${filepath}"
+
+
+
+
 done
 
 echo "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR}";
