@@ -143,7 +143,7 @@ declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_DOC_BKG_
 declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_DOC_TXT_COL_VAL='\\definecolor{text}{HTML}{ffffff}';
 
 # Storing the original relative path to the "00 DATA" data directory.
-declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_00DATA_PATH_VAL
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_00DATA_PATH_VAL='\\includegraphics\[scale=[0-9]+\.[0-9]\{4\}\]\{\.\.\/\.\.\/00[[:space:]]DATA\/';
 
 # Storing the new value of the "xcolor" LaTeX package's option.
 declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_XCOLOR_OPT='\\usepackage[usenames,dvipsnames]{xcolor}                    %';
@@ -155,7 +155,7 @@ declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_DOC_BKG_
 declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_DOC_TXT_COL_VAL='\\definecolor{text}{HTML}{000000}';
 
 # Storing the new relative path to the "00 DATA" data directory.
-declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_00DATA_PATH_VAL='';
+declare -gr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_00DATA_PATH_VAL='\\includegraphics\[scale=[0-9]+\.[0-9]\{4\}\]\{\.\.\/\.\.\/\.\.\/00[[:space:]]DATA\/';
 
 ## ==============================================
 
@@ -235,8 +235,11 @@ for filepath in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS[@]}"; do
         "${filepath}";
 
     # Modifying the relative path to the "00 DATA" folder.
-    sed -E -i "s/\\includegraphics\[scale=[0-9]+\.[0-9]\{4\}\]\{\.\.\/\.\.\/00[[:space:]]DATA\//\\includegraphics\[scale=[0-9]+\.[0-9]\{4\}\]\{\.\.\/\.\.\/\.\.\/00[[:space:]]DATA\//g" "${filepath}"
+#     sed -E -i \
+#         "s/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_00DATA_PATH_VAL}/${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_00DATA_PATH_VAL}/g" \
+#         "${filepath}";
 
+    sed -i 's|\\includegraphics\[scale=\([0-9]\{1,\}\.[0-9]\{4\}\)\]{\.\./\.\./00 DATA/img/XTERM palette table\.png}|\\includegraphics[scale=\1]{../../../00 DATA/img/XTERM palette table.png}|g' "${filepath}"
 
 
 
