@@ -1,0 +1,122 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Textkodning (tecken med accenter).
+\usepackage[swedish]{babel}             % Dokumentets språk.
+\usepackage[sfdefault]{roboto}          % Font som används i dokumentet.
+\usepackage[T1]{fontenc}                % Avstavningsregel för tecken med accent (för LaTeX-kompilatorn).
+
+\usepackage{fancyhdr}                   % Lägg till sidhuvud och sidfot på varje sida i dokumentet.
+\usepackage{graphicx}                   % Lägg till bilder i dokumentet.
+\usepackage{hyperref}                   % Skapande av klickbara länkar till andra delar av dokumentet.
+\usepackage{parskip}                    % Tillägg av definierbara radbrytningar mellan varje stycke.
+
+% Glöm inte att ersätta alternativet "svgnames" (färger definierade enligt RGB-modellen, mer lämpliga
+% för digital visning) med alternativet "dvipsnames" (baserat på CJMB (CMYK) färgmodell, mer lämpliga
+% för utskrift) via skriptet för konvertering av utskriftsformat.
+
+\usepackage[usenames,dvipsnames]{xcolor}                    % Färgläggning av text.
+\usepackage{verbatim}                                     % Layout för stycken.
+
+\usepackage[document]{ragged2e}                           % Motivering av texten.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry} % Dokumentets layout.
+
+
+% ----------------------------------------------------------------------------------------------------
+% Du hittar mer information och dokumentation om dessa LaTeX-paket genom att klicka på länkarna nedan:
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% -------------------------------------------------------------------------------------------------
+% Lista över definierade färger (för sidlayout och temaförändringar vid utskrift av dokumentation).
+
+% Definition av färg             % Normal   | Utskriftsbar  - Beskrivning
+
+\definecolor{back}{HTML}{000000} % Svart    | Vit           - Dokumentets bakgrundsfärg.
+\definecolor{case}{HTML}{fcff00} % Gul                      - Färg på "case"-förhållanden.
+\definecolor{cmds}{HTML}{909090} % Grå                      - Färg på namn på systemkommandon och deras argument.
+\definecolor{cond}{HTML}{be480a} % Tegelstenenfärg          - Färg av "if"-villkor.
+\definecolor{func}{HTML}{800080} % Lila                     - Färg på de funktioner som definieras i varje modul i framework Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff} % Cyan                     - Färg på "for"-loopar.
+\definecolor{main}{HTML}{8F00FF} % Violett                  - Färg på de viktigaste skriptfunktionerna.
+\definecolor{path}{HTML}{bfff00} % Limefärg                 - Färg på mappar och filsökvägar.
+\definecolor{sec1}{HTML}{ff0000} % Röd                      - Färg på huvud- och topptitlar.
+\definecolor{sec2}{HTML}{00ff00} % Grön                     - Färg på titlar på andra nivån.
+
+\definecolor{sec3}{HTML}{0060ff} % Blå                      - Färg på titlar på tredje nivå.
+\definecolor{text}{HTML}{ffffff} % Vit      | Svart         - Normal textfärg.
+\definecolor{vars}{HTML}{FF7F00} % Orange                   - Färg på parameter- och variabelnamn.
+
+
+% --------------------------------------------------------
+% Definierar teckensnitt och bakgrundsfärg för dokumentet.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ----------------------------------
+% Definition av dokumentinformation.
+
+\title{\color{red}Bash Utils-framework...}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Bash Utils-framework...)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Bash Utils-framework...)
+  /Keywords ()
+}
+
+
+% ----------------------------------------------
+% Layout av stycken och rubriker för varje sida.
+
+\setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
+
+
+% ------------------
+% Start av dokument.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \color{sec1}
+    \section{}\color{text}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\end{document}
+

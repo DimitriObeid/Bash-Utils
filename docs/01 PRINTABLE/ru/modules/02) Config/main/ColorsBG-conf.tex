@@ -1,0 +1,124 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Кодировка текста (акцентированные символы).
+\usepackage[russian]{babel}             % Язык документа.
+\usepackage[sfdefault]{roboto}          % Шрифт, используемый в документе.
+\usepackage[T1]{fontenc}                % Правило гифена для акцентированных символов (для компилятора LaTeX).
+
+\usepackage{fancyhdr}                   % Добавьте верхние и нижние колонтитулы на каждую страницу документа.
+\usepackage{graphicx}                   % Добавьте изображения в документ.
+\usepackage{hyperref}                   % Создавайте кликабельные ссылки на другие части документа.
+\usepackage{parskip}                    % Выбор переносов строк между абзацами.
+
+% Не забудьте заменить параметр "svgnames" (цвета, основанные на модели RGB, лучше
+% для цифрового отображения) на параметр "dvipsnames" (основанный на цветовой
+% модели CMYK, лучше для печати) с помощью скрипта преобразования печати.
+
+\usepackage[usenames,dvipsnames]{xcolor}                      % Окрашивание текста.
+\usepackage{verbatim}                                       % Расположение абзацев.
+
+\usepackage[document]{ragged2e}                             % Обоснование текста.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}   % Макет документа.
+
+
+% ---------------------------------------------------------------------------------------------------------
+% Более подробную информацию и документацию по этим пакетам LaTeX вы можете найти, перейдя по ссылкам ниже:
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% ---------------------------------------------------------------------------------------------
+% Список определенных цветов (для оформления страниц и изменения темы для печати документации).
+
+% Определение цвета              % Нормальный	| Печать    - Описание
+
+\definecolor{back}{HTML}{000000} % Черный       | Белый     - Цвет фона документа.
+\definecolor{case}{HTML}{fcff00} % Желтый                   - Цвет условий "case".
+\definecolor{cmds}{HTML}{909090} % Серый                    - Цвет имен системных команд и их аргументов.
+\definecolor{cond}{HTML}{be480a} % Кирпич                   - Цвет условий "if".
+\definecolor{func}{HTML}{800080} % Фиолетовый               - Цвет функций, определенных в каждом модуле фреймворка "Bash Utils".
+
+\definecolor{loop}{HTML}{00ffff} % Голубой циан             - Цвет локонов.
+\definecolor{main}{HTML}{8F00FF} % Виолетта                 - Цвет основных функций скрипта.
+\definecolor{path}{HTML}{bfff00} % Лайм                     - Цвет путей к папкам и файлам.
+\definecolor{sec1}{HTML}{ff0000} % Красный                  - Цвет основного и верхнего заголовков.
+\definecolor{sec2}{HTML}{00ff00} % Зеленый                  - Цвет заголовков второго уровня.
+
+\definecolor{sec3}{HTML}{0060ff} % Голубой                  - Цвет названий третьего уровня.
+\definecolor{text}{HTML}{ffffff} % Белый        | Черный    - Цвет: обычный текст
+\definecolor{vars}{HTML}{FF7F00} % Оранжевый                - Цвет имен параметров и переменных.
+
+
+% ---------------------------------------
+% Определяет шрифт и цвет фона документа.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ---------------------------------
+% Определение информации документа.
+
+\title{\color{sec1}Bash Utils}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Bash Utils)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Bash Utils)
+  /Keywords ()
+}
+
+
+% ------------------------------------------
+% Расположение абзацев и заголовков страниц.
+
+\setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
+
+
+% -----------------
+% Начало документа.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \begin{abstract}
+
+    \end{abstract}
+
+    \section{}
+
+	% ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\end{document}

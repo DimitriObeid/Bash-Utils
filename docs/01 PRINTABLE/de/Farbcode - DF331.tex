@@ -1,0 +1,177 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}     % Textkodierung (akzentuierte Zeichen).
+\usepackage[german]{babel}      % Dokumentsprache.
+\usepackage[sfdefault]{roboto}  % Die im Dokument verwendete Schriftart.
+\usepackage[T1]{fontenc}		% Regel für die Trennung von Zeichen mit Akzent (für den LaTeX-Compiler).
+
+\usepackage{fancyhdr}           % Fügen Sie auf jeder Seite des Dokuments Kopf- und Fußzeilen ein.
+\usepackage{hyperref}           % Erstellen von anklickbaren Links, die auf andere Teile des Dokuments verweisen.
+\usepackage{parskip}            % Definierbare Zeilenumbrüche zwischen den einzelnen Absätzen.
+
+% Vergessen Sie nicht, die Option "svgnames" (Farben nach dem RGB-Farbmodell definiert, besser für
+% Digitalanzeigen) über das Konvertierungsskript in die Option "dvipsnames" (basierend auf dem CMGS
+% (CMYK)-Farbmodell, besser für den Druck) zu ändern. in ein druckbares Format umgewandelt.
+\usepackage[usenames,dvipsnames]{xcolor}      % Text färben.
+\usepackage{verbatim}						% Formatierung von Absätzen.
+
+\usepackage[document]{ragged2e}								% Rechtfertigung des Textes.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}	% Layout des Dokuments.
+
+
+% -------------------------------------------------------------------------------------------------------
+% Liste der definierten Farben (für das Layout und für den Themenwechsel beim Drucken der Dokumentation).
+
+% Definition von Farbe           % Normal | Bedruckbar   - Beschreibung
+
+\definecolor{back}{HTML}{000000} % Schwarz      | weiß        - Hintergrundfarbe des Dokuments.
+\definecolor{case}{HTML}{fcff00} % Gelb                       - Farbe der "case"-Bedingungen.
+\definecolor{cmds}{HTML}{909090} % Grau                       - Farbige Darstellung der Namen von Systembefehlen und ihrer Argumente.
+\definecolor{cond}{HTML}{be480a} % Ziegelstein                - Farbe der "if"-Bedingungen.
+\definecolor{func}{HTML}{800080} % Malve                      - Farbe der Funktionen, die in jedem Modul des Frameworks Bash Utils definiert sind.
+
+\definecolor{loop}{HTML}{00ffff} % Cyan                       - Farbe der Locken.
+\definecolor{main}{HTML}{8F00FF} % Violett                    - Farbe der Funktionen des Hauptskripts.
+\definecolor{path}{HTML}{bfff00} % Limette                    - Farbe der Pfade zu Ordnern und Dateien.
+\definecolor{sec1}{HTML}{ff0000} % Rot                        - Farbe von Haupt- und Toptiteln.
+\definecolor{sec2}{HTML}{00ff00} % Grün                       - Farbe von Titeln der zweiten Ebene.
+
+\definecolor{sec3}{HTML}{0060ff} % Blau                       - Farbe von Titeln der dritten Ebene.
+\definecolor{text}{HTML}{ffffff} % weiß         | Schwarz     - Farbe des normalen Textes.
+\definecolor{vars}{HTML}{FF7F00} % Orange                     - Farbe der Namen von Parametern und Variablen.
+
+
+% ---------------------------------------------------------------------
+% Legen Sie die Schriftart und die Hintergrundfarbe des Dokuments fest.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ---------------------------------------------
+% Definieren Sie die Informationen im Dokument.
+
+\title{\color{red}Farbcode \color{orange}der \color{yellow}offiziellen \color{green}Dokumentation \\\color{blue}des \color{violet}Frameworks \color{red}Bash \color{orange}Utils}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Farbcode der offiziellen Dokumentation des Frameworks Bash Utils)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Farbcode der offiziellen Dokumentation des Frameworks Bash Utils)
+  /Keywords ()
+}
+
+
+% ------------------------------------------------------------
+% Formatierung von Absätzen und Überschriften auf jeder Seite.
+
+\setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
+
+
+% ---------------------
+% Beginn des Dokuments.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \color{sec1}
+    \section{Farben der Dokumentation im ``normalen'' Format}\color{text}
+
+    \begin{justify}
+        \textbf{\color{case}ACHTUNG :} Es ist nicht ratsam, ein Dokument in diesem Format zu drucken. Dies gilt sowohl für den Toner Ihres Druckers als auch für eine bessere Druckqualität mit dem Farbmodell CJMB (CYMK), das von dem druckbaren Format angeboten wird..
+
+        Um auf das druckbare Format umzuschalten, führen Sie das Skript \textbf{\color{cmds}latex-convert-to-printable.sh} aus. Sie befindet sich im Ordner mit den ausführbaren Dateien, ihr Code wurde jedoch noch nicht geschrieben.
+    \end{justify}
+
+    \color{text}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \begin{justify}
+        \textbf{NOTE :} Jedes Mal, wenn Sie den Befehl \textbf{\textbackslash{color}} aufrufen, der im Paket \textbf{xcolor} enthalten ist, rufen Sie bitte den nativen \textbf{\textbackslash{textbf}}-Befehl von \LaTeX \ auf, um die gefärbte Zeichenfolge fett zu markieren, damit sie besser hervorgehoben wird.
+    \end{justify}
+
+    \begin{justify}
+        Gehen Sie dazu wie folgt vor :
+
+        \begin{itemize}
+              \item \textbackslash{textbf\{\textbackslash{color\{Name\_des\_festgelegten\_Farbcodes}\}}\}
+          \end{itemize}
+    \end{justify}
+
+    \color{text}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \begin{justify}
+        Die Liste der Farbcodes für die Druckversion finden Sie unterhalb der folgenden Liste auf der nächsten Seite.
+    \end{justify}
+
+    \begin{justify}
+        \begin{tabular}{lll}
+            \textbf{Farbcode} & \textbf{Farbe}          & \textbf{Beschreibung}\\\\
+
+            \color{text}back  & \color{text}Schwarz     & \color{text}Hintergrundfarbe des Dokuments\\
+            \color{case}case  & \color{case}Gelb        & \color{case}Farbe der \textbf{``case''}-Bedingungen\\
+            \color{cmds}cmds  & \color{cmds}Grau        & \color{cmds}Farbige Darstellung der Namen von Systembefehlen und ihren Argumenten\\\\
+
+            \color{cond}cond  & \color{cond}Ziegelstein & \color{cond}Farbe der \textbf{``if''}-Bedingungen\\
+            \color{func}func  & \color{func}Malve       & \color{func}Farbe der Funktionen, die in jedem Modul des Frameworks BU definiert sind\\
+            \color{loop}loop  & \color{loop}Cyan        & \color{loop}Farbe der Locken\\\\
+
+            \color{main}main  & \color{main}Violett     & \color{main}Farbe der Funktionen des Hauptskripts\\
+            \color{path}path  & \color{path}Limette     & \color{path}Farbe der Pfade zu Ordnern und Dateien\\
+            \color{sec1}sec1  & \color{sec1}Rot         & \color{sec1}Farbe von Haupt- und Toptiteln\\\\
+
+            \color{sec2}sec2  & \color{sec2}Grun        & \color{sec2}Farbe von Titeln der zweiten Ebene\\
+            \color{sec3}sec3  & \color{sec3}Blau        & \color{sec3}Farbe von Titeln der dritten Ebene\\
+            \color{text}text  & \color{text}weiß        & \color{text}Farbe des normalen Textes\\\\
+
+            \color{vars}vars  & \color{vars}Orange      & \color{vars}Farbe der Namen von Parametern und Variablen\\
+        \end{tabular}
+    \end{justify}
+
+    \newpage
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+    \color{red}
+    \section{Farben der Dokumentation in druckbarem Format}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{lll}
+            \textbf{Farbcode} & \textbf{Farbe}          & \textbf{Beschreibung}\\\\
+
+            \color{text}back  & \color{text}weiß        & \color{text}Hintergrundfarbe des Dokuments\\
+            \color{case}case  & \color{case}Gelb        & \color{case}Farbe der \textbf{``case''}-Bedingungen\\
+            \color{cmds}cmds  & \color{cmds}Grau        & \color{cmds}Farbige Darstellung der Namen von Systembefehlen und ihren Argumenten\\\\
+
+            \color{cond}cond  & \color{cond}Ziegelstein & \color{cond}Farbe der \textbf{``if''}-Bedingungen\\
+            \color{func}func  & \color{func}Malve       & \color{func}Farbe der Funktionen, die in jedem Modul des Frameworks BU definiert sind\\
+            \color{loop}loop  & \color{loop}Cyan        & \color{loop}Farbe der Locken\\\\
+
+            \color{main}main  & \color{main}Violett     & \color{main}Farbe der Funktionen des Hauptskripts\\
+            \color{path}path  & \color{path}Limette     & \color{path}Farbe der Pfade zu Ordnern und Dateien\\
+            \color{sec1}sec1  & \color{sec1}Rot         & \color{sec1}Farbe von Haupt- und Toptiteln\\\\
+
+            \color{sec2}sec2  & \color{sec2}Grun        & \color{sec2}Farbe von Titeln der zweiten Ebene\\
+            \color{sec3}sec3  & \color{sec3}Blau        & \color{sec3}Farbe von Titeln der dritten Ebene\\
+            \color{text}text  & \color{text}Schwarz     & \color{text}Farbe des normalen Textes\\\\
+
+            \color{vars}vars  & \color{vars}Orange      & \color{vars}Farbe der Namen von Parametern und Variablen\\
+        \end{tabular}
+    \end{justify}
+\end{document}

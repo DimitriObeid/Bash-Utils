@@ -1,0 +1,633 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Encodage du texte (caractères accentués).
+\usepackage[french]{babel}              % Langue du document.
+\usepackage[sfdefault]{roboto}          % Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}                % Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
+
+\usepackage{fancyhdr}                   % Ajout d'en-têtes et de pieds de page à chaque page du document.
+\usepackage{graphicx}                   % Ajout d'images dans le document.
+\usepackage{hyperref}                   % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}                    % Sauts de ligne déterminables entre chaque paragraphe.
+
+% Ne pas oublier de modifier l'option "svgnames" (couleurs définies sur le modèle RGB, meilleur pour
+% l'affichage numérique) en option "dvipsnames" (basé sur le modèle de couleur CJMB (CMYK), meilleur
+% pour l'impression) via le script de conversion en format imprimable.
+
+\usepackage[usenames,dvipsnames]{xcolor}                      % Coloration du texte.
+\usepackage{verbatim}                                       % Mise en page des paragraphes.
+
+\usepackage[document]{ragged2e}                             % Justification du texte.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}   % Mise en page du document.
+
+
+% ----------------------------------------------------------------------------------------------------------------
+% Pour plus d'informations et de documentation sur ces paquets LaTeX, veuillez vous référer aux liens ci-dessous :
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% ------------------------------------------------------------------------------------------------------------------------
+% Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
+
+% Définition de la couleur       % Normal   | Imprimable    - Description
+
+\definecolor{back}{HTML}{000000} % Noir     | Blanc         - Couleur de fond du document.
+\definecolor{case}{HTML}{fcff00} % Jaune                    - Couleur des conditions "case".
+\definecolor{cmds}{HTML}{909090} % Gris                     - Couleur des noms de commandes du système et de leurs arguments.
+\definecolor{cond}{HTML}{be480a} % Brique                   - Couleur des conditions "if".
+\definecolor{func}{HTML}{800080} % Mauve                    - Couleur des fonctions définies dans chaque module du framework Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff} % Cyan                     - Couleur des boucles.
+\definecolor{main}{HTML}{8F00FF} % Violet                   - Couleur des fonctions du script principal.
+\definecolor{path}{HTML}{bfff00} % Citron vert              - Couleur des chemins de dossiers et de fichiers.
+\definecolor{sec1}{HTML}{ff0000} % Rouge                    - Couleur des titres principaux et de premier niveau.
+\definecolor{sec2}{HTML}{00ff00} % Vert                     - Couleur des titres de deuxième niveau.
+
+\definecolor{sec3}{HTML}{0060ff} % Bleu                     - Couleur des titres de troisième niveau.
+\definecolor{text}{HTML}{ffffff} % Blanc    | Noir          - Couleur du texte normal.
+\definecolor{vars}{HTML}{FF7F00} % Orange                   - Couleur des noms des paramètres et des variables.
+
+
+% ------------------------------------------------------------------------
+% Définition de la police d'écriture et de la couleur de fond du document.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ----------------------------------------
+% Définition des informations du document.
+
+\title{\color{sec1}Fonctions et variables du fichier \\de configuration du module \\principal \color{path}Colors.conf}\color{text}
+\author{Dimitri OBEID}
+\date{2023}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Fonctions et variables du fichier de configuration du module principal "Colors.conf")
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Fonctions et variables du fichier de configuration du module principal "Colors.conf")
+  /Keywords ()
+}
+
+
+% ------------------------------------------------------------
+% Mise en page des paragraphes et des en-têtes de chaque page.
+
+\setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
+
+
+% ------------------
+% Début du document.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \color{sec1}
+    \section{Présentation}\color{text}
+
+    \color{sec2}
+    \subsection{Description}\color{text}
+
+    \begin{justify}
+        Ce fichier de configurations liste chaque variable globale de couleur utilisée par la librairie, avec sa ou ses valeurs par défaut.
+    \end{justify}
+
+    \begin{justify}
+        Elles sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{Définition des éléments mentionnés}\color{text}
+
+    \color{sec3}
+    \subsubsection{Chemins des fichiers}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Dossier parent} - \textit{dossier des configurations}    & \textbf{Nom du fichier}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT}      & \textbf{\color{path}Status.conf}\\
+            \hline
+        \end{tabular}
+
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Dossier parent} - \textit{dossier de la librairie}       & \textbf{Nom du fichier}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH}    & \textbf{\color{path}Status.lib}\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+    \color{sec3}
+    \subsubsection{Fonctions externes appelées}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Fonction} & \textbf{Fichier de définition}\\
+            \hline
+            \textbf{\color{func}BU.Main.Status.CheckStatAllowFormatting} & \textbf{\color{path}Status.lib}\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}\setlength{\parskip}{1em}
+
+    \color{sec3}
+    \subsubsection{Variables globales externes et / ou variables d'environnement appelées}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Variable globale}                           & \textbf{Fichier de définition}\\
+            \hline
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} & \textbf{\color{path}Status.lib}\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec1}
+    \section{Liste des fonctions}\color{text}
+
+    \color{sec2}
+    \subsection{Fonctions d'encodage}\color{text}
+
+    \color{sec3}
+    \subsubsection{BU.Main.TextFormat.SetBGColor}\color{text}
+
+    \begin{justify}
+        \textbf{Fonction : \color{func}BU.Main.TextFormat.SetBGColor}
+    \end{justify}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        \textbf{Description :} Cette fonction colore le fond de la zone de texte où est entré le moindre caractère.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Paramètres :}
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{orange}\$1} & Nombre entier positif\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Fonctionnement :}
+
+        \textbf{\color{cond}Si} la fonction \textbf{\color{func}BU.Main.Status.CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{true}, \textbf{\color{cond}alors} :
+    \end{justify}
+
+    \begin{itemize}
+        \item
+        {
+            \begin{justify}
+                La commande \textbf{\color{cmds}command -v} est invoquée dans une condition pour déterminer si la commande \textbf{\color{cmds}tput} est installée sur le système.
+            \end{justify}
+
+            \setlength{\parskip}{1em}
+
+            \begin{justify}
+                \textbf{\color{cond}Si} la commande \textbf{\color{cmds}tput} est trouvée, \textbf{\color{cond}alors} :
+
+                \begin{itemize}
+                    \item
+                    {
+                        \begin{justify}
+                            la commande \textbf{\color{cmds}tput} est invoquée avec l'option \textbf{\color{cmds}setab} (\textbf{set} \textbf{A}NSI \textbf{b}ackground) pour décorer le fond de la zone d'affichage de texte. Le cas échétant, la séquence d'échappement ANSI traditionnelle est invoquée via la commande \textbf{\color{cmds}echo -e} (l'option \textbf{\color{cmds}-e} permet de créer des séquences d'échappement).
+                        \end{justify}
+
+                        \setlength{\parskip}{2em}
+
+                        \begin{justify}
+                            \textbf{\color{cond}Si} le \textbf{\color{path}fichier temporaire dédié au stockage du code couleur pour la couleur de fond} n'existe pas \textbf{ET} ne peut pas être créé (via la fonction \textbf{\color{func}BU.Main.Checkings.CheckProjectRelatedFile}), \textbf{\color{cond}alors} un message d'erreur est affiché à l'écran.
+                        \end{justify}
+
+                        \setlength{\parskip}{1em}
+
+                        \begin{justify}
+                            \textbf{\color{cond}Fin de la condition « si »}.
+                        \end{justify}
+                    }
+                \end{itemize}
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{cond}Sinon, si} la commande \textbf{\color{cmds}tput} n'est pas installée sur le système, \textbf{\color{cond}alors} la séquence d'échappement ANSI traditionnelle est invoquée via la commande \textbf{\color{cmds}echo -e}.
+            \end{justify}
+
+            \begin{justify}
+                \textbf{\color{cond}Fin de la condition « si »}.
+            \end{justify}
+        }
+    \end{itemize}
+
+    \begin{justify}
+        \textbf{\color{cond}Sinon, si} la fonction \textbf{\color{func}BU.Main.Status.CheckStatAllowFormatting} découvre que la valeur de la variable globale de statut \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT} correspond à la chaîne de caractères \textbf{false}, \textbf{\color{cond}alors} l'exécution de la fonction est interrompue.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{\color{cond}Fin de la condition « si »}.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Utilisation :} Appelez cette fonction pour colorer le bout de texte que vos souhaitez.
+    \end{justify}
+
+    \begin{justify}
+        Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}«  »}
+    \end{justify}
+
+
+
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{BU.Main.TextFormat.SetTextColor}\color{text}
+
+    \begin{justify}
+        \textbf{Fonction : \color{func}BU.Main.TextFormat.SetTextColor}
+    \end{justify}
+
+    \begin{justify}
+        \textbf{Description :} Cette fonction colore chaque caractère.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Paramètres :}
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{orange}\$1} & Nombre entier positif\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Fonctionnement :}
+
+        La fonction fonctionne de la même manière que la fonction \textbf{\color{func}BU.Main.TextFormat.SetBGColor}, à quelques différences près :
+        \begin{enumerate}
+            \item l'option de la commande de formatage \textbf{\color{cmds}tput} n'est pas \textbf{setab}, mais \textbf{setaf} (\textbf{set} \textbf{A}NSI \textbf{f}oreground),
+            \item le code couleur est enregistré dans un autre fichier temporaire,
+        \end{enumerate}
+    \end{justify}
+
+
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Utilisation :} Appelez cette fonction pour colorer le bout de texte que vos souhaitez.
+    \end{justify}
+
+    \begin{justify}
+        Cela dit, il est recommandé d'appeler l'une des substitutions de commande de la sous-section \textbf{\color{sec2}«  »}
+    \end{justify}
+
+
+
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{Fonctions d'affichage de texte}\color{text}
+
+    \color{sec3}
+    \subsubsection{BU.Main.ModConfig.Colors.BG.PrintColorVarNameCmdSub}\color{text}
+
+    \begin{justify}
+        \textbf{Fonction : \color{func}BU.Main.ModConfig.Colors.BG.PrintColorVarNameCmdSub}
+    \end{justify}
+
+    \begin{justify}
+        \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU.ModuleInit.DisplayInitGlobalVarsInfos}.
+    \end{justify}
+
+    \begin{justify}
+        Ce message doit être le même pour chaque variable globale de couleur de fond. Cette fonction évite donc de le réécrire ou de le modifier pour chaque variable.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Paramètres :}
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}\$1} & Chaîne de caractères\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Fonctionnement :} La commande \textbf{\color{cmds}printf} est appelée pour afficher un message sans saut de ligne, décrivant le comportement de la substitution de commandes traitée et donnant le nom de la couleur de fond, qui est passé en premier argument.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Utilisation :} Appelez cette fonction en quatrième argument de la fonction \textbf{\color{func}BU.ModuleInit.DisplayInitGlobalVarsInfos} lorsque vous créez une nouvelle variable globale de couleur, ici pour une variable globale enregistrant une substitution de commande permettant la coloration du fond.
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{BU.Main.ModConfig.Colors.PrintColorTextVarsNameSubsCmd}\color{text}
+
+    \begin{justify}
+        \textbf{Fonction : \color{func}BU.Main.ModConfig.Colors.PrintColorTextVarsNameSubsCmd}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Description :} Cette fonction affiche un message passé en quatrième argument à la fonction \textbf{\color{func}BU.ModuleInit.DisplayInitGlobalVarsInfos}.
+    \end{justify}
+
+    \begin{justify}
+        Ce message doit être le même pour chaque variable globale de couleur de texte. Cette fonction évite donc de le réécrire ou de le modifier pour chaque variable.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Paramètres :}
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{\color{vars}\$1} & Chaîne de caractères\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Fonctionnement :} Le fonctionnement est identique à la fonction \textbf{\color{func}BU.Main.ModConfig.Colors.BG.PrintColorVarNameCmdSub}, mais le message varie.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \textbf{Utilisation :} Même cas d'utilisation que pour la fonction \textbf{\color{func}BU.Main.ModConfig.Colors.BG.PrintColorVarNameCmdSub}, mais la coloration du texte lui-même.
+    \end{justify}
+
+
+
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec1}
+    \section{Liste des variables}\color{text}
+
+    \color{sec2}
+    \subsection{Codes couleur}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{Nom de la variable} & \textbf{Type}
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}TEXT
+        \textit{Description de la variable :}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_CODE\_...}  & Nombre entier\\
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Chacune de ces variables globales de couleur de texte enregistre en mémoire le code couleur associé à la couleur dont le nom figure après les points de suspension.
+    \end{justify}
+
+    \begin{justify}
+        Liste des couleurs disponibles :
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Couleur système} & \textbf{Code couleur associé}\\
+            \hline
+            \textbf{\color{text}Black} & \textbf{\color{text}0}\\
+            \hline
+            \textbf{\color{Maroon}Maroon} & \textbf{\color{Maroon}1}\\
+            \hline
+            \textbf{\color{Green}Green} & \textbf{\color{Green}2}\\
+            \hline
+            \textbf{\color{Olive}Olive} & \textbf{\color{Olive}3}\\
+            \hline
+            \textbf{\color{Navy}Navy} & \textbf{\color{Navy}4}\\
+            \hline
+            \textbf{\color{Purple}Purple} & \textbf{\color{Purple}5}\\
+            \hline
+            \textbf{\color{Teal}Teal} & \textbf{\color{Teal}6}\\
+            \hline
+            \textbf{\color{Silver}Silver} & \textbf{\color{Silver}7}\\
+            \hline
+            \textbf{\color{Gray}Gray} & \textbf{\color{Gray}8}\\
+            \hline
+            \textbf{\color{Red}red} & \textbf{\color{Red}9}\\
+            \hline
+            \textbf{\color{Lime}Lime} & \textbf{\color{Lime}10}\\
+            \hline
+            \textbf{\color{Yellow}Yellow} & \textbf{\color{Yellow}11}\\
+            \hline
+            \textbf{\color{Blue}Blue} & \textbf{\color{Blue}12}\\
+            \hline
+            \textbf{\color{Fuchsia}Fuchsia} & \textbf{\color{Fuchsia}13}\\
+            \hline
+            \textbf{\color{Aqua}Aqua} & \textbf{\color{Aqua}14}\\
+            \hline
+            \textbf{\color{White}White} & \textbf{\color{White}15}\\
+            \hline
+        \end{tabular}
+
+        \begin{tabular}{|l|l|}
+            \hline
+            \textbf{Couleurs supplémentaires} & \textbf{Code couleur associé}\\
+            \hline
+            \textbf{\color{Cyan}Cyan} & \textbf{\color{Cyan}51}\\
+            \hline
+            \textbf{\color{Orange}Orange} & \textbf{\color{Orange}166}\\
+            \hline
+            \textbf{\color{Pink}Pink} & \textbf{\color{Pink}200}\\
+            \hline
+            \textbf{\color{Salmon}Salmon} & \textbf{\color{Salmon}209}\\
+            \hline
+            \textbf{\color{Tan}Tan} & \textbf{\color{Tan}180}\\
+            \hline
+            \textbf{\color{Turquoise}Turquoise} & \textbf{\color{Turquoise}51}\\
+            \hline
+            \textbf{\color{Violet}Violet} & \textbf{\color{Violet}177}\\
+            \hline
+        \end{tabular}
+    \end{justify}
+
+    \setlength{\parskip}{2em}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \setlength{\parskip}{1em}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_TXT\_...} & Substitution de commandes\\
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU.Main.TextFormat.SetTextColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    \end{justify}
+
+    \begin{justify}
+        \textbf{Note :} Ces variables globales sont définies avant celles servant à l'encodage de la ouleur de fond, car elles sont appelées pour encoder la couleur du texte pour mieux lire les informations concernant les variables globales de couleur de fond si la valeur \textbf{--log-mode-partial} est passée à l'argument \textbf{module} lors de l'exécution du script principal.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_COLOR\_BG\_...} & Substitution de commandes\\
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Chacune des variables variables globales de couleur commençant par ce nom retourne le résultat de la fonction \textbf{\color{func}BU.Main.TextFormat.SetBGColor} lors de l'appel d'une de ces variables, pour colorer le texte selon le code couleur.
+    \end{justify}
+\end{document}

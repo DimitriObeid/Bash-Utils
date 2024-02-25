@@ -1,0 +1,324 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Encodage du texte (caractères accentués).
+\usepackage[french]{babel}              % Langue du document.
+\usepackage[sfdefault]{roboto}          % Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}                % Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
+
+\usepackage{fancyhdr}                   % Ajout d'en-têtes et de pieds de page à chaque page du document.
+\usepackage{graphicx}                   % Ajout d'images dans le document.
+\usepackage{hyperref}                   % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}                    % Sauts de ligne déterminables entre chaque paragraphe.
+
+% Ne pas oublier de modifier l'option "svgnames" (couleurs définies sur le modèle RGB, meilleur pour
+% l'affichage numérique) en option "dvipsnames" (basé sur le modèle de couleur CJMB (CMYK), meilleur
+% pour l'impression) via le script de conversion en format imprimable.
+
+\usepackage[usenames,dvipsnames]{xcolor}                      % Coloration du texte.
+\usepackage{verbatim}                                       % Mise en page des paragraphes.
+
+\usepackage[document]{ragged2e}                             % Justification du texte.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}   % Mise en page du document.
+
+
+% ----------------------------------------------------------------------------------------------------------------
+% Pour plus d'informations et de documentation sur ces paquets LaTeX, veuillez vous référer aux liens ci-dessous :
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% ------------------------------------------------------------------------------------------------------------------------
+% Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
+
+% Définition de la couleur       % Normal   | Imprimable    - Description
+
+\definecolor{back}{HTML}{000000} % Noir     | Blanc         - Couleur de fond du document.
+\definecolor{case}{HTML}{fcff00} % Jaune                    - Couleur des conditions "case".
+\definecolor{cmds}{HTML}{909090} % Gris                     - Couleur des noms de commandes du système et de leurs arguments.
+\definecolor{cond}{HTML}{be480a} % Brique                   - Couleur des conditions "if".
+\definecolor{func}{HTML}{800080} % Mauve                    - Couleur des fonctions définies dans chaque module du framework Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff} % Cyan                     - Couleur des boucles.
+\definecolor{main}{HTML}{8F00FF} % Violet                   - Couleur des fonctions du script principal.
+\definecolor{path}{HTML}{bfff00} % Citron vert              - Couleur des chemins de dossiers et de fichiers.
+\definecolor{sec1}{HTML}{ff0000} % Rouge                    - Couleur des titres principaux et de premier niveau.
+\definecolor{sec2}{HTML}{00ff00} % Vert                     - Couleur des titres de deuxième niveau.
+
+\definecolor{sec3}{HTML}{0060ff} % Bleu                     - Couleur des titres de troisième niveau.
+\definecolor{text}{HTML}{ffffff} % Blanc    | Noir          - Couleur du texte normal.
+\definecolor{vars}{HTML}{FF7F00} % Orange                   - Couleur des noms des paramètres et des variables.
+
+
+% ------------------------------------------------------------------------
+% Définition de la police d'écriture et de la couleur de fond du document.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ----------------------------------------
+% Définition des informations du document.
+
+\title{\color{sec1}Variables du fichier de configuration \\du module principal \color{path}Status.conf}\color{text}
+\author{Dimitri OBEID}
+\date{2023}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Fonctions et variables du fichier de configuration du module principal "Status.conf")
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Fonctions et variables du fichier de configuration du module principal "Status.conf")
+  /Keywords ()
+}
+
+
+% ------------------------------------------------------------
+% Mise en page des paragraphes et des en-têtes de chaque page.
+
+\setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
+
+
+% ------------------
+% Début du document.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \color{sec1}
+    \section{Présentation}\color{text}
+
+    \begin{justify}
+        Ce fichier de configurations liste chaque variable globale de statut utilisée par la librairie, avec sa ou ses valeurs par défaut.
+    \end{justify}
+
+    \begin{justify}
+        Elles sont chargées en mémoire lors de l'inclusion du fichier \textbf{\color{path}Initialization.sh} appartenant au module principal.
+    \end{justify}
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+    \color{sec1}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec1}
+    \section{Liste des variables}\color{text}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{Nom de la variable} & \textbf{Type} & \textbf{Valeurs acceptées}
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        \textit{Description de la variable :}
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DEBUG}  & Booléen & \textbf{false} || \textbf{true} \\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut sert à lancer un déboguage de certaines fonctionnalités (dans une section de code écrite de préférence au début du script principal), sans attendre l'atteinte à cette fonctionnalité si le code de cette dernière est écrit trop loin dans un script.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_DECHO}  & Chaîne de caractères    & \textbf{authorize} || \textbf{forbid} || \textbf{restrict}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut sert à autoriser, empêcher \textbf{OU} restreindre l'exécution de la fonction de décoration de texte avancée \textbf{\color{func}Decho}, en fonction des situations où l'appel de cette fonctions peut provoquer ou non une boucle infinie.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ECHO}   & Booléen      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut sert à totalement autoriser \textbf{OU} empêcher l'exécution de la fonction \textbf{\color{func}BU.Main.Status.CheckProjectLogStatus}, notamment dans le cas où une fonction d'affichage de texte formaté est appelée à l'intérieur de cette fonction, où via une autre fonction appelée dans le même cas.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+                    \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_ERROR}  & Chaîne de caractères    & \textit{aucune valeur} || \textbf{fatal}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut sert à déterminer la gravité d'une erreur selon le contexte. Ce choix est à déterminer par l'utilisateur, et la valeur de cette variable est traitée par la fonction \textbf{\color{func}BU.Main.Errors.HandleErrors()} du fichier de librairie \textbf{\color{path}Checkings.lib}.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_INITIALIZING}       & Booléen  & \textbf{false} || \textbf{true}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut sert à déterminer si la librairie est en phase d'initialisation des modules.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG}    & Booléen      & \textbf{false} || \textbf{true}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut sert à autoriser ou non la création d'un fichier de logs pour le projet en cours.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_LOG\_REDIRECT}  & Chaîne de caractères & \textit{aucune valeur} || \textbf{log} || \textbf{tee}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable vérifie si un message peut être affiché à l'écran, redirigé vers un fichier de logs, ou les deux à la fois.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_OPERATE\_ROOT}  & Chaîne de caractères & \textbf{authorized} || \textbf{forbidden} || \textbf{restricted}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable vérifie si une opération sur un fichier ou un dossier localisé à la racine du système de fichiers peut être effectuée.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_HEADER}   & Nombre décimal\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un header.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_NEWLINE}  & Nombre décimal\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un saut de ligne.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TIME\_TXT}  & Nombre décimal\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable sert à mettre en pause l'exécution du script pendant un temps bref lors de l'affichage d'un message à l'écran.
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_TXT\_FMT}   & Booléen & \textbf{false} || \textbf{true}\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        Cette variable de statut vérifie que le script ait la permission de formater le texte (couleurs, gras, italique, soulignage, clignotement, etc...).
+    \end{justify}
+
+    % ------------
+
+    \par\noindent\rule{\textwidth}{0.4pt}
+
+    \begin{justify}
+        \begin{tabular}{l|l|l}
+            \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_USER\_OS}   & &\\[1\baselineskip]
+        \end{tabular}
+    \end{justify}
+
+    \begin{justify}
+        \textbf{ATTENTION : Cette variable est dépreciée et sera déplacée dans le module \textbf{\color{path}os\_specific} dans une prochaine mise à jour}
+    \end{justify}
+\end{document}

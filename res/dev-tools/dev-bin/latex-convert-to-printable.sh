@@ -67,8 +67,11 @@
 
 ## ISO 639-1 CODES
 
+# List of LaTeX files to modify into the sub-folders located inside the "Bash-utils/docs/01 PRINTABLE" directory.
+declare -ag __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS=();
+
 # Array of ISO 639-1 codes.
-declare -ag ___BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' \
+declare -agr __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY=('ab' 'aa' 'af' 'ak' 'sq' 'am' 'ar' 'an' 'hy' 'as' 'av' 'ae' \
                                                                             'ay' 'az' 'bm' 'ba' 'eu' 'be' 'bn' 'bi' 'bs' 'br' 'bg' 'my' \
                                                                             'ca' 'ch' 'ce' 'ny' 'zh' 'cu' 'cv' 'kw' 'co' 'cr' 'hr' 'cs' \
                                                                             'da' 'dv' 'nl' 'dz' 'en' 'eo' 'et' 'ee' 'fo' 'fj' 'fi' 'fr' \
@@ -95,8 +98,11 @@ declare -ag ___BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY=('ab'
 
 ## COUNTERS
 
-# Counting the number of folders copied into the "Bash-utils/docs/01 PRINTABLE" directory.
+# Counting the total number of folders copied into the "Bash-utils/docs/01 PRINTABLE" directory.
 declare -gi __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__COPIED_FOLDERS_INTO_PRINTABLE_DIR=0;
+
+# Counting the total number of files found into the sub-folders located inside the "Bash-utils/docs/01 PRINTABLE" directory.
+declare -gi __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR=0;
 
 ## ==============================================
 
@@ -161,7 +167,7 @@ for ISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH
     __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH=false;
 
     # Checking if the currently processed directory has a valid ISO 639-1 code as a name.
-    for validISOFolder in "${___BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY[@]}"; do
+    for validISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS__LANG_ARRAY[@]}"; do
         if [ "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_NAME,,}" == "${validISOFolder,,}" ]; then
             __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__DATA__CURRENT_FOLDER_AUTH=true;
 
@@ -178,8 +184,17 @@ for ISOFolder in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__BASH
     fi
 done
 
-echo "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__COPIED_FOLDERS_INTO_PRINTABLE_DIR}"
+mapfile -t __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS < <(find "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR}" -type f -name "*.tex")
 
 # Rewriting every strings which have to be modified, like the RGB to CMYK, the path to the "00 DATA" folder, and so on.
+for filepath in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS[@]}"; do
+    # Incremeting the counter of files found into the sub-folders located inside the "Bash-utils/docs/01 PRINTABLE" directory by 1;
+    (( __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR++ ));
+
+    sed -i 's/\\usepackage\[usenames,svgnames\]{xcolor}/\\usepackage[usenames,dvipsnames]{xcolor}/g' "${filepath}";
+
+done
+
+echo "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR}";
 
 exit 0;

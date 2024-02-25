@@ -1,0 +1,635 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Encodage du texte (caractères accentués).
+\usepackage[french]{babel}              % Langue du document.
+\usepackage[sfdefault]{roboto}          % Police d'écriture utilisée dans le document.
+\usepackage[T1]{fontenc}                % Règle de césure pour les caractères accentués (pour le compilateur LaTeX).
+
+\usepackage{fancyhdr}                   % Ajout d'en-têtes et de pieds de page à chaque page du document.
+\usepackage{graphicx}                   % Ajout d'images dans le document.
+\usepackage{hyperref}                   % Création de liens cliquables pointant vers d'autres parties du document.
+\usepackage{parskip}                    % Sauts de ligne déterminables entre chaque paragraphe.
+
+% Ne pas oublier de modifier l'option "svgnames" (couleurs définies sur le modèle RGB, meilleur pour
+% l'affichage numérique) en option "dvipsnames" (basé sur le modèle de couleur CJMB (CMYK), meilleur
+% pour l'impression) via le script de conversion en format imprimable.
+
+\usepackage[usenames,dvipsnames]{xcolor}                      % Coloration du texte.
+\usepackage{verbatim}                                       % Mise en page des paragraphes.
+
+\usepackage[document]{ragged2e}                             % Justification du texte.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}   % Mise en page du document.
+
+
+% ----------------------------------------------------------------------------------------------------------------
+% Pour plus d'informations et de documentation sur ces paquets LaTeX, veuillez vous référer aux liens ci-dessous :
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% ------------------------------------------------------------------------------------------------------------------------
+% Liste des couleurs définies (pour la mise en page et pour le changement de thème pour l'impression de la documentation).
+
+% Définition de la couleur       % Normal   | Imprimable    - Description
+
+\definecolor{back}{HTML}{000000} % Noir     | Blanc         - Couleur de fond du document.
+\definecolor{case}{HTML}{fcff00} % Jaune                    - Couleur des conditions "case".
+\definecolor{cmds}{HTML}{909090} % Gris                     - Couleur des noms de commandes du système et de leurs arguments.
+\definecolor{cond}{HTML}{be480a} % Brique                   - Couleur des conditions "if".
+\definecolor{func}{HTML}{800080} % Mauve                    - Couleur des fonctions définies dans chaque module du framework Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff} % Cyan                     - Couleur des boucles.
+\definecolor{main}{HTML}{8F00FF} % Violet                   - Couleur des fonctions du script principal.
+\definecolor{path}{HTML}{bfff00} % Citron vert              - Couleur des chemins de dossiers et de fichiers.
+\definecolor{sec1}{HTML}{ff0000} % Rouge                    - Couleur des titres principaux et de premier niveau.
+\definecolor{sec2}{HTML}{00ff00} % Vert                     - Couleur des titres de deuxième niveau.
+
+\definecolor{sec3}{HTML}{0060ff} % Bleu                     - Couleur des titres de troisième niveau.
+\definecolor{text}{HTML}{ffffff} % Blanc    | Noir          - Couleur du texte normal.
+\definecolor{vars}{HTML}{FF7F00} % Orange                   - Couleur des noms des paramètres et des variables.
+
+
+% ------------------------------------------------------------------------
+% Définition de la police d'écriture et de la couleur de fond du document.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% ----------------------------------------
+% Définition des informations du document.
+
+\title{\color{sec1}Tutoriels d'aide aux ajouts basiques\\ dans le module principal}\color{text}
+\author{Dimitri OBEID}
+\date{2021}
+\pagestyle{fancy}
+\justifying
+
+\pdfinfo{
+  /Title    (Tutoriels d'aide aux ajouts basiques dans le module principal)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Tutoriels d'aide aux ajouts basiques dans le module principal)
+  /Keywords ()
+}
+
+% Définition de couleurs
+\definecolor{mauve}{RGB}{128, 0, 128}
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \color{sec1}
+    \section{Liste des tutoriels}\color{text}
+
+    \textbf{Note :} Pour des raisons de lisibilité, veuillez créer les nouvelles fonctions et variables dans l'ordre\linebreak alphabétique de chacune de leurs liste.
+
+    \color{sec2}
+    \subsection{Ajouter une nouvelle langue à la librairie}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de configuration à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main/LangCSVCode.conf}
+        \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main/LangISOCode.conf}
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de librairie à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/lang/SetLibLang.sh}
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    \begin{justify}
+        Ouvrez le fichier de configuration \textbf{\color{path}LangCSVCode.conf}, puis dans la liste des variables globales, créez une variable globale nommée \textbf{\color{vars}\_\_BU\_MAIN\_LANG\_CSV\_CODE\_}, suivie immédiatement du code ISO 639-1 de la langue que vous souhaitez ajouter.
+    \end{justify}
+
+    \begin{justify}
+        Ensuite, ouvrez le fichier de librairie \textbf{\color{path}SetLibLang.sh}, puis rendez-vous dans la fonction \textbf{\color{mauve}SetLibLang}.
+    \end{justify}
+
+    \begin{justify}
+        Une fois dedans, ajoutez une nouvelle condition dans la structure de contrôle \textbf{case}, en écrivant le code ISO 639-1 de la langue cible, suivi d'un tiret du 8 '\_', utilisé par le système pour relier ce code avec le code ISO 3166 du pays, avant d'ajouter une étoile '*' pour ne pas à se soucier de la gestion des différences de langue par pays.
+    \end{justify}
+
+    \begin{justify}
+        Une fois la condition créée, définissez la en créant une variable nommée \textbf{\color{vars}\_\_BU\_MAIN\_LANG\_CSV\_CODE}, puiz assignez la variable que vous venez de défninir dans le fichier de configuration \textbf{\color{path}LangCSVCode.conf}.
+    \end{justify}
+
+    \begin{justify}
+        Appelez ensuite la fonction \textbf{\color{mauve}ParseCSVLibLang}, en lui passant en argument :
+
+        \begin{itemize}
+            \item Le chemin du fichier de traduction de la librairie (vous pouvez copier cette valeur, puis la coller en la passant en argument) :
+            \begin{itemize}
+                \item \textbf{\color{vars}\$\_\_BU\_MAIN\_MODULE\_LIB\_LANG\_DIR\_PATH\color{path}/lang.csv}\\\mbox{}
+            \end{itemize}
+
+            \item La variable globale \textbf{\color{vars}\$\_\_BU\_MAIN\_LANG}, qui enregistre la langue choisie, définie plus bas dans le fichier, dans la fonction \textbf{\color{mauve}GetLibLang}.\\\mbox{}
+
+            \item Le message de succès de recherche du chemin du fichier CSV, dans la langue que vous\ souhaitez définir.\\\mbox{}
+
+            \item Le message d'erreur du header de la fonction \textbf{\color{mauve}BU.Main.Errors.HandleErrors}\\\mbox{}
+
+            \item Le message de conseil de la fonction \textbf{\color{mauve}BU.Main.Errors.HandleErrors}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Pour plus de praticité, vous pouvez créer un fichier nommé \textbf{\color{path}LangISOCode.conf} dans ce dossier :
+
+        \begin{itemize}
+            \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        puis écrire le code ISO 639-1 de votre langue, suivie du code ISO 3166 d'un des pays où la langue à ajouter est parlée.
+    \end{justify}
+
+    \begin{justify}
+        Pour encore plus de praticité, si la langue que vous souhaitez ajouter est définie dans les paramètres de votre système d'exploitation, vous pouvez taper la commande suivante en remplaçant la variable \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT} par le chemin de la racine du dossier de configurations de Bash Utils (normalement localisé dans votre dossier personnel) :
+
+        \begin{itemize}
+            \item \textbf{\color{cmds}echo \color{vars}\$LANG \color{text} > "\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/modules/main/LangISOCode.conf\color{text}"}
+        \end{itemize}
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{Ajouter une nouvelle langue à la documentation}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de configuration à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}}
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de librairie à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}}
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{Ajouter une nouvelle couleur}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de configuration à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MODULE\_UTILS\_ROOT\color{path}/config/module/main/colors.conf}\\[1\baselineskip]
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de librairie à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main/Decho.lib}
+        \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main/Headers.lib}\\[1\baselineskip]
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    \begin{justify}
+        Dans le fichier de configuration \textbf{\color{path}colors.conf}, repérez la section \textbf{COLOR ENCODING}, puis la sous-section \textbf{COLOR CODES FOR TEXT ENCODING (OTHERS)}, puis créez une nouvelle variable globale de code couleur, de préférence nommée :
+
+        \begin{itemize}
+            \item \textbf{\color{vars}\_\_BU\_MAIN\_COLOR\_CODE\_<\$nom\_de\_la\_couleur\_en\_anglais>}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Suivie de son code ANSI de la table des couleurs XTERM.
+    \end{justify}
+
+    \begin{justify}
+        Pour plus d'informations concernant les valeurs de cette table, veuillez cliquer \href{https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes/269085#269085}{\textbf{ici}}, ou exécuter le script \textbf{\color{path}256-color-table.sh}, localisé dans le dossier \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/res/dev-tools/dev-bin}.
+    \end{justify}
+
+    \begin{justify}
+        Une fois le code couleur ajouté, repérez, dans le même fichier, la section :
+
+        \begin{itemize}
+            \item \textbf{ENCODING WITH THE "tput" COMMAND AND PRINTED AND REDIRECTED WITH THE\\ "BU.Main.TextFormat.SetTextColor" FUNCTIONS}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Puis la sous-section suivante :
+
+        \begin{itemize}
+            \item \textbf{TEXT ENCODING}
+        \end{itemize}
+    \end{justify}
+
+
+    \begin{justify}
+        Puis créez une nouvelle variable globale de nom de couleur nommée comme la variable créée précédement, sans le \textbf{\color{vars}\_CODE}, puis appelez la fonction \textbf{\color{mauve}BU.Main.TextFormat.SetTextColor}, suivie du nom de la variable créée dans la sous-section \textbf{COLOR CODES FOR TEXT ENCODING}.
+    \end{justify}
+
+    \begin{justify}
+        Regardez la manière dont la fonction \textbf{\color{mauve}BU.Main.TextFormat.SetTextColor} est appelée, pour vous aider.\\\mbox{}
+    \end{justify}
+
+    \begin{justify}
+        Maintenant, rendez vous dans le fichier de librairie
+
+        \begin{itemize}
+            \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main/Decho.lib}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Puis repérez la sous-catégorie suivante :
+
+        \begin{itemize}
+            \item \textbf{WRITING DIFFERENTLY COLORED/FORMATTED TEXT BETWEEN TEXT - LIST}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Repérez les premières fonctions, toutes nommées \textbf{\color{mauve}Decho\_<\$nom\_de\_couleur\_en\_anglais>}, puis ajoutez une fonction pour chaque couleur en copiant simplement l'une des fonctions en l renommant \textbf{\color{mauve}Decho\_<\$nom\_de\_la\_nouvelle\_couleur>} et en remplaçant le second argument de la fonction \textbf{\color{mauve}Decho} par le nom de la variable globale de nom de couleur associée.\\\mbox{}
+    \end{justify}
+
+    \begin{justify}
+        Ensuite, rendez vous dans ce fichier de librairie :
+
+        \begin{itemize}
+            \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main/Echo.lib}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Puis dans la sous-catégorie suivante :
+
+        \begin{itemize}
+            \item \textbf{DISPLAYING A COLORED MESSAGE WITH A PAUSE TIME DEPENDING ON THE\\ "\$\_\_BU\_MAIN\_STAT\_TIME\_TXT" STATUS VARIABLE}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Vous y trouvrerez des fonctions nommées \textbf{\color{mauve}BU.Echo<\$\_nom\_couleur\_en\_anglais>}.
+    \end{justify}
+
+    \begin{justify}
+    Copiez-collez simplement l'une de ces fonctions, et remplacez y le nom de la couleur par celui de la nouvelle couleur.\\\mbox{}
+    \end{justify}
+
+    \begin{justify}
+        Enfin, rendez-vous dans ce fichier de librairie :
+
+        \begin{itemize}
+            \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main/Headers.lib}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Puis dans la sous-section \textbf{UNICOLOR HEADERS}, repérez la liste de fonctions nommées :
+
+        \begin{itemize}
+            \item \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>}
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Copiez simplement l'une des fonctions, puis renommez la \textbf{\color{mauve}Header<\$nom\_de\_la\_couleur\_en\_anglais>},
+    et modifiez les noms des premier et troisième arguments de la fonction \textbf{\color{mauve}BU.Main.Headers.HeaderBase}, en les
+    remplaçant par le nom de la variable globale de noms de couleurs souhaitée.
+    \end{justify}
+
+    \begin{justify}
+        Rendez vous ensuite dans la sous-section suivante, nommée \textbf{BICOLOR HEADERS}, puis pour chaque liste de fonction par couleur, copiez-collez une fonction, puis renomez la en ne changeant que le nom de la deuxième couleur, puis le nom du troisième argument de la fonction \textbf{\color{mauve}BU.Main.Headers.HeaderBase}.
+    \end{justify}
+
+    \begin{justify}
+        Finalement, pour chaque couleur que vous ajoutez, créez une nouvelle liste de fonctions bicolores,
+    toujours en respectant l'ordre alphabétique du nom des couleurs en anglais (voir les commentaires
+    avant chaque liste).
+    \end{justify}
+
+    \begin{justify}
+        Créez une fonction pour chacune des couleurs à supporter, nommée \textbf{\color{mauve}Header}, suivie du \textbf{\color{mauve}nom de la nouvelle couleur}, suivie enfin du \textbf{\color{mauve}nom d'une autre couleur}.
+    \end{justify}
+
+    \begin{justify}
+        Modifiez la valeur du premier argument en appelant la variable globale de nom de couleur associée à la nouvelle couleur, puis la valeur du troisième argument en appelant la variable globale de nom de couleur dédiée au nom de l'autre couleur à afficher.
+    \end{justify}
+
+    \begin{justify}
+        Encore une fois, n'hésitez pas à jeter un œil à l'organisation des autres listes de fonctions d'affichage bicolore pour vous aider.
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{Ajouter un nouveau module}\color{text}
+
+    \begin{justify}
+        \textbf{Note :} Le fonctionnement des modules est détaillé dans la section \textbf{\color{sec1}Introduction} du fichier de documentation \textbf{\color{path}Bash-utils/docs/fr/modules/Fonctionnement.pdf}.
+    \end{justify}
+
+    \color{sec3}
+    \subsubsection{Fichiers à exécuter}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/res/dev-tools/dev-bin/mkmodules.sh}\\[1\baselineskip]
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    \begin{justify}
+        \textbf{De manière automatique :}
+
+        \begin{itemize}
+            \item Rendez-vous EXACTEMENT dans le dossier du fichier shell \textbf{\color{path}mkmodules.sh}, puis exécutez juste ce script en lui passant en argument les noms des modules à créer.\\\mbox{}
+
+            \item \textbf{Astuce :} Vous pouvez vous y rendre directement via le lien symbolique \textbf{\color{path}bin} dans le dossier racine de la librairie. \textbf{Attention}, pour ceux qui utilisent WSL, ce lien ne marche pas dans le moindre explorateur de fichiers sur Windows, mais uniquement en ligne de commande avec votre distribution Linux.
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        \textbf{De manière manuelle :}
+        \begin{itemize}
+            \item  Rendez vous dans le dossier de configurations des modules \textbf{\color{path}.Bash-utils}, puis rendez vous dans le dossier \textbf{\color{path}config/modules}. Créez un nouveau dossier pour chaque module à créer, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{path}module.conf}.\\\mbox{}
+
+            \item Revenez de nouveau dans le dossier racine \textbf{\color{path}.Bash-utils}, puis allez dans le dossier \textbf{\color{path}modules}. Créez un nouveau dossier pour chaque module, puis dans chacun de ces dossiers, créez un fichier nommé \textbf{\color{path}Initializer.sh}.
+        \end{itemize}
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{Ajouter une variable de statut}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de configuration à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{vars}\$\_\_BU\_MODULES\_UTILS\_ROOT\color{path}/config/modules/main/Status.conf}\\[1\baselineskip]
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers de librairie à éditer}\color{text}
+
+    \begin{justify}
+        \begin{itemize}
+            \item \textbf{\color{vars}\$\_\_BU\_MAIN\_ROOT\_DIR\_PATH\color{path}/lib/functions/main/CheckSTAT.lib}\\\mbox{}
+
+            \item \textbf{Tout fichier où vous avez créé une nouvelle fonction ou modifié une fonction existante, où vous souhaitez appeler cette variable}
+        \end{itemize}
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    \begin{justify}
+        Rendez vous dans le fichier de configurations \textbf{\color{path}Status.conf}, puis créez une nouvelle variable commençant par \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT\_}, puis, de préférence en anglais, nommez le reste de la variable selon l'action nécessitant l'appel de cette variable.
+    \end{justify}
+
+    \begin{justify}
+        Comme les autres variables définies dans ce fichier, décrivez brièvement le but de cette variable, puis indiquez quelles valeurs sont acceptées, avant de définir une valeur par défaut, tout en prenant le soin, si vous utilisez l'utilitaire \textbf{\color{cmds}Shellcheck}, de désactiver l'affichage du message d'avertissement retourné avec le code \textbf{SC2034}, vous indiquant que la variable est définie, mais non-utilisée dans ce fichier.
+    \end{justify}
+
+    \begin{justify}
+        Une fois la nouvelle variable créée, rendez-vous dans le fichier de librairie \textbf{\color{path}CheckSTAT.lib}, dans la sous-section \textbf{CHECKINGS} puis créez une fonction dont le nom commence par \textbf{\color{mauve}CheckSTAT\_}, puis ajoutez-y le nom de la variable de statut que vous venez de créer dans le fichier précédent, sans le double tiret du 8.
+    \end{justify}
+
+    \begin{justify}
+        Copiez-collez la définition des paramètres de n'importe quelle autre fonction, puis définissez une section de variables, où vous créerez un tableau (\textbf{pa\_correctValues} par exemple, en y passant la déclaration \textbf{\color{cmds}local} au préalable pour assurer que ce dernier n'ait qu'une portée locale (CÀD dans la fonction en elle même, sans accès via l'extérieur)) dans lequel vous passerez en valeurs les valeurs acceptées pour cette nouvelle variable de statut.
+    \end{justify}
+
+    \begin{justify}
+        Dans la section \textbf{code}, ajoutez une nouvelle condition où vous vérifirez si la valeur de votre variable de statut est différente de chacune des valeurs définies dans le tableau défini dans la section \textbf{Variables}.
+    \end{justify}
+
+    \begin{justify}
+        Dans cette condition, appelez la fonction \textbf{\color{mauve}BU.Main.Status.ConfEcho}, puis passez en arguments :
+
+        \begin{itemize}
+            \item Le paramètre \textbf{\color{vars}\$p\_file}\\\mbox{}
+
+            \item Le paramètre \textbf{\color{vars}\$p\_lineno}\\\mbox{}
+
+            \item Le nom de la variable.\\\mbox{}
+
+            \item Idem, mais sans le signe \textbf{\$}\\\mbox{}
+
+            \item Le tableau de valeurs.
+        \end{itemize}
+    \end{justify}
+
+    \begin{justify}
+        Puis n'oubliez pas d'appelez la déclaration \textbf{\color{cmds}return} en lui passant la valeur 1, indiquant que l'exécution de la fonction ne s'est pas déroulée correctement.
+    \end{justify}
+
+    \begin{justify}
+        Puis à l'extérieur de la condition, appelez de nouveau la déclaration \textbf{\color{cmds}return} en lui passant cette fois la valeur 0.
+    \end{justify}
+
+    \begin{justify}
+        Une fois ceci fait, rendez vous tout à la fin de la sous-section actuelle, dans la fonction \textbf{\color{mauve}CheckProjectStatusVars}, puis appelez-y la ou les fonctions que vous venez de créer, en y passant en argument les variables \textbf{\color{vars}\$p\_file} et \textbf{\color{vars}\$p\_lineno}.\\\mbox{}
+    \end{justify}
+
+
+    \begin{justify}
+        Maintenant, rendez vous dans la sous-section \textbf{CHANGING VALUES MORE EASILY}. Créez une nouvelle fonction, dont le nom commence par \textbf{\color{mauve}BU.Main.Status.ChangeSTAT\_}, suivie du nom de votre variable de statut, sans le \textbf{\color{vars}\$\_\_BU\_MAIN\_STAT}.
+    \end{justify}
+
+    \begin{justify}
+        Dans cette nouvelle fonction, appelez votre fonction fraîchement créée en redéfinissant votre variable de statut (l'écrire sans le signe \textbf{\$}), en lui passant le paramètre positionnel \textbf{\$l}; puis appelez la fonction que vous avez créé en lui passant en arguments les paramètres positionnels \textbf{\$2} et \textbf{\$3}.
+    \end{justify}
+
+    \begin{justify}
+        N'oubliez pas les déclarations de retour (\textbf{\color{cmds}return 1} et \textbf{\color{cmds}return 0})\\\mbox{}
+    \end{justify}
+
+
+    \begin{justify}
+        Enfin, \textbf{SI et seulement SI} votre nouvelle variable accepte seulement les valeurs \textbf{true} ou \textbf{false}, rendez vous dans la sous-section \textbf{EASIER CHECKING BOOLEAN VALUES} pour créer une dernière fonction que vous nommerez \textbf{\color{mauve}CheckStat} (attention à la casse), suivie du nom de l'action accomplie par votre nouvelle variable (regardez les noms des fonctions existantes pour vous donner une idée).
+    \end{justify}
+
+    \begin{justify}
+    Il est recommandé de vérifier si la valeur enregistrée dans votre variable soit égale à vrai (\textbf{true}), et de retourner 0, et 1 le cas échéant.
+    \end{justify}
+
+    \begin{justify}
+        Maintenant, vous pouvez utiliser cette nouvelle variable et ces nouvelles fonctions là où vous le souhaitez dans le module principal, voire dans un autre module, puis dans vos propres scripts.
+    \end{justify}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{\$\_TITRE}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{path}\color{text}}
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec2}
+    \subsection{\$\_TITRE}\color{text}
+
+    \color{sec3}
+    \subsubsection{Fichiers à éditer}\color{text}
+
+    \begin{itemize}
+        \item \textbf{\color{path}\color{text}}
+    \end{itemize}
+
+    % ------------
+
+    % ----------------------
+
+    \color{sec3}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+
+    \color{sec3}
+    \subsubsection{Consignes}\color{text}
+
+    % ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    \color{sec2}\par\noindent\rule{\textwidth}{0.4pt}\color{text}
+\end{document}

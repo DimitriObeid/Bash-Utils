@@ -1,0 +1,123 @@
+\documentclass[a4paper,10pt]{article}
+
+\usepackage[utf8]{inputenc}             % Kódování textu (znaky s diakritikou).
+\usepackage[czech]{babel}               % Jazyk dokumentu.
+\usepackage[sfdefault]{roboto}          % Písmo použité v dokumentu.
+\usepackage[T1]{fontenc}                % Pravidlo pro spojování znaků s diakritikou (pro překladač LaTeXu).
+
+\usepackage{fancyhdr}                   % Na každou stránku dokumentu přidejte záhlaví a zápatí.
+\usepackage{graphicx}                   % Přidání obrázků do dokumentu.
+\usepackage{hyperref}                   % Vytvářejte klikací odkazy na další části dokumentu.
+\usepackage{parskip}                    % Určení zlomů řádků mezi jednotlivými odstavci.
+
+% Nezapomeňte změnit možnost "svgnames" (barvy definované na základě modelu RGB, lepší pro digitální zobrazení)
+% na "dvipsnames" (založené na barevném modelu CMYK, lepší pro tisk) prostřednictvím skriptu pro převod tisku.
+
+\usepackage[usenames,dvipsnames]{xcolor}                      % Vybarvení textu.
+\usepackage{verbatim}                                       % Rozložení odstavců.
+
+\usepackage[document]{ragged2e}                             % Odůvodnění textu.
+\usepackage[a4paper,margin=1in,footskip=0.25in]{geometry}   % Rozložení dokumentu.
+
+
+% -------------------------------------------------------------------------------------------
+% Další informace a dokumentaci k těmto balíčkům LaTeXu naleznete na níže uvedených odkazech:
+
+% inputenc  : https://www.ctan.org/pkg/inputenc
+% babel     : https://www.ctan.org/pkg/babel
+% roboto    : https://www.ctan.org/pkg/roboto
+% fontenc   : https://www.ctan.org/pkg/fontenc
+
+% fancyhdr  : https://www.ctan.org/pkg/fancyhdr
+% graphicx  : https://www.ctan.org/pkg/graphicx
+% hyperref  : https://www.ctan.org/pkg/hyperref
+% parskip   : https://www.ctan.org/pkg/parskip
+
+% xcolor    : https://www.ctan.org/pkg/xcolor
+% verbatim  : https://www.ctan.org/pkg/verbatim
+
+% ragged2e  : https://www.ctan.org/pkg/ragged2e
+% geometry  : https://www.ctan.org/pkg/geometry
+
+
+% ----------------------------------------------------------------------------------------
+% Seznam definovaných barev (pro rozvržení stránky a změnu motivu pro tisk dokumentace).
+
+% Definice barvy                 % Normální | Tisknutelné   - Popis
+
+\definecolor{back}{HTML}{000000} % Černá    | Bílá          - Barva pozadí dokumentu.
+\definecolor{case}{HTML}{fcff00} % Žlutý                    - Barva "case" podmínek.
+\definecolor{cmds}{HTML}{909090} % Šedá                     - Barva názvů systémových příkazů a jejich argumentů.
+\definecolor{cond}{HTML}{be480a} % Cihly                    - Barva podmínek "if".
+\definecolor{func}{HTML}{800080} % Purpurový                - Barva funkcí definovaných v jednotlivých modulech rámce Bash Utils.
+
+\definecolor{loop}{HTML}{00ffff} % Azurová barva            - Barva kudrlinek.
+\definecolor{main}{HTML}{8F00FF} % Fialová                  - Barva hlavních funkcí skriptu.
+\definecolor{path}{HTML}{bfff00} % Vápno                    - Barva cest ke složkám a souborům.
+\definecolor{sec1}{HTML}{ff0000} % Červená                  - Barva hlavního a horního názvu.
+\definecolor{sec2}{HTML}{00ff00} % Zelená                   - Barva titulů druhé úrovně.
+
+\definecolor{sec3}{HTML}{0060ff} % Modrá                    - Barva titulů třetí úrovně.
+\definecolor{text}{HTML}{ffffff} % Bílá     | Černá         - Barva textu.
+\definecolor{vars}{HTML}{FF7F00} % Oranžová                 - Barva názvů parametrů a proměnných.
+
+
+% ----------------------------------------
+% Definuje písmo a barvu pozadí dokumentu.
+
+\fontfamily{Roboto}
+
+\pagecolor{back}
+
+
+% -------------------------------
+% Definice informací o dokumentu.
+
+\title{\color{sec1}Bash Utils}\color{text}
+\author{Dimitri OBEID}
+\pagestyle{fancy}
+
+\pdfinfo{
+  /Title    (Bash Utils)
+  /Author   (Dimitri OBEID)
+  /Creator  (Dimitri OBEID)
+  /Producer (Dimitri OBEID)
+  /Subject  (Bash Utils)
+  /Keywords ()
+}
+
+
+% -------------------------------------
+% Rozložení odstavců a záhlaví stránek.
+
+\setlength{\parskip}{1em}
+
+\setlength{\headheight}{13pt}
+
+
+% ------------------
+% Začátek dokumentu.
+
+\begin{document}
+    \maketitle
+    \newpage
+
+    \hypertarget{contents}{}
+    \tableofcontents
+    \newpage
+
+    \begin{abstract}
+
+    \end{abstract}
+
+    \section{}
+
+	% ------------
+
+    % ----------------------
+
+    % -----------------------------------------------
+
+    % /////////////////////////////////////////////////////////////////////////////////////////////// %
+
+\end{document}
