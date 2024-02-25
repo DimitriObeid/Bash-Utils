@@ -186,13 +186,21 @@ done
 
 mapfile -t __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS < <(find "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__PATHS__DEST_DIR}" -type f -name "*.tex")
 
-# Rewriting every strings which have to be modified, like the RGB to CMYK, the path to the "00 DATA" folder, and so on.
+# Rewriting every strings which have to be modified, like the RGB to CMYK, the defined colors for the document backgroud and the text, and the path to the "00 DATA" folder.
 for filepath in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS[@]}"; do
     # Incremeting the counter of files found into the sub-folders located inside the "Bash-utils/docs/01 PRINTABLE" directory by 1;
     (( __BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR++ ));
 
-    sed -i 's/\\usepackage\[usenames,svgnames\]{xcolor}/\\usepackage[usenames,dvipsnames]{xcolor}/g' "${filepath}";
+    # Modifying the line where the "xcolor" package is called, in order to use the CYMK model, which is better for the impression.
+    sed -i 's/\\usepackage\[usenames,svgnames\]{xcolor}                    %/\\usepackage[usenames,dvipsnames]{xcolor}                    %/g' "${filepath}";
 
+    # Modifying the "back" color code.
+    sed -i 's/\\definecolor{back}{HTML}{000000}/\\definecolor{back}{HTML}{ffffff}/g' "${filepath}";
+
+    # Modifying the "text" color code.
+    sed -i 's/\\definecolor{text}{HTML}{ffffff}/\\definecolor{text}{HTML}{000000}/g' "${filepath}";
+
+    # Modifying the relative path to the "00 DATA" folder.
 done
 
 echo "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__COUNTERS__FOUND_FILES_INTO_PRINTABLE_SUB_FOLDERS_DIR}";
