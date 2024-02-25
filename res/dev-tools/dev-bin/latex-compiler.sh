@@ -49,9 +49,14 @@
 
 #### ARRAY OF ARGUMENTS
 
-## SUB-CATEGORY NAME
+## FILEPATHS ARRAY
 
-# Feel free to define an array of arguments here if needed.
+# ARG TYPE : Array
+# REQUIRED
+# DEFAULT VAL : .
+
+# DESC :
+declare -agr __BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS=();
 
 ## ==============================================
 
