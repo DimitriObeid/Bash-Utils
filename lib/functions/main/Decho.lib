@@ -128,6 +128,12 @@ declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FOR
 # ···························································································································································
 # Text's inside decoration / formatting procssing (light version, safe to use when the complete version cannot be called without provoking an infinite loop).
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+#   - printf    |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -158,6 +164,15 @@ function BU.Main.Decho.__Decho()
 
 # ···································································
 # Text's inside decoration / formatting procssing (complete version).
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - echo      | (-e | -n)
+#   - local     |
+#   - printf    |
+#   - shift     |
+#   - test      |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -384,6 +399,11 @@ declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FOR
 # ························································
 # Easy "BU.Main.Decho.Decho()" function calls with colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - local     |
+#   - shift     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
@@ -424,6 +444,11 @@ function BU.Main.Decho.Decho.Yellow                 { local v_str=${1:-$'\0'}; l
 # ··············································································
 # Easy "BU.Main.Decho.Decho()" function calls with specific text display colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - local     |
+#   - shift     |
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues() -> Main -> Args.lib
@@ -458,6 +483,10 @@ function BU.Main.Decho.BGColor                      { local v_str=${1:-$'\0'}; l
 
 # ··························································
 # Easy "BU.Main.Decho.__Decho()" function calls with colors.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -497,6 +526,10 @@ function BU.Main.Decho.__Decho.Yellow               { BU.Main.Decho.__Decho "${1
 # ················································································
 # Easy "BU.Main.Decho.__Decho()" function calls with specific text display colors.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.__Decho() -> Main -> Decho.lib (this file)
@@ -525,6 +558,10 @@ function BU.Main.Decho.__Decho.Warning              { BU.Main.Decho.__Decho "${1
 
 # ·················
 # Blink formatting.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -566,6 +603,10 @@ function BU.Main.Decho.Decho.FMT_BlinkU             { BU.Main.Decho.Decho "${1}"
 # ···············
 # Bold formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
@@ -590,6 +631,10 @@ function BU.Main.Decho.Decho.FMT_BoldU          { BU.Main.Decho.Decho "${1}" "${
 # ··············
 # Dim formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
@@ -606,6 +651,10 @@ function BU.Main.Decho.Decho.FMT_DU         { BU.Main.Decho.Decho "${1}" "${2}" 
 # ·················
 # Italic formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
@@ -618,6 +667,10 @@ function BU.Main.Decho.Decho.FMT_IU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 # ························
 # Strikethrough formatting
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Decho.Decho() -> Main -> Decho.lib (this file)
@@ -627,6 +680,10 @@ function BU.Main.Decho.Decho.FMT_SU     { BU.Main.Decho.Decho "${1}" "${2}" "${3
 
 # ····················
 # Underline formatting
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

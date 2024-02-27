@@ -147,7 +147,7 @@ function BU.DevBin.LatexCompiler.Function.CheckIsAlreadyCompiled()
 function BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF()
 {
     #**** Parameters ****
-    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to compile.
+    local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the LaTeX file to compile.
 
     #**** Variables ****
     local v_compiler_env;           # VAR TYPE : Filepath   - DESC : Cutting the path which precedes the "Bash-utils/" sub-string in order to unify the compilation environments by processing the relative path of a file instead of its absolute path (if someone else compiles a version of the framework stored in their home folder, instead of "/usr/local/lib/" for example).
@@ -298,6 +298,19 @@ else
             exit 1;
         };
     fi
+fi
+
+# Doing the same thing with the "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__UNCOMMENTED_FILES_LIST}" file.
+if [ ! -f "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__UNCOMMENTED_FILES_LIST}" ]; then
+    touch "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__UNCOMMENTED_FILES_LIST}"  || {
+        echo "ERROR : UNABLE TO CREATE THE \"${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__UNCOMMENTED_FILES_LIST}\" FILE !!!" >&2;
+        echo >&2;
+
+        echo "Terminating the script's execution" >&2;
+        echo >&2;
+
+        exit 1;
+    };
 fi
 
 # If a single file path was passed as argument.

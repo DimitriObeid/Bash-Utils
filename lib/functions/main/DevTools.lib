@@ -163,12 +163,11 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
-#   - awk       | (-v)
+#   - awk       |
 #   - echo      |
 #   - grep      | (-i | -q)
 #   - local     |
 #   - md5sum    |
-#   - mv        |
 #   - printf    |
 #   - touch     |
 
@@ -195,7 +194,18 @@ function BU.Main.DevTools.ShellcheckVerif()
     compiler_env="${p_path#*"${compiler_env}"}";
     compiler_env="Bash-utils${compiler_env}";
 
+    # ··························································································
     # Support for the legacy "lib-compilerV3.sh" script and the future versions of the compiler.
+
+    # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    # Featured shell commands and their options(s) :
+    #   - declare   | (-g)
+
+    # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+    #   -
+
+    # shellcheck disable=
     function BU.Main.DevTools.ShellcheckVerif.SupportLegacyVersions()
     {
         # Each of the original variables values are assigned to the ones whose name respect the naming conventions of the newer versions of the compiler.
@@ -215,7 +225,21 @@ function BU.Main.DevTools.ShellcheckVerif()
         return 0;
     }
 
+    # ·································
     # Shellchecking the processed file.
+
+    # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    # Featured shell commands and their options(s) :
+    #   - awk       | (-v)
+    #   - md5sum    |
+    #   - mv        |
+    #   - printf    |
+
+    # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+    #   -
+
+    # shellcheck disable=
     function BU.Main.DevTools.ShellcheckVerif.Shellcheck()
     {
         # shellcheck disable=SC2059
