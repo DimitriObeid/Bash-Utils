@@ -89,6 +89,21 @@ __BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD='latexmk';
 
 ## ==============================================
 
+## PATHS
+
+# Path to the "Bash-utils" directory.
+declare -g      __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__BASH_UTILS__DIR;
+                __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__BASH_UTILS__DIR="$(cat "${HOME}/.Bash-utils/Bash-utils-root-val.path" || echo "Unable to get the path to the \"Bash-utils\" folder" >&2; exit 1)";
+    readonly    __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__BASH_UTILS__DIR;
+
+# Path to the parent directory of the file which stores the the list of compiled files and their MD5 checksum.
+declare -gr __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR="${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__BASH_UTILS__DIR}/docs/00 DATA/cmp";
+
+# Path to the file which stores the list of compiled files and their MD5 checksum.
+declare -gr __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST="${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}/LaTeX_compiled.list";
+
+## ==============================================
+
 
 
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
@@ -101,6 +116,16 @@ __BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD='latexmk';
 
 ## COMPILATION PROCESS
 
+# ···········································································································
+# Checking if the content of the file to compile was not modified since its last compilation, by implementing
+# this functionality the same way as the Shellchecking function from the framework compiler's code.
+
+# shellcheck disable=
+function BU.DevBin.LatexCompiler.Function.CheckIsAlreadyCompiled()
+{
+    return 0;
+}
+
 # ··································
 # LaTeX to PDF compilation function.
 
@@ -110,7 +135,16 @@ function BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF()
     #**** Parameters ****
     local p_filepath=${1:-$'\0'};   # ARG TYPE : Filepath   - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the file to compile.
 
+    #**** Variables ****
+    local v_compiler_env;           # VAR TYPE : Filepath   - DESC : Cutting the path which precedes the "Bash-utils/" sub-string in order to unify the compilation environments by processing the relative path of a file instead of its absolute path (if someone else compiles a version of the framework stored in their home folder, instead of "/usr/local/lib/" for example).
+    local v_existing_md5;           # VAR TYPE : CMD        - DESC : Storing the output of the "$(grep)" command used to get the current file's corresponding md5 checksum from the "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" file.
+    local v_new_md5;                # VAR TYPE : CMD        - DESC : Storing the output of the "$(md5sum)" command used to calculate the current file's corresponding md5 checksum.
+
     #**** Code ****
+    v_compiler_env='Bash-utils';
+    v_compiler_env="${p_filepath#*"${v_compiler_env}"}";
+    v_compiler_env="Bash-utils${v_compiler_env}";
+
     if [ -z "${p_filepath}" ]; then
         BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_MISSING_FILEPATH'; return "${?}";
     
@@ -118,8 +152,37 @@ function BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF()
         BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_INCORRECT_FILE_PATH'; return "${?}";
     fi
 
+    # Checking first if the file was already compiled by parsing the "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" file.
+    if grep -qi "${v_compiler_env}" "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}"; then
+
+        # Extracting the current file's corresponding MD5 checksum from the "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}".
+        v_existing_md5=$(grep -i "${v_compiler_env}" "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" | awk '{print $1}');
+
+        # Calculating the MD5 checksum of the current file.
+        v_new_md5="$(md5sum "${p_path}" | awk '{print $1}')";
+
+        # Checking if both checksums correspond to each other.
+        if [ "${v_existing_md5}" != "${v_new_md5}" ]; then
+            BU.DevBin.LatexCompiler.Function.CheckIsAlreadyCompiled || {
+                BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_COMPILATION_AND_MODIFICATION_CHECKING_FAILED';
+
+                return 1;
+            }
+        else
+            # shellcheck disable=SC2059
+            printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_S__SHELLCHECK__SUCCESS_FILE_ALREADY_SHELLCHECKED}\n" "${v_compiler_env}";
+        fi
+    else
+        BU.DevBin.LatexCompiler.Function.CheckIsAlreadyCompiled || {
+            BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_COMPILATION_AND_MODIFICATION_CHECKING_FAILED';
+
+            return 1;
+        }
+    fi
+
+    # Compiling the targeted file.
     latexmk -pdf "${p_filepath}" || { 
-        BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_COMPILATION_FAILED'; return "${?}"; 
+        BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_COMPILATION_FAILED'; return "${?}";
     }:
 
     return 0;
@@ -144,10 +207,13 @@ function BU.DevBin.LatexCompiler.Functions.HandleErrorInput()
 
     elif [ "${p_code^^}" == 'E_INCORRECT_FILE_PATH' ]; then
         echo "ERROR : INCORRECT FILE PATH PASSED INTO THE ${FUNCNAME[1]}() FUNCTION !" >&2;
-    
+
+    elif [ "${p_code^^}" == 'E_COMPILATION_AND_MODIFICATION_CHECKING_FAILED' ]; then
+        echo "ERROR : AN ERROR OCCURED WHILE CHECKING IF THE CURRENT FILE WAS ALREADY COMPILED AND MODIFIED SINCE THE LAST COMPILATION" >&2;
+
     elif [ "${p_code^^}" == 'E_COMPILATION_FAILED' ]; then
         echo "ERROR : AN ERROR OCCURED DURING THE COMPILATION OF THE PREVIOUS FILE !" >&2;
-        echo "Please correct this / these error(s) with the help of your LaTeX editor";
+        echo "Please correct this / these error(s) with the help of your LaTeX editor" >&2;
     fi
 
     echo >&2;
@@ -193,6 +259,31 @@ if ! command -v "${__BU__BIN__LATEX_COMPILER__GLOBVARS__CMDS__CMD}"; then
     fi
 
     echo >&2; exit 1;
+fi
+
+# Checking first if the "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" file and its parent directory exists.
+if [ ! -d "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}" ]; then
+    mkdir -p "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}" || {
+        echo "ERROR : UNABLE TO CREATE THE \"${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}\" DIRECTORY !!!" >&2;
+        echo >&2;
+
+        echo "Terminating the script's execution" >&2;
+        echo >&2;
+
+        exit 1;
+    };
+else
+    if [ ! -f "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" ]; then
+        touch "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}"  || {
+            echo "ERROR : UNABLE TO CREATE THE \"${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}\" FILE !!!" >&2;
+            echo >&2;
+
+            echo "Terminating the script's execution" >&2;
+            echo >&2;
+
+            exit 1;
+        };
+    fi
 fi
 
 # If a single file path was passed as argument.
