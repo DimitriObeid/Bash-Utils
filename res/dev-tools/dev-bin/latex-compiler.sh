@@ -120,6 +120,14 @@ declare -gr __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST="${_
 # Checking if the content of the file to compile was not modified since its last compilation, by implementing
 # this functionality the same way as the Shellchecking function from the framework compiler's code.
 
+# TODO :
+
+# Implement a feature which checks if the only modifications made were comments, so that the file won't be compiled.
+# The processed file should be copied in a temporary file and the comments have to be deleted into this file.
+
+# The LaTeX comments begin with a '%'. The lines where only a comment is present must be deleted, and if a LaTeX command
+# is called before the comment, the latter and the blank space separating the command and the comment must be deleted.
+
 # shellcheck disable=
 function BU.DevBin.LatexCompiler.Function.CheckIsAlreadyCompiled()
 {
