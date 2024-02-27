@@ -99,6 +99,12 @@ declare -g      __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__BASH_UTILS__DIR;
 # Path to the parent directory of the file which stores the the list of compiled files and their MD5 checksum.
 declare -gr __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR="${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__BASH_UTILS__DIR}/docs/00 DATA/cmp";
 
+# Path to the file which stores the list of files without comments and their MD5 checksum.
+
+# This technique also allows not to ship many LaTeX source files, which would unnecessarily increase the size of the Git repository with all the languages
+# which need to be supported and take too many hard drive memory on older computers, where an user would prefer to install their needed documentation only.
+declare -gr __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__UNCOMMENTED_FILES_LIST="${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}/LaTeX_uncommented.list";
+
 # Path to the file which stores the list of compiled files and their MD5 checksum.
 declare -gr __BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST="${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}/LaTeX_compiled.list";
 
