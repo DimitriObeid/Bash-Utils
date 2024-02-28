@@ -1461,7 +1461,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 
 # shellcheck disable=
 function BU.Main.Status.CheckProjectLogStatus()
-{
+({
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug \
@@ -1471,17 +1471,22 @@ function BU.Main.Status.CheckProjectLogStatus()
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__PATHS_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATHS_CHECKINGS}";
 
-	# Checking first if the partition where the log file exists is not fully used.
-	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; };
-
     #**** Parameters ****
-    local p_string=${1:-$'\0'}; # ARG TYPE : Any        - REQUIRED | DEFAULT VAL : NULL     - DESC : Text to display.
-    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
+    local p_string=${1:-$'\0'};     # ARG TYPE : Any        - REQUIRED | DEFAULT VAL : NULL     - DESC : Text to display.
+    local p_option=${2:-$'\0'};     # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command's options.
     shift 2;
 
-    local pa_extraArgs=("${@}");   # Array - More processing arguments (like the processing of a whole line-long string).
+    local pa_extraArgs=("${@}");    # ARG TYPE : Array      - OPTIONAL | DEFAULT VAL : NULL     - DESC :  More processing arguments (like the processing of a whole line-long string).
 
     #**** Variables ****
+    local v_bu_stat_decho_old;      # VAR TYPE : String     - DESC :
+    local v_bu_stat_echo_old;       # VAR TYPE : String     - DESC :
+    local v_redirectionError;       # VAR TYPE : String     - DESC :
+    local v_warning_array_value;    # VAR TYPE : String     - DESC :
+
+    #**** Code ****
+
+    # -------------------------------------------
 
 	# WARNING : DO NOT call any "BU.Echo<...>()" function from the "main/Echo.lib" file, as they all call the "BU.Main.Status.CheckProjectLogStatus()" function.
 
@@ -1493,37 +1498,64 @@ function BU.Main.Status.CheckProjectLogStatus()
 
     # -------------------------------------------
 
+    #
+    # Formatting the "${p_string}" variable with the "Text.lib" functions adapted for the options passed in the "${pa_extraArgs}" array.
+
+    # shellcheck disable=
+    function BU.Main.Checkings.CheckProjectLogStatus.FormatString()
+    {
+        #**** Code ****
+        for opt in "${pa_extraArgs[@]}"; do
+            if [ "{opt,,}" == 'nodate' ]; then
+                BU.Main.Text. "${p_string}";
+            fi
+        done
+
+        return 0;
+    }
+
+	# Checking first if the partition where the log file exists is not fully used.
+	BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; };
+
     # Setting the "${__BU_MAIN_STAT_DECHO}" global status variable's value to 'restrict', in case an error occurs during a function call.
 
     # Also disabling a shellcheck warning, which is a false positive (saying that "${__BU_MAIN_STAT_DECHO}" may not be assigned, but "${__BU_MAIN_STAT_ECHO}" is (both of them are valid and working differently)).
 
     # shellcheck disable=SC2153
-    local v_bu_stat_decho_old="${__BU_MAIN_STAT_DECHO}"; BU.Main.Status.ChangeSTAT_DECHO "restrict" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || {
+    v_bu_stat_decho_old="${__BU_MAIN_STAT_DECHO}";
+    
+    BU.Main.Status.ChangeSTAT_DECHO "restrict" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || {
         local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "${C}";
     }
 
     # Setting the "${__BU_MAIN_STAT_ECHO}" global status variable's value to 'true', in case an error occurs during a function call, where the "BU.Main.Status.CheckProjectLogStatus()" function or any other function that calls it might be called.
-    local v_bu_stat_echo_old="${__BU_MAIN_STAT_ECHO}"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || {
+    v_bu_stat_echo_old="${__BU_MAIN_STAT_ECHO}";
+    
+    BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || {
         local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "${C}";
     }
 
-    local v_redirectionError;
-        v_redirectionError="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PATH}") file.\nRedirection option --> ";
+    #
+    v_redirectionError="$(BU.Main.Decho.Decho.Function \
+        "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PATH}") file.\nRedirection option --> ";
 
-    local v_warning_array_value;
-        v_warning_array_value="$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU.Main.Decho.Decho.Path "${BASH_SOURCE[0]}"), function $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()").\nValue --> $(BU.Main.Decho.Decho.Highlight "${val}")\nLine -->";
+    #
+    v_warning_array_value="$(BU.Main.Decho.Decho.Function \
+        "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU.Main.Decho.Decho.Path "${BASH_SOURCE[0]}"), function $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()").\nValue --> $(BU.Main.Decho.Decho.Highlight "${val}")\nLine -->";
 
-    #**** Code ****
+
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
     if [ "${__BU_MAIN_STAT_LOG,,}" == "true" ]; then
         BU.Main.Checkings.CheckProjectLogPath || \
         {
+            #**** Conditional variables ****
             local returnCode="${?}";
 
+            #**** Conditional code ****
             # Resetting the "${__BU_MAIN_STAT_DECHO}" global status variable's value to its former value, since the "BU.Main.Status.CheckProjectLogStatus()" function's execution is stopped.
             BU.Main.Status.ChangeSTAT_DECHO "${v_bu_stat_decho_old}"    'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }
 
@@ -1544,14 +1576,56 @@ function BU.Main.Status.CheckProjectLogStatus()
         # If messages must be redirected in the log file only ("${__BU_MAIN_STAT_LOG_REDIRECT}" value is equal to "log").
         if [ "${__BU_MAIN_STAT_LOG_REDIRECT,,}" == "log" ]; then
 
+            #**** Conditional variables ****
+            local v_stat_time_header="${__BU_MAIN_STAT_TIME_HEADER}";   # VAR TYPE : Int    - DESC : Backup of the current value of the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable.
+            local v_stat_time_newline="${__BU_MAIN_STAT_TIME_NEWLINE}"; # VAR TYPE : Int    - DESC : Backup of the current value of the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable.
+            local v_stat_time_txt="${__BU_MAIN_STAT_TIME_TXT}";         # VAR TYPE : Int    - DESC : Backup of the current value of the "${__BU_MAIN_STAT_TIME_TXT}" global status variable.
+
+            #**** Conditional code ****
             # Setting the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_header="${__BU_MAIN_STAT_TIME_HEADER}"; BU.Main.Status.ChangeSTAT_TIME_HEADER "0" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Status.ChangeSTAT_TIME_HEADER "0"   || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Setting the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_newline="${__BU_MAIN_STAT_NEWLINE}"; BU.Main.Status.ChangeSTAT_TIME_NEWLINE "0"   || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Status.ChangeSTAT_TIME_NEWLINE "0"  || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
             # Setting the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value to 0 seconds, since no text is being displayed on the screen.
-            local v_stat_time_txt="${__BU_MAIN_STAT_TIME_TXT}"; BU.Main.Status.ChangeSTAT_TIME_TXT "0"          || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Status.ChangeSTAT_TIME_TXT "0"      || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+            # If no arguments were passed into the "${pa_extraArgs[@]} extra arguments array.
+            if [ "${#pa_extraArgs[@]}" -lt 1 ]; then
+                case "${p_option,,}" in
+                    '-n' | 'n')
+                        if BU.Main.Status.CheckStatIsInitializing; then
+                            BU.ModuleInit.Msg "${p_string}" 'n';
+                        else
+                            echo -ne "$(if [ -n "${__BU_MAIN_TIME_DATE_DISPLAY}" ]; then echo "${__BU_MAIN_TIME_DATE_DISPLAY}"; fi) ${p_string}" >> "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "${v_redirectionError} $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "${LINENO}")" "${p_option}" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                        fi
+                    ;;
+                    '' | *)
+                        if BU.Main.Status.CheckStatIsInitializing; then
+                            BU.ModuleInit.Msg "${p_string}";
+                        else
+                            echo -e "$(if [ -n "${__BU_MAIN_TIME_DATE_DISPLAY}" ]; then echo "${__BU_MAIN_TIME_DATE_DISPLAY}"; fi) ${p_string}" >> "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" || { local C="${?}"; BU.Main.Echo.Newline >&2; BU.ModuleInit.SetInitErrorMsg && local VCheckProjectLogStatus='1'; BU.Main.Echo.Error "${v_redirectionError} $(BU.Main.Decho.Decho.Var "log")\nLine --> $(BU.Main.Decho.Decho.Highlight "${LINENO}")" "${p_option}" 'nodate'; BU.Main.Echo.Newline >&2; v_loop_error='error'; break; };
+                        fi
+                    ;;
+                esac
+            else
+                # Looping through the "${pa_extraArgs[@]} extra arguments array.
+                for val in "${pa_extraArgs[@]}"; do
+                    BU.Main.Checkings.CheckProjectLogStatus.FormatString;
+                done
+            fi
+
+
+
+
+
+
+
+
+
+
+            # OLD CODE
 
             for val in "${pa_extraArgs[@]}"; do
 
@@ -1791,7 +1865,7 @@ function BU.Main.Status.CheckProjectLogStatus()
 
 		return 0;
 	fi
-}
+})
 
 # ·························································
 # Check project related file presence, or create this file.

@@ -488,6 +488,8 @@ function BU.Main.Echo.__EchoCPLS()
     # DO NOT CALL THE "BU.Main.Args.GetFuncArgsArrayValues()" FUNCTION IN THIS FUNCTION, OR ELSE AN INFINITE LOOP WILL LIKELY OCCUR !!!!!
 
     for val in "${pa_extraArgs[@]}"; do
+
+        # If the "nodate" option is passed to the "${val}" key (the current date must not be written before the string to print).
         if [ "${val}" == 'nodate' ]; then
             case "${p_option}" in
                 '-n' | 'n')
@@ -505,6 +507,8 @@ function BU.Main.Echo.__EchoCPLS()
                     fi
                     ;;
             esac
+
+        # Else, if no value is passed to the "${val}" key.
         elif [ -z "${val}" ]; then
             case "${p_option}" in
                 '-n' | 'n')
@@ -578,6 +582,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+#   - shift     |
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
