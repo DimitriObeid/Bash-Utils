@@ -1506,8 +1506,11 @@ function BU.Main.Status.CheckProjectLogStatus()
     {
         #**** Code ****
         for opt in "${pa_extraArgs[@]}"; do
+            # If the "nodate" option is passed to the "${opt}" key (the current date must not be written before the string to print).
             if [ "{opt,,}" == 'nodate' ]; then
-                BU.Main.Text. "${p_string}";
+                BU.Main.Text.CutLogDateFromString "${p_string}";
+            else
+                echo "${FUNCNAME[1]}() --> ${FUNCNAME[0]}() : ${opt} is not a supported option" >&2;
             fi
         done
 

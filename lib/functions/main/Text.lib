@@ -151,6 +151,35 @@ function BU.Main.Text.CutLogDateFromString()
         "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
         "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
 
+    echo "${1}" | sed -E 's/^\[ [0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2} \]//';
+    
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    
+    return 0;
+}
+
+# ············································
+# Cutting any log information before a string.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
+#   - BU.Main.Text.CutSubStringAfterNthDelim()  -> Main -> Text.lib (this file)
+
+# shellcheck disable=
+function BU.Main.Text.CutLogInfoFromString()
+{
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
+        "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTING_TEXT}";
+
     BU.Main.Text.CutSubStringAfterNthDelim "${1}" '] ';
     
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
