@@ -56,7 +56,7 @@
 # DEFAULT VAL : .
 
 # DESC : This array contains all the paths to the LaTeX files to be compiled into a PDF file.
-declare -agr __BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS=();
+declare -agr __BU__BIN__LATEX_COMPILER__ARGS__FILEPATHS=("${@}");
 
 ## ==============================================
 
@@ -173,7 +173,7 @@ function BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF()
         v_existing_md5=$(grep -i "${v_compiler_env}" "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" | awk '{print $1}');
 
         # Calculating the MD5 checksum of the current file.
-        v_new_md5="$(md5sum "${p_path}" | awk '{print $1}')";
+        v_new_md5="$(md5sum "${p_filepath}" | awk '{print $1}')";
 
         # Checking if both checksums correspond to each other.
         if [ "${v_existing_md5}" != "${v_new_md5}" ]; then
@@ -197,7 +197,7 @@ function BU.DevBin.LatexCompiler.Functions.CompileLatexToPDF()
     # Compiling the targeted file.
     latexmk -pdf "${p_filepath}" || { 
         BU.DevBin.LatexCompiler.Functions.HandleErrorInput 'E_COMPILATION_FAILED'; return "${?}";
-    }:
+    };
 
     return 0;
 }
@@ -235,8 +235,8 @@ function BU.DevBin.LatexCompiler.Functions.HandleErrorInput()
     read -pr "Do you want to continue the compiler's execution ? (Y/N)" __read_handle_error_input;
 
     case "${__read_handle_error_input^^}" in
-        Y?(E?(S))|YS)   return 0;;
-        *)              return 1;;
+        'Y'|'YE'|'YES'|'YS')    return 0;;
+        *)                      return 1;;
     esac
 
     return 0;
@@ -277,7 +277,7 @@ fi
 
 # Checking first if the "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_FILES_LIST}" file and its parent directory exists.
 if [ ! -d "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}" ]; then
-    mkdir -p "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}" || {
+    mkdir -p -v "${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}" || {
         echo "ERROR : UNABLE TO CREATE THE \"${__BU__BIN__LATEX_COMPILER__GLOBVARS__PATHS__COMPILED_DIR}\" DIRECTORY !!!" >&2;
         echo >&2;
 
