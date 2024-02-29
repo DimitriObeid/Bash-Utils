@@ -3264,7 +3264,11 @@ function BU.Main.Args__Files.SearchInArchive()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass as first argument the path to the archive to process (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_arch' \
+            "${p_arch}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3280,7 +3284,11 @@ function BU.Main.Args__Files.SearchInArchive()
         BU.Main.Args.PrintBadOption \
             '!f' \
             "Please pass as first argument an existing path to find the archive to process (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_arch' \
+            "${p_arch}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3289,7 +3297,9 @@ function BU.Main.Args__Files.SearchInArchive()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·········································
@@ -3342,7 +3352,11 @@ function BU.Main.Args__Files.UncompressCMD()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass a(n) (un)compression command's name as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_cmd' "${p_cmd}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_cmd' \
+            "${p_cmd}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3353,10 +3367,14 @@ function BU.Main.Args__Files.UncompressCMD()
 
 	# If the command line compression tool is not found.
     if ! command -v "${p_cmd}"; then local lineno="${LINENO}";
-            BU.Main.Args.PrintBadOption \
+        BU.Main.Args.PrintBadOption \
             '!CMDSTR' \
-                "Please pass an existing / installed (un)compression command's name as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-                'p_cmd' "${p_cmd}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            "Please pass an existing / installed (un)compression command's name as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
+            'p_cmd' \
+            "${p_cmd}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3372,7 +3390,11 @@ function BU.Main.Args__Files.UncompressCMD()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass as third argument the path of the archive to uncompress (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_arch' \
+            "${p_arch}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3433,7 +3455,11 @@ function BU.Main.Args__Files.UncompressFormat()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass an archive format name (like 7z, Gzip, Cab, etc...) as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_form' "${p_form}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_form' \
+            "${p_form}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3449,7 +3475,11 @@ function BU.Main.Args__Files.UncompressFormat()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass as second argument the path of the archive to uncompress (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_arch' \
+            "${p_arch}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3520,7 +3550,11 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass a path to get the file or folder's host file system (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_fileFS' "${p_fileFS}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_fileFS' \
+            "${p_fileFS}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3535,7 +3569,11 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
         BU.Main.Args.PrintBadOption \
             '!df' \
             "Please pass a valid path to get the file or folder's host file system (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_fileFS' "${p_fileFS}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_fileFS' \
+            "${p_fileFS}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3544,7 +3582,9 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -3600,7 +3640,11 @@ function BU.Main.Args__Filesystem.GetFSInfos()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass a path to get the file or folder's host file system (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_path' \
+            "${p_path}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3615,7 +3659,11 @@ function BU.Main.Args__Filesystem.GetFSInfos()
         BU.Main.Args.PrintBadOption \
             '!df' \
             "Please pass a valid path to get the file or folder's host file system (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_path' \
+            "${p_path}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3624,7 +3672,9 @@ function BU.Main.Args__Filesystem.GetFSInfos()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -3682,7 +3732,11 @@ function BU.Main.Args__Filesystem.Chown()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the former directory's or file's owner (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_currentOwner' "${p_currentOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_currentOwner' \
+            "${p_currentOwner}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3697,7 +3751,11 @@ function BU.Main.Args__Filesystem.Chown()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the new directory's or file's owner (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_newOwner' "${p_newOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_newOwner' \
+            "${p_newOwner}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3712,7 +3770,11 @@ function BU.Main.Args__Filesystem.Chown()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the path to the directory or the file to process (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_path' \
+            "${p_path}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3727,7 +3789,11 @@ function BU.Main.Args__Filesystem.Chown()
         BU.Main.Args.PrintBadOption \
             '!df' \
             "Please give a valid path for the directory or the file to process (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_path' \
+            "${p_path}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3736,7 +3802,9 @@ function BU.Main.Args__Filesystem.Chown()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -3794,7 +3862,11 @@ function BU.Main.Args__Filesystem.ChownRec()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the former directory's owner (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_currentOwner' "${p_currentOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_currentOwner' \
+            "${p_currentOwner}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3809,7 +3881,11 @@ function BU.Main.Args__Filesystem.ChownRec()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the new directory's owner (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_newOwner' "${p_newOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_newOwner' \
+            "${p_newOwner}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3824,7 +3900,11 @@ function BU.Main.Args__Filesystem.ChownRec()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the path to the directory to process (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_path' \
+            "${p_path}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3839,7 +3919,11 @@ function BU.Main.Args__Filesystem.ChownRec()
         BU.Main.Args.PrintBadOption \
             '!d' \
             "Please give a valid path for the directory to process (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_path' \
+            "${p_path}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3848,7 +3932,9 @@ function BU.Main.Args__Filesystem.ChownRec()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -3912,7 +3998,11 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give an ISO 639-1 code to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_code' \
+            "${p_code}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3927,7 +4017,11 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         BU.Main.Args.PrintBadOption \
             '!639-1' \
             "Please give a valid ISO 639-1 code to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_code' \
+            "${p_code}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3942,7 +4036,11 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the targeted language in English (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_code' \
+            "${p_code}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3957,7 +4055,11 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the targeted language in its own language (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_code' \
+            "${p_code}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3972,7 +4074,11 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give the name of the targeted language in the language used on your operating system (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_code' \
+            "${p_code}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -3981,7 +4087,9 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         return "${C}";
     fi
 
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -4048,7 +4156,11 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4063,7 +4175,11 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a character as second argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_delimiter' "${p_delimiter}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_delimiter' \
+            "${p_delimiter}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4072,7 +4188,9 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
         return "${C}";
     fi
 
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -4130,7 +4248,11 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4145,7 +4267,11 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a character as second argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_delimiter' "${p_delimiter}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_delimiter' \
+            "${p_delimiter}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4160,7 +4286,11 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
         BU.Main.Args.PrintBadOption \
             '!intpos' \
             "Please pass a positive integer as third argument (optional argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_iterations' \
+            "${p_iterations}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4331,7 +4461,11 @@ function BU.Main.Args__Text.DeleteLettersInString()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4399,7 +4533,11 @@ function BU.Main.Args__Text.GetCharacterOccurences()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4414,7 +4552,11 @@ function BU.Main.Args__Text.GetCharacterOccurences()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give any single character to process as second argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_target' "${p_target}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_target' \
+            "${p_target}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4429,7 +4571,11 @@ function BU.Main.Args__Text.GetCharacterOccurences()
         BU.Main.Args.PrintBadOption \
             '!alphanumchar' \
             "Please give only a single character to process as second argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_target' "${p_target}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_target' \
+            "${p_target}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4544,6 +4690,8 @@ function BU.Main.Args__Text.GetCharacterOccurencesFromArray()
         return "${C}";
     fi
 
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
     return 0;
 }
 
@@ -4595,7 +4743,11 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4604,7 +4756,9 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·······················································
@@ -4659,7 +4813,11 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4674,7 +4832,11 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give any single character as delimiter to process as second argument$(BU.Main.Args.X "${lineno}")" \
-            'p_delim' "${p_delim}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_delim' \
+            "${p_delim}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4689,7 +4851,11 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
         BU.Main.Args.PrintBadOption \
             '!intpos' \
             "Please pass a positive integer as third argument (optional)$(BU.Main.Args.X "${lineno}")" \
-            'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_iterations' \
+            "${p_iterations}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4698,7 +4864,9 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ··················································
@@ -4753,7 +4921,11 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4768,7 +4940,11 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give any single character as delimiter to process as second argument$(BU.Main.Args.X "${lineno}")" \
-            'p_delim' "${p_delim}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_delim' \
+            "${p_delim}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4783,7 +4959,11 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
         BU.Main.Args.PrintBadOption \
             '!intpos' \
             "Please pass a positive integer as third argument (optional)$(BU.Main.Args.X "${lineno}")" \
-            'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_iterations' \
+            "${p_iterations}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4792,7 +4972,9 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
         return "${C}";
     fi
 
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·················································
@@ -4844,7 +5026,11 @@ function BU.Main.Args__Text.GetSubStringOccurences()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument). $(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4859,7 +5045,11 @@ function BU.Main.Args__Text.GetSubStringOccurences()
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give any sub-string to process as second argument (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_target' "${p_target}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_target' \
+            "${p_target}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4868,7 +5058,9 @@ function BU.Main.Args__Text.GetSubStringOccurences()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -4925,7 +5117,11 @@ function BU.Main.Args__Text.StrToWordArray()
         BU.Main.Args.PrintBadOption \
             'Z' \
             "Please give as first argument a string to convert in a word array (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_string' \
+            "${p_string}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4940,7 +5136,11 @@ function BU.Main.Args__Text.StrToWordArray()
         BU.Main.Args.PrintBadOption \
             'Z' \
             "Please give as second argument a string to name the array (mandatory argument)$(BU.Main.Args.X "${lineno}")" \
-            'p_varname' "${p_varname}" "${p_filename}" "${p_funcname}" "${p_lineno}";
+            'p_varname' \
+            "${p_varname}" \
+            "${p_filename}" \
+            "${p_funcname}" \
+            "${p_lineno}";
 
         local C="${?}";
 
@@ -4949,7 +5149,9 @@ function BU.Main.Args__Text.StrToWordArray()
         return "${C}";
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
