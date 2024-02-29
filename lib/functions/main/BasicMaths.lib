@@ -132,6 +132,10 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVE
 # Initial source of this AWK script (since it's not mine, plus I added more informations as comments, as well as the localization) :
 # https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
 
+# My Wayback Machine snapshot (from Feb. 29th of 2024 - 22h 07m 08s), in case the the web page linked above no longer exists :
+# https://web.archive.org/web/20240229220708/https://unix.stackexchange.com/questions/44040/a-standard-tool-to-convert-a-byte-count-into-human-kib-mib-etc-like-du-ls1/98790#98790
+
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - awk       | (-v)
@@ -166,7 +170,7 @@ function BU.Main.BasicMaths.BytesToHuman()
     local V_LANG="${4:-en}";    # ARG TYPE : ISO 639-1 code     - REQUIRED | DEFAULT VAL : en       - DESC : Localization of the byte count (default language : English).
 
     #**** Variables ****
-    local BYTESTOHUMAN_RESULT;
+    local BYTESTOHUMAN_RESULT;  # VAR TYPE : CMD                - DESC : This command stores the output of the executed "$(awk)" command.
 
     #**** Code ****
     if [[ "${L_PAD^^}" == N?(I|U)L?(L) ]]; then L_PAD='no'; fi
