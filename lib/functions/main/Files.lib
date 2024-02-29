@@ -137,6 +137,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__PRO
 #   - BU.Main.Echo.Success()        -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()        -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.__ProcessingFile()
 {
@@ -195,6 +196,7 @@ function BU.Main.Files.__ProcessingFile()
 #   - BU.Main.Files.OverwriteFile()         -> Main -> Files.lib
 
 #   - BU.Main.Headers.DrawLine()            -> Main -> Headers.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.ProcessingFile()
@@ -271,6 +273,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FIL
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.OverwriteFile()
 {
@@ -337,6 +340,7 @@ function BU.Main.Files.OverwriteFile()
 #   - BU.Main.Files.OverwriteFile()                 -> Main -> Files.lib (this file)
 
 #   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.Make()
@@ -421,6 +425,7 @@ function BU.Main.Files.Make()
 
 #   - BU.Main.Files.Make()                      -> Main -> Files.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.MakePath()
 {
@@ -462,6 +467,7 @@ function BU.Main.Files.MakePath()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.MakeFileInMemory()
@@ -514,6 +520,7 @@ function BU.Main.Files.MakeFileInMemory()
 #   - BU.Main.Status.ChangeSTAT_DECHO()             -> Main -> Status.lib
 #   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
 #   - BU.Main.Status.CheckProjectLogStatus()        -> Main -> Status.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.CreateProjectLogFile()
@@ -674,6 +681,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FIL
 
 #   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.DeleteFile()
 {
@@ -764,6 +772,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__CHE
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.IsReadOnly()
 {
@@ -794,6 +803,7 @@ function BU.Main.Files.IsReadOnly()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.IsRW()
@@ -826,6 +836,7 @@ function BU.Main.Files.IsRW()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.IsRWX()
 {
@@ -856,6 +867,7 @@ function BU.Main.Files.IsRWX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.IsRX()
@@ -888,6 +900,7 @@ function BU.Main.Files.IsRX()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.IsWriteOnly()
 {
@@ -919,6 +932,7 @@ function BU.Main.Files.IsWriteOnly()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.IsWX()
 {
@@ -949,6 +963,7 @@ function BU.Main.Files.IsWX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.IsExecutableOnly()
@@ -993,6 +1008,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__GET
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetByteSize()
@@ -1047,6 +1063,7 @@ function BU.Main.Files.GetByteSize()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetCreationDate()
 {
@@ -1093,6 +1110,7 @@ function BU.Main.Files.GetCreationDate()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetCharactersNumber()
 {
@@ -1131,6 +1149,7 @@ function BU.Main.Files.GetCharactersNumber()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetChecksum.MD5()
 {
@@ -1159,6 +1178,7 @@ function BU.Main.Files.GetChecksum.MD5()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetChecksum.SHA1()
@@ -1189,6 +1209,7 @@ function BU.Main.Files.GetChecksum.SHA1()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetChecksum.SHA224()
 {
@@ -1217,6 +1238,7 @@ function BU.Main.Files.GetChecksum.SHA224()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetChecksum.SHA256()
@@ -1247,6 +1269,7 @@ function BU.Main.Files.GetChecksum.SHA256()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetChecksum.SHA384()
 {
@@ -1275,6 +1298,7 @@ function BU.Main.Files.GetChecksum.SHA384()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetChecksum.SHA512()
@@ -1307,6 +1331,7 @@ function BU.Main.Files.GetChecksum.SHA512()
 #   - BU.Main.Echo.Warning()                -> Main -> Echo.lib
 
 #   - BU.Main.Text.CutLastFieldAfterDelim() -> Main -> Text.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetExtension()
@@ -1351,6 +1376,7 @@ function BU.Main.Files.GetExtension()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetLastAccess()
 {
@@ -1391,6 +1417,7 @@ function BU.Main.Files.GetLastAccess()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetLastModification()
 {
@@ -1430,6 +1457,7 @@ function BU.Main.Files.GetLastModification()
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetMIMEType()
 {
@@ -1467,6 +1495,7 @@ function BU.Main.Files.GetMIMEType()
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetLinesNumber()
@@ -1508,6 +1537,7 @@ function BU.Main.Files.GetLinesNumber()
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetMaxLineLength()
@@ -1569,6 +1599,7 @@ function BU.Main.Files.GetNameFromPath()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetOwnerName()
 {
@@ -1610,6 +1641,7 @@ function BU.Main.Files.GetOwnerName()
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.GetOwnerGroup()
 {
@@ -1650,6 +1682,7 @@ function BU.Main.Files.GetOwnerGroup()
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()    -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetWordsNumber()
@@ -1698,6 +1731,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__SET
 
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.File.SetFileLastAccess()
@@ -1748,6 +1782,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__FIL
 #   - BU.Main.Echo.Success()        -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors() -> Main -> Errors.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.SourceFile()
@@ -1818,6 +1853,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__FILES_PROCESSING_FUNCTIONS__TEX
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.GetLineFromTextFile()
@@ -1951,6 +1987,7 @@ declare -r __BU_MAIN_FILES_LIB__SUBCAT_DEBUG_ID__ARCHIVES_PROCESSING_FUNCTIONS__
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.AddToArchive()
 {
@@ -2006,6 +2043,7 @@ function BU.Main.Files.AddToArchive()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.CompressCMD()
 {
@@ -2045,6 +2083,7 @@ function BU.Main.Files.CompressCMD()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.CompressFormat()
@@ -2143,6 +2182,7 @@ function BU.Main.Files.CompressFormat()
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
+
 # shellcheck disable=
 function BU.Main.Files.DeleteInArchive()
 {
@@ -2180,6 +2220,7 @@ function BU.Main.Files.DeleteInArchive()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.SearchInArchive()
@@ -2220,6 +2261,7 @@ function BU.Main.Files.SearchInArchive()
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 
 #   - BU.Main.Files.DeleteFile()            -> Main -> Files.lib
+
 
 # shellcheck disable=
 function BU.Main.Files.UncompressCMD()

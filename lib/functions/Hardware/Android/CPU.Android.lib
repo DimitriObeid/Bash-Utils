@@ -553,6 +553,7 @@ declare -r __BU_HARDWARE_ANDROID_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
+
 # shellcheck disable=
 function BU.Hardware.Android.CPU.IsMonocore()
 {
@@ -588,6 +589,7 @@ declare -r __BU_HARDWARE_ANDROID_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_T
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
+
 
 # shellcheck disable=
 function BU.Hardware.Android.CPU.GetCoresNumber()

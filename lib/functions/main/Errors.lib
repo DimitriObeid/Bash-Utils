@@ -140,6 +140,7 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLA
 #   - basename  |
 #   - local     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
@@ -152,6 +153,7 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLA
 
 #   - BU.ModuleInit.SetInitErrorMsg()   -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg() -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Errors.HandleSmallErrors()
@@ -245,9 +247,11 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__EXI
 # ····································································································
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename	|
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -260,6 +264,7 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__EXI
 #   - BU.Main.Echo.Warning()            -> Main -> Echo.lib
 
 #   - BU.ModuleInit.IsInScript()        -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Errors.Exit()
@@ -351,17 +356,20 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__SCR
 # ···············································································································································································································
 # "BU.Main.Errors.HandleErrors()" function --> Handling file name presence      | Featured function(s) and file(s) by module(s) and from the "functions" folder : BU.Main.Decho.Decho.Path() -> Main -> Decho.lib
 
+
 # shellcheck disable=
 function BU.Main.Errors.HandleErrors_File()        { if [ -z "${1}" ]; then BU.Main.Decho.Decho.Path "<no specified file>"; else BU.Main.Decho.Decho.Path "${1}"; fi; }
 
 # ···················································································································································································································
 # "BU.Main.Errors.HandleErrors()" function --> Handling function name presence  | Featured function(s) and file(s) by module(s) and from the "functions" folder : BU.Main.Decho.Decho.Function() -> Main -> Decho.lib
 
+
 # shellcheck disable=
 function BU.Main.Errors.HandleErrors_Function()    { if [ -z "${1}" ]; then BU.Main.Decho.Decho.Function "<no specified function>"; else BU.Main.Decho.Decho.Function "${1}"; fi; }
 
 # ····················································································································································································································
 # "BU.Main.Errors.HandleErrors()" function --> Handling line number presence    | Featured function(s) and file(s) by module(s) and from the "functions" folder : BU.Main.Decho.Decho.Highlight() -> Main -> Decho.lib
+
 
 # shellcheck disable=
 function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.Main.Decho.Decho.Highlight "<no specified line>"; else BU.Main.Decho.Decho.Highlight "${1}"; fi; }
@@ -389,6 +397,7 @@ function BU.Main.Errors.HandleErrors_Line()        { if [ -z "${1}" ]; then BU.M
 #   - BU.ModuleInit.HandleErrors()              -> Modules initializer script
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Errors.HandleErrors()

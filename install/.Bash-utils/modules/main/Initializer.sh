@@ -143,6 +143,7 @@ fi
 #   - BU.ModuleInit.IsInScript()            -> Modules initializer script
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 
+
 # shellcheck disable=
 function BU.Main.Initializer.SourceLibrary()
 {
@@ -184,6 +185,7 @@ function BU.Main.Initializer.SourceLibrary()
 #   - BU.ModuleInit.IsInScript()            -> Modules initializer script
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Initializer.SourceConfig()
@@ -303,6 +305,7 @@ function BU.Main.Initializer.Usage()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Msg() -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Initializer.ProcessBadStatusOptionValues()

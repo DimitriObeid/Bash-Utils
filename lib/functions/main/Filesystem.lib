@@ -141,6 +141,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PRO
 #   - BU.Main.OS.IsOpenBSD()        -> Main -> OS.lib
 #   - BU.Main.OS.IsOSX()            -> Main -> OS.lib
 
+
 # shellcheck disable=
 function BU.Main.Filesystem.IsPartitionFull()
 {
@@ -229,6 +230,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PRO
 # ·····························
 # Getting the file system path.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename
@@ -245,6 +247,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__HARD_DRIVE_FILE_SYSTEM_PRO
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSDevice()
@@ -296,6 +299,7 @@ function BU.Main.Filesystem.GetFSDevice()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSTotalSize()
 {
@@ -345,6 +349,7 @@ function BU.Main.Filesystem.GetFSTotalSize()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSMountPoint()
@@ -396,6 +401,7 @@ function BU.Main.Filesystem.GetFSMountPoint()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSUsedSizeBytes()
@@ -464,6 +470,7 @@ function BU.Main.Filesystem.GetFSUsedSizeBytes()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSUsedSizePercent()
 {
@@ -531,6 +538,7 @@ function BU.Main.Filesystem.GetFSUsedSizePercent()
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
 
+
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSAvailableSize()
 {
@@ -580,6 +588,7 @@ function BU.Main.Filesystem.GetFSAvailableSize()
 
 #   - BU.Main.OS.IsHaiku()                          -> Main -> OS.lib
 #   - BU.Main.OS.IsLinux()                          -> Main -> OS.lib
+
 
 # shellcheck disable=
 function BU.Main.Filesystem.GetFSType()
@@ -651,6 +660,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_P
 #   - BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
 
 #   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
+
 
 # shellcheck disable=
 function BU.Main.Filesystem.Chown()
@@ -770,6 +780,7 @@ declare -r __BU_MAIN_FILESYSTEM_LIB__SUBCAT_DEBUG_ID__PERMISSION_AND_OWNERSHIP_P
 #	- BU.Main.Echo.Success()		        -> Main -> Echo.lib
 
 #	- BU.Main.Errors.HandleErrors()		    -> Main -> Headers.lib
+
 
 # shellcheck disable=
 function BU.Main.Filesystem.ChownRec()

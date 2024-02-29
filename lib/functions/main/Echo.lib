@@ -130,16 +130,19 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBU
 # ···················································································
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - sleep     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.__EchoVoid()         -> Main -> Echo.lib (this file)
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Echo.__Debug()
@@ -163,15 +166,18 @@ function BU.Main.Echo.__Debug()
 # ···················································································
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.__EchoVoid()         -> Main -> Echo.lib (this file)
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Echo.DebugEnd()
@@ -197,15 +203,18 @@ function BU.Main.Echo.DebugEnd()
 
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "$(bash -x)".
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.__Debug()            -> Main -> Echo.lib (this file)
 
 #   - BU.ModuleInit.CheckIsDebugging()  -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Echo.Debug()
@@ -294,11 +303,13 @@ function BU.Main.Echo.Debug()
 # ···················································
 # Print void lines before and after calling a header.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - exit      |
 #   - printf    |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -328,10 +339,12 @@ printf "
 
 # It's better to also execute the project's script with the "$(bash -x "${project_name}")" command, instead of the "./${project_name}" way.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -355,6 +368,7 @@ printf "
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()              -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing()     -> Main -> Status.lib
+
 
 # shellcheck disable=
 function BU.Main.Echo.__EchoOutput()
@@ -448,6 +462,7 @@ function BU.Main.Echo.__EchoOutput()
 # ····················································································································
 # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -457,6 +472,7 @@ function BU.Main.Echo.__EchoOutput()
 #   - shift     |
 #   - sleep     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib (this file)
@@ -465,6 +481,7 @@ function BU.Main.Echo.__EchoOutput()
 #   - BU.Main.Status.CheckStatIsInitializing()      -> Main -> Status.conf
 
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Echo.__EchoCPLS()
@@ -584,6 +601,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 #   - local     |
 #   - shift     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
@@ -598,6 +616,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Echo.Error()
@@ -664,6 +683,7 @@ function BU.Main.Echo.Error()
 #   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
 
+
 # shellcheck disable=
 function BU.Main.Echo.Msg()
 {
@@ -722,6 +742,7 @@ function BU.Main.Echo.Msg()
 
 #   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
 
 # shellcheck disable=
 function BU.Main.Echo.Newstep()
@@ -817,6 +838,7 @@ function BU.Main.Echo.Read()
 #   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
 #   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
 
+
 # shellcheck disable=
 function BU.Main.Echo.Success()
 {
@@ -878,6 +900,7 @@ function BU.Main.Echo.Success()
 
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Main.Echo.Warning()
@@ -1495,6 +1518,7 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__LINE_BREAKS__LINE_BREAKS_ACCORDI
 #   - BU.Main.Echo.Msg()                -> Main -> Echo.lib
 
 #	- BU.Main.Errors.HandleErrors()     -> Main -> Errors.lib
+
 
 # shellcheck disable=
 function BU.Main.Echo.Newline()

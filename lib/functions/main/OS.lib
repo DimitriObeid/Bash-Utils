@@ -1595,6 +1595,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="${__BU
 
 #   - BU.Main.OS.IsOSX*()       -> Main -> OS.lib
 
+
 # shellcheck disable=
 function BU.Main.OS.CheckOSXVersion()
 {
@@ -1765,6 +1766,7 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="${
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsInt() -> Main -> Checkings.lib
+
 
 # shellcheck disable=
 function BU.Main.OS.CheckOSWindowsVersion()

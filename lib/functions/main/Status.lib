@@ -129,6 +129,7 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 # ···························
 # Easy writing text function.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -153,6 +154,7 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 #   - BU.Main.Files.SourceFile()        -> Main -> Files.lib
 
 #   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.ConfEcho()
@@ -246,10 +248,12 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 # ···································································
 # Check the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -291,10 +295,12 @@ function BU.Main.Status.CheckSTAT_DECHO()
 # ··································································
 # Check the "${__BU_MAIN_STAT_ECHO}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -336,10 +342,12 @@ function BU.Main.Status.CheckSTAT_ECHO()
 # ······································································
 # Checking the "${__BU_MAIN_STAT_ERROR}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -381,10 +389,12 @@ function BU.Main.Status.CheckSTAT_ERROR()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_INITIALIZING}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -426,10 +436,12 @@ function BU.Main.Status.CheckSTAT_INITIALIZING()
 # ····································································
 # Checking the "${__BU_MAIN_STAT_LOG}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -476,10 +488,12 @@ function BU.Main.Status.CheckSTAT_LOG()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_LOG_REDIRECT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -521,10 +535,12 @@ function BU.Main.Status.CheckSTAT_LOG_REDIRECT()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_OPERATE_ROOT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -566,10 +582,12 @@ function BU.Main.Status.CheckSTAT_OPERATE_ROOT()
 # ············································································
 # Checking the "${__BU_MAIN_STAT_TIME_HEADER}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -614,10 +632,12 @@ function BU.Main.Status.CheckSTAT_TIME_HEADER()
 # ·············································································
 # Checking the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -662,10 +682,12 @@ function BU.Main.Status.CheckSTAT_TIME_NEWLINE()
 # ·········································································
 # Checking the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -710,10 +732,12 @@ function BU.Main.Status.CheckSTAT_TIME_TXT()
 # ········································································
 # Checking the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -756,10 +780,12 @@ function BU.Main.Status.CheckSTAT_TXT_FMT()
 # Checking the "${__BU_MAIN_STAT_USER_OS}" global status variable's value.
 # This function is empty now, as the OS handling is still in work.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - local     |
 #   - shift     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -785,10 +811,12 @@ function BU.Main.Status.CheckSTAT_USER_OS()
 # ························································································
 # Checking all the project's status variables values if multiple values had been modified.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -796,6 +824,7 @@ function BU.Main.Status.CheckSTAT_USER_OS()
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
 #   - BU.Main.Status.CheckSTAT_*()  -> Main -> Status.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.CheckProjectStatusVars()
@@ -847,10 +876,12 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 
 # Changing the "${__BU_MAIN_STAT_DECHO}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -897,6 +928,7 @@ function BU.Main.Status.ChangeSTAT_DECHO()
 #   - declare   |
 #   - echo      |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1034,10 +1066,12 @@ function BU.Main.Status.ChangeSTAT_ERROR()
 # Changing the "${__BU_MAIN_STAT_INITIALIZING}" global status variable's value.
 # WARNING : Do NOT change it's value from 'false' to 'true'. Otherwise, expect bugs.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1077,10 +1111,12 @@ function BU.Main.Status.ChangeSTAT_INITIALIZING()    {
 # ··································································
 # Changing the "${__BU_MAIN_STAT_LOG}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1117,10 +1153,12 @@ function BU.Main.Status.ChangeSTAT_LOG()
 # ·············································································
 # Changing the "${__BU_MAIN_STAT_LOG_REDIRECT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1157,10 +1195,12 @@ function BU.Main.Status.ChangeSTAT_LOG_REDIRECT()
 # ·············································································
 # Changing the "${__BU_MAIN_STAT_OPERATE_ROOT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1233,10 +1273,12 @@ function BU.Main.Status.ChangeSTAT_TIME_HEADER()
 # ············································································
 # Changing the "${__BU_MAIN_STAT_TIME_NEWLINE}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1273,10 +1315,12 @@ function BU.Main.Status.ChangeSTAT_TIME_NEWLINE()
 # ·········································································
 # Changing the "${__BU_MAIN_STAT_TIME_TXT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1313,10 +1357,12 @@ function BU.Main.Status.ChangeSTAT_TIME_TXT()
 # ········································································
 # Changing the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1362,15 +1408,18 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EA
 # ·············································································································································
 # Checking if the "BU.Echo<...>()" functions can call the "BU.Main.Status.CheckProjectLogStatus()" function without provoking an infinite loop.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsBackupEchoing()
@@ -1397,15 +1446,18 @@ function BU.Main.Status.CheckStatIsBackupEchoing()
 # ····························································································
 # Checking if the library is into its initialization process (${__BU_MAIN_STAT_INITIALIZING}).
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsInitializing()
@@ -1432,15 +1484,18 @@ function BU.Main.Status.CheckStatIsInitializing()
 # ···············································
 # Checking if the log redirection mode is active.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsLogging()
@@ -1467,15 +1522,18 @@ function BU.Main.Status.CheckStatIsLogging()
 # ···································································
 # Checking if the initialization logs can be printed on the terminal.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsPrintingInit()
@@ -1502,15 +1560,18 @@ function BU.Main.Status.CheckStatIsPrintingInit()
 # ···········································
 # Checking if the text formatting is allowed.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
+
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatAllowFormatting()

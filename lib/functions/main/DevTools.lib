@@ -135,11 +135,13 @@ fi
 # ······························································
 # Writing the error message if a Shellcheck verification failed.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - local     |
 #   - printf    |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -161,6 +163,7 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 # ·························································································
 # Verifying for any programming errors in a Bash script file with the "shellcheck" command.
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - awk       |
@@ -170,6 +173,7 @@ function BU.Main.DevTools.ShellcheckVerifFailed()
 #   - md5sum    |
 #   - printf    |
 #   - touch     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

@@ -141,6 +141,7 @@ fi
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
 
+
 # shellcheck disable=
 function BU.Hardware.Initializer.SourceLibrary()
 {
@@ -178,6 +179,7 @@ function BU.Hardware.Initializer.SourceLibrary()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.Msg()                   -> Modules initializer script
 #   - BU.ModuleInit.SourcingFailure()       -> Modules initializer script
+
 
 # shellcheck disable=
 function BU.Hardware.Initializer.SourceConfig()
