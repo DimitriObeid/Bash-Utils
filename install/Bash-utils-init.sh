@@ -1459,6 +1459,7 @@ function BU.ModuleInit.GetModuleInitLanguage()
 #	- echo	|
 #	- read	| (-p | -r)
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.MsgLine()   -> Modules initializer script (this file)
@@ -2268,6 +2269,7 @@ function BU.ModuleInit.PressAnyKey() { echo; read -n 1 -s -r -p "$(printf "${__B
 #	- local		|
 #	- printf	|
 #	- shopt		| (-s extglob)
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

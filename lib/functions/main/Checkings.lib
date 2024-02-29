@@ -348,6 +348,7 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - basename  |
 #   - date      | ("+%H:%M:%S")
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -390,6 +391,7 @@ function BU.Main.Checkings.IsDateHMS()
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - date      | ("+%d-%m-%Y")
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1511,6 +1513,7 @@ function BU.Main.Checkings.CheckProjectLogPath()
 #   - shift     |
 #   - sleep     |
 #   - tee       | (-a)
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

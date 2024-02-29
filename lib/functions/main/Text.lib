@@ -141,6 +141,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTI
 #   - basename  |
 #   - sed       | (-E)
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
@@ -289,6 +290,7 @@ function BU.Main.Text.CutFirstCharacter()
 #   - echo      |
 #   - local     |
 #   - shopt     | (-s | -u)
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1350,6 +1352,7 @@ function BU.Main.Text.GetStringCharactersNumber()
 #   - echo      (-n -e)
 #   - wc        (--words)
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -1389,6 +1392,7 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTI
 #   - basename
 #   - fold      (-w1)
 #   - sort      (-u)
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1431,6 +1435,7 @@ function BU.Main.Text.ListCharactersFromFile() {
 #   - basename
 #   - sed       (-e)
 #   - sort      (-u | -f)
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

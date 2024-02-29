@@ -299,6 +299,7 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODE
 #   - touch     |
 #   - tput      | (setab)
 
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
@@ -380,6 +381,7 @@ function BU.Main.TextFormat.SetBGColor()
 #   - mkdir     | (-p)
 #   - touch     |
 #   - shopt     | (-s extglob | -u extglob)
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
