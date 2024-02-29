@@ -626,6 +626,7 @@ function BU.Main.Echo.Error()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -633,6 +634,7 @@ function BU.Main.Echo.Error()
     # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -686,6 +688,7 @@ function BU.Main.Echo.Msg()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Status.CheckProjectLogStatus "${p_string}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -693,6 +696,7 @@ function BU.Main.Echo.Msg()
     # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Echo.__EchoCPLS "${p_string}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -743,6 +747,7 @@ function BU.Main.Echo.Newstep()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -750,6 +755,7 @@ function BU.Main.Echo.Newstep()
     # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_NEWSTEP}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -835,6 +841,7 @@ function BU.Main.Echo.Success()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'S' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_SUCCESS}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} $'p_string'${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'S' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -842,6 +849,7 @@ function BU.Main.Echo.Success()
     # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'S' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_SUCCESS}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'S' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -898,6 +906,7 @@ function BU.Main.Echo.Warning()
 
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'W' || { local C="${?}"; [ -n "${VEchoWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_WARNING}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'W' || { local C="${?}"; [ -n "${VEchoWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -905,6 +914,7 @@ function BU.Main.Echo.Warning()
     # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
         BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'W' || { local C="${?}"; [ -n "${VEchoWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_WARNING}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
         BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'W' || { local C="${?}"; [ -n "${VEchoWarning}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
