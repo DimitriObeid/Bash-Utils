@@ -7,6 +7,8 @@
 # Author(s)     :
 # Version       :
 
+# Contributors  :
+#   -
 
 # ----------------------
 # SCRIPT'S DESCRIPTION :
