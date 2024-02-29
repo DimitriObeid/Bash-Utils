@@ -2206,7 +2206,7 @@ function BU.Main.Args__Directories.MakePath()
         return "${C}";
     fi
 
-	if [ -n "${p_overwrite}" ] && [ "${p_overwrite,,}" != ?(-?(-))rmdir ]; then
+	if [ -n "${p_overwrite}" ] && [[ "${p_overwrite,,}" != ?(-?(-))rmdir ]]; then
         local lineno="$(( LINENO - 1 ))";
 
         BU.Main.Args.PrintBadOption \
@@ -2515,7 +2515,7 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
 
 # shellcheck disable=
 function BU.Main.Args__Directories.GetParentDirectoryPath()
-(
+{
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug \
@@ -2537,7 +2537,9 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
     # If the target folder path is missing (no path is given).
-    if [ -z "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please pass the path of the directory to overwrite as argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
@@ -2554,7 +2556,9 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
         return "${C}";
     fi
 
-    if [ -n "${p_iterations}" ] || ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then local lineno="${LINENO}";
+    if [ -n "${p_iterations}" ] || ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption \
             '!intpos' \
             "Please pass a positive integer as number of iterations (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
@@ -2889,7 +2893,9 @@ function BU.Main.Args__Files.MakePath()
 	BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
     # If the new file's full path is missing (no path is given).
-    if [ -z "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass the full path of the directory to create as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -2952,7 +2958,9 @@ function BU.Main.Args__Files.SetLastAccess()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_filepath}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_filepath}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as first argument the path of the file whose last access date you wish to change (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_filepath' "${p_filepath}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -2964,7 +2972,9 @@ function BU.Main.Args__Files.SetLastAccess()
         return "${C}";
     fi
 
-    if [ ! -f "${p_filepath}" ]; then local lineno="${LINENO}";
+    if [ ! -f "${p_filepath}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!f' \
             "Please pass a valid file path as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_filepath' "${p_filepath}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3040,7 +3050,9 @@ function BU.Main.Args__Files.CompressCMD()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-	if [ -z "${p_cmd}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_cmd}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a compression command name as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_cmd' "${p_cmd}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3066,7 +3078,9 @@ function BU.Main.Args__Files.CompressCMD()
     fi
 
     # If no name of the archive to create is given (remember that the second parameter "${p_opts}" is optional here, so the "${p_arch}" parameter is the third parameter of the original function).
-    if [ -z "${p_arch}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_arch}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as third argument the path of the archive to uncompress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3124,7 +3138,9 @@ function BU.Main.Args__Files.CompressFormat()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-	if [ -z "${p_cmd}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_cmd}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a compression command name as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_cmd' "${p_cmd}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3137,7 +3153,9 @@ function BU.Main.Args__Files.CompressFormat()
 	fi
 
     # If no name of the archive to create is given.
-    if [ -z "${p_arch}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_arch}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as second argument the path of the archive to uncompress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3195,7 +3213,9 @@ function BU.Main.Args__Files.SearchInArchive()
     BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
     # If no archive path is provided as first argument.
-    if [ -z "${p_arch}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_arch}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as first argument the path to the archive to process (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3208,7 +3228,9 @@ function BU.Main.Args__Files.SearchInArchive()
     fi
 
     # If a bad archive path is provided as first argument.
-    if [ ! -f "${p_arch}" ]; then local lineno="${LINENO}";
+    if [ ! -f "${p_arch}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!f' \
             "Please pass as first argument an existing path to find the archive to process (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3267,7 +3289,9 @@ function BU.Main.Args__Files.UncompressCMD()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_cmd}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_cmd}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a(n) (un)compression command's name as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_cmd' "${p_cmd}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3293,7 +3317,9 @@ function BU.Main.Args__Files.UncompressCMD()
     fi
 
     # If no path to the archive to uncompress is given (remember that the second parameter "${p_opts}" is optional here, so the "${p_arch}" parameter is the third parameter of the original function).
-    if [ -z "${p_arch}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_arch}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as third argument the path of the archive to uncompress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3351,7 +3377,9 @@ function BU.Main.Args__Files.UncompressFormat()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-	if [ -z "${p_form}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_form}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass an archive format name (like 7z, Gzip, Cab, etc...) as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_form' "${p_form}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3364,7 +3392,9 @@ function BU.Main.Args__Files.UncompressFormat()
 	fi
 
     # If no name / path to the archive to uncompress is given.
-    if [ -z "${p_arch}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_arch}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass as second argument the path of the archive to uncompress (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_arch' "${p_arch}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3432,7 +3462,9 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_fileFS}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_fileFS}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a path to get the file or folder's host file system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_fileFS' "${p_fileFS}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3444,7 +3476,9 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
         return "${C}";
     fi
 
-    if [ -n "${p_fileFS}" ] && [ ! -d "${p_fileFS}" ] || [ ! -f "${p_fileFS}" ]; then local lineno="${LINENO}";
+    if [ -n "${p_fileFS}" ] && [ ! -d "${p_fileFS}" ] || [ ! -f "${p_fileFS}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!df' \
             "Please pass a valid path to get the file or folder's host file system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_fileFS' "${p_fileFS}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3506,7 +3540,9 @@ function BU.Main.Args__Filesystem.GetFSInfos()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please pass a path to get the file or folder's host file system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3518,7 +3554,9 @@ function BU.Main.Args__Filesystem.GetFSInfos()
         return "${C}";
     fi
 
-    if [ -n "${p_path}" ] && [ ! -d "${p_path}" ] || [ ! -f "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -n "${p_path}" ] && [ ! -d "${p_path}" ] || [ ! -f "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!df' \
             "Please pass a valid path to get the file or folder's host file system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3582,7 +3620,9 @@ function BU.Main.Args__Filesystem.Chown()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_currentOwner}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_currentOwner}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the former directory's or file's owner (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_currentOwner' "${p_currentOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3594,7 +3634,9 @@ function BU.Main.Args__Filesystem.Chown()
         return "${C}";
     fi
 
-    if [ -z "${p_newOwner}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_newOwner}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the new directory's or file's owner (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_newOwner' "${p_newOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3606,7 +3648,9 @@ function BU.Main.Args__Filesystem.Chown()
         return "${C}";
     fi
 
-    if [ -z "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the path to the directory or the file to process (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3618,7 +3662,9 @@ function BU.Main.Args__Filesystem.Chown()
         return "${C}";
     fi
 
-    if [ -n "${p_path}" ] && [ ! -d "${p_path}" ] || [ ! -f "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -n "${p_path}" ] && [ ! -d "${p_path}" ] || [ ! -f "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!df' \
             "Please give a valid path for the directory or the file to process (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3682,7 +3728,9 @@ function BU.Main.Args__Filesystem.ChownRec()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_currentOwner}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_currentOwner}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the former directory's owner (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_currentOwner' "${p_currentOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3694,7 +3742,9 @@ function BU.Main.Args__Filesystem.ChownRec()
         return "${C}";
     fi
 
-    if [ -z "${p_newOwner}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_newOwner}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the new directory's owner (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_newOwner' "${p_newOwner}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3706,7 +3756,9 @@ function BU.Main.Args__Filesystem.ChownRec()
         return "${C}";
     fi
 
-    if [ -z "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the path to the directory to process (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3718,7 +3770,9 @@ function BU.Main.Args__Filesystem.ChownRec()
         return "${C}";
     fi
 
-    if [ -n "${p_path}" ] && [ ! -d "${p_path}" ]; then local lineno="${LINENO}";
+    if [ -n "${p_path}" ] && [ ! -d "${p_path}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!d' \
             "Please give a valid path for the directory to process (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_path' "${p_path}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3788,7 +3842,9 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '7' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ "${p_code^^}" == 'NULL' ]; then local lineno="${LINENO}";
+    if [ "${p_code^^}" == 'NULL' ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give an ISO 639-1 code to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3800,7 +3856,9 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         return "${C}";
     fi
 
-    if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then local lineno="${LINENO}";
+    if ! BU.Main.Locale.CheckISO_639_1_ValidCode "${p_code}"; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!639-1' \
             "Please give a valid ISO 639-1 code to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3812,7 +3870,9 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         return "${C}";
     fi
 
-    if [ "${p_langNameEngl^^}" == 'NULL' ]; then local lineno="${LINENO}";
+    if [ "${p_langNameEngl^^}" == 'NULL' ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the targeted language in English (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3824,7 +3884,9 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         return "${C}";
     fi
 
-    if [ "${p_langNameOrig^^}" == 'NULL' ]; then local lineno="${LINENO}";
+    if [ "${p_langNameOrig^^}" == 'NULL' ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the targeted language in its own language (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3836,7 +3898,9 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
         return "${C}";
    fi
 
-    if [ "${p_langNameUser^^}" == 'NULL' ]; then local lineno="${LINENO}";
+    if [ "${p_langNameUser^^}" == 'NULL' ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give the name of the targeted language in the language used on your operating system (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_code' "${p_code}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3909,7 +3973,9 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-	if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3921,7 +3987,9 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
         return "${C}";
     fi
 
-    if [ -z "${p_delimiter}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_delimiter}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delimiter' "${p_delimiter}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3985,7 +4053,9 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -3997,7 +4067,9 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
         return "${C}";
     fi
 
-    if [ -z "${p_delimiter}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_delimiter}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delimiter' "${p_delimiter}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4009,7 +4081,9 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
         return "${C}";
     fi
 
-    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then local lineno="${LINENO}";
+    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4072,7 +4146,9 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
@@ -4089,7 +4165,9 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
         return "${C}";
     fi
 
-    if [ -z "${p_delimiter}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_delimiter}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a character as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delimiter' \
@@ -4105,7 +4183,9 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
         return "${C}";
     fi
 
-    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then local lineno="${LINENO}";
+    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_iterations' \
@@ -4169,7 +4249,9 @@ function BU.Main.Args__Text.DeleteLettersInString()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4234,7 +4316,9 @@ function BU.Main.Args__Text.GetCharacterOccurences()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4246,7 +4330,9 @@ function BU.Main.Args__Text.GetCharacterOccurences()
         return "${C}";
     fi
 
-    if [ -z "${p_target}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_target}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any single character to process as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_target' "${p_target}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4258,7 +4344,9 @@ function BU.Main.Args__Text.GetCharacterOccurences()
         return "${C}";
     fi
 
-    if [ -n "${p_target}" ] && [ "${#p_target}" -gt 1 ]; then local lineno="${LINENO}";
+    if [ -n "${p_target}" ] && [ "${#p_target}" -gt 1 ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!alphanumchar' \
             "Please give only a single character to process as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_target' "${p_target}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4319,7 +4407,9 @@ function BU.Main.Args__Text.GetCharacterOccurencesFromArray()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_array}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_array}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
@@ -4336,7 +4426,9 @@ function BU.Main.Args__Text.GetCharacterOccurencesFromArray()
         return "${C}";
     fi
 
-    if [ -z "${p_array}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_array}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a character as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
@@ -4353,7 +4445,9 @@ function BU.Main.Args__Text.GetCharacterOccurencesFromArray()
         return "${C}";
     fi
 
-    if [ -z "${p_valToDisplay}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_valToDisplay}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption \
             'z' \
             "Please give a positive integer as third argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
@@ -4415,7 +4509,9 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '4' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4476,7 +4572,9 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-	if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4488,7 +4586,9 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
         return "${C}";
 	fi
 
-	if [ -z "${p_delim}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_delim}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any single character as delimiter to process as second argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delim' "${p_delim}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4500,7 +4600,9 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
         return "${C}";
 	fi
 
-    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then local lineno="${LINENO}";
+    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4561,7 +4663,9 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
     #**** Code ****
 	BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-	if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4573,7 +4677,9 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
         return "${C}";
 	fi
 
-	if [ -z "${p_delim}" ]; then local lineno="${LINENO}";
+	if [ -z "${p_delim}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any single character as delimiter to process as second argument${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_delim' "${p_delim}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4585,7 +4691,9 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
         return "${C}";
 	fi
 
-    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then local lineno="${LINENO}";
+    if [ -n "${p_iterations}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_iterations}"; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption '!intpos' \
             "Please pass a positive integer as third argument (optional)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_iterations' "${p_iterations}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4643,7 +4751,9 @@ function BU.Main.Args__Text.GetSubStringOccurences()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give a string to process as first argument (mandatory argument). $(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4655,7 +4765,9 @@ function BU.Main.Args__Text.GetSubStringOccurences()
         return "${C}";
     fi
 
-    if [ -z "${p_target}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_target}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'z' \
             "Please give any sub-string to process as second argument (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_target' "${p_target}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4718,7 +4830,9 @@ function BU.Main.Args__Text.StrToWordArray()
     #**** Code ****
     BU.Main.Args.GetArgc-FFL "${#}" '5' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
-    if [ -z "${p_string}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_string}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'Z' \
             "Please give as first argument a string to convert in a word array (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_string' "${p_string}" "${p_filename}" "${p_funcname}" "${p_lineno}";
@@ -4730,7 +4844,9 @@ function BU.Main.Args__Text.StrToWordArray()
         return "${C}";
     fi
 
-    if [ -z "${p_varname}" ]; then local lineno="${LINENO}";
+    if [ -z "${p_varname}" ]; then
+        local lineno="$(( LINENO - 1 ))";
+
         BU.Main.Args.PrintBadOption 'Z' \
             "Please give as second argument a string to name the array (mandatory argument)${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured "${p_funcname}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}" '--decho')" \
             'p_varname' "${p_varname}" "${p_filename}" "${p_funcname}" "${p_lineno}";

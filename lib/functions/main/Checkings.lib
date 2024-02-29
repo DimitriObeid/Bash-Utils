@@ -1564,7 +1564,7 @@ function BU.Main.Status.CheckProjectLogStatus()
     local v_bu_stat_decho_old;      # VAR TYPE : String     - DESC :
     local v_bu_stat_echo_old;       # VAR TYPE : String     - DESC :
     local v_redirectionError;       # VAR TYPE : String     - DESC :
-    local v_warning_array_value;    # VAR TYPE : String     - DESC :
+#    local v_warning_array_value;    # VAR TYPE : String     - DESC :
 
     #**** Code ****
 
@@ -1645,8 +1645,6 @@ function BU.Main.Status.CheckProjectLogStatus()
             'nodate';
 
         BU.Main.Echo.Newline >&2;
-
-        v_loop_error='error';
     }
 
 	# Checking first if the partition where the log file exists is not fully used.
@@ -1679,8 +1677,8 @@ function BU.Main.Status.CheckProjectLogStatus()
         "${FUNCNAME[0]}()") --> Error : unable to write into the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_LOG_FILE_PATH}") file.\nRedirection option --> ";
 
     #
-    v_warning_array_value="$(BU.Main.Decho.Decho.Function \
-        "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU.Main.Decho.Decho.Path "${BASH_SOURCE[0]}"), function $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()").\nValue --> $(BU.Main.Decho.Decho.Highlight "${val}")\nLine -->";
+    # v_warning_array_value="$(BU.Main.Decho.Decho.Function \
+    #     "${FUNCNAME[0]}()") --> Warning : incorrect argument given as extra argument array in $(BU.Main.Decho.Decho.Path "${BASH_SOURCE[0]}"), function $(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}()").\nValue --> $(BU.Main.Decho.Decho.Highlight "${val}")\nLine -->";
 
 
     # This checking must be done before the long condition below, since it needs to know if the project's log file is present.
