@@ -4445,11 +4445,11 @@ if [ -z "${BASH_VERSION}" ]; then
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'id' ] && echo "BASH-UTILS ERROR: Interpreter shell Anda saat ini bukanlah interpreter « Bash », tetapi interpreter « ${SHELL##*/} »" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ja' ] && echo "BASH-UTILS ERROR : 現在のシェルインタプリタは « Bash » インタプリタではなく、 \" ${SHELL##*/} \" インタプリタです。" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ko' ] && echo "" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ko' ] && echo "BASH-UTILS 에러: 현재 셸 인터프리터는 « Bash » 인터프리터가 아니라 « ${SHELL##*/} » 인터프리터입니다." >&2;
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'pt' ] && echo "BASH-UTILS ERRO : O seu intérprete shell actual não é o intérprete « Bash », mas o intérprete « ${SHELL##*/} »" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ru' ] && echo "ОШИБКА « BASH-UTILS » : Ваш текущий интерпретатор оболочки - это не интерпретатор « Bash », а интерпретатор « ${SHELL##*/} »" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'tr' ] && echo "BASH-UTILS HATASI : Mevcut kabuk yorumlayıcınız " Bash " yorumlayıcısı değil, « ${SHELL##*/} » tercüman" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'tr' ] && echo "BASH-UTILS HATASI : Mevcut kabuk yorumlayıcınız « Bash » yorumlayıcısı değil, « ${SHELL##*/} » tercüman" >&2;
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'uk' ] && echo "ВИНИКЛА ПОМИЛКА BASH-UTILS: Поточний інтерпретатор командного рядка - це не інтерпретатор « Bash », а інтерпретатор « ${SHELL##*/} »" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'zh' ] && echo "BASH-UTILS错误：你当前的shell解释器不是 \"Bash \"解释器，而是\"${SHELL##*/}\"解释器。" >&2;
