@@ -3245,6 +3245,7 @@ function BU.ModuleInit.CheckSTAT_DEBUG_BASHX()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.CheckSTAT_DEBUG() -> Modules initializer script (this file)
 
+
 # shellcheck disable=
 function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG="${1}";         BU.ModuleInit.CheckSTAT_DEBUG         "${2}" "${3}" || return "${?}"; return 0; }
 
@@ -3254,6 +3255,7 @@ function BU.ModuleInit.ChangeSTAT_DEBUG()         { __BU_MODULE_INIT_STAT_DEBUG=
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.ModuleInit.CheckSTAT_DEBUG_BASHX() Modules initializer script (this file)
+
 
 # shellcheck disable=
 function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_BASHX="${1}";   BU.ModuleInit.CheckSTAT_DEBUG_BASHX   "${2}" "${3}" || return "${?}"; return 0; }
@@ -3265,11 +3267,24 @@ function BU.ModuleInit.ChangeSTAT_DEBUG_BASHX()   { __BU_MODULE_INIT_STAT_DEBUG_
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
 
+
 # shellcheck disable=
 function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'true' ] && return 0; return 1; }
 
 # ·····················································································
 # Processing the "module" value's parameters during the top priority modules inclusion.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - cut       | (-d | -f1)
+#   - declare   | (-i)
+#   - echo      |
+#	- local	    |
+#   - printf    |
+#   - read      | (-a | -r)
+#   - unset
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -3281,6 +3296,7 @@ function BU.ModuleInit.CheckIsDebugging()         { [ "${__BU_MODULE_INIT_STAT_D
 #   - BU.ModuleInit.Msg()                           -> Modules initializer script (this file)
 #   - BU.ModuleInit.MsgTerminate()                  -> Modules initializer script (this file)
 #   - BU.ModuleInit.PrintLogError()                 -> Modules initializer script (this file)
+
 
 # shellcheck disable=SC1090
 function BU.ModuleInit.ProcessFirstModuleParameters()
@@ -3734,7 +3750,9 @@ function BU.ModuleInit.ProcessFirstModuleParameters()
 
                     v_loop_error='error'; break;
                 fi
-            done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.Exit 1; return "${?}"; fi
+            done;
+
+            if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.Exit 1; return "${?}"; fi
 
             # Sourcing the "Status.conf" file, and then modifying the sourced global status variables values.
             if ! BU.ModuleInit.IsFrameworkCompiled && ! source "${__BU_MODULE_INIT__CONFIG_INIT_DIR__STATUS}"; then echo >&2;
@@ -4065,7 +4083,9 @@ function BashUtils_InitModules._()
                 # No need to call the function "BU.ModuleInit.AskPrintLog" function, it's already called in the function "BU.ModuleInit.ListInstalledModules".
                 BU.ModuleInit.ListInstalledModules || { v_loop_error="error"; break; }
 
-                v_loop_error="error"; break;
+                v_loop_error="error";
+
+                break;
             else
                 #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 #~ OPTIONAL : SOURCING THE ALIASES CONFIGURATION FILE IN ORDER TO LET THE DEVELOPER WRITING SHORTER FUNCTION NAMES
@@ -4085,12 +4105,24 @@ function BashUtils_InitModules._()
                     for aliasesFilename in "${va_aliasesFileNames[@]}"; do
 
                         # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH}" variable.
-                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'modaliasfile'; then
+                        if BU.ModuleInit.FindPath \
+                            "${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}" \
+                            "${aliasesFilename}" \
+                            'f' \
+                            'shut' \
+                            'modaliasfile';
+                        then
                             __BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__ALIASES_CONF__PARENT}/${aliasesFilename}";
                         fi
 
                         # Setting a value to the "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH}" variable.
-                        if BU.ModuleInit.FindPath "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}" "${aliasesFilename}" 'f' 'shut' 'osmodaliasfile'; then
+                        if BU.ModuleInit.FindPath \
+                            "${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}" \
+                            "${aliasesFilename}" \
+                            'f' \
+                            'shut' \
+                            'osmodaliasfile';
+                        then
                             __BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PATH="${__BU_MODULE_INIT__MODULES_DIR__OS_ALIASES_CONF__PARENT}/${aliasesFilename}";
                         fi
                     done
@@ -4135,7 +4167,10 @@ function BashUtils_InitModules._()
                             source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_os_aliases_file_name}" 'f')" || {
                                 BU.ModuleInit.SourcingFailure \
                                     "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_os_aliases_file_name}" \
-                                    "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                                    "${v_module_name}" \
+                                    "${BASH_SOURCE[0]}" \
+                                    "${FUNCNAME[0]}" \
+                                    "${LINENO}";
 
                                 v_loop_error="error";
 
@@ -4226,11 +4261,14 @@ function BashUtils_InitModules._()
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}" "${v_module_config_file_name}" 'f')" || {
                         BU.ModuleInit.SourcingFailure \
                             "${__BU_MODULE_INIT_CURRENT_MODULE_CONF_PATH}/${v_module_config_file_name}" \
-                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                            "${v_module_name}" \
+                            "${BASH_SOURCE[0]}" \
+                            "${FUNCNAME[0]}" \
+                            "${LINENO}";
 
-                            v_loop_error="error";
+                        v_loop_error="error";
 
-                            break;
+                        break;
                     }
                 }
 
@@ -4248,7 +4286,8 @@ function BashUtils_InitModules._()
                     "$(printf \
                         "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND__CALL_PLE}" \
                         "${v_module_name}")" \
-                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "$(basename \
+                        "${BASH_SOURCE[0]}")" \
                     "${lineno}" \
                     "E_BUINIT__INITMODULE__MODULE_INIT_DIR_NOT_FOUND";
 
@@ -4257,7 +4296,8 @@ function BashUtils_InitModules._()
                 # shellcheck disable=SC2059
                 printf \
                     "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__DIR_NOT_FOUND}\n\n" \
-                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "$(basename \
+                        "${BASH_SOURCE[0]}")" \
                     "${FUNCNAME[0]}" \
                     "${lineno}" \
                     "${v_module_name}" \
@@ -4303,7 +4343,8 @@ function BashUtils_InitModules._()
                             "${__BU_MODULE_INIT_MSG__BU_IM__SOURCE_MODULES_CONF_DIRS__CURRENT_MODULE__INCLUDE_INIT_DIRS__MODULE_INIT_FILE_NOT_FOUND}" \
                             "${v_module_name}" \
                             "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}")" \
-                        "$(basename "${BASH_SOURCE[0]}")" \
+                        "$(basename \
+                            "${BASH_SOURCE[0]}")" \
                         "$(( LINENO - 1 ))" \
                         "E_BUINIT__INITMODULE__MODULE_INIT_FILE_NOT_FOUND";
 
@@ -4325,13 +4366,17 @@ function BashUtils_InitModules._()
                                 "${v_module_name}" \
                                 "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" \
                                 "${v_module_init_file_name}")" \
-                            "$(basename "${BASH_SOURCE[0]}")" \
+                            "$(basename \
+                                "${BASH_SOURCE[0]}")" \
                             "$(( LINENO - 1 ))" \
                             "E_BUINIT__INITMODULE__MODULE_INIT_FILE_IS_EMPTY";
 
                         BU.ModuleInit.SourcingFailure \
                             "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" \
-                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                            "${v_module_name}" \
+                            "${BASH_SOURCE[0]}" \
+                            "${FUNCNAME[0]}" \
+                            "${LINENO}";
 
                         BU.ModuleInit.MsgTerminate;
 
@@ -4345,7 +4390,10 @@ function BashUtils_InitModules._()
                     source "$(BU.ModuleInit.FindPath "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}" "${v_module_init_file_name}" 'f')" || {
                         BU.ModuleInit.SourcingFailure \
                             "${__BU_MODULE_INIT_CURRENT_MODULE_INIT_PATH}/${v_module_init_file_name}" \
-                            "${v_module_name}" "${BASH_SOURCE[0]}" "${FUNCNAME[0]}" "${LINENO}";
+                            "${v_module_name}" \
+                            "${BASH_SOURCE[0]}" \
+                            "${FUNCNAME[0]}" \
+                            "${LINENO}";
 
                         v_loop_error="error";
 
@@ -4366,7 +4414,13 @@ function BashUtils_InitModules._()
         # Incrementing the modules array index variable.
         v_index="$(( v_index + 1 ))";
 
-    done; if [ "${v_loop_error,,}" == 'error' ]; then BU.ModuleInit.Exit 1; return "${?}"; fi
+    done;
+
+    if [ "${v_loop_error,,}" == 'error' ]; then
+        BU.ModuleInit.Exit 1;
+
+        return "${?}";
+    fi
 }
 
 ## ==============================================
@@ -4390,12 +4444,12 @@ if [ -z "${BASH_VERSION}" ]; then
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'hi' ] && echo "बैश-बर्तन त्रुटि: आपका वर्तमान शेल दुभाषिया «बैश» दुभाषिया नहीं है, बल्कि «${SHELL##*/}» दुभाषिया है" >&2;
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'id' ] && echo "BASH-UTILS ERROR: Interpreter shell Anda saat ini bukanlah interpreter « Bash », tetapi interpreter « ${SHELL##*/} »" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ja' ] && echo "BASH-UTILS ERROR : 現在のシェルインタプリタは \" Bash \" インタプリタではなく、 \" ${SHELL##*/} \" インタプリタです。" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ja' ] && echo "" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ja' ] && echo "BASH-UTILS ERROR : 現在のシェルインタプリタは « Bash » インタプリタではなく、 \" ${SHELL##*/} \" インタプリタです。" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ko' ] && echo "" >&2;
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'pt' ] && echo "BASH-UTILS ERRO : O seu intérprete shell actual não é o intérprete « Bash », mas o intérprete « ${SHELL##*/} »" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'ru' ] && echo "ОШИБКА « BASH-UTILS » : Ваш текущий интерпретатор оболочки - это не интерпретатор « Bash », а интерпретатор « ${SHELL##*/} »" >&2;
-    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'tr' ] && echo "" >&2;
+    [ "$(echo "${LANG}" | cut -d _ -f1)" == 'tr' ] && echo "BASH-UTILS HATASI : Mevcut kabuk yorumlayıcınız " Bash " yorumlayıcısı değil, « ${SHELL##*/} » tercüman" >&2;
 
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'uk' ] && echo "ВИНИКЛА ПОМИЛКА BASH-UTILS: Поточний інтерпретатор командного рядка - це не інтерпретатор « Bash », а інтерпретатор « ${SHELL##*/} »" >&2;
     [ "$(echo "${LANG}" | cut -d _ -f1)" == 'zh' ] && echo "BASH-UTILS错误：你当前的shell解释器不是 \"Bash \"解释器，而是\"${SHELL##*/}\"解释器。" >&2;
