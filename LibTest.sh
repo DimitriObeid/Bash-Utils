@@ -101,6 +101,11 @@ BU.Main.Modules.InitNewModule "Hardware";
 # Testing functions
 BU.Main.Echo.Newstep "Architecture du processeur : $(BU.Hardware.Linux.CPU.GetArch || BU.Main.Echo.Error "False")";
 
+BU.Main.Echo.Msg "Découpage de la chaîne de caractères \"BU.Main.Echo.Msg\" en \"Msg\" via la fonction \"BU.Main.Text.DeleteLettersInString()\" :";
+BU.Main.Echo.Msg "Résultat : $(BU.Main.Text.DeleteLettersInString "BU.Main.Echo.Msg" "BU.Main.Echo.")";
+
+BU.Main.Echo.Error "Test de l'appel de la fonction \"BU.Main.Echo.WriteMessage()\" via la fonction \"BU.Main.Echo.Error()\"";
+
 # This command pauses the script, in order to see how much memory it uses.
 # sleep 1
 

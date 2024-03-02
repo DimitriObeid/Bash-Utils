@@ -1451,7 +1451,7 @@ function BU.Main.Args.Argc()
 
 
 # shellcheck disable=
-function BU.Main.Argx.X()
+function BU.Main.Args.X()
 {
     #**** Parameters ****
     #   - ARG TYPE : Int

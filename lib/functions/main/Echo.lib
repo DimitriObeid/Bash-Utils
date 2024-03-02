@@ -684,6 +684,47 @@ function BU.Main.Echo.__EchoCPLS()
     return 0;
 }
 
+# ··························································································································································································
+# Repeating the calls of the "BU.Main.Echo.__EchoOutput()" function into the "BU.Main.Echo.<...>()" functions and managing its failsafes in a single place, in order to have a cleaner code.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+
+# shellcheck disable=
+function BU.Main.Echo.CallEchoOutput()
+{
+    #**** Parameters ****
+    local p_val="${1:-}";   # ARG TYPE : String - REQUIRED | DEFAULT VAL : 1    - DESC : Context to pass to the "BU.Main.Echo.__EchoOutput()" function as second argument.
+
+    #**** Variables ****
+    local v_strParentFunc;  # VAR TYPE : String - DESC : Storing the name of the parent function, and gathering the first letter of the same function name after cutting the "BU.Main.Echo." sub-string.
+
+    #**** Code ****
+    v_strParentFunc="${FUNCNAME[1]}";
+
+    BU.Main.Text.DeleteLettersInString  "${v_strParentFunc}" 'BU.Main.Echo.';
+    BU.Main.Text.GetFirstCharacter      "${v_strParentFunc}";
+
+    BU.Main.Echo.__EchoOutput "${p_string}" "${p_val}" "${v_strParentFunc}" || {
+        local C="${?}";
+
+        [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[1]}";
+
+        return "${C}";
+    }
+}
+
 # ···············································································
 # Writing, redirecting and displaying a basic message with its associated colors.
 
@@ -734,7 +775,7 @@ function BU.Main.Echo.WriteMessage()
     local v_colorToDisplay;      # VAR TYPE : CMD       - DESC : Storing the command substitution suitable to the parent function.
     local v_echoError;           # VAR TYPE : Int       - DESC : Storing a '1' value if an error occurs when the framework is initializing.
     local v_isParentFuncValid;   # VAR TYPE : Bool      - DESC : Checking if the parent function's name has the 'Error', 'Msg', 'Newstep', 'Success' or 'Warning' sub-string following the "Bu.Main.Echo." sub-string.
-    local v_strParentFunc;       # VAR TYPE : String    - DESC : Storing the name of the parent function, and gathering the first letter of the rean function name after cutting the "BU.Main.Echo." sub-string.
+    local v_strParentFunc;       # VAR TYPE : String    - DESC : Storing the name of the parent function, and gathering the first letter of the same function name after cutting the "BU.Main.Echo." sub-string.
     local v_strTab;              # VAR TYPE : String    - DESC : Printing twice the content of the "${__BU_MAIN_TXT_PRINT_TAB}" global variable if the parent function's name has the 'Error', 'Msg', 'Newstep', 'Success' or 'Warning' sub-string following the "Bu.Main.Echo." sub-string.
 
     #**** Sub-functions ****
@@ -746,38 +787,41 @@ function BU.Main.Echo.WriteMessage()
     function BU.Main.Echo.WriteMessage.CallEchoOutput()
     {
         #**** Parameters ****
-        local p_val="${1:-}";  # ARG TYPE : String - REQUIRED | DEFAULT VAL : 1    - DESC : Return code of the previous command's call.
+        local p_val="${1:-}";  # ARG TYPE : String - REQUIRED | DEFAULT VAL : 1    - DESC : Context to pass to the "BU.Main.Echo.__EchoOutput()" function as second argument.
 
         #**** Code ****
         if [ "${v_isParentFuncValid,,}" == 'true' ]; then
             BU.Main.Echo.__EchoOutput "${p_string}" "${p_val}" "${v_strParentFunc}" || {
                 local C="${?}";
 
-                [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+                [ "${FUNCNAME[2]}" == 'BU.Main.Echo.Error' ] && [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                BU.Main.Echo.DebugEnd "${FUNCNAME[1]}";
 
                 return "${C}";
             }
+        fi
     }
 
     #**** Code ****
     BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
-    # If the framework is still initializing when an error occurs (decided by the call of the "BU.Main.Echo.Error()" function).
-    if [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ]; then
-        BU.ModuleInit.SetInitErrorMsg;
+    v_strParentFunc="${FUNCNAME[1]}";
 
-        v_echoError='1';
-    fi
+    v_strTab="${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB}";
 
     # Setting the correct color to display according to the name of the parent function.
     if      [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ];   then
         v_colorToDisplay="${__BU_MAIN_COLOR_TXT_ERROR}";
         v_isParentFuncValid='true';
 
+        # If the framework is still initializing when an error occurs (decided by the call of the "BU.Main.Echo.Error()" function).
+        BU.ModuleInit.SetInitErrorMsg;
+
+        v_echoError='1';
+
     elif    [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Msg' ];     then
-        # Please leave this variable empty, as no specific color is natively displayed by this parent function.
+        # Please leave the following variable empty, as no specific color is natively displayed by this parent function.
         # Any text display function calling this parent function can display a custom color, however.
         v_colorToDisplay='';
         v_isParentFuncValid='true';
@@ -795,14 +839,14 @@ function BU.Main.Echo.WriteMessage()
         v_isParentFuncValid='true';
 
     else
-        # Please leave this variable empty, as no specific parent function has called this very function.
+        # Please leave the following variable empty, as no specific parent function has called this very function.
         v_colorToDisplay='';
         v_isParentFuncValid='false';
     fi
 
     # Removing the "BU.Main.Echo." sub-string from the parent function's name.
     if [ "${v_isParentFuncValid,,}" == 'true' ]; then
-        BU.Main.Text. "${v_strParentFunc}" '';
+        BU.Main.Text.DeleteLettersInString "${v_strParentFunc}" 'BU.Main.Echo.';
     fi
 
     # Cutting the remaining text following the first letter of the new string.
@@ -810,40 +854,36 @@ function BU.Main.Echo.WriteMessage()
 
     BU.Main.Echo.WriteMessage.CallEchoOutput 'Begin' || return "${?}";
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
+    # Failsafe if any of the "BU.Main.Echo.<...>()" functions using the current function have to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-
+        BU.Main.Status.CheckProjectLogStatus \
+            "${v_colorToDisplay}${v_strTab}$ ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || { 
+            local C="${?}";
+            
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+            
+            return "${C}";
+        };
     else
-
+        BU.Main.Echo.__EchoCPLS \
+            "${v_colorToDisplay}${v_strTab}$ ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || {
+            local C="${?}";
+            
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+            
+            return "${C}";
+        };
     fi
 
     #
-    [ "${v_isParentFuncValid,,}" == 'true' ] && BU.Main.Echo.__EchoOutput "${p_string}" 'begin' "${v_strParentFunc}" || {
-        local C="${?}";
-
-        [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
-
-        return "${C}";
-    }
-
-
-    # OLD CODE
-    if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-        BU.Main.Status.CheckProjectLogStatus "${v_colorToDisplay}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
-    else
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-        BU.Main.Echo.__EchoCPLS "${v_colorToDisplay}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-    fi
-
+    BU.Main.Echo.WriteMessage.CallEchoOutput 'End' || return "${?}";
+        
     # Restoring the former value of the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable.
     [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -864,8 +904,11 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 # ·····················
 # Error message display
 
-# Usage :
-#	BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
+# \\\\\\\
+# Usage : BU.Main.Echo.Error "<Text to write>" "<optional echo argument>" "<Any extra argument supported by the BU.Main.Status.CheckProjectLogStatus() function>";
+
+# \\\\\\\\
+# Output : A colored error message redirected to the screen and / or the log file according to the configuration of the "${}" and "${}" global status variables.
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
@@ -893,6 +936,8 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 # shellcheck disable=
 function BU.Main.Echo.Error()
 {
+    BU.Main.Echo.WriteMessage "${@}"; return "${?}";
+
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug \
@@ -915,26 +960,44 @@ function BU.Main.Echo.Error()
     # If the framework is still initializing when an error occurs.
     BU.ModuleInit.SetInitErrorMsg && local VEchoError='1';
 
+    BU.Main.Echo.CallEchoOutput 'Begin' || return "${?}";
+
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Status.CheckProjectLogStatus \
+            "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || {
+            local C="${?}";
 
-        BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            return "${C}";
+        };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Echo.__EchoCPLS \
+            "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || {
+            local C="${?}";
 
-        BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_ERROR}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            return "${C}";
+        };
+
     fi
+
+    BU.Main.Echo.CallEchoOutput 'End' 'E' || return "${?}";
 
     # Restoring the former value of the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable.
     [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ····································································
@@ -978,21 +1041,37 @@ function BU.Main.Echo.Msg()
     #**** Code ****
     BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
+    BU.Main.Echo.CallEchoOutput 'Begin' || return "${?}";
+
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Status.CheckProjectLogStatus \
+            "${p_string}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || {
+            local C="${?}";
 
-        BU.Main.Status.CheckProjectLogStatus "${p_string}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            return "${C}";
+        };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Echo.__EchoCPLS \
+            "${p_string}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || {
+            local C="${?}";
+            
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+            
+            return "${C}";
+        };
 
-        BU.Main.Echo.__EchoCPLS "${p_string}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'm' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     fi
+
+    BU.Main.Echo.CallEchoOutput 'End' || return "${?}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1038,21 +1117,27 @@ function BU.Main.Echo.Newstep()
     #**** Code ****
     BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
 
+    BU.Main.Echo.CallEchoOutput 'Begin' || return "${?}";
+
     if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+        BU.Main.Status.CheckProjectLogStatus \
+            "${__BU_MAIN_COLOR_TXT_NEWSTEP}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" \
+            "${p_option}" \
+            "${pa_extraArgs[@]}" \
+        || {
+            local C="${?}";
 
-        BU.Main.Status.CheckProjectLogStatus "${__BU_MAIN_COLOR_TXT_NEWSTEP}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+            return "${C}";
+        };
 
-    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
     else
-        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
-
         BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_NEWSTEP}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
 
-        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'N' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
     fi
+
+    BU.Main.Echo.CallEchoOutput 'End' || return "${?}";
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
 }
@@ -1071,6 +1156,7 @@ function BU.Main.Echo.Newstep()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib (this file)
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Read()
 {
@@ -1088,8 +1174,20 @@ function BU.Main.Echo.Read()
 
 	#**** Code ****
 	if [ -f "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" ] && [ "${__BU_MAIN_STAT_LOG}" == "true" ] && [ -n "${__BU_MAIN_STAT_LOG_REDIRECT}" ]; then
-		echo -e "Keyboard input value : $(BU.Main.Decho.Decho.Var "${p_string}")" >> "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "" 'R' "CPLS"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-	fi; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+
+		echo -e "Keyboard input value : $(BU.Main.Decho.Decho.Var "${p_string}")" >> "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" || \
+        {
+            BU.Main.Echo.__EchoCPLS "" 'R' "CPLS";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
+        }
+	fi
+    
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·······················
@@ -1237,6 +1335,7 @@ function BU.Main.Echo.Warning()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Aqua()
 {
@@ -1259,6 +1358,7 @@ function BU.Main.Echo.Aqua()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Black()
@@ -1283,6 +1383,7 @@ function BU.Main.Echo.Black()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Blue()
 {
@@ -1305,6 +1406,7 @@ function BU.Main.Echo.Blue()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Cyan()
@@ -1329,6 +1431,7 @@ function BU.Main.Echo.Cyan()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Fuchsia()
 {
@@ -1351,6 +1454,7 @@ function BU.Main.Echo.Fuchsia()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Gray()
@@ -1375,6 +1479,7 @@ function BU.Main.Echo.Gray()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Green()
 {
@@ -1397,6 +1502,7 @@ function BU.Main.Echo.Green()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Lime()
@@ -1421,6 +1527,7 @@ function BU.Main.Echo.Lime()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Maroon()
 {
@@ -1443,6 +1550,7 @@ function BU.Main.Echo.Maroon()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Navy()
@@ -1467,6 +1575,7 @@ function BU.Main.Echo.Navy()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Olive()
 {
@@ -1489,6 +1598,7 @@ function BU.Main.Echo.Olive()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Orange()
@@ -1513,6 +1623,7 @@ function BU.Main.Echo.Orange()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Pink()
 {
@@ -1535,6 +1646,7 @@ function BU.Main.Echo.Pink()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Purple()
@@ -1559,6 +1671,7 @@ function BU.Main.Echo.Purple()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Red()
 {
@@ -1581,6 +1694,7 @@ function BU.Main.Echo.Red()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Salmon()
@@ -1605,6 +1719,7 @@ function BU.Main.Echo.Salmon()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Silver()
 {
@@ -1627,6 +1742,7 @@ function BU.Main.Echo.Silver()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Tan()
@@ -1651,6 +1767,7 @@ function BU.Main.Echo.Tan()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Teal()
 {
@@ -1673,6 +1790,7 @@ function BU.Main.Echo.Teal()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Turquoise()
@@ -1697,6 +1815,7 @@ function BU.Main.Echo.Turquoise()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.Violet()
 {
@@ -1720,6 +1839,7 @@ function BU.Main.Echo.Violet()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
 
+
 # shellcheck disable=
 function BU.Main.Echo.White()
 {
@@ -1742,6 +1862,7 @@ function BU.Main.Echo.White()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Msg()    -> Main -> Echo.lib (this file)
+
 
 # shellcheck disable=
 function BU.Main.Echo.Yellow()

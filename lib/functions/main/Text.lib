@@ -407,7 +407,9 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 
 	if [ "${p_count,,}" != 'count' ]; then echo -ne "${v_newString}"; else echo -ne "${v_count}"; fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ···········································································································
@@ -606,11 +608,27 @@ function BU.Main.Text.DeleteLettersInString()
 
     #**** Code ****
     if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
-        if ! BU.Main.Args__Text.DeleteLettersInString "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+        if ! BU.Main.Args__Text.DeleteLettersInString \
+            "${p_string}" \
+            "$(basename \
+                "${BASH_SOURCE[0]}")" \
+            "${FUCNAME[0]}" \
+            "${LINENO}";
+        then
+            local C="${?}";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return "${C}";
+        fi
     fi
 
     BU.Main.Text.ReplaceLettersInString "${p_string}" "${p_chars}" "$([ "${p_replacement}" == '' ] && printf '' || printf ' ')" || {
-        local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}";
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
     };
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
