@@ -376,6 +376,9 @@ printf "
 # shellcheck disable=
 function BU.Main.Echo.__EchoOutput()
 {
+    # If the debugging procedure is not active, then it is really not necessary to proceed further into this function.
+    if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" != 'true' ]; then return 0; fi
+
     # This function call makes it easier for the user to find the current function and its executed
     # content if it is called during the execution of the main script with the "$(bash -x)" command.
     BU.Main.Echo.Debug \
@@ -394,73 +397,178 @@ function BU.Main.Echo.__EchoOutput()
 	local v_strlen="${#p_string}";  # VAR TYPE : Int        - DESC :
 
 	#**** Code ****
-	# If the "${p_type}" argument is a string, then the first character is extracted.
+	# If the value of the "${p_type}" argument is a string, then the first character is extracted.
 	if ! BU.Main.Checkings.IsAlphaChar "${p_type}"; then
-        local v_type=${p_type:0:1};
+
+        #**** Conditional variables ****
+        local v_type;               # VAR TYPE : String     - DESC : Storing the "${p_type}" string before cutting every characters following the first one and reassigning this new value to the original variable.
+
+        #**** Conditional code ****
+        v_type=${p_type:0:1};
 
         p_type="${v_type}";
 	fi
 
-	if [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == 'false' ]; then return 0;
+	# Passing the "${__BU_MAIN_STAT_ECHO}" global status variable's value from "false" to "true".
+    if ! BU.Main.Status.CheckStatIsBackupEchoing; then
+        local v_BU_MAIN_STAT_ECHO_val="${__BU_MAIN_STAT_ECHO}";
 
-	elif [ "${__BU_MODULE_INIT_STAT_DEBUG,,}" == "true" ]; then
-	    # Passing the "${__BU_MAIN_STAT_ECHO}" global status variable's value from "false" to "true".
-        if ! BU.Main.Status.CheckStatIsBackupEchoing; then
-            local v_BU_MAIN_STAT_ECHO_val="${__BU_MAIN_STAT_ECHO}"; BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "${BASH_SOURCE[0]}" "${LINENO}";
+        BU.Main.Status.ChangeSTAT_ECHO "true" 'main' "${BASH_SOURCE[0]}" "${LINENO}";
+    fi
+
+	BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}" "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}" "f" || { BU.Main.Echo.__EchoCPLS "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Unable to create the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}") debug log file" 'E' "CPLS"; BU.Main.Errors.Exit 1; return "${?}"; }
+
+	BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
+
+    if [ "${p_context,,}" == "begin" ]; then
+        BU.Main.Echo.__EchoVoid;
+
+        if [ "${p_type^^}" == "E" ]; then
+            BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || {
+                BU.Main.Echo.__EchoCPLS \
+                    "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+
+        elif [ "${p_type,,}" == 'm' ]; then
+            BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || {
+                BU.Main.Echo.__EchoCPLS \
+                    "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    
+                return 1;
+            }
+
+        elif [ "${p_type^^}" == 'N' ]; then
+            BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || {
+                BU.Main.Echo.__EchoCPLS \
+                    "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; 
+
+                return 1;
+            }
+
+        elif [ "${p_type^^}" == 'S' ]; then
+            BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || {
+                BU.Main.Echo.__EchoCPLS \
+                    "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+                    
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+
+        elif [ "${p_type^^}" == 'W' ]; then
+            BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || {
+                BU.Main.Echo.__EchoCPLS \
+                    "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+                    
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
         fi
 
-		BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PARENT}" "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}" "f" || { BU.Main.Echo.__EchoCPLS "$(BU.Main.Decho.Decho.Function "${FUNCNAME[0]}") --> Unable to create the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_NAME}") debug log file" 'E' "CPLS"; BU.Main.Errors.Exit 1; return "${?}"; }
+        BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
 
-		BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
-
-        if [ "${p_context,,}" == "begin" ]; then
-            BU.Main.Echo.__EchoVoid;
-
-            if [ "${p_type^^}" == "E" ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type,,}" == 'm' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" == 'N' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" == 'S' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" == 'W' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}BEGIN DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "BEGIN DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            fi
-
-            BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
-
-            # Reassigning the "${__BU_MAIN_STAT_ECHO}" global status variable's former value.
-            if [ -n "${v_BU_MAIN_STAT_ECHO_val}" ]; then
-                __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}"; v_BU_MAIN_STAT_ECHO_val=''
-            fi
-
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
-
-        elif [ "${p_context,,}" == "end" ]; then
-            if [ "${p_type^^}" == "E" ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type,,}" == 'm' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" == 'N' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" == 'S' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            elif [ "${p_type^^}" == 'W' ]; then
-                BU.Main.Echo.__EchoCPLS "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1; }
-            fi
-
-            BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
-
-            # Reassigning the "${__BU_MAIN_STAT_ECHO}" global status variable's former value.
-            if [ -n "${v_BU_MAIN_STAT_ECHO_val}" ]; then
-                __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}"; v_BU_MAIN_STAT_ECHO_val='';
-            fi
-
-            BU.Main.Echo.__EchoVoid; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        # Reassigning the "${__BU_MAIN_STAT_ECHO}" global status variable's former value.
+        if [ -n "${v_BU_MAIN_STAT_ECHO_val}" ]; then
+            __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}"; v_BU_MAIN_STAT_ECHO_val=''
         fi
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+
+    elif [ "${p_context,,}" == "end" ]; then
+        if [ "${p_type^^}" == "E" ]; then
+            BU.Main.Echo.__EchoCPLS \
+                "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { 
+                    BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+        
+        elif [ "${p_type,,}" == 'm' ]; then
+            BU.Main.Echo.__EchoCPLS \
+                "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { 
+                    BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+        
+        elif [ "${p_type^^}" == 'N' ]; then
+            BU.Main.Echo.__EchoCPLS \
+                "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { 
+                    BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+        
+        elif [ "${p_type^^}" == 'S' ]; then
+            BU.Main.Echo.__EchoCPLS \
+                "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { 
+                    BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+                    
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+        
+        elif [ "${p_type^^}" == 'W' ]; then
+            BU.Main.Echo.__EchoCPLS \
+                "${__BU_MAIN_COLOR_TXT_}END DEBUGGING TEXT : ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" > "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}" || { 
+                    BU.Main.Echo.__EchoCPLS "In $(BU.Main.Args.PrintFFL "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}") --> Unable to write the $(BU.Main.Decho.Decho "END DEBUGGING TEXT") debug test in the $(BU.Main.Decho.Decho.Path "${__BU_MAIN_PROJECT_ECHO_OUTPUT_FILE_PATH}") file";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
+            }
+        fi
+
+        BU.Main.Headers.DrawLine "${__BU_MAIN_TXT_CHAR_HEADER_LINE}" '' "$(( 24 + v_strlen ))";
+
+        # Reassigning the "${__BU_MAIN_STAT_ECHO}" global status variable's former value.
+        if [ -n "${v_BU_MAIN_STAT_ECHO_val}" ]; then
+            __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}";
+
+            v_BU_MAIN_STAT_ECHO_val='';
+        fi
+
+        BU.Main.Echo.__EchoVoid;
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     fi
 }
+
+## ==============================================
+
+
+
+# /////////////////////////////////////////////////////////////////////////////////////////////// #
+
+#### TEXT DISPLAYING
+#### DEBUG ID : "bu::main::echo::text-displaying"
+
+declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="bu::main::echo::text-displaying";
+
+## BASIC WRITING FUNCTIONS
+## DEBUG ID : "basic-writing-functions"
+
+declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__BASIC_WRITING_FUNCTIONS="${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}::basic-writing-functions";
 
 # ····················································································································
 # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
@@ -571,19 +679,180 @@ function BU.Main.Echo.__EchoCPLS()
     done
    # if (( $(echo "${num1} > ${num2}" |bc -l) ));
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
+# ···············································································
+# Writing, redirecting and displaying a basic message with its associated colors.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - local     |
+#   - shift     |
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Args.GetFuncArgsArrayValues()     -> Main -> Args.lib
+
+#   - BU.Main.Echo.__EchoCPLS()                 -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.__EchoOutput()               -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib (this file)
+#   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib (this file)
+
+#   - BU.Main.Status.CheckProjectLogStatus()    -> Main -> Status.lib
+#   - BU.Main.Status.CheckStatIsBackupEchoing() -> Main -> Status.lib
+
+#   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
+#   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
+
+
+# shellcheck disable=
+function BU.Main.Echo.WriteMessage()
+({
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING}" \
+        "${__BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CONTEXT_MESSAGE}";
+
+    #**** Parameters ****
+    local p_string=${1:-$'\0'};	# ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : String to print and / or redirect to the log file.
+    local p_option=${2:-$'\0'}; # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC : "$(echo)" command options (it is a string, since the "BU.Main.Status.CheckProjectLogStatus()" function accepts a '-' before the option).
+    shift 2;
+
+    local pa_extraArgs=("${@}"); # ARG TYPE : Array     - OPTIONAL | DEFAULT VAL : NULL     - DESC : More processing arguments (like the processing of a whole line-long string) for the "BU.Main.Checkings.CheckProjectLogStatus()" or the "BU.Main.Echo.__EchoCPLS()" functions.
+
+    #**** Variables ****
+    local v_colorToDisplay;      # VAR TYPE : CMD       - DESC : Storing the command substitution suitable to the parent function.
+    local v_echoError;           # VAR TYPE : Int       - DESC : Storing a '1' value if an error occurs when the framework is initializing.
+    local v_isParentFuncValid;   # VAR TYPE : Bool      - DESC : Checking if the parent function's name has the 'Error', 'Msg', 'Newstep', 'Success' or 'Warning' sub-string following the "Bu.Main.Echo." sub-string.
+    local v_strParentFunc;       # VAR TYPE : String    - DESC : Storing the name of the parent function, and gathering the first letter of the rean function name after cutting the "BU.Main.Echo." sub-string.
+    local v_strTab;              # VAR TYPE : String    - DESC : Printing twice the content of the "${__BU_MAIN_TXT_PRINT_TAB}" global variable if the parent function's name has the 'Error', 'Msg', 'Newstep', 'Success' or 'Warning' sub-string following the "Bu.Main.Echo." sub-string.
+
+    #**** Sub-functions ****
+
+    # ················································································································································
+    # Repeating the calls of the "BU.Main.Echo.__EchoOutput()" function and managing its failsafes in a single place, in order to have a cleaner code.
+
+    # shellcheck disable=
+    function BU.Main.Echo.WriteMessage.CallEchoOutput()
+    {
+        #**** Parameters ****
+        local p_val="${1:-}";  # ARG TYPE : String - REQUIRED | DEFAULT VAL : 1    - DESC : Return code of the previous command's call.
+
+        #**** Code ****
+        if [ "${v_isParentFuncValid,,}" == 'true' ]; then
+            BU.Main.Echo.__EchoOutput "${p_string}" "${p_val}" "${v_strParentFunc}" || {
+                local C="${?}";
+
+                [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return "${C}";
+            }
+    }
+
+    #**** Code ****
+    BU.Main.Args.GetFuncArgsArrayValues "${FUNCNAME[0]}" "${pa_extraArgs[@]}";
+
+    # If the framework is still initializing when an error occurs (decided by the call of the "BU.Main.Echo.Error()" function).
+    if [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ]; then
+        BU.ModuleInit.SetInitErrorMsg;
+
+        v_echoError='1';
+    fi
+
+    # Setting the correct color to display according to the name of the parent function.
+    if      [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ];   then
+        v_colorToDisplay="${__BU_MAIN_COLOR_TXT_ERROR}";
+        v_isParentFuncValid='true';
+
+    elif    [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Msg' ];     then
+        # Please leave this variable empty, as no specific color is natively displayed by this parent function.
+        # Any text display function calling this parent function can display a custom color, however.
+        v_colorToDisplay='';
+        v_isParentFuncValid='true';
+
+    elif    [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Newstep' ]; then
+        v_colorToDisplay="${__BU_MAIN_COLOR_TXT_NEWSTEP}";
+        v_isParentFuncValid='true';
+
+    elif    [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Success' ]; then
+        v_colorToDisplay="${__BU_MAIN_COLOR_TXT_SUCCESS}";
+        v_isParentFuncValid='true';
+
+    elif    [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Warning' ]; then
+        v_colorToDisplay="${__BU_MAIN_COLOR_TXT_WARNING}";
+        v_isParentFuncValid='true';
+
+    else
+        # Please leave this variable empty, as no specific parent function has called this very function.
+        v_colorToDisplay='';
+        v_isParentFuncValid='false';
+    fi
+
+    # Removing the "BU.Main.Echo." sub-string from the parent function's name.
+    if [ "${v_isParentFuncValid,,}" == 'true' ]; then
+        BU.Main.Text. "${v_strParentFunc}" '';
+    fi
+
+    # Cutting the remaining text following the first letter of the new string.
+    BU.Main.Text.GetFirstCharacter "${v_strParentFunc}";
+
+    BU.Main.Echo.WriteMessage.CallEchoOutput 'Begin' || return "${?}";
+
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
+    if ! BU.Main.Status.CheckStatIsBackupEchoing; then
+
+    else
+
+    fi
+
+    #
+    [ "${v_isParentFuncValid,,}" == 'true' ] && BU.Main.Echo.__EchoOutput "${p_string}" 'begin' "${v_strParentFunc}" || {
+        local C="${?}";
+
+        [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+        return "${C}";
+    }
+
+
+    # OLD CODE
+    if ! BU.Main.Status.CheckStatIsBackupEchoing; then
+        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+        BU.Main.Status.CheckProjectLogStatus "${v_colorToDisplay}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+    # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
+    else
+        BU.Main.Echo.__EchoOutput "${p_string}" 'begin' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+        BU.Main.Echo.__EchoCPLS "${v_colorToDisplay}${__BU_MAIN_TXT_PRINT_TAB}${__BU_MAIN_TXT_PRINT_TAB} ${p_string}${__BU_MAIN_COLOR_TXT_RESET}" "${p_option}" "${pa_extraArgs[@]}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+
+        BU.Main.Echo.__EchoOutput "${p_string}" 'end' 'E' || { local C="${?}"; [ -n "${v_echoError}" ] && BU.ModuleInit.UnsetInitErrorMsg; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
+    fi
+
+    # Restoring the former value of the "${__BU_MODULE_INIT_MSG_ARRAY_PERMISSION}" global variable.
+    [ "${FUNCNAME[1]}" == 'BU.Main.Echo.Error' ] && [ -n "${VEchoError}" ] && BU.ModuleInit.UnsetInitErrorMsg;
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
+})
+
 ## ==============================================
-
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////// #
-
-#### TEXT DISPLAYING
-#### DEBUG ID : "bu::main::echo::text-displaying"
-
-declare -r __BU_MAIN_ECHO_LIB__CAT_DEBUG_ID__TEXT_DISPLAYING="bu::main::echo::text-displaying";
 
 ## DISPLAYING A CONTEXT MESSAGE
 ## DEBUG ID : displaying-a-context-message

@@ -199,7 +199,7 @@ function BU.DevBin.LibDebug.Function.CommentOrUncomment()
 
 				# Getting the number of occurences of
 				v_has_4_commented_spaces_oc="$(grep -c '^[[:space:]][[:space:]][[:space:]][[:space:]]BU\.Main\.Echo\.Debug[[:space:]]*\\' "${p_file}" | wc -l)";
-				echo "${v_has_4_commented_spaces_oc}"
+				echo "${v_has_4_commented_spaces_oc}";
 			fi
 
 #  			if grep -Eo "${v_8_uncommented_spaces}" "${p_file}" | wc -l; then

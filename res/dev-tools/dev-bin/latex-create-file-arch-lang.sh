@@ -387,7 +387,7 @@ for __lang in "${__BU__BIN__LCFAL__ARGS__LANG_ARRAY[@]}"; do
     # Assigning the the "${__BU__BIN__LCFAL__GLOBVARS__PATHS__LATEX_FILES_ARCH[@]}" array's indexes to the "${__BU__BIN__LCFAL__GLOBVARS__PATHS__LATEX_FILES_ARCH__LANG[@]}" array.
     __BU__BIN__LCFAL__GLOBVARS__PATHS__LATEX_FILES_ARCH__LANG+=("${__BU__BIN__LCFAL__GLOBVARS__PATHS__LATEX_FILES_ARCH[@]}");
 
-    # Replacing every "Bash-utils/docs/en/" occurences by "Bash-utils/docs/${__lang}/"
+    # Replacing every "Bash-utils/docs/en/" occurences by "Bash-utils/docs/${__lang}/".
     for ((i=0; i<"${#__BU__BIN__LCFAL__GLOBVARS__PATHS__LATEX_FILES_ARCH__LANG[@]}"; i++)); do
 
         __BU__BIN__LCFAL__GLOBVARS__PATHS__LATEX_FILES_ARCH__LANG["${i}"]="$(BU.Main.Text.ReplaceLettersInString \

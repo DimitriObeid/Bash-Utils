@@ -23,7 +23,7 @@
 ## BASH UTILS
 
 # Temporarily commented, as the feature is not yet implemented . In the future, every dev-tools scripts will use a stable compiled version.
-# source "${HOME}/.Bash-utils/compiled/stable/framework-full.sh"
+# source "${HOME}/.Bash-utils/compiled/stable/framework-full.sh";
 
 # if ! BashUtils_InitModules \
 #    "module --log-shut --mode-log-partial" \
@@ -54,7 +54,7 @@
 # DEFAULT VAL : NULL
 
 # DESC 1 : String containing the list of languages to select as translation for each compiled scripts.
-# DESC 2 : This argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh"
+# DESC 2 : This argument must be provided in a single string like that, if you want to compile the project in English, French, Spanish, Swedish, Ukrainian and Chinese : "lang=en,fr,es,sv,uk,zh".
 declare -gr __BU__BIN__LIB_COMPILER_V4__ARGS__LANG_LIST_STR_TO_ARRAY=${1:-$'\0'};
 
 shift 1;
@@ -173,7 +173,7 @@ declare -g      __YELLOW;
     readonly    __YELLOW;
 
 # Defining some colors for specific text decoration.
-declare -gr __CMDS="${__GREY}"
+declare -gr __CMDS="${__GREY}";
 
 declare -gr __ERROR="${__RED}";
 
@@ -875,7 +875,7 @@ function LibCompilerV4.Functions.CompilerUsage()
     echo;
 
     # Optional options.
-    echo -n "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}"
+    echo -n "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS}";
     echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_AUTHORS}";
 
     echo "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS__COMPILATION_VERSION}";
@@ -969,7 +969,7 @@ function LibCompilerV4.PreCompilationFunctions.OptionalArgumentsArrayLooping()
 
     local _____value_of__display='--display';
 
-    local _____value_of__help='--help'
+    local _____value_of__help='--help';
 
     # If this value is passed as optional argument, the '--keep-functions(-pvc)-infos' parameters will not be processed.
     local _____value_of__keep_comments='--keep-comments';
@@ -2142,15 +2142,15 @@ function LibCompilerV4.CompileInSingleFile()
                     if [ "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}" == "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" ]; then
                         LibCompilerV4.Functions.PrintWarningLine \
                             "$(printf \
-                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED}"
-                                "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")"
+                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__EVERY_FILES_NOT_CHMODED}" \
+                                "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")" \
                             'FULL';
                     else
                         LibCompilerV4.Functions.PrintWarningLine \
                             "$(printf \
-                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED}"
-                                "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}"
-                                "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")"
+                                "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__COPY_COMPILED_FILE_IN_STABLE_DIRECTORY__CHMOD__WARNING__MULTIPLE_FILES_NOT_CHMODED}" \
+                                "${#__BU_ARRAY__READ_ONLY_FAILED_FILES[@]}" \
+                                "${#__BU_ARRAY__COMPILED_STABLE_FILES_LIST[@]}")" \
                             'FULL';
                     fi
                 fi
@@ -2181,7 +2181,7 @@ function LibCompilerV4.CompileInSingleFile()
 }
 
 # Debug
-# echo "${0##*/}"
+# echo "${0##*/}";
 
 if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then
 

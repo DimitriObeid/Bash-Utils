@@ -157,7 +157,7 @@ function LatexCreateDoc_ListLanguages()
     BU.Main.Echo.Newstep "Currently supported languages --> English (en), French (fr)";
 
     for i in "${__LATEX_CREATE_DOC__SUPPORTED_LANGUAGES[@]}"; do
-        echo "  - ${i}"
+        echo "  - ${i}";
     done
 }
 
@@ -291,7 +291,7 @@ else
 
     __
 
-	# BU.Main.Files.Make "${__folder_path}" "${__read_doc_name}.tex" && BU.Main.Echo.Success "Your LaTeX file ($(BU.Main.Decho.Decho.Path "${__tex_full_path}")) was successfully created."
+	# BU.Main.Files.Make "${__folder_path}" "${__read_doc_name}.tex" && BU.Main.Echo.Success "Your LaTeX file ($(BU.Main.Decho.Decho.Path "${__tex_full_path}")) was successfully created.";
     lineno_case_copy_file="${LINENO}"; case "${__read_folder_code}" in
         1) BU.Main.Files.MakePath "${__tex_full_path}"; cat "${__LATEX_CREATE_DOC__RES_DIR}/${__read_lang}/packages.txt" > "${__tex_full_path}"; cat "${__LATEX_CREATE_DOC__RES_DIR}/${__read_lang}/master.txt" >> "${__tex_full_path}";;
         2) BU.Main.Files.MakePath "${__tex_full_path}"; cat "${__LATEX_CREATE_DOC__RES_DIR}/${__read_lang}/packages.txt" > "${__tex_full_path}"; cat "${__LATEX_CREATE_DOC__RES_DIR}/${__read_lang}/module-general.txt" >> "${__tex_full_path}";;

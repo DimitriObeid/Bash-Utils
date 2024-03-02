@@ -237,7 +237,7 @@ for filepath in "${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBARRAYS[@]}"; do
     # Modifying the relative path to the "00 DATA" folder.
     sed -i \
         "s|${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__O_00DATA_PATH_VAL}|${__BU__BIN__LATEX_CONVERT_TO_PRINTABLE__GLOBVARS__STRINGS__N_00DATA_PATH_VAL}|g" \
-        "${filepath}"
+        "${filepath}";
 
 done
 

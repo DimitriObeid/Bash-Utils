@@ -2460,7 +2460,7 @@ function BU.ModuleInit.PrintLog()
     # Removing the extra whitespace with the dash.
     v_tmp_file="$(printf "%s" "${__BU_MODULE_INIT__ROOT}/$(date +"%Y-%m-%d %H:%M:%S")")___${v_str_randomizer}.tmp"; shopt -u extglob;
 
-    BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__PRINTLOG__HERE}" '#' 'echo'; echo
+    BU.ModuleInit.MsgLine "${__BU_MODULE_INIT_MSG__PRINTLOG__HERE}" '#' 'echo'; echo;
 
     # If no value is stored in the log messages array, then the log messages display procedure is cancelled.
     if [ -z "${__BU_MODULE_INIT_MSG_ARRAY[*]}" ] || [ ${#__BU_MODULE_INIT_MSG_ARRAY[@]} -eq 0 ]; then
