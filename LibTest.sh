@@ -106,6 +106,9 @@ BU.Main.Echo.Msg "Résultat : $(BU.Main.Text.DeleteLettersInString "BU.Main.Echo
 
 BU.Main.Echo.Error "Test de l'appel de la fonction \"BU.Main.Echo.WriteMessage()\" via la fonction \"BU.Main.Echo.Error()\"";
 
+BU.Main.Echo.Msg "Test de l'appel de la fonction \"BU.Main.Echo.Msg()\" sans l'option \"nodate\"" '';
+BU.Main.Echo.Msg "Test de l'appel de la fonction \"BU.Main.Echo.Msg()\" avec l'option \"nodate\"" '' 'nodate';
+
 # This command pauses the script, in order to see how much memory it uses.
 # sleep 1
 
