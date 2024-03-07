@@ -1615,10 +1615,26 @@ function BU.Main.Status.CheckProjectLogStatus()
     # shellcheck disable=
     function BU.Main.Checkings.CheckProjectLogStatus.FormatString()
     {
+        #**** Variables ****
+        local v_arrToStr;   # Var type : CMD    # DESC : Converts the "${pa_extraArgs}" array in a string in order to look at incompatible values in an optimized way.
+
         #**** Code ****
+        v_arrToStr="$(IFS="|"; echo "${pa_extraArgs[*]}")";
+
+        # Handling every incompatible values at the first loop iteration.
+        if [[ "${v_arrToStr,,}" =~ 'nolog' && "${v_arrToStr,,}" =~ 'nodate' ]]; then
+                    
+            # Deleting the 'nodate' value from the array, since the 'nolog' value also deletes the same pattern --> [ INFO ].
+            mapfile -t pa_extraArgs < <(printf "%s\n" "${pa_extraArgs[@]}" | grep -i -v 'nodate')
+        fi
+
         for opt in "${pa_extraArgs[@]}"; do
-            # If the "nodate" option is passed to the "${opt}" key (the current date must not be written before the string to print).
-            if [ "${opt,,}" == 'nodate' ]; then
+            # If the "nolog" option is passed to the "${opt}" key (any log information mustn't be written before the string to print).
+            if      [ "${opt,,}" == 'nolog' ]; then
+                p_string="$(BU.Main.Text.CutLogInfoFromString "${p_string}")";
+
+            # Else, if the "nodate" option is passed to the "${opt}" key (the current date must not be written before the string to print).
+            elif    [ "${opt,,}" == 'nodate' ]; then
                 p_string="$(BU.Main.Text.CutLogDateFromString "${p_string}")";
             else
                 echo "${FUNCNAME[0]}() --> ${FUNCNAME[1]}() : ${opt} is not a supported option" >&2;
@@ -1653,6 +1669,7 @@ function BU.Main.Status.CheckProjectLogStatus()
             fi
         done
 
+        # Printing the formatted string according to the "$(echo)" command's options.
         if [[ "${p_option}" == ?(-)n ]]; then
             echo -ne "${p_string}";
         else

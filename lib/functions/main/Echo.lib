@@ -478,7 +478,7 @@ function BU.Main.Echo.__EchoOutput()
 
         # Reassigning the "${__BU_MAIN_STAT_ECHO}" global status variable's former value.
         if [ -n "${v_BU_MAIN_STAT_ECHO_val}" ]; then
-            __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}"; v_BU_MAIN_STAT_ECHO_val=''
+            __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}";
         fi
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -542,8 +542,6 @@ function BU.Main.Echo.__EchoOutput()
         # Reassigning the "${__BU_MAIN_STAT_ECHO}" global status variable's former value.
         if [ -n "${v_BU_MAIN_STAT_ECHO_val}" ]; then
             __BU_MAIN_STAT_ECHO="${v_BU_MAIN_STAT_ECHO_val}";
-
-            v_BU_MAIN_STAT_ECHO_val='';
         fi
 
         BU.Main.Echo.__EchoVoid;
