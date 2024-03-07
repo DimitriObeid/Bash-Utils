@@ -33,7 +33,7 @@ separate_number_every_x_digits() {
     # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     # Formatting the whole part into groups of X digits.
 
-    #
+    # Storing the newly reformatted integer part of the number being formatted.
     formatted_integer="";
 
     # Initialization of the counter of digits into a group.
@@ -67,6 +67,8 @@ separate_number_every_x_digits() {
     fi
 
     echo "${formatted_number}";
+
+    return 0;
 }
 
 # Using the function.

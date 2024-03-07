@@ -3,7 +3,7 @@
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
 34e12c7047622accd1a91f11d8280b05 Bash-utils/install/Bash-utils-init.sh
 ddb69726ae8f77376515a70b6e00d255 Bash-utils/lib/functions/main/Args.lib
-706a53809cb7d6615ead57049bb9042d Bash-utils/lib/functions/main/BasicMaths.lib
+397551c0156f569f259f44f5cfc81461 Bash-utils/lib/functions/main/BasicMaths.lib
 76cbaa91c7b475391098c6032848373c Bash-utils/lib/functions/main/Checkings.lib
 d1f7be27ba43d0238d1b19ab90fb8371 Bash-utils/lib/functions/main/CMDS.lib
 5dc819229026eda8160bf69ed3366506 Bash-utils/lib/functions/main/Decho.lib
