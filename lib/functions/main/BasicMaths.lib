@@ -297,14 +297,16 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMBER_FORMAT
 # shellcheck disable=
 function BU.Main.BasicMaths.SeparateNumberEveryXDigits()
 {
-    # This function call makes it easier for the user to find the current function and its executed
-    # content if it is called during the execution of the main script with the "$(bash -x)" command.
-    BU.Main.Echo.Debug \
-        "main" \
-        "$(basename "${BASH_SOURCE[0]}")" \
-        "${FUNCNAME[0]}" \
-        "${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}" \
-        "${__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS}";
+    if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+        # This function call makes it easier for the user to find the current function and its executed
+        # content if it is called during the execution of the main script with the "$(bash -x)" command.
+        BU.Main.Echo.Debug \
+            "main" \
+            "$(basename "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "${__BU_MAIN_BASICMATHS_LIB__CAT_DEBUG_ID__CONVERSIONS}" \
+            "${__BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVERSIONS}";
+    fi
 
     #**** Parameters ****
     local num=${1};            # ARG TYPE : Float   - REQUIRED | DEFAULT VAL : NULL - DESC : Number to format.
@@ -330,15 +332,18 @@ function BU.Main.BasicMaths.SeparateNumberEveryXDigits()
         separator=',';
     fi
 
-    # Extracting the integer part and the decimal part.
-    integer_part=$(echo "${num}" | cut -d '.' -f 1);
-    decimal_part=$(echo "${num}" | cut -d '.' -f 2);
+    # Calling the "BU.Main.Text.GetSubStringOccurences()" function in order to avoid storing the integer part in the unecessary "${decimal_part}" variable.
+    if BU.Main.Text.GetSubStringOccurences "${num}" '.' > /dev/null; then
+        # Extracting the integer part.
+        integer_part="${num}";
+    else
+        # Extracting the integer part and the decimal part.
+        integer_part=$(echo "${num}" | cut -d '.' -f 1);
+        decimal_part=$(echo "${num}" | cut -d '.' -f 2);
+    fi
 
     # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     # Formatting the whole part into groups of X digits.
-
-    # Storing the newly reformatted integer part of the number being formatted.
-    formatted_integer="";
 
     # Initialization of the counter of digits into a group.
     count=0;
@@ -348,6 +353,8 @@ function BU.Main.BasicMaths.SeparateNumberEveryXDigits()
 
     # While the main number's first digit is not processed yet, every digit composing the aforementioned number will be grouped.
     while [ "${i}" -ge 0 ]; do
+
+        # Storing the newly reformatted integer part of the number being formatted.
         formatted_integer="${integer_part:$i:1}$formatted_integer";
         count=$((count + 1));
 
@@ -372,7 +379,7 @@ function BU.Main.BasicMaths.SeparateNumberEveryXDigits()
 
     echo "${formatted_number}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    ! BU.DevBin.LibCompiler.Function.IsCompiler && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
     return 0;
 }

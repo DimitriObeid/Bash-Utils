@@ -865,7 +865,20 @@ function BU.Main.Text.GetCharacterOccurences()
     local v_occurences="${p_string//[^${p_target}]}";
 
     #**** Code ****
-    if ! BU.Main.Args__Text.GetCharacterOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${?}"; fi
+    if ! BU.Main.Args__Text.GetCharacterOccurences \
+        "${p_string}" \
+        "${p_target}" \
+        "$(basename \
+            "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${?}";
+    fi
 
     echo -ne "${#v_occurences}";
 
@@ -1281,7 +1294,20 @@ function BU.Main.Text.GetSubStringOccurences()
 
     #**** Code ****
     if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]] && ! BU.DevBin.LibCompiler.Function.IsCompiler; then
-        if ! BU.Main.Args__Text.GetSubStringOccurences "${p_string}" "${p_target}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+        if ! BU.Main.Args__Text.GetSubStringOccurences \
+            "${p_string}" \
+            "${p_target}" \
+            "$(basename \
+                "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "${LINENO}";
+        then
+            local C="${?}";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return "${C}";
+        fi
     fi
 
 	# https://stackoverflow.com/a/50601141

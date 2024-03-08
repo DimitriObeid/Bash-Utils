@@ -3,7 +3,7 @@
 e33c1efcb592e91855a2d4d15c3c7f6e Bash-utils/install/.Bash-utils/config/initializer/Status.conf
 34e12c7047622accd1a91f11d8280b05 Bash-utils/install/Bash-utils-init.sh
 ddb69726ae8f77376515a70b6e00d255 Bash-utils/lib/functions/main/Args.lib
-397551c0156f569f259f44f5cfc81461 Bash-utils/lib/functions/main/BasicMaths.lib
+809fcee21205a5be57c3caca77779483 Bash-utils/lib/functions/main/BasicMaths.lib
 76cbaa91c7b475391098c6032848373c Bash-utils/lib/functions/main/Checkings.lib
 d1f7be27ba43d0238d1b19ab90fb8371 Bash-utils/lib/functions/main/CMDS.lib
 5dc819229026eda8160bf69ed3366506 Bash-utils/lib/functions/main/Decho.lib
@@ -21,7 +21,7 @@ a4fb8747df615fb16e45360c2a7e0071 Bash-utils/lib/functions/main/OS.lib
 b4c5e64d4ec079dfaf89e61131582adb Bash-utils/lib/functions/main/PosixTerm.lib
 3a59fbe3c101ead32173e7501216020b Bash-utils/lib/functions/main/Status.lib
 d12524baafe98701705491e0b8de9ec2 Bash-utils/lib/functions/main/TextFormat.lib
-d298c85e716a3c16b0e7813124f67dd0 Bash-utils/lib/functions/main/Text.lib
+5278e1973367675ed57153ba18571e24 Bash-utils/lib/functions/main/Text.lib
 0ee7544536e1fa791f5832c2a11c1e09 Bash-utils/lib/functions/main/Time.lib
 d9faf45490d7f437491a2a5b61061baa Bash-utils/lib/functions/main/Usage.lib
 08a7326382857595e6ac1c017d1abd06 Bash-utils/install/.Bash-utils/config/modules/main/Aliases.conf

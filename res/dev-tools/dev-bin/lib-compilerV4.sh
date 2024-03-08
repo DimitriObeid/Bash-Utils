@@ -285,6 +285,10 @@ declare -gr __BU_MODULE_INIT_CONFIGS_PATH="${__BU__BIN__LIB_COMPILER_V4__GLOBVAR
 # Path to the modules initialization script's translations files.
 declare -gr __BU_MODULE_INIT_TRANSLATIONS_PATH="${__BU_MODULE_INIT_CONFIGS_PATH}/locale";
 
+# Sourcing the "BasicMaths.lib" file in order to use the "BU.Main.BasicMaths.SeparateNumberEveryXDigits()" function.
+# shellcheck disable=SC1091
+source "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/BasicMaths.lib";
+
 # Sourcing the "DevTools.lib" file in order to use the "BU.Main.DevTools.ShellcheckVerif()" function.
 # shellcheck disable=SC1091
 source "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__PATHS__BASH_UTILS_ROOT_DIR}/lib/functions/main/DevTools.lib";
@@ -1925,10 +1929,10 @@ function LibCompilerV4.CompileInSingleFile()
         printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__STATS}\n" "${__compiled_file_path}"; echo;
 
         printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__BYTES}\n" "$(LibCompilerV4.Functions.BytesToHuman "$(wc -c < "${__compiled_file_path}")" 'NULL' 1000 "${____sys_lang}")";
-        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__CHARS}\n" "$(wc -m < "${__compiled_file_path}")";
-        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__LINES}\n" "$(wc -l < "${__compiled_file_path}")";
-        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__WIDTH}\n" "$(wc -L < "${__compiled_file_path}")";
-        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__WORDS}\n" "$(wc -w < "${__compiled_file_path}")";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__CHARS}\n" "$(BU.Main.BasicMaths.SeparateNumberEveryXDigits "$(wc -m < "${__compiled_file_path}")" ' ' 3)";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__LINES}\n" "$(BU.Main.BasicMaths.SeparateNumberEveryXDigits "$(wc -l < "${__compiled_file_path}")" ' ' 3)";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__WIDTH}\n" "$(BU.Main.BasicMaths.SeparateNumberEveryXDigits "$(wc -L < "${__compiled_file_path}")" ' ' 3)";
+        printf "${__BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__LOCALIZED_FILE__WORDS}\n" "$(BU.Main.BasicMaths.SeparateNumberEveryXDigits "$(wc -w < "${__compiled_file_path}")" ' ' 3)";
 
         # Exiting the script's loop after the compilation of the multi-language file.
         if [ -n "${__vMandatoryArgLangInclude}" ] && [ -z "${__vArrayVal_compile_stable}" ]; then break; fi
