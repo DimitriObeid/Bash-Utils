@@ -1,0 +1,9 @@
+Functions from the main module to rewrite from scratch :
+    - BU.Main.Checkings.CheckProjectLogStatus()
+    - BU.Main.Decho.Decho()
+    - BU.Main.Echo.__EchoCPLS()
+    - BU.Main.Echo.HandleSmalleErrors()
+    - BU.Main.Echo.HandleErrors()
+
+Functions from the main module to check if they are really necessary :
+    - BU.Main.Args.GetFFL()
