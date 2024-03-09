@@ -197,6 +197,30 @@ printf "
 # shellcheck disable=
 function BU.ModuleInit.Exit()                           { local p_code=${1:-1}; BU.ModuleInit.IsInScript && exit "${p_code}"; return "${p_code}"; }
 
+# ···················································································
+# Checking if the script file which runs the Bash code is one of the dev-bin scripts.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   -
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+
+# shellcheck disable=
+function BU.DevBin.X.Function.IsShellScriptFromDevBin()
+{
+    BU.DevBin.LibCompiler.Function.IsCompiler           && return 0;
+    BU.DevBin.LCFAL.Function.IsShellScriptLCFAL         && return 0;
+    BU.DevBin.LibDebug.Function.IsShellScriptLibDebug   && return 0;
+
+    return 1;
+}
+
 # ··········································································································
 # Checking if the script file which runs the Bash code is the "latex-create-file-arch-lang.sh" shell script.
 

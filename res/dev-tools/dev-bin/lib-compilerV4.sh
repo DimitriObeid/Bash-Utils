@@ -2187,6 +2187,10 @@ function LibCompilerV4.CompileInSingleFile()
 # Debug
 # echo "${0##*/}";
 
+# If the compiler isn't executed from the "lib-compiler-for-all-supported-versions.sh" file,
+# then the "LibCompilerV4.CompileInSingleFile()" function is directly called, and the script
+# will be exited with the "$(exit)" command, which is not something wanted for the execution 
+# of this script from the aforementioned file.
 if [[ "${0##*/}" != lib-compiler-for-all-supported-versions.?(ba)sh ]]; then
 
     # Support of the arguments when this script is executed with the mandatory argument and the optional ones.
