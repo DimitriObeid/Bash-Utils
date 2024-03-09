@@ -228,14 +228,20 @@ function BU.DevBin.LCFAL.Function.IsShellScriptLCFAL()
     if [[ "${0##*/}" == latex-create-file-arch-lang.?(ba)sh ]]; then return 0; else return 1; fi
 }
 
-# ······················································································································
-# Bypassing the "command not found" error from the absence of the "BU.DevBin.LibCompiler.Function.IsCompiler()" function
-# into the "BU.Main.Text.ReplaceLettersInString()" function from the "Text.lib" file by only returning the '0' value, as
-# in the "BU.Main.Text.ReplaceLettersInString()" function, the functions from the "Echo.lib" file won't be called if the 
-# "BU.DevBin.LibCompiler.Function.IsCompiler()" function return 0.
+# ···················································································
+# Checking if the script file which runs the Bash code is one of the dev-bin scripts.
+
+# This function simplifies these checkings by avoiding the creation of a new function for each dev-bin script.
 
 # shellcheck disable=
-function BU.DevBin.LibCompiler.Function.IsCompiler() { return 0; }
+function BU.DevBin.X.Function.IsShellScriptFromDevBin()
+{
+    if BU.DevBin.LibCompiler.Function.IsShellScriptLCFAL; then
+        return 0;
+    else
+        return 1;
+    fi
+}
 
 ## ==============================================
 
