@@ -153,7 +153,6 @@ fi
 #   - BU.Hardware.BSD.USB.GetHardwareInfos()            -> Hardware -> BSD -> USB.BSD.lib
 #   - BU.Hardware.BSD.VGA.GetHardwareInfos()            -> Hardware -> BSD -> VGA.BSD.lib
 
-
 # shellcheck disable=
 function BU.Hardware.BSD.General.GetAllHardwareInfos()
 {

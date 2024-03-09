@@ -168,7 +168,6 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
 
-
 # shellcheck disable=
 function BU.Main.Args.PrintBadOption()
 {
@@ -567,7 +566,6 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__ARGUM
 
 #   - BU.ModuleInit.CheckIsDebugging()          -> Modules initializer script
 
-
 # shellcheck disable=
 function BU.Main.Args.GetFuncArgsArrayValues()
 {
@@ -662,7 +660,6 @@ function BU.Main.Args.GetFuncArgsArrayValues()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args.GetFileName()
 {
@@ -717,7 +714,6 @@ function BU.Main.Args.GetFileName()
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args.GetFunctionName()
 {
@@ -770,7 +766,6 @@ function BU.Main.Args.GetFunctionName()
 
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args.GetLineNumber()
@@ -826,7 +821,6 @@ function BU.Main.Args.GetLineNumber()
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Args.GetFFL()
@@ -1065,7 +1059,6 @@ function BU.Main.Args.GetFFL()
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args.PrintFFL()
 {
@@ -1121,7 +1114,6 @@ function BU.Main.Args.PrintFFL()
 
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args.PrintFFLErrorOccured()
@@ -1197,7 +1189,6 @@ function BU.Main.Args.PrintFFLErrorOccured()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args.Argc()
@@ -1490,7 +1481,6 @@ function BU.Main.Args.X()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args.GetArgc-FFL()
 {
@@ -1546,7 +1536,6 @@ function BU.Main.Args.GetArgc-FFL()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Checkings.CheckProjectRelatedFile()
@@ -1683,7 +1672,6 @@ function BU.Main.Args__Checkings.CheckProjectRelatedFile()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__CMDS.GetCommandPath()
 {
@@ -1760,7 +1748,6 @@ function BU.Main.Args__CMDS.GetCommandPath()
 
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Decho.Decho()
@@ -1860,7 +1847,6 @@ function BU.Main.Args__Decho.Decho()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Directories.ProcessingDir()
@@ -1972,7 +1958,6 @@ function BU.Main.Args__Directories.ProcessingDir()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Directories.OverwriteDir()
 {
@@ -2056,7 +2041,6 @@ function BU.Main.Args__Directories.OverwriteDir()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Directories.Make()
@@ -2164,7 +2148,6 @@ function BU.Main.Args__Directories.Make()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Directories.MakePath()
 {
@@ -2256,7 +2239,6 @@ function BU.Main.Args__Directories.MakePath()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Directories.GetDirectoryName()
 {
@@ -2322,7 +2304,6 @@ function BU.Main.Args__Directories.GetDirectoryName()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Directories.GetDirectoryPath()
 {
@@ -2387,7 +2368,6 @@ function BU.Main.Args__Directories.GetDirectoryPath()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Directories.GetParentDirectoryName()
@@ -2455,7 +2435,6 @@ function BU.Main.Args__Directories.GetParentDirectoryName()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Directories.GetParentDirectoryPath()
@@ -2567,7 +2546,6 @@ function BU.Main.Args__Directories.GetParentDirectoryPath()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Files.ProcessingFile()
 {
@@ -2632,7 +2610,6 @@ function BU.Main.Args__Files.ProcessingFile()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Files.OverwriteFile()
@@ -2742,7 +2719,6 @@ function BU.Main.Args__Files.OverwriteFile()
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Files.Make()
@@ -2867,7 +2843,6 @@ function BU.Main.Args__Files.Make()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Files.MakePath()
 {
@@ -2938,7 +2913,6 @@ function BU.Main.Args__Files.MakePath()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Files.SetLastAccess()
@@ -3050,7 +3024,6 @@ function BU.Main.Args__Files.SetLastAccess()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Files.CompressCMD()
 {
@@ -3153,7 +3126,6 @@ function BU.Main.Args__Files.CompressCMD()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Files.CompressFormat()
 {
@@ -3237,7 +3209,6 @@ function BU.Main.Args__Files.CompressFormat()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Files.SearchInArchive()
@@ -3325,7 +3296,6 @@ function BU.Main.Args__Files.SearchInArchive()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Files.UncompressCMD()
@@ -3429,7 +3399,6 @@ function BU.Main.Args__Files.UncompressCMD()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Files.UncompressFormat()
 {
@@ -3525,7 +3494,6 @@ function BU.Main.Args__Files.UncompressFormat()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Filesystem.IsPartitionFull()
 {
@@ -3615,7 +3583,6 @@ function BU.Main.Args__Filesystem.IsPartitionFull()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Filesystem.GetFSInfos()
 {
@@ -3704,7 +3671,6 @@ function BU.Main.Args__Filesystem.GetFSInfos()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Filesystem.Chown()
@@ -3834,7 +3800,6 @@ function BU.Main.Args__Filesystem.Chown()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Filesystem.ChownRec()
@@ -3969,7 +3934,6 @@ function BU.Main.Args__Filesystem.ChownRec()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Locale.PrintLanguageName.Optimize()
@@ -4130,7 +4094,6 @@ function BU.Main.Args__Locale.PrintLanguageName.Optimize()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 {
@@ -4220,7 +4183,6 @@ function BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Text.CutSubStringAfterNthDelim()
@@ -4329,7 +4291,6 @@ function BU.Main.Args__Text.CutSubStringAfterNthDelim()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
 {
@@ -4435,7 +4396,6 @@ function BU.Main.Args__Text.CutSubStringBeforeNthDelim()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Text.DeleteLettersInString()
 {
@@ -4506,7 +4466,6 @@ function BU.Main.Args__Text.DeleteLettersInString()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Text.GetCharacterOccurences()
@@ -4611,7 +4570,6 @@ function BU.Main.Args__Text.GetCharacterOccurences()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Text.GetCharacterOccurencesFromArray()
@@ -4718,7 +4676,6 @@ function BU.Main.Args__Text.GetCharacterOccurencesFromArray()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Text.GetFirstLastCharacter()
 {
@@ -4785,7 +4742,6 @@ function BU.Main.Args__Text.GetFirstLastCharacter()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Text.GetSubStringAfterDelim()
@@ -4894,7 +4850,6 @@ function BU.Main.Args__Text.GetSubStringAfterDelim()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Text.GetSubStringBeforeDelim()
 {
@@ -5000,7 +4955,6 @@ function BU.Main.Args__Text.GetSubStringBeforeDelim()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Args__Text.GetSubStringOccurences()
 {
@@ -5090,7 +5044,6 @@ function BU.Main.Args__Text.GetSubStringOccurences()
 
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Args__Text.StrToWordArray()

@@ -150,7 +150,6 @@ declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS
 
 #   - BU.Main.Errors.HandleSmallErrors()    -> Main -> Errors.lib
 
-
 # shellcheck disable=
 function BU.Main.Headers.DrawLine()
 {
@@ -365,7 +364,6 @@ function BU.Main.Headers.LightDeco()
 #   - BU.Main.Echo.Newline()                -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleSmallErrors()    -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Headers.Base () {

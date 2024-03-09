@@ -153,7 +153,6 @@ fi
 #   - BU.Hardware.Haiku.USB.GetHardwareInfos()          -> Hardware -> Haiku -> USB.Haiku.lib
 #   - BU.Hardware.Haiku.VGA.GetHardwareInfos()          -> Hardware -> Haiku -> VGA.Haiku.lib
 
-
 # shellcheck disable=
 function BU.Hardware.Haiku.General.GetAllHardwareInfos()
 {

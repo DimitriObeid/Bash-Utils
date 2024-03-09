@@ -152,7 +152,6 @@ declare -r __BU_MAIN_CMDS_LIB__SUBCAT_DEBUG_ID__PROCESSING_COMMANDS__GET_COMMAND
 
 # BU.Main.Errors.HandleSmallErrors()        -> Main -> Errors.lib
 
-
 # shellcheck disable=
 function BU.Main.CMDS.GetCommandPath()
 {
@@ -191,7 +190,6 @@ function BU.Main.CMDS.GetCommandPath()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.CMDS.GetCommandReturnOutputValue()

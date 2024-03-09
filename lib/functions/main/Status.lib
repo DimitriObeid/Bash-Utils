@@ -160,7 +160,6 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__CH
 
 #   - BU.Main.Headers.DrawLine()        -> Main -> Headers.lib
 
-
 # shellcheck disable=
 function BU.Main.Status.ConfEcho()
 {
@@ -830,7 +829,6 @@ function BU.Main.Status.CheckSTAT_USER_OS()
 
 #   - BU.Main.Status.CheckSTAT_*()  -> Main -> Status.lib
 
-
 # shellcheck disable=
 function BU.Main.Status.CheckProjectStatusVars()
 {
@@ -1425,7 +1423,6 @@ declare -r __BU_MAIN_STATUS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_FUNCTIONS__EA
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsBackupEchoing()
 {
@@ -1462,7 +1459,6 @@ function BU.Main.Status.CheckStatIsBackupEchoing()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsInitializing()
@@ -1501,7 +1497,6 @@ function BU.Main.Status.CheckStatIsInitializing()
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsLogging()
 {
@@ -1539,7 +1534,6 @@ function BU.Main.Status.CheckStatIsLogging()
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Status.CheckStatIsPrintingInit()
 {
@@ -1576,7 +1570,6 @@ function BU.Main.Status.CheckStatIsPrintingInit()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Status.CheckStatAllowFormatting()

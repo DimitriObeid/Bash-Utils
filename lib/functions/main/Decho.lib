@@ -145,7 +145,6 @@ declare -r __BU_MAIN_DECHO_LIB__SUBCAT_DEBUG_ID__TEXT_WRITING_AND_DECORATION_FOR
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Decho.__Decho()
 {
@@ -199,7 +198,6 @@ function BU.Main.Decho.__Decho()
 #   - BU.Main.TextFormat.Atoi()             -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetBGColor()       -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetTextColor()     -> Main -> TextFormat.lib
-
 
 # shellcheck disable=
 function BU.Main.Decho.Decho()

@@ -783,11 +783,26 @@ function BU.DevBin.LibCompiler.Function.IsCompiler()
      if \
         [[ "${0##*/}" == lib-compilerV?(3|4).?(ba)sh ]] || \
         [[ "${0##*/}" == lib-compiler-for-all-supported-versions.?(ba)sh ]]; 
-    then 
-        return 0; 
+    then
+        return 0;
     else
-        return 1; 
-    fi 
+        return 1;
+    fi
+}
+
+# ···················································································
+# Checking if the script file which runs the Bash code is one of the dev-bin scripts.
+
+# This function simplifies these checkings by avoiding the creation of a new function for each dev-bin script.
+
+# shellcheck disable=
+function BU.DevBin.X.Function.IsShellScriptFromDevBin()
+{
+    if BU.DevBin.LibCompiler.Function.IsCompiler; then
+        return 0;
+    else
+        return 1;
+    fi
 }
 
 ## ==============================================

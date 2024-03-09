@@ -151,7 +151,6 @@ declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PR
 
 #   - BU.Main.Headers.DrawLine()                -> Main -> Headers.lib
 
-
 # shellcheck disable=
 function BU.Main.Directories.ProcessingDir()
 {
@@ -221,7 +220,6 @@ declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__FO
 #	- BU.Main.Echo.Success()		                -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Directories.OverwriteDir()
@@ -302,7 +300,6 @@ function BU.Main.Directories.OverwriteDir()
 
 #   - BU.Main.Headers.DrawLine()                    -> Main -> Headers.lib
 
-
 # shellcheck disable=
 function BU.Main.Directories.Make()
 {
@@ -380,7 +377,6 @@ function BU.Main.Directories.Make()
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Directories.MakePath()
 {
@@ -425,7 +421,6 @@ function BU.Main.Directories.MakePath()
 #   - BU.Main.Errors.HandleErrors()         -> Main -> Errors.lib
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()      -> Main -> Status.lib
-
 
 # shellcheck disable=
 function BU.Main.Directories.MkTmpDir()
@@ -477,7 +472,6 @@ declare -r __BU_MAIN_DIRECTORIES_LIB__SUBCAT_DEBUG_ID__DIRECTORIES_FUNCTIONS__PA
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Directories.GetDirectoryName()
@@ -531,7 +525,6 @@ function BU.Main.Directories.GetDirectoryName()
 
 #   - BU.Main.Errors.HandleErrors()                 -> Main -> Errors.lib
 
-
 # shellcheck disable=
 function BU.Main.Directories.GetDirectoryPath()
 {
@@ -573,7 +566,6 @@ function BU.Main.Directories.GetDirectoryPath()
 #   - BU.Main.Echo.DebugEnd()                               -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleErrors()                         -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Directories.GetParentDirectoryName()
@@ -634,7 +626,6 @@ function BU.Main.Directories.GetParentDirectoryName()
 #   - BU.Main.Errors.HandleErrors()                         -> Main -> Errors.lib
 
 #   - BU.Main.Text.ReverseStringWordsOrder()                -> Main -> Text.lib
-
 
 # shellcheck disable=
 function BU.Main.Directories.GetParentDirectoryPath()
@@ -731,7 +722,6 @@ function BU.Main.Directories.GetParentDirectoryPath()
 #   - BU.Main.Headers.Header.Warning()  -> Main -> Headers.lib
 
 #   - BU.Main.Inputs.Read_DirectoriesTriggerRootDirWarning()    -> Main -> Inputs.lib
-
 
 # shellcheck disable=
 function BU.Main.Directories.TriggerRootDirWarning()

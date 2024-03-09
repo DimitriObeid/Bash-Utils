@@ -207,7 +207,6 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_ARCHITECTURE__CHEC
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
-
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.Is32Bits()
 {
@@ -220,7 +219,6 @@ function BU.Hardware.Linux.CPU.Is32Bits()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
-
 
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.Is64Bits()
@@ -491,7 +489,6 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__CHECKING_TH
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
 
-
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.IsMonocore()
 {
@@ -527,7 +524,6 @@ declare -r __BU_HARDWARE_LINUX_CPU_LIB__SUBCAT_DEBUG_ID__CPUS_CORES__GETTING_THE
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.CMDS.GetCommandPath() -> Main -> CMDS.lib
-
 
 # shellcheck disable=
 function BU.Hardware.Linux.CPU.GetCoresNumber()

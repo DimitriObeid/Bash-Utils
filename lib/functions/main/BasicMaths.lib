@@ -152,7 +152,6 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVE
 #   - BU.Main.Echo.DebugEnd()           -> Main -> Echo.lib
 #   - BU.Main.Echo.Msg()                -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.BasicMaths.BytesToHuman()
 {

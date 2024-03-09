@@ -257,7 +257,6 @@ function BU.Main.Text.CutDashFromOption()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.CutFirstCharacter()
 {
@@ -296,7 +295,6 @@ function BU.Main.Text.CutFirstCharacter()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.CutLastCharacter()
@@ -351,7 +349,6 @@ function BU.Main.Text.CutLastCharacter()
 #   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                            -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.CutSubStringAfterNthDelim()
@@ -434,7 +431,6 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 #   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.CutSubStringBeforeNthDelim()
 {
@@ -504,7 +500,6 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.CutFirstFieldBeforeDelim()
 {
@@ -544,7 +539,6 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.CutLastFieldAfterDelim()
@@ -607,7 +601,7 @@ function BU.Main.Text.DeleteLettersInString()
     local p_replacement=${4:-' '};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : ' '      - DESC : Replacing the former character / sub-string by an empty space (default (' ')) OR deleting them by remplacing them with an empty character ('').
 
     #**** Code ****
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         if ! BU.Main.Args__Text.DeleteLettersInString \
             "${p_string}" \
             "$(basename \
@@ -631,11 +625,23 @@ function BU.Main.Text.DeleteLettersInString()
         return "${C}";
     };
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ···················································
 # Replacing letters and sub-strings in a main string.
+
+
+# \\\\\\\
+# Usage :
+#   - BU.Main.Text.ReplaceLettersInString <string> <delim> <occurences to replace> <>
+
+
+# \\\\\\\\
+# Output :
+#   - A
 
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -648,14 +654,15 @@ function BU.Main.Text.DeleteLettersInString()
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 
-#   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 
+#   - BU.DevBin.X.Function.IsShellScriptFromDevBin()    -> Modules initializer script
 
 # shellcheck disable=
 function BU.Main.Text.ReplaceLettersInString()
 {
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler && ! BU.DevBin.LCFAL.Function.IsShellScriptLCFAL; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         # This function call makes it easier for the user to find the current function and its executed
         # content if it is called during the execution of the main script with the "$(bash -x)" command.
         BU.Main.Echo.Debug \
@@ -679,7 +686,7 @@ function BU.Main.Text.ReplaceLettersInString()
         echo "${p_string/${p_delim}/"${p_replacement}"}";
     fi
 
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler && ! BU.DevBin.LCFAL.Function.IsShellScriptLCFAL; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
     fi
 
@@ -709,7 +716,6 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMA
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.KeepFormatting()
 {
@@ -737,7 +743,9 @@ function BU.Main.Text.KeepFormatting()
 #         echo -ne "<<|| No reformatting precised in the $(BU.Main.Text.ToLowercase "${FUNCNAME[0]}()") function ||>>";
 # 	fi
 
-	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ························
@@ -759,7 +767,6 @@ function BU.Main.Text.KeepFormatting()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.ToLowercase()
 {
@@ -776,7 +783,11 @@ function BU.Main.Text.ToLowercase()
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
 
 	#**** Code ****
-	echo "${p_string}" | tr '[:upper:]' '[:lower:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	echo "${p_string}" | tr '[:upper:]' '[:lower:]';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·························
@@ -798,7 +809,6 @@ function BU.Main.Text.ToLowercase()
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.ToUppercase()
 {
@@ -815,7 +825,11 @@ function BU.Main.Text.ToUppercase()
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
 
 	#**** Code ****
-	echo "${p_string}" | tr '[:lower:]' '[:upper:]'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+	echo "${p_string}" | tr '[:lower:]' '[:upper:]';
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -843,7 +857,6 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTI
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetCharacterOccurences()
@@ -902,7 +915,6 @@ function BU.Main.Text.GetCharacterOccurences()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.GetCharacterOccurencesFromArray()
 {
@@ -939,8 +951,16 @@ function BU.Main.Text.GetCharacterOccurencesFromArray()
     return 0;
 }
 
-# ·························································································
-# Get the very first character of a string, and cut everything that follows this character.
+# ·································································································
+# Getting the very first character of a string, and cutting everything that follows this character.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - echo      |
+#   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -948,7 +968,6 @@ function BU.Main.Text.GetCharacterOccurencesFromArray()
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetFirstCharacter()
@@ -966,13 +985,35 @@ function BU.Main.Text.GetFirstCharacter()
     local p_string=${1:-$'\0'}; # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
 
     #**** Code ****
-    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Text.GetFirstLastCharacter \
+        "${p_string}" \
+        "$(basename \
+            "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        local C="${?}";
 
-    echo "${p_string:0:1}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    fi
+
+    echo "${p_string:0:1}";
+
+    return 0;
 }
 
-# ··························································································
-# Get the very first field of a string, and cut everything that follows the first delimiter.
+# ··································································································
+# Getting the very first field of a string, and cutting everything that follows the first delimiter.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - echo      |
+#   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -980,7 +1021,6 @@ function BU.Main.Text.GetFirstCharacter()
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetFirstFieldBeforeDelim()
@@ -999,15 +1039,39 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
     local p_target=${2:-$'\0'}; # ARG TYPE : Char       - REQUIRED | DEFAULT VAL : NULL     - DESC : Targeted character.
 
     #**** Code ****
-	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims "${p_string}" "${p_delim}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+	if ! BU.Main.Args__Text.CutBeforeAndAfterFirstAndLastDelims \
+        "${p_string}" \
+        "${p_delim}" \
+        "$(basename \
+            "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    fi
 
     echo "${p_string%%"${p_delim}"*}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
-# ··········································································
-# Get the very last character of a string, and cut the preceding characters.
+# ··················································································
+# Getting the very last character of a string, and cutting the preceding characters.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - declare   | (-i)
+#   - echo      |
+#   - local     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1015,7 +1079,6 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetLastCharacter()
@@ -1036,7 +1099,19 @@ function BU.Main.Text.GetLastCharacter()
     declare -i v_length;        # VAR TYPE : Int        - DESC : Storing the length of the character.
 
     #**** Code ****
-    if ! BU.Main.Args__Text.GetFirstLastCharacter "${p_string}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; fi
+    if ! BU.Main.Args__Text.GetFirstLastCharacter \
+        "${p_string}" \
+        "$(basename \
+            "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        local C="${?}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return "${C}";
+    fi
 
     # Getting the number of characters from this string.
     v_length="${#p_string}";
@@ -1044,11 +1119,23 @@ function BU.Main.Text.GetLastCharacter()
     # Printing the wanted character.
     echo "${p_string:$(( v_length - 1 )):1}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·························································································
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
+
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - declare   | (-F)
+#   - echo      |
+#   - local     |
+#   - unset     |
+
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1057,11 +1144,12 @@ function BU.Main.Text.GetLastCharacter()
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
 
+#   - BU.DevBin.X.Function.IsShellScriptFromDevBin()            -> Modules initializer script
 
 # shellcheck disable=
 function BU.Main.Text.GetLastFieldAfterDelim()
 {
-    local __v_functions=('BU.DevBin.LibDebug.Function.IsShellScriptLibDebug');
+    local __v_functions=('BU.DevBin.X.Function.IsShellScriptFromDevBin');
 
     # This method, which uses the previously defined array, allows to avoid the call of too many functions while checking if a condition is valid or not.
     for func in "${__v_functions[@]}"; do
@@ -1071,7 +1159,8 @@ function BU.Main.Text.GetLastFieldAfterDelim()
                 # content if it is called during the execution of the main script with the "$(bash -x)" command.
                 BU.Main.Echo.Debug \
                     "main" \
-                    "$(basename "${BASH_SOURCE[0]}")" \
+                    "$(basename \
+                        "${BASH_SOURCE[0]}")" \
                     "${FUNCNAME[0]}" \
                     "${__BU_MAIN_TEXT_LIB__CAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS}" \
                     "${__BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTING_TEXT}";
@@ -1126,13 +1215,20 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 # ······················································································
 # Getting substring after a delimiter, which can be both a single character or a string.
 
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#   - basename  |
+#   - echo      |
+#   - local     |
+
+
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Args__Text.GetSubStringAfterDelim()   -> Main -> Args.lib
 
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetSubStringAfterDelim()
@@ -1170,7 +1266,9 @@ function BU.Main.Text.GetSubStringAfterDelim()
 
     if [ "${p_count,,}" != 'count' ]; then echo -ne "${p_string}"; else echo -ne "${v_count}"; fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·······················································································
@@ -1185,7 +1283,6 @@ function BU.Main.Text.GetSubStringAfterDelim()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()                        -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetSubStringBeforeDelim()
@@ -1268,11 +1365,10 @@ function BU.Main.Text.GetSubStringBeforeDelim()
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.GetSubStringOccurences()
 {
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         # This function call makes it easier for the user to find the current function and its executed
         # content if it is called during the execution of the main script with the "$(bash -x)" command.
         BU.Main.Echo.Debug \
@@ -1293,7 +1389,7 @@ function BU.Main.Text.GetSubStringOccurences()
 	local count;    # VAR TYPE :
 
     #**** Code ****
-    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]] && ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+    if [ -z "${p_init}" ] || [ -n "${p_init}" ] && [[ "${p_init,,}" != ?(-)?(-)init ]] && ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         if ! BU.Main.Args__Text.GetSubStringOccurences \
             "${p_string}" \
             "${p_target}" \
@@ -1325,7 +1421,7 @@ function BU.Main.Text.GetSubStringOccurences()
 
 	echo -e "${count}";
 
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
     fi
 
@@ -1339,7 +1435,6 @@ function BU.Main.Text.GetSubStringOccurences()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetStringByteSize()
@@ -1368,7 +1463,6 @@ function BU.Main.Text.GetStringByteSize()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.GetStringCharactersNumber()
 {
@@ -1391,17 +1485,16 @@ function BU.Main.Text.GetStringCharactersNumber()
 # ········································
 # Getting the number of words in a string.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their option(s) :
-#   - basename
-#   - echo      (-n -e)
-#   - wc        (--words)
-
+#   - basename  |
+#   - echo      | (-e | -n)
+#   - wc        | (--words)
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.GetStringWordsNumber()
@@ -1419,7 +1512,11 @@ function BU.Main.Text.GetStringWordsNumber()
     local p_string=${1:-$'\0'};  # ARG : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : String to process.
 
     #**** Code ****
-    echo -ne "${p_string}" | wc --words; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    echo -ne "${p_string}" | wc --words;
+
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -1432,18 +1529,17 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__LISTI
 # ···········································
 # Getting every characters present in a file.
 
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their option(s) :
-#   - basename
-#   - fold      (-w1)
-#   - sort      (-u)
-
+#   - basename  |
+#   - fold      | (-w1)
+#   - sort      | (-u)
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.ListCharactersFromFile() {
@@ -1462,14 +1558,18 @@ function BU.Main.Text.ListCharactersFromFile() {
 
     #**** Code ****
     fold -w1 "${p_filepath}" | sort -u || {
-        local C="${?}"; BU.Main.Echo.Warning "Failed to get the list of each character from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
+        local C="${?}";
+
+        BU.Main.Echo.Warning "Failed to get the list of each character from the $(BU.Main.Decho.Decho.Path "${p_filepath}") file";
 
         BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
         return "${C}";
     };
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ······································
@@ -1486,7 +1586,6 @@ function BU.Main.Text.ListCharactersFromFile() {
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()    -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.ListWordsFromFile()
@@ -1534,7 +1633,6 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__PRINT
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Newstep()    -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.PrintCharXTimes()
 {
@@ -1580,7 +1678,6 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__REVER
 
 #   - BU.Main.Echo.Debug()                                      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()                                   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.ReverseStringWordsOrder()
@@ -1702,7 +1799,6 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__SPLIT
 
 #   - BU.Main.Inputs.Sanitize()             -> Main -> Inputs.lib
 
-
 # shellcheck disable=
 function BU.Main.Text.StrToWordArray()
 {
@@ -1746,7 +1842,6 @@ function BU.Main.Text.StrToWordArray()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Text.WordArrayToStr()

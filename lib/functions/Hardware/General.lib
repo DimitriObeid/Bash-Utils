@@ -133,7 +133,6 @@ fi
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Hardware."${}".General.GetAllHardwareInfos()   -> Hardware -> General."${}".lib
 
-
 # shellcheck disable=
 function BU.Hardware.General.GetAllHardwareInfos()
 {
@@ -146,7 +145,6 @@ function BU.Hardware.General.GetAllHardwareInfos()
 # Getting every general hardware components (like the computer's chassis, etc...).
 
 #   - BU.Hardware."${}".General.GetHardwareInfos()      -> Hardware -> General."${}".lib
-
 
 # shellcheck disable=
 function BU.Hardware.General.GetHardwareInfos()

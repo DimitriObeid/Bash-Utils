@@ -153,7 +153,6 @@ fi
 #   - BU.Hardware.Android.USB.GetHardwareInfos()            -> Hardware -> Android -> USB.Android.lib
 #   - BU.Hardware.Android.VGA.GetHardwareInfos()            -> Hardware -> Android -> VGA.Android.lib
 
-
 # shellcheck disable=
 function BU.Hardware.Android.General.GetAllHardwareInfos()
 {

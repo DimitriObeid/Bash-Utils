@@ -153,7 +153,6 @@ fi
 #   - BU.Hardware.Windows.USB.GetHardwareInfos()            -> Hardware -> Windows -> USB.Windows.lib
 #   - BU.Hardware.Windows.VGA.GetHardwareInfos()            -> Hardware -> Windows -> VGA.Windows.lib
 
-
 # shellcheck disable=
 function BU.Hardware.Windows.General.GetAllHardwareInfos()
 {

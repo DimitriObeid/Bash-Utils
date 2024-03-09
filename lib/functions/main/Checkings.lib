@@ -144,7 +144,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsArray()
 {
@@ -179,7 +178,6 @@ function BU.Main.Checkings.IsArray()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsArrayEmpty()
@@ -218,7 +216,6 @@ function BU.Main.Checkings.IsArrayEmpty()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsArrayNotEmpty()
@@ -269,7 +266,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()                  -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()               -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsCMD()
 {
@@ -310,7 +306,6 @@ function BU.Main.Checkings.IsCMD()
 
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsNotCMD()
@@ -354,7 +349,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsDateHMS()
 {
@@ -397,7 +391,6 @@ function BU.Main.Checkings.IsDateHMS()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsDateYMD()
@@ -450,7 +443,6 @@ function BU.Main.Checkings.IsDateYMD()
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 #   - BU.Main.Echo.Newline()        -> Main -> Echo.lib
 #   - BU.Main.Echo.Warning()        -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsDateYMD_HMS()
@@ -518,7 +510,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsEven()
 {
@@ -551,7 +542,6 @@ function BU.Main.Checkings.IsEven()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.isOdd()
@@ -588,7 +578,6 @@ alias BU.Main.Checkings.IsUneven='BU.Main.Checkings.isOdd';
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsFloat()
 {
@@ -621,7 +610,6 @@ function BU.Main.Checkings.IsFloat()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsNegativeFloat()
@@ -656,7 +644,6 @@ function BU.Main.Checkings.IsNegativeFloat()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsPositiveFloat()
 {
@@ -689,7 +676,6 @@ function BU.Main.Checkings.IsPositiveFloat()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsInt()
@@ -724,7 +710,6 @@ function BU.Main.Checkings.IsInt()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsNegativeInt()
 {
@@ -757,7 +742,6 @@ function BU.Main.Checkings.IsNegativeInt()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsPositiveInt()
@@ -799,7 +783,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsAlphaChar()
 {
@@ -833,7 +816,6 @@ function BU.Main.Checkings.IsAlphaChar()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsAlphaString()
 {
@@ -866,7 +848,6 @@ function BU.Main.Checkings.IsAlphaString()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsAlphaStringOnly()
@@ -906,7 +887,6 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsAlphaNumChar()
 {
@@ -940,7 +920,6 @@ function BU.Main.Checkings.IsAlphaNumChar()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.IsAlphaNumString()
 {
@@ -973,7 +952,6 @@ function BU.Main.Checkings.IsAlphaNumString()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.IsAlphaNumStringOnly()
@@ -1037,7 +1015,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKI
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.CheckRootEUID()
 {
@@ -1088,7 +1065,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_
 #   - BU.ModuleInit.IsInScript()            -> Modules initializer script
 #   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
-
 
 # shellcheck disable=
 function BU.Main.Checkings.CheckDiskUsedSpace()
@@ -1264,7 +1240,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIE
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.CheckDirPathExists()
 {
@@ -1308,7 +1283,6 @@ function BU.Main.Checkings.CheckDirPathExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.CheckDirPathWasCreated()
@@ -1357,7 +1331,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATH
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.CheckFilePathExists()
 {
@@ -1405,7 +1378,6 @@ function BU.Main.Checkings.CheckFilePathExists()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()       -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.CheckFilePathWasCreated()
@@ -1462,7 +1434,6 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 
 #   - BU.ModuleInit.SetInitErrorMsg()       -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()     -> Modules initializer script
-
 
 # shellcheck disable=
 function BU.Main.Checkings.CheckProjectLogPath()
@@ -1568,7 +1539,6 @@ function BU.Main.Checkings.CheckProjectLogPath()
 #   - BU.ModuleInit.Msg()                       -> Modules initializer script
 #   - BU.ModuleInit.SetInitErrorMsg()           -> Modules initializer script
 #   - BU.ModuleInit.UnsetInitErrorMsg()         -> Modules initializer script
-
 
 # shellcheck disable=
 function BU.Main.Status.CheckProjectLogStatus()
@@ -2052,7 +2022,6 @@ function BU.Main.Status.CheckProjectLogStatus()
 #   - BU.Main.TextFormat.SetBGColor()                   -> Main -> TextFormat.lib
 #   - BU.Main.TextFormat.SetTextColor()                 -> Main -> TextFormat.lib
 
-
 # shellcheck disable=
 function BU.Main.Checkings.CheckProjectRelatedFile()
 {
@@ -2206,7 +2175,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_
 #   - BU.Main.Echo.Msg()                            -> Main -> Echo.lib
 
 #   - BU.Main.Errors.HandleSmallErrors()            -> Main -> Errors.lib
-
 
 # shellcheck disable=
 function BU.Main.Checkings.CheckDecho()

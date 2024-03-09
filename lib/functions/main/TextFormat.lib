@@ -145,7 +145,6 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_CO
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Errors.Exit()         -> Main -> Errors.lib
 
-
 # shellcheck disable=
 function BU.Main.TextFormat.CannotCreateRessource()
 {
@@ -541,7 +540,6 @@ function BU.Main.TextFormat.Atoi()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Text.ToUppercase()    -> Main -> Text.lib
 
-
 # shellcheck disable=
 function BU.Main.TextFormat.Itoa()
 {
@@ -631,7 +629,6 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__TEXT__SETTING_TEXT_FORMAT=
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.TextFormat.SetTextFormat()

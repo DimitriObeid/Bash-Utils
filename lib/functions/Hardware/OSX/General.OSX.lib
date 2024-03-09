@@ -153,7 +153,6 @@ fi
 #   - BU.Hardware.OSX.USB.GetHardwareInfos()            -> Hardware -> OSX -> USB.OSX.lib
 #   - BU.Hardware.OSX.VGA.GetHardwareInfos()            -> Hardware -> OSX -> VGA.OSX.lib
 
-
 # shellcheck disable=
 function BU.Hardware.OSX.General.GetAllHardwareInfos()
 {

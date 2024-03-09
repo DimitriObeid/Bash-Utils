@@ -144,7 +144,6 @@ declare -r __BU_MAIN_POSIXTERM_LIB__SUBCAT_DEBUG_ID__TERMINAL_INTERACTION_FUNCTI
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 
-
 # shellcheck disable=
 function BU.Main.PosixTerm.DisplayCountdown()
 {
@@ -173,7 +172,6 @@ function BU.Main.PosixTerm.DisplayCountdown()
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.PosixTerm.DisplayProgressBar()
@@ -206,7 +204,6 @@ function BU.Main.PosixTerm.DisplayProgressBar()
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
 #   - BU.Main.Echo.DebugEnd()   -> Main -> Echo.lib
 #   - BU.Main.Echo.Msg          -> Main -> Echo.lib
-
 
 # shellcheck disable=
 function BU.Main.PosixTerm.DisplaySpinner()
