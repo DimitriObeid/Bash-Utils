@@ -254,14 +254,24 @@ function BU.Main.Decho.Decho()
 
             # If the text formatting is forbidden, but the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value is set to "true", the text to decorate will be put between French guillemets.
             if BU.Main.Status.CheckStatAllowFormatting; then
-                echo -ne "« ${p_string} »"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                echo -ne "« ${p_string} »"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
 
             # Else, if the text formatting is forbidden, AND the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value is set to "false", no decoration nor highlighting will be made.
             else
-                echo -ne "${p_string}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                echo -ne "${p_string}";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
             fi
         else
-            echo -ne "« ${p_string} »"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            echo -ne "« ${p_string} »";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
         fi
     else
         if [ -f "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" ]; then
@@ -313,7 +323,9 @@ function BU.Main.Decho.Decho()
         printf "%s" "${v_oldTextColor}";
         printf "\n";
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
         # Setting every formattings.
         for val in "${pa_fmtArgs[@]}"; do

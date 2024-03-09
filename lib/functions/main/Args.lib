@@ -673,12 +673,28 @@ function BU.Main.Args.GetFileName()
     #**** Code ****
     if [[ "${p_decorate}" == ?(-?(-))d?(ec?(h)o) ]]; then
 
+        # Setting the "${__BU_MAIN_STAT_DECHO}" status global variable's value to 'restrict' if it is set to 'authorize'.
+        if [ "${__BU_MAIN_STAT_DECHO,,}" == 'authorize' ]; then
+            #**** Conditional variables ****
+            local v_stat_decho_old;
+
+            #**** Conditional code ****
+            v_stat_decho_old="${__BU_MAIN_STAT_DECHO}";
+
+            __BU_MAIN_STAT_DECHO='restrict';
+        fi
+
         # Checking if the file's name was specified, in order to print it.
         if [ -z "${p_filename}" ]; then
             printf "%s" "$(BU.Main.Decho.Decho.Path 'no file identified')";
         else
             printf "%s" "$(BU.Main.Decho.Decho.Path "${p_filename}")";
         fi;
+
+        # Resetting the "${__BU_MAIN_STAT_DECHO}" global status variable's value to 'authorize'.
+        if [ -n "${v_stat_decho_old}" ]; then
+            __BU_MAIN_STAT_DECHO="${v_stat_decho_old}";
+        fi
     else
         if [ -z "${p_filename}" ]; then
             printf "« no file identified »";
@@ -724,12 +740,29 @@ function BU.Main.Args.GetFunctionName()
 
     #**** Code ****
     if [[ "${p_decorate,,}" == ?(-?(-))d?(ec?(h)o) ]]; then
+
+        # Setting the "${__BU_MAIN_STAT_DECHO}" status global variable's value to 'restrict' if it is set to 'authorize'.
+        if [ "${__BU_MAIN_STAT_DECHO,,}" == 'authorize' ]; then
+            #**** Conditional variables ****
+            local v_stat_decho_old;
+
+            #**** Conditional code ****
+            v_stat_decho_old="${__BU_MAIN_STAT_DECHO}";
+
+            __BU_MAIN_STAT_DECHO='restrict';
+        fi
+
         # Checking if the function's name was specified, in order to print it.
         if [ -z "${p_funcname}" ]; then
             printf "%s" "$(BU.Main.Decho.Decho.Function 'no function identified')";
         else
             printf "%s" "$(BU.Main.Decho.Decho.Function "${p_funcname}()")";
         fi;
+
+        # Resetting the "${__BU_MAIN_STAT_DECHO}" global status variable's value to 'authorize'.
+        if [ -n "${v_stat_decho_old}" ]; then
+            __BU_MAIN_STAT_DECHO="${v_stat_decho_old}";
+        fi
     else
         if [ -z "${p_funcname}" ]; then
             printf "« no line identified »";
@@ -775,11 +808,28 @@ function BU.Main.Args.GetLineNumber()
 
     #**** Code ****
     if [[ "${p_decorate}" == ?(-?(-))d?(ec?(h)o) ]]; then
+
+        # Setting the "${__BU_MAIN_STAT_DECHO}" status global variable's value to 'restrict' if it is set to 'authorize'.
+        if [ "${__BU_MAIN_STAT_DECHO,,}" == 'authorize' ]; then
+            #**** Conditional variables ****
+            local v_stat_decho_old;
+
+            #**** Conditional code ****
+            v_stat_decho_old="${__BU_MAIN_STAT_DECHO}";
+
+            __BU_MAIN_STAT_DECHO='restrict';
+        fi
+
         if [ -z "${p_lineno}" ]; then
             printf "%s" "$(BU.Main.Decho.Decho.Highlight 'no line identified')";
         else
             printf "%s" "$(BU.Main.Decho.Decho.Highlight "${p_lineno}")";
         fi;
+
+        # Resetting the "${__BU_MAIN_STAT_DECHO}" global status variable's value to 'authorize'.
+        if [ -n "${v_stat_decho_old}" ]; then
+            __BU_MAIN_STAT_DECHO="${v_stat_decho_old}";
+        fi
     else
         # Checking if the file's name was specified, in order to print it.
         if [ -z "${p_lineno}" ]; then
@@ -1127,7 +1177,7 @@ function BU.Main.Args.PrintFFLErrorOccured()
 
     #**** Code ****
     if [[ "${p_decorate}" == ?(-?(-))d?(ec?(h)o) ]]; then
-        v_target_f="$(BU.Main.Decho.Decho.Function "${p_target_f}")";
+   #     v_target_f="$(BU.Main.Decho.Decho.Function "${p_target_f}")";
 
         v_filename="$(BU.Main.Args.GetFileName "${p_filename}" '--decho')";
         v_funcname="$(BU.Main.Args.GetFunctionName "${p_funcname}" '--decho')";
@@ -1339,7 +1389,7 @@ function BU.Main.Args.Argc()
             if ! BU.Main.Checkings.IsPositiveInt "${p_argawait}"; then
                 local lineno="$(( LINENO - 1 ))";
 
-                BU.Main.Args.PrintBadOption \
+                BU.Main.Errors.HandleErrors \
                     '1' \
                     "THE $(BU.Main.Decho.Decho.Function "${p_funcname}") FUNCTION'S AWAITED ARGUMENTS COUNTER $(BU.Main.Decho.Decho.Var "$(echo -n '$')p_argawait") PARAMETER'S VALUE IS NOT A POSITIVE INTEGER" \
                     "The function $(BU.Main.Decho.Decho.Function "${p_funcname}") second argument $(BU.Main.Decho.Decho.Var 'p_argawait')'s value needs to be an integer, since it is an argument limit${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}$(BU.Main.Args.PrintFFLErrorOccured \

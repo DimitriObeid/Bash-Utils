@@ -828,7 +828,7 @@ function BU.Main.Echo.WriteMessage()
 
     # Removing the "BU.Main.Echo." sub-string from the parent function's name.
     if [ "${v_isParentFuncValid,,}" == 'true' ]; then
-        BU.Main.Text.DeleteLettersInString "${v_strParentFunc}" 'BU.Main.Echo.';
+        BU.Main.Text.DeleteLettersInString "${v_strarentFunc}" 'BU.Main.Echo.';
     fi
 
     # Cutting the remaining text following the first letter of the new string.
