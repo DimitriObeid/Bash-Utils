@@ -141,6 +141,21 @@ function BU.DevBin.LibDebug.Function.IsShellScriptLibDebug()
 	if [[ "${0##*/}" == lib-debug.?(ba)sh ]]; then return 0; else return 1; fi
 }
 
+# ···················································································
+# Checking if the script file which runs the Bash code is one of the dev-bin scripts.
+
+# This function simplifies these checkings by avoiding the creation of a new function for each dev-bin script.
+
+# shellcheck disable=
+function BU.DevBin.X.Function.IsShellScriptFromDevBin()
+{
+    if BU.DevBin.LibCompiler.Function.IsShellScriptLibDebug; then
+        return 0;
+    else
+        return 1;
+    fi
+}
+
 ## ==============================================
 
 ## FILE EDITION
