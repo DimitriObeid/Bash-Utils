@@ -290,7 +290,7 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMBER_FORMAT
 # shellcheck disable=
 function BU.Main.BasicMaths.SeparateNumberEveryXDigits()
 {
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         # This function call makes it easier for the user to find the current function and its executed
         # content if it is called during the execution of the main script with the "$(bash -x)" command.
         BU.Main.Echo.Debug \
@@ -372,7 +372,9 @@ function BU.Main.BasicMaths.SeparateNumberEveryXDigits()
 
     echo "${formatted_number}";
 
-    ! BU.DevBin.LibCompiler.Function.IsCompiler && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then \
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+    fi
 
     return 0;
 }

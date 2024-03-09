@@ -555,12 +555,14 @@ function BU.Main.Text.CutLastFieldAfterDelim()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Args__Text.DeleteLettersInString()    -> Main -> Args.lib
+#   - BU.Main.Args__Text.DeleteLettersInString()        -> Main -> Args.lib
 
-#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
 
-#   - BU.Main.Text.ReplaceLettersInString()         -> Main -> Text.lib (this file)
+#   - BU.Main.Text.ReplaceLettersInString()             -> Main -> Text.lib (this file)
+
+#   - BU.DevBin.X.Function.IsShellScriptFromDevBin()    -> Modules initializer script
 
 # shellcheck disable=
 function BU.Main.Text.DeleteLettersInString()
@@ -1321,10 +1323,12 @@ function BU.Main.Text.GetSubStringBeforeDelim()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
-#   - BU.Main.Args__Text.GetSubStringOccurences()   -> Main -> Args.lib
+#   - BU.Main.Args__Text.GetSubStringOccurences()       -> Main -> Args.lib
 
-#   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
-#   - BU.Main.Echo.DebugEnd()                       -> Main -> Echo.lib
+#   - BU.Main.Echo.Debug()                              -> Main -> Echo.lib
+#   - BU.Main.Echo.DebugEnd()                           -> Main -> Echo.lib
+
+#   - BU.DevBin.X.Function.IsShellScriptFromDevBin()    -> Modules initializer script
 
 # shellcheck disable=
 function BU.Main.Text.GetSubStringOccurences()
