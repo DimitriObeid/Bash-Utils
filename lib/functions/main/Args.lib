@@ -1208,7 +1208,9 @@ function BU.Main.Args.Argc()
 
             # If the correct number of arguments is given to the processed function.
             if [ "${p_argcount}" -eq "${p_argawait}" ] || [ "${p_argawait}" -eq 0 ]; then
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
 
             # Else, if an incorrect number of arguments is given to the processed function.
             else
@@ -1379,7 +1381,10 @@ function BU.Main.Args.Argc()
                     "${BASH_SOURCE[0]}")" \
                 "${FUNCNAME[0]}" \
                 "${lineno}";
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
         fi
 
         if [ -z "${p_argawait}" ]; then

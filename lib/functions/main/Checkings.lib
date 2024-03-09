@@ -156,9 +156,13 @@ function BU.Main.Checkings.IsArray()
 
     #**** Code ****
     if [[ -n ${1} ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -192,9 +196,13 @@ function BU.Main.Checkings.IsArrayEmpty()
 
     #**** Code ****
     if [ ${#arr[@]} -eq 0 ]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -228,9 +236,13 @@ function BU.Main.Checkings.IsArrayNotEmpty()
 
     #**** Code ****
     if [ ${#arr[@]} -gt 0 ]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -277,9 +289,13 @@ function BU.Main.Checkings.IsCMD()
         ! BU.Main.Checkings.IsInt "${1}" && \
         ! BU.Main.Checkings.IsFloat "${1}";
     then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     fi
 }
 
@@ -311,9 +327,13 @@ function BU.Main.Checkings.IsNotCMD()
 
     #**** Code ****
     if BU.Main.Checkings.IsCMD "${1}"; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -461,7 +481,9 @@ function BU.Main.Checkings.IsDateYMD_HMS()
         BU.Main.Echo.Warning "DD/MM/YYYY";
         BU.Main.Echo.Newline;
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     };
 
     date "+%H:%M:%S" -d "${v_hour}" || \
@@ -470,10 +492,14 @@ function BU.Main.Checkings.IsDateYMD_HMS()
         BU.Main.Echo.Warning "Please use only this format : hh:mm:ss";
         BU.Main.Echo.Newline;
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     };
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 ## ==============================================
@@ -508,9 +534,13 @@ function BU.Main.Checkings.IsEven()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [ "$(( ${1:-$'\0'} % 2 ))" -eq 0 ]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -539,9 +569,13 @@ function BU.Main.Checkings.isOdd()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [ "$(( ${1:-$'\0'} % 2 ))" -ne 0 ]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -572,9 +606,13 @@ function BU.Main.Checkings.IsFloat()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [[ "${1}" =~ ^[+-]?[0-9]+\.?[0-9]*$ ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -603,9 +641,13 @@ function BU.Main.Checkings.IsNegativeFloat()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if BU.Main.Checkings.IsFloat "${1}" && (( 1 < 0 )); then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -634,9 +676,13 @@ function BU.Main.Checkings.IsPositiveFloat()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if BU.Main.Checkings.IsFloat "${1}" && (( 1 >= 0 )); then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -665,9 +711,13 @@ function BU.Main.Checkings.IsInt()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
     if [[ "${1}" =~ ^[\-0-9]+$ ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -696,9 +746,13 @@ function BU.Main.Checkings.IsNegativeInt()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
 	if BU.Main.Checkings.IsInt "${1}" && (( 1 < 0 )); then
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
 	else
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
 	fi
 }
 
@@ -727,9 +781,13 @@ function BU.Main.Checkings.IsPositiveInt()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__NUMBER_VALUES}";
 
 	if BU.Main.Checkings.IsInt "${1}" && (( 1 >= 0 )); then
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
 	else
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
 	fi
 }
 
@@ -765,9 +823,13 @@ function BU.Main.Checkings.IsAlphaChar()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
 	if [[ "${1}" == [a-zA-Z] ]]; then
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
 	else
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
 	fi
 }
 
@@ -796,9 +858,13 @@ function BU.Main.Checkings.IsAlphaString()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
     if [[ "${1}" == [^a-zA-Z\ ] ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -831,9 +897,13 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 
 	else
 		if [[ "${1}" == [^a-zA-Z\ ] ]]; then
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
 		else
-    		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
 		fi
 	fi
 }
@@ -863,9 +933,13 @@ function BU.Main.Checkings.IsAlphaNumChar()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
 	if [[ "${1}" == [a-zA-Z0-9] ]]; then
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
 	else
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
 	fi
 }
 
@@ -894,9 +968,13 @@ function BU.Main.Checkings.IsAlphaNumString()
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS__CHARACTERS_AND_STRING_VALUES}";
 
     if [[ "${1}" =~ [^a-zA-Z0-9\ ] ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
@@ -929,9 +1007,13 @@ function BU.Main.Checkings.IsAlphaNumStringOnly()
 
 	else
 		if [[ "${1}" == [^a-zA-Z0-9\ ] ]]; then
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
 		else
-    		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+    		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 1;
 		fi
 	fi
 }
@@ -984,7 +1066,15 @@ function BU.Main.Checkings.CheckRootEUID()
         "${__BU_MAIN_CHECKINGS_LIB__CAT_DEBUG_ID__DIFFERENT_CHECKINGS}" \
         "${__BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKING_FOR_IDENTIFIANTS}";
 
-    if [ "${EUID}" -eq 0 ]; then BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0; else return 1; fi
+    if [ "${EUID}" -eq 0 ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
+    else
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
+    fi
 }
 
 alias BU.Main.Checkings.IsRoot='BU.Main.Checkings.CheckRootEUID';
@@ -1070,7 +1160,9 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
         [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
 
     # Else, if no directory or file is passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
     elif [ "${IsPartitionFullReturnCode}" == "${__BU_MAIN_EXIT_INVALID_ARGUMENT}" ]; then local lineno="${LINENO}";
@@ -1082,13 +1174,22 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         if [ "${p_authorization,,}" == 'true' ]; then
-            BU.Main.Errors.HandleErrors "${IsPartitionFullReturnCode}" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
+            BU.Main.Errors.HandleErrors \
+                "${IsPartitionFullReturnCode}" "NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
                 "Please give a filepath in order to check if the target file system is full or not${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
-                "Unknown file system size because of a missing path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                "Unknown file system size because of a missing path" \
+                "$(basename \
+                    "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "${lineno}";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}";
+
+            return "${IsPartitionFullReturnCode}";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : NO DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a path in order to check if the target file system is full or not" >&2;
@@ -1099,11 +1200,16 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}";
+
+            return "${IsPartitionFullReturnCode}";
         fi
 
     # Else, if an invalid directory or file was passed as first argument for the "BU.Main.Filesystem.IsPartitionFull()" function.
-    elif [ "${IsPartitionFullReturnCode}" == "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" ]; then local lineno="${LINENO}";
+    elif [ "${IsPartitionFullReturnCode}" == "${__BU_MAIN_EXIT_DIR_FILE_NOT_FOUND}" ]; then
+        local lineno="${LINENO}";
 
         # If the framework is still initializing when an error occurs.
         BU.ModuleInit.SetInitErrorMsg && local VCheckDiskUsedSpace='1';
@@ -1112,13 +1218,23 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         if [ "${p_authorization,,}" == 'true' ]; then
-            BU.Main.Errors.HandleErrors "${IsPartitionFullReturnCode}" "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
+            BU.Main.Errors.HandleErrors \
+                "${IsPartitionFullReturnCode}" \
+                "INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" \
                 "Please give a valid path in order to check if the target file system is full or not${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is unknown, the script has to be exited, in order to avoid potential bugs" \
-                "Unknown file system size because of a missing file path" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                "Unknown file system size because of a missing file path" \
+                "$(basename \
+                    "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "${lineno}";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}";
+
+            return "${IsPartitionFullReturnCode}";
         else
             echo "IN $(basename "${BASH_SOURCE[0]}"), FUNCTION ${FUNCNAME[0]}, LINE $(( LINENO - 1 )) --> ERROR : INVALID DIRECTORY OR FILE PASSED AS FIRST ARGUMENT !!!" >&2;
             echo "Please give a valid path in order to check if the target file system is full or not" >&2;
@@ -1129,7 +1245,11 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}";
+
+            return "${IsPartitionFullReturnCode}";
         fi
 
     elif [ "${IsPartitionFullReturnCode}" == "${__BU_MAIN_EXIT_NO_SPACE_LEFT}" ]; then local lineno="${LINENO}";
@@ -1141,10 +1261,20 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
         BU.Main.Status.ChangeSTAT_ERROR 'fatal' 'main' "$(basename "${BASH_SOURCE[0]}")" "${LINENO}";
 
         if [ "${p_authorization,,}" == 'true' ]; then
-            BU.Main.Errors.HandleErrors "${IsPartitionFullReturnCode}" \
+            BU.Main.Errors.HandleErrors \
+                "${IsPartitionFullReturnCode}" \
                 "NO SPACE LEFT ON THE TARGET FILE {SYSTEM} !!!" \
 				"Please empty this file system (mounted on the « $(BU.Main.Filesystem.GetFSMountPoint "${p_fileFS}") » partition) before using it, or use another partition to write data in a file${__BU_MAIN_TXT_ERR_SUBSTR_DELIM}Since the file system's disk space is full, the script has to be exited in order to avoid potential bugs" \
-                "No space left on the target device's partition" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${lineno}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+                "No space left on the target device's partition" \
+                "$(basename "${BASH_SOURCE[0]}")" \
+                "${FUNCNAME[0]}" \
+                "${lineno}";
+            
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}";
+
+            return "${IsPartitionFullReturnCode}";
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
@@ -1158,7 +1288,11 @@ function BU.Main.Checkings.CheckDiskUsedSpace()
 
             [ -n "${VCheckDiskUsedSpace}" ] && BU.ModuleInit.UnsetInitErrorMsg;
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${IsPartitionFullReturnCode}"; return "${IsPartitionFullReturnCode}";
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            BU.Main.Errors.Exit "${IsPartitionFullReturnCode}";
+
+            return "${IsPartitionFullReturnCode}";
         fi
     fi
 }
@@ -1213,13 +1347,21 @@ function BU.Main.Checkings.CheckDirPathExists()
     if [ ! -d "${p_path}" ] && [ "${p_authorization,,}" == 'true' ]; then
         BU.Main.Decho.Decho.Path "<missing directory path>";  # Since this function should be called into a string, it's better to use a formatting function.
 
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
 
     elif [ ! -d "${p_path}" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "${p_authorization}" ]; then
-        printf "<missing directory path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        printf "<missing directory path>"
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ·················································
@@ -1252,9 +1394,13 @@ function BU.Main.Checkings.CheckDirPathWasCreated()
 
 	#**** Code ****
 	if [ -d "${p_path}" ]; then
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
 	else
-		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+		BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
 	fi
 }
 
@@ -1306,7 +1452,11 @@ function BU.Main.Checkings.CheckFilePathExists()
         return 1;
 
     elif [ ! -f "${p_path}" ] && [ "${p_authorization,,}" == 'false' ] || [ -z "${p_authorization}" ]; then
-        printf "<missing file path>"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        printf "<missing file path>";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 
     BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
@@ -1991,15 +2141,55 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
 	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; };
 
 	if [ -z "${p_decho}" ] || [ -n "${p_decho}" ] && [ "${p_decho,,}" == '--decho' ]; then
-        if ! BU.Main.Args__Checkings.CheckProjectRelatedFile "${p_parent}" "${p_child}" "${p_type}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+        if ! BU.Main.Args__Checkings.CheckProjectRelatedFile \
+            "${p_parent}" \
+            "${p_child}" \
+            "${p_type}" \
+            "$(basename \
+                "${BASH_SOURCE[0]}")" \
+            "${FUNCNAME[0]}" \
+            "${LINENO}";
+        then
+            local C="${?}";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return "${C}";
+        fi
     fi
 
 	if [ "${p_type}" == 'f' ]; then
 		if [ ! -f "${v_path}" ]; then
 			if [ ! -d "${p_parent}" ]; then
-                if [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then echo TEST1; BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                if [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then
+                    echo TEST1;
 
-                elif [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then echo TEST2; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                    BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || {
+                        local C="${?}";
+
+                        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                        return "${C}";
+                    };
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return 0;
+
+                elif [ "${p_parent}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then
+                    echo TEST2;
+
+                    BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { 
+                        local C="${?}";
+
+                        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                        return "${C}";
+                    };
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return 0;
 
                 else
                     mkdir -p "${p_parent}" || {
@@ -2013,16 +2203,52 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                             BU.Main.Echo.Newline;
                         fi
 
-                        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${returnCode}";
+                        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                        return "${returnCode}";
                     }
                 fi
 
-				BU.Main.Checkings.CheckDirPathWasCreated "${p_parent}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+				BU.Main.Checkings.CheckDirPathWasCreated "${p_parent}" || {
+                    local C="${?}";
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return "${C}";
+                };
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
 			fi
 
-            if [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" ]; then echo TEST3; BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            if [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" ]; then
+                echo TEST3;
 
-            elif [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" ]; then echo TEST4; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+                BU.Main.TextFormat.SetBGColor "${__BU_MAIN_COLOR_BG_RESET}" || {
+                    local C="${?}";
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return "${C}";
+                };
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
+
+            elif [ "${p_child}" == "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" ]; then
+                echo TEST4; BU.Main.TextFormat.SetTextColor "${__BU_MAIN_COLOR_TXT_RESET}" || {
+                    local C="${?}";
+
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return "${C}";
+                };
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
 
             else
                 touch "${v_path}" || {
@@ -2036,11 +2262,21 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                         BU.Main.Echo.Newline;
                     fi
 
-                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${returnCode}";
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return "${returnCode}";
                 }
             fi
 
-			BU.Main.Checkings.CheckFilePathWasCreated "${v_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; return 0;
+			BU.Main.Checkings.CheckFilePathWasCreated "${v_path}" || {
+                local C="${?}";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return "${C}";
+            };
+
+            return 0;
 		else
 			if [ -s "${v_path}" ]; then
 				true > "${v_path}" || {
@@ -2052,16 +2288,22 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                         BU.Main.Echo.Newline;
                     fi
 
-                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                    return 1;
                 }
 			fi
 
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
 		fi
 
     elif [ "${p_type}" == 'd' ]; then
 		if [ -d "${v_path}" ]; then
-			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
 		else
             mkdir -p "${v_path}" || {
                 local returnCode="${?}";
@@ -2074,9 +2316,21 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
                     BU.Main.Echo.Newline;
                 fi
 
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${returnCode}";
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return "${returnCode}";
             }
-			BU.Main.Checkings.CheckDirPathWasCreated "${v_path}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+			BU.Main.Checkings.CheckDirPathWasCreated "${v_path}" || {
+                local C="${?}";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return "${C}";
+            };
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
 		fi
     fi
 }
@@ -2133,19 +2387,29 @@ function BU.Main.Checkings.CheckDecho()
 
     # If the text formatting is forbidden, then the "Decho()" function will not decorate the targeted text :
     if [ "${__BU_MAIN_STAT_TXT_FMT,,}" == "false" ] || [ "${__BU_MAIN_STAT_DECHO,,}" == 'forbid' ]; then
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
         return 1;
     else
         # Creating the "fgcolor.tmp" (text color) file in case it doesn't exists.
         if [ ! -f "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" ]; then
             if ! BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_NAME}" 'f'; then
-                BU.Main.Errors.HandleSmallErrors 'E' "Unable to create the $(BU.Main.Decho.Decho "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}") file" 'E' 'CPLS'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                BU.Main.Errors.HandleSmallErrors 'E' "Unable to create the $(BU.Main.Decho.Decho "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}") file" 'E' 'CPLS';
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
             fi
         fi
 
         # Creating the "bgcolor.tmp" (background color) file in case it doesn't exists.
         if [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" ]; then
             if ! BU.Main.Checkings.CheckProjectRelatedFile "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_NAME}" 'f'; then
-                BU.Main.Errors.HandleSmallErrors 'E' "Unable to create the $(BU.Main.Decho.Decho "${__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH}") file" 'E' 'CPLS'; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                BU.Main.Errors.HandleSmallErrors 'E' "Unable to create the $(BU.Main.Decho.Decho "${__BU_MAIN_PROJECT_COLOR_TEXT_BG_FILE_PATH}") file" 'E' 'CPLS';
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
             fi
         fi
 
@@ -2156,12 +2420,18 @@ function BU.Main.Checkings.CheckDecho()
                 # It's also better to not call the "BU.Main.Errors.HandleSmallErrors()" function here, so that there won't be any problem when this function calls the "Decho<...>()" functions.
                 BU.Main.Echo.Msg "${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${FUNCNAME[0]}()${__BU_MAIN_COLOR_TXT_WARNING}--> Warning : Unable to write any color code into the ${__BU_MAIN_COLOR_TXT_HIGHLIGHT}${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}${__BU_MAIN_COLOR_TXT_WARNING} file." 'R' '';
 
-                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 1;
             }
 
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
         else
-            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return 0;
         fi
 	fi
 }
