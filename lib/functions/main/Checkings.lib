@@ -133,11 +133,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 # ·····································
 # Checking if the variable is an array.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -167,12 +165,10 @@ function BU.Main.Checkings.IsArray()
 # ······························
 # Checking if an array in empty.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -205,12 +201,10 @@ function BU.Main.Checkings.IsArrayEmpty()
 # ··································
 # Checking if an array is not empty.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -250,11 +244,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 # ················································
 # Checking if the value is a command substitution.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -294,11 +286,9 @@ function BU.Main.Checkings.IsCMD()
 # ····················································
 # Checking if the value is not a command substitution.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -343,7 +333,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 #   - basename  |
 #   - date      | ("+%H:%M:%S")
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()      -> Main -> Echo.lib
@@ -385,7 +374,6 @@ function BU.Main.Checkings.IsDateHMS()
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - date      | ("+%d-%m-%Y")
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -433,7 +421,6 @@ function BU.Main.Checkings.IsDateYMD()
 #   - echo      |
 #   - local     |
 #   - rev       |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -499,11 +486,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 # ·····························
 # Checking if a number is even.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -532,11 +517,9 @@ function BU.Main.Checkings.IsEven()
 # ·······························
 # Checking if a number is uneven.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -567,11 +550,9 @@ alias BU.Main.Checkings.IsUneven='BU.Main.Checkings.isOdd';
 # ························
 # Checking floating value.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -600,11 +581,9 @@ function BU.Main.Checkings.IsFloat()
 # ······································
 # Checking negative only floating value.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -633,11 +612,9 @@ function BU.Main.Checkings.IsNegativeFloat()
 # ······································
 # Checking positive only floating value.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -666,11 +643,9 @@ function BU.Main.Checkings.IsPositiveFloat()
 # ·······················
 # Checking integer value.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -699,11 +674,9 @@ function BU.Main.Checkings.IsInt()
 # ·····································
 # Checking negative only integer value.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -732,11 +705,9 @@ function BU.Main.Checkings.IsNegativeInt()
 # ·····································
 # Checking positive only integer value.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -772,11 +743,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__VARIABLES_VALUES_CHECKINGS_
 # ··········································································
 # Checking if the value is an alphabetic character (not any number allowed).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -805,11 +774,9 @@ function BU.Main.Checkings.IsAlphaChar()
 # ·······································································
 # Checking if the value is an alphabetic string (not any number allowed).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -838,11 +805,9 @@ function BU.Main.Checkings.IsAlphaString()
 # ·············································································································
 # Checking if the value is an alphabetic string only (not less than two characters AND not any number allowed).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -876,11 +841,9 @@ function BU.Main.Checkings.IsAlphaStringOnly()
 # ·····································
 # Checking if the value is a character.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -909,11 +872,9 @@ function BU.Main.Checkings.IsAlphaNumChar()
 # ················································
 # Checking if the value is an alphanumeric string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -942,11 +903,9 @@ function BU.Main.Checkings.IsAlphaNumString()
 # ··················································································
 # Checking if the value is an alphabetic string only (not less than two characters).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1004,11 +963,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__CHECKI
 # ··················································································
 # Checking if the current effective UID (EUID) is not equal to 0 (root user's EUID).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1042,13 +999,11 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__DIFFERENT_CHECKINGS__BASIC_
 # ································
 # Check if the hard drive is full.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1227,11 +1182,9 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__DIRECTORIE
 # ··································································································
 # Checking for an existent directory path (for the "BU.Main.Errors.HandleErrors()" function mainly).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1272,12 +1225,10 @@ function BU.Main.Checkings.CheckDirPathExists()
 # ·················································
 # Checking if a directory was successfully created.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1316,7 +1267,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__PATHS_CHECKINGS__FILES_PATH
 
 # ·····························································································
 # Checking for an existent file path (for the "BU.Main.Errors.HandleErrors()" function mainly).
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
@@ -1367,12 +1317,10 @@ function BU.Main.Checkings.CheckFilePathExists()
 # ············································
 # Checking if a file was successfully created.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1409,13 +1357,11 @@ function BU.Main.Checkings.CheckFilePathWasCreated()
 # ······································································································································
 # Checking for the presence of the project's log path, whose path is stored in the "${__BU_MAIN_PROJECT_LOG_FILE_PATH}" global variable.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - declare   | (-i)
 #   - echo      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1506,7 +1452,6 @@ function BU.Main.Checkings.CheckProjectLogPath()
 #   - shift     |
 #   - sleep     |
 #   - tee       | (-a)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1990,7 +1935,6 @@ function BU.Main.Status.CheckProjectLogStatus()
 # ·························································
 # Check project related file presence, or create this file.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -1999,7 +1943,6 @@ function BU.Main.Status.CheckProjectLogStatus()
 #   - mkdir     | (-p)
 #   - touch     |
 #   - true      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -2164,7 +2107,6 @@ declare -r __BU_MAIN_CHECKINGS_LIB__SUBCAT_DEBUG_ID__TEXT_CHECKINGS__FORMATTING_
 #   - basename  |
 #   - cat       |
 #   - echo      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

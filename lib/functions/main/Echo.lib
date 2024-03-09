@@ -133,12 +133,10 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__PRINTING_FORMATTED_STRINGS__DEBU
 # ···················································································
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - sleep     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -168,11 +166,9 @@ function BU.Main.Echo.__Debug()
 # ···················································································
 # This function only serves as text printer for the " BU.Main.Echo.Debug()" function.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -204,11 +200,9 @@ function BU.Main.Echo.DebugEnd()
 
 ## TODO : RÉFLÉCHIR À LA MISE EN PLACE DE L'AFFICHAGE DU NOM DE LA FONCTION CIBLE LORS DE LA PROCÉDURE DE DÉBOGUAGE AVEC LA COMMANDE "$(bash -x)".
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -303,13 +297,11 @@ function BU.Main.Echo.Debug()
 # ···················································
 # Print void lines before and after calling a header.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - exit      |
 #   - printf    |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -339,12 +331,10 @@ printf "
 
 # It's better to also execute the project's script with the "$(bash -x "${project_name}")" command, instead of the "./${project_name}" way.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -567,7 +557,6 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__BASIC_WRITING_F
 # ····················································································································
 # Failsafe if any "BU.Echo<...>()" function has to be called in the "BU.Main.Status.CheckProjectLogStatus()" function.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -576,7 +565,6 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__BASIC_WRITING_F
 #   - local     |
 #   - shift     |
 #   - sleep     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -680,7 +668,6 @@ function BU.Main.Echo.__EchoCPLS()
 # ··························································································································································································
 # Repeating the calls of the "BU.Main.Echo.__EchoOutput()" function into the "BU.Main.Echo.<...>()" functions and managing its failsafes in a single place, in order to have a cleaner code.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   -
@@ -721,13 +708,11 @@ function BU.Main.Echo.CallEchoOutput()
 # ···············································································
 # Writing, redirecting and displaying a basic message with its associated colors.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 #   - shift     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -914,7 +899,6 @@ declare -r __BU_MAIN_ECHO_LIB__SUBCAT_DEBUG_ID__TEXT_DISPLAYING__DISPLAYING_A_CO
 #   - basename  |
 #   - local     |
 #   - shift     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

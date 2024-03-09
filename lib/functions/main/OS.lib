@@ -1399,7 +1399,6 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__LINUX__GATHERING_INFORMATIONS="${_
 #   - cut   (-d | -f)
 #   - grep  (-q | -i)
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Newline()            -> Main -> Echo.lib
@@ -1499,7 +1498,6 @@ function BU.Main.OS.GetLinuxKernelFullVersion()
 #   - cut   (-d | -f1)
 #   - uname (-r)
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
@@ -1516,7 +1514,6 @@ function BU.Main.OS.GetLinuxKernelMajorVersion()
 # Featured shell commands and their options(s) :
 #   - cut   (-d | -f2)
 #   - uname (-r)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1535,7 +1532,6 @@ function BU.Main.OS.GetLinuxKernelMinorVersion()
 #   - cut   (-d | -f2)
 #   - uname (-r)
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.OS.IsLinux() -> Main -> OS.lib (this file)
@@ -1552,7 +1548,6 @@ function BU.Main.OS.GetLinuxKernelPatchNumber()
 # Featured shell commands and their options(s) :
 #   - cut   (-d | -f3)
 #   - uname (-r)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1590,7 +1585,6 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__OSX__CHECKING_INFORMATIONS="${__BU
 #   - UNIX SYSTEMS :
 #       - basename
 #       - grep      (-q)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1768,7 +1762,6 @@ declare -r __BU_MAIN_OS_LIB__SUBCAT_DEBUG_ID__WINDOWS__CHECKING_INFORMATIONS="${
 #       - awk
 #       - command (-v)
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Checkings.IsInt() -> Main -> Checkings.lib
@@ -1838,7 +1831,6 @@ function BU.Main.OS.IsWindows()
 #       - command   (-v)
 #       - grep      (-q)
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - Feel free to call a function if it is needed for your contribution.
@@ -1856,7 +1848,6 @@ function BU.Main.OS.IsWindows32bits()					{ if command -v powershell.exe > /dev/
 #   - UNIX SYSTEMS :
 #       - command   (-v)
 #       - grep      (-q)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

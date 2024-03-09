@@ -135,12 +135,10 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__CUTTI
 # ···········································
 # Cutting the date displayed before a string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - sed       | (-E)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -172,11 +170,9 @@ function BU.Main.Text.CutLogDateFromString()
 # ············································
 # Cutting any log information before a string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -208,11 +204,9 @@ function BU.Main.Text.CutLogInfoFromString()
 # ·······································································
 # Cutting the dash written before a command option call (to be improved).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -244,13 +238,11 @@ function BU.Main.Text.CutDashFromOption()
 # ··················································································
 # Cutting the first character from a string, and getting every following characters.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -281,7 +273,6 @@ function BU.Main.Text.CutFirstCharacter()
 # ················································································
 # Cutting the last character from a string, and getting every previous characters.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -289,7 +280,6 @@ function BU.Main.Text.CutFirstCharacter()
 #   - echo      |
 #   - local     |
 #   - shopt     | (-s | -u)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -331,14 +321,12 @@ function BU.Main.Text.CutLastCharacter()
 # ··············································································································
 # Cutting every part of a string after and with the delimiter, which can be both a single character or a string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - declare   | (-i)
 #   - echo      | (-e | -n)
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -412,7 +400,6 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 # ···········································································································
 # Cut every part of a string before and with the delimiter, which can be both a single character or a string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -420,7 +407,6 @@ function BU.Main.Text.CutSubStringAfterNthDelim()
 #   - echo      | (-e | -n)
 #   - local     |
 #   - sed       |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -485,13 +471,11 @@ function BU.Main.Text.CutSubStringBeforeNthDelim()
 # ····················································································································
 # Cut the very first field of a string, before the delimiter, in order to get everything that follows the first field.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 #   - echo      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -525,13 +509,11 @@ function BU.Main.Text.CutFirstFieldBeforeDelim()
 # ·····························································································
 # Cut the very last field of a string, in order to get everything that preceeds the last field.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 #   - echo      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -565,13 +547,11 @@ function BU.Main.Text.CutLastFieldAfterDelim()
 # ··················································
 # Deleting letters and sub-strings in a main string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 #   - printf    |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -650,7 +630,6 @@ function BU.Main.Text.DeleteLettersInString()
 #   - echo      |
 #   - local     |
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 
@@ -705,11 +684,9 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__FORMA
 # Keep the same text format between lowercased or uppercased text printed by a formatting text function ("BU.Main.Text.ToLowercase()" OR "BU.Main.Text.ToUppercase()") or a parameter expansion.
 # This function is planned to be used between force-uppered/lowered text, to keep the original text formatting of the wanted string excerpt.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -761,7 +738,6 @@ function BU.Main.Text.KeepFormatting()
 #   - local     |
 #   - tr        |
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
@@ -803,7 +779,6 @@ function BU.Main.Text.ToLowercase()
 #   - local     |
 #   - tr        |
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()          -> Main -> Echo.lib
@@ -843,13 +818,11 @@ declare -r __BU_MAIN_TEXT_LIB__SUBCAT_DEBUG_ID__TEXT_PROCESSING_FUNCTIONS__GETTI
 # ·······················································
 # Getting the occurences of a character in a main string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      | (-n | -e)
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -901,12 +874,10 @@ function BU.Main.Text.GetCharacterOccurences()
 # ·····································································
 # Getting the occurences of a string pattern in the values of an array.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -954,13 +925,11 @@ function BU.Main.Text.GetCharacterOccurencesFromArray()
 # ·································································································
 # Getting the very first character of a string, and cutting everything that follows this character.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1007,13 +976,11 @@ function BU.Main.Text.GetFirstCharacter()
 # ··································································································
 # Getting the very first field of a string, and cutting everything that follows the first delimiter.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1064,14 +1031,12 @@ function BU.Main.Text.GetFirstFieldBeforeDelim()
 # ··················································································
 # Getting the very last character of a string, and cutting the preceding characters.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - declare   | (-i)
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1127,7 +1092,6 @@ function BU.Main.Text.GetLastCharacter()
 # ·························································································
 # Get the very last field of a string, and cut everything that preceeds the last delimiter.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -1135,7 +1099,6 @@ function BU.Main.Text.GetLastCharacter()
 #   - echo      |
 #   - local     |
 #   - unset     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1215,13 +1178,11 @@ function BU.Main.Text.GetLastFieldAfterDelim()
 # ······················································································
 # Getting substring after a delimiter, which can be both a single character or a string.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -1579,7 +1540,6 @@ function BU.Main.Text.ListCharactersFromFile() {
 #   - basename
 #   - sed       (-e)
 #   - sort      (-u | -f)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

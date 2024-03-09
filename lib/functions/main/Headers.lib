@@ -130,7 +130,6 @@ declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS
 # ······················································································································
 # Function to create and display rows (decorated or not) according to the number of columns in the terminal's text area.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -138,7 +137,6 @@ declare -r __BU_MAIN_HEADERS_LIB__SUBCAT_DEBUG_ID__FUNCTIONS_DEFINITION__HEADERS
 #   - eval      |
 #   - local     |
 #   - test      |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -253,13 +251,11 @@ function BU.Main.Headers.DrawLine()
 # ··················································
 # Printing a simple header, without any decorations.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -295,14 +291,12 @@ function BU.Main.Headers.Light()
 # ··················································
 # Printing a simple header, without any decorations.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - echo      |
 #   - local     |
 #   - printf    |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -341,14 +335,12 @@ function BU.Main.Headers.LightDeco()
 # even if the "${__BU_MAIN_STAT_ECHO}" global status variable's value is set to "true",
 # it's better to create a failsafe, to avoid experiencing an infinite loop.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
 #   - local     |
 #   - read      | (-a | -r)
 #   - sleep     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

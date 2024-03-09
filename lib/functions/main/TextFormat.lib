@@ -133,13 +133,11 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_CO
 # ················································
 # Writing the error messages in a single location.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - local     |
 #   - printf    |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -170,7 +168,6 @@ function BU.Main.TextFormat.CannotCreateRessource()
 # ·································································
 # Getting the current background color from a command substitution.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -178,7 +175,6 @@ function BU.Main.TextFormat.CannotCreateRessource()
 #   - local     |
 #   - mkdir     | (-p)
 #   - touch     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -223,7 +219,6 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
 # ···························································
 # Getting the current text color from a command substitution.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename  |
@@ -231,7 +226,6 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
 #   - local     |
 #   - mkdir     | (-p)
 #   - touch     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -297,7 +291,6 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODE
 #   - mkdir     | (-p)
 #   - touch     |
 #   - tput      | (setab)
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -381,7 +374,6 @@ function BU.Main.TextFormat.SetBGColor()
 #   - touch     |
 #   - shopt     | (-s extglob | -u extglob)
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()                          -> Main -> Echo.lib
@@ -461,7 +453,6 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTION
 # ······················································
 # Conversion of color name (string) to color code (int).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   -
@@ -530,7 +521,6 @@ function BU.Main.TextFormat.Atoi()
 
 # ······················································
 # Conversion of color code (int) to color code (string).
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :

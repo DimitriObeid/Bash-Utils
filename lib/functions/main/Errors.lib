@@ -143,7 +143,6 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__CLA
 #   - basename  |
 #   - local     |
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
@@ -249,11 +248,9 @@ declare -r __BU_MAIN_ERRORS_LIB__SUBCAT_DEBUG_ID__ERRORS_HANDLING_FUNCTIONS__EXI
 # ····································································································
 # Handling exit command from sourced files, as it's impossible to properly exit the script from these.
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - basename	|
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :

@@ -145,7 +145,6 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMERIC_CONVE
 #   - local     |
 #   - printf    |
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
 #   - BU.Main.Echo.Debug()              -> Main -> Echo.lib
@@ -223,12 +222,10 @@ function BU.Main.BasicMaths.BytesToHuman()
 # ·································································
 # Negative number (float or int) to positive number (float or int).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -249,12 +246,10 @@ function BU.Main.BasicMaths.NegativeToPositive()
 # ·································································
 # Positive number (float or int) to negative number (float or int).
 
-
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
@@ -287,7 +282,6 @@ declare -r __BU_MAIN_BASICMATHS_LIB__SUBCAT_DEBUG_ID__CONVERSIONS__NUMBER_FORMAT
 # Featured shell commands and their options(s) :
 #   - echo      |
 #   - local     |
-
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
