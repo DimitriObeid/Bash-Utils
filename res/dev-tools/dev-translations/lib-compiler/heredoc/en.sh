@@ -3,7 +3,7 @@
 # shellcheck disable=SC2154
 function WriteCommentCode.Heredoc.en()
 {
-cat <<-EOF > "${v_filename_tmp}"
+cat <<-EOF >> "${v_filename_tmp}"
 #!/usr/bin/env bash
 
 # -----------------------

@@ -516,7 +516,7 @@ function BU.DevBin.LibCompilerV4.Functions.WriteCommentCode()
         exit 1;
     }
     
-    echo '/usr/bin/env bash' >> "${v_filename_tmp}";
+    echo '/usr/bin/env bash' > "${v_filename_tmp}";
     echo >> "${v_filename_tmp}";
 
 # Writing the informations about the compiled file (in English, in order to detect these informations in the "Bash-utils-init.sh" functions which handle the type of compiled file).
