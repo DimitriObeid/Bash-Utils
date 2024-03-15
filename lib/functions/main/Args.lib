@@ -115,6 +115,8 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1; 
 fi
 
+# End of the prevention of the direct execution of this file.
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -166,7 +168,7 @@ declare -r __BU_MAIN_ARGS_LIB__SUBCAT_DEBUG_ID__ARGUMENT_VALUES_CHECKINGS__QUICK
 
 #   - BU.Main.Status.ChangeSTAT_ECHO()  -> Main -> Status.lib
 
-# shellcheck disable=
+# shellcheck disable=2153
 function BU.Main.Args.PrintBadOption()
 {
     # This function call makes it easier for the user to find the current function and its executed

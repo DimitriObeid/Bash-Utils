@@ -130,6 +130,8 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1; 
 fi
 
+# End of the prevention of the direct execution of this file.
+
 # /////////////////////////////////////////////////////////////////////////////////////////////// #
 
 #### INITIALIZER RESOURCES - FUNCTIONS

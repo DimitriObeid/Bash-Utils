@@ -115,6 +115,8 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1; 
 fi
 
+# End of the prevention of the direct execution of this file.
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -201,7 +203,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompi
 # shellcheck disable=
 function BU.Main.Locale.PrintLanguageName.Optimize()
 {
-	if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+	if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         # This function call makes it easier for the user to find the current function and its executed
         # content if it is called during the execution of the main script with the "$(bash -x)" command.
 		BU.Main.Echo.Debug \
@@ -236,7 +238,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
     local tmp;          # VAR TYPE : CMD        # DESC : Storing a complex command substitution called in the previous "${usr}" variable.
 
 	#**** Code ****
-    if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+    if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         if ! BU.Main.Args__Locale.PrintLanguageName.Optimize "${p_code}" "${p_langNameEngl}"    "${p_langNameOrig}" "${p_langNameUser}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))"; then local C="${?}"; return "${C}"; fi
     else
         BU.Main.Locale.PrintLanguageName.Optimize.HandleParameterErrorsLibCompiler "${p_code}"  "${p_langNameEngl}" "${p_langNameOrig}" || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; };
@@ -371,7 +373,7 @@ function BU.Main.Locale.PrintLanguageName.Optimize()
 	echo "${output}";
 
 	# Calling the "BU.Main.Echo.DebugEnd()" function if the current script is not the compiler or any other file which directly includes its code.
-	! BU.DevBin.LibCompiler.Function.IsCompiler && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+	! BU.DevBin.X.Function.IsShellScriptFromDevBin && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 	return 0;
 }
@@ -401,7 +403,7 @@ declare -r __BU_MAIN_LOCALE_LIB__SUBCAT_DEBUG_ID__LOCALE_DISPLAY_FUNCTIONS__PRIN
 # shellcheck disable=SC2154
 function BU.Main.Locale.PrintLanguageName()
 ({
-	if ! BU.DevBin.LibCompiler.Function.IsCompiler; then
+	if ! BU.DevBin.X.Function.IsShellScriptFromDevBin; then
         # This function call makes it easier for the user to find the current function and its executed
         # content if it is called during the execution of the main script with the "$(bash -x)" command.
 		BU.Main.Echo.Debug \
@@ -770,7 +772,7 @@ function BU.Main.Locale.PrintLanguageName()
 		  fi
 	fi;
 
-	! BU.DevBin.LibCompiler.Function.IsCompiler && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+	! BU.DevBin.X.Function.IsShellScriptFromDevBin && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
 	return 0;
 })

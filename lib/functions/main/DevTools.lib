@@ -115,6 +115,8 @@ if [ "${0##*/}" == "${BASH_SOURCE[0]##*/}" ]; then
     exit 1; 
 fi
 
+# End of the prevention of the direct execution of this file.
+
 # ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; #
 
 #################################### DEFINING LIBRARY FUNCTIONS ###################################
@@ -322,7 +324,7 @@ function BU.Main.DevTools.ShellcheckVerif()
     
     # Checking if the "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" exists or not on the user's hard drive.
     if [ ! -f "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" ]; then 
-        touch "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}";
+        touch "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" || return 1;
     fi
 
     # Checking first if the file was already shellchecked by parsing the "${__BU__BIN__LIB_COMPILER_V4__RESOURCES__SHELLCHECKED_FILES_LIST}" file.

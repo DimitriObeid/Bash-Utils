@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# ---------------------------------------------------
-# "LibCompilerV4.Functions.CompilerUsage()" function.
+# -------------------------------------------------------------
+# "BU.DevBin.LibCompilerV4.Functions.CompilerUsage()" function.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__USAGE="Usage : ./path/to/lib-compilerV4.sh [MANDATORY ARG] [OPTIONAL ARGS]...";
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__PROGRAM_DESC="Compiles the content of the Bash Utils framework's basic files and its main module into a single file.";
 
-# ------------------------------------------------------------------------
-# "LibCompilerV4.Functions.CompilerUsage()" function : mandatory argument.
+# ----------------------------------------------------------------------------------
+# "BU.DevBin.LibCompilerV4.Functions.CompilerUsage()" function : mandatory argument.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MANDATORY_ARG="Mandatory argument (use ONLY one of them) :";
 
@@ -66,8 +66,8 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__MA
     -h --help                           replacement of the '--lang=' option. Displays on the screen the help messages and the compiler's usage
                                         instructions.";
 
-# ------------------------------------------------------------------------
-# "LibCompilerV4.Functions.CompilerUsage()" function : optional arguments.
+# ----------------------------------------------------------------------------------
+# "BU.DevBin.LibCompilerV4.Functions.CompilerUsage()" function : optional arguments.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OPTIONAL_ARGS="Optional arguments (WARNING : some options are incompatible between each other, please read carefully this help guide) :";
 
@@ -148,16 +148,16 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_M__COMPILER_USAGE_FNCT__OP
                                         compiled file, so this option is incompatible with the '--compile-stable' option.";
 
 
-# --------------------------------------------------------------------
-# "LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()" function.
+# ------------------------------------------------------------------------------
+# "BU.DevBin.LibCompilerV4.Functions.HandleIncompatibleOptionalArgs()" function.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_SINGLE="${__WARNING}The ${__HIGHLIGHT}%s${__WARNING} option is incompatible with this option : ${__HIGHLIGHT}%s${__RESET}";
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_W__HANDLEINCOMPATIBLEOPTIONALARGS__WARNING_MSG_MULTIPLE="${__WARNING}The ${__HIGHLIGHT}%s${__WARNING} option is incompatible with these options : ${__HIGHLIGHT}%s${__RESET}";
 
 
-# --------------------------------------------------------------------------
-# "LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()" function.
+# --------------------------------------------------------------------------------------
+# "BU.DevBin.LibCompilerV4.Functions.QuitErrorMessage_NumberOfFilesCompiled()" function.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__QUITERRORMESSAGE_NUMBEROFFILESCOMPILED__NO_FILES_WERE_COMPILED="${__ERROR}No files were compiled${__RESET}";
 
@@ -237,8 +237,8 @@ declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__BAD_LANGUAGE_PASSED="${
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_N__BEGIN_FRAMEWORK_COMPILATION="STARTING THE COMPILATION OF THE BASH UTILS FRAMEWORK IN THE ${__HIGHLIGHT}%s${__NEWSTEP} FILE${__RESET}";
 
 
-# ---------------------------------------------------------------------------------------------------------
-# ("LibCompilerV4.Functions.WriteBU" function) Writing the target file's content into the file to generate.
+# -------------------------------------------------------------------------------------------------------------------
+# ("BU.DevBin.LibCompilerV4.Functions.WriteBU" function) Writing the target file's content into the file to generate.
 
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE="UNABLE TO WRITE THE FILE'S CONTENT IN THE FILE TO GENERATE !";
 declare -gr __BU__BIN__LIB_COMPILER_V4__GLOBVARS__MSG_E__UNABLE_TO_WRITE_IN_THE_FILE_TO_GENERATE__ADVICE="Please check its path, its rights and if it exists.";
