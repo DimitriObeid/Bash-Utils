@@ -131,17 +131,17 @@ function BU.ModuleInit.SetInitLocale.fr()
     # FONCTION : "BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
     # Message d'initialisation.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISATION DES VARIABLES GLOBALES";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="INITIALISATION DES VARIABLES GLOBALES";
 
     # Identifiant du processus (PID).
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="Initialisation des informations du script";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="Cette variable globale enregistre l'identifiant de processus (PID) du programme actuel";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="Initialisation des informations du script";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="Cette variable globale enregistre l'identifiant de processus (PID) du programme actuel";
 
     # Chemins du gestionnaire de modules.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="Initialisation des variables du dossier racine du gestionnaire de modules";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="Cette variable globale enregistre le chemin d'accès au répertoire parent des répertoires de configuration et d'initialisation de chaque module";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="Cette variable globale enregistre le chemin vers les répertoires de configuration et d'initialisation de chaque module";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="Cette variable globale enregistre le chemin vers le script d'initialisation des modules";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="Initialisation des variables du dossier racine du gestionnaire de modules";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="Cette variable globale enregistre le chemin d'accès au répertoire parent des répertoires de configuration et d'initialisation de chaque module";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="Cette variable globale enregistre le chemin vers les répertoires de configuration et d'initialisation de chaque module";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="Cette variable globale enregistre le chemin vers le script d'initialisation des modules";
 
     # Chemin du dossier temporaire du script d'initialisation.
     declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="Initialisation du répertoire temporaire du framework";
@@ -149,51 +149,51 @@ function BU.ModuleInit.SetInitLocale.fr()
     declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR_PATH="Cette variable globale enregistre le chemin du dossier temporaire du framework";
 
     # Chemins des dossiers de configuration.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initialisation des chemins des répertoires de configuration";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="Initialisation des chemins des répertoires de configuration";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configuration de chaque module.";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_NAME="Cette variable globale enregistre le nom du dossier de configuration de chaque module.";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configuration de chaque module.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_NAME="Cette variable globale enregistre le nom du dossier de configuration de chaque module.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configuration de chaque module.";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configuration utilisé par le script d'initialisation des modules.";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_NAME="Cette variable globale enregistre le nom du dossier de configuration utilisé par le script d'initialisation des modules.";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configuration utilisé par le script d'initialisation des modules.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configuration utilisé par le script d'initialisation des modules.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_NAME="Cette variable globale enregistre le nom du dossier de configuration utilisé par le script d'initialisation des modules.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configuration utilisé par le script d'initialisation des modules.";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configurations du module actuellement traité";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_NAME="Cette variable globale enregistre le nom du dossier de configurations du module actuellement traité";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configurations du module actuellement traité";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PARENT="Cette variable globale enregistre le chemin du dossier parent du dossier de configurations du module actuellement traité";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_NAME="Cette variable globale enregistre le nom du dossier de configurations du module actuellement traité";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PATH="Cette variable globale enregistre le chemin du dossier de configurations du module actuellement traité";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier parent du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le nom du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier parent du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le nom du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="Cette variable globale enregistre le chemin du dossier contenant les fichiers de traductions, utilisés par le script d'initialisation des modules";
 
     # Fichiers de configuration du script d'initialisation.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES="Initialisation des chemins des fichiers de configuration du script d'initialisation";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="Cette variable globale enregistre le chemin du fichier de configuration des variables globales de statut";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES="Initialisation des chemins des fichiers de configuration du script d'initialisation";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="Cette variable globale enregistre le chemin du fichier de configuration des variables globales de statut";
 
     # Chemins des scripts d'initialisation de chaque module.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initialisation du répertoire des fichiers d'initialisation des modules";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="Cette variable globale enregistre le chemin des fichiers d'initialisation du module actuel";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="Initialisation du répertoire des fichiers d'initialisation des modules";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="Cette variable globale enregistre le chemin des fichiers d'initialisation du module actuel";
 
     # Chemin du répertoire racine de la librairie.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Cette variable globale enregistre le nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Cette variable globale enregistre le chemin du fichier contenant le chemin du dossier racine de la librairie";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Cette variable globale enregistre le nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Cette variable globale enregistre le chemin du fichier contenant le chemin du dossier racine de la librairie";
 
     # Chemin du répertoire racine de la librairie (avec les privilèges du super-utilisateur).
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie (installée avec les privilèges du super-utilisateur avec le fichier d'installation).";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Cette variable globale enregistre le nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Cette variable globale enregistre le chemin du fichier contenant le chemin du dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE="Initialisation des variables du fichier qui contient le chemin du dossier racine de la librairie (installée avec les privilèges du super-utilisateur avec le fichier d'installation).";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="Cette variable globale enregistre le nom du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="Cette variable globale enregistre le nom du dossier parent du fichier contenant le chemin d'accès au dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="Cette variable globale enregistre le chemin du fichier contenant le chemin du dossier racine de la librairie (si ce fichier est détenu par le super-utilisateur)";
 
     # Variables diverses.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="Initialisation des variables diverses";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BU_BASE_IS_TRANSLATED="Cette variable globale enregistre l'état déterminant si la base du framework Bash Utils (fichiers de librairie du module principal) est traduite ou non";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="Cette variable globale enregistre le caractère qui est utilisé comme délimiteur du fichier de traduction CSV du module principal.";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="Cette variable globale enregistre la date actuelle, afin de l'afficher avant les messages du journal";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="Cette variable globale enregistre la langue de l'utilisateur en ne conservant que son code ISO 639-1";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="Cette variable globale, qui est un tableau, enregistre la liste des valeurs acceptées par la variable globale de statut « \$__BU_MODULE_INIT_STAT_DEBUG_BASHX »";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="Initialisation des variables diverses";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BU_BASE_IS_TRANSLATED="Cette variable globale enregistre l'état déterminant si la base du framework Bash Utils (fichiers de librairie du module principal) est traduite ou non";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="Cette variable globale enregistre le caractère qui est utilisé comme délimiteur du fichier de traduction CSV du module principal.";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="Cette variable globale enregistre la date actuelle, afin de l'afficher avant les messages du journal";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="Cette variable globale enregistre la langue de l'utilisateur en ne conservant que son code ISO 639-1";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="Cette variable globale, qui est un tableau, enregistre la liste des valeurs acceptées par la variable globale de statut « \$__BU_MODULE_INIT_STAT_DEBUG_BASHX »";
 
     # --------
 
@@ -201,25 +201,25 @@ function BU.ModuleInit.SetInitLocale.fr()
     # FONCTION : "BU.ModuleInit.DisplayInitGlobalVarsInfos()"
 
     # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Module      : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2="Fichier     : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3="Fonction    : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4="Ligne       : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Module      : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2="Fichier     : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3="Fonction    : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4="Ligne       : %s";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Module      : Inconnu";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="Fichier     : Inconnu";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Fonction    : Aucune";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Ligne       : Inconnue";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Module      : Inconnu";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="Fichier     : Inconnu";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Fonction    : Aucune";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Ligne       : Inconnue";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9="Tableau global déclarée : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A="Variable globale déclarée : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B="Description :";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9="Tableau global déclarée : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A="Variable globale déclarée : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B="Description :";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C="Type        : Array (tableau)";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D="Type        : %s %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C="Type        : Array (tableau)";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D="Type        : %s %s";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E="Valeur      : La valeur de la variable globale « %s » est une substitution de commande";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F="Valeur      : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E="Valeur      : La valeur de la variable globale « %s » est une substitution de commande";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F="Valeur      : %s";
 
     # Traduction des types de variables.
     declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR="(caractère alphabétique)";
@@ -433,18 +433,18 @@ function BU.ModuleInit.SetInitLocale.fr()
     # FONCTION : "BU.ModuleInit.Usage()"
 
     # Liste des différents messages, servant à mieux mesurer l'espace entre le texte et le double point.
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="ATTENTION             : les quatre paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display      : ne pas afficher les messages d'initialisation à l'écran, mais les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display    : afficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="ATTENTION             : les quatre paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display         : afficher les messages d'initialisation sur l'écran pendant leur enregistrement dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display      : ne pas afficher les messages d'initialisation à l'écran, mais les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut            : ne pas afficher les messages d'initialisation à l'écran OU les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display    : afficher les messages d'initialisation à l'écran sans les enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} »";
 
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="ATTENTION             : les deux paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full       : afficher à l'écran et / ou enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » TOUTES les informations sur le processus d'initialisation";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » les informations essentielles uniquement";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="ATTENTION             : les deux paramètres suivants sont incompatibles entre eux, leurs valeurs s'écrasent entre elles :";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full       : afficher à l'écran et / ou enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » TOUTES les informations sur le processus d'initialisation";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial    : afficher à l'écran et / ou enregistrer dans le tableau « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » les informations essentielles uniquement";
 
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false             OU --stat-debug=true";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category    OU --stat-debug-bashx=file   OU --stat-debug-bashx=function OU --stat-debug-bashx=sub-category";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false             OU --stat-debug=true";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category    OU --stat-debug-bashx=file   OU --stat-debug-bashx=function OU --stat-debug-bashx=sub-category";
 
     # Affichage des valeurs supportées par l'option "module".
     declare -g -r __BU_MODULE_INIT_MSG__USAGE__SUPVALS="Les valeurs supportées sont :";
@@ -921,9 +921,9 @@ function BU.ModuleInit.SetInitLocale.fr()
     declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE="Essayez une seule de ces valeurs acceptées pour cette variable globale de statut : ";
 
     # Traitement de la description de chaque variable globale de statut du module principal : écriture de phrases redondantes.
-    declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="Cette variable globale de statut du module principal enregistre une valeur booléenne, servant à";
-    declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="Cette variable globale de statut du module principal enregistre un nombre décimal, servant à";
-    declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="Cette variable globale de statut du module principal enregistre une chaîne de caractères, servant à";
+    declare       __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="Cette variable globale de statut du module principal enregistre une valeur booléenne, servant à";
+    declare       __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="Cette variable globale de statut du module principal enregistre un nombre décimal, servant à";
+    declare       __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="Cette variable globale de statut du module principal enregistre une chaîne de caractères, servant à";
 
     # Traitement de la description de chaque variable globale de statut du module principal.
     declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING} déterminer le niveau de décoration de texte";

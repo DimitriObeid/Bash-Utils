@@ -131,17 +131,17 @@ function BU.ModuleInit.SetInitLocale.bg()
     # ФУНКЦИЯ : BU.ModuleInit.DisplayInitializedGlobalVarsInfos()"
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_GLOBAL_VARS="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__SCRIPT_INFO="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__PID="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_ROOT_DIR_VARS="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT_HOME="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__ROOT="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INITIALIZER_PATH="";
 
     #
     declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__INIT_TMP_DIR="";
@@ -149,51 +149,51 @@ function BU.ModuleInit.SetInitLocale.bg()
     declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIVGI__TMP_DIR_PATH="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_CONF_DIRS="";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PARENT="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_NAME="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PARENT="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_NAME="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_DIR_PATH="";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PARENT="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_NAME="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PARENT="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_NAME="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR_PATH="";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PARENT="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_NAME="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PARENT="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_NAME="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_MODULES_DIR_PATH="";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="";
-
-    #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_LANG_DIR="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__CONFIGURATION_FILES="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__CONFIG_INIT_DIR__STATUS="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MODULE_INIT_DIR="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__MODULES_DIR="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_FILE_PATH="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BU_BASE_IS_TRANSLATED="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_VARS_LIB_ROOT_DIR_ROOT_FILE="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_NAME="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PARENT_DIR="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__LIB_ROOT_DIR_ROOT_FILE_PATH="";
+
+    #
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__INIT_MISC_VARS="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BU_BASE_IS_TRANSLATED="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__TRANSLATION_FILE_DELIM="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__DATE_LOG="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__USER_LANG="";
+    declare -g    __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__BASHX_DEBUG_VALS_ARRAY="";
 
     # --------
 
@@ -201,25 +201,25 @@ function BU.ModuleInit.SetInitLocale.bg()
     # ФУНКЦИЯ : BU.ModuleInit.DisplayInitGlobalVarsInfos()"
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Modl  : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2="File  : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3="Func  : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4="Line  : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__1="Modl  : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__2="File  : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__3="Func  : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__4="Line  : %s";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Modl  : ";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="File  : ";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Func  : ";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Line  : ";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__5="Modl  : ";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__6="File  : ";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__7="Func  : ";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__8="Line  : ";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9=" : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A=" : %s";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B=" :";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__9=" : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__A=" : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__B=" :";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C=" : ";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D=" : %s %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__C=" : ";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__D=" : %s %s";
 
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E=" :  « %s »";
-    declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F=" : %s";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__E=" :  « %s »";
+    declare       __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__F=" : %s";
 
     #
     declare -g -r __BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__TYPE__ACHAR="()";
@@ -433,18 +433,18 @@ function BU.ModuleInit.SetInitLocale.bg()
     # ФУНКЦИЯ : BU.ModuleInit.Usage()"
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="                          :  :";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display             :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display          :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut                :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display        :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_0="                          :  :";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_1="--log-display             :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_2="--log-no-display          :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_3="--log-shut                :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________LOG_4="--log-shut-display        :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
 
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING                   :  :";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full           :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial        :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_0="WARNING                   :  :";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_1="--mode-log-full           :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS_MODE_____LOG_2="--mode-log-partial        :  « \${__BU_MODULE_INIT_MSG_ARRAY[@]} » ";
 
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            --stat-debug=true";
-    declare -g -r __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   --stat-debug-bashx=file    --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS__________DEBUG="--stat-debug=false            --stat-debug=true";
+    declare       __BU_MODULE_INIT_MSG__USAGE__INCOMPATIBLE_VALS____DEBUG_BASHX="--stat-debug-bashx=category   --stat-debug-bashx=file    --stat-debug-bashx=function  OR --stat-debug-bashx=sub-category";
 
     #
     declare -g -r __BU_MODULE_INIT_MSG__USAGE__SUPVALS=" :";
@@ -921,9 +921,9 @@ function BU.ModuleInit.SetInitLocale.bg()
     declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__BAD_VALUE_GIVEN__ADVICE=" : ";
 
     #
-    declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="";
-    declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="";
-    declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="";
+    declare       __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_BOOL="";
+    declare       __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_FLOAT="";
+    declare       __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING="";
 
     #
     declare -g -r __BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR_DESC_DECHO="${__BU_MODULE_INIT_MSG__INIT_MAIN_MODULE__STEP_THREE__STAT_GLOB_VAR__IS_STAT_VAL_STRING}";

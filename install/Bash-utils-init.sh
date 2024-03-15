@@ -1935,7 +1935,7 @@ function BU.ModuleInit.DisplayInitGlobalVarsInfos__DisplayInitializedGlobalVarsI
 
     # Unsetting every string variables in order to free up some memory.
 
-	# DO NOT single or double quote the following command substitution.
+	# DO NOT single or double quote the following command substitutions.
 
 	# shellcheck disable=SC2046
 	unset $(compgen -v "__BU_MODULE_INIT_MSG__DISP_INIT_GLOB_VARS_INFO__DIGVI__");
