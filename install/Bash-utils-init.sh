@@ -270,7 +270,7 @@ function BU.DevBin.LibCompiler.Function.IsCompiler()            { local f=${0##*
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsFrameworkBeingInstalled()              { if [ "${__BU_MODULE_PRE_INIT__IS_FRAMEWORK_INSTALLED,,}" == 'true' ] || [ "${0,,}" == "./install-framework.sh" ] || [ "${0,,}" == "install-framework.sh" ]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsFrameworkBeingInstalled()              { if [ "${__BU_MODULE_PRE_INIT__IS_FRAMEWORK_INSTALLED,,}" == 'true' ] || [[ ( "${0,,}" == "./install-framework."?(ba)sh )  || ( "${0,,}" == "install-framework".?(ba)sh ) ]]; then return 0; else return 1; fi }
 
 # ······································································································
 # Checking if the Bash Utils framework's main code is executed from a stable version of a compiled file.
@@ -284,7 +284,7 @@ function BU.ModuleInit.IsFrameworkBeingInstalled()              { if [ "${__BU_M
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsFrameworkCompiledStable()              { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile##*/,,}" == bash-utils-stable?(-full|-multilang|-[a-z][a-z]).sh ]]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsFrameworkCompiledStable()              { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile##*/,,}" == bash-utils-stable?(-full|-multilang|-[a-z][a-z]).?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ·········································································································
 # Checking if the Bash Utils framework's main code is executed from an unstable version of a compiled file.
@@ -298,7 +298,7 @@ function BU.ModuleInit.IsFrameworkCompiledStable()              { local v_currFi
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsFrameworkCompiledUnstable()            { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile##*/,,}" == bash-utils?(-full|-multilang|-[a-z][a-z]).sh ]]; then return 0; else return 1; fi }
+function BU.ModuleInit.IsFrameworkCompiledUnstable()            { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile##*/,,}" == bash-utils?(-unstable)?(-full|-multilang|-[a-z][a-z]).?(ba)sh ]]; then return 0; else return 1; fi }
 
 # ············································································································································································································
 # Checking if the whole framework's main code (config, initializer and main module's code) is compiled in a single localized file (English is not shipped or is not the only language shipped into this file).
@@ -312,12 +312,12 @@ function BU.ModuleInit.IsFrameworkCompiledUnstable()            { local v_currFi
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsFrameworkCompiledLocalized()   { 
+function BU.ModuleInit.IsFrameworkCompiledLocalized()           {
     local v_currFile;
     
     v_currFile="$(basename "${BASH_SOURCE[0]}")"; 
     
-    if [[ ("${v_currFile##*/,,}" == bash-utils?(-stable)-[a-z][a-z].sh) || ("${v_currFile##*/,,}" == bash-utils?(-full|-multilang).sh) ]] \
+    if [[ ("${v_currFile##*/,,}" == bash-utils?(-?(un)stable)-[a-z][a-z].?(ba)sh) || ("${v_currFile##*/,,}" == bash-utils?(-full|-multilang).?(ba)sh) ]] \
     && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 15000 ]; then return 0; else return 1; fi }
 
 # ························································································································································································
@@ -332,7 +332,7 @@ function BU.ModuleInit.IsFrameworkCompiledLocalized()   {
 #   - Feel free to call a function if it is needed for your contribution.
 
 # shellcheck disable=
-function BU.ModuleInit.IsFrameworkCompiledUnlocalized() { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile##*/,,}" == bash-utils?(-stable)-full.sh ]] && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 15000 ]; then echo "FILE = ${v_currFile}"; return 0; else return 1; fi }
+function BU.ModuleInit.IsFrameworkCompiledUnlocalized() { local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")"; if [[ "${v_currFile##*/,,}" == bash-utils?(-?(un)stable)-full.?(ba)sh ]] && [ "$(wc -l "${v_currFile}" | cut -f1 -d" ")" -ge 15000 ]; then echo "FILE = ${v_currFile}"; return 0; else return 1; fi }
 
 # ····································································································································
 # Checking if the whole framework's main code (config, initializer and main module's code) is compiled in a single (un)localized file.
@@ -349,7 +349,7 @@ function BU.ModuleInit.IsFrameworkCompiledUnlocalized() { local v_currFile; v_cu
 
 # shellcheck disable=
 function BU.ModuleInit.IsFrameworkCompiled()
-{
+{ local v_currFile; v_currFile="$(basename "${BASH_SOURCE[0]}")";
     if BU.ModuleInit.IsFrameworkCompiledLocalized || BU.ModuleInit.IsFrameworkCompiledUnlocalized; then
         return 0;
     else
@@ -388,8 +388,8 @@ function BU.ModuleInit.IsInScript()
     fi
 }
 
-# ········································
-# Checking if the framework is translated.
+# ·····················································································
+# Checking if the framework's features are translated to another language than English.
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured shell commands and their options(s) :

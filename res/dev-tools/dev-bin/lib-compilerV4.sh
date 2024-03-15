@@ -1446,7 +1446,14 @@ function LibCompilerV4.CompileInSingleFile()
             __compiled_file_name="Bash-utils-${__v_loop_curr_locale}.sh";
 
         elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-            __compiled_file_name="Bash-utils-multilang.sh";
+            # If every languages codes stored into the "${___BU_COMPILER__LANG_ARRAY}" array are passed, then the compiled file will have the "full" string in its name.
+            if diff <(printf "%s\n" "${__language_array[@]}" | sort) <(printf "%s\n" "${___BU_COMPILER__LANG_ARRAY[@]}" | sort) >/dev/null; then
+                __compiled_file_name="Bash-utils-full.sh";
+
+            # Else, if not every languages codes stored into the "${___BU_COMPILER__LANG_ARRAY}" array are passed, then the compiled file will have the "multilang" string in its name.
+            else
+                __compiled_file_name="Bash-utils-multilang.sh";
+            fi
         fi
 
         __v_loop_compiled_file_path="${__v_loop_compiled_file_parent_dir}/${__compiled_file_name}";
@@ -2021,7 +2028,14 @@ function LibCompilerV4.CompileInSingleFile()
                 __v_loop_compiled_stable_file_path="${__v_loop_compiled_stable_file_parent_dir}/Bash-utils-stable-${__v_loop_curr_locale}.sh";
 
             elif [ -n "${__vMandatoryArgLangInclude}" ]; then
-                __v_loop_compiled_stable_file_path="${__v_loop_compiled_stable_file_parent_dir}/Bash-utils-stable-full.sh";
+                # If every languages codes stored into the "${___BU_COMPILER__LANG_ARRAY}" array are passed, then the compiled file will have the "full" string in its name.
+                if diff <(printf "%s\n" "${__language_array[@]}" | sort) <(printf "%s\n" "${___BU_COMPILER__LANG_ARRAY[@]}" | sort) >/dev/null; then
+                    __v_loop_compiled_stable_file_path="${__v_loop_compiled_stable_file_parent_dir}/Bash-utils-stable-full.sh";
+
+                # Else, if not every languages codes stored into the "${___BU_COMPILER__LANG_ARRAY}" array are passed, then the compiled file will have the "multilang" string in its name.
+                else
+                    __v_loop_compiled_stable_file_path="${__v_loop_compiled_stable_file_parent_dir}/Bash-utils-multilang.sh";
+                fi
             fi
 
             #~ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
