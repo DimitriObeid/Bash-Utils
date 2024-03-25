@@ -850,6 +850,29 @@ function BU.ModuleInit.GetModuleInitLanguage_RestOfLibrary()
     return 0;
 }
 
+# ·······························································································································································································
+# Declaring global variables into the "BU.ModuleInit.SetInitLocale.${__BU_MODULE_INIT__USER_LANG}()" function and ignoring the empty strings in order to avoid overwritting the existing strings.
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured shell commands and their options(s) :
+#	- local	|
+
+# \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+# Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   -
+
+# shellcheck disable=
+function Declare()
+{
+    #**** Parameters ****
+    local pa_args=("${@}"); # ARG TYPE : Array  - REQUIRED | DEFAULT VAL : NULL - DESC : array which contains the arguments to pass to the "$(declare)" command.
+
+    #**** Code ****
+    # TODO : Check the presence of the string to pass to the "$(declare)" command into the last index of the "${pa_args[@]}" array.
+
+    return 0;
+}
+
 # ·········································································································································································································
 # Set english as default language if an unsupported language is stored in the "${__BU_MODULE_INIT__USER_LANG}" global variable (this function is not called if the framework is compiled in a single file).
 
