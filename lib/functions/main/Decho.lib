@@ -165,7 +165,9 @@ function BU.Main.Decho.__Decho()
 	#**** Code ****
     printf "%s\n" "${p_newTextColor}${p_string}${p_newBGColor}";
 
-    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+    BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+    return 0;
 }
 
 # ···································································
@@ -244,10 +246,29 @@ function BU.Main.Decho.Decho()
 
     #**** Code ****
     # If a string is provided as a color name, the corresponding color code is assigned to the variable.
-    if BU.Main.Checkings.IsAlphaString "${p_newTextColor}";     then BU.Main.TextFormat.Atoi "${p_newTextColor}";   p_newTextColor="${__BU_MAIN_COLORS_ATOI_COLOR}";    fi
-    if BU.Main.Checkings.IsAlphaString "${p_newBGColor}";       then BU.Main.TextFormat.Atoi "${p_newBGColor}";     p_newBGColor="${__BU_MAIN_COLORS_ATOI_COLOR}";      fi
+    if BU.Main.Checkings.IsAlphaString "${p_newTextColor}"; then
+        BU.Main.TextFormat.Atoi "${p_newTextColor}";
+        
+        p_newTextColor="${__BU_MAIN_COLORS_ATOI_COLOR}";
+    fi
+    
+    if BU.Main.Checkings.IsAlphaString "${p_newBGColor}"; then
+        BU.Main.TextFormat.Atoi "${p_newBGColor}";
+        
+        p_newBGColor="${__BU_MAIN_COLORS_ATOI_COLOR}";
+    fi
 
-    if ! BU.Main.Args__Decho.Decho "${p_string}" "${p_newTextColor}" "${p_newTextColor}" "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "${LINENO}"; then return 1; fi
+    if ! BU.Main.Args__Decho.Decho \
+        "${p_string}" \
+        "${p_newTextColor}" \
+        "${p_newBGColor}" \
+        "$(basename \
+            "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${LINENO}";
+    then
+        return "${?}";
+    fi
 
     BU.Main.Checkings.CheckDecho;
 
@@ -256,7 +277,9 @@ function BU.Main.Decho.Decho()
 
             # If the text formatting is forbidden, but the "${__BU_MAIN_STAT_TXT_FMT}" global status variable's value is set to "true", the text to decorate will be put between French guillemets.
             if BU.Main.Status.CheckStatAllowFormatting; then
-                echo -ne "« ${p_string} »"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                echo -ne "« ${p_string} »";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
                 return 0;
 

@@ -1497,7 +1497,7 @@ function BU.Main.Args.X()
                 "${BASH_SOURCE[0]}")" \
             "${FUNCNAME[0]}" \
             "${lineno}" \
-            '--decho')";
+            "$([ "${FUNCNAME[1]}" != 'BU.Main.Args__Decho.Decho' ] && echo -n '--decho')")";
 }
 
 # ········································································································
@@ -1803,7 +1803,7 @@ function BU.Main.Args__Decho.Decho()
 	BU.Main.Args.GetArgc-FFL "${#}" '6' "${p_filename}" "${p_funcname}" "${p_lineno}";
 
 	# If the text's color code is not an integer.
-	if ! BU.Main.Checkings.IsPositiveInt "${p_newTextColor}"; then
+	if [ -n "${p_newTextColor}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_newTextColor}"; then
         local lineno="$(( LINENO - 1 ))";
 
         printf \
@@ -1821,7 +1821,7 @@ function BU.Main.Args__Decho.Decho()
     fi
 
     # If the background's color code is not an integer.
-    if ! BU.Main.Checkings.IsPositiveInt "${p_newBGColor}"; then
+    if [ -n "${p_newBGColor}" ] && ! BU.Main.Checkings.IsPositiveInt "${p_newBGColor}"; then
         local lineno="$(( LINENO - 1 ))";
 
         printf \

@@ -149,22 +149,24 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__SETTING_COLORS__GETTING_CO
 function BU.Main.TextFormat.CannotCreateRessource()
 {
     #**** Parameters ****
-    local p_file=${1:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
-    local p_fnct=${2:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
-    local p_line=${3:-NULL}; # ARG TYPE : Int       - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_file=${1:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : File where the current error occured.
+    local p_fnct=${2:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Func where the current error occured.
+    local p_line=${3:-NULL}; # ARG TYPE : Int       - REQUIRED | DEFAULT VAL : NULL     - DESC : Line where the current error occured.
 
-    local p_path=${4:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
-    local p_type=${5:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC :
+    local p_path=${4:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Path to the resource whose creation failed.
+    local p_type=${5:-NULL}; # ARG TYPE : String    - REQUIRED | DEFAULT VAL : NULL     - DESC : Type of the resource to create initially (dir = directory ; file = self explanatory).
 
     #**** Code ****
-    echo "IN ${p_file}, FUNCTION ${p_fnct}, LINE ${p_line} --> ERROR : THE ${p_path} $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
+    echo "IN ${p_file}, FUNCTION ${p_fnct}, LINE ${p_line} --> ERROR : THE « ${p_path} » $( [[ "${p_type,,}" == 'dir' ]] && printf 'DIRECTORY' || printf 'FILE' ) CANNOT BE CREATED" >&2;
     echo "Please check what is preventing this $( [[ "${p_type,,}" == 'dir' ]] && printf 'directory' || printf 'file' ) directory from being created. It may be a directory permission issue." >&2;
     echo >&2;
 
     echo "Terminating the script's execution" >&2;
     echo >&2;
 
-    BU.Main.Errors.Exit 1; return "${?}";
+    BU.Main.Errors.Exit 1;
+
+    return "${?}";
 }
 
 # ·································································
@@ -192,19 +194,7 @@ function BU.Main.TextFormat.GetBGColorFromCMD()
     local v_code;   # VAR TYPE : CMD    - DESC : This variable stores the content of the file which contains the ANSi raw escape sequence.
 
     #**** Code ****
-    if [ ! -d "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}" ]; then mkdir -p "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}" || {
-            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PARENT}" 'dir';
-
-            return 1;
-        };
-    fi
-
-    if [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" || {
-            BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" 'file';
-
-            return 1;
-        }
-    fi
+    [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}" ] || BU.Main.TextFormat.CreateRessource 'BG' || return "${?}";
 
     # Storing the background color's ANSI escape sequence in the file.
     echo "${p_cmd}" > "${__BU_MAIN_PROJECT_COLOR_BG_RAW_CODE_FILE_PATH}";
@@ -276,6 +266,83 @@ function BU.Main.TextFormat.GetTextColorFromCMD()
 
 declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES="${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}::setting-color-codes-in-files";
 
+#
+# Creating and managing the needed ressources (directories, files, permissions, disk space, etc...) without relying on the other parts of the framework.
+
+#
+
+#
+
+# shellcheck disable=
+function BU.Main.TextFormat.CreateRessource()
+{
+    # This function call makes it easier for the user to find the current function and its executed
+    # content if it is called during the execution of the main script with the "$(bash -x)" command.
+    BU.Main.Echo.Debug \
+        "main" \
+        "$(basename "${BASH_SOURCE[0]}")" \
+        "${FUNCNAME[0]}" \
+        "${__BU_MAIN_TEXTFORMAT_LIB__CAT_DEBUG_ID__COLORS}" \
+        "${__BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS__SETTING_COLOR_CODES_IN_FILES}";
+
+    #**** Parameters ****
+    local p_file=${1:-$'\0'};   # ARG TYPE : String     - REQUIRED | DEFAULT VAL : NULL     - DESC : File to create (background OR text color).
+
+    #**** Variables ****
+    local v_type_d;             # VAR TYPE : String     - DESC : Indirect expansion for the parent directory of the file to create.
+    local v_type_f;             # VAR TYPE : String     - DESC : Indirect expansion for the name of the file to create.
+
+    #**** Code ****
+    if [ "${p_file^^}" == 'BG' ]; then
+        v_type_d='__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT';
+        v_type_f='__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH';
+
+    elif [[ "${p_file^^}" == T?(E)XT ]]; then
+        v_type_d='__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT';
+        v_type_f='__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH';
+    fi
+
+    # Checking if the program has the correct rights to write data into the parent directory of the folder to create.
+    if BU.Main.Files.IsRW "$(dirname "${!v_type_d}")"; then
+        if [ ! -d "${!v_type_d}" ]; then
+            mkdir "${!v_type_d}";
+
+            if [ "${?}" != 0 ]; then
+                BU.Main.TextFormat.CannotCreateRessource \
+                    "$(basename \
+                        "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "$(( LINENO - 1 ))" \
+                    "${!v_type_d}" \
+                    'dir';
+
+                return 1
+            fi
+        fi
+
+        if [ ! -f "${!v_type_f}" ]; then
+            touch "${!v_type_f}";
+
+            if [ "${?}" != 0 ]; then
+                BU.Main.TextFormat.CannotCreateRessource \
+                    "$(basename \
+                        "${BASH_SOURCE[0]}")" \
+                    "${FUNCNAME[0]}" \
+                    "$(( LINENO - 1 ))" \
+                    "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" \
+                    'file';
+
+                return 1;
+            fi
+        fi
+    else
+
+        return "${}";
+    fi
+
+    return 0;
+}
+
 # ····································································································································
 # Writing the text zone's background color into a file, to be processed by any function which needs to know what is the current color.
 
@@ -321,39 +388,61 @@ function BU.Main.TextFormat.SetBGColor()
 	local p_color_code=${1:-$'\0'};     # ARG TYPE : Int        # REQUIRED | DEFAULT VAL : NULL     - DESC : Color code
 	local p_init_ctrl=${2:-$'\0'};      # ARG TYPE : String     # CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the background color's temporary file.
 
+    #**** Variables ****
+    declare -i X;                       # VAR TYPE : Int        - DESC : Return code of the "$(echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}")" command.
+
 	#**** Code ****
 	# Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
-	if [[ "${p_init_ctrl,,}" == ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" 'create' 'false' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return "${C}"; }; fi
+	if [[ "${p_init_ctrl,,}" == ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then
+        BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" 'create' 'false' || {
+            local C="${?}";
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            return "${C}";
+        };
+
+    fi
 
 	# If the script is allowed to format text.
     if BU.Main.Status.CheckStatAllowFormatting; then
         # Checking the existence of the "bgcolor.tmp" (background color) file's parent directory, and creating it if it doesn't exists.
-        if [ ! -d "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" ]; then mkdir -p "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PARENT}" 'dir';
+        if [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" ]; then
+            BU.Main.TextFormat.CreateRessource 'BG' || {
+                X="${?}";
 
-                return 1;
-            };
-        fi
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        # Checking the existence of the "bgcolor.tmp" (background color) file in its defined path, and creating it if it doesn't exists.
-        if [ ! -f "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_RAW_CODE_FILE_PATH}" 'file';
-
-                return 1;
-            };
+                return "${?}";
+            }
         fi
 
         # Redirecting the background's color code in its dedicated temporary file.
-        echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}"; local X="${?}";
+        echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}";
+
+        X="${?}";
 
         [ "${X}" -ne 0 ] && {
-            echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" 'false') (bgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
+            echo -e >&2;
+            echo -e "The $(BU.Main.Checkings.CheckFilePathExists "${__BU_MAIN_PROJECT_COLOR_BG_CODE_FILE_PATH}" 'false') (bgcolor.tmp) file doesn't exists" >&2;
+            echo -e >&2;
 
-            BU.Main.Errors.Exit 1; return "${?}";
+            BU.Main.Errors.Exit 1;
+
+            return "${?}";
         }
 
         # Finally, the background color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setab "${p_color_code}" || { echo -ne "\e[48;5;${1}m" && echo "${p_color_code}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then
+            tput setab "${p_color_code}" || {
+                echo -ne "\e[48;5;${1}m";
+                echo "${p_color_code}";
+
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+                return 0;
+            };
+        fi
     else
         echo -ne "\e[48;5;${1}m"; echo "${p_color_code}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
     fi
@@ -403,45 +492,75 @@ function BU.Main.TextFormat.SetTextColor()
 	local p_color_code=${1:-$'\0'};     # ARG TYPE : Int        # REQUIRED | DEFAULT VAL : NULL     - DESC : Color code
 	local p_init_ctrl=${2:-$'\0'};      # ARG TYPE : String     # CCONTEXT | DEFAULT VAL : NULL     - DESC : RESERVED FOR THE INITIALIZATION PROCESS OF THE MAIN MODULE OF THE BASH UTILS FRAMEWORK : Forbids the creation of the text color's temporary file.
 
+    #**** Variables ****
+    declare -i X;                       # VAR TYPE : Int        - DESC : Return code of the "$(echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}")" command.
+
 	#**** Code ****
     shopt -s extglob;
 
     # Checking first if the target partition is not fully used. The file is created by the "BU.Main.Checkings.CheckDiskUsedSpace()" function if the framework is not initialized.
-    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'create' 'false' || { local C="${?}"; shopt -u extglob; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; }; fi
+    if [[ "${p_init_ctrl,,}" != ?(-?(-))no?(-)function ]] && [ "${__BU_MAIN_STAT_INITIALIZING,,}" == 'false' ]; then
+        BU.Main.Checkings.CheckDiskUsedSpace "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'create' 'false' || {
+            local C="${?}";
+
+            shopt -u extglob;
+
+            BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+            BU.Main.Errors.Exit "${C}";
+
+            return "${?}";
+        };
+    fi
 
     shopt -u extglob;
 
     # If the script is allowed to format text.
 	if BU.Main.Status.CheckStatAllowFormatting; then
         # Checking the existence of the "fgcolor.tmp" (foreground / text color) file's parent directory, and creating it if it doesn't exists.
-        if [ ! -d "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" ]; then mkdir -p "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PARENT}" 'dir';
+        if [ ! -f "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" ]; then
+            BU.Main.TextFormat.CreateRessource 'TXT' || {
+                X="${?}";
 
-                return 1;
-            };
-        fi
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
 
-        # Checking the existence of the "fgcolor.tmp" (foreground / text color) file in its defined path, and creating it if it doesn't exists.
-        if [ ! -f "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" ]; then touch "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" || {
-                BU.Main.TextFormat.CannotCreateRessource "$(basename "${BASH_SOURCE[0]}")" "${FUNCNAME[0]}" "$(( LINENO - 1 ))" "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'file';
-
-                return 1;
-            };
+                return "${?}";
+            }
         fi
 
         # Redirecting the text's color code in its dedicated temporary file.
-        echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}"; local X="${?}";
+        echo "${p_color_code}" > "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}";
+
+        X="${?}";
 
         [ "${X}" -ne 0 ] && {
-            echo -e >&2; echo -e "The $(BU.Main.Checkings.CheckFilePathExists "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'false') (fgcolor.tmp) file doesn't exists" >&2; echo -e >&2;
+            echo -e >&2;
+            echo -e "The $(BU.Main.Checkings.CheckFilePathExists "${__BU_MAIN_PROJECT_COLOR_TEXT_CODE_FILE_PATH}" 'false') (fgcolor.tmp) file doesn't exists" >&2;
+            echo -e >&2;
 
-            BU.Main.Errors.Exit 1; return "${?}";
+            BU.Main.Errors.Exit 1;
+
+            return "${?}";
         }
 
         # Finally, the foreground color is displayed on the terminal.
-        if command -v tput &> /dev/null; then tput setaf "${p_color_code}" || { echo -ne "\e[38;5;${1}m" && echo "${p_color_code}" && BU.Main.Echo.DebugEnd "${FUNCNAME[0]}" && return 0; }; fi
+        if command -v tput &> /dev/null; then
+            tput setaf "${p_color_code}" || {
+                echo -ne "\e[38;5;${1}m";
+                echo "${p_color_code}";
+                
+                BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+                
+                return 0;
+            };
+        fi
     else
-        echo -ne "\e[38;5;${1}m"; echo "${p_color_code}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        echo -ne "\e[38;5;${1}m";
+        echo "${p_color_code}";
+
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     fi
 }
 
@@ -467,7 +586,7 @@ declare -r __BU_MAIN_TEXTFORMAT_LIB__SUBCAT_DEBUG_ID__COLORS_PROCESSING_FUNCTION
 function BU.Main.TextFormat.Atoi()
 {
     #**** Parameters ****
-    local p_str=${1:-white};                    # String - Default : NULL - Color name
+    local p_str=${1:-white};                    # ARG TYPE : String - REQUIRED | DEFAULT VAL : white    - DESC : Color name
 
     #**** Code ****
     # Basic colors
@@ -530,14 +649,15 @@ function BU.Main.TextFormat.Atoi()
 
 # \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 # Featured function(s) and file(s) by module(s) and from the "functions" folder :
+#   - BU.Main.Text.ToLowerCase()    -> Main -> Text.lib
 #   - BU.Main.Text.ToUppercase()    -> Main -> Text.lib
 
 # shellcheck disable=
 function BU.Main.TextFormat.Itoa()
 {
     #**** Parameters ****
-    local p_code=${1:-0};   # Int       - Default : NULL            - Color code
-    local p_fmt=${2:-$'\0'} # String    - Default : NULL            - Text format
+    local p_code=${1:-0};   # ARG TYPE : Int    - REQUIRED | DEFAULT VAL : 0        - DESC : Color code to process
+    local p_fmt=${2:-$'\0'} # ARG TYPE : String - OPTIONAL | DEFAULT VAL : NULL     - DESC : Text formatting (lowercase or UPPERCASE), if empty, the text format will be printed the same way than in the "${__BU_MAIN_COLORS_ITOA_COLOR}" global variable.
 
     #**** Code ****
     # Basic colors

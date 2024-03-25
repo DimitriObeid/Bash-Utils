@@ -1692,7 +1692,7 @@ function BU.Main.Status.CheckProjectLogStatus()
         if [[ "${v_arrToStr,,}" =~ 'nolog' && "${v_arrToStr,,}" =~ 'nodate' ]]; then
                     
             # Deleting the 'nodate' value from the array, since the 'nolog' value also deletes the same pattern --> [ INFO ].
-            mapfile -t pa_extraArgs < <(printf "%s\n" "${pa_extraArgs[@]}" | grep -i -v 'nodate')
+            mapfile -t pa_extraArgs < <(printf "%s\n" "${pa_extraArgs[@]}" | grep -i -v 'nodate');
         fi
 
         for opt in "${pa_extraArgs[@]}"; do
@@ -1704,7 +1704,7 @@ function BU.Main.Status.CheckProjectLogStatus()
             elif    [ "${opt,,}" == 'nodate' ]; then
                 p_string="$(BU.Main.Text.CutLogDateFromString "${p_string}")";
             else
-                echo "${FUNCNAME[0]}() --> ${FUNCNAME[1]}() : ${opt} is not a supported option" >&2;
+                echo "${FUNCNAME[0]}() --> ${FUNCNAME[1]}() : « ${opt} » is not a supported option" >&2;
 
             # TODO : Testing this error manager and decide if the calling of the "BU.Main.Echo.*()" functions is justified or not.
 
@@ -2136,9 +2136,11 @@ function BU.Main.Checkings.CheckProjectRelatedFile()
     local p_decho=${4:-$'\0'};  # ARG TYPE : String     - OPTIONAL | DEFAULT VAL : NULL     - DESC :
 
 	#**** Variables ****
-    local v_path="${p_parent}/${p_child}";  # VAR TYPE : Path   - DESC : Path to the file to check for its existence, or to create if it does not exists on the computer's hard drive.
+    local v_path;               # VAR TYPE : Path       - DESC : Path to the file to check for its existence, or to create if it does not exists on the computer's hard drive.
 
 	#**** Code ****
+    v_path="${p_parent}/${p_child}";
+
 	# Checking first if the target partition is not fully used.
 	BU.Main.Checkings.CheckDiskUsedSpace "${v_path}" 'create' 'true' || { local C="${?}"; BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; BU.Main.Errors.Exit "${C}"; return "${?}"; };
 

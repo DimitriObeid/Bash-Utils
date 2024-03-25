@@ -817,9 +817,13 @@ function BU.Main.Files.IsRW()
 
     #**** Code ****
     if [[ (-r "${p_filepath}") && (-w "${p_filepath}") && (! -x "${p_filepath}") ]]; then
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 0;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 0;
     else
-        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}"; return 1;
+        BU.Main.Echo.DebugEnd "${FUNCNAME[0]}";
+
+        return 1;
     fi
 }
 
